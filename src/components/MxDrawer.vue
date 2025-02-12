@@ -9,7 +9,7 @@
       >
         <div
           class="mx-drawer-content"
-          :class="`is-${position}`"
+          :class="[className, `is-${position}`]"
           :style="{ '--mx-drawer-width': width, '--mx-drawer-max-width': maxWidth }"
         >
           <div
@@ -35,7 +35,8 @@ defineProps({
   title: { type: String, default: null },
   // 位置：left, right
   position: { type: String, default: 'left' },
-  // 宽度
+  // 样式
+  className: { type: String, default: null },
   width: { type: String, default: '350px' },
   maxWidth: { type: String, default: '100vw' }
 });
@@ -56,22 +57,23 @@ function onCancel() {
   position: fixed;
   inset: 0;
   z-index: 999;
-  transition: opacity 0.3s ease;
+  transition: opacity .3s ease;
   &-content {
+    --mx-drawer-content-width: min(var(--mx-drawer-width), var(--mx-drawer-max-width));
+
     position: absolute;
     top: 0;
     bottom: 0;
+    width: var(--mx-drawer-content-width);
     word-break: break-word;
-    width: var(--mx-drawer-width);
-    max-width: var(--mx-drawer-max-width);
     background-color: var(--mx-drawer-bg);
     &.is-left {
       left: 0;
-      transition: left 0.3s ease;
+      transition: left .3s ease;
     }
     &.is-right {
       right: 0;
-      transition: right 0.3s ease;
+      transition: right .3s ease;
     }
   }
   &-title {
@@ -82,15 +84,15 @@ function onCancel() {
     color: var(--mx-drawer-title-color);
     text-align: center;
   }
-  &-body {
-    padding: 0 10px 20px;
-  }
 }
 .mx-drawer-enter-from,
 .mx-drawer-leave-to {
   opacity: 0;
-  .mx-drawer-content {
-    right: max(calc(var(--mx-drawer-max-width) * -1), calc(var(--mx-drawer-width) * -1));
+  .mx-drawer-content.is-left {
+    left: calc(var(--mx-drawer-content-width) * -1);
+  }
+  .mx-drawer-content.is-right {
+    right: calc(var(--mx-drawer-content-width) * -1);
   }
 }
 </style>
