@@ -69,15 +69,35 @@ const iconNameRef = computed(() => {
   width: 1em;
   height: 1em;
   fill: currentcolor;
-  transition: all 0.3s ease;
+  transition: all .3s ease;
   &.is-clickable {
     cursor: pointer;
   }
   &.is-disabled {
     cursor: not-allowed;
+    opacity: .8;
   }
   &.is-loading {
     animation: mx-spin 1s linear infinite;
+  }
+}
+
+// animation
+@keyframes mx-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
 </style>

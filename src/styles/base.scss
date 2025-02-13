@@ -1,4 +1,11 @@
-// base
-.mx-mt-10 {
-  margin-top: 10px;
+// margin
+$positions: (mt, top), (mr, right), (mb, bottom), (ml, left);
+$sizes: 5, 10, 15, 20, 25, 30;
+
+@each $p1, $p2 in $positions {
+  @each $size in $sizes {
+    .mx-#{$p1}-#{$size} {
+      margin-#{$p2}: #{$size}px !important;
+    }
+  }
 }
