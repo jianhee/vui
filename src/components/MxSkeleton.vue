@@ -54,6 +54,7 @@ function formatRows(rows) {
   --mx-skeleton-from-bg-color: #f0f2f5;
   --mx-skeleton-to-bg-color: #e6e8eb;
 }
+
 @media (prefers-color-scheme: dark) {
   :root {
     --mx-skeleton-from-bg-color: #303030;
@@ -89,6 +90,7 @@ function formatRows(rows) {
     margin-left: auto;
   }
 }
+
 @keyframes mx-skeleton-loading {
   0% {
     background-position: 100% 50%;
