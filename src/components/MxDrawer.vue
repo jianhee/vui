@@ -5,12 +5,12 @@
       <div
         v-show="visible"
         class="mx-drawer"
-        @click.self="onCancel"
+        @click.self="visible = false"
       >
         <div
           class="mx-drawer-content"
-          :class="[className, `is-${position}`]"
-          :style="{ '--mx-drawer-width': width }"
+          :class="[`is-${placement}`, className]"
+          :style="{ '--mx-drawer-contant-width': width }"
         >
           <div
             v-if="title"
@@ -29,43 +29,37 @@
 
 <script setup>
 defineProps({
-  // 是否显示
-  visible: { type: Boolean, default: false },
   // 标题
   title: { type: String, default: null },
   // 位置：left, right
-  position: { type: String, default: 'left' },
+  placement: { type: String, default: 'right' },
+  // 宽度
+  width: { type: String, default: '378px' },
   // 样式
-  className: { type: String, default: null },
-  width: { type: String, default: '350px' }
+  className: { type: String, default: null }
 });
 
-// 关闭
-const emits = defineEmits(['update:visible']);
-function onCancel() {
-  emits('update:visible', false);
-}
+// 是否显示
+const visible = defineModel('visible', { type: Boolean, default: false });
 </script>
 
 <style lang="scss">
-:root {
-  --mx-drawer-bg: #f7f7f7;
-  --mx-drawer-title-color: #212121;
-}
 .mx-drawer {
+  --mx-drawer-title-color: #212121;
+  --mx-drawer-content-bg: #f7f7f7;
+
   position: fixed;
   inset: 0;
   z-index: 999;
   transition: opacity .3s ease;
   &-content {
-    --mx-drawer-content-width: min(var(--mx-drawer-width), 100vw);
-
     position: absolute;
     top: 0;
     bottom: 0;
-    width: var(--mx-drawer-content-width);
+    width: var(--mx-drawer-contant-width);
+    max-width: 100vw;
     word-break: break-word;
-    background-color: var(--mx-drawer-bg);
+    background-color: var(--mx-drawer-content-bg);
     &.is-left {
       left: 0;
       transition: left .3s ease;
@@ -84,16 +78,13 @@ function onCancel() {
     text-align: center;
   }
 }
-.mx-drawer-enter-from,
-.mx-drawer-leave-to {
-  --mx-drawer-transition-width: calc(var(--mx-drawer-content-width) * -1);
-
-  opacity: 0;
-  .mx-drawer-content.is-left {
-    left: var(--mx-drawer-transition-width);
+.mx-drawer-enter-from .mx-drawer-content,
+.mx-drawer-leave-to .mx-drawer-content {
+  &.is-left {
+    left: calc(min(var(--mx-drawer-contant-width), 100vw) * -1);
   }
-  .mx-drawer-content.is-right {
-    right: var(--mx-drawer-transition-width);
+  &.is-right {
+    right: calc(min(var(--mx-drawer-contant-width), 100vw) * -1);
   }
 }
 </style>

@@ -5,16 +5,16 @@
     aria-hidden="true"
     class="mx-icon"
     :class="{
+      'is-spin': spin,
       'is-clickable': clickable,
-      'is-disabled': disabled,
-      'is-loading': loading
+      'is-disabled': disabled
     }"
     :style="{
-      'font-size': iconSize ? `${iconSize}px` : null,
+      'font-size': size ? `${size}px` : null,
       'transform': rotate ? `rotate(${rotate}deg)` : null
     }"
   >
-    <use :href="`#icon-${iconNameRef}`" />
+    <use :href="`#icon-${nameRef}`" />
   </svg>
 </template>
 
@@ -23,43 +23,42 @@ import { ref, computed } from 'vue';
 import { useElementHover } from '@vueuse/core';
 
 const props = defineProps({
-  // 名称
-  iconName: { type: String, required: true },
-  // 明暗模式：用于多色图标，需要准备两个图标 'name-dark' 和 'name-light'
-  useDarkIcon: { type: Boolean, default: false },
-  // hover状态：用于多色图标，需要准备两个图标 'name' 和 'name-hover'
-  useHoverIcon: { type: Boolean, default: false },
-  // 大小
-  iconSize: { type: [String, Number], default: null },
+  // 图标名称
+  name: { type: String, required: true },
+  // 其它模式图标名称：无法使用color设置图标颜色时，用来指定其它图标
+  hoverName: { type: String, default: null },
+  darkName: { type: String, default: null },
+  darkHoverName: { type: String, default: null },
+  // 图标大小: 16, '16'
+  size: { type: [String, Number], default: null },
   // 是否旋转
-  loading: { type: Boolean, default: false },
+  spin: { type: Boolean, default: false },
   // 是否可点击
   clickable: { type: Boolean, default: false },
+  // 是否禁用
   disabled: { type: Boolean, default: false },
   // 旋转角度
   rotate: { type: [String, Number], default: null }
 });
 
-// 初始化明暗模式
+// 明暗模式
 const mediaQueryList = window.matchMedia('(prefers-color-scheme: dark)');
 const isDarkMode = ref(mediaQueryList.matches);
-
-// 切换明暗模式
 mediaQueryList.addEventListener('change', e => {
   isDarkMode.value = e.matches;
 });
 
 // hover状态
 const elRef = ref(null);
-const isHovered = props.useHoverIcon ? useElementHover(elRef) : ref(false);
+const isHovered = useElementHover(elRef);
 
-// 切换图标
-const iconNameRef = computed(() => {
-  let newName = props.iconName;
-  if (props.useDarkIcon) {
-    newName += isDarkMode.value ? '-dark' : '-light';
+// 自动切换图标
+const nameRef = computed(() => {
+  if (isDarkMode.value) {
+    return isHovered.value ? props.darkHoverName : props.darkName;
+  } else {
+    return isHovered.value ? props.hoverName : props.name;
   }
-  return isHovered.value ? `${newName}-hover` : newName;
 });
 </script>
 
@@ -70,15 +69,15 @@ const iconNameRef = computed(() => {
   height: 1em;
   fill: currentcolor;
   transition: all .3s ease;
+  &.is-spin {
+    animation: mx-spin 1s linear infinite;
+  }
   &.is-clickable {
     cursor: pointer;
   }
   &.is-disabled {
     cursor: not-allowed;
     opacity: .8;
-  }
-  &.is-loading {
-    animation: mx-spin 1s linear infinite;
   }
 }
 
