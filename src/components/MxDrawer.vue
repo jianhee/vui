@@ -10,7 +10,7 @@
         <div
           class="mx-drawer-content"
           :class="[className, `is-${position}`]"
-          :style="{ '--mx-drawer-width': width, '--mx-drawer-max-width': maxWidth }"
+          :style="{ '--mx-drawer-width': width }"
         >
           <div
             v-if="title"
@@ -37,8 +37,7 @@ defineProps({
   position: { type: String, default: 'left' },
   // 样式
   className: { type: String, default: null },
-  width: { type: String, default: '350px' },
-  maxWidth: { type: String, default: '100vw' }
+  width: { type: String, default: '350px' }
 });
 
 // 关闭
@@ -59,7 +58,7 @@ function onCancel() {
   z-index: 999;
   transition: opacity .3s ease;
   &-content {
-    --mx-drawer-content-width: min(var(--mx-drawer-width), var(--mx-drawer-max-width));
+    --mx-drawer-content-width: min(var(--mx-drawer-width), 100vw);
 
     position: absolute;
     top: 0;
@@ -87,12 +86,14 @@ function onCancel() {
 }
 .mx-drawer-enter-from,
 .mx-drawer-leave-to {
+  --mx-drawer-transition-width: calc(var(--mx-drawer-content-width) * -1);
+
   opacity: 0;
   .mx-drawer-content.is-left {
-    left: calc(var(--mx-drawer-content-width) * -1);
+    left: var(--mx-drawer-transition-width);
   }
   .mx-drawer-content.is-right {
-    right: calc(var(--mx-drawer-content-width) * -1);
+    right: var(--mx-drawer-transition-width);
   }
 }
 </style>
