@@ -28,3 +28,9 @@ export function copyText(text) {
   document.execCommand('Copy');
   document.body.removeChild(input);
 }
+
+// 获取地址栏参数
+export function getQueryParam(name) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(name);
+}
