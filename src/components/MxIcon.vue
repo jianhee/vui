@@ -55,9 +55,9 @@ const isHovered = useElementHover(elRef);
 // 自动切换图标
 const nameRef = computed(() => {
   if (isDarkMode.value) {
-    return isHovered.value ? props.darkHoverName : props.darkName;
+    return isHovered.value ? props.darkName || props.darkHoverName : props.darkName;
   } else {
-    return isHovered.value ? props.hoverName : props.name;
+    return isHovered.value ? props.name || props.hoverName : props.name;
   }
 });
 </script>
