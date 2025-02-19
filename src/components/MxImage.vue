@@ -42,9 +42,9 @@ const props = defineProps({
 // 显示的图片地址
 const { isLoading, error } = useImage({ src: props.src });
 const imgUrl = computed(() => {
-  if (isLoading) {
+  if (isLoading.value) {
     return props.placeholder || 'skeleton';
-  } else if (error) {
+  } else if (error.value) {
     return props.error || errorImg;
   } else {
     return props.src;

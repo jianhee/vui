@@ -4,7 +4,7 @@
   <div
     v-for="n in rows"
     :key="n"
-    class="mx-skeleton"
+    class="mx-skeleton is-card"
     :class="{
       'is-first': rows > 1 && n === 1,
       'is-last': rows > 1 && n === rows,
@@ -19,7 +19,7 @@
   <!-- 边框 -->
   <div
     v-if="border"
-    class="mx-skeleton-border"
+    class="mx-skeleton is-border"
   />
 </template>
 
@@ -50,12 +50,15 @@ defineProps({
   }
 }
 .mx-skeleton {
-  background: linear-gradient(90deg, var(--mx-skeleton-from-bg-color) 25%, var(--mx-skeleton-to-bg-color) 37%, var(--mx-skeleton-from-bg-color) 63%);
-  background-size: 400% 100%;
-  border-radius: 4px;
-  animation: mx-skeleton-loading 1.4s ease infinite;
-  & + & {
-    margin-top: 10px;
+  &.is-card {
+    background: linear-gradient(90deg, var(--mx-skeleton-from-bg-color) 25%, var(--mx-skeleton-to-bg-color) 37%, var(--mx-skeleton-from-bg-color) 63%);
+    background-size: 400% 100%;
+    border-radius: 4px;
+    animation: mx-skeleton-loading 1.4s ease infinite;
+  }
+  &.is-border {
+    height: 1px;
+    background-color: var(--mx-border-color);
   }
   &.is-first {
     width: 40%;
@@ -67,10 +70,8 @@ defineProps({
     margin-right: auto;
     margin-left: auto;
   }
-  &-border {
-    height: 1px;
+  & + & {
     margin-top: 10px;
-    background-color: var(--mx-border-color);
   }
 }
 
