@@ -31,6 +31,6 @@ export function copyText(text) {
 
 // 获取地址栏参数
 export function getQueryParam(name) {
-  const urlParams = new URLSearchParams(window.location.search);
+  const urlParams = new URLSearchParams(window.location.href.split('?')[1]);
   return urlParams.get(name);
 }
