@@ -20,17 +20,25 @@ export function getDeviceType() {
 }
 
 // 复制文本
-export function copyText(text) {
-  const input = document.createElement('input');
-  input.value = text;
-  document.body.appendChild(input);
-  input.select();
-  document.execCommand('Copy');
-  document.body.removeChild(input);
+export async function copyText(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch (error) {
+    const input = document.createElement('input');
+    input.value = text;
+    document.body.appendChild(input);
+    input.select();
+    document.execCommand('Copy');
+    document.body.removeChild(input);
+  }
 }
 
 // 获取地址栏参数
 export function getQueryParam(name) {
-  const urlParams = new URLSearchParams(window.location.href.split('?')[1]);
-  return urlParams.get(name);
+  const queryString = window.location.href.split('?')[1];
+  if (queryString) {
+    const urlParams = new URLSearchParams(queryString);
+    return urlParams.get(name);
+  }
+  return null;
 }

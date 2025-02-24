@@ -42,8 +42,9 @@ const props = defineProps({
 });
 
 // 明暗模式
+const isDarkMode = ref(false);
 const mediaQueryList = window.matchMedia('(prefers-color-scheme: dark)');
-const isDarkMode = ref(mediaQueryList.matches);
+isDarkMode.value = mediaQueryList.matches;
 mediaQueryList.addEventListener('change', e => {
   isDarkMode.value = e.matches;
 });
@@ -55,9 +56,9 @@ const isHovered = useElementHover(elRef);
 // 自动切换图标
 const nameRef = computed(() => {
   if (isDarkMode.value) {
-    return isHovered.value ? props.darkName || props.darkHoverName : props.darkName;
+    return isHovered.value ? props.darkHoverName || props.darkName : props.darkName;
   } else {
-    return isHovered.value ? props.name || props.hoverName : props.name;
+    return isHovered.value ? props.hoverName || props.name : props.name;
   }
 });
 </script>
