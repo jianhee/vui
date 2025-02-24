@@ -38,18 +38,9 @@ defineProps({
 </script>
 
 <style lang="scss">
-:root {
+.mx-skeleton {
   --mx-skeleton-from-bg-color: #f0f2f5;
   --mx-skeleton-to-bg-color: #e6e8eb;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --mx-skeleton-from-bg-color: #303030;
-    --mx-skeleton-to-bg-color: #424243;
-  }
-}
-.mx-skeleton {
   &.is-card {
     background: linear-gradient(90deg, var(--mx-skeleton-from-bg-color) 25%, var(--mx-skeleton-to-bg-color) 37%, var(--mx-skeleton-from-bg-color) 63%);
     background-size: 400% 100%;
@@ -81,6 +72,13 @@ defineProps({
   }
   100% {
     background-position: 0 50%;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .mx-skeleton {
+    --mx-skeleton-from-bg-color: #303030;
+    --mx-skeleton-to-bg-color: #424243;
   }
 }
 </style>
