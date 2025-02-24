@@ -33,12 +33,10 @@ export async function copyText(text) {
   }
 }
 
-// 获取地址栏参数
-export function getQueryParam(name) {
+// 获取url参数
+export function getUrlParams(name) {
   const queryString = window.location.href.split('?')[1];
-  if (queryString) {
-    const urlParams = new URLSearchParams(queryString);
-    return urlParams.get(name);
-  }
-  return null;
+  if (!queryString) return null;
+  const urlParams = new URLSearchParams(queryString);
+  return urlParams.get(name);
 }
