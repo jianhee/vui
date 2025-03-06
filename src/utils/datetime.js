@@ -1,4 +1,4 @@
-// 日期时间相关
+// 日期时间：依赖 dayjs
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 dayjs.extend(utc);

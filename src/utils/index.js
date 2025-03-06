@@ -1,3 +1,5 @@
+// 基础方法
+
 // 生成随机id
 export function guid() {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {

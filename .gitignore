@@ -29,7 +29,8 @@ coverage
 *.sw?
 
 # Lint
-.editor*
-.prettier*
-.eslint*
-.stylelint*
+*editor*
+*prettier*
+*eslint*
+*stylelint*
+*yalc*

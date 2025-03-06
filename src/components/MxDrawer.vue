@@ -9,8 +9,9 @@
       >
         <div
           class="mx-drawer-content"
-          :class="[`is-${placement}`, className]"
-          :style="{ '--mx-drawer-contant-width': width }"
+          v-bind="$attrs"
+          :class="contentClasses"
+          :style="contentStyles"
         >
           <div
             v-if="title"
@@ -28,45 +29,56 @@
 </template>
 
 <script setup>
-defineProps({
+import { computed } from 'vue';
+
+const props = defineProps({
   // 标题
   title: { type: String, default: null },
   // 位置：left, right
-  placement: { type: String, default: 'right' },
+  placement: { type: String, default: 'left' },
   // 宽度
-  width: { type: String, default: '378px' },
-  // 样式
-  className: { type: String, default: null }
+  width: { type: String, default: '378px' }
 });
 
 // 是否显示
 const visible = defineModel('visible', { type: Boolean, default: false });
+
+// 计算样式
+const contentClasses = computed(() => {
+  return `is-${props.placement}`;
+});
+const contentStyles = computed(() => {
+  return { '--mx-drawer-content-width': props.width };
+});
+
+// 计算样式
 </script>
 
 <style lang="scss">
+:root {
+  --mx-drawer-title-text-color: #212121;
+  --mx-drawer-content-bg-color: #f7f7f7;
+}
 .mx-drawer {
-  --mx-drawer-title-color: #212121;
-  --mx-drawer-content-bg: #f7f7f7;
-
   position: fixed;
   inset: 0;
   z-index: 999;
-  transition: opacity .3s ease;
+  transition: opacity 0.3s ease;
   &-content {
     position: absolute;
     top: 0;
     bottom: 0;
-    width: var(--mx-drawer-contant-width);
+    width: var(--mx-drawer-content-width);
     max-width: 100vw;
     word-break: break-word;
-    background-color: var(--mx-drawer-content-bg);
+    background-color: var(--mx-drawer-content-bg-color);
     &.is-left {
       left: 0;
-      transition: left .3s ease;
+      transition: left 0.3s ease;
     }
     &.is-right {
       right: 0;
-      transition: right .3s ease;
+      transition: right 0.3s ease;
     }
   }
   &-title {
@@ -74,17 +86,17 @@ const visible = defineModel('visible', { type: Boolean, default: false });
     font-size: 20px;
     font-weight: bold;
     line-height: 48px;
-    color: var(--mx-drawer-title-color);
+    color: var(--mx-drawer-title-text-color);
     text-align: center;
   }
 }
 .mx-drawer-enter-from .mx-drawer-content,
 .mx-drawer-leave-to .mx-drawer-content {
   &.is-left {
-    left: calc(min(var(--mx-drawer-contant-width), 100vw) * -1);
+    left: calc(min(var(--mx-drawer-content-width), 100vw) * -1);
   }
   &.is-right {
-    right: calc(min(var(--mx-drawer-contant-width), 100vw) * -1);
+    right: calc(min(var(--mx-drawer-content-width), 100vw) * -1);
   }
 }
 </style>

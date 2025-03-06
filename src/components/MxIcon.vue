@@ -1,84 +1,83 @@
 <!-- 图标 -->
 <template>
-  <svg
-    ref="elRef"
-    aria-hidden="true"
+  <i
     class="mx-icon"
-    :class="{
-      'is-spin': spin,
-      'is-clickable': clickable,
-      'is-disabled': disabled
-    }"
-    :style="{
-      'font-size': size ? `${size}px` : null,
-      'transform': rotate ? `rotate(${rotate}deg)` : null
-    }"
+    :class="[iconClasses, $attrs.class]"
+    :style="[iconStyles, $attrs.style]"
   >
-    <use :href="`#icon-${nameRef}`" />
-  </svg>
+    <!-- 方式1：使用 name，需要使用 vite-plugin-svg-icons 插件自动导入 svg 文件 -->
+    <!-- <MxIcon name="loading" /> -->
+    <IconUseSvg
+      v-if="$attrs.name"
+      :name="$attrs.name"
+      :hover-name="$attrs.hoverName"
+      :dark-name="$attrs.darkName"
+      :dark-hover-name="$attrs.darkHoverName"
+    />
+    <!-- 方式2：使用 slot，需要将 svg 文件改成 vue 组件，然后在使用前手动导入组件 -->
+    <!-- <MxIcon><IconLoading /></MxIcon> -->
+    <slot v-else />
+  </i>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
-import { useElementHover } from '@vueuse/core';
+import { computed } from 'vue';
+import IconUseSvg from './MxIconUseSvg.vue';
+
+defineOptions({
+  inheritAttrs: false
+});
 
 const props = defineProps({
-  // 图标名称
-  name: { type: String, required: true },
-  // 其它模式图标名称：无法使用color设置图标颜色时，用来指定其它图标
-  hoverName: { type: String, default: null },
-  darkName: { type: String, default: null },
-  darkHoverName: { type: String, default: null },
   // 图标大小: 16, '16'
   size: { type: [String, Number], default: null },
-  // 是否旋转
-  spin: { type: Boolean, default: false },
   // 是否可点击
   clickable: { type: Boolean, default: false },
   // 是否禁用
   disabled: { type: Boolean, default: false },
   // 旋转角度
-  rotate: { type: [String, Number], default: null }
+  rotate: { type: [String, Number], default: null },
+  // 是否旋转
+  spin: { type: Boolean, default: false }
 });
 
-// 明暗模式
-const isDarkMode = ref(false);
-const mediaQueryList = window.matchMedia('(prefers-color-scheme: dark)');
-isDarkMode.value = mediaQueryList.matches;
-mediaQueryList.addEventListener('change', e => {
-  isDarkMode.value = e.matches;
-});
+// 类名
+const iconClasses = computed(() => ({
+  'is-clickable': props.clickable,
+  'is-disabled': props.disabled,
+  'is-spin': props.spin
+}));
 
-// hover状态
-const elRef = ref(null);
-const isHovered = useElementHover(elRef);
-
-// 自动切换图标
-const nameRef = computed(() => {
-  if (isDarkMode.value) {
-    return isHovered.value ? props.darkHoverName || props.darkName : props.darkName;
-  } else {
-    return isHovered.value ? props.hoverName || props.name : props.name;
-  }
-});
+// 样式
+const iconStyles = computed(() => ({
+  'font-size': props.size ? `${props.size}px` : null,
+  'transform': props.rotate ? `rotate(${props.rotate}deg)` : null
+}));
 </script>
 
 <style lang="scss">
 .mx-icon {
+  position: relative;
+  display: inline-flex;
   flex: none;
-  width: 1em;
-  height: 1em;
-  fill: currentcolor;
-  transition: all .3s ease;
-  &.is-spin {
-    animation: mx-spin 1s linear infinite;
+  align-items: center;
+  justify-content: center;
+  line-height: 1em;
+  transition: all 0.3s ease;
+  > svg {
+    width: 1em;
+    height: 1em;
+    fill: currentcolor;
   }
   &.is-clickable {
     cursor: pointer;
   }
   &.is-disabled {
     cursor: not-allowed;
-    opacity: .8;
+    opacity: 0.6;
+  }
+  &.is-spin {
+    animation: mx-spin 1s linear infinite;
   }
 }
 

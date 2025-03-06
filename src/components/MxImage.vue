@@ -2,21 +2,20 @@
 <template>
   <div
     class="mx-image"
-    :style="{
-      'aspect-ratio': aspectRatio,
-      'border-radius': radius
-    }"
+    :style="imageStyles"
   >
+    <!-- 加载中 -->
     <MxSkeleton
-      v-if="imgUrl === 'skeleton'"
-      :aspect-ratio="aspectRatio || '16/9'"
+      v-if="isLoading && !placeholder"
+      :aspect-ratio="skeletonAspectRatio"
     />
+    <!-- 其它 -->
     <img
       v-else
+      class="mx-image-inner"
       :src="imgUrl"
       :data-src="src"
-      class="mx-image-inner"
-    >
+    />
   </div>
 </template>
 
@@ -28,27 +27,39 @@ import errorImg from '../images/error.png';
 
 const props = defineProps({
   // 图片地址
-  src: { type: String, default: '' },
-  // 未加载时占位的图片地址
-  placeholder: { type: String, default: '' },
+  src: { type: String, default: null },
+  // 加载中的图片地址
+  placeholder: { type: String, default: null },
   // 加载失败的图片地址
-  error: { type: String, default: '' },
+  error: { type: String, default: errorImg },
+  // 尺寸
+  width: { type: String, default: null },
   // 长宽比：默认为空，按照图片自身比例完整展示，设置后按比例显示图片的一部分
-  aspectRatio: { type: String, default: '' },
+  aspectRatio: { type: String, default: null },
   // 圆角
-  radius: { type: String, default: '' }
+  radius: { type: String, default: null }
 });
 
-// 显示的图片地址
+// 加载状态
 const { isLoading, error } = useImage({ src: props.src });
+
+// 显示的图片地址
 const imgUrl = computed(() => {
-  if (isLoading.value) {
-    return props.placeholder || 'skeleton';
-  } else if (error.value) {
-    return props.error || errorImg;
-  } else {
-    return props.src;
-  }
+  return isLoading.value ? props.placeholder : error.value ? props.error : props.src;
+});
+
+// 计算样式
+const imageStyles = computed(() => {
+  return {
+    'width': props.width,
+    'aspect-ratio': props.aspectRatio,
+    'border-radius': props.radius
+  };
+});
+
+// 骨架屏长宽比
+const skeletonAspectRatio = computed(() => {
+  return props.aspectRatio || '16/9';
 });
 </script>
 

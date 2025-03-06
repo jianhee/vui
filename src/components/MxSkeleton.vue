@@ -26,7 +26,7 @@
 <script setup>
 defineProps({
   // 多行
-  rows: { type: [Number, String], default: 1 },
+  rows: { type: Number, default: 1 },
   // 尺寸
   width: { type: String, default: null },
   height: { type: String, default: '20px' },
@@ -38,18 +38,28 @@ defineProps({
 </script>
 
 <style lang="scss">
-.mx-skeleton {
+:root {
   --mx-skeleton-from-bg-color: #f0f2f5;
   --mx-skeleton-to-bg-color: #e6e8eb;
+  --mx-skeleton-border-color: #ddd;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --mx-skeleton-from-bg-color: #303030;
+    --mx-skeleton-to-bg-color: #424243;
+  }
+}
+.mx-skeleton {
   &.is-card {
     background: linear-gradient(90deg, var(--mx-skeleton-from-bg-color) 25%, var(--mx-skeleton-to-bg-color) 37%, var(--mx-skeleton-from-bg-color) 63%);
     background-size: 400% 100%;
     border-radius: 4px;
-    animation: mx-skeleton-loading 1.4s ease infinite;
+    animation: mx-skeleton 1.4s ease infinite;
   }
   &.is-border {
     height: 1px;
-    background-color: var(--mx-border-color);
+    background-color: var(--mx-skeleton-border-color);
   }
   &.is-first {
     width: 40%;
@@ -66,19 +76,12 @@ defineProps({
   }
 }
 
-@keyframes mx-skeleton-loading {
+@keyframes mx-skeleton {
   0% {
     background-position: 100% 50%;
   }
   100% {
     background-position: 0 50%;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .mx-skeleton {
-    --mx-skeleton-from-bg-color: #303030;
-    --mx-skeleton-to-bg-color: #424243;
   }
 }
 </style>
