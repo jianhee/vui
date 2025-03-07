@@ -45,7 +45,7 @@ const props = defineProps({
 const iconClasses = computed(() => ({
   'is-clickable': props.clickable,
   'is-disabled': props.disabled,
-  'is-spin': props.spin
+  'mx-animation-spin': props.spin
 }));
 
 // 样式
@@ -56,6 +56,7 @@ const iconStyles = computed(() => ({
 </script>
 
 <style lang="scss">
+@import '../styles/base';
 .mx-icon {
   position: relative;
   display: inline-flex;
@@ -75,28 +76,6 @@ const iconStyles = computed(() => ({
   &.is-disabled {
     cursor: not-allowed;
     opacity: 0.6;
-  }
-  &.is-spin {
-    animation: mx-spin 1s linear infinite;
-  }
-}
-
-// animation
-@keyframes mx-spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  25% {
-    transform: rotate(90deg);
-  }
-  50% {
-    transform: rotate(180deg);
-  }
-  75% {
-    transform: rotate(270deg);
-  }
-  100% {
-    transform: rotate(360deg);
   }
 }
 </style>

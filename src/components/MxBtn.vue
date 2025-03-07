@@ -48,6 +48,7 @@ defineProps({
 </script>
 
 <style lang="scss">
+@import '../styles/base';
 :root {
   // brand
   --mx-btn-brand-color: #458ff3;

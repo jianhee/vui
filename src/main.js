@@ -1,5 +1,5 @@
 // styles
-import './styles/_main.scss';
+import './styles/reset.scss';
 
 // vue
 import { createApp } from 'vue';

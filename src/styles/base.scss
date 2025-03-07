@@ -1,4 +1,4 @@
-// margin
+// 间距
 $positions: (mt, top), (mr, right), (mb, bottom), (ml, left);
 $sizes: 5, 10, 15, 20, 25, 30;
 
@@ -7,5 +7,29 @@ $sizes: 5, 10, 15, 20, 25, 30;
     .mx-#{$p1}-#{$size} {
       margin-#{$p2}: #{$size}px !important;
     }
+  }
+}
+
+// 动画
+.mx-animation-spin {
+  animation: mx-animation-spin 1s linear infinite;
+}
+
+// animation
+@keyframes mx-animation-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
