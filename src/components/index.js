@@ -17,10 +17,11 @@ export function setupComponents(vueApp, options = {}) {
  * 在 setupComponents 中调用，导出方便其它项目使用
  * @param {Object} vueApp                 - Vue 应用实例
  * @param {Object} options.vueComponents  - 需要注册的组件集合：由 import.meta.glob 生成
- * @param {Array} [options.includes=[]]   - 需要注册的组件名称白名单：空数组时注册全部组件
+ * @param {Array} [options.include=[]]    - 组件名称白名单：空数组时注册全部组件
+ * @param {Array} [options.exclude=[]]    - 组件名称黑名单
  */
 export function installComponents(vueApp, options = {}) {
-  const { vueComponents, includes = [] } = options;
+  const { vueComponents, include = [], exclude = [] } = options;
 
   // 遍历导入的组件并注册
   for (const path in vueComponents) {
@@ -38,8 +39,13 @@ export function installComponents(vueApp, options = {}) {
       // 拼接成大驼峰形式
       .join('');
 
-    // 当白名单为空 或 组件名在白名单中时执行注册
-    if (includes.length === 0 || includes.includes(componentName)) {
+    // 白名单为空 或 组件名在白名单中
+    const isIncluded = include.length === 0 || include.includes(componentName);
+    // 组件名在黑名单中
+    const isExcluded = exclude.includes(componentName);
+
+    // 注册组件
+    if (isIncluded && !isExcluded) {
       vueApp.component(componentName, defineAsyncComponent(vueComponents[path]));
     }
   }
