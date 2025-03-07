@@ -5,13 +5,13 @@
       <!-- mask -->
       <div
         v-show="visible"
-        class="mx-drawer-mask"
+        class="mx-drawer"
         @click.self="visible = false"
       >
         <!-- 主体 -->
         <div
-          class="mx-drawer-content"
           v-bind="$attrs"
+          class="mx-drawer-content"
           :class="contentClasses"
           :style="contentStyles"
         >
@@ -66,17 +66,14 @@ const contentStyles = computed(() => {
   --mx-drawer-content-bg-color: #f7f7f7;
 }
 .mx-drawer {
-  &-mask {
-    position: fixed;
-    inset: 0;
-    z-index: 999;
-    transition: opacity 0.3s ease;
-  }
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  transition: opacity 0.3s ease;
   &-content {
     position: absolute;
     top: 0;
     bottom: 0;
-    z-index: 999;
     width: var(--mx-drawer-content-width);
     max-width: 100vw;
     word-break: break-word;

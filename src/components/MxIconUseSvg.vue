@@ -28,10 +28,13 @@ const isHovered = useElementHover(elRef);
 // 自动切换图标
 const nameRef = computed(() => {
   if (!props.name) return;
+  const hoverName = props.hoverName || props.name;
+  const darkName = props.darkName || props.name;
+  const darkHoverName = props.darkHoverName || hoverName;
   if (isDark.value) {
-    return isHovered.value ? props.darkHoverName || props.darkName : props.darkName;
+    return isHovered.value ? darkHoverName : darkName;
   } else {
-    return isHovered.value ? props.hoverName || props.name : props.name;
+    return isHovered.value ? hoverName : props.name;
   }
 });
 </script>

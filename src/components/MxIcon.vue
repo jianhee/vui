@@ -2,17 +2,17 @@
 <template>
   <i
     class="mx-icon"
-    :class="[iconClasses, $attrs.class]"
-    :style="[iconStyles, $attrs.style]"
+    :class="iconClasses"
+    :style="iconStyles"
   >
     <!-- 方式1：使用 name，需要使用 vite-plugin-svg-icons 插件自动导入 svg 文件 -->
     <!-- <MxIcon name="loading" /> -->
     <IconUseSvg
-      v-if="$attrs.name"
-      :name="$attrs.name"
-      :hover-name="$attrs.hoverName"
-      :dark-name="$attrs.darkName"
-      :dark-hover-name="$attrs.darkHoverName"
+      v-if="name"
+      :name="name"
+      :hover-name="hoverName"
+      :dark-name="darkName"
+      :dark-hover-name="darkHoverName"
     />
     <!-- 方式2：使用 slot，需要将 svg 文件改成 vue 组件，然后在使用前手动导入组件 -->
     <!-- <MxIcon><IconLoading /></MxIcon> -->
@@ -24,11 +24,12 @@
 import { computed } from 'vue';
 import IconUseSvg from './MxIconUseSvg.vue';
 
-defineOptions({
-  inheritAttrs: false
-});
-
 const props = defineProps({
+  // 传给 IconUseSvg 的参数
+  name: { type: String, default: null },
+  hoverName: { type: String, default: null },
+  darkName: { type: String, default: null },
+  darkHoverName: { type: String, default: null },
   // 图标大小: 16, '16'
   size: { type: [String, Number], default: null },
   // 是否可点击
