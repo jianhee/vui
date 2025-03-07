@@ -1,13 +1,13 @@
 // styles
 import './styles/_main.scss';
 
-// i18n
-import en from './locales/en';
-import zh from './locales/zh';
-
 // vue
 import { createApp } from 'vue';
 import App from './App.vue';
+
+// i18n
+import en from './locales/en';
+import zh from './locales/zh';
 
 // custom
 import 'virtual:svg-icons-register';
