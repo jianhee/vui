@@ -1,17 +1,27 @@
-// 多语言：依赖 vue-i18n
+// 设置 Vue 应用的国际化支持
+// 依赖 vue-i18n
 import { createI18n } from 'vue-i18n';
 
-// 插件安装
-export function setupMxI18n(app, options = {}) {
+/**
+ * 在 main.js 中调用
+ * @param {Object} app          - Vue 应用实例
+ * @param {Object} [options={}] - i18n 配置项，参考官方文档
+ */
+export function setupI18n(app, options = {}) {
   // 创建i18n实例
   const i18n = createI18n({
+    // 不使用 Vue 2 的兼容模式
     legacy: false,
+    // 当前语言：匹配浏览器主语言 'zh-CN' -> 'zh'，默认 en
     locale: navigator.language.split('-')[0] || 'en',
+    // 备用语言：当前语言不存在对应的 messages 时使用
     fallbackLocale: 'en',
-    messages: options.messages || {},
+    // 消息内容：必填
+    messages: options.messages,
+    // 其他配置项
     ...options
   });
 
-  // 注册i18n实例
+  // 将 i18n 插件注册到 Vue 应用中
   app.use(i18n);
 }

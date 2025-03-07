@@ -14,9 +14,9 @@
     <slot />
   </div>
 
-  <!-- 下拉内容 -->
+  <!-- 内容 -->
   <Teleport to="body">
-    <Transition name="mx-dropdown-content">
+    <Transition name="mx-dropdown">
       <div
         v-show="contentVisible"
         ref="contentRef"
@@ -35,11 +35,13 @@
 import { ref, useSlots, nextTick } from 'vue';
 import { onClickOutside, useWindowSize } from '@vueuse/core';
 
+// 参数
 const props = defineProps({
   // 触发方式：hover, click, contextmenu
   trigger: { type: String, default: 'hover' }
 });
 
+// slots
 const slots = useSlots();
 
 // 窗口大小
@@ -173,11 +175,11 @@ defineExpose({
     transition:
       opacity 0.3s ease,
       transform 0.3s ease;
-    &-enter-from,
-    &-leave-to {
-      opacity: 0;
-      transform: translateY(-5px);
-    }
+  }
+  &-enter-from,
+  &-leave-to {
+    opacity: 0;
+    transform: translateY(-5px);
   }
 }
 </style>

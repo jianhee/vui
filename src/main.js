@@ -1,24 +1,22 @@
 // styles
 import './styles/_main.scss';
 
+// i18n
+import en from './locales/en';
+import zh from './locales/zh';
+
 // vue
 import { createApp } from 'vue';
-
 import App from './App.vue';
 
 // custom
 import 'virtual:svg-icons-register';
-import { setupMxComponents } from './components';
-import { setupMxI18n } from './plugins/i18n';
+import { setupI18n } from './plugins/i18n';
+import { setupComponents } from './components';
 
 const app = createApp(App);
 
-setupMxComponents(app);
-setupMxI18n(app, {
-  messages: {
-    en: { hello: 'Hello' },
-    zh: { hello: '你好' }
-  }
-});
+setupI18n(app, { messages: { en, zh } });
+setupComponents(app);
 
 app.mount('#app');

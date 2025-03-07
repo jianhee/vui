@@ -9,7 +9,7 @@
       v-if="isLoading && !placeholder"
       :aspect-ratio="skeletonAspectRatio"
     />
-    <!-- 其它 -->
+    <!-- 其它状态 -->
     <img
       v-else
       class="mx-image-inner"

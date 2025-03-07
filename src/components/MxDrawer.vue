@@ -2,23 +2,27 @@
 <template>
   <Teleport to="body">
     <Transition name="mx-drawer">
+      <!-- mask -->
       <div
         v-show="visible"
-        class="mx-drawer"
+        class="mx-drawer-mask"
         @click.self="visible = false"
       >
+        <!-- 主体 -->
         <div
           class="mx-drawer-content"
           v-bind="$attrs"
           :class="contentClasses"
           :style="contentStyles"
         >
+          <!-- 标题 -->
           <div
             v-if="title"
             class="mx-drawer-title"
           >
             {{ title }}
           </div>
+          <!-- 内容 -->
           <div class="mx-drawer-body">
             <slot />
           </div>
@@ -43,15 +47,17 @@ const props = defineProps({
 // 是否显示
 const visible = defineModel('visible', { type: Boolean, default: false });
 
-// 计算样式
+// 计算类名
 const contentClasses = computed(() => {
   return `is-${props.placement}`;
 });
-const contentStyles = computed(() => {
-  return { '--mx-drawer-content-width': props.width };
-});
 
 // 计算样式
+const contentStyles = computed(() => {
+  return {
+    '--mx-drawer-content-width': props.width
+  };
+});
 </script>
 
 <style lang="scss">
@@ -60,14 +66,17 @@ const contentStyles = computed(() => {
   --mx-drawer-content-bg-color: #f7f7f7;
 }
 .mx-drawer {
-  position: fixed;
-  inset: 0;
-  z-index: 999;
-  transition: opacity 0.3s ease;
+  &-mask {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    transition: opacity 0.3s ease;
+  }
   &-content {
     position: absolute;
     top: 0;
     bottom: 0;
+    z-index: 999;
     width: var(--mx-drawer-content-width);
     max-width: 100vw;
     word-break: break-word;

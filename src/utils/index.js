@@ -1,6 +1,7 @@
-// 基础方法
-
-// 生成随机id
+/**
+ * 生成符合UUID格式的随机字符串
+ * @returns {string} 返回字符串："xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"
+ */
 export function guid() {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
     const r = (Math.random() * 16) | 0;
@@ -9,7 +10,10 @@ export function guid() {
   });
 }
 
-// 获取设备类型
+/**
+ * 根据用户代理字符串判断设备类型
+ * @returns {string} 返回设备类型：'android'|'ios'|'pc'
+ */
 export function getDeviceType() {
   const userAgent = navigator.userAgent.toLowerCase();
   if (/android/.test(userAgent)) {
@@ -21,10 +25,14 @@ export function getDeviceType() {
   }
 }
 
-// 复制文本
+/**
+ * 将指定文本复制到剪贴板
+ * @param {string} text     要复制的文本内容
+ * @returns {Promise<void>} 返回一个Promise，表示复制操作的结果
+ */
 export async function copyText(text) {
   try {
-    await navigator.clipboard.writeText(text);
+    await navigator.clipboard.writeText('text');
   } catch (error) {
     const input = document.createElement('input');
     input.value = text;
@@ -35,7 +43,11 @@ export async function copyText(text) {
   }
 }
 
-// 获取url参数
+/**
+ * 从当前URL中获取指定参数的值
+ * @param {string} name   要获取的参数名称
+ * @returns {string|null} 返回参数值：不存在时返回null
+ */
 export function getUrlParams(name) {
   const queryString = window.location.href.split('?')[1];
   if (!queryString) return null;
