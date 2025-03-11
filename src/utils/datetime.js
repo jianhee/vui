@@ -4,6 +4,24 @@ import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 dayjs.extend(utc);
 
+// 按照本地语言格式化日期时间
+export function getLocalDate(format, _date) {
+  if (!_date) return '';
+  const date = _date === 'now' ? new Date() : new Date(_date);
+  let options = null;
+  if (format === 'YYYY-MM-DD') {
+    // 2023-01-06
+    options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+  } else if (format === 'YYYY-MM-DD HH:mm') {
+    // 2023-01-06 20:50
+    options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false };
+  } else if (format === 'YYYY-MM-DD dddd') {
+    // 2023年1月06日 星期五
+    options = { year: 'numeric', month: 'long', day: '2-digit', weekday: 'long' };
+  }
+  return new Intl.DateTimeFormat(navigator.language, options).format(date);
+}
+
 /**
  * 获取当前UTC日期
  * @returns {string} 返回格式化的UTC日期字符串："2025-01-01"

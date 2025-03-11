@@ -35,6 +35,8 @@
 import { ref, useSlots, nextTick } from 'vue';
 import { onClickOutside, useWindowSize } from '@vueuse/core';
 
+defineOptions({ inheritAttrs: false });
+
 // 参数
 const props = defineProps({
   // 触发方式：hover, click, contextmenu

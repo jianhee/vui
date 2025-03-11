@@ -42,6 +42,8 @@ import { computed } from 'vue';
 import MxIcon from './MxIcon.vue';
 import IconClose from '../icons-vue/IconClose.vue';
 
+defineOptions({ inheritAttrs: false });
+
 const props = defineProps({
   // 标题
   title: { type: String, default: null },
