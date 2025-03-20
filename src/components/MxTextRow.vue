@@ -1,15 +1,17 @@
 <!-- 文字行溢出隐藏 -->
-<script>
-import { h } from 'vue';
+<template>
+  <component
+    :is="tag"
+    class="'mx-text-row'"
+  >
+    <slot />
+  </component>
+</template>
 
-export default {
-  props: {
-    tag: { type: String, default: 'span' }
-  },
-  setup(props, { slots }) {
-    return () => h(props.tag, { class: 'mx-text-row' }, slots.default && slots.default());
-  }
-};
+<script setup>
+defineProps({
+  tag: { type: String, default: 'span' }
+});
 </script>
 
 <style lang="scss">

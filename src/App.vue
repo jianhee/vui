@@ -5,55 +5,96 @@
     <div class="mx-ui-card">{{ $t('hello') }}</div>
     <div class="mx-ui-title">图标</div>
     <div class="mx-ui-card">
-      <div>使用 name：默认尺寸、size=20、可点击、禁用、旋转90度、loading</div>
+      <div>方式1：使用 name，依次展示 默认尺寸、size=20、可点击、禁用、旋转90度、loading、多图标</div>
       <div class="mx-ui-row">
-        <MxIcon name="search" />
+        <MxIcon name="close" />
         <MxIcon
-          name="search"
+          name="close"
           size="20"
         />
         <MxIcon
-          name="search"
+          name="close"
           size="20"
           clickable
         />
         <MxIcon
-          name="search"
+          name="close"
           size="20"
           disabled
         />
         <MxIcon
-          name="search"
+          name="close"
           size="20"
           rotate="90"
         />
         <MxIcon
-          name="search"
+          name="close"
           size="20"
           spin
         />
+        <MxIcon
+          :name="{
+            default: 'toggle-light',
+            hover: 'toggle-light-hover',
+            dark: 'toggle-dark',
+            darkHover: 'toggle-dark-hover'
+          }"
+          size="20"
+          class="mx-ui-icon"
+        />
       </div>
-      <div>使用 slot</div>
+      <div>方式2：使用 component</div>
       <div class="mx-ui-row">
-        <MxIcon>
-          <IconLoading />
-        </MxIcon>
-        <MxIcon size="20">
-          <IconLoading />
-        </MxIcon>
+        <MxIcon :component="IconClose" />
+        <MxIcon
+          :component="IconClose"
+          size="20"
+        />
+        <MxIcon
+          :component="IconClose"
+          size="20"
+          clickable
+        />
+        <MxIcon
+          :component="IconClose"
+          size="20"
+          disabled
+        />
+        <MxIcon
+          :component="IconClose"
+          size="20"
+          rotate="90"
+        />
+        <MxIcon
+          :component="IconClose"
+          size="20"
+          spin
+        />
+        <MxIcon
+          :component="{
+            default: IconToggleLight,
+            hover: IconToggleLightHover,
+            dark: IconToggleDark,
+            darkHover: IconToggleDarkHover
+          }"
+          size="20"
+          class="mx-ui-icon"
+        />
       </div>
     </div>
     <div class="mx-ui-title">按钮</div>
     <div class="mx-ui-card">
       <div class="mx-ui-row">
-        <MxBtn> default </MxBtn>
-        <MxBtn disabled> disabled </MxBtn>
-        <MxBtn loading> loading </MxBtn>
-        <MxBtn pre-icon="search"> 前置图标 </MxBtn>
-        <MxBtn post-icon="search"> 后置图标 </MxBtn>
+        <MxBtn>default</MxBtn>
+        <MxBtn disabled>disabled</MxBtn>
+        <MxBtn loading>loading</MxBtn>
+        <MxBtn icon="close">图标 name</MxBtn>
+        <MxBtn :icon="IconClose">图标 component</MxBtn>
+        <MxBtn :icon="{ name: 'close' }">图标 props.name</MxBtn>
+        <MxBtn :icon="{ component: IconClose }">图标 props.component</MxBtn>
       </div>
       <div class="mx-ui-row">
-        <MxBtn type="primary"> primary </MxBtn>
+        <MxBtn type="primary">primary</MxBtn>
         <MxBtn
           type="primary"
           disabled
@@ -68,51 +109,78 @@
         </MxBtn>
         <MxBtn
           type="primary"
-          pre-icon="search"
+          icon="close"
         >
-          前置图标
+          图标 name
         </MxBtn>
         <MxBtn
           type="primary"
-          post-icon="search"
+          :icon="IconClose"
         >
-          后置图标
+          图标 component
+        </MxBtn>
+        <MxBtn
+          type="primary"
+          :icon="{ name: 'close' }"
+        >
+          图标 props.name
+        </MxBtn>
+        <MxBtn
+          type="primary"
+          :icon="{ component: IconClose }"
+        >
+          图标 props.component
         </MxBtn>
       </div>
     </div>
-    <div class="mx-ui-title">拖拽</div>
+    <div class="mx-ui-title">菜单+下拉框</div>
     <div class="mx-ui-card">
-      <mx-drag-box
-        :width="100"
-        :height="100"
-        :min-width="50"
-        :min-height="50"
-        :is-draggable="false"
-        :handles="['left', 'right', 'top', 'bottom']"
+      <div>方式1：使用 trigger 打开</div>
+      <div class="mx-ui-row">
+        <MxDropdown trigger="hover">
+          <MxBtn>hover</MxBtn>
+          <template #content>
+            <MxMenu :data="menuItems" />
+          </template>
+        </MxDropdown>
+        <MxDropdown trigger="click">
+          <MxBtn>click</MxBtn>
+          <template #content>
+            <MxMenu :data="menuItems" />
+          </template>
+        </MxDropdown>
+        <MxDropdown trigger="contextmenu">
+          <MxBtn>contextmenu</MxBtn>
+          <template #content>
+            <MxMenu :data="menuItems" />
+          </template>
+        </MxDropdown>
+      </div>
+      <div>方式2：使用 open 方法打开</div>
+      <div class="mx-ui-row">
+        <MxBtn
+          ref="downdownTrigger"
+          @click="openDropdown()"
+        >
+          对齐元素
+        </MxBtn>
+        <MxBtn @click="openDropdown">对齐鼠标</MxBtn>
+        <MxDropdown ref="downdownContent">
+          <template #content>
+            <MxMenu :data="menuItems" />
+          </template>
+        </MxDropdown>
+      </div>
+    </div>
+    <div class="mx-ui-title">弹窗</div>
+    <div class="mx-ui-card">
+      <MxBtn @click="dialogVisible = true">打开弹窗</MxBtn>
+      <MxDialog
+        v-model:visible="dialogVisible"
+        title="标题"
       >
-        只能缩放
-      </mx-drag-box>
-      <mx-drag-box
-        :x="200"
-        :y="420"
-        :width="100"
-        :height="100"
-        :min-width="50"
-        :min-height="50"
-        :handles="[]"
-      >
-        只能移动
-      </mx-drag-box>
-      <mx-drag-box
-        :x="400"
-        :y="420"
-        :width="100"
-        :height="100"
-        :min-width="50"
-        :min-height="50"
-      >
-        移动+缩放
-      </mx-drag-box>
+        内容
+      </MxDialog>
     </div>
     <div class="mx-ui-title">抽屉</div>
     <div class="mx-ui-card">
@@ -126,44 +194,39 @@
         内容
       </MxDrawer>
     </div>
-    <div class="mx-ui-title">下拉框</div>
+    <div class="mx-ui-title">拖拽</div>
     <div class="mx-ui-card">
-      <div>使用 trigger 触发</div>
-      <div class="mx-ui-row">
-        <MxDropdown trigger="hover">
-          <MxBtn>hover</MxBtn>
-          <template #content>
-            <div class="mx-ui-dropdown">内容</div>
-          </template>
-        </MxDropdown>
-        <MxDropdown trigger="click">
-          <MxBtn>click</MxBtn>
-          <template #content>
-            <div class="mx-ui-dropdown">内容</div>
-          </template>
-        </MxDropdown>
-        <MxDropdown trigger="contextmenu">
-          <MxBtn>contextmenu</MxBtn>
-          <template #content>
-            <div class="mx-ui-dropdown">内容</div>
-          </template>
-        </MxDropdown>
-      </div>
-      <div>使用方法手动触发</div>
-      <div class="mx-ui-row">
-        <MxBtn
-          ref="downdownTrigger"
-          @click="openDropdown()"
-        >
-          对齐元素
-        </MxBtn>
-        <MxBtn @click="openDropdown">对齐鼠标</MxBtn>
-        <MxDropdown ref="downdownContent">
-          <template #content>
-            <div class="mx-ui-dropdown">内容</div>
-          </template>
-        </MxDropdown>
-      </div>
+      <MxDragBox
+        :width="100"
+        :height="100"
+        :min-width="50"
+        :min-height="50"
+        :is-draggable="false"
+        :handles="['left', 'right', 'top', 'bottom']"
+      >
+        只能缩放
+      </MxDragBox>
+      <MxDragBox
+        :x="200"
+        :y="420"
+        :width="100"
+        :height="100"
+        :min-width="50"
+        :min-height="50"
+        :handles="[]"
+      >
+        只能移动
+      </MxDragBox>
+      <MxDragBox
+        :x="400"
+        :y="420"
+        :width="100"
+        :height="100"
+        :min-width="50"
+        :min-height="50"
+      >
+        移动+缩放
+      </MxDragBox>
     </div>
     <div class="mx-ui-title">图片</div>
     <div class="mx-ui-card">
@@ -217,15 +280,19 @@
 <script setup>
 import { ref } from 'vue';
 import { unrefElement } from '@vueuse/core';
-import IconLoading from './icons-vue/IconLoading.vue';
+import IconClose from './icons/close.svg?component';
+import IconToggleLight from './icons/toggle-light.svg?component';
+import IconToggleLightHover from './icons/toggle-light-hover.svg?component';
+import IconToggleDark from './icons/toggle-dark.svg?component';
+import IconToggleDarkHover from './icons/toggle-dark-hover.svg?component';
 
-// 抽屉
-const drawerVisible = ref(false);
-const drawerPlacement = ref(null);
-function openDrawer(placement) {
-  drawerVisible.value = true;
-  drawerPlacement.value = placement;
-}
+// 菜单
+const menuItems = [
+  { key: 'key1', title: '图标 name', icon: 'close' },
+  { key: 'key2', title: '图标 component', icon: IconClose },
+  { key: 'key3', title: '图标 props.name', icon: { name: 'close' }, divider: true },
+  { key: 'key4', title: '图标 props.component', icon: { component: IconClose } }
+];
 
 // 下拉框
 const downdownTrigger = ref(null);
@@ -233,6 +300,17 @@ const downdownContent = ref(null);
 function openDropdown(event) {
   const el = unrefElement(downdownTrigger);
   downdownContent.value.open(event || el);
+}
+
+// 弹窗
+const dialogVisible = ref(false);
+
+// 抽屉
+const drawerVisible = ref(false);
+const drawerPlacement = ref(null);
+function openDrawer(placement) {
+  drawerVisible.value = true;
+  drawerPlacement.value = placement;
 }
 </script>
 
@@ -259,19 +337,14 @@ function openDropdown(event) {
   &-row > .mx-icon:hover {
     color: pink;
   }
+  .mx-dropdown-trigger {
+    margin-right: 10px;
+  }
   .mx-drag-box {
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: pink;
-  }
-  .mx-dropdown-trigger {
-    margin-right: 10px;
-  }
-  &-dropdown {
-    width: 100px;
-    height: 100px;
-    padding: 10px;
   }
   .mx-image {
     margin-right: 10px;

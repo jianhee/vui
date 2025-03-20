@@ -1,4 +1,7 @@
 <!-- 下拉框 -->
+<!-- 有两种打开方式 -->
+<!-- 1.使用 trigger 打开 -->
+<!-- 2.使用 open 方法打开 -->
 <template>
   <!-- 触发器 -->
   <div
@@ -169,6 +172,8 @@ defineExpose({
     z-index: 999;
     max-width: 95vw;
     max-height: 95vh;
+    padding-top: 5px;
+    padding-bottom: 5px;
     overflow: auto;
     background-color: var(--mx-dropdown-bg-color);
     border: 1px solid var(--mx-dropdown-border-color);

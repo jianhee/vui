@@ -1,35 +1,30 @@
 <!-- 图标 -->
+<!-- 本组件用于处理参数，然后传给 MxIconSingle 和 MxIconMulti -->
 <template>
-  <i
+  <!-- 单个值：用于单色图标，使用 color 切换颜色 -->
+  <!-- 多个值：用于多色图标，使用 js 切换图标，分成单独的组件是为了减少不必要的性能开销 -->
+  <component
+    :is="isMulti ? MxIconMulti : MxIconSingle"
     class="mx-icon"
     :class="iconClasses"
     :style="iconStyles"
-  >
-    <!-- 方式1：使用 name，需要使用 vite-plugin-svg-icons 插件自动导入 svg 文件 -->
-    <!-- <MxIcon name="loading" /> -->
-    <IconUseSvg
-      v-if="name"
-      :name="name"
-      :hover-name="hoverName"
-      :dark-name="darkName"
-      :dark-hover-name="darkHoverName"
-    />
-    <!-- 方式2：使用 slot，需要将 svg 文件改成 vue 组件，然后在使用前手动导入组件 -->
-    <!-- <MxIcon><IconLoading /></MxIcon> -->
-    <slot v-else />
-  </i>
+    :name="name"
+    :component="component"
+  />
 </template>
 
 <script setup>
 import { computed } from 'vue';
-import IconUseSvg from './MxIconUseSvg.vue';
+import MxIconSingle from './MxIconSingle.vue';
+import MxIconMulti from './MxIconMulti.vue';
 
 const props = defineProps({
-  // 传给 IconUseSvg 的参数
-  name: { type: String, default: null },
-  hoverName: { type: String, default: null },
-  darkName: { type: String, default: null },
-  darkHoverName: { type: String, default: null },
+  // 图标名称
+  // 单个值：name="close"
+  // 多个值：name="{ default: 'close', hover: 'close-hover', dark: 'close-dark', darkHover: 'close-dark-hover' }"
+  name: { type: [String, Object], default: null },
+  // 图标组件：同上
+  component: { type: Object, default: null },
   // 图标大小: 16, '16'
   size: { type: [String, Number], default: null },
   // 是否可点击
@@ -41,6 +36,9 @@ const props = defineProps({
   // 是否旋转
   spin: { type: Boolean, default: false }
 });
+
+// 是否多个值
+const isMulti = computed(() => props.name?.default || props.component?.default);
 
 // 类名
 const iconClasses = computed(() => ({
@@ -57,7 +55,7 @@ const iconStyles = computed(() => ({
 </script>
 
 <style lang="scss">
-@import '../styles/base';
+@use '../styles/base';
 .mx-icon {
   position: relative;
   display: inline-flex;

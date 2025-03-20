@@ -2,7 +2,7 @@
 <template>
   <div class="mx-menu">
     <template
-      v-for="item in items"
+      v-for="item in data"
       :key="item.key"
     >
       <!-- 菜单项 -->
@@ -11,9 +11,9 @@
         class="mx-menu-item"
         @click="onSelect(item)"
       >
-        <MxIcon
+        <MxIconInside
           v-if="item.icon"
-          :name="item.icon"
+          :icon="item.icon"
         />
         <span>{{ item.title }}</span>
       </div>
@@ -27,11 +27,10 @@
 </template>
 
 <script setup>
-import MxIcon from './MxIcon.vue';
-
+import MxIconInside from './MxIconInside.vue';
 defineProps({
-  // 菜单项：{ key: 'key', title: 'title', icon: 'icon', divider: true }
-  items: { type: Array, default: null }
+  // 菜单项：{ key: 'key', title: 'title', divider: true, icon: 'MxIcon 组件的 name/component/props' }
+  data: { type: Array, default: null }
 });
 
 // 选中菜单

@@ -1,36 +1,31 @@
 <!-- 按钮 -->
 <template>
   <button
-    :class="['mx-btn', `is-${type}`, `is-${size}`]"
+    type="button"
     :disabled="disabled || loading"
+    :class="['mx-btn', `is-${type}`, `is-${size}`]"
   >
     <!-- loading -->
     <MxIcon
       v-if="loading"
+      :component="IconLoading"
       class="mx-mr-5"
-    >
-      <IconLoading />
-    </MxIcon>
+    />
     <!-- 前置图标 -->
-    <MxIcon
-      v-if="preIcon"
-      :name="preIcon"
+    <MxIconInside
+      v-if="icon"
+      :icon="icon"
       class="mx-mr-5"
     />
     <!-- 内容 -->
     <slot />
-    <!-- 后置图标 -->
-    <MxIcon
-      v-if="postIcon"
-      :name="postIcon"
-      class="mx-ml-5"
-    />
   </button>
 </template>
 
 <script setup>
 import MxIcon from './MxIcon.vue';
-import IconLoading from '../icons-vue/IconLoading.vue';
+import MxIconInside from './MxIconInside.vue';
+import IconLoading from '../icons/loading.svg?component';
 
 defineProps({
   // 类型：default, primary
@@ -41,14 +36,13 @@ defineProps({
   disabled: { type: Boolean, default: false },
   // 加载状态
   loading: { type: Boolean, default: false },
-  // 图标
-  preIcon: { type: String, default: null },
-  postIcon: { type: String, default: null }
+  // 图标：MxIcon 组件的 name/component/props
+  icon: { type: [String, Object], default: null }
 });
 </script>
 
 <style lang="scss">
-@import '../styles/base';
+@use '../styles/base';
 :root {
   // brand
   --mx-btn-brand-color: #458ff3;

@@ -1,4 +1,7 @@
-<!-- 拖拽调整大小+移动 -->
+<!-- 拖拽 -->
+<!-- 有两个功能 -->
+<!-- 1.调整大小 -->
+<!-- 2.移动位置 -->
 <template>
   <div
     ref="boxRef"
@@ -34,9 +37,7 @@ const props = defineProps({
   // 可拖拽的轴
   handles: {
     type: Array,
-    default: () => {
-      return ['left', 'right', 'top', 'bottom'];
-    }
+    default: () => ['left', 'right', 'top', 'bottom']
   }
 });
 
@@ -132,7 +133,6 @@ function onDragStart(e) {
   const rect = boxRef.value.getBoundingClientRect();
   boxStartX.value = rect.left;
   boxStartY.value = rect.top;
-  console.log(boxRef.value);
   window.addEventListener('mousemove', onDrag);
   window.addEventListener('mouseup', onDragEnd);
 }

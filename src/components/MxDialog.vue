@@ -18,10 +18,9 @@
             <span class="mx-dialog-title">{{ title }}</span>
             <MxIcon
               class="mx-dialog-close"
+              :component="IconClose"
               @click="onClose"
-            >
-              <IconClose />
-            </MxIcon>
+            />
           </div>
           <!-- 内容 -->
           <div class="mx-dialog-body">
@@ -40,7 +39,7 @@
 <script setup>
 import { computed } from 'vue';
 import MxIcon from './MxIcon.vue';
-import IconClose from '../icons-vue/IconClose.vue';
+import IconClose from '../icons/close.svg?component';
 
 defineOptions({ inheritAttrs: false });
 
