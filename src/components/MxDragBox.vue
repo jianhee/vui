@@ -1,6 +1,6 @@
 <!-- 拖拽 -->
 <!-- 有两个功能 -->
-<!-- 1.调整大小 -->
+<!-- 1.缩放大小 -->
 <!-- 2.移动位置 -->
 <template>
   <div
@@ -31,32 +31,34 @@ import { useWindowSize } from '@vueuse/core';
 
 // 参数
 const props = defineProps({
-  // 最小值
+  // 定位：absolute/fixed
+  position: { type: String, default: null },
+  // 最小尺寸
   minWidth: { type: Number, default: 0 },
   minHeight: { type: Number, default: 0 },
-  // 是否可移动
+  // 是否可移动：非定位元素不能移动
   draggable: { type: Boolean, default: false },
-  // 是否可调整大小
+  // 是否可缩放：非定位元素只能调整右边和下边
   resizable: { type: Boolean, default: false },
   // 可拖拽的轴
-  handles: {
-    type: Array,
-    default: () => ['left', 'right', 'top', 'bottom']
-  }
+  handles: { type: Array, default: () => ['left', 'right', 'top', 'bottom'] }
 });
+
+// 当前定位：只支持left和top
+const boxCurrentX = defineModel('x', { type: Number, default: null });
+const boxCurrentY = defineModel('y', { type: Number, default: null });
+
+// 当前尺寸
+const boxCurrentWidth = defineModel('width', { type: Number, default: null });
+const boxCurrentHeight = defineModel('height', { type: Number, default: null });
 
 // 窗口大小
 const { width: windowWidth, height: windowHeight } = useWindowSize();
 
-// 当前值
-const boxCurrentX = defineModel('x', { type: Number, default: 0 });
-const boxCurrentY = defineModel('y', { type: Number, default: 0 });
-const boxCurrentWidth = defineModel('width', { type: Number, default: null });
-const boxCurrentHeight = defineModel('height', { type: Number, default: null });
-
 // 计算样式
 const boxStyles = computed(() => {
   return {
+    position: props.position,
     left: `${boxCurrentX.value}px`,
     top: `${boxCurrentY.value}px`,
     width: `${boxCurrentWidth.value}px`,
@@ -74,9 +76,9 @@ const boxClasses = computed(() => {
 
 // 手柄
 const handleActiveName = ref(null);
-const handleBoderWidth = computed(() => (/right|bottom/.test(handleActiveName.value) ? 2 : 0));
 const handleStartX = ref(0);
 const handleStartY = ref(0);
+const handleBoderWidth = computed(() => (/right|bottom/.test(handleActiveName.value) ? 2 : 0));
 
 // 盒子
 const boxRef = ref(null);
@@ -85,8 +87,21 @@ const boxStartY = ref(0);
 const boxStartWidth = ref(0);
 const boxStartHeight = ref(0);
 
-// 调整大小：开始
+// 是否定位元素
+const isFixed = () => {
+  const style = window.getComputedStyle(boxRef.value);
+  return ['fixed', 'absolute'].includes(style.position);
+};
+
+// 缩放：开始
 function onHandleDragStart(e, _handleName) {
+  if (!props.resizable) return;
+
+  // 是否需要定位
+  const needFixed = _handleName === 'top' || _handleName === 'left';
+  if (needFixed && !isFixed()) return;
+
+  // 记录初始数据
   handleActiveName.value = _handleName;
   handleStartX.value = e.clientX;
   handleStartY.value = e.clientY;
@@ -96,13 +111,14 @@ function onHandleDragStart(e, _handleName) {
   window.addEventListener('mouseup', onResizeEnd);
 }
 
-// 调整大小：鼠标不能超出窗口
+// 缩放：鼠标不能超出窗口
 function onResize(e) {
   if (!handleActiveName.value) return;
 
   if (/left|right/.test(handleActiveName.value)) {
     // 水平方向
-    if (e.clientX < 0 || e.clientX + handleBoderWidth.value > windowWidth.value) return;
+    const maxX = windowWidth.value - handleBoderWidth.value;
+    if (e.clientX < 0 || e.clientX > maxX) return;
     const deltaX = e.clientX - handleStartX.value;
     const newWidth = handleActiveName.value === 'left' ? boxStartWidth.value - deltaX : boxStartWidth.value + deltaX;
     if (newWidth < props.minWidth) return;
@@ -110,7 +126,8 @@ function onResize(e) {
     boxCurrentWidth.value = newWidth;
   } else {
     // 垂直方向
-    if (e.clientY < 0 || e.clientY + handleBoderWidth.value > windowHeight.value) return;
+    const maxY = windowHeight.value - handleBoderWidth.value;
+    if (e.clientY < 0 || e.clientY > maxY) return;
     const deltaY = e.clientY - handleStartY.value;
     const newHeight = handleActiveName.value === 'top' ? boxStartHeight.value - deltaY : boxStartHeight.value + deltaY;
     if (newHeight < props.minHeight) return;
@@ -119,7 +136,7 @@ function onResize(e) {
   }
 }
 
-// 调整大小：结束
+// 缩放：结束
 function onResizeEnd() {
   handleActiveName.value = null;
   window.removeEventListener('mousemove', onResize);
@@ -131,6 +148,10 @@ const isDragging = ref(false);
 function onDragStart(e) {
   if (!props.draggable) return;
 
+  // 是否需要定位
+  if (!isFixed()) return;
+
+  // 记录初始数据
   isDragging.value = true;
   handleStartX.value = e.clientX;
   handleStartY.value = e.clientY;
@@ -172,7 +193,6 @@ function onDragEnd() {
     position: relative;
     z-index: 999;
     &.is-draggable {
-      position: fixed;
       cursor: move;
     }
     &.is-active {
