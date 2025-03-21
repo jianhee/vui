@@ -151,18 +151,7 @@ defineExpose({
 </script>
 
 <style lang="scss">
-:root {
-  --mx-dropdown-bg-color: #fff;
-  --mx-dropdown-border-color: #ddd;
-  --mx-dropdown-shadow: 0 3px 6px rgb(0 0 0 / 16%);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --mx-dropdown-bg-color: #2b2b2b;
-    --mx-dropdown-border-color: #4f4f4f;
-  }
-}
+@use '../styles/vars';
 .mx-dropdown {
   &-trigger {
     cursor: pointer;

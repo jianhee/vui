@@ -10,12 +10,31 @@ $sizes: 5, 10, 15, 20, 25, 30;
   }
 }
 
-// 动画
+// 文本
+.mx-text {
+  &-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+// 状态
+.mx-state {
+  &-clickable {
+    cursor: pointer !important;
+  }
+  &-disabled {
+    cursor: not-allowed !important;
+    opacity: 0.6;
+  }
+}
+
+// 旋转动画
 .mx-animation-spin {
   animation: mx-animation-spin 1s linear infinite;
 }
 
-// animation
 @keyframes mx-animation-spin {
   0% {
     transform: rotate(0deg);

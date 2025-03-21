@@ -162,15 +162,7 @@ function onDragEnd() {
 </script>
 
 <style lang="scss">
-:root {
-  --mx-drag-handle-bg-color: #458ff3;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --mx-drag-handle-bg-color: #6f8cb4;
-  }
-}
+@use '../styles/vars';
 .mx-drag {
   &-box {
     position: relative;

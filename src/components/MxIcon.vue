@@ -42,8 +42,8 @@ const isMulti = computed(() => props.name?.default || props.component?.default);
 
 // 类名
 const iconClasses = computed(() => ({
-  'is-clickable': props.clickable,
-  'is-disabled': props.disabled,
+  'mx-state-clickable': props.clickable,
+  'mx-state-disabled': props.disabled,
   'mx-animation-spin': props.spin
 }));
 
@@ -68,13 +68,6 @@ const iconStyles = computed(() => ({
     width: 1em;
     height: 1em;
     fill: currentcolor;
-  }
-  &.is-clickable {
-    cursor: pointer;
-  }
-  &.is-disabled {
-    cursor: not-allowed;
-    opacity: 0.6;
   }
 }
 </style>

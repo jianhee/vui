@@ -364,16 +364,22 @@ function openDrawer(placement) {
 </script>
 
 <style lang="scss">
+@use './styles/vars';
+@use './styles/reset';
+@use './styles/base';
+body {
+  color: var(--mx-body-text-color);
+  background-color: var(--mx-body-bg-color);
+}
 .mx-ui {
   padding: 20px;
   &-title {
     margin: 20px 0;
     font-size: 20px;
-    color: #666;
   }
   &-card {
     padding: 20px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--mx-border-color);
   }
   &-row {
     display: flex;

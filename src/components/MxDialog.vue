@@ -69,23 +69,7 @@ function onClose() {
 </script>
 
 <style lang="scss">
-:root {
-  --mx-dialog-mask-bg-color: rgb(0 0 0 / 20%);
-  --mx-dialog-content-bg-color: #fff;
-  --mx-dialog-title-text-color: #212121;
-  --mx-dialog-close-text-color: #757575;
-  --mx-dialog-close-active-text-color: #458ff3;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --mx-dialog-mask-bg-color: rgb(0 0 0 / 60%);
-    --mx-dialog-content-bg-color: #333;
-    --mx-dialog-title-text-color: #fff;
-    --mx-dialog-close-text-color: #9e9e9e;
-    --mx-dialog-close-active-text-color: #6f8cb4;
-  }
-}
+@use '../styles/vars';
 .mx-dialog {
   position: fixed;
   inset: 0;

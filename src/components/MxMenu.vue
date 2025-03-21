@@ -41,19 +41,7 @@ function onSelect(item) {
 </script>
 
 <style lang="scss">
-:root {
-  --mx-menu-text-color: #333;
-  --mx-menu-divider-bg-color: #ddd;
-  --mx-menu-hover-bg-color: #f1f1f1;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --mx-menu-text-color: #fff;
-    --mx-menu-divider-bg-color: #4f4f4f;
-    --mx-menu-hover-bg-color: #444;
-  }
-}
+@use '../styles/vars';
 .mx-menu {
   &-item {
     display: flex;

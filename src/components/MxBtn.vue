@@ -2,8 +2,8 @@
 <template>
   <button
     type="button"
-    :disabled="disabled || loading"
-    :class="['mx-btn', `is-${type}`, `is-${size}`]"
+    :disabled="isDisabled"
+    :class="btnClasses"
   >
     <!-- loading -->
     <MxIcon
@@ -21,11 +21,13 @@
 </template>
 
 <script setup>
+import { computed } from 'vue';
 import MxIcon from './MxIcon.vue';
 import MxIconInside from './MxIconInside.vue';
 import IconLoading from '../icons/loading.vue';
 
-defineProps({
+// 参数
+const props = defineProps({
   // 类型：default, primary
   type: { type: String, default: 'default' },
   // 尺寸：medium
@@ -37,33 +39,24 @@ defineProps({
   // 图标：MxIcon 组件的 name/component/props
   icon: { type: [String, Object], default: null }
 });
+
+// 是否禁用
+const isDisabled = computed(() => props.disabled || props.loading);
+
+// 类名
+const btnClasses = computed(() => {
+  return {
+    'mx-btn': true,
+    [`is-${props.type}`]: true,
+    [`is-${props.size}`]: true,
+    'mx-state-disabled': isDisabled.value
+  };
+});
 </script>
 
 <style lang="scss">
-:root {
-  // brand
-  --mx-btn-brand-color: #458ff3;
-
-  // default
-  --mx-btn-default-bg-color: #458ff31a;
-  --mx-btn-default-border-color: #ddd;
-  --mx-btn-default-hover-bg-color: #458ff34d;
-
-  // primary
-  --mx-btn-primary-text-color: #fff;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    // brand
-    --mx-btn-brand-color: #6f8cb4;
-
-    // default
-    --mx-btn-default-bg-color: #6f8cb41a;
-    --mx-btn-default-border-color: #4f4f4f;
-    --mx-btn-default-hover-bg-color: #6f8cb44d;
-  }
-}
+@use '../styles/vars';
+@use '../styles/base';
 .mx-btn {
   display: inline-flex;
   flex: none;
@@ -80,10 +73,6 @@ defineProps({
   border-width: 1px;
   border-radius: 4px;
   transition: all 0.3s ease;
-  &:disabled {
-    cursor: not-allowed;
-    opacity: 0.6;
-  }
 
   // 尺寸
   &.is-medium {

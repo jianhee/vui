@@ -63,10 +63,7 @@ const contentStyles = computed(() => {
 </script>
 
 <style lang="scss">
-:root {
-  --mx-drawer-title-text-color: #212121;
-  --mx-drawer-content-bg-color: #f7f7f7;
-}
+@use '../styles/vars';
 .mx-drawer {
   position: fixed;
   inset: 0;

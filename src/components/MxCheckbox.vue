@@ -45,17 +45,7 @@ function onChange() {
 </script>
 
 <style lang="scss">
-:root {
-  --mx-checkbox-default-color: #ddd;
-  --mx-checkbox-active-color: #458ff3;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --mx-checkbox-default-color: #4f4f4f;
-    --mx-checkbox-active-color: #6f8cb4;
-  }
-}
+@use '../styles/vars';
 .mx-checkbox {
   position: relative;
   display: inline-flex;
