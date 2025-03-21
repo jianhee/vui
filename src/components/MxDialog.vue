@@ -39,7 +39,7 @@
 <script setup>
 import { computed } from 'vue';
 import MxIcon from './MxIcon.vue';
-import IconClose from '../icons/close.svg?component';
+import IconClose from '../icons/close.vue';
 
 defineOptions({ inheritAttrs: false });
 
@@ -60,10 +60,8 @@ const contentStyles = computed(() => {
   };
 });
 
-// 手动打开或关闭
-const emits = defineEmits(['close']);
-
 // 关闭
+const emits = defineEmits(['close']);
 function onClose() {
   visible.value = false;
   emits('close');

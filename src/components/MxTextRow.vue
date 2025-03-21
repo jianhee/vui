@@ -2,7 +2,7 @@
 <template>
   <component
     :is="tag"
-    class="'mx-text-row'"
+    class="mx-text-row"
   >
     <slot />
   </component>

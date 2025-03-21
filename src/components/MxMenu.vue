@@ -57,6 +57,7 @@ function onSelect(item) {
 .mx-menu {
   &-item {
     display: flex;
+    gap: 5px;
     align-items: center;
     padding: 8px 20px;
     font-size: 12px;
@@ -66,10 +67,6 @@ function onSelect(item) {
     cursor: pointer;
     &:hover {
       background-color: var(--mx-menu-hover-bg-color);
-    }
-    .mx-icon {
-      margin-right: 5px;
-      font-size: 14px;
     }
   }
   &-divider {

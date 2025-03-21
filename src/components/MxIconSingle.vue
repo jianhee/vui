@@ -16,7 +16,7 @@
 
 <script setup>
 defineProps({
-  name: { type: Object, default: null },
+  name: { type: [String, Object], default: null },
   component: { type: Object, default: null }
 });
 </script>

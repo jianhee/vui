@@ -133,6 +133,32 @@
         </MxBtn>
       </div>
     </div>
+    <div class="mx-ui-title">多选</div>
+    <div class="mx-ui-card">
+      <div class="mx-ui-row">
+        <MxCheckbox
+          v-model:checked="checkboxValue1"
+          label="选项1-label"
+          @change="showLog('change', $event)"
+        />
+        <span>{{ checkboxValue1 }}</span>
+        <MxCheckbox
+          v-model:checked="checkboxValue2"
+          @change="showLog('change', $event)"
+        >
+          选项2-slot
+        </MxCheckbox>
+        <span>{{ checkboxValue2 }}</span>
+        <MxCheckbox
+          v-model:checked="checkboxValue3"
+          label="选项3-label"
+          @change="showLog('change', $event)"
+        >
+          选项3-slot优先
+        </MxCheckbox>
+        <span>{{ checkboxValue3 }}</span>
+      </div>
+    </div>
     <div class="mx-ui-title">菜单+下拉框</div>
     <div class="mx-ui-card">
       <div>方式1：使用 trigger 打开</div>
@@ -140,19 +166,28 @@
         <MxDropdown trigger="hover">
           <MxBtn>hover</MxBtn>
           <template #content>
-            <MxMenu :data="menuItems" />
+            <MxMenu
+              :data="menuItems"
+              @select="showLog('select', $event)"
+            />
           </template>
         </MxDropdown>
         <MxDropdown trigger="click">
           <MxBtn>click</MxBtn>
           <template #content>
-            <MxMenu :data="menuItems" />
+            <MxMenu
+              :data="menuItems"
+              @select="showLog('select', $event)"
+            />
           </template>
         </MxDropdown>
         <MxDropdown trigger="contextmenu">
           <MxBtn>contextmenu</MxBtn>
           <template #content>
-            <MxMenu :data="menuItems" />
+            <MxMenu
+              :data="menuItems"
+              @select="showLog('select', $event)"
+            />
           </template>
         </MxDropdown>
       </div>
@@ -167,7 +202,10 @@
         <MxBtn @click="openDropdown">对齐鼠标</MxBtn>
         <MxDropdown ref="downdownContent">
           <template #content>
-            <MxMenu :data="menuItems" />
+            <MxMenu
+              :data="menuItems"
+              @select="showLog('select', $event)"
+            />
           </template>
         </MxDropdown>
       </div>
@@ -178,6 +216,7 @@
       <MxDialog
         v-model:visible="dialogVisible"
         title="标题"
+        @close="showLog('close', $event)"
       >
         内容
       </MxDialog>
@@ -286,6 +325,16 @@ import IconToggleLightHover from './icons/toggle-light-hover.svg?component';
 import IconToggleDark from './icons/toggle-dark.svg?component';
 import IconToggleDarkHover from './icons/toggle-dark-hover.svg?component';
 
+// 日志
+function showLog(action, val) {
+  console.log(action, val);
+}
+
+// 复选框
+const checkboxValue1 = ref(false);
+const checkboxValue2 = ref(false);
+const checkboxValue3 = ref(false);
+
 // 菜单
 const menuItems = [
   { key: 'key1', title: '图标 name', icon: 'close' },
@@ -328,26 +377,18 @@ function openDrawer(placement) {
   }
   &-row {
     display: flex;
+    gap: 10px;
     align-items: flex-start;
     margin: 10px 0;
   }
-  &-row > .mx-icon {
-    margin-right: 10px;
-  }
   &-row > .mx-icon:hover {
     color: pink;
-  }
-  .mx-dropdown-trigger {
-    margin-right: 10px;
   }
   .mx-drag-box {
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: pink;
-  }
-  .mx-image {
-    margin-right: 10px;
   }
 }
 </style>

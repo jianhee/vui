@@ -9,13 +9,11 @@
     <MxIcon
       v-if="loading"
       :component="IconLoading"
-      class="mx-mr-5"
     />
     <!-- 前置图标 -->
     <MxIconInside
       v-if="icon"
       :icon="icon"
-      class="mx-mr-5"
     />
     <!-- 内容 -->
     <slot />
@@ -25,7 +23,7 @@
 <script setup>
 import MxIcon from './MxIcon.vue';
 import MxIconInside from './MxIconInside.vue';
-import IconLoading from '../icons/loading.svg?component';
+import IconLoading from '../icons/loading.vue';
 
 defineProps({
   // 类型：default, primary
@@ -42,7 +40,6 @@ defineProps({
 </script>
 
 <style lang="scss">
-@use '../styles/base';
 :root {
   // brand
   --mx-btn-brand-color: #458ff3;
@@ -70,6 +67,7 @@ defineProps({
 .mx-btn {
   display: inline-flex;
   flex: none;
+  gap: 5px;
   align-items: center;
   justify-content: center;
   line-height: 1;
