@@ -13,13 +13,15 @@
     <!-- 内容 -->
     <slot />
     <!-- 拖拽手柄 -->
-    <div
-      v-for="handle in handles"
-      :key="handle"
-      class="mx-drag-handle"
-      :class="`is-${handle}`"
-      @mousedown.stop="onHandleDragStart($event, handle)"
-    />
+    <template v-if="resizable">
+      <div
+        v-for="handle in handles"
+        :key="handle"
+        class="mx-drag-handle"
+        :class="`is-${handle}`"
+        @mousedown.stop="onHandleDragStart($event, handle)"
+      />
+    </template>
   </div>
 </template>
 
@@ -33,7 +35,9 @@ const props = defineProps({
   minWidth: { type: Number, default: 0 },
   minHeight: { type: Number, default: 0 },
   // 是否可移动
-  isDraggable: { type: Boolean, default: true },
+  draggable: { type: Boolean, default: false },
+  // 是否可调整大小
+  resizable: { type: Boolean, default: false },
   // 可拖拽的轴
   handles: {
     type: Array,
@@ -63,7 +67,7 @@ const boxStyles = computed(() => {
 // 计算类名
 const boxClasses = computed(() => {
   return {
-    'is-draggable': props.isDraggable,
+    'is-draggable': props.draggable,
     'is-active': handleActiveName.value || isDragging.value
   };
 });
@@ -125,7 +129,7 @@ function onResizeEnd() {
 // 移动：开始
 const isDragging = ref(false);
 function onDragStart(e) {
-  if (!props.isDraggable) return;
+  if (!props.draggable) return;
 
   isDragging.value = true;
   handleStartX.value = e.clientX;

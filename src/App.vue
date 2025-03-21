@@ -240,10 +240,9 @@
         :height="100"
         :min-width="50"
         :min-height="50"
-        :is-draggable="false"
-        :handles="['left', 'right', 'top', 'bottom']"
+        resizable
       >
-        只能缩放
+        只能缩放（四个边）
       </MxDragBox>
       <MxDragBox
         :x="200"
@@ -252,7 +251,7 @@
         :height="100"
         :min-width="50"
         :min-height="50"
-        :handles="[]"
+        draggable
       >
         只能移动
       </MxDragBox>
@@ -263,8 +262,11 @@
         :height="100"
         :min-width="50"
         :min-height="50"
+        resizable
+        draggable
+        :handles="['right', 'bottom']"
       >
-        移动+缩放
+        移动+缩放（右边和下边）
       </MxDragBox>
     </div>
     <div class="mx-ui-title">图片</div>
