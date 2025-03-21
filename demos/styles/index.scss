@@ -1,0 +1,29 @@
+@use "@mxui/styles/reset";
+@use "@mxui/styles/base";
+
+// vars
+:root {
+  --demo-body-text-color: #333;
+  --demo-body-bg-color: #fff;
+  --demo-sidebar-text-color: #333;
+  --demo-sidebar-active-text-color: #458ff3;
+  --demo-sidebar-active-bg-color: #458ff31a;
+  --demo-border-color: #ddd;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --demo-body-text-color: #fff;
+    --demo-body-bg-color: #333;
+    --demo-sidebar-text-color: #fff;
+    --demo-sidebar-active-text-color: #6f8cb4;
+    --demo-sidebar-active-bg-color: #6f8cb41a;
+    --demo-border-color: #4f4f4f;
+  }
+}
+
+// reset
+body {
+  color: var(--demo-body-text-color);
+  background-color: var(--demo-body-bg-color);
+}

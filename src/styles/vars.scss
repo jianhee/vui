@@ -1,12 +1,10 @@
-// colors
+// vars
 :root {
   // 通用样式
   --mx-brand-color-default: #458ff3;
   --mx-brand-color-a10: #458ff31a;
   --mx-brand-color-a30: #458ff34d;
   --mx-border-color: #ddd;
-  --mx-body-bg-color: #fff;
-  --mx-body-text-color: #333;
 
   // 按钮
   --mx-btn-brand-color: var(--mx-brand-color-default);
@@ -56,8 +54,6 @@
     --mx-brand-color-a10: #6f8cb41a;
     --mx-brand-color-a30: #6f8cb44d;
     --mx-border-color: #4f4f4f;
-    --mx-body-bg-color: #333;
-    --mx-body-text-color: #fff;
 
     // 菜单
     --mx-menu-text-color: #fff;

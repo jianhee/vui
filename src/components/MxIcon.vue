@@ -33,7 +33,7 @@ const props = defineProps({
   disabled: { type: Boolean, default: false },
   // 旋转角度
   rotate: { type: [String, Number], default: null },
-  // 是否旋转
+  // 旋转动画
   spin: { type: Boolean, default: false }
 });
 

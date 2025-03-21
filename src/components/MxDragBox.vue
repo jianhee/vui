@@ -13,15 +13,13 @@
     <!-- 内容 -->
     <slot />
     <!-- 拖拽手柄 -->
-    <template v-if="resizable">
-      <div
-        v-for="handle in handles"
-        :key="handle"
-        class="mx-drag-handle"
-        :class="`is-${handle}`"
-        @mousedown.stop="onHandleDragStart($event, handle)"
-      />
-    </template>
+    <div
+      v-for="handle in handles"
+      :key="handle"
+      class="mx-drag-handle"
+      :class="`is-${handle}`"
+      @mousedown.stop="onHandleDragStart($event, handle)"
+    />
   </div>
 </template>
 
@@ -39,9 +37,16 @@ const props = defineProps({
   // 是否可移动：非定位元素不能移动
   draggable: { type: Boolean, default: false },
   // 是否可缩放：非定位元素只能调整右边和下边
-  resizable: { type: Boolean, default: false },
-  // 可拖拽的轴
-  handles: { type: Array, default: () => ['left', 'right', 'top', 'bottom'] }
+  // 布尔值：true：全部, false：不允许
+  // 数组：['left', 'right', 'top', 'bottom'] 允许指定的边
+  resizable: { type: [Boolean, Array], default: false }
+});
+
+// 可拖拽的轴
+const handles = computed(() => {
+  if (!props.resizable) return null;
+  if (props.resizable === true) return ['left', 'right', 'top', 'bottom'];
+  return props.resizable;
 });
 
 // 当前定位：只支持left和top
@@ -95,8 +100,6 @@ const isFixed = () => {
 
 // 缩放：开始
 function onHandleDragStart(e, _handleName) {
-  if (!props.resizable) return;
-
   // 是否需要定位
   const needFixed = _handleName === 'top' || _handleName === 'left';
   if (needFixed && !isFixed()) return;

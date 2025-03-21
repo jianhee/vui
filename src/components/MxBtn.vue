@@ -76,7 +76,8 @@ const btnClasses = computed(() => {
 
   // 尺寸
   &.is-medium {
-    padding: 8px 20px;
+    height: 32px;
+    padding: 0 20px;
     font-size: 14px;
   }
 
