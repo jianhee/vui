@@ -31,7 +31,7 @@ const slots = useSlots();
 
 // 文本
 defineProps({
-  label: { type: [String, Number, Boolean], default: true }
+  label: { type: String, default: null }
 });
 
 // 是否选中
@@ -71,7 +71,7 @@ function onChange() {
   &-icon {
     overflow: hidden;
     color: var(--mx-checkbox-default-color);
-    border-radius: 4px;
+    border-radius: 2px;
   }
   &-input:checked + &-icon {
     color: var(--mx-checkbox-active-color);
