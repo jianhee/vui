@@ -2,6 +2,8 @@
 // 依赖 vue-i18n
 import { createI18n } from 'vue-i18n';
 
+let t = null;
+
 /**
  * 在 main.js 中调用
  * @param {Object} app          - Vue 应用实例
@@ -22,6 +24,11 @@ export function setupI18n(app, options = {}) {
     ...options
   });
 
+  t = i18n.global.t;
+
   // 将 i18n 插件注册到 Vue 应用中
   app.use(i18n);
 }
+
+// 在 js 中调用
+export { t };
