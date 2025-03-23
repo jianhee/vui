@@ -49,6 +49,9 @@ const props = defineProps({
 // slots
 const slots = useSlots();
 
+// 事件
+const emits = defineEmits(['close']);
+
 // 窗口大小
 const { width: windowWidth, height: windowHeight } = useWindowSize();
 
@@ -104,6 +107,7 @@ onClickOutside(contentRef, () => {
 // 关闭下拉框
 function closeDropdown() {
   contentVisible.value = false;
+  emits('close');
 }
 
 // 打开下拉框：target可以是触发元素或鼠标事件
@@ -146,7 +150,7 @@ function openDropdown(target) {
 // 外部调用方法，比如v-for渲染多个触发元素时，直接调用方法更方便
 defineExpose({
   open: openDropdown,
-  clsoe: closeDropdown
+  close: closeDropdown
 });
 </script>
 
