@@ -8,7 +8,6 @@
     class="mx-drag-box"
     :class="boxClasses"
     :style="boxStyles"
-    @mousedown="onDragStart"
   >
     <!-- 内容 -->
     <slot />
@@ -25,7 +24,7 @@
 
 <script setup>
 import { ref, computed } from 'vue';
-import { useWindowSize } from '@vueuse/core';
+import { useWindowSize, onLongPress } from '@vueuse/core';
 
 // 参数
 const props = defineProps({
@@ -64,17 +63,17 @@ const { width: windowWidth, height: windowHeight } = useWindowSize();
 const boxStyles = computed(() => {
   return {
     position: props.position,
-    left: `${boxCurrentX.value}px`,
-    top: `${boxCurrentY.value}px`,
-    width: `${boxCurrentWidth.value}px`,
-    height: `${boxCurrentHeight.value}px`
+    left: props.draggable ? `${boxCurrentX.value}px` : null,
+    top: props.draggable ? `${boxCurrentY.value}px` : null,
+    width: props.resizable ? `${boxCurrentWidth.value}px` : null,
+    height: props.resizable ? `${boxCurrentHeight.value}px` : null,
+    cursor: isDragging.value ? 'move' : null
   };
 });
 
 // 计算类名
 const boxClasses = computed(() => {
   return {
-    'is-draggable': props.draggable,
     'is-active': handleActiveName.value || isDragging.value
   };
 });
@@ -100,6 +99,8 @@ const isFixed = () => {
 
 // 缩放：开始
 function onHandleDragStart(e, _handleName) {
+  if (!props.resizable) return;
+
   // 是否需要定位
   const needFixed = _handleName === 'top' || _handleName === 'left';
   if (needFixed && !isFixed()) return;
@@ -146,9 +147,10 @@ function onResizeEnd() {
   window.removeEventListener('mouseup', onResizeEnd);
 }
 
-// 移动：开始
+// 移动：长按开始
+// 修复移动时无法选中文本的问题
 const isDragging = ref(false);
-function onDragStart(e) {
+onLongPress(boxRef, e => {
   if (!props.draggable) return;
 
   // 是否需要定位
@@ -163,7 +165,7 @@ function onDragStart(e) {
   boxStartY.value = rect.top;
   window.addEventListener('mousemove', onDrag);
   window.addEventListener('mouseup', onDragEnd);
-}
+});
 
 // 移动：鼠标不能超出窗口
 function onDrag(e) {
@@ -195,9 +197,6 @@ function onDragEnd() {
   &-box {
     position: relative;
     z-index: 999;
-    &.is-draggable {
-      cursor: move;
-    }
     &.is-active {
       transition: none;
     }

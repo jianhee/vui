@@ -54,3 +54,14 @@ export function getUrlParams(name) {
   const urlParams = new URLSearchParams(queryString);
   return urlParams.get(name);
 }
+
+// 校验网址格式
+export function isValidUrl(url) {
+  try {
+    // eslint-disable-next-line no-new
+    new URL(url);
+    return true;
+  } catch (e) {
+    return false;
+  }
+}

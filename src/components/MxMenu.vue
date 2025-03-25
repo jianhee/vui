@@ -2,7 +2,7 @@
 <template>
   <div class="mx-menu">
     <template
-      v-for="item in data"
+      v-for="item in items"
       :key="item.key"
     >
       <!-- 菜单项 -->
@@ -27,11 +27,16 @@
 </template>
 
 <script setup>
+import { computed } from 'vue';
 import MxIconInside from './MxIconInside.vue';
-defineProps({
+
+const props = defineProps({
   // 菜单项：{ key: 'key', title: 'title', divider: true, icon: 'MxIcon 组件的 name/component/props' }
   data: { type: Array, default: null }
 });
+
+// 筛选菜单
+const items = computed(() => props.data?.filter(item => item.visible !== false));
 
 // 选中菜单
 const emits = defineEmits(['select']);
