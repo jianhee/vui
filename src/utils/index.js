@@ -32,7 +32,12 @@ export function getDeviceType() {
  */
 export async function copyText(text) {
   try {
-    await navigator.clipboard.writeText('text');
+    return new Promise(resolve => {
+      navigator.clipboard
+        .writeText(text)
+        .then(() => resolve(true))
+        .catch(() => resolve(false));
+    });
   } catch (error) {
     const input = document.createElement('input');
     input.value = text;
@@ -40,6 +45,7 @@ export async function copyText(text) {
     input.select();
     document.execCommand('Copy');
     document.body.removeChild(input);
+    return true;
   }
 }
 

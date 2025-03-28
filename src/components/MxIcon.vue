@@ -27,6 +27,8 @@ const props = defineProps({
   component: { type: Object, default: null },
   // 图标大小: 16, '16'
   size: { type: [String, Number], default: null },
+  // 图标颜色
+  color: { type: String, default: null },
   // 是否可点击
   clickable: { type: Boolean, default: false },
   // 是否禁用
@@ -49,6 +51,7 @@ const iconClasses = computed(() => ({
 
 // 样式
 const iconStyles = computed(() => ({
+  'color': props.color,
   'font-size': props.size ? `${props.size}px` : null,
   'transform': props.rotate ? `rotate(${props.rotate}deg)` : null
 }));

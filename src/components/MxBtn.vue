@@ -9,6 +9,7 @@
     <MxIcon
       v-if="loading"
       :component="IconLoading"
+      spin
     />
     <!-- 前置图标 -->
     <MxIconInside
@@ -28,7 +29,7 @@ import IconLoading from '../icons/loading.vue';
 
 // 参数
 const props = defineProps({
-  // 类型：default, primary
+  // 类型：custom, default, primary
   type: { type: String, default: 'default' },
   // 尺寸：medium
   size: { type: String, default: 'medium' },
@@ -48,7 +49,7 @@ const btnClasses = computed(() => {
   return {
     'mx-btn': true,
     [`is-${props.type}`]: true,
-    [`is-${props.size}`]: true,
+    [`is-${props.size}`]: props.type !== 'custom',
     'mx-state-disabled': isDisabled.value
   };
 });
@@ -69,8 +70,8 @@ const btnClasses = computed(() => {
   cursor: pointer;
   user-select: none;
   outline: 0;
-  border-style: solid;
-  border-width: 1px;
+  background-color: transparent;
+  border: 1px solid transparent;
   border-radius: 4px;
   transition: all 0.3s ease;
 

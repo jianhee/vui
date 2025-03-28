@@ -1,6 +1,9 @@
 <!-- 多选框 -->
 <template>
-  <label class="mx-checkbox">
+  <label
+    class="mx-checkbox"
+    :class="classList"
+  >
     <input
       v-model="checked"
       type="checkbox"
@@ -11,27 +14,24 @@
       :component="IconCheckbox"
       class="mx-checkbox-icon"
     />
-    <span
-      v-if="slots.default || label"
-      class="mx-checkbox-label"
-    >
-      <slot v-if="slots.default" />
-      <template v-else-if="label">{{ label }}</template>
-    </span>
+    <!-- 显示内容：slots 优先级高于 label -->
+    <slot v-if="slots.default" />
+    <span v-else-if="label">{{ label }}</span>
   </label>
 </template>
 
 <script setup>
-import { useSlots } from 'vue';
+import { computed, useSlots } from 'vue';
 import MxIcon from './MxIcon.vue';
 import IconCheckbox from '../icons/checkbox.vue';
 
-// 显示内容：优先级高于 label
 const slots = useSlots();
 
-// 文本
-defineProps({
-  label: { type: String, default: null }
+const props = defineProps({
+  // 文本
+  label: { type: String, default: null },
+  // 是否独占一行
+  block: { type: Boolean, default: false }
 });
 
 // 是否选中
@@ -42,6 +42,14 @@ const emits = defineEmits(['change']);
 function onChange() {
   emits('change', checked.value);
 }
+
+// 类名
+const classList = computed(() => {
+  return {
+    'is-checked': checked.value,
+    'is-block': props.block
+  };
+});
 </script>
 
 <style lang="scss">
@@ -51,7 +59,12 @@ function onChange() {
   display: inline-flex;
   gap: 8px;
   align-items: center;
+  height: 32px;
+  margin-right: 10px;
+  font-size: 14px;
+  white-space: nowrap;
   cursor: pointer;
+  user-select: none;
   &-input {
     position: absolute;
     width: 0;
@@ -62,9 +75,14 @@ function onChange() {
     overflow: hidden;
     color: var(--mx-checkbox-default-color);
     border-radius: 2px;
+    transition: color 0.3s ease;
   }
-  &-input:checked + &-icon {
+  &.is-checked,
+  &.is-checked .mx-checkbox-icon {
     color: var(--mx-checkbox-active-color);
+  }
+  &.is-block {
+    display: flex;
   }
 }
 </style>

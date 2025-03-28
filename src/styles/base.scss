@@ -12,6 +12,9 @@ $sizes: 5, 10, 15, 20, 25, 30;
 
 // 文本
 .mx-text {
+  &-center {
+    text-align: center;
+  }
   &-ellipsis {
     overflow: hidden;
     text-overflow: ellipsis;

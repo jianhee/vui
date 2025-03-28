@@ -11,11 +11,17 @@
         class="mx-menu-item"
         @click="onSelect(item)"
       >
-        <MxIconInside
-          v-if="item.icon"
-          :icon="item.icon"
+        <slot
+          v-if="slots.default"
+          :item="item"
         />
-        <span>{{ item.title }}</span>
+        <template v-else>
+          <MxIconInside
+            v-if="item.icon"
+            :icon="item.icon"
+          />
+          <span>{{ item.title }}</span>
+        </template>
       </div>
       <!-- 分隔符 -->
       <hr
@@ -27,16 +33,15 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { useSlots } from 'vue';
 import MxIconInside from './MxIconInside.vue';
 
-const props = defineProps({
-  // 菜单项：{ key: 'key', title: 'title', divider: true, icon: 'MxIcon 组件的 name/component/props' }
-  data: { type: Array, default: null }
-});
+const slots = useSlots();
 
-// 筛选菜单
-const items = computed(() => props.data?.filter(item => item.visible !== false));
+defineProps({
+  // 菜单项：{ key: 'key', title: 'title', divider: true, icon: 'MxIcon 组件的 name/component/props' }
+  items: { type: Array, default: null }
+});
 
 // 选中菜单
 const emits = defineEmits(['select']);
@@ -52,10 +57,14 @@ function onSelect(item) {
     display: flex;
     gap: 5px;
     align-items: center;
+    max-width: 240px;
     padding: 8px 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
     font-size: 12px;
     line-height: 20px;
     color: var(--mx-menu-text-color);
+    white-space: nowrap;
     text-decoration: none;
     cursor: pointer;
     &:hover {

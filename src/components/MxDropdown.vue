@@ -158,6 +158,9 @@ defineExpose({
 @use '../styles/vars';
 .mx-dropdown {
   &-trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
   }
   &-content {

@@ -20,11 +20,13 @@ const route = useRoute();
   &-layout {
     display: flex;
     height: 100vh;
+    overflow: hidden;
   }
   &-container {
     flex: auto;
     height: 100%;
     padding: 40px 20px;
+    overflow: auto;
   }
   &-title {
     margin-bottom: 20px;

@@ -1,142 +1,79 @@
 <template>
   <svg
+    width="16"
+    height="16"
     xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
+    viewBox="-289 412.9 16 16"
   >
-    <circle
-      cx="12"
-      cy="2"
-      r="0"
-      fill="currentColor"
-    >
-      <animate
-        attributeName="r"
-        begin="0"
-        calcMode="spline"
-        dur="1s"
-        keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"
-        repeatCount="indefinite"
-        values="0;2;0;0"
+    <g>
+      <linearGradient
+        id="prefix__Oval-15-Copy-3_1_"
+        gradientUnits="userSpaceOnUse"
+        x1="-274.378"
+        y1="417.069"
+        x2="-287.386"
+        y2="424.58"
+      >
+        <stop
+          offset="0"
+          stop-color="#fff"
+          stop-opacity="0"
+        />
+        <stop
+          offset=".014"
+          stop-color="#F7FBFF"
+          stop-opacity=".02"
+        />
+        <stop
+          offset=".099"
+          stop-color="#C8E2FE"
+          stop-opacity=".147"
+        />
+        <stop
+          offset=".187"
+          stop-color="#9FCDFD"
+          stop-opacity=".278"
+        />
+        <stop
+          offset=".277"
+          stop-color="#7EBCFC"
+          stop-opacity=".411"
+        />
+        <stop
+          offset=".368"
+          stop-color="#65AFFC"
+          stop-opacity=".547"
+        />
+        <stop
+          offset=".463"
+          stop-color="#52A5FB"
+          stop-opacity=".687"
+        />
+        <stop
+          offset=".562"
+          stop-color="#48A0FB"
+          stop-opacity=".834"
+        />
+        <stop
+          offset=".674"
+          stop-color="#449EFB"
+        />
+      </linearGradient>
+      <path
+        id="prefix__Oval-15-Copy-3"
+        d="M-281 426.9c3.3 0 6-2.7 6-6s-2.7-6-6-6-6 2.7-6 6 2.7 6 6 6zm0 2c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8z"
+        fill="url(#prefix__Oval-15-Copy-3_1_)"
       />
-    </circle>
+    </g>
     <circle
-      cx="12"
-      cy="2"
-      r="0"
       fill="currentColor"
-      transform="rotate(45 12 12)"
-    >
-      <animate
-        attributeName="r"
-        begin="0.125s"
-        calcMode="spline"
-        dur="1s"
-        keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"
-        repeatCount="indefinite"
-        values="0;2;0;0"
-      />
-    </circle>
-    <circle
-      cx="12"
-      cy="2"
-      r="0"
+      cx="-276.9"
+      cy="415.3"
+      r="1"
+    />
+    <path
       fill="currentColor"
-      transform="rotate(90 12 12)"
-    >
-      <animate
-        attributeName="r"
-        begin="0.25s"
-        calcMode="spline"
-        dur="1s"
-        keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"
-        repeatCount="indefinite"
-        values="0;2;0;0"
-      />
-    </circle>
-    <circle
-      cx="12"
-      cy="2"
-      r="0"
-      fill="currentColor"
-      transform="rotate(135 12 12)"
-    >
-      <animate
-        attributeName="r"
-        begin="0.375s"
-        calcMode="spline"
-        dur="1s"
-        keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"
-        repeatCount="indefinite"
-        values="0;2;0;0"
-      />
-    </circle>
-    <circle
-      cx="12"
-      cy="2"
-      r="0"
-      fill="currentColor"
-      transform="rotate(180 12 12)"
-    >
-      <animate
-        attributeName="r"
-        begin="0.5s"
-        calcMode="spline"
-        dur="1s"
-        keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"
-        repeatCount="indefinite"
-        values="0;2;0;0"
-      />
-    </circle>
-    <circle
-      cx="12"
-      cy="2"
-      r="0"
-      fill="currentColor"
-      transform="rotate(225 12 12)"
-    >
-      <animate
-        attributeName="r"
-        begin="0.625s"
-        calcMode="spline"
-        dur="1s"
-        keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"
-        repeatCount="indefinite"
-        values="0;2;0;0"
-      />
-    </circle>
-    <circle
-      cx="12"
-      cy="2"
-      r="0"
-      fill="currentColor"
-      transform="rotate(270 12 12)"
-    >
-      <animate
-        attributeName="r"
-        begin="0.75s"
-        calcMode="spline"
-        dur="1s"
-        keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"
-        repeatCount="indefinite"
-        values="0;2;0;0"
-      />
-    </circle>
-    <circle
-      cx="12"
-      cy="2"
-      r="0"
-      fill="currentColor"
-      transform="rotate(315 12 12)"
-    >
-      <animate
-        attributeName="r"
-        begin="0.875s"
-        calcMode="spline"
-        dur="1s"
-        keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"
-        repeatCount="indefinite"
-        values="0;2;0;0"
-      />
-    </circle>
+      d="M-276.3 414.5c-1.3-1-3-1.6-4.7-1.6-4.4 0-8 3.6-8 8v.5l2-.9c.2-3.1 2.8-5.6 6-5.6 1.3 0 2.5.4 3.5 1.1l1-.4.2-1.1z"
+    />
   </svg>
 </template>

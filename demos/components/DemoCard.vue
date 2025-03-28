@@ -21,6 +21,7 @@ defineProps({
   }
   &-content {
     padding: 20px;
+    font-size: 14px;
     border: 1px solid var(--demo-border-color);
   }
 }

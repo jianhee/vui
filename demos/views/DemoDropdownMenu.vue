@@ -5,19 +5,28 @@
       <MxDropdown trigger="hover">
         <MxBtn>hover</MxBtn>
         <template #content>
-          <div class="demo-dorpdown-content">内容</div>
+          <MxMenu
+            :items="menuItems"
+            @select="showLog('select', $event)"
+          />
         </template>
       </MxDropdown>
       <MxDropdown trigger="click">
         <MxBtn>click</MxBtn>
         <template #content>
-          <div class="demo-dorpdown-content">内容</div>
+          <MxMenu
+            :items="menuItems"
+            @select="showLog('select', $event)"
+          />
         </template>
       </MxDropdown>
       <MxDropdown trigger="contextmenu">
         <MxBtn>contextmenu</MxBtn>
         <template #content>
-          <div class="demo-dorpdown-content">内容</div>
+          <MxMenu
+            :items="menuItems"
+            @select="showLog('select', $event)"
+          />
         </template>
       </MxDropdown>
     </DemoRow>
@@ -33,7 +42,10 @@
       <MxBtn @click="openDropdown">对齐鼠标</MxBtn>
       <MxDropdown ref="downdownContent">
         <template #content>
-          <div class="demo-dorpdown-content">内容</div>
+          <MxMenu
+            :items="menuItems"
+            @select="showLog('select', $event)"
+          />
         </template>
       </MxDropdown>
     </DemoRow>
@@ -43,19 +55,25 @@
 <script setup>
 import { ref } from 'vue';
 import { unrefElement } from '@vueuse/core';
+import IconClose from '@/icons/close.svg?component';
 
+// 下拉框
 const downdownTrigger = ref(null);
 const downdownContent = ref(null);
 function openDropdown(event) {
   const el = unrefElement(downdownTrigger);
   downdownContent.value.open(event || el);
 }
-</script>
 
-<style scoped>
-.demo-dorpdown-content {
-  width: 100px;
-  height: 200px;
-  padding: 10px;
+// 菜单
+const menuItems = [
+  { key: 'key1', title: '图标 name', icon: 'close' },
+  { key: 'key2', title: '图标 component', icon: IconClose },
+  { key: 'key3', title: '图标 props.name', icon: { name: 'close' }, divider: true },
+  { key: 'key4', title: '图标 props.component', icon: { component: IconClose } }
+];
+
+function showLog(action, val) {
+  console.log(action, val);
 }
-</style>
+</script>
