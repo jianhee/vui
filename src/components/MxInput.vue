@@ -26,12 +26,12 @@ const valRef = defineModel('value', { type: String, default: null });
 
 // 输入
 function onInput(event) {
-  emits('input', event.tarent.value);
+  emits('input', event.target.value);
 }
 
 // 修改值
 function onChange(event) {
-  emits('change', event.tarent.value);
+  emits('change', event.target.value);
 }
 </script>
 

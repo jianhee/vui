@@ -6,6 +6,22 @@
       <MxBtn type="primary">primary</MxBtn>
     </DemoRow>
   </DemoCard>
+  <DemoCard title="尺寸">
+    <DemoRow>
+      <MxBtn size="small"> small </MxBtn>
+      <MxBtn>medium</MxBtn>
+      <MxBtn size="large"> large </MxBtn>
+    </DemoRow>
+  </DemoCard>
+  <DemoCard title="铺满状态">
+    <MxBtn block>default</MxBtn>
+    <MxBtn
+      type="primary"
+      block
+    >
+      primary
+    </MxBtn>
+  </DemoCard>
   <DemoCard title="禁用状态">
     <DemoRow>
       <MxBtn disabled>default</MxBtn>
