@@ -1,8 +1,20 @@
 <!-- 表单元素 -->
 <template>
+  <DemoCard title="输入框">
+    <DemoRow>绑定值：value</DemoRow>
+    <MxForm label-width="4em">
+      <MxFormFiled label="基础用法">
+        <MxInput
+          v-model:value="inputValue"
+          @change="showLog('change', $event)"
+        />
+        <DemoRow>当前绑定值：{{ inputValue }}</DemoRow>
+      </MxFormFiled>
+    </MxForm>
+  </DemoCard>
   <DemoCard title="多选框">
-    <DemoRow>显示值：slots 优先级高于 label</DemoRow>
     <DemoRow>绑定值：选中状态</DemoRow>
+    <DemoRow>显示值：slots 优先级高于 label</DemoRow>
     <MxForm label-width="4em">
       <MxFormFiled label="横向">
         <MxCheckbox
@@ -20,8 +32,8 @@
           label="选项3"
           @change="showLog('change', $event)"
         />
-        <DemoRow>显示值：label</DemoRow>
-        <DemoRow>绑定值：{{ checkboxValue1 }}, {{ checkboxValue2 }}, {{ checkboxValue3 }}</DemoRow>
+        <DemoRow>当前绑定值：{{ checkboxValue1 }}, {{ checkboxValue2 }}, {{ checkboxValue3 }}</DemoRow>
+        <DemoRow>当前显示值：label</DemoRow>
       </MxFormFiled>
       <MxFormFiled label="纵向">
         <MxCheckbox
@@ -45,8 +57,8 @@
         >
           选项3 的选中状态 {{ checkboxValue6 }}
         </MxCheckbox>
-        <DemoRow>显示值：slots</DemoRow>
-        <DemoRow>绑定值：{{ checkboxValue4 }}, {{ checkboxValue5 }}, {{ checkboxValue6 }}</DemoRow>
+        <DemoRow>当前绑定值：{{ checkboxValue4 }}, {{ checkboxValue5 }}, {{ checkboxValue6 }}</DemoRow>
+        <DemoRow>当前显示值：slots</DemoRow>
       </MxFormFiled>
     </MxForm>
   </DemoCard>
@@ -60,8 +72,8 @@
           :items="radioItems1"
           @change="showLog('change', $event)"
         />
-        <DemoRow>显示值：label</DemoRow>
-        <DemoRow>绑定值：{{ radioValue1 }}</DemoRow>
+        <DemoRow>当前绑定值：{{ radioValue1 }}</DemoRow>
+        <DemoRow>当前显示值：label</DemoRow>
       </MxFormFiled>
       <MxFormFiled label="纵向">
         <MxRadioGroup
@@ -72,8 +84,8 @@
         >
           <template #default="{ item }">选项{{ item.value }} 的 value {{ item.value }}</template>
         </MxRadioGroup>
-        <DemoRow>显示值：slots</DemoRow>
-        <DemoRow>绑定值：{{ radioValue2 }}</DemoRow>
+        <DemoRow>当前绑定值：{{ radioValue2 }}</DemoRow>
+        <DemoRow>当前显示值：slots</DemoRow>
       </MxFormFiled>
     </MxForm>
   </DemoCard>
@@ -87,8 +99,8 @@
           :items="selectOptions"
           @change="showLog('change', $event)"
         />
-        <DemoRow>显示值：label</DemoRow>
-        <DemoRow>绑定值：{{ selectValue }}</DemoRow>
+        <DemoRow>当前绑定值：{{ selectValue }}</DemoRow>
+        <DemoRow>当前显示值：label</DemoRow>
       </MxFormFiled>
     </MxForm>
   </DemoCard>
@@ -96,6 +108,9 @@
 
 <script setup>
 import { ref } from 'vue';
+
+// 选择器
+const inputValue = ref('11111');
 
 // 多选框
 const checkboxValue1 = ref(false);
