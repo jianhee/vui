@@ -3,6 +3,8 @@
   <input
     v-model="valRef"
     type="text"
+    :placeholder="placeholder"
+    :maxlength="maxlength"
     class="mx-input"
     @input="onInput"
     @change="onChange"
@@ -11,6 +13,13 @@
 
 <script setup>
 const emits = defineEmits(['input', 'change']);
+
+defineProps({
+  // 原生值
+  placeholder: { type: String, default: null },
+  // 最大长度
+  maxlength: { type: Number, default: null }
+});
 
 // 当前值
 const valRef = defineModel('value', { type: String, default: null });
