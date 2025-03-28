@@ -8,10 +8,10 @@
     />
     <!-- 文本 -->
     <div
-      v-if="labelRef"
-      class="mx-loading-label"
+      v-if="!props.hideText"
+      class="mx-loading-text"
     >
-      {{ labelRef }}
+      {{ text }}
     </div>
   </div>
 </template>
@@ -24,8 +24,10 @@ import IconLoading from '../icons/loading.vue';
 const props = defineProps({
   // 图标：MxIcon 组件的 name/component/props
   icon: { type: [String, Object], default: null },
-  // 文本：传入 false 不显示
-  label: { type: [String, Boolean], default: null }
+  // 文本
+  text: { type: String, default: 'Loading...' },
+  // 隐藏文本
+  hideText: { type: Boolean, default: false }
 });
 
 // 图标
@@ -35,12 +37,6 @@ const iconProps = computed(() => {
     component: IconLoading,
     spin: true
   };
-});
-
-// 文本
-const labelRef = computed(() => {
-  if (props.label === false) return null;
-  return props.label || 'Loading...';
 });
 </script>
 
@@ -53,7 +49,7 @@ const labelRef = computed(() => {
     font-size: 16px;
     color: var(--mx-brand-color-default);
   }
-  &-label {
+  &-text {
     margin-top: 10px;
     font-size: 12px;
   }

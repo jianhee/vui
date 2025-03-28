@@ -7,7 +7,10 @@
     <MxLoading :icon="IconLoading" />
   </DemoCard>
   <DemoCard title="自定义文本">
-    <MxLoading label="加载中..." />
+    <MxLoading text="加载中..." />
+  </DemoCard>
+  <DemoCard title="不显示文本">
+    <MxLoading hide-text />
   </DemoCard>
 </template>
 
