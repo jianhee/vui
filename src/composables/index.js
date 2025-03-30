@@ -32,7 +32,6 @@ export function setupComponents(vueApp, options = {}) {
     const isExcluded = exclude.includes(componentName);
 
     // 注册组件
-    console.log(componentName);
     if (isIncluded && !isExcluded) {
       vueApp.component(componentName, defineAsyncComponent(vueComponents[path]));
     }
