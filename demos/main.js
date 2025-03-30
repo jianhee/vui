@@ -6,21 +6,24 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
 
+// icon
+import 'virtual:svg-icons-register';
+
+// components
+import { setupMxComponents, setupComponents } from '@mxui/composables';
+
 // i18n
 import en from './locales/en';
 import zh from './locales/zh';
-
-// custom
-import 'virtual:svg-icons-register';
 import { setupI18n } from '@mxui/plugins/i18n';
-import { setupComponents } from './components';
-import { setupComponents as setupMxComponents } from '@mxui/components';
 
 const app = createApp(App);
 app.use(router);
 
-setupI18n(app, { messages: { en, zh } });
-setupComponents(app);
+const vueComponents = import.meta.glob(['./components/*.vue']);
 setupMxComponents(app);
+setupComponents(app, { vueComponents });
+
+setupI18n(app, { messages: { en, zh } });
 
 app.mount('#app');
