@@ -17,6 +17,7 @@
           <div class="mx-dialog-header">
             <span class="mx-dialog-title">{{ title }}</span>
             <MxIcon
+              v-if="close"
               class="mx-dialog-close"
               :component="IconClose"
               @click="onClose"
@@ -37,7 +38,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, watch } from 'vue';
 import MxIcon from './MxIcon.vue';
 import IconClose from '../icons/close.vue';
 
@@ -46,6 +47,8 @@ defineOptions({ inheritAttrs: false });
 const props = defineProps({
   // 标题
   title: { type: String, default: null },
+  // 关闭按钮
+  close: { type: Boolean, default: true },
   // 宽度
   width: { type: String, default: '500px' }
 });
@@ -66,6 +69,13 @@ function onClose() {
   visible.value = false;
   emits('close');
 }
+
+// 监听关闭
+watch(visible, val => {
+  if (!val) {
+    emits('close');
+  }
+});
 </script>
 
 <style lang="scss">
