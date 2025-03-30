@@ -23,7 +23,7 @@ export function setupComponents(vueApp, options = {}) {
       // 同时匹配中划线和下划线
       .split(/[_-]/)
       // 转成驼峰式
-      .map(part => part[0]?.toUpperCase() + part.slice(1).toLowerCase())
+      .map(part => part[0]?.toUpperCase() + part.slice(1))
       .join('');
 
     // 白名单为空 或 组件名在白名单中
