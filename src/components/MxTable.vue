@@ -224,15 +224,18 @@ function onScroll(event) {
     padding: 0 8px;
     white-space: nowrap;
   }
+
   // 表头加粗
   &-fixedbar &-row {
     font-weight: bold;
   }
+
   // 表身状态
   &-scrollbar &-row:hover,
   &-scrollbar &-row.is-current {
     background-color: var(--mx-table-row-active-bg-color);
   }
+
   // 是否显示复选框
   .is-checkbox {
     visibility: hidden;
@@ -244,6 +247,7 @@ function onScroll(event) {
       visibility: visible;
     }
   }
+
   // 是否显示拖拽手柄
   .mx-drag-handle {
     top: 5px !important;
