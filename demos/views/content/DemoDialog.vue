@@ -1,11 +1,11 @@
 <!-- 弹窗 -->
 <template>
   <DemoCard title="基本用法">
-    <MxBtn @click="dialogVisible = true">打开弹窗</MxBtn>
+    <MxBtn @click="isVisible = true">打开弹窗</MxBtn>
   </DemoCard>
 
   <MxDialog
-    v-model:visible="dialogVisible"
+    v-model:visible="isVisible"
     title="标题"
     @close="showLog('close')"
   >
@@ -16,7 +16,7 @@
 <script setup>
 import { ref } from 'vue';
 
-const dialogVisible = ref(false);
+const isVisible = ref(false);
 
 function showLog(action) {
   console.log(action);

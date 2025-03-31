@@ -25,8 +25,9 @@ import { computed, useSlots } from 'vue';
 import MxIcon from './MxIcon.vue';
 import IconCheckbox from '../assets/icons/checkbox.vue';
 
-const emits = defineEmits(['change']);
 const slots = useSlots();
+const emits = defineEmits(['change']);
+
 const props = defineProps({
   // 文本
   label: { type: String, default: null },

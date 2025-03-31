@@ -34,13 +34,13 @@
   <DemoCard title="使用 open 方法打开">
     <DemoRow>
       <MxBtn
-        ref="downdownTrigger"
+        ref="triggerRef"
         @click="openDropdown()"
       >
         对齐元素
       </MxBtn>
       <MxBtn @click="openDropdown">对齐鼠标</MxBtn>
-      <MxDropdown ref="downdownContent">
+      <MxDropdown ref="contentRef">
         <template #content>
           <MxMenu
             :items="menuItems"
@@ -58,11 +58,13 @@ import { unrefElement } from '@vueuse/core';
 import IconClose from '@/assets/icons/close.svg?component';
 
 // 下拉框
-const downdownTrigger = ref(null);
-const downdownContent = ref(null);
+const triggerRef = ref(null);
+const contentRef = ref(null);
+
+// 打开下拉框
 function openDropdown(event) {
-  const el = unrefElement(downdownTrigger);
-  downdownContent.value.open(event || el);
+  const el = unrefElement(triggerRef);
+  contentRef.value.open(event || el);
 }
 
 // 菜单

@@ -39,8 +39,9 @@ import { ref, useSlots, nextTick } from 'vue';
 import { onClickOutside, useWindowSize } from '@vueuse/core';
 
 defineOptions({ inheritAttrs: false });
-const emits = defineEmits(['close']);
 const slots = useSlots();
+const emits = defineEmits(['close']);
+
 const props = defineProps({
   // 触发方式：hover, click, contextmenu
   trigger: { type: String, default: 'hover' }
@@ -49,20 +50,18 @@ const props = defineProps({
 // 窗口大小
 const { width: windowWidth, height: windowHeight } = useWindowSize();
 
-// 触发器
+// 触发器和内容
 const triggerRef = ref(null);
-
-// 内容
 const contentRef = ref(null);
 const contentVisible = ref(false);
 const contentStyles = ref(null);
 const contentOffset = 5;
 
 // hover：进入
-const hoverTimer = ref(null);
+let hoverTimer = null;
 function onMouseEnter() {
   if (props.trigger !== 'hover') return;
-  clearTimeout(hoverTimer.value);
+  clearTimeout(hoverTimer);
   if (contentVisible.value) return;
   // 对齐元素
   openDropdown(triggerRef.value);
@@ -72,7 +71,7 @@ function onMouseEnter() {
 function onMouseLeave() {
   if (props.trigger !== 'hover') return;
   if (!contentVisible.value) return;
-  hoverTimer.value = setTimeout(() => {
+  hoverTimer = setTimeout(() => {
     closeDropdown();
   }, 100);
 }

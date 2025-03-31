@@ -36,6 +36,7 @@
 import { computed } from 'vue';
 
 defineOptions({ inheritAttrs: false });
+
 const props = defineProps({
   // 标题
   title: { type: String, default: null },

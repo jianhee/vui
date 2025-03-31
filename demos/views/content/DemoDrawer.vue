@@ -8,8 +8,8 @@
   </DemoCard>
 
   <MxDrawer
-    v-model:visible="drawerVisible"
-    :placement="drawerPlacement"
+    v-model:visible="visibleRef"
+    :placement="placementRef"
     title="标题"
   >
     内容
@@ -19,11 +19,11 @@
 <script setup>
 import { ref } from 'vue';
 
-const drawerVisible = ref(false);
-const drawerPlacement = ref(null);
+const visibleRef = ref(false);
+const placementRef = ref(null);
 
 function openDrawer(placement) {
-  drawerVisible.value = true;
-  drawerPlacement.value = placement;
+  visibleRef.value = true;
+  placementRef.value = placement;
 }
 </script>

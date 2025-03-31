@@ -28,14 +28,12 @@ import { useWindowSize, onLongPress } from '@vueuse/core';
 
 // 参数
 const props = defineProps({
-  // 定位：absolute/fixed
-  position: { type: String, default: null },
   // 最小尺寸
   minWidth: { type: Number, default: 0 },
   minHeight: { type: Number, default: 0 },
-  // 是否可移动：非定位元素不能移动
+  // 是否可移动：自动转成定位元素
   draggable: { type: Boolean, default: false },
-  // 是否可缩放：非定位元素只能调整右边和下边
+  // 是否可缩放：定位元素支持四个边，非定位元素只支持右边和下边
   // 布尔值：true：全部, false：不允许
   // 数组：['left', 'right', 'top', 'bottom'] 允许指定的边
   resizable: { type: [Boolean, Array], default: false }
@@ -62,11 +60,11 @@ const { width: windowWidth, height: windowHeight } = useWindowSize();
 // 获取样式
 const boxStyles = computed(() => {
   return {
-    position: props.position,
-    left: props.draggable ? `${boxCurrentX.value}px` : null,
-    top: props.draggable ? `${boxCurrentY.value}px` : null,
-    width: props.resizable ? `${boxCurrentWidth.value}px` : null,
-    height: props.resizable ? `${boxCurrentHeight.value}px` : null,
+    position: props.draggable ? 'fixed' : null,
+    left: `${boxCurrentX.value}px`,
+    top: `${boxCurrentY.value}px`,
+    width: `${boxCurrentWidth.value}px`,
+    height: `${boxCurrentHeight.value}px`,
     cursor: isDragging.value ? 'move' : null
   };
 });
@@ -80,21 +78,22 @@ const boxClasses = computed(() => {
 
 // 手柄
 const handleActiveName = ref(null);
-const handleStartX = ref(0);
-const handleStartY = ref(0);
 const handleBoderWidth = computed(() => (/right|bottom/.test(handleActiveName.value) ? 2 : 0));
+let handleStartX = 0;
+let handleStartY = 0;
 
 // 盒子
+const isDragging = ref(false);
 const boxRef = ref(null);
-const boxStartX = ref(0);
-const boxStartY = ref(0);
-const boxStartWidth = ref(0);
-const boxStartHeight = ref(0);
+let boxStartX = 0;
+let boxStartY = 0;
+let boxStartWidth = 0;
+let boxStartHeight = 0;
 
-// 是否定位元素
+// 是否固定定位
 const isFixed = () => {
   const style = window.getComputedStyle(boxRef.value);
-  return ['fixed', 'absolute'].includes(style.position);
+  return style.position === 'fixed';
 };
 
 // 缩放：开始
@@ -107,10 +106,10 @@ function onHandleDragStart(e, _handleName) {
 
   // 记录初始数据
   handleActiveName.value = _handleName;
-  handleStartX.value = e.clientX;
-  handleStartY.value = e.clientY;
-  boxStartWidth.value = boxRef.value.offsetWidth;
-  boxStartHeight.value = boxRef.value.offsetHeight;
+  handleStartX = e.clientX;
+  handleStartY = e.clientY;
+  boxStartWidth = boxRef.value.offsetWidth;
+  boxStartHeight = boxRef.value.offsetHeight;
   window.addEventListener('mousemove', onResize);
   window.addEventListener('mouseup', onResizeEnd);
 }
@@ -123,8 +122,8 @@ function onResize(e) {
     // 水平方向
     const maxX = windowWidth.value - handleBoderWidth.value;
     if (e.clientX < 0 || e.clientX > maxX) return;
-    const deltaX = e.clientX - handleStartX.value;
-    const newWidth = handleActiveName.value === 'left' ? boxStartWidth.value - deltaX : boxStartWidth.value + deltaX;
+    const deltaX = e.clientX - handleStartX;
+    const newWidth = handleActiveName.value === 'left' ? boxStartWidth - deltaX : boxStartWidth + deltaX;
     if (newWidth < props.minWidth) return;
     boxCurrentX.value = handleActiveName.value === 'left' ? e.clientX : null;
     boxCurrentWidth.value = newWidth;
@@ -132,8 +131,8 @@ function onResize(e) {
     // 垂直方向
     const maxY = windowHeight.value - handleBoderWidth.value;
     if (e.clientY < 0 || e.clientY > maxY) return;
-    const deltaY = e.clientY - handleStartY.value;
-    const newHeight = handleActiveName.value === 'top' ? boxStartHeight.value - deltaY : boxStartHeight.value + deltaY;
+    const deltaY = e.clientY - handleStartY;
+    const newHeight = handleActiveName.value === 'top' ? boxStartHeight - deltaY : boxStartHeight + deltaY;
     if (newHeight < props.minHeight) return;
     boxCurrentY.value = handleActiveName.value === 'top' ? e.clientY : null;
     boxCurrentHeight.value = newHeight;
@@ -149,7 +148,6 @@ function onResizeEnd() {
 
 // 移动：长按开始
 // 修复移动时无法选中文本的问题
-const isDragging = ref(false);
 onLongPress(boxRef, e => {
   if (!props.draggable) return;
 
@@ -158,11 +156,11 @@ onLongPress(boxRef, e => {
 
   // 记录初始数据
   isDragging.value = true;
-  handleStartX.value = e.clientX;
-  handleStartY.value = e.clientY;
+  handleStartX = e.clientX;
+  handleStartY = e.clientY;
   const rect = boxRef.value.getBoundingClientRect();
-  boxStartX.value = rect.left;
-  boxStartY.value = rect.top;
+  boxStartX = rect.left;
+  boxStartY = rect.top;
   window.addEventListener('mousemove', onDrag);
   window.addEventListener('mouseup', onDragEnd);
 });
@@ -173,13 +171,13 @@ function onDrag(e) {
 
   // 水平方向
   if (e.clientX >= 0 && e.clientX <= windowWidth.value) {
-    const deltaX = e.clientX - handleStartX.value;
-    boxCurrentX.value = boxStartX.value + deltaX;
+    const deltaX = e.clientX - handleStartX;
+    boxCurrentX.value = boxStartX + deltaX;
   }
   // 垂直方向
   if (e.clientY >= 0 && e.clientY <= windowWidth.value) {
-    const deltaY = e.clientY - handleStartY.value;
-    boxCurrentY.value = boxStartY.value + deltaY;
+    const deltaY = e.clientY - handleStartY;
+    boxCurrentY.value = boxStartY + deltaY;
   }
 }
 
@@ -198,6 +196,7 @@ function onDragEnd() {
     position: relative;
     z-index: 999;
     &.is-active {
+      user-select: none;
       transition: none;
     }
   }

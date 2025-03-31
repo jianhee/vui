@@ -44,6 +44,7 @@ import IconClose from '../assets/icons/close.vue';
 
 defineOptions({ inheritAttrs: false });
 const emits = defineEmits(['close']);
+
 const props = defineProps({
   // 标题
   title: { type: String, default: null },
@@ -68,7 +69,7 @@ function onClose() {
   visible.value = false;
 }
 
-// 关闭时触发关闭事件
+// 关闭时触发关闭事件：外部关闭也能触发
 watch(visible, val => {
   if (!val) {
     emits('close');
