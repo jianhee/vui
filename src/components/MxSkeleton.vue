@@ -38,7 +38,7 @@ defineProps({
 </script>
 
 <style lang="scss">
-@use '../styles/vars';
+@use '../assets/styles/vars';
 .mx-skeleton {
   &.is-card {
     background: linear-gradient(90deg, var(--mx-skeleton-from-bg-color) 25%, var(--mx-skeleton-to-bg-color) 37%, var(--mx-skeleton-from-bg-color) 63%);

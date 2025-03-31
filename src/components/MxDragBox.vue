@@ -192,7 +192,7 @@ function onDragEnd() {
 </script>
 
 <style lang="scss">
-@use '../styles/vars';
+@use '../assets/styles/vars';
 .mx-drag {
   &-box {
     position: relative;

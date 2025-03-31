@@ -51,7 +51,7 @@ function onSelect(item) {
 </script>
 
 <style lang="scss">
-@use '../styles/vars';
+@use '../assets/styles/vars';
 .mx-menu {
   &-item {
     display: flex;

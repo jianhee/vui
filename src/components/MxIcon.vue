@@ -58,7 +58,7 @@ const iconStyles = computed(() => ({
 </script>
 
 <style lang="scss">
-@use '../styles/base';
+@use '../assets/styles/base';
 .mx-icon {
   position: relative;
   display: inline-flex;

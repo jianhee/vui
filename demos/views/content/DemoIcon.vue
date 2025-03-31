@@ -103,11 +103,11 @@
 </template>
 
 <script setup>
-import IconClose from '@/icons/close.svg?component';
-import IconToggleLight from '@/icons/toggle-light.svg?component';
-import IconToggleLightHover from '@/icons/toggle-light-hover.svg?component';
-import IconToggleDark from '@/icons/toggle-dark.svg?component';
-import IconToggleDarkHover from '@/icons/toggle-dark-hover.svg?component';
+import IconClose from '@/assets/icons/close.svg?component';
+import IconToggleLight from '@/assets/icons/toggle-light.svg?component';
+import IconToggleLightHover from '@/assets/icons/toggle-light-hover.svg?component';
+import IconToggleDark from '@/assets/icons/toggle-dark.svg?component';
+import IconToggleDarkHover from '@/assets/icons/toggle-dark-hover.svg?component';
 </script>
 
 <style scoped>

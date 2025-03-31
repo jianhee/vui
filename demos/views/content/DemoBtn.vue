@@ -55,5 +55,5 @@
 </template>
 
 <script setup>
-import IconClose from '@/icons/close.svg?component';
+import IconClose from '@/assets/icons/close.svg?component';
 </script>

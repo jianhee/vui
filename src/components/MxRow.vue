@@ -28,5 +28,5 @@ defineProps({
 </script>
 
 <style lang="scss">
-@use '../styles/base';
+@use '../assets/styles/base';
 </style>

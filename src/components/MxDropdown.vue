@@ -155,7 +155,7 @@ defineExpose({
 </script>
 
 <style lang="scss">
-@use '../styles/vars';
+@use '../assets/styles/vars';
 .mx-dropdown {
   &-trigger {
     display: inline-flex;

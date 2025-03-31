@@ -1,6 +1,6 @@
 <template>
   <div class="demo-layout">
-    <LayoutSidebar />
+    <DemoSidebar />
     <div class="demo-container">
       <div class="demo-title">{{ route.meta.title }}</div>
       <RouterView />
@@ -10,7 +10,7 @@
 
 <script setup>
 import { useRoute, RouterView } from 'vue-router';
-import LayoutSidebar from './views/LayoutSidebar.vue';
+import DemoSidebar from './views/layout/DemoSidebar.vue';
 
 const route = useRoute();
 </script>

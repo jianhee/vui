@@ -19,7 +19,7 @@
 <script setup>
 import { computed } from 'vue';
 import MxIconInside from './MxIconInside.vue';
-import IconLoading from '../icons/loading.vue';
+import IconLoading from '../assets/icons/loading.vue';
 
 const props = defineProps({
   // 图标：MxIcon 组件的 name/component/props
@@ -41,7 +41,7 @@ const iconProps = computed(() => {
 </script>
 
 <style lang="scss">
-@use '../styles/vars';
+@use '../assets/styles/vars';
 .mx-loading {
   width: 100%;
   padding: 20px 0;

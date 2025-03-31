@@ -40,7 +40,7 @@
 <script setup>
 import { computed, watch } from 'vue';
 import MxIcon from './MxIcon.vue';
-import IconClose from '../icons/close.vue';
+import IconClose from '../assets/icons/close.vue';
 
 defineOptions({ inheritAttrs: false });
 
@@ -79,7 +79,7 @@ watch(visible, val => {
 </script>
 
 <style lang="scss">
-@use '../styles/vars';
+@use '../assets/styles/vars';
 .mx-dialog {
   position: fixed;
   inset: 0;

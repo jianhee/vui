@@ -21,7 +21,7 @@ const navRoutes = navItems.map(({ name, title, file }) => ({
   path: `/${name}`,
   name,
   meta: { title },
-  component: () => import(`@/views/${file}.vue`)
+  component: () => import(`@/views/content/${file}.vue`)
 }));
 
 // 初始化路由

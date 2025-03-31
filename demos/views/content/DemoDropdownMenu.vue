@@ -55,7 +55,7 @@
 <script setup>
 import { ref } from 'vue';
 import { unrefElement } from '@vueuse/core';
-import IconClose from '@/icons/close.svg?component';
+import IconClose from '@/assets/icons/close.svg?component';
 
 // 下拉框
 const downdownTrigger = ref(null);

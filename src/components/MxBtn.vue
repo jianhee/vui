@@ -26,7 +26,7 @@
 import { computed } from 'vue';
 import MxIcon from './MxIcon.vue';
 import MxIconInside from './MxIconInside.vue';
-import IconLoading from '../icons/loading.vue';
+import IconLoading from '../assets/icons/loading.vue';
 
 // 参数
 const props = defineProps({
@@ -71,8 +71,8 @@ const btnClasses = computed(() => {
 </script>
 
 <style lang="scss">
-@use '../styles/vars';
-@use '../styles/base';
+@use '../assets/styles/vars';
+@use '../assets/styles/base';
 .mx-btn {
   display: inline-flex;
   flex: none;

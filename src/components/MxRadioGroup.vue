@@ -50,7 +50,7 @@ function onChange(item) {
 </script>
 
 <style lang="scss">
-@use '../styles/vars';
+@use '../assets/styles/vars';
 .mx-radio {
   &-item {
     display: inline-flex;

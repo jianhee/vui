@@ -23,7 +23,7 @@
 import { computed } from 'vue';
 import { useImage } from '@vueuse/core';
 import MxSkeleton from './MxSkeleton.vue';
-import errorImg from '../images/mx-error.png';
+import errorImg from '../assets/images/mx-error.png';
 
 const props = defineProps({
   // 图片地址

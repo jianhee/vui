@@ -63,7 +63,7 @@ const contentStyles = computed(() => {
 </script>
 
 <style lang="scss">
-@use '../styles/vars';
+@use '../assets/styles/vars';
 .mx-drawer {
   position: fixed;
   inset: 0;

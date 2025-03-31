@@ -23,7 +23,7 @@
 <script setup>
 import { computed, useSlots } from 'vue';
 import MxIcon from './MxIcon.vue';
-import IconCheckbox from '../icons/checkbox.vue';
+import IconCheckbox from '../assets/icons/checkbox.vue';
 
 const slots = useSlots();
 
@@ -53,7 +53,7 @@ const classList = computed(() => {
 </script>
 
 <style lang="scss">
-@use '../styles/vars';
+@use '../assets/styles/vars';
 .mx-checkbox {
   position: relative;
   display: inline-flex;
