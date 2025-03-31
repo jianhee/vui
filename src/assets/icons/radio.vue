@@ -1,0 +1,31 @@
+<template>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="14"
+    height="14"
+  >
+    <g
+      stroke="currentColor"
+      stroke-miterlimit="10"
+      fill="none"
+    >
+      <circle
+        cx="7"
+        cy="7"
+        r="7"
+        stroke="none"
+      />
+      <circle
+        cx="7"
+        cy="7"
+        r="6.5"
+      />
+    </g>
+    <circle
+      cx="3.5"
+      cy="3.5"
+      r="3.5"
+      transform="translate(3.5 3.5)"
+    />
+  </svg>
+</template>

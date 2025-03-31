@@ -1,6 +1,7 @@
 <!-- 图标 -->
 <template>
-  <DemoCard title="基础用法：默认状态、可点击状态、禁用状态、旋转45度、旋转动画">
+  <DemoCard title="基础用法">
+    <template #desc>依次展示默认状态、可点击状态、禁用状态、旋转45度、旋转动画</template>
     <div>使用 name</div>
     <DemoRow>
       <MxIcon name="close" />

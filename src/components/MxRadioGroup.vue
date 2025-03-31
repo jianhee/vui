@@ -1,13 +1,14 @@
 <!-- 单选框 -->
 <template>
-  <div
-    class="mx-radio-group"
-    :class="{ 'is-block': block }"
-  >
+  <div class="mx-radio-group">
     <label
       v-for="item in items"
       :key="item.value"
       class="mx-radio-item"
+      :class="{
+        'is-checked': item.value === valRef,
+        'is-block': block
+      }"
     >
       <input
         :value="item.value"
@@ -16,7 +17,11 @@
         class="mx-radio-input"
         @change="onChange(item)"
       />
-      <!-- 显示内容：slots 优先级高于 label -->
+      <MxIcon
+        :component="IconRadio"
+        class="mx-radio-icon"
+      />
+      <!-- 优先显示slot -->
       <slot
         v-if="slots.default"
         :item="item"
@@ -28,6 +33,7 @@
 
 <script setup>
 import { useSlots } from 'vue';
+import IconRadio from '../assets/icons/radio.vue';
 
 const slots = useSlots();
 const emits = defineEmits(['change']);
@@ -52,6 +58,7 @@ function onChange(item) {
 @use '../assets/styles/vars';
 .mx-radio {
   &-item {
+    position: relative;
     display: inline-flex;
     gap: 8px;
     align-items: center;
@@ -61,12 +68,25 @@ function onChange(item) {
     white-space: nowrap;
     cursor: pointer;
     user-select: none;
-    &.is-checked {
+    &.is-block {
+      display: flex;
+    }
+    &.is-checked,
+    &.is-checked .mx-radio-icon {
       color: var(--mx-checkbox-active-color);
     }
   }
-  &-group.is-block &-item {
-    display: flex;
+  &-input {
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+  &-icon {
+    overflow: hidden;
+    color: var(--mx-checkbox-default-color);
+    border-radius: 2px;
+    transition: color 0.3s ease;
   }
 }
 </style>

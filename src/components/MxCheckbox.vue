@@ -14,7 +14,7 @@
       :component="IconCheckbox"
       class="mx-checkbox-icon"
     />
-    <!-- 显示内容：slots 优先级高于 label -->
+    <!-- 优先显示slot -->
     <slot v-if="slots.default" />
     <span v-else-if="label">{{ label }}</span>
   </label>
@@ -77,12 +77,12 @@ function onChange() {
     border-radius: 2px;
     transition: color 0.3s ease;
   }
+  &.is-block {
+    display: flex;
+  }
   &.is-checked,
   &.is-checked .mx-checkbox-icon {
     color: var(--mx-checkbox-active-color);
-  }
-  &.is-block {
-    display: flex;
   }
 }
 </style>

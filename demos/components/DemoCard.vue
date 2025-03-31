@@ -1,6 +1,9 @@
 <template>
   <div class="demo-card">
     <div class="demo-card-title">{{ title }}</div>
+    <div class="demo-card-desc">
+      <slot name="desc" />
+    </div>
     <div class="demo-card-content">
       <slot />
     </div>
@@ -18,6 +21,10 @@ defineProps({
   &-title {
     margin: 20px 0;
     font-size: 16px;
+  }
+  &-desc {
+    margin: 10px 0;
+    font-size: 12px;
   }
   &-content {
     padding: 20px;

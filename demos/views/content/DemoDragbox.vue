@@ -1,6 +1,6 @@
 <!-- 拖拽 -->
 <template>
-  <DemoCard title="基础用法">
+  <DemoCard title="缩放">
     <MxDragbox
       :width="180"
       :height="100"
@@ -8,7 +8,6 @@
       :min-height="50"
       resizable
     >
-      缩放<br />
       非定位元素<br />
       只能拖拽右边和下边
     </MxDragbox>
@@ -26,8 +25,10 @@
       定位元素<br />
       可以拖拽四个边
     </MxDragbox>
+  </DemoCard>
+  <DemoCard title="移动">
     <MxDragbox
-      :x="240"
+      :x="500"
       :y="310"
       :width="180"
       :height="100"
@@ -35,8 +36,10 @@
     >
       移动
     </MxDragbox>
+  </DemoCard>
+  <DemoCard title="缩放+移动">
     <MxDragbox
-      :x="240"
+      :x="500"
       :y="450"
       :width="180"
       :height="100"

@@ -170,7 +170,9 @@ defineExpose({
     box-shadow: var(--mx-dropdown-shadow);
     transition:
       opacity 0.3s ease,
-      transform 0.3s ease;
+      transform 0.3s ease,
+      left 0.1s ease,
+      top 0.1s ease;
   }
   &-enter-from,
   &-leave-to {

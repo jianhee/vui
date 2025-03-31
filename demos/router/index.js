@@ -12,6 +12,7 @@ export const navItems = [
   { name: 'image', title: '图片', file: 'DemoImage' },
   { name: 'loading', title: '加载状态', file: 'DemoLoading' },
   { name: 'skeleton', title: '骨架屏', file: 'DemoSkeleton' },
+  { name: 'tableTree', title: '表格+树结构', file: 'DemoTableTree' },
   { name: 'dragbox', title: '拖拽', file: 'DemoDragbox' }
 ];
 

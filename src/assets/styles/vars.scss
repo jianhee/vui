@@ -5,6 +5,7 @@
   --mx-brand-color-a10: #458ff31a;
   --mx-brand-color-a30: #458ff34d;
   --mx-border-color: #ddd;
+  --mx-row-hover-bg-color: #f1f1f1;
 
   // 按钮
   --mx-btn-brand-color: var(--mx-brand-color-default);
@@ -20,7 +21,7 @@
   // 菜单
   --mx-menu-divider-bg-color: var(--mx-border-color);
   --mx-menu-text-color: #333;
-  --mx-menu-hover-bg-color: #f1f1f1;
+  --mx-menu-hover-bg-color: var(--mx-row-hover-bg-color);
 
   // 下拉框
   --mx-dropdown-border-color: var(--mx-border-color);
@@ -45,6 +46,10 @@
   --mx-skeleton-from-bg-color: #f0f2f5;
   --mx-skeleton-to-bg-color: #e6e8eb;
   --mx-skeleton-border-color: var(--mx-border-color);
+
+  // 表格和树
+  --mx-table-row-active-bg-color: var(--mx-row-hover-bg-color);
+  --mx-tree-node-active-bg-color: var(--mx-row-hover-bg-color);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -54,10 +59,10 @@
     --mx-brand-color-a10: #6f8cb41a;
     --mx-brand-color-a30: #6f8cb44d;
     --mx-border-color: #4f4f4f;
+    --mx-row-hover-bg-color: #444;
 
     // 菜单
     --mx-menu-text-color: #fff;
-    --mx-menu-hover-bg-color: #444;
 
     // 下拉框
     --mx-dropdown-bg-color: #2b2b2b;

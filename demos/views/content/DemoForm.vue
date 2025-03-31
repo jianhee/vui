@@ -1,20 +1,22 @@
 <!-- 表单元素 -->
 <template>
   <DemoCard title="输入框">
-    <DemoRow>绑定值：value</DemoRow>
+    <template #desc>绑定值：v-model:value === input 的 value 属性</template>
     <MxForm label-width="4em">
       <MxFormFiled label="基础用法">
         <MxInput
           v-model:value="inputValue"
           @change="showLog('change', $event)"
         />
-        <DemoRow>当前绑定值：{{ inputValue }}</DemoRow>
+        <DemoRow>当前值：{{ inputValue }}</DemoRow>
       </MxFormFiled>
     </MxForm>
   </DemoCard>
   <DemoCard title="多选框">
-    <DemoRow>绑定值：选中状态</DemoRow>
-    <DemoRow>显示值：slots 优先级高于 label</DemoRow>
+    <template #desc>
+      <div>绑定值：v-model:checked === checkbox 的 checked 属性</div>
+      <div>显示值：优先显示 slot，其次显示 label 字段</div>
+    </template>
     <MxForm label-width="4em">
       <MxFormFiled label="横向">
         <MxCheckbox
@@ -32,8 +34,7 @@
           label="选项3"
           @change="showLog('change', $event)"
         />
-        <DemoRow>当前绑定值：{{ checkboxValue1 }}, {{ checkboxValue2 }}, {{ checkboxValue3 }}</DemoRow>
-        <DemoRow>当前显示值：label</DemoRow>
+        <DemoRow>当前值：{{ checkboxValue1 }}, {{ checkboxValue2 }}, {{ checkboxValue3 }}</DemoRow>
       </MxFormFiled>
       <MxFormFiled label="纵向">
         <MxCheckbox
@@ -57,14 +58,16 @@
         >
           选项3 的选中状态 {{ checkboxValue6 }}
         </MxCheckbox>
-        <DemoRow>当前绑定值：{{ checkboxValue4 }}, {{ checkboxValue5 }}, {{ checkboxValue6 }}</DemoRow>
-        <DemoRow>当前显示值：slots</DemoRow>
+        <DemoRow>当前值：{{ checkboxValue4 }}, {{ checkboxValue5 }}, {{ checkboxValue6 }}</DemoRow>
       </MxFormFiled>
     </MxForm>
   </DemoCard>
   <DemoCard title="单选框">
-    <DemoRow>显示值：slots 优先级高于 label</DemoRow>
-    <DemoRow>绑定值：选中项的 value</DemoRow>
+    <template #desc>
+      <div>绑定值：v-model:value === 选中项的值</div>
+      <div>每项的值：value 字段 === radio 的 value 属性</div>
+      <div>每项的显示值：优先显示 slot，其次显示 label 字段</div>
+    </template>
     <MxForm label-width="4em">
       <MxFormFiled label="横向">
         <MxRadioGroup
@@ -72,8 +75,7 @@
           :items="radioItems1"
           @change="showLog('change', $event)"
         />
-        <DemoRow>当前绑定值：{{ radioValue1 }}</DemoRow>
-        <DemoRow>当前显示值：label</DemoRow>
+        <DemoRow>当前值：{{ radioValue1 }}</DemoRow>
       </MxFormFiled>
       <MxFormFiled label="纵向">
         <MxRadioGroup
@@ -84,14 +86,16 @@
         >
           <template #default="{ item }">选项{{ item.value }} 的 value {{ item.value }}</template>
         </MxRadioGroup>
-        <DemoRow>当前绑定值：{{ radioValue2 }}</DemoRow>
-        <DemoRow>当前显示值：slots</DemoRow>
+        <DemoRow>当前值：{{ radioValue2 }}</DemoRow>
       </MxFormFiled>
     </MxForm>
   </DemoCard>
   <DemoCard title="选择器">
-    <DemoRow>显示值：选中项的 label</DemoRow>
-    <DemoRow>绑定值：选中项的 value</DemoRow>
+    <template #desc>
+      <div>绑定值：v-model:value === 选中项的值</div>
+      <div>每项的值：value 字段 === option 的 value 属性</div>
+      <div>每项的显示值：label 字段</div>
+    </template>
     <MxForm label-width="4em">
       <MxFormFiled label="基础用法">
         <MxSelect
@@ -99,8 +103,7 @@
           :items="selectOptions"
           @change="showLog('change', $event)"
         />
-        <DemoRow>当前绑定值：{{ selectValue }}</DemoRow>
-        <DemoRow>当前显示值：label</DemoRow>
+        <DemoRow>当前值：{{ selectValue }}</DemoRow>
       </MxFormFiled>
     </MxForm>
   </DemoCard>

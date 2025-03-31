@@ -11,6 +11,7 @@
         class="mx-menu-item"
         @click="onSelect(item)"
       >
+        <!-- 优先显示slot -->
         <slot
           v-if="slots.default"
           :item="item"
