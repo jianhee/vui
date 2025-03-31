@@ -48,7 +48,7 @@ const imgUrl = computed(() => {
   return isLoading.value ? props.placeholder : error.value ? props.error : props.src;
 });
 
-// 计算样式
+// 获取样式
 const imageStyles = computed(() => {
   return {
     'width': props.width,

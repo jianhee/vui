@@ -36,15 +36,14 @@
 import { useSlots } from 'vue';
 import MxIconInside from './MxIconInside.vue';
 
+const emits = defineEmits(['select']);
 const slots = useSlots();
-
 defineProps({
   // 菜单项：{ key: 'key', title: 'title', divider: true, icon: 'MxIcon 组件的 name/component/props' }
   items: { type: Array, default: null }
 });
 
 // 选中菜单
-const emits = defineEmits(['select']);
 function onSelect(item) {
   emits('select', item);
 }

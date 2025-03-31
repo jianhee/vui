@@ -14,6 +14,7 @@ const props = defineProps({
   icon: { type: [String, Object], default: null }
 });
 
+//  传给icon组件的参数
 const iconProps = computed(() => {
   // 当做 name 使用
   // icon="close"

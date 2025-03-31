@@ -36,7 +36,6 @@
 import { computed } from 'vue';
 
 defineOptions({ inheritAttrs: false });
-
 const props = defineProps({
   // 标题
   title: { type: String, default: null },
@@ -49,12 +48,12 @@ const props = defineProps({
 // 是否显示
 const visible = defineModel('visible', { type: Boolean, default: false });
 
-// 计算类名
+// 获取类名
 const contentClasses = computed(() => {
   return `is-${props.placement}`;
 });
 
-// 计算样式
+// 获取样式
 const contentStyles = computed(() => {
   return {
     '--mx-drawer-content-width': props.width

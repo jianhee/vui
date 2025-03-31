@@ -13,9 +13,8 @@
 
 <script setup>
 const emits = defineEmits(['input', 'change']);
-
 defineProps({
-  // 原生值
+  // 原生属性
   placeholder: { type: String, default: null },
   // 最大长度
   maxlength: { type: Number, default: null }
@@ -24,7 +23,7 @@ defineProps({
 // 当前值
 const valRef = defineModel('value', { type: String, default: null });
 
-// 输入
+// 输入值
 function onInput(event) {
   emits('input', event.target.value);
 }

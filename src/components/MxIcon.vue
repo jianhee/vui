@@ -42,14 +42,14 @@ const props = defineProps({
 // 是否多个值
 const isMulti = computed(() => props.name?.default || props.component?.default);
 
-// 类名
+// 获取类名
 const iconClasses = computed(() => ({
   'mx-state-clickable': props.clickable,
   'mx-state-disabled': props.disabled,
   'mx-animation-spin': props.spin
 }));
 
-// 样式
+// 获取样式
 const iconStyles = computed(() => ({
   'color': props.color,
   'font-size': props.size ? `${props.size}px` : null,

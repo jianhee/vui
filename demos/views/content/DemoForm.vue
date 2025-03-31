@@ -109,7 +109,7 @@
 <script setup>
 import { ref } from 'vue';
 
-// 选择器
+// 输入框
 const inputValue = ref('11111');
 
 // 多选框

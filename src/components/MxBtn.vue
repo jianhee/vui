@@ -49,14 +49,14 @@ const props = defineProps({
 // 是否禁用
 const isDisabled = computed(() => props.disabled || props.loading);
 
-// 样式
+// 获取样式
 const btnStyles = computed(() => {
   return {
     borderRadius: props.radius
   };
 });
 
-// 类名
+// 获取类名
 const btnClasses = computed(() => {
   return [
     'mx-btn',

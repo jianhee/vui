@@ -59,7 +59,7 @@ const boxCurrentHeight = defineModel('height', { type: Number, default: null });
 // 窗口大小
 const { width: windowWidth, height: windowHeight } = useWindowSize();
 
-// 计算样式
+// 获取样式
 const boxStyles = computed(() => {
   return {
     position: props.position,
@@ -71,7 +71,7 @@ const boxStyles = computed(() => {
   };
 });
 
-// 计算类名
+// 获取类名
 const boxClasses = computed(() => {
   return {
     'is-active': handleActiveName.value || isDragging.value

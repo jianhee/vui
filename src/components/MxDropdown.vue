@@ -39,18 +39,12 @@ import { ref, useSlots, nextTick } from 'vue';
 import { onClickOutside, useWindowSize } from '@vueuse/core';
 
 defineOptions({ inheritAttrs: false });
-
-// 参数
+const emits = defineEmits(['close']);
+const slots = useSlots();
 const props = defineProps({
   // 触发方式：hover, click, contextmenu
   trigger: { type: String, default: 'hover' }
 });
-
-// slots
-const slots = useSlots();
-
-// 事件
-const emits = defineEmits(['close']);
 
 // 窗口大小
 const { width: windowWidth, height: windowHeight } = useWindowSize();

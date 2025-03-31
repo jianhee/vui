@@ -25,8 +25,8 @@ import { computed, useSlots } from 'vue';
 import MxIcon from './MxIcon.vue';
 import IconCheckbox from '../assets/icons/checkbox.vue';
 
+const emits = defineEmits(['change']);
 const slots = useSlots();
-
 const props = defineProps({
   // 文本
   label: { type: String, default: null },
@@ -37,19 +37,18 @@ const props = defineProps({
 // 是否选中
 const checked = defineModel('checked', { type: Boolean, default: false });
 
-// 修改值
-const emits = defineEmits(['change']);
-function onChange() {
-  emits('change', checked.value);
-}
-
-// 类名
+// 获取类名
 const classList = computed(() => {
   return {
     'is-checked': checked.value,
     'is-block': props.block
   };
 });
+
+// 修改值
+function onChange() {
+  emits('change', checked.value);
+}
 </script>
 
 <style lang="scss">

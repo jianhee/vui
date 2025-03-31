@@ -31,7 +31,6 @@ import { useSlots } from 'vue';
 
 const slots = useSlots();
 const emits = defineEmits(['change']);
-
 defineProps({
   // 数据 { value: '', label: ''}
   items: { type: Array, default: null },

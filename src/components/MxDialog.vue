@@ -43,7 +43,7 @@ import MxIcon from './MxIcon.vue';
 import IconClose from '../assets/icons/close.vue';
 
 defineOptions({ inheritAttrs: false });
-
+const emits = defineEmits(['close']);
 const props = defineProps({
   // 标题
   title: { type: String, default: null },
@@ -56,7 +56,7 @@ const props = defineProps({
 // 是否显示
 const visible = defineModel('visible', { type: Boolean, default: false });
 
-// 计算样式
+// 获取样式
 const contentStyles = computed(() => {
   return {
     width: props.width
@@ -64,13 +64,11 @@ const contentStyles = computed(() => {
 });
 
 // 关闭
-const emits = defineEmits(['close']);
 function onClose() {
   visible.value = false;
-  emits('close');
 }
 
-// 监听关闭
+// 关闭时触发关闭事件
 watch(visible, val => {
   if (!val) {
     emits('close');
