@@ -28,6 +28,11 @@
   --mx-dropdown-bg-color: #fff;
   --mx-dropdown-shadow: 0 3px 6px rgb(0 0 0 / 16%);
 
+  // 开关
+  --mx-switch-on-bg-color: var(--mx-brand-color-default);
+  --mx-switch-off-bg-color: #bec1c7;
+  --mx-switch-action-bg-color: #fff;
+
   // 弹窗
   --mx-dialog-mask-bg-color: rgb(0 0 0 / 20%);
   --mx-dialog-content-bg-color: #fff;

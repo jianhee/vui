@@ -1,7 +1,7 @@
 <!-- 表单元素 -->
 <template>
   <DemoCard title="输入框">
-    <template #desc>绑定值：v-model:value === input 的 value 属性</template>
+    <template #desc>绑定值：v-model:value === 输入框的 value 属性</template>
     <MxForm label-width="4em">
       <MxFormFiled label="基础用法">
         <MxInput
@@ -14,7 +14,7 @@
   </DemoCard>
   <DemoCard title="多选框">
     <template #desc>
-      <div>绑定值：v-model:checked === checkbox 的 checked 属性</div>
+      <div>绑定值：v-model:checked === 多选框的 checked 属性</div>
       <div>显示值：优先显示 slot，其次显示 label 字段</div>
     </template>
     <MxForm label-width="4em">
@@ -65,7 +65,7 @@
   <DemoCard title="单选框">
     <template #desc>
       <div>绑定值：v-model:value === 选中项的值</div>
-      <div>每项的值：value 字段 === radio 的 value 属性</div>
+      <div>每项的值：value 字段 === 单选框的 value 属性</div>
       <div>每项的显示值：优先显示 slot，其次显示 label 字段</div>
     </template>
     <MxForm label-width="4em">
@@ -107,6 +107,34 @@
       </MxFormFiled>
     </MxForm>
   </DemoCard>
+  <DemoCard title="开关">
+    <template #desc>绑定值：v-model:checked === 开关的 checked 属性</template>
+    <MxForm label-width="4em">
+      <MxFormFiled label="基础用法">
+        <MxSwitch
+          v-model:checked="switchVal1"
+          @change="showLog('change', $event)"
+        />
+        <DemoRow>当前值：{{ switchVal1 }}</DemoRow>
+      </MxFormFiled>
+      <MxFormFiled label="切换成功">
+        <MxSwitch
+          v-model:checked="switchVal2"
+          :before-change="beforeChange1"
+          @change="showLog('change', $event)"
+        />
+        <DemoRow>当前值：{{ switchVal2 }}</DemoRow>
+      </MxFormFiled>
+      <MxFormFiled label="切换失败">
+        <MxSwitch
+          v-model:checked="switchVal3"
+          :before-change="beforeChange2"
+          @change="showLog('change', $event)"
+        />
+        <DemoRow>当前值：{{ switchVal3 }}</DemoRow>
+      </MxFormFiled>
+    </MxForm>
+  </DemoCard>
 </template>
 
 <script setup>
@@ -141,4 +169,25 @@ const selectOptions = [
   { value: 2, label: '选项2' },
   { value: 3, label: '选项3' }
 ];
+
+// 开关
+const switchVal1 = ref(false);
+const switchVal2 = ref(true);
+const switchVal3 = ref(true);
+
+// 切换前
+const beforeChange1 = () => {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve(true);
+    }, 2000);
+  });
+};
+const beforeChange2 = () => {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve(false);
+    }, 2000);
+  });
+};
 </script>

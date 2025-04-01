@@ -36,7 +36,7 @@ const props = defineProps({
   block: { type: Boolean, default: false }
 });
 
-// 是否选中
+// 选中状态
 const checked = defineModel('checked', { type: Boolean, default: false });
 
 // 获取类名
