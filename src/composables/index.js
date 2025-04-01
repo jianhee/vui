@@ -1,7 +1,8 @@
+// 需要 Vue 上下文的方法
 import { defineAsyncComponent } from 'vue';
 
 /**
- * 自动注册 Vue 全局组件
+ * 自动注册全局组件
  * @param {Object} vueApp                 - Vue 应用实例
  * @param {Object} options.vueComponents  - 需要注册的组件集合：import.meta.glob(['./*.vue'])
  * @param {Array} [options.include=[]]    - 组件名称白名单：空数组时注册全部组件

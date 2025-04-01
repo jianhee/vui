@@ -64,7 +64,16 @@
 <script setup>
 import { ref } from 'vue';
 import { unrefElement } from '@vueuse/core';
+import { showLog } from '@/utils';
 import IconClose from '@/assets/icons/close.svg?component';
+
+// 菜单数据
+const menuItems = [
+  { key: 'key1', title: '图标 name', icon: 'close' },
+  { key: 'key2', title: '图标 component', icon: IconClose },
+  { key: 'key3', title: '图标 props.name', icon: { name: 'close' }, divider: true },
+  { key: 'key4', title: '图标 props.component', icon: { component: IconClose } }
+];
 
 // 下拉框
 const triggerRef = ref(null);
@@ -74,17 +83,5 @@ const contentRef = ref(null);
 function openDropdown(event) {
   const el = unrefElement(triggerRef);
   contentRef.value.open(event || el);
-}
-
-// 菜单
-const menuItems = [
-  { key: 'key1', title: '图标 name', icon: 'close' },
-  { key: 'key2', title: '图标 component', icon: IconClose },
-  { key: 'key3', title: '图标 props.name', icon: { name: 'close' }, divider: true },
-  { key: 'key4', title: '图标 props.component', icon: { component: IconClose } }
-];
-
-function showLog(action, val) {
-  console.log(action, val);
 }
 </script>

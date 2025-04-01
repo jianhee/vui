@@ -52,6 +52,7 @@ import IconArrowDown from '../assets/icons/arrow-down.vue';
 const slots = useSlots();
 const emits = defineEmits(['node-click', 'node-contextmenu']);
 
+// 参数
 const props = defineProps({
   // 高度
   height: { type: String, default: null },

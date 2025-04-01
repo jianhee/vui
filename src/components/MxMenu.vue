@@ -39,6 +39,8 @@ import MxIconInside from './MxIconInside.vue';
 
 const emits = defineEmits(['select']);
 const slots = useSlots();
+
+// 参数
 defineProps({
   // 菜单项：{ key: 'key', title: 'title', divider: true, icon: 'MxIcon 组件的 name/component/props' }
   items: { type: Array, default: null }

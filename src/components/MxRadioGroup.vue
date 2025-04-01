@@ -37,6 +37,8 @@ import IconRadio from '../assets/icons/radio.vue';
 
 const slots = useSlots();
 const emits = defineEmits(['change']);
+
+// 参数
 defineProps({
   // 数据 { value: '', label: ''}
   items: { type: Array, default: null },

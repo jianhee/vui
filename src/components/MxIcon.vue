@@ -4,7 +4,7 @@
   <!-- 单个值：用于单色图标，使用 color 切换颜色 -->
   <!-- 多个值：用于多色图标，使用 js 切换图标，分成单独的组件是为了减少不必要的性能开销 -->
   <component
-    :is="isMulti ? MxIconMulti : MxIconSingle"
+    :is="isMultiIcons ? MxIconMulti : MxIconSingle"
     class="mx-icon"
     :class="iconClasses"
     :style="iconStyles"
@@ -18,6 +18,7 @@ import { computed } from 'vue';
 import MxIconSingle from './MxIconSingle.vue';
 import MxIconMulti from './MxIconMulti.vue';
 
+// 参数
 const props = defineProps({
   // 图标名称
   // 单个值：name="close"
@@ -39,8 +40,8 @@ const props = defineProps({
   spin: { type: Boolean, default: false }
 });
 
-// 是否多个值
-const isMulti = computed(() => props.name?.default || props.component?.default);
+// 是否多个图标
+const isMultiIcons = computed(() => props.name?.default || props.component?.default);
 
 // 获取类名
 const iconClasses = computed(() => ({

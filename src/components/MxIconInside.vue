@@ -9,6 +9,7 @@
 import { computed } from 'vue';
 import MxIcon from './MxIcon.vue';
 
+// 参数
 const props = defineProps({
   // MxIcon 组件的 name/component/props
   icon: { type: [String, Object], default: null }

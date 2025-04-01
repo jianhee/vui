@@ -111,6 +111,7 @@
 
 <script setup>
 import { ref } from 'vue';
+import { showLog } from '@/utils';
 
 // 输入框
 const inputValue = ref('11111');
@@ -140,8 +141,4 @@ const selectOptions = [
   { value: 2, label: '选项2' },
   { value: 3, label: '选项3' }
 ];
-
-function showLog(action, val) {
-  console.log(action, val);
-}
 </script>

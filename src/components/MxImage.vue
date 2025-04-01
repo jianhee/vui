@@ -25,6 +25,7 @@ import { useImage } from '@vueuse/core';
 import MxSkeleton from './MxSkeleton.vue';
 import errorImg from '../assets/images/mx-error.png';
 
+// 参数
 const props = defineProps({
   // 图片地址
   src: { type: String, default: null },

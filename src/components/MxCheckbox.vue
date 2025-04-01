@@ -28,6 +28,7 @@ import IconCheckbox from '../assets/icons/checkbox.vue';
 const slots = useSlots();
 const emits = defineEmits(['change']);
 
+// 参数
 const props = defineProps({
   // 文本
   label: { type: String, default: null },

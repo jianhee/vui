@@ -39,13 +39,6 @@ const props = defineProps({
   resizable: { type: [Boolean, Array], default: false }
 });
 
-// 可拖拽的轴
-const handles = computed(() => {
-  if (!props.resizable) return null;
-  if (props.resizable === true) return ['left', 'right', 'top', 'bottom'];
-  return props.resizable;
-});
-
 // 当前定位：只支持left和top
 const boxCurrentX = defineModel('x', { type: Number, default: null });
 const boxCurrentY = defineModel('y', { type: Number, default: null });
@@ -77,6 +70,11 @@ const boxClasses = computed(() => {
 });
 
 // 手柄
+const handles = computed(() => {
+  if (!props.resizable) return null;
+  if (props.resizable === true) return ['left', 'right', 'top', 'bottom'];
+  return props.resizable;
+});
 const handleActiveName = ref(null);
 const handleBoderWidth = computed(() => (/right|bottom/.test(handleActiveName.value) ? 2 : 0));
 let handleStartX = 0;

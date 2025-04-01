@@ -1,4 +1,4 @@
-// 设置 Vue 应用的国际化支持
+// 国际化语言
 // 依赖 vue-i18n
 import { createI18n } from 'vue-i18n';
 
@@ -24,6 +24,7 @@ export function setupI18n(app, options = {}) {
     ...options
   });
 
+  // 将 t 函数赋值给全局变量，方便在其他地方使用
   t = i18n.global.t;
 
   // 将 i18n 插件注册到 Vue 应用中

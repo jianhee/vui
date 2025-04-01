@@ -15,10 +15,7 @@
 
 <script setup>
 import { ref } from 'vue';
+import { showLog } from '@/utils';
 
 const isVisible = ref(false);
-
-function showLog(action) {
-  console.log(action);
-}
 </script>

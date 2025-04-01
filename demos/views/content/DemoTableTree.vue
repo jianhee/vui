@@ -36,6 +36,7 @@
 
 <script setup>
 import { ref } from 'vue';
+import { showLog } from '@/utils';
 
 // 表格列数据
 const tableCols = [
@@ -73,9 +74,5 @@ function renderTree(path = '0', level = 3) {
       children: level > 0 ? renderTree(key, level - 1) : null
     };
   });
-}
-
-function showLog(action, val) {
-  console.log(action, val);
 }
 </script>

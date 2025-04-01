@@ -42,6 +42,7 @@ defineOptions({ inheritAttrs: false });
 const slots = useSlots();
 const emits = defineEmits(['close']);
 
+// 参数
 const props = defineProps({
   // 触发方式：hover, click, contextmenu
   trigger: { type: String, default: 'hover' }

@@ -7,4 +7,6 @@ import 'vue-toast-notification/dist/theme-default.css';
  * 全局Toast实例
  * @description 使用默认主题，位置在顶部
  */
-export const toast = useToast({ position: 'top' });
+export const toast = useToast({
+  position: 'top'
+});

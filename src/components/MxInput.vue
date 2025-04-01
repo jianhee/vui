@@ -13,6 +13,8 @@
 
 <script setup>
 const emits = defineEmits(['input', 'change']);
+
+// 参数
 defineProps({
   // 原生属性
   placeholder: { type: String, default: null },

@@ -21,6 +21,7 @@ import { computed } from 'vue';
 import MxIconInside from './MxIconInside.vue';
 import IconLoading from '../assets/icons/loading.vue';
 
+// 参数
 const props = defineProps({
   // 图标：MxIcon 组件的 name/component/props
   icon: { type: [String, Object], default: null },

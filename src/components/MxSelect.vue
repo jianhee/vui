@@ -28,6 +28,8 @@
 
 <script setup>
 const emits = defineEmits(['change']);
+
+// 参数
 defineProps({
   // 数据 { value: '', label: ''}
   items: { type: Array, default: null },

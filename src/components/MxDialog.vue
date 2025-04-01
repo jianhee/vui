@@ -45,6 +45,7 @@ import IconClose from '../assets/icons/close.vue';
 defineOptions({ inheritAttrs: false });
 const emits = defineEmits(['close']);
 
+// 参数
 const props = defineProps({
   // 标题
   title: { type: String, default: null },

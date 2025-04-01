@@ -12,6 +12,7 @@ import { ref, computed } from 'vue';
 import { useDark, useElementHover } from '@vueuse/core';
 import MxIconSingle from './MxIconSingle.vue';
 
+// 参数
 const props = defineProps({
   name: { type: Object, default: null },
   component: { type: Object, default: null }

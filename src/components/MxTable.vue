@@ -102,6 +102,7 @@ import { useVirtualList, useStorage } from '@vueuse/core';
 const slots = useSlots();
 const emits = defineEmits(['row-contextmenu', 'selection-change']);
 
+// 参数
 const props = defineProps({
   // 高度
   height: { type: String, default: null },
