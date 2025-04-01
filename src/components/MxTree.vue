@@ -71,7 +71,7 @@ const expandedMap = ref(new Map());
 const flatNodes = ref([]);
 const flattenTree = (nodes, level = 0) => {
   const result = [];
-  nodes.forEach(node => {
+  nodes?.forEach(node => {
     // 当前节点
     const formatted = {
       ...node,
