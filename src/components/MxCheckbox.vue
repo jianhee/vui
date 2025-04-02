@@ -2,10 +2,10 @@
 <template>
   <label
     class="mx-checkbox"
-    :class="classList"
+    :class="boxClasses"
   >
     <input
-      v-model="checked"
+      v-model="isChecked"
       type="checkbox"
       class="mx-checkbox-input"
       @change="onChange"
@@ -36,20 +36,20 @@ const props = defineProps({
   block: { type: Boolean, default: false }
 });
 
-// 选中状态
-const checked = defineModel('checked', { type: Boolean, default: false });
+// 是否选中
+const isChecked = defineModel('checked', { type: Boolean, default: false });
 
 // 获取类名
-const classList = computed(() => {
+const boxClasses = computed(() => {
   return {
-    'is-checked': checked.value,
+    'is-checked': isChecked.value,
     'is-block': props.block
   };
 });
 
-// 修改值
+// 切换选中状态
 function onChange() {
-  emits('change', checked.value);
+  emits('change', isChecked.value);
 }
 </script>
 

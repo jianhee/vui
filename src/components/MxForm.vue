@@ -2,6 +2,7 @@
 <template>
   <div
     class="mx-form"
+    :class="`is-${derection}`"
     :style="{ '--mx-form-lable-width': labelWidth }"
   >
     <slot />
@@ -10,6 +11,8 @@
 
 <script setup>
 defineProps({
+  // 表单项布局方向：row, column
+  derection: { type: String, default: 'row' },
   // 表单项label宽度
   labelWidth: { type: String, default: '5em' }
 });

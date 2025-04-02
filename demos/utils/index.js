@@ -1,4 +1,4 @@
 // log
-export function showLog(...arg) {
+export function writeLog(...arg) {
   console.log(...arg);
 }

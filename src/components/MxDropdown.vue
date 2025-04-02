@@ -48,7 +48,7 @@ const props = defineProps({
   trigger: { type: String, default: 'hover' }
 });
 
-// 窗口大小
+// 窗口
 const { width: windowWidth, height: windowHeight } = useWindowSize();
 
 // 触发器和内容
@@ -58,8 +58,10 @@ const contentVisible = ref(false);
 const contentStyles = ref(null);
 const contentOffset = 5;
 
-// hover：进入
+// hover 触发
 let hoverTimer = null;
+
+// 鼠标进入
 function onMouseEnter() {
   if (props.trigger !== 'hover') return;
   clearTimeout(hoverTimer);
@@ -68,7 +70,7 @@ function onMouseEnter() {
   openDropdown(triggerRef.value);
 }
 
-// hover：离开
+// 鼠标离开
 function onMouseLeave() {
   if (props.trigger !== 'hover') return;
   if (!contentVisible.value) return;
@@ -77,7 +79,8 @@ function onMouseLeave() {
   }, 100);
 }
 
-// click：左键点击
+// click 触发
+// 点击内部
 function onClickTrigger() {
   if (props.trigger !== 'click') return;
   if (contentVisible.value) return;
@@ -85,23 +88,17 @@ function onClickTrigger() {
   openDropdown(triggerRef.value);
 }
 
-// contextmenu：右键点击
-function onContextMenu(event) {
-  if (props.trigger !== 'contextmenu') return;
-  // 对齐鼠标
-  openDropdown(event);
-}
-
-// click：点击外部
+// 点击外部
 onClickOutside(contentRef, () => {
   if (!contentVisible.value) return;
   closeDropdown();
 });
 
-// 关闭下拉框
-function closeDropdown() {
-  contentVisible.value = false;
-  emits('close');
+// contextmenu 触发
+function onContextMenu(event) {
+  if (props.trigger !== 'contextmenu') return;
+  // 对齐鼠标
+  openDropdown(event);
 }
 
 // 打开下拉框：target可以是触发元素或鼠标事件
@@ -139,6 +136,12 @@ function openDropdown(target) {
       left: `${contentLeft}px`
     };
   });
+}
+
+// 关闭下拉框
+function closeDropdown() {
+  contentVisible.value = false;
+  emits('close');
 }
 
 // 外部调用方法，比如v-for渲染多个触发元素时，直接调用方法更方便

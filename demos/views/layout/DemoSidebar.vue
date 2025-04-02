@@ -4,7 +4,7 @@
     <RouterLink
       v-for="item in navItems"
       :key="item.name"
-      :to="item.name"
+      :to="`${item.name}?test=测试测试`"
       class="demo-sidebar-item"
       active-class="demo-sidebar-item-active"
     >

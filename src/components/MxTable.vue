@@ -64,7 +64,7 @@
           >
             <MxCheckbox
               v-model:checked="row.isSelected"
-              @change="onRowSelected(row, $event)"
+              @change="onRowSelectionChange(row, $event)"
             />
           </div>
           <!-- 内容：slot优先 -->
@@ -142,19 +142,17 @@ watch(
 );
 
 // 虚拟列表
-const overscan = 5;
-const itemHeight = 35;
 const {
   list: virtualList,
   containerProps: scrollbarProps,
   wrapperProps: bodyProps
 } = useVirtualList(formattedRows, {
-  itemHeight,
-  overscan
+  itemHeight: 5,
+  overscan: 35
 });
 
 // 单选
-const onRowSelected = (item, newState) => {
+const onRowSelectionChange = (item, newState) => {
   selectedMap.value.set(item.id, newState);
   const items = formattedRows.value.filter(item => item.isSelected);
   emits('selection-change', items);

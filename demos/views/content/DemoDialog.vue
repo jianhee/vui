@@ -7,7 +7,7 @@
   <MxDialog
     v-model:visible="isVisible"
     title="标题"
-    @close="showLog('close')"
+    @close="writeLog('close')"
   >
     内容
   </MxDialog>
@@ -15,7 +15,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { showLog } from '@/utils';
+import { writeLog } from '@/utils';
 
 const isVisible = ref(false);
 </script>

@@ -4,7 +4,7 @@
     <Transition name="mx-dialog">
       <!-- mask -->
       <div
-        v-show="visible"
+        v-show="isVisible"
         class="mx-dialog"
       >
         <!-- 主体 -->
@@ -56,7 +56,7 @@ const props = defineProps({
 });
 
 // 是否显示
-const visible = defineModel('visible', { type: Boolean, default: false });
+const isVisible = defineModel('visible', { type: Boolean, default: false });
 
 // 获取样式
 const contentStyles = computed(() => {
@@ -67,11 +67,11 @@ const contentStyles = computed(() => {
 
 // 关闭
 function onClose() {
-  visible.value = false;
+  isVisible.value = false;
 }
 
 // 关闭时触发关闭事件：外部关闭也能触发
-watch(visible, val => {
+watch(isVisible, val => {
   if (!val) {
     emits('close');
   }

@@ -29,7 +29,7 @@ $sizes: 5, 10, 15, 20, 25, 30;
   }
   &-disabled {
     cursor: not-allowed !important;
-    opacity: 0.6;
+    opacity: var(--mx-disabled-opcity, 0.6);
   }
 }
 

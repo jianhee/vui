@@ -3,13 +3,13 @@
   <div
     class="mx-switch"
     :class="{
-      'is-checked': checked,
-      'mx-state-disabled': isLoading
+      'is-checked': isChecked,
+      'is-disabled': isLoading
     }"
   >
     <div
       class="mx-switch-inner"
-      @click="onChange"
+      @click="onClick"
     >
       <span class="mx-switch-action">
         <MxIcon
@@ -35,16 +35,18 @@ const props = defineProps({
   beforeChange: { type: Function, default: null }
 });
 
-// 选中状态
-const checked = defineModel('checked', { type: Boolean, default: false });
+// 是否选中
+const isChecked = defineModel('checked', { type: Boolean, default: false });
 
-// 切换状态
+// 是否加载中
 const isLoading = ref(false);
-async function onChange() {
+
+// 点击开关
+async function onClick() {
   if (isLoading.value) return;
   // 直接切换
   if (!props.beforeChange) {
-    updateState();
+    changeState();
     return;
   }
   // 切换前调用方法
@@ -52,14 +54,14 @@ async function onChange() {
   const isSuccess = await props.beforeChange();
   isLoading.value = false;
   if (isSuccess) {
-    updateState();
+    changeState();
   }
 }
 
-// 更新状态
-function updateState() {
-  const newState = !checked.value;
-  checked.value = newState;
+// 切换选中状态
+function changeState() {
+  const newState = !isChecked.value;
+  isChecked.value = newState;
   emits('change', newState);
 }
 </script>
@@ -82,6 +84,10 @@ function updateState() {
   }
   &.is-checked &-inner {
     background-color: var(--mx-switch-on-bg-color);
+  }
+  &.is-disabled &-inner {
+    cursor: not-allowed;
+    opacity: var(--mx-disabled-opcity);
   }
   &-action {
     position: absolute;

@@ -18,11 +18,9 @@ const props = defineProps({
   component: { type: Object, default: null }
 });
 
-// 明暗模式
-const isDark = useDark();
-
-// hover状态
+// 图标状态
 const elRef = ref(null);
+const isDark = useDark();
 const isHovered = useElementHover(elRef);
 
 // 图标 props

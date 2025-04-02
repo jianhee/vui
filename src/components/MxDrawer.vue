@@ -4,9 +4,9 @@
     <Transition name="mx-drawer">
       <!-- mask -->
       <div
-        v-show="visible"
+        v-show="isVisible"
         class="mx-drawer"
-        @click.self="visible = false"
+        @click.self="isVisible = false"
       >
         <!-- 主体 -->
         <div
@@ -48,7 +48,7 @@ const props = defineProps({
 });
 
 // 是否显示
-const visible = defineModel('visible', { type: Boolean, default: false });
+const isVisible = defineModel('visible', { type: Boolean, default: false });
 
 // 获取类名
 const contentClasses = computed(() => {

@@ -12,8 +12,8 @@
       :columns="tableCols"
       selectable
       storage-key="demo-table"
-      @node-click="showLog('node-click', $event)"
-      @node-contextmenu="showLog('node-contextmenu', $event)"
+      @node-click="writeLog('node-click', $event)"
+      @node-contextmenu="writeLog('node-contextmenu', $event)"
     />
   </DemoCard>
   <DemoCard title="树结构">
@@ -24,8 +24,8 @@
     <MxTree
       height="200px"
       :data="treeData"
-      @node-click="showLog('node-click', $event)"
-      @node-contextmenu="showLog('node-contextmenu', $event)"
+      @node-click="writeLog('node-click', $event)"
+      @node-contextmenu="writeLog('node-contextmenu', $event)"
     >
       <template #default="{ node }">
         {{ node.title }}
@@ -36,20 +36,12 @@
 
 <script setup>
 import { ref } from 'vue';
-import { showLog } from '@/utils';
-
-// 表格列数据
-const tableCols = [
-  { key: 'name', title: '姓名', width: 100 },
-  { key: 'age', title: '年纪', width: 100 },
-  { key: 'phone', title: '年纪', width: 100 },
-  { key: 'address', title: '地址', width: 100 }
-];
+import { writeLog } from '@/utils';
 
 // 表格行数据
 const tableRows = ref(null);
-tableRows.value = renderTable();
-function renderTable() {
+tableRows.value = renderTableRows();
+function renderTableRows() {
   return Array.from({ length: 1000 }).map((_, i) => {
     const key = i;
     return {
@@ -62,16 +54,24 @@ function renderTable() {
   });
 }
 
+// 表格列数据
+const tableCols = [
+  { key: 'name', title: '姓名', width: 100 },
+  { key: 'age', title: '年纪', width: 100 },
+  { key: 'phone', title: '年纪', width: 100 },
+  { key: 'address', title: '地址', width: 100 }
+];
+
 // 树结构数据
 const treeData = ref(null);
-treeData.value = renderTree();
-function renderTree(path = '0', level = 3) {
+treeData.value = renderTreeData();
+function renderTreeData(path = '0', level = 3) {
   return Array.from({ length: 10 }).map((_, i) => {
     const key = `${path}-${i}`;
     return {
       id: key,
       title: key,
-      children: level > 0 ? renderTree(key, level - 1) : null
+      children: level > 0 ? renderTreeData(key, level - 1) : null
     };
   });
 }

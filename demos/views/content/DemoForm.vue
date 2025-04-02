@@ -1,12 +1,31 @@
 <!-- 表单元素 -->
 <template>
+  <DemoCard
+    v-for="item in layoutItems"
+    :key="item.title"
+    :title="item.title"
+  >
+    <MxForm
+      label-width="4em"
+      :derection="item.derection"
+    >
+      <MxFormFiled
+        v-for="n in 3"
+        :key="n"
+        label="纯文本"
+        is-text
+      >
+        这是一段文本文本这是一段文本文本这是一段文本文本这是一段文本文本这是一段文本文本这是一段文本文本这是一段文本文本
+      </MxFormFiled>
+    </MxForm>
+  </DemoCard>
   <DemoCard title="输入框">
     <template #desc>绑定值：v-model:value === 输入框的 value 属性</template>
     <MxForm label-width="4em">
       <MxFormFiled label="基础用法">
         <MxInput
           v-model:value="inputValue"
-          @change="showLog('change', $event)"
+          @change="writeLog('change', $event)"
         />
         <DemoRow>当前值：{{ inputValue }}</DemoRow>
       </MxFormFiled>
@@ -22,17 +41,17 @@
         <MxCheckbox
           v-model:checked="checkboxValue1"
           label="选项1"
-          @change="showLog('change', $event)"
+          @change="writeLog('change', $event)"
         />
         <MxCheckbox
           v-model:checked="checkboxValue2"
           label="选项2"
-          @change="showLog('change', $event)"
+          @change="writeLog('change', $event)"
         />
         <MxCheckbox
           v-model:checked="checkboxValue3"
           label="选项3"
-          @change="showLog('change', $event)"
+          @change="writeLog('change', $event)"
         />
         <DemoRow>当前值：{{ checkboxValue1 }}, {{ checkboxValue2 }}, {{ checkboxValue3 }}</DemoRow>
       </MxFormFiled>
@@ -40,21 +59,21 @@
         <MxCheckbox
           v-model:checked="checkboxValue4"
           block
-          @change="showLog('change', $event)"
+          @change="writeLog('change', $event)"
         >
           选项1 的选中状态 {{ checkboxValue4 }}
         </MxCheckbox>
         <MxCheckbox
           v-model:checked="checkboxValue5"
           block
-          @change="showLog('change', $event)"
+          @change="writeLog('change', $event)"
         >
           选项2 的选中状态 {{ checkboxValue5 }}
         </MxCheckbox>
         <MxCheckbox
           v-model:checked="checkboxValue6"
           block
-          @change="showLog('change', $event)"
+          @change="writeLog('change', $event)"
         >
           选项3 的选中状态 {{ checkboxValue6 }}
         </MxCheckbox>
@@ -72,17 +91,17 @@
       <MxFormFiled label="横向">
         <MxRadioGroup
           v-model:value="radioValue1"
-          :items="radioItems1"
-          @change="showLog('change', $event)"
+          :layout-items="radioItems1"
+          @change="writeLog('change', $event)"
         />
         <DemoRow>当前值：{{ radioValue1 }}</DemoRow>
       </MxFormFiled>
       <MxFormFiled label="纵向">
         <MxRadioGroup
           v-model:value="radioValue2"
-          :items="radioItems2"
+          :layout-items="radioItems2"
           block
-          @change="showLog('change', $event)"
+          @change="writeLog('change', $event)"
         >
           <template #default="{ item }">选项{{ item.value }} 的 value {{ item.value }}</template>
         </MxRadioGroup>
@@ -100,8 +119,8 @@
       <MxFormFiled label="基础用法">
         <MxSelect
           v-model:value="selectValue"
-          :items="selectOptions"
-          @change="showLog('change', $event)"
+          :layout-items="selectOptions"
+          @change="writeLog('change', $event)"
         />
         <DemoRow>当前值：{{ selectValue }}</DemoRow>
       </MxFormFiled>
@@ -113,23 +132,23 @@
       <MxFormFiled label="基础用法">
         <MxSwitch
           v-model:checked="switchVal1"
-          @change="showLog('change', $event)"
+          @change="writeLog('change', $event)"
         />
         <DemoRow>当前值：{{ switchVal1 }}</DemoRow>
       </MxFormFiled>
       <MxFormFiled label="切换成功">
         <MxSwitch
           v-model:checked="switchVal2"
-          :before-change="beforeChange1"
-          @change="showLog('change', $event)"
+          :before-change="() => beforeChange(true)"
+          @change="writeLog('change', $event)"
         />
         <DemoRow>当前值：{{ switchVal2 }}</DemoRow>
       </MxFormFiled>
       <MxFormFiled label="切换失败">
         <MxSwitch
           v-model:checked="switchVal3"
-          :before-change="beforeChange2"
-          @change="showLog('change', $event)"
+          :before-change="() => beforeChange(false)"
+          @change="writeLog('change', $event)"
         />
         <DemoRow>当前值：{{ switchVal3 }}</DemoRow>
       </MxFormFiled>
@@ -139,7 +158,13 @@
 
 <script setup>
 import { ref } from 'vue';
-import { showLog } from '@/utils';
+import { writeLog } from '@/utils';
+
+// 布局
+const layoutItems = [
+  { title: '横向布局', derection: 'row' },
+  { title: '纵向布局', derection: 'column' }
+];
 
 // 输入框
 const inputValue = ref('11111');
@@ -173,20 +198,13 @@ const selectOptions = [
 // 开关
 const switchVal1 = ref(false);
 const switchVal2 = ref(true);
-const switchVal3 = ref(true);
+const switchVal3 = ref(false);
 
 // 切换前
-const beforeChange1 = () => {
+const beforeChange = state => {
   return new Promise(resolve => {
     setTimeout(() => {
-      resolve(true);
-    }, 2000);
-  });
-};
-const beforeChange2 = () => {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve(false);
+      resolve(state);
     }, 2000);
   });
 };

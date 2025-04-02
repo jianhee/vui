@@ -2,7 +2,6 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 
 // 导航栏
 export const navItems = [
-  { name: 'i18n', title: '多语言', file: 'DemoI18n' },
   { name: 'icon', title: '图标', file: 'DemoIcon' },
   { name: 'btn', title: '按钮', file: 'DemoBtn' },
   { name: 'form', title: '表单', file: 'DemoForm' },
@@ -13,7 +12,8 @@ export const navItems = [
   { name: 'loading', title: '加载状态', file: 'DemoLoading' },
   { name: 'skeleton', title: '骨架屏', file: 'DemoSkeleton' },
   { name: 'tableTree', title: '表格+树结构', file: 'DemoTableTree' },
-  { name: 'dragbox', title: '拖拽', file: 'DemoDragbox' }
+  { name: 'dragbox', title: '拖拽', file: 'DemoDragbox' },
+  { name: 'utils', title: '插件+方法', file: 'DemoUtils' }
 ];
 
 // 导航栏路由

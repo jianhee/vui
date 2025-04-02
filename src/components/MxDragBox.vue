@@ -39,16 +39,30 @@ const props = defineProps({
   resizable: { type: [Boolean, Array], default: false }
 });
 
-// 当前定位：只支持left和top
+// 窗口
+const { width: windowWidth, height: windowHeight } = useWindowSize();
+
+// 盒子
+const boxRef = ref(null);
+const boxIsDragging = ref(false);
+
+// 当前定位和尺寸：只支持left和top
 const boxCurrentX = defineModel('x', { type: Number, default: null });
 const boxCurrentY = defineModel('y', { type: Number, default: null });
-
-// 当前尺寸
 const boxCurrentWidth = defineModel('width', { type: Number, default: null });
 const boxCurrentHeight = defineModel('height', { type: Number, default: null });
 
-// 窗口大小
-const { width: windowWidth, height: windowHeight } = useWindowSize();
+// 开始拖拽时的定位和尺寸
+let boxStartX = 0;
+let boxStartY = 0;
+let boxStartWidth = 0;
+let boxStartHeight = 0;
+
+// 是否固定定位
+const boxIsFixed = () => {
+  const style = window.getComputedStyle(boxRef.value);
+  return style.position === 'fixed';
+};
 
 // 获取样式
 const boxStyles = computed(() => {
@@ -58,14 +72,14 @@ const boxStyles = computed(() => {
     top: `${boxCurrentY.value}px`,
     width: `${boxCurrentWidth.value}px`,
     height: `${boxCurrentHeight.value}px`,
-    cursor: isDragging.value ? 'move' : null
+    cursor: boxIsDragging.value ? 'move' : null
   };
 });
 
 // 获取类名
 const boxClasses = computed(() => {
   return {
-    'is-active': handleActiveName.value || isDragging.value
+    'is-active': handleActiveName.value || boxIsDragging.value
   };
 });
 
@@ -75,32 +89,67 @@ const handles = computed(() => {
   if (props.resizable === true) return ['left', 'right', 'top', 'bottom'];
   return props.resizable;
 });
+
+// 当前激活的手柄
 const handleActiveName = ref(null);
+
+// 需要扣除的宽度
 const handleBoderWidth = computed(() => (/right|bottom/.test(handleActiveName.value) ? 2 : 0));
+
+// 开始拖拽时的定位
 let handleStartX = 0;
 let handleStartY = 0;
 
-// 盒子
-const isDragging = ref(false);
-const boxRef = ref(null);
-let boxStartX = 0;
-let boxStartY = 0;
-let boxStartWidth = 0;
-let boxStartHeight = 0;
+// 移动
+// 长按开始拖拽：修复移动时无法选中文本的问题
+onLongPress(boxRef, e => {
+  if (!props.draggable) return;
 
-// 是否固定定位
-const isFixed = () => {
-  const style = window.getComputedStyle(boxRef.value);
-  return style.position === 'fixed';
-};
+  // 是否需要定位
+  if (!boxIsFixed()) return;
 
-// 缩放：开始
+  // 记录初始数据
+  boxIsDragging.value = true;
+  handleStartX = e.clientX;
+  handleStartY = e.clientY;
+  const rect = boxRef.value.getBoundingClientRect();
+  boxStartX = rect.left;
+  boxStartY = rect.top;
+  window.addEventListener('mousemove', onBoxDraging);
+  window.addEventListener('mouseup', onBoxDragEnd);
+});
+
+// 拖拽中：鼠标不能超出窗口
+function onBoxDraging(e) {
+  if (!boxIsDragging.value) return;
+
+  // 水平方向
+  if (e.clientX >= 0 && e.clientX <= windowWidth.value) {
+    const deltaX = e.clientX - handleStartX;
+    boxCurrentX.value = boxStartX + deltaX;
+  }
+  // 垂直方向
+  if (e.clientY >= 0 && e.clientY <= windowWidth.value) {
+    const deltaY = e.clientY - handleStartY;
+    boxCurrentY.value = boxStartY + deltaY;
+  }
+}
+
+// 拖拽结束
+function onBoxDragEnd() {
+  boxIsDragging.value = false;
+  window.removeEventListener('mousemove', onBoxDraging);
+  window.removeEventListener('mouseup', onBoxDragEnd);
+}
+
+// 缩放
+// 拖拽开始
 function onHandleDragStart(e, _handleName) {
   if (!props.resizable) return;
 
   // 是否需要定位
   const needFixed = _handleName === 'top' || _handleName === 'left';
-  if (needFixed && !isFixed()) return;
+  if (needFixed && !boxIsFixed()) return;
 
   // 记录初始数据
   handleActiveName.value = _handleName;
@@ -108,12 +157,12 @@ function onHandleDragStart(e, _handleName) {
   handleStartY = e.clientY;
   boxStartWidth = boxRef.value.offsetWidth;
   boxStartHeight = boxRef.value.offsetHeight;
-  window.addEventListener('mousemove', onResize);
-  window.addEventListener('mouseup', onResizeEnd);
+  window.addEventListener('mousemove', onHandleDraging);
+  window.addEventListener('mouseup', onHandleDragEnd);
 }
 
-// 缩放：鼠标不能超出窗口
-function onResize(e) {
+// 拖拽中：鼠标不能超出窗口
+function onHandleDraging(e) {
   if (!handleActiveName.value) return;
 
   if (/left|right/.test(handleActiveName.value)) {
@@ -137,53 +186,11 @@ function onResize(e) {
   }
 }
 
-// 缩放：结束
-function onResizeEnd() {
+// 拖拽结束
+function onHandleDragEnd() {
   handleActiveName.value = null;
-  window.removeEventListener('mousemove', onResize);
-  window.removeEventListener('mouseup', onResizeEnd);
-}
-
-// 移动：长按开始
-// 修复移动时无法选中文本的问题
-onLongPress(boxRef, e => {
-  if (!props.draggable) return;
-
-  // 是否需要定位
-  if (!isFixed()) return;
-
-  // 记录初始数据
-  isDragging.value = true;
-  handleStartX = e.clientX;
-  handleStartY = e.clientY;
-  const rect = boxRef.value.getBoundingClientRect();
-  boxStartX = rect.left;
-  boxStartY = rect.top;
-  window.addEventListener('mousemove', onDrag);
-  window.addEventListener('mouseup', onDragEnd);
-});
-
-// 移动：鼠标不能超出窗口
-function onDrag(e) {
-  if (!isDragging.value) return;
-
-  // 水平方向
-  if (e.clientX >= 0 && e.clientX <= windowWidth.value) {
-    const deltaX = e.clientX - handleStartX;
-    boxCurrentX.value = boxStartX + deltaX;
-  }
-  // 垂直方向
-  if (e.clientY >= 0 && e.clientY <= windowWidth.value) {
-    const deltaY = e.clientY - handleStartY;
-    boxCurrentY.value = boxStartY + deltaY;
-  }
-}
-
-// 移动：结束
-function onDragEnd() {
-  isDragging.value = false;
-  window.removeEventListener('mousemove', onDrag);
-  window.removeEventListener('mouseup', onDragEnd);
+  window.removeEventListener('mousemove', onHandleDraging);
+  window.removeEventListener('mouseup', onHandleDragEnd);
 }
 </script>
 

@@ -20,7 +20,7 @@
           :key="node.id"
           class="mx-tree-node"
           :class="{ 'is-current': node.id === currentId }"
-          :style="{ paddingLeft: `${props.indent + node.level * nodeIndent}px` }"
+          :style="{ paddingLeft: `${props.treeIndent + node.level * nodeIndent}px` }"
           @click.stop="onNodeClick(node)"
           @contextmenu.prevent="onNodeContextmenu(node, $event)"
         >
@@ -61,14 +61,15 @@ const props = defineProps({
   // 当前 ID
   currentId: { type: [String, Number], default: null },
   // 缩进
-  indent: { type: Number, default: 10 }
+  treeIndent: { type: Number, default: 10 },
+  nodeIndent: { type: Number, default: 15 }
 });
 
 // 保存展开状态
 const expandedMap = ref(new Map());
 
 // 扁平化树结构
-const flatNodes = ref([]);
+const flattenedNodes = ref([]);
 const flattenTree = (nodes, level = 0) => {
   const result = [];
   nodes?.forEach(node => {
@@ -95,29 +96,26 @@ const flattenTree = (nodes, level = 0) => {
 watch(
   () => props.data,
   newData => {
-    flatNodes.value = flattenTree(newData);
+    flattenedNodes.value = flattenTree(newData);
   },
   { immediate: true }
 );
 
 // 虚拟列表
-const overscan = 5;
-const itemHeight = 30;
-const nodeIndent = 15;
 const {
   list: virtualList,
   containerProps: scrollbarProps,
   wrapperProps: bodyProps
-} = useVirtualList(flatNodes, {
-  itemHeight,
-  overscan
+} = useVirtualList(flattenedNodes, {
+  itemHeight: 30,
+  overscan: 5
 });
 
 // 展开/折叠节点
 const onNodeToggle = node => {
   const newState = !node.isExpanded;
   expandedMap.value.set(node.id, newState);
-  flatNodes.value = flattenTree(props.data);
+  flattenedNodes.value = flattenTree(props.data);
 };
 
 // 左键点击节点

@@ -5,7 +5,7 @@
     <DemoRow>
       <MxMenu
         :items="menuItems"
-        @select="showLog('select', $event)"
+        @select="writeLog('select', $event)"
       />
     </DemoRow>
   </DemoCard>
@@ -16,7 +16,7 @@
         <template #content>
           <MxMenu
             :items="menuItems"
-            @select="showLog('select', $event)"
+            @select="writeLog('select', $event)"
           />
         </template>
       </MxDropdown>
@@ -25,7 +25,7 @@
         <template #content>
           <MxMenu
             :items="menuItems"
-            @select="showLog('select', $event)"
+            @select="writeLog('select', $event)"
           />
         </template>
       </MxDropdown>
@@ -34,7 +34,7 @@
         <template #content>
           <MxMenu
             :items="menuItems"
-            @select="showLog('select', $event)"
+            @select="writeLog('select', $event)"
           />
         </template>
       </MxDropdown>
@@ -53,7 +53,7 @@
         <template #content>
           <MxMenu
             :items="menuItems"
-            @select="showLog('select', $event)"
+            @select="writeLog('select', $event)"
           />
         </template>
       </MxDropdown>
@@ -64,7 +64,7 @@
 <script setup>
 import { ref } from 'vue';
 import { unrefElement } from '@vueuse/core';
-import { showLog } from '@/utils';
+import { writeLog } from '@/utils';
 import IconClose from '@/assets/icons/close.svg?component';
 
 // 菜单数据

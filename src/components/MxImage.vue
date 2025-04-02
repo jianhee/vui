@@ -44,7 +44,7 @@ const props = defineProps({
 // 加载状态
 const { isLoading, error } = useImage({ src: props.src });
 
-// 显示的图片地址
+// 图片地址
 const imgUrl = computed(() => {
   return isLoading.value ? props.placeholder : error.value ? props.error : props.src;
 });
