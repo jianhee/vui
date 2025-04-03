@@ -2,8 +2,8 @@
 <template>
   <div class="mx-menu">
     <template
-      v-for="item in items"
-      :key="item.key"
+      v-for="(item, index) in items"
+      :key="index"
     >
       <!-- 菜单项 -->
       <div
@@ -42,7 +42,7 @@ const slots = useSlots();
 
 // 参数
 defineProps({
-  // 菜单项：{ key: 'key', title: 'title', divider: true, icon: 'MxIcon 组件的 name/component/props' }
+  // 菜单项：{ title: 'title', divider: true, icon: 'MxIcon 组件的 name/component/props' }
   items: { type: Array, default: null }
 });
 

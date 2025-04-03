@@ -210,10 +210,21 @@ function onScroll(event) {
   &-scrollbar {
     flex: auto;
   }
+
+  // 行
   &-row {
     display: flex;
     font-size: 14px;
+    &:hover,
+    &.is-current {
+      background-color: var(--mx-table-row-active-bg-color);
+    }
   }
+  &-fixedbar &-row {
+    font-weight: bold;
+  }
+
+  // 单元格
   &-cell {
     display: inline-flex;
     flex: none;
@@ -224,18 +235,7 @@ function onScroll(event) {
     white-space: nowrap;
   }
 
-  // 表头加粗
-  &-fixedbar &-row {
-    font-weight: bold;
-  }
-
-  // 表身状态
-  &-scrollbar &-row:hover,
-  &-scrollbar &-row.is-current {
-    background-color: var(--mx-table-row-active-bg-color);
-  }
-
-  // 是否显示复选框
+  // 复选框
   .is-checkbox {
     visibility: hidden;
     width: 30px;
@@ -247,7 +247,7 @@ function onScroll(event) {
     }
   }
 
-  // 是否显示拖拽手柄
+  // 拖拽手柄
   .mx-drag-handle {
     top: 5px !important;
     bottom: 5px !important;
