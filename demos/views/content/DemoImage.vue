@@ -1,16 +1,12 @@
 <!-- 图片 -->
 <template>
   <DemoCard title="基本用法">
-    <DemoRow>
+    <template #desc>依次展示默认比例、16/9 和 1:1</template>
+    <DemoRow flex>
       <MxImage
         src="https://pc-newtab.maxthonimg.com/mxbg/horizontal/1031.jpg"
         width="200px"
       />
-    </DemoRow>
-  </DemoCard>
-  <DemoCard title="设置比例">
-    <div>16/9 和 1:1</div>
-    <DemoRow>
       <MxImage
         src="https://pc-newtab.maxthonimg.com/mxbg/horizontal/1031.jpg"
         width="200px"

@@ -1,16 +1,14 @@
 <!-- 下拉框+菜单 -->
 <template>
   <DemoCard title="菜单">
-    <template #desc>每项的显示值：优先显示 slot，其次显示 title 字段</template>
-    <DemoRow>
-      <MxMenu
-        :items="menuItems"
-        @select="writeLog('select', $event)"
-      />
-    </DemoRow>
+    <template #desc>每项的显示值：优先显示 <code>slot</code> 其次显示 <code>item.title</code></template>
+    <MxMenu
+      :items="menuItems"
+      @select="writeLog('select', $event)"
+    />
   </DemoCard>
   <DemoCard title="使用 trigger 打开">
-    <DemoRow>
+    <DemoRow flex>
       <MxDropdown trigger="hover">
         <MxBtn>hover</MxBtn>
         <template #content>

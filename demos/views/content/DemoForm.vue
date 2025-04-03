@@ -20,21 +20,23 @@
     </MxForm>
   </DemoCard>
   <DemoCard title="输入框">
-    <template #desc>绑定值：v-model:value === 输入框的 value 属性</template>
+    <template #desc>绑定值：<code>v-model:value</code> 等同于输入框的值 <code>value</code></template>
     <MxForm label-width="4em">
       <MxFormFiled label="基础用法">
         <MxInput
           v-model:value="inputValue"
           @change="writeLog('change', $event)"
         />
-        <DemoRow>当前值：{{ inputValue }}</DemoRow>
+        <DemoRow>
+          当前值：<code>{{ inputValue }}</code>
+        </DemoRow>
       </MxFormFiled>
     </MxForm>
   </DemoCard>
   <DemoCard title="多选框">
     <template #desc>
-      <div>绑定值：v-model:checked === 多选框的 checked 属性</div>
-      <div>显示值：优先显示 slot，其次显示 label 字段</div>
+      <DemoRow>绑定值：<code>v-model:checked</code> 等同于多选框的选中状态 <code>checked</code></DemoRow>
+      <DemoRow>显示值：优先显示 <code>slot</code> 其次显示 <code>props.label</code></DemoRow>
     </template>
     <MxForm label-width="4em">
       <MxFormFiled label="横向">
@@ -53,7 +55,9 @@
           label="选项3"
           @change="writeLog('change', $event)"
         />
-        <DemoRow>当前值：{{ checkboxValue1 }}, {{ checkboxValue2 }}, {{ checkboxValue3 }}</DemoRow>
+        <DemoRow>
+          当前值：<code>{{ checkboxValue1 }}</code> <code>{{ checkboxValue2 }}</code> <code>{{ checkboxValue3 }}</code>
+        </DemoRow>
       </MxFormFiled>
       <MxFormFiled label="纵向">
         <MxCheckbox
@@ -77,64 +81,74 @@
         >
           选项3 的选中状态 {{ checkboxValue6 }}
         </MxCheckbox>
-        <DemoRow>当前值：{{ checkboxValue4 }}, {{ checkboxValue5 }}, {{ checkboxValue6 }}</DemoRow>
+        <DemoRow>
+          当前值：<code>{{ checkboxValue4 }}</code> <code>{{ checkboxValue5 }}</code> <code>{{ checkboxValue6 }}</code>
+        </DemoRow>
       </MxFormFiled>
     </MxForm>
   </DemoCard>
   <DemoCard title="单选框">
     <template #desc>
-      <div>绑定值：v-model:value === 选中项的值</div>
-      <div>每项的值：value 字段 === 单选框的 value 属性</div>
-      <div>每项的显示值：优先显示 slot，其次显示 label 字段</div>
+      <DemoRow>绑定值：<code>v-model:value</code> 等同于选中项的值</DemoRow>
+      <DemoRow>每项的值：<code>item.value</code> 等同于单选框的值 <code>value</code></DemoRow>
+      <DemoRow>每项的显示值：优先显示 <code>slot</code> 其次显示 <code>item.label</code></DemoRow>
     </template>
     <MxForm label-width="4em">
       <MxFormFiled label="横向">
         <MxRadioGroup
           v-model:value="radioValue1"
-          :layout-items="radioItems1"
+          :items="radioItems1"
           @change="writeLog('change', $event)"
         />
-        <DemoRow>当前值：{{ radioValue1 }}</DemoRow>
+        <DemoRow>
+          当前值：<code>{{ radioValue1 }}</code>
+        </DemoRow>
       </MxFormFiled>
       <MxFormFiled label="纵向">
         <MxRadioGroup
           v-model:value="radioValue2"
-          :layout-items="radioItems2"
+          :items="radioItems2"
           block
           @change="writeLog('change', $event)"
         >
           <template #default="{ item }">选项{{ item.value }} 的 value {{ item.value }}</template>
         </MxRadioGroup>
-        <DemoRow>当前值：{{ radioValue2 }}</DemoRow>
+        <DemoRow>
+          当前值：<code>{{ radioValue2 }}</code>
+        </DemoRow>
       </MxFormFiled>
     </MxForm>
   </DemoCard>
   <DemoCard title="选择器">
     <template #desc>
-      <div>绑定值：v-model:value === 选中项的值</div>
-      <div>每项的值：value 字段 === option 的 value 属性</div>
-      <div>每项的显示值：label 字段</div>
+      <DemoRow>绑定值：<code>v-model:value</code> 等同于选中项的值</DemoRow>
+      <DemoRow>每项的值：<code>item.value</code> 等同于 option 的 <code>value</code></DemoRow>
+      <DemoRow>每项的显示值：<code>item.label</code></DemoRow>
     </template>
     <MxForm label-width="4em">
       <MxFormFiled label="基础用法">
         <MxSelect
           v-model:value="selectValue"
-          :layout-items="selectOptions"
+          :items="selectOptions"
           @change="writeLog('change', $event)"
         />
-        <DemoRow>当前值：{{ selectValue }}</DemoRow>
+        <DemoRow>
+          当前值：<code>{{ selectValue }}</code>
+        </DemoRow>
       </MxFormFiled>
     </MxForm>
   </DemoCard>
   <DemoCard title="开关">
-    <template #desc>绑定值：v-model:checked === 开关的 checked 属性</template>
+    <template #desc>绑定值：<code>v-model:checked</code> 等同于开关的选中状态</template>
     <MxForm label-width="4em">
       <MxFormFiled label="基础用法">
         <MxSwitch
           v-model:checked="switchVal1"
           @change="writeLog('change', $event)"
         />
-        <DemoRow>当前值：{{ switchVal1 }}</DemoRow>
+        <DemoRow>
+          当前值：<code>{{ switchVal1 }}</code>
+        </DemoRow>
       </MxFormFiled>
       <MxFormFiled label="切换成功">
         <MxSwitch
@@ -142,7 +156,9 @@
           :before-change="() => beforeChange(true)"
           @change="writeLog('change', $event)"
         />
-        <DemoRow>当前值：{{ switchVal2 }}</DemoRow>
+        <DemoRow>
+          当前值：<code>{{ switchVal2 }}</code>
+        </DemoRow>
       </MxFormFiled>
       <MxFormFiled label="切换失败">
         <MxSwitch
@@ -150,7 +166,9 @@
           :before-change="() => beforeChange(false)"
           @change="writeLog('change', $event)"
         />
-        <DemoRow>当前值：{{ switchVal3 }}</DemoRow>
+        <DemoRow>
+          当前值：<code>{{ switchVal3 }}</code>
+        </DemoRow>
       </MxFormFiled>
     </MxForm>
   </DemoCard>

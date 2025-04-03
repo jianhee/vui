@@ -10,8 +10,8 @@
   --mx-text-color-primary: #303133;
   --mx-text-color-regular: #606266;
   --mx-text-color-secondary: #909399;
+  --mx-bg-color-active: #f1f1f1;
   --mx-border-color: #dcdfe6;
-  --mx-row-hover-bg-color: #f1f1f1;
 
   // 按钮
   --mx-btn-brand-color: var(--mx-brand-color-default);
@@ -35,7 +35,7 @@
   // 菜单
   --mx-menu-divider-bg-color: var(--mx-border-color);
   --mx-menu-text-color: var(--mx-text-color-primary);
-  --mx-menu-hover-bg-color: var(--mx-row-hover-bg-color);
+  --mx-menu-hover-bg-color: var(--mx-bg-color-active);
 
   // 下拉框
   --mx-dropdown-border-color: var(--mx-border-color);
@@ -59,8 +59,8 @@
   --mx-skeleton-border-color: var(--mx-border-color);
 
   // 表格和树
-  --mx-table-row-active-bg-color: var(--mx-row-hover-bg-color);
-  --mx-tree-node-active-bg-color: var(--mx-row-hover-bg-color);
+  --mx-table-row-active-bg-color: var(--mx-bg-color-active);
+  --mx-tree-node-active-bg-color: var(--mx-bg-color-active);
 
   // 拖拽
   --mx-drag-handle-bg-color: var(--mx-brand-color-default);
@@ -76,7 +76,7 @@
     --mx-text-color-regular: #cfd3dc;
     --mx-text-color-secondary: #a3a6ad;
     --mx-border-color: #4c4d4f;
-    --mx-row-hover-bg-color: #444;
+    --mx-bg-color-active: #444;
 
     // 下拉框
     --mx-dropdown-bg-color: #2b2b2b;

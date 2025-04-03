@@ -1,14 +1,28 @@
 <template>
-  <div class="demo-row">
+  <div
+    class="demo-row"
+    :class="{ 'is-flex': flex }"
+  >
     <slot />
   </div>
 </template>
 
-<style>
+<script setup>
+defineProps({
+  flex: { type: Boolean, default: false }
+});
+</script>
+
+<style lang="scss">
 .demo-row {
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
-  margin: 10px 0;
+  margin-top: 10px;
+  &:first-child {
+    margin-top: 0;
+  }
+  &.is-flex {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
 }
 </style>

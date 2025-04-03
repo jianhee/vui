@@ -1,24 +1,22 @@
+@use "@mxui/assets/styles/vars";
 @use "@mxui/assets/styles/reset";
 @use "@mxui/assets/styles/base";
 
 // vars
 :root {
-  --demo-body-text-color: #333;
+  --demo-body-text-color: var(--mx-text-color-primary);
   --demo-body-bg-color: #fff;
-  --demo-sidebar-text-color: #333;
-  --demo-sidebar-active-text-color: #458ff3;
-  --demo-sidebar-active-bg-color: #458ff31a;
-  --demo-border-color: #ddd;
+  --demo-code-bg-color: var(--mx-bg-color-active);
+  --demo-sidebar-text-color: var(--mx-text-color-primary);
+  --demo-sidebar-active-text-color: var(--mx-brand-color-default);
+  --demo-sidebar-active-bg-color: var(--mx-brand-color-a10);
+  --demo-card-desc-text-color: var(--mx-text-color-regular);
+  --demo-border-color: var(--mx-border-color);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --demo-body-text-color: #fff;
     --demo-body-bg-color: #333;
-    --demo-sidebar-text-color: #fff;
-    --demo-sidebar-active-text-color: #6f8cb4;
-    --demo-sidebar-active-bg-color: #6f8cb41a;
-    --demo-border-color: #4f4f4f;
   }
 }
 
@@ -26,4 +24,13 @@
 body {
   color: var(--demo-body-text-color);
   background-color: var(--demo-body-bg-color);
+}
+
+// base
+code {
+  padding: 0.15rem 0.5rem;
+  font-family: "JetBrains Mono", source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-size: 12px;
+  background-color: var(--demo-code-bg-color);
+  border-radius: 4px;
 }

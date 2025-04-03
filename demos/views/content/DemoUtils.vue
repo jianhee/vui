@@ -11,7 +11,7 @@
         label="生成UUID"
         is-text
       >
-        当前结果：{{ guid() }}
+        当前结果：<code>{{ guid() }}</code>
       </MxFormFiled>
     </MxForm>
   </DemoCard>
@@ -21,8 +21,44 @@
         label="生成随机整数"
         is-text
       >
-        <div>默认范围 0-10000：{{ randomIntNum() }}</div>
-        <div>限制范围 190-200：{{ randomIntNum(190, 200) }}</div>
+        <DemoRow>
+          默认范围 0-10000：<code>{{ randomIntNum() }}</code>
+        </DemoRow>
+        <DemoRow>
+          指定范围 190-200：<code>{{ randomIntNum(190, 200) }}</code>
+        </DemoRow>
+      </MxFormFiled>
+    </MxForm>
+  </DemoCard>
+  <DemoCard title="数组相关的方法">
+    <MxForm derection="column">
+      <MxFormFiled
+        label="测试数据"
+        is-text
+      >
+        <DemoRow
+          v-for="(item, index) in testArray"
+          :key="index"
+        >
+          数组{{ index + 1 }}：<code>{{ item }}</code>
+        </DemoRow>
+      </MxFormFiled>
+      <MxFormFiled
+        label="获取/检查两个数组的重复项"
+        is-text
+      >
+        <DemoRow>
+          数字数组1和2：<code>{{ getCommonItems(testArray[0], testArray[1]) }}</code> <code>{{ hasCommonItems(testArray[0], testArray[1]) }}</code>
+        </DemoRow>
+        <DemoRow>
+          数字数组1和3：<code>{{ getCommonItems(testArray[0], testArray[2]) }}</code> <code>{{ hasCommonItems(testArray[0], testArray[2]) }}</code>
+        </DemoRow>
+        <DemoRow>
+          对象数组4和5：<code>{{ getCommonItems(testArray[3], testArray[4], 'id') }}</code> <code>{{ hasCommonItems(testArray[3], testArray[4], 'id') }}</code>
+        </DemoRow>
+        <DemoRow>
+          对象数组4和6：<code>{{ getCommonItems(testArray[3], testArray[5], 'id') }}</code> <code>{{ hasCommonItems(testArray[3], testArray[5], 'id') }}</code>
+        </DemoRow>
       </MxFormFiled>
     </MxForm>
   </DemoCard>
@@ -32,8 +68,12 @@
         label="校验是否有效网址"
         is-text
       >
-        <div>https://123.com：{{ isValidUrl('https://123.com') }}</div>
-        <div>abcd01223456789：{{ isValidUrl('abcd01223456789') }}</div>
+        <DemoRow
+          v-for="url in testUrls"
+          :key="url"
+        >
+          {{ url }}：<code>{{ isValidUrl(url) }}</code>
+        </DemoRow>
       </MxFormFiled>
     </MxForm>
   </DemoCard>
@@ -43,13 +83,13 @@
         label="获取设备类型"
         is-text
       >
-        当前设备：{{ getDeviceType() }}
+        当前设备：<code>{{ getDeviceType() }}</code>
       </MxFormFiled>
       <MxFormFiled
         label="获取当前URL中的指定参数"
         is-text
       >
-        test参数：{{ getUrlParams('test') }}
+        test参数：<code>{{ getUrlParams('test') }}</code>
       </MxFormFiled>
       <MxFormFiled label="复制文本"><MxBtn @click="onCopy">复制当前网址</MxBtn></MxFormFiled>
     </MxForm>
@@ -60,34 +100,48 @@
         label="获取时间"
         is-text
       >
-        <div>1.默认时间+默认格式：{{ getDateTime() }}</div>
-        <div>2.指定时间+指定格式：{{ getDateTime(time1, format1) }}</div>
+        <DemoRow>
+          1.默认时间+默认格式：<code>{{ getDateTime() }}</code>
+        </DemoRow>
+        <DemoRow>
+          2.指定时间+指定格式：<code>{{ getDateTime(time1, format1) }}</code>
+        </DemoRow>
       </MxFormFiled>
       <MxFormFiled
         label="获取UTC时间"
         is-text
       >
-        <div>1.默认时间+默认格式：{{ getUTCDateTime() }}</div>
-        <div>2.指定时间+指定格式：{{ getUTCDateTime(time1, format1) }}</div>
+        <DemoRow>
+          1.默认时间+默认格式：<code>{{ getUTCDateTime() }}</code>
+        </DemoRow>
+        <DemoRow>
+          2.指定时间+指定格式：<code>{{ getUTCDateTime(time1, format1) }}</code>
+        </DemoRow>
       </MxFormFiled>
       <MxFormFiled
         label="获取语言环境的时间"
         is-text
       >
-        <div>1.默认时间+默认格式+默认语言：{{ getLocalDateTime() }}</div>
-        <div>2.指定时间+指定格式+默认语言：{{ getLocalDateTime(time1, format2) }}</div>
-        <div>3.指定时间+指定格式+指定语言：{{ getLocalDateTime(time1, format2, 'en-us') }}</div>
+        <DemoRow>
+          1.默认时间+默认格式+默认语言：<code>{{ getLocalDateTime() }}</code>
+        </DemoRow>
+        <DemoRow>
+          2.指定时间+指定格式+默认语言：<code>{{ getLocalDateTime(time1, format2) }}</code>
+        </DemoRow>
+        <DemoRow>
+          3.指定时间+指定格式+指定语言：<code>{{ getLocalDateTime(time1, format2, 'en-us') }}</code>
+        </DemoRow>
       </MxFormFiled>
       <MxFormFiled
         label="获取相对时间"
         is-text
       >
-        <div>1分钟内：{{ getTimeAgo(timeAgo1) }}</div>
-        <div>1小时内：{{ getTimeAgo(timeAgo2) }}</div>
-        <div>1天内：{{ getTimeAgo(timeAgo3) }}</div>
-        <div>7天内：{{ getTimeAgo(timeAgo4) }}</div>
-        <div>1年内：{{ getTimeAgo(timeAgo5) }}</div>
-        <div>1年以上：{{ getTimeAgo(timeAgo6) }}</div>
+        <DemoRow
+          v-for="item in timeArray"
+          :key="item"
+        >
+          {{ item.title }}：<code>{{ getTimeAgo(item.time) }}</code>
+        </DemoRow>
       </MxFormFiled>
     </MxForm>
   </DemoCard>
@@ -95,7 +149,20 @@
 
 <script setup>
 import { toast } from '@mxui/plugins/toast';
-import { guid, randomIntNum, isValidUrl, getDeviceType, getUrlParams, copyText, getDateTime, getUTCDateTime, getLocalDateTime, getTimeAgo } from '@mxui/utils';
+import { guid, randomIntNum, getCommonItems, hasCommonItems, isValidUrl, getDeviceType, getUrlParams, copyText, getDateTime, getUTCDateTime, getLocalDateTime, getTimeAgo } from '@mxui/utils';
+
+// 数组
+const testArray = [
+  [1, 2, 3],
+  [3, 4, 5],
+  [5, 6, 7],
+  [{ id: 1 }, { id: 2 }, { id: 3 }],
+  [{ id: 3 }, { id: 4 }, { id: 5 }],
+  [{ id: 5 }, { id: 6 }, { id: 7 }]
+];
+
+// 校验
+const testUrls = ['https://123.com', 'https://123', '123.com', 'abcd01223456789'];
 
 // 复制
 async function onCopy() {
@@ -114,10 +181,12 @@ const format2 = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long
 
 // 相对时间
 const timeStamp = Date.now();
-const timeAgo1 = new Date(timeStamp - 10 * 1000);
-const timeAgo2 = new Date(timeStamp - 10 * 60 * 1000);
-const timeAgo3 = new Date(timeStamp - 10 * 60 * 60 * 1000);
-const timeAgo4 = new Date(timeStamp - 5 * 24 * 60 * 60 * 1000);
-const timeAgo5 = new Date(timeStamp - 10 * 24 * 60 * 60 * 1000);
-const timeAgo6 = new Date(timeStamp - 380 * 24 * 60 * 60 * 1000);
+const timeArray = [
+  { title: '1分钟内', time: new Date(timeStamp - 10 * 1000) },
+  { title: '1小时内', time: new Date(timeStamp - 10 * 60 * 1000) },
+  { title: '1天内', time: new Date(timeStamp - 10 * 60 * 60 * 1000) },
+  { title: '7天内', time: new Date(timeStamp - 5 * 24 * 60 * 60 * 1000) },
+  { title: '1年内', time: new Date(timeStamp - 10 * 24 * 60 * 60 * 1000) },
+  { title: '1年以上', time: new Date(timeStamp - 380 * 24 * 60 * 60 * 1000) }
+];
 </script>

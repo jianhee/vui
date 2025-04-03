@@ -2,9 +2,9 @@
 <template>
   <DemoCard title="表格">
     <template #desc>
-      <div>1.虚拟列表、固定表头、拖拽调整列宽、多选</div>
-      <div>2.表头显示值：每列的 title 字段</div>
-      <div>3.每行显示值：优先显示 slot，其次显示 row[col.key]</div>
+      <DemoRow>1.虚拟列表、固定表头、拖拽调整列宽、多选</DemoRow>
+      <DemoRow>2.表头显示值：<code>col.title</code></DemoRow>
+      <DemoRow>3.每行显示值：优先显示 <code>slot</code> 其次显示 <code>row[col.key]</code></DemoRow>
     </template>
     <MxTable
       height="300px"
@@ -18,8 +18,8 @@
   </DemoCard>
   <DemoCard title="树结构">
     <template #desc>
-      <div>1.虚拟列表</div>
-      <div>2.每行显示值：优先显示 slot，其次显示 title 字段</div>
+      <DemoRow>1.虚拟列表</DemoRow>
+      <DemoRow>2.每行显示值：优先显示 <code>slot</code> 其次显示 <code>node.title</code></DemoRow>
     </template>
     <MxTree
       height="200px"

@@ -17,7 +17,7 @@
           <div class="mx-dialog-header">
             <span class="mx-dialog-title">{{ title }}</span>
             <MxIcon
-              v-if="close"
+              v-if="showClose"
               class="mx-dialog-close"
               :component="IconClose"
               @click="onClose"
@@ -49,8 +49,8 @@ const emits = defineEmits(['close']);
 const props = defineProps({
   // 标题
   title: { type: String, default: null },
-  // 关闭按钮
-  close: { type: Boolean, default: true },
+  // 是否显示关闭按钮
+  showClose: { type: Boolean, default: true },
   // 宽度
   width: { type: String, default: '500px' }
 });

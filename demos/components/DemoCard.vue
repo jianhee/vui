@@ -25,6 +25,7 @@ defineProps({
   &-desc {
     margin: 10px 0;
     font-size: 12px;
+    color: var(--demo-card-desc-text-color);
   }
   &-content {
     padding: 20px;
