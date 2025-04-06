@@ -1,6 +1,6 @@
 <!-- 插件+方法 -->
 <template>
-  <DemoCard title="i18n">{{ $t('hello') }}</DemoCard>
+  <DemoCard title="i18n">{{ t('hello') }}</DemoCard>
   <DemoCard title="toast">
     <MxBtn @click="toast.success('这是一个成功提示')">成功</MxBtn>
     <MxBtn @click="toast.error('这是一个失败提示')">失败</MxBtn>
@@ -148,6 +148,7 @@
 </template>
 
 <script setup>
+import { t } from '@mxui/plugins/i18n';
 import { toast } from '@mxui/plugins/toast';
 import { guid, randomIntNum, getCommonItems, hasCommonItems, isValidUrl, getDeviceType, getUrlParams, copyText, getDateTime, getUTCDateTime, getLocalDateTime, getTimeAgo } from '@mxui/utils';
 

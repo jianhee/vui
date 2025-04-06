@@ -2,9 +2,10 @@
 
 /**
  * 获取两个数组的重复项
- * @param {array} arr   需要比较的数组
+ * @param {array} arr1  需要比较的数组1
+ * @param {array} arr2  需要比较的数组2
  * @param {string} key  数组项的key：默认空表示字符串/数字数组，设置后表示对象数组
- * @returns {boolean}   范围内的整数
+ * @returns {array}     重复的数组
  */
 export function getCommonItems(arr1, arr2, key) {
   // 对象数组
@@ -21,8 +22,8 @@ export function getCommonItems(arr1, arr2, key) {
 
 /**
  * 检查两个数组是否有重复项
- * @param   同 getCommonItems
- * @returns 同 getCommonItems
+ * @param {arr1,arr2,key} 同 getCommonItems
+ * @returns {boolean}     是否有重复项
  */
 export function hasCommonItems(...args) {
   return getCommonItems(...args).length > 0;
