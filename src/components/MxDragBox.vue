@@ -13,7 +13,7 @@
     <slot />
     <!-- 拖拽手柄 -->
     <div
-      v-for="handle in handles"
+      v-for="handle in handleItems"
       :key="handle"
       class="mx-drag-handle"
       :class="`is-${handle}`"
@@ -33,10 +33,10 @@ const props = defineProps({
   minHeight: { type: Number, default: 0 },
   // 是否可移动：自动转成定位元素
   draggable: { type: Boolean, default: false },
-  // 是否可缩放：定位元素支持四个边，非定位元素只支持右边和下边
-  // 布尔值：true：全部, false：不允许
-  // 数组：['left', 'right', 'top', 'bottom'] 允许指定的边
-  resizable: { type: [Boolean, Array], default: false }
+  // 是否可缩放
+  resizable: { type: Boolean, default: false },
+  // 缩放时可拖拽的轴：定位元素支持四个边，非定位元素只支持右边和下边
+  handles: { type: String, default: 'left, right, top, bottom' }
 });
 
 // 窗口
@@ -84,10 +84,9 @@ const boxClasses = computed(() => {
 });
 
 // 手柄
-const handles = computed(() => {
+const handleItems = computed(() => {
   if (!props.resizable) return null;
-  if (props.resizable === true) return ['left', 'right', 'top', 'bottom'];
-  return props.resizable;
+  return props.handles.replace(/\s/g, '').split(',');
 });
 
 // 当前激活的手柄

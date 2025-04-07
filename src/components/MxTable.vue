@@ -27,7 +27,8 @@
           :key="col.key"
           v-model:width="tableColsWidth[col.key]"
           :min-width="100"
-          :resizable="['right']"
+          resizable
+          handles="right"
           class="mx-table-cell"
         >
           {{ col.title }}

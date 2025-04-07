@@ -25,6 +25,21 @@
       定位元素<br />
       可以拖拽四个边
     </MxDragbox>
+    <MxDragbox
+      style="position: fixed"
+      :x="800"
+      :y="160"
+      :width="180"
+      :height="100"
+      :min-width="50"
+      :min-height="50"
+      resizable
+      handles="right"
+    >
+      缩放<br />
+      定位元素<br />
+      自定义可拖拽的轴
+    </MxDragbox>
   </DemoCard>
   <DemoCard title="移动">
     <MxDragbox
