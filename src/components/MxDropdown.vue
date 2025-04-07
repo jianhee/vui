@@ -58,13 +58,13 @@ const contentVisible = ref(false);
 const contentStyles = ref(null);
 const contentOffset = 5;
 
-// hover 触发
-let hoverTimer = null;
+// 定时器
+let timer = null;
 
 // 鼠标进入
 function onMouseEnter() {
   if (props.trigger !== 'hover') return;
-  clearTimeout(hoverTimer);
+  clearTimeout(timer);
   if (contentVisible.value) return;
   // 对齐元素
   openDropdown(triggerRef.value);
@@ -74,13 +74,12 @@ function onMouseEnter() {
 function onMouseLeave() {
   if (props.trigger !== 'hover') return;
   if (!contentVisible.value) return;
-  hoverTimer = setTimeout(() => {
+  timer = setTimeout(() => {
     closeDropdown();
   }, 100);
 }
 
-// click 触发
-// 点击内部
+// 点击 trigger
 function onClickTrigger() {
   if (props.trigger !== 'click') return;
   if (contentVisible.value) return;
@@ -88,18 +87,18 @@ function onClickTrigger() {
   openDropdown(triggerRef.value);
 }
 
-// 点击外部
-onClickOutside(contentRef, () => {
-  if (!contentVisible.value) return;
-  closeDropdown();
-});
-
-// contextmenu 触发
+// 右键 trigger
 function onContextMenuTrigger(event) {
   if (props.trigger !== 'contextmenu') return;
   // 对齐鼠标
   openDropdown(event);
 }
+
+// 点击 content 外部
+onClickOutside(contentRef, () => {
+  if (!contentVisible.value) return;
+  closeDropdown();
+});
 
 // 打开下拉框：target可以是触发元素或鼠标事件
 function openDropdown(target) {
