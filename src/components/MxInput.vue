@@ -65,8 +65,6 @@ function onValueChange() {
 function clearValue() {
   const newVal = '';
   valRef.value = newVal;
-  emits('input', newVal);
-  emits('change', newVal);
   emits('clear', newVal);
 }
 </script>
