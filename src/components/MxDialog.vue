@@ -20,7 +20,7 @@
               v-if="showClose"
               class="mx-dialog-close"
               :component="IconClose"
-              @click="onClose"
+              @click="closeDialog"
             />
           </div>
           <!-- 内容 -->
@@ -65,8 +65,8 @@ const contentStyles = computed(() => {
   };
 });
 
-// 关闭
-function onClose() {
+// 关闭弹窗
+function closeDialog() {
   isVisible.value = false;
 }
 

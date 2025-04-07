@@ -8,7 +8,7 @@
     <!-- 固定表头 -->
     <div
       class="mx-table-fixedbar"
-      :style="fixedbarStyles"
+      :style="headerStyles"
     >
       <div
         class="mx-table-row"
@@ -39,7 +39,7 @@
     <div
       v-bind="scrollbarProps"
       class="mx-table-scrollbar"
-      @scroll="onScroll"
+      @scroll="onBodyScroll"
     >
       <!-- 虚拟列表区域 -->
       <div
@@ -188,10 +188,10 @@ onMounted(() => {
   }, {});
 });
 
-// 表头滚动
-const fixedbarStyles = ref(null);
-function onScroll(event) {
-  fixedbarStyles.value = {
+// 表身滚动时同步表头状态
+const headerStyles = ref(null);
+function onBodyScroll(event) {
+  headerStyles.value = {
     transform: `translateX(-${event.target.scrollLeft}px)`
   };
 }

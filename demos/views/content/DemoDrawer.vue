@@ -19,9 +19,11 @@
 <script setup>
 import { ref } from 'vue';
 
+// 抽屉
 const isVisible = ref(false);
 const currentPlacement = ref(null);
 
+// 打开抽屉
 function openDrawer(newVal) {
   isVisible.value = true;
   currentPlacement.value = newVal;

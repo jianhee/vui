@@ -8,7 +8,7 @@
       v-model="isChecked"
       type="checkbox"
       class="mx-checkbox-input"
-      @change="onChange"
+      @change="onCheckedChange"
     />
     <MxIcon
       :component="IconCheckbox"
@@ -48,7 +48,7 @@ const boxClasses = computed(() => {
 });
 
 // 切换选中状态
-function onChange() {
+function onCheckedChange() {
   emits('change', isChecked.value);
 }
 </script>

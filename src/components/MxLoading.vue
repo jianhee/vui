@@ -8,7 +8,7 @@
     />
     <!-- 文本 -->
     <div
-      v-if="!props.hideText"
+      v-if="showText"
       class="mx-loading-text"
     >
       {{ text }}
@@ -27,8 +27,8 @@ const props = defineProps({
   icon: { type: [String, Object], default: null },
   // 文本
   text: { type: String, default: 'Loading...' },
-  // 隐藏文本
-  hideText: { type: Boolean, default: false }
+  // 是否显示文本
+  showText: { type: Boolean, default: true }
 });
 
 // 图标

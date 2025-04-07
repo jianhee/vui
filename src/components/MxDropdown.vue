@@ -12,7 +12,7 @@
     @mouseenter="onMouseEnter"
     @mouseleave="onMouseLeave"
     @click="onClickTrigger"
-    @contextmenu.prevent="onContextMenu"
+    @contextmenu.prevent="onContextMenuTrigger"
   >
     <slot />
   </div>
@@ -95,7 +95,7 @@ onClickOutside(contentRef, () => {
 });
 
 // contextmenu 触发
-function onContextMenu(event) {
+function onContextMenuTrigger(event) {
   if (props.trigger !== 'contextmenu') return;
   // 对齐鼠标
   openDropdown(event);

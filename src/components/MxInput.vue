@@ -6,8 +6,8 @@
     :placeholder="placeholder"
     :maxlength="maxlength"
     class="mx-input"
-    @input="onInput"
-    @change="onChange"
+    @input="onValueInput"
+    @change="onValueChange"
   />
 </template>
 
@@ -26,12 +26,12 @@ defineProps({
 const valRef = defineModel('value', { type: String, default: null });
 
 // 输入值
-function onInput(event) {
+function onValueInput(event) {
   emits('input', event.target.value);
 }
 
 // 修改值
-function onChange(event) {
+function onValueChange(event) {
   emits('change', event.target.value);
 }
 </script>

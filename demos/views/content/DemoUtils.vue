@@ -110,7 +110,7 @@
       >
         test参数：<code>{{ getUrlParams('test') }}</code>
       </MxFormFiled>
-      <MxFormFiled label="复制文本"><MxBtn @click="onCopy">复制当前网址</MxBtn></MxFormFiled>
+      <MxFormFiled label="复制文本"><MxBtn @click="copyCurrentUrl">复制当前网址</MxBtn></MxFormFiled>
     </MxForm>
   </DemoCard>
   <DemoCard title="日期时间相关的方法">
@@ -195,7 +195,7 @@ const testArray = [
 const testUrls = ['https://123.com', 'https://123', '123.com', 'abcd01223456789'];
 
 // 复制
-async function onCopy() {
+async function copyCurrentUrl() {
   const isSuccess = await copyText(location.href);
   if (isSuccess) {
     toast.success('复制成功');

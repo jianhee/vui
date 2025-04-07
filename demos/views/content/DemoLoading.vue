@@ -10,7 +10,7 @@
     <MxLoading text="加载中..." />
   </DemoCard>
   <DemoCard title="不显示文本">
-    <MxLoading hide-text />
+    <MxLoading :show-text="false" />
   </DemoCard>
 </template>
 

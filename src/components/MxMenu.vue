@@ -9,7 +9,7 @@
       <div
         :title="item.title"
         class="mx-menu-item"
-        @click="onSelect(item)"
+        @click="onClick(item)"
       >
         <!-- 优先显示slot -->
         <slot
@@ -46,8 +46,8 @@ defineProps({
   items: { type: Array, default: null }
 });
 
-// 选中菜单
-function onSelect(item) {
+// 点击菜单项
+function onClick(item) {
   emits('select', item);
 }
 </script>

@@ -13,7 +13,7 @@
       v-else
       v-model="valRef"
       class="mx-select-inner"
-      @change="onChange"
+      @change="onValueChange"
     >
       <option
         v-for="item in items"
@@ -41,7 +41,7 @@ defineProps({
 const valRef = defineModel('value', { type: [String, Number], default: null });
 
 // 修改值
-function onChange() {
+function onValueChange() {
   emits('change', valRef.value);
 }
 </script>

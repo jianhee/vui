@@ -15,7 +15,7 @@
         :checked="item.value === valRef"
         type="radio"
         class="mx-radio-input"
-        @change="onChange(item)"
+        @change="onValueChange(item)"
       />
       <MxIcon
         :component="IconRadio"
@@ -50,7 +50,7 @@ defineProps({
 const valRef = defineModel('value', { type: [String, Number], default: null });
 
 // 修改值
-function onChange(item) {
+function onValueChange(item) {
   valRef.value = item.value;
   emits('change', item);
 }

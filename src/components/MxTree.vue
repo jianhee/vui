@@ -29,7 +29,7 @@
             :component="IconArrowDown"
             size="16"
             :rotate="node.isExpanded ? null : -90"
-            :class="{ 'mx-tree-hidden': !node.childrenFilter?.length }"
+            :class="{ 'mx-tree-hidden': !node.children?.length }"
             @click.stop="onNodeToggle(node)"
           />
           <!-- 优先显示slot -->
@@ -77,16 +77,14 @@ const flattenTree = (nodes, level = 0) => {
     const formatted = {
       ...node,
       level,
-      isExpanded: expandedMap.value.get(node.id),
-      // children是原始子集，childrenFilter是父组件中过滤后的子集
-      childrenFilter: node.childrenFilter || node.children
+      isExpanded: expandedMap.value.get(node.id)
     };
     result.push(formatted);
 
     // 子集
-    if (formatted.isExpanded && formatted.childrenFilter) {
-      const childrenFilter = flattenTree(formatted.childrenFilter, level + 1, formatted);
-      result.push(...childrenFilter);
+    if (formatted.isExpanded && formatted.children) {
+      const children = flattenTree(formatted.children, level + 1, formatted);
+      result.push(...children);
     }
   });
   return result;
@@ -120,7 +118,7 @@ const onNodeToggle = node => {
 
 // 左键点击节点
 function onNodeClick(node) {
-  if (node.childrenFilter?.length) {
+  if (node.children?.length) {
     onNodeToggle(node);
   }
   if (node.id !== props.currentId) {
