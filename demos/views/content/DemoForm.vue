@@ -25,12 +25,28 @@
       <MxFormFiled label="基础用法">
         <MxInput
           v-model:value="inputValue"
+          placeholder="请输入内容"
           @input="writeLog('input', $event)"
           @change="writeLog('change', $event)"
+          @clear="writeLog('clear', $event)"
         />
         <DemoRow>
           当前值：<code>{{ inputValue }}</code>
         </DemoRow>
+      </MxFormFiled>
+      <MxFormFiled label="禁用状态">
+        <MxInput
+          v-model:value="inputValue"
+          placeholder="请输入内容"
+          disabled
+        />
+      </MxFormFiled>
+      <MxFormFiled label="前置图标">
+        <MxInput
+          v-model:value="inputValue"
+          placeholder="请输入内容"
+          prefix-icon="close"
+        />
       </MxFormFiled>
     </MxForm>
   </DemoCard>
@@ -178,7 +194,7 @@ const layoutItems = [
 ];
 
 // 输入框
-const inputValue = ref('11111');
+const inputValue = ref('内容');
 
 // 多选框
 const checkboxValue1 = ref(false);

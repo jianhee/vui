@@ -59,51 +59,65 @@ const contentStyles = ref(null);
 const contentOffset = 5;
 
 // 定时器
-let timer = null;
+let closeTimer = null;
 
-// 鼠标进入
+// 鼠标进入：对齐元素
 function onMouseEnter() {
   if (props.trigger !== 'hover') return;
-  clearTimeout(timer);
-  if (contentVisible.value) return;
-  // 对齐元素
   openDropdown(triggerRef.value);
 }
 
 // 鼠标离开
 function onMouseLeave() {
   if (props.trigger !== 'hover') return;
-  if (!contentVisible.value) return;
-  timer = setTimeout(() => {
-    closeDropdown();
-  }, 100);
+  closeDropdown();
 }
 
-// 点击 trigger
+// 点击 trigger：对齐元素
 function onClickTrigger() {
   if (props.trigger !== 'click') return;
-  if (contentVisible.value) return;
-  // 对齐元素
   openDropdown(triggerRef.value);
 }
 
-// 右键 trigger
+// 右键 trigger：对齐鼠标
 function onContextMenuTrigger(event) {
   if (props.trigger !== 'contextmenu') return;
-  // 对齐鼠标
   openDropdown(event);
 }
 
 // 点击 content 外部
-onClickOutside(contentRef, () => {
-  if (!contentVisible.value) return;
-  closeDropdown();
-});
+onClickOutside(contentRef, closeDropdown);
 
-// 打开下拉框：target可以是触发元素或鼠标事件
+// 关闭下拉框
+function closeDropdown() {
+  if (!contentVisible.value) return;
+  closeTimer = setTimeout(() => {
+    contentVisible.value = false;
+    emits('close');
+  }, 100);
+}
+
+// 打开下拉框
 function openDropdown(target) {
-  contentVisible.value = true;
-  emits('open');
+  // 停止关闭
+  clearTimeout(closeTimer);
+  // 未打开时：更新打开状态
+  if (!contentVisible.value) {
+    contentVisible.value = true;
+    emits('open');
+    updatePosition(target);
+    return;
+  }
+  // 已打开时：如果是对齐鼠标每次都要更新定位
+  const isEl = target instanceof HTMLElement;
+  if (!isEl) {
+    updatePosition(target);
+  }
+}
+
+// 更新定位：target可以是触发元素或鼠标事件
+function updatePosition(target) {
+  // 更新定位
   const isEl = target instanceof HTMLElement;
   nextTick(() => {
     // 触发元素
@@ -136,12 +150,6 @@ function openDropdown(target) {
       left: `${contentLeft}px`
     };
   });
-}
-
-// 关闭下拉框
-function closeDropdown() {
-  contentVisible.value = false;
-  emits('close');
 }
 
 // 外部调用方法，比如v-for渲染多个触发元素时，直接调用方法更方便

@@ -10,6 +10,7 @@
   --mx-text-color-primary: #303133;
   --mx-text-color-regular: #606266;
   --mx-text-color-secondary: #909399;
+  --mx-text-color-placeholder: #a8abb2;
   --mx-bg-color-active: #f1f1f1;
   --mx-border-color: #dcdfe6;
 
@@ -22,6 +23,9 @@
 
   // 表单
   --mx-form-label-text-color: var(--mx-text-color-regular);
+
+  // 输入框
+  --mx-input-icon-color: var(--mx-text-color-placeholder);
 
   // 复选框
   --mx-checkbox-default-color: var(--mx-border-color);
@@ -75,6 +79,7 @@
     --mx-text-color-primary: #e5eaf3;
     --mx-text-color-regular: #cfd3dc;
     --mx-text-color-secondary: #a3a6ad;
+    --mx-text-color-placeholder: #8d9095;
     --mx-border-color: #4c4d4f;
     --mx-bg-color-active: #444;
 
