@@ -12,8 +12,8 @@
       :columns="tableCols"
       selectable
       storage-key="demo-table"
-      @node-click="writeLog('node-click', $event)"
-      @node-contextmenu="writeLog('node-contextmenu', $event)"
+      @row-contextmenu="writeLog('row-contextmenu', $event)"
+      @selection-change="writeLog('selection-change', $event)"
     />
   </DemoCard>
   <DemoCard title="树结构">

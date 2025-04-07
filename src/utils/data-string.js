@@ -11,3 +11,30 @@ export function guid() {
     return v.toString(16);
   });
 }
+
+/**
+ * 字数统计
+ * @param {string} str  文本
+ * @returns {object}    数量对象
+ */
+export function countText(str) {
+  // 1. 包含空格的字符数量
+  const charCount = str.length;
+
+  // 2. 不包含空格的字符数量
+  const charCountWithoutSpaces = str.replace(/\s/g, '').length;
+
+  // 3. 汉字和单词数量
+  // 汉字：Unicode范围
+  const chineseCharArr = str.match(/[\u4E00-\u9FA5]|[\u9FA6-\u9fcb]/g) || [];
+  // 英文单词：按单词边界分割
+  const englishWordArr = str.match(/\b[a-zA-Z]+\b/g) || [];
+  // 总数
+  const wordCount = chineseCharArr.length + englishWordArr.length;
+
+  return {
+    charCount,
+    charCountWithoutSpaces,
+    wordCount
+  };
+}

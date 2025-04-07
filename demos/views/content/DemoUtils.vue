@@ -13,6 +13,25 @@
       >
         当前结果：<code>{{ guid() }}</code>
       </MxFormFiled>
+      <MxFormFiled
+        label="字数统计"
+        is-text
+      >
+        <DemoRow
+          v-for="text in textArr"
+          :key="text"
+        >
+          <div>{{ text }}</div>
+          <div>
+            字符数量
+            <code>{{ countText(text).charCount }}</code>
+            不包含空格的字符数量
+            <code>{{ countText(text).charCountWithoutSpaces }}</code>
+            单词数量
+            <code>{{ countText(text).wordCount }}</code>
+          </div>
+        </DemoRow>
+      </MxFormFiled>
     </MxForm>
   </DemoCard>
   <DemoCard title="数字相关的方法">
@@ -44,20 +63,20 @@
         </DemoRow>
       </MxFormFiled>
       <MxFormFiled
-        label="获取/检查两个数组的重复项"
+        label="检查/获取两个数组的重复项"
         is-text
       >
         <DemoRow>
-          数字数组1和2：<code>{{ getCommonItems(testArray[0], testArray[1]) }}</code> <code>{{ hasCommonItems(testArray[0], testArray[1]) }}</code>
+          数字数组1和2：<code>{{ hasCommonItems(testArray[0], testArray[1]) }}</code> <code>{{ getCommonItems(testArray[0], testArray[1]) }}</code>
         </DemoRow>
         <DemoRow>
-          数字数组1和3：<code>{{ getCommonItems(testArray[0], testArray[2]) }}</code> <code>{{ hasCommonItems(testArray[0], testArray[2]) }}</code>
+          数字数组1和3：<code>{{ hasCommonItems(testArray[0], testArray[2]) }}</code> <code>{{ getCommonItems(testArray[0], testArray[2]) }}</code>
         </DemoRow>
         <DemoRow>
-          对象数组4和5：<code>{{ getCommonItems(testArray[3], testArray[4], 'id') }}</code> <code>{{ hasCommonItems(testArray[3], testArray[4], 'id') }}</code>
+          对象数组4和5：<code>{{ hasCommonItems(testArray[3], testArray[4], 'id') }}</code> <code>{{ getCommonItems(testArray[3], testArray[4], 'id') }}</code>
         </DemoRow>
         <DemoRow>
-          对象数组4和6：<code>{{ getCommonItems(testArray[3], testArray[5], 'id') }}</code> <code>{{ hasCommonItems(testArray[3], testArray[5], 'id') }}</code>
+          对象数组4和6：<code>{{ hasCommonItems(testArray[3], testArray[5], 'id') }}</code> <code>{{ getCommonItems(testArray[3], testArray[5], 'id') }}</code>
         </DemoRow>
       </MxFormFiled>
     </MxForm>
@@ -150,7 +169,17 @@
 <script setup>
 import { t } from '@mxui/plugins/i18n';
 import { toast } from '@mxui/plugins/toast';
-import { guid, randomIntNum, getCommonItems, hasCommonItems, isValidUrl, getDeviceType, getUrlParams, copyText, getDateTime, getUTCDateTime, getLocalDateTime, getTimeAgo } from '@mxui/utils';
+import { guid, countText, randomIntNum, getCommonItems, hasCommonItems, isValidUrl, getDeviceType, getUrlParams, copyText, getDateTime, getUTCDateTime, getLocalDateTime, getTimeAgo } from '@mxui/utils';
+
+// 字符串
+const textArr = [
+  // 全英文
+  'abcd efgh ijkl mnop',
+  // 全中文
+  '测试 测试 测试 测试',
+  // 中英混合
+  'abcd测试 efgh 测试 ijkl测试 mnop 测试'
+];
 
 // 数组
 const testArray = [

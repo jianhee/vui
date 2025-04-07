@@ -25,6 +25,7 @@
       <MxFormFiled label="基础用法">
         <MxInput
           v-model:value="inputValue"
+          @input="writeLog('input', $event)"
           @change="writeLog('change', $event)"
         />
         <DemoRow>
@@ -48,12 +49,10 @@
         <MxCheckbox
           v-model:checked="checkboxValue2"
           label="选项2"
-          @change="writeLog('change', $event)"
         />
         <MxCheckbox
           v-model:checked="checkboxValue3"
           label="选项3"
-          @change="writeLog('change', $event)"
         />
         <DemoRow>
           当前值：<code>{{ checkboxValue1 }}</code> <code>{{ checkboxValue2 }}</code> <code>{{ checkboxValue3 }}</code>
@@ -63,21 +62,18 @@
         <MxCheckbox
           v-model:checked="checkboxValue4"
           block
-          @change="writeLog('change', $event)"
         >
           选项1 的选中状态 {{ checkboxValue4 }}
         </MxCheckbox>
         <MxCheckbox
           v-model:checked="checkboxValue5"
           block
-          @change="writeLog('change', $event)"
         >
           选项2 的选中状态 {{ checkboxValue5 }}
         </MxCheckbox>
         <MxCheckbox
           v-model:checked="checkboxValue6"
           block
-          @change="writeLog('change', $event)"
         >
           选项3 的选中状态 {{ checkboxValue6 }}
         </MxCheckbox>
@@ -109,7 +105,6 @@
           v-model:value="radioValue2"
           :items="radioItems2"
           block
-          @change="writeLog('change', $event)"
         >
           <template #default="{ item }">选项{{ item.value }} 的 value {{ item.value }}</template>
         </MxRadioGroup>
@@ -154,7 +149,6 @@
         <MxSwitch
           v-model:checked="switchVal2"
           :before-change="() => beforeChange(true)"
-          @change="writeLog('change', $event)"
         />
         <DemoRow>
           当前值：<code>{{ switchVal2 }}</code>
@@ -164,7 +158,6 @@
         <MxSwitch
           v-model:checked="switchVal3"
           :before-change="() => beforeChange(false)"
-          @change="writeLog('change', $event)"
         />
         <DemoRow>
           当前值：<code>{{ switchVal3 }}</code>

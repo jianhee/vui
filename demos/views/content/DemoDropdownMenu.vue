@@ -9,31 +9,26 @@
   </DemoCard>
   <DemoCard title="使用 trigger 打开">
     <DemoRow flex>
-      <MxDropdown trigger="hover">
+      <MxDropdown
+        trigger="hover"
+        @open="writeLog('open')"
+        @close="writeLog('close')"
+      >
         <MxBtn>hover</MxBtn>
         <template #content>
-          <MxMenu
-            :items="menuItems"
-            @select="writeLog('select', $event)"
-          />
+          <MxMenu :items="menuItems" />
         </template>
       </MxDropdown>
       <MxDropdown trigger="click">
         <MxBtn>click</MxBtn>
         <template #content>
-          <MxMenu
-            :items="menuItems"
-            @select="writeLog('select', $event)"
-          />
+          <MxMenu :items="menuItems" />
         </template>
       </MxDropdown>
       <MxDropdown trigger="contextmenu">
         <MxBtn>contextmenu</MxBtn>
         <template #content>
-          <MxMenu
-            :items="menuItems"
-            @select="writeLog('select', $event)"
-          />
+          <MxMenu :items="menuItems" />
         </template>
       </MxDropdown>
     </DemoRow>
@@ -49,10 +44,7 @@
       <MxBtn @click="openDropdown">对齐鼠标</MxBtn>
       <MxDropdown ref="contentRef">
         <template #content>
-          <MxMenu
-            :items="menuItems"
-            @select="writeLog('select', $event)"
-          />
+          <MxMenu :items="menuItems" />
         </template>
       </MxDropdown>
     </DemoRow>

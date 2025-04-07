@@ -40,7 +40,7 @@ import { onClickOutside, useWindowSize } from '@vueuse/core';
 
 defineOptions({ inheritAttrs: false });
 const slots = useSlots();
-const emits = defineEmits(['close']);
+const emits = defineEmits(['open', 'close']);
 
 // 参数
 const props = defineProps({
@@ -104,6 +104,7 @@ function onContextMenu(event) {
 // 打开下拉框：target可以是触发元素或鼠标事件
 function openDropdown(target) {
   contentVisible.value = true;
+  emits('open');
   const isEl = target instanceof HTMLElement;
   nextTick(() => {
     // 触发元素

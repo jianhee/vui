@@ -41,8 +41,8 @@ defineProps({
 const valRef = defineModel('value', { type: [String, Number], default: null });
 
 // 修改值
-function onChange(item) {
-  emits('change', item);
+function onChange() {
+  emits('change', valRef.value);
 }
 </script>
 
