@@ -22,7 +22,7 @@ export function countText(str) {
   const charCount = str.length;
 
   // 2. 不包含空格的字符数量
-  const charCountWithoutSpaces = str.replace(/\s/g, '').length;
+  const charCountWithoutSpace = str.replace(/\s/g, '').length;
 
   // 3. 汉字和单词数量
   // 汉字：Unicode范围
@@ -34,7 +34,7 @@ export function countText(str) {
 
   return {
     charCount,
-    charCountWithoutSpaces,
+    charCountWithoutSpace,
     wordCount
   };
 }

@@ -26,7 +26,7 @@
             字符数量
             <code>{{ countText(text).charCount }}</code>
             不包含空格的字符数量
-            <code>{{ countText(text).charCountWithoutSpaces }}</code>
+            <code>{{ countText(text).charCountWithoutSpace }}</code>
             单词数量
             <code>{{ countText(text).wordCount }}</code>
           </div>
