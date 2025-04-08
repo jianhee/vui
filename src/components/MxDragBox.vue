@@ -31,6 +31,10 @@ const props = defineProps({
   // 最小尺寸
   minWidth: { type: Number, default: 0 },
   minHeight: { type: Number, default: 0 },
+  // 是否固定定位
+  fixed: { type: Boolean, default: true },
+  // 是否计算样式：比如状态1可拖拽，绑定了定位和宽高，状态2普通div，不需要使用绑定信息，可以设置 false 清除绑定样式
+  useStyles: { type: Boolean, default: true },
   // 是否可移动：自动转成定位元素
   draggable: { type: Boolean, default: false },
   // 是否可缩放
@@ -58,16 +62,12 @@ let boxStartY = 0;
 let boxStartWidth = 0;
 let boxStartHeight = 0;
 
-// 是否固定定位
-const boxIsFixed = () => {
-  const style = window.getComputedStyle(boxRef.value);
-  return style.position === 'fixed';
-};
-
 // 获取样式
 const boxStyles = computed(() => {
+  const position = props.fixed ? 'fixed' : 'relative';
+  if (!props.useStyles) return { position };
   return {
-    position: props.draggable ? 'fixed' : null,
+    position,
     left: `${boxCurrentX.value}px`,
     top: `${boxCurrentY.value}px`,
     width: `${boxCurrentWidth.value}px`,
@@ -79,14 +79,19 @@ const boxStyles = computed(() => {
 // 获取类名
 const boxClasses = computed(() => {
   return {
-    'is-active': handleActiveName.value || boxIsDragging.value
+    'is-active': boxIsDragging.value || handleActiveName.value
   };
 });
 
 // 手柄
 const handleItems = computed(() => {
   if (!props.resizable) return null;
-  return props.handles.replace(/\s/g, '').split(',');
+  const items = props.handles.replace(/\s/g, '').split(',');
+  if (props.fixed) {
+    return items;
+  } else {
+    return items.filter(item => item === 'right' || item === 'bottom');
+  }
 });
 
 // 当前激活的手柄
@@ -105,7 +110,7 @@ onLongPress(boxRef, e => {
   if (!props.draggable) return;
 
   // 是否需要定位
-  if (!boxIsFixed()) return;
+  if (!props.fixed) return;
 
   // 记录初始数据
   boxIsDragging.value = true;
@@ -145,10 +150,6 @@ function onBoxDragEnd() {
 // 拖拽开始
 function onHandleDragStart(e, _handleName) {
   if (!props.resizable) return;
-
-  // 是否需要定位
-  const needFixed = _handleName === 'top' || _handleName === 'left';
-  if (needFixed && !boxIsFixed()) return;
 
   // 记录初始数据
   handleActiveName.value = _handleName;
@@ -197,12 +198,11 @@ function onHandleDragEnd() {
 @use '../assets/styles/vars';
 .mx-drag {
   &-box {
-    position: relative;
     z-index: 999;
-    &.is-active {
-      user-select: none;
-      transition: none;
-    }
+  }
+  &-box.is-active {
+    user-select: none;
+    transition: none;
   }
   &-handle {
     position: absolute;

@@ -6,13 +6,13 @@
       :height="100"
       :min-width="50"
       :min-height="50"
+      :fixed="false"
       resizable
     >
       非定位元素<br />
       只能拖拽右边和下边
     </MxDragbox>
     <MxDragbox
-      style="position: fixed"
       :x="500"
       :y="160"
       :width="180"
@@ -26,7 +26,6 @@
       可以拖拽四个边
     </MxDragbox>
     <MxDragbox
-      style="position: fixed"
       :x="800"
       :y="160"
       :width="180"
