@@ -28,6 +28,7 @@
           placeholder="请输入内容"
           @input="writeLog('input', $event)"
           @change="writeLog('change', $event)"
+          @enter="writeLog('enter', $event)"
           @clear="writeLog('clear', $event)"
         />
         <DemoRow>

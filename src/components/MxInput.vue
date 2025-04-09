@@ -19,6 +19,7 @@
       class="mx-input-inner"
       @input="onValueInput"
       @change="onValueChange"
+      @keyup.enter="onKeyupEnter"
     />
     <!-- 清空 -->
     <MxIcon
@@ -70,6 +71,11 @@ function onValueInput() {
 // 修改值
 function onValueChange() {
   emits('change', valRef.value);
+}
+
+// 按下enter键
+function onKeyupEnter() {
+  emits('enter', valRef.value);
 }
 
 // 清空值
