@@ -116,6 +116,8 @@ const props = defineProps({
   currentId: { type: Number, default: null },
   // 是否可选择
   selectable: { type: Boolean, default: false },
+  // 数据刷新时是否保留选中状态
+  keepSelected: { type: Boolean, default: false },
   // 列宽本地存储的 key
   storageKey: { type: String, default: null }
 });
@@ -129,7 +131,7 @@ const formatRows = data => {
   return data?.map(item => {
     return {
       ...item,
-      isSelected: selectedMap.value.get(item.id)
+      isSelected: props.keepSelected ? selectedMap.value.get(item.id) : false
     };
   });
 };
@@ -139,6 +141,9 @@ watch(
   () => props.rows,
   newData => {
     formattedRows.value = formatRows(newData);
+    if (!props.keepSelected) {
+      emits('selection-change', []);
+    }
   },
   { immediate: true }
 );
@@ -149,8 +154,8 @@ const {
   containerProps: scrollbarProps,
   wrapperProps: bodyProps
 } = useVirtualList(formattedRows, {
-  itemHeight: 5,
-  overscan: 35
+  itemHeight: 35,
+  overscan: 5
 });
 
 // 单选
