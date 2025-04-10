@@ -229,9 +229,11 @@ const switchVal2 = ref(true);
 const switchVal3 = ref(false);
 
 // 切换前
+let timer = null;
 const beforeChange = state => {
   return new Promise(resolve => {
-    setTimeout(() => {
+    timer = setTimeout(() => {
+      clearTimeout(timer);
       resolve(state);
     }, 2000);
   });

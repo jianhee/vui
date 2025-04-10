@@ -92,6 +92,7 @@ onClickOutside(contentRef, closeDropdown);
 function closeDropdown() {
   if (!contentVisible.value) return;
   closeTimer = setTimeout(() => {
+    clearTimeout(closeTimer);
     contentVisible.value = false;
     emits('close');
   }, 100);
