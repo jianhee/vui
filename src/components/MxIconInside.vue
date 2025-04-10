@@ -2,7 +2,7 @@
 <!-- 本组件用于处理参数，然后将符合规范的参数传给 MxIcon -->
 <!-- 这里是为了在 MxBtn 等其它组件中使用时更方便的传参 -->
 <template>
-  <MxIcon v-bind="iconProps" />
+  <MxIcon v-bind="{ ...defaultProps, ...iconProps }" />
 </template>
 
 <script setup>
@@ -12,7 +12,9 @@ import MxIcon from './MxIcon.vue';
 // 参数
 const props = defineProps({
   // MxIcon 组件的 name/component/props
-  icon: { type: [String, Object], default: null }
+  icon: { type: [String, Object], default: null },
+  // 默认参数
+  defaultProps: { type: Object, default: () => ({}) }
 });
 
 //  传给icon组件的参数

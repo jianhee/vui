@@ -15,5 +15,5 @@
 </template>
 
 <script setup>
-import IconLoading from '@/assets/icons/loading2.svg?component';
+import IconLoading from '@/assets/icons/close.svg?component';
 </script>

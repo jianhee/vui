@@ -4,6 +4,7 @@
     <!-- 图标 -->
     <MxIconInside
       :icon="iconProps"
+      :default-props="{ spin: true }"
       class="mx-loading-icon"
     />
     <!-- 文本 -->
@@ -34,10 +35,7 @@ const props = defineProps({
 // 图标
 const iconProps = computed(() => {
   if (props.icon) return props.icon;
-  return {
-    component: IconLoading,
-    spin: true
-  };
+  return { component: IconLoading };
 });
 </script>
 
