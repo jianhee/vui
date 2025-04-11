@@ -79,9 +79,10 @@ function getTableData() {
 // 表格列数据
 const tableCols = [
   { key: 'id', title: 'ID', width: 100 },
+  { key: 'title', title: '标题', width: 100 },
   { key: 'name', title: '姓名', width: 100 },
   { key: 'age', title: '年纪', width: 100 },
-  { key: 'phone', title: '年纪', width: 100 },
+  { key: 'phone', title: '手机', width: 100 },
   { key: 'address', title: '地址', width: 100 }
 ];
 
@@ -99,7 +100,7 @@ function renderData(length, level = 0, _path = '0') {
     const path = `${_path}-${i}`;
     const key = `${path}(${refreshTag})`;
     return {
-      id: key,
+      id: path,
       title: key,
       name: `姓名-${key}`,
       age: `年纪-${key}`,
