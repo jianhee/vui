@@ -8,7 +8,7 @@
     </template>
     <DemoRow>
       <MxTable
-        height="300px"
+        :table-height="300"
         :rows="tableRows"
         :columns="tableCols"
         selectable
@@ -22,7 +22,7 @@
       <MxBtn
         type="primary"
         size="small"
-        @click="renderTableRows"
+        @click="getTableData"
       >
         刷新
       </MxBtn>
@@ -34,41 +34,46 @@
       <DemoRow>1.虚拟列表</DemoRow>
       <DemoRow>2.每行显示值：优先显示 <code>slot</code> 其次显示 <code>node.title</code></DemoRow>
     </template>
-    <MxTree
-      height="200px"
-      :data="treeData"
-      @node-click="writeLog('node-click', $event)"
-      @node-contextmenu="writeLog('node-contextmenu', $event)"
-    >
-      <template #default="{ node }">
-        {{ node.title }}
-      </template>
-    </MxTree>
+    <DemoRow flex>
+      <MxTree
+        :tree-height="200"
+        :data="treeData"
+        @node-click="writeLog('node-click', $event)"
+        @node-contextmenu="writeLog('node-contextmenu', $event)"
+      >
+        <template #default="{ node }">
+          {{ node.title }}
+        </template>
+      </MxTree>
+    </DemoRow>
+    <DemoRow flex>
+      <MxBtn
+        type="primary"
+        size="small"
+        @click="getTreeData"
+      >
+        刷新
+      </MxBtn>
+    </DemoRow>
   </DemoCard>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import { writeLog } from '@/utils';
-import { randomIntNum } from '@mxui/utils';
+
+// 刷新标识
+let refreshTag = 0;
 
 // 保留选中状态
 const keepSelected = ref(false);
 
 // 表格行数据
 const tableRows = ref(null);
-renderTableRows();
-function renderTableRows() {
-  tableRows.value = Array.from({ length: 1000 }).map((_, i) => {
-    const key = randomIntNum();
-    return {
-      id: i,
-      name: `姓名-${key}`,
-      age: `年纪-${key}`,
-      phone: `手机号-${key}`,
-      address: `地址-${key}`
-    };
-  });
+getTableData();
+function getTableData() {
+  refreshTag++;
+  tableRows.value = renderData(1000);
 }
 
 // 表格列数据
@@ -82,14 +87,25 @@ const tableCols = [
 
 // 树结构数据
 const treeData = ref(null);
-treeData.value = renderTreeData();
-function renderTreeData(path = '0', level = 2) {
-  return Array.from({ length: 20 }).map((_, i) => {
-    const key = `${path}-${i}`;
+getTreeData();
+function getTreeData() {
+  refreshTag++;
+  treeData.value = renderData(20, 2);
+}
+
+// 生成数据
+function renderData(length, level = 0, _path = '0') {
+  return Array.from({ length }).map((_, i) => {
+    const path = `${_path}-${i}`;
+    const key = `${path}(${refreshTag})`;
     return {
       id: key,
       title: key,
-      children: level > 0 ? renderTreeData(key, level - 1) : null
+      name: `姓名-${key}`,
+      age: `年纪-${key}`,
+      phone: `手机号-${key}`,
+      address: `地址-${key}`,
+      children: level > 0 ? renderData(length, level - 1, path) : null
     };
   });
 }

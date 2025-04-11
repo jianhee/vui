@@ -1,7 +1,7 @@
 <!-- 拖拽 -->
 <!-- 有两个功能 -->
-<!-- 1.缩放大小 -->
-<!-- 2.移动位置 -->
+<!-- 1.移动位置 -->
+<!-- 2.缩放大小 -->
 <template>
   <div
     ref="boxRef"
@@ -17,20 +17,20 @@
       :key="handle"
       class="mx-drag-handle"
       :class="`is-${handle}`"
-      @mousedown.stop="onHandleDragStart($event, handle)"
+      @mousedown.stop="onResizeStart($event, handle)"
     />
   </div>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue';
-import { useWindowSize, onLongPress } from '@vueuse/core';
+import { onLongPress } from '@vueuse/core';
 
 // 参数
 const props = defineProps({
   // 最小尺寸
-  minWidth: { type: Number, default: 0 },
-  minHeight: { type: Number, default: 0 },
+  minWidth: { type: Number, default: 10 },
+  minHeight: { type: Number, default: 10 },
   // 是否固定定位
   fixed: { type: Boolean, default: true },
   // 是否计算样式：比如状态1可拖拽，绑定了定位和宽高，状态2普通div，不需要使用绑定信息，可以设置 false 清除绑定样式
@@ -43,24 +43,24 @@ const props = defineProps({
   handles: { type: String, default: 'left, right, top, bottom' }
 });
 
-// 窗口
-const { width: windowWidth, height: windowHeight } = useWindowSize();
+// 操作标识：move-移动, left等-缩放的轴
+const actionName = ref(null);
+
+// 鼠标开始位置
+let mouseStartPos = { x: 0, y: 0 };
 
 // 盒子
 const boxRef = ref(null);
-const boxIsDragging = ref(false);
 
-// 当前定位和尺寸：只支持left和top
+// 开始位置和尺寸
+let boxStartPos = { x: 0, y: 0 };
+let boxStartSize = { width: 0, height: 0 };
+
+// 当前位置和尺寸：只支持left和top
 const boxCurrentX = defineModel('x', { type: Number, default: null });
 const boxCurrentY = defineModel('y', { type: Number, default: null });
 const boxCurrentWidth = defineModel('width', { type: Number, default: null });
 const boxCurrentHeight = defineModel('height', { type: Number, default: null });
-
-// 开始拖拽时的定位和尺寸
-let boxStartX = 0;
-let boxStartY = 0;
-let boxStartWidth = 0;
-let boxStartHeight = 0;
 
 // 获取样式
 const boxStyles = computed(() => {
@@ -72,15 +72,13 @@ const boxStyles = computed(() => {
     top: `${boxCurrentY.value}px`,
     width: `${boxCurrentWidth.value}px`,
     height: `${boxCurrentHeight.value}px`,
-    cursor: boxIsDragging.value ? 'move' : null
+    cursor: actionName.value === 'move' ? 'move' : null
   };
 });
 
 // 获取类名
 const boxClasses = computed(() => {
-  return {
-    'is-active': boxIsDragging.value || handleActiveName.value
-  };
+  return { 'is-draging': !!actionName.value };
 });
 
 // 手柄
@@ -94,103 +92,100 @@ const handleItems = computed(() => {
   }
 });
 
-// 当前激活的手柄
-const handleActiveName = ref(null);
-
-// 需要扣除的宽度
-const handleBoderWidth = computed(() => (/right|bottom/.test(handleActiveName.value) ? 2 : 0));
-
-// 开始拖拽时的定位
-let handleStartX = 0;
-let handleStartY = 0;
-
-// 移动
-// 长按开始拖拽：修复移动时无法选中文本的问题
+// 长按开始移动：修复移动时无法选中文本的问题
 onLongPress(boxRef, e => {
   if (!props.draggable) return;
-
-  // 是否需要定位
   if (!props.fixed) return;
 
   // 记录初始数据
-  boxIsDragging.value = true;
-  handleStartX = e.clientX;
-  handleStartY = e.clientY;
   const rect = boxRef.value.getBoundingClientRect();
-  boxStartX = rect.left;
-  boxStartY = rect.top;
-  window.addEventListener('mousemove', onBoxDraging);
-  window.addEventListener('mouseup', onBoxDragEnd);
+  actionName.value = 'move';
+  mouseStartPos = { x: e.clientX, y: e.clientY };
+  boxStartPos = { x: rect.left, y: rect.top };
+
+  window.addEventListener('mousemove', onBoxMove);
+  window.addEventListener('mouseup', onBoxMoveStop);
 });
 
-// 拖拽中：鼠标不能超出窗口
-function onBoxDraging(e) {
-  if (!boxIsDragging.value) return;
+// 移动中
+function onBoxMove(e) {
+  if (!actionName.value) return;
 
-  // 水平方向
-  if (e.clientX >= 0 && e.clientX <= windowWidth.value) {
-    const deltaX = e.clientX - handleStartX;
-    boxCurrentX.value = boxStartX + deltaX;
-  }
-  // 垂直方向
-  if (e.clientY >= 0 && e.clientY <= windowWidth.value) {
-    const deltaY = e.clientY - handleStartY;
-    boxCurrentY.value = boxStartY + deltaY;
-  }
+  // 鼠标当前位置：不能超出窗口
+  const mouseCurrentPos = {
+    x: Math.max(0, Math.min(e.clientX, document.documentElement.clientWidth)),
+    y: Math.max(0, Math.min(e.clientY, document.documentElement.clientHeight))
+  };
+
+  // 差值
+  const deltaX = mouseCurrentPos.x - mouseStartPos.x;
+  const deltaY = mouseCurrentPos.y - mouseStartPos.y;
+
+  // 盒子当前位置
+  boxCurrentX.value = boxStartPos.x + deltaX;
+  boxCurrentY.value = boxStartPos.y + deltaY;
 }
 
-// 拖拽结束
-function onBoxDragEnd() {
-  boxIsDragging.value = false;
-  window.removeEventListener('mousemove', onBoxDraging);
-  window.removeEventListener('mouseup', onBoxDragEnd);
+// 移动结束
+function onBoxMoveStop() {
+  actionName.value = null;
+
+  window.removeEventListener('mousemove', onBoxMove);
+  window.removeEventListener('mouseup', onBoxMoveStop);
 }
 
-// 缩放
-// 拖拽开始
-function onHandleDragStart(e, _handleName) {
+// 缩放开始
+function onResizeStart(e, handleName) {
   if (!props.resizable) return;
 
   // 记录初始数据
-  handleActiveName.value = _handleName;
-  handleStartX = e.clientX;
-  handleStartY = e.clientY;
-  boxStartWidth = boxRef.value.offsetWidth;
-  boxStartHeight = boxRef.value.offsetHeight;
-  window.addEventListener('mousemove', onHandleDraging);
-  window.addEventListener('mouseup', onHandleDragEnd);
+  actionName.value = handleName;
+  mouseStartPos = { x: e.clientX, y: e.clientY };
+  boxStartSize = { width: boxRef.value.offsetWidth, height: boxRef.value.offsetHeight };
+
+  window.addEventListener('mousemove', onBoxResizing);
+  window.addEventListener('mouseup', onResizeStop);
 }
 
-// 拖拽中：鼠标不能超出窗口
-function onHandleDraging(e) {
-  if (!handleActiveName.value) return;
+// 缩放中
+function onBoxResizing(e) {
+  if (!actionName.value) return;
 
-  if (/left|right/.test(handleActiveName.value)) {
-    // 水平方向
-    const maxX = windowWidth.value - handleBoderWidth.value;
-    if (e.clientX < 0 || e.clientX > maxX) return;
-    const deltaX = e.clientX - handleStartX;
-    const newWidth = handleActiveName.value === 'left' ? boxStartWidth - deltaX : boxStartWidth + deltaX;
-    if (newWidth < props.minWidth) return;
-    boxCurrentX.value = handleActiveName.value === 'left' ? e.clientX : null;
-    boxCurrentWidth.value = newWidth;
-  } else {
-    // 垂直方向
-    const maxY = windowHeight.value - handleBoderWidth.value;
-    if (e.clientY < 0 || e.clientY > maxY) return;
-    const deltaY = e.clientY - handleStartY;
-    const newHeight = handleActiveName.value === 'top' ? boxStartHeight - deltaY : boxStartHeight + deltaY;
-    if (newHeight < props.minHeight) return;
-    boxCurrentY.value = handleActiveName.value === 'top' ? e.clientY : null;
-    boxCurrentHeight.value = newHeight;
+  // 需要扣除的边框宽度
+  const handleBoderWidth = /right|bottom/.test(actionName.value) ? 2 : 0;
+
+  // 水平方向
+  if (/left|right/.test(actionName.value)) {
+    const maxWidth = document.documentElement.clientWidth - handleBoderWidth;
+    const mouseCurrentX = Math.max(0, Math.min(e.clientX, maxWidth));
+    // 盒子当前宽度
+    const deltaX = mouseCurrentX - mouseStartPos.x;
+    const newWidth = actionName.value === 'left' ? boxStartSize.width - deltaX : boxStartSize.width + deltaX;
+    boxCurrentWidth.value = Math.max(newWidth, props.minWidth);
+    // 盒子当前位置
+    if (actionName.value === 'left' && newWidth >= props.minWidth) {
+      boxCurrentX.value = mouseCurrentX;
+    }
+    return;
+  }
+  // 垂直方向
+  const maxHeight = document.documentElement.clientHeight - handleBoderWidth;
+  const mouseCurrentY = Math.max(0, Math.min(e.clientY, maxHeight));
+  // 盒子当前宽度
+  const deltaY = mouseCurrentY - mouseStartPos.y;
+  const newHeight = actionName.value === 'top' ? boxStartSize.height - deltaY : boxStartSize.height + deltaY;
+  boxCurrentHeight.value = Math.max(newHeight, props.minHeight);
+  // 盒子当前位置
+  if (actionName.value === 'top' && newHeight >= props.minHeight) {
+    boxCurrentY.value = mouseCurrentY;
   }
 }
 
 // 拖拽结束
-function onHandleDragEnd() {
-  handleActiveName.value = null;
-  window.removeEventListener('mousemove', onHandleDraging);
-  window.removeEventListener('mouseup', onHandleDragEnd);
+function onResizeStop() {
+  actionName.value = null;
+  window.removeEventListener('mousemove', onBoxResizing);
+  window.removeEventListener('mouseup', onResizeStop);
 }
 </script>
 
@@ -200,7 +195,7 @@ function onHandleDragEnd() {
   &-box {
     z-index: 999;
   }
-  &-box.is-active {
+  &-box.is-draging {
     user-select: none;
     transition: none;
   }

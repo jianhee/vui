@@ -3,11 +3,12 @@
   <div
     ref="tableRef"
     class="mx-table"
-    :style="{ height: height }"
+    :class="{ 'is-selecting': isSelecting }"
+    :style="tableStyles"
   >
-    <!-- 固定表头 -->
+    <!-- 表头 -->
     <div
-      class="mx-table-fixedbar"
+      class="mx-table-header"
       :style="headerStyles"
     >
       <div
@@ -19,7 +20,10 @@
           v-if="selectable"
           class="mx-table-cell is-checkbox"
         >
-          <MxCheckbox v-model:checked="selectedAll" />
+          <MxCheckbox
+            :checked="selectedAll"
+            @change="toggleSelectedAll"
+          />
         </div>
         <!-- 拖拽调整宽度 -->
         <MxDragbox
@@ -37,16 +41,23 @@
       </div>
     </div>
 
-    <!-- 滚动区域 -->
+    <!-- 表身 -->
     <div
-      v-bind="scrollbarProps"
-      class="mx-table-scrollbar"
+      v-bind="bodyProps"
+      class="mx-table-body"
       @scroll="onBodyScroll"
+      @mousedown="onSelectStart"
     >
-      <!-- 虚拟列表区域 -->
+      <!-- 框选层 -->
       <div
-        class="mx-table-body"
-        v-bind="bodyProps"
+        v-show="isSelecting"
+        class="mx-table-select-box"
+        :style="selectboxStyles"
+      />
+      <!-- 虚拟列表 -->
+      <div
+        v-bind="viewProps"
+        class="mx-table-view"
       >
         <!-- 行 -->
         <div
@@ -55,7 +66,7 @@
           class="mx-table-row"
           :class="{
             'is-current': row.id === currentId,
-            'is-selected': row.isSelected
+            'is-selected': selectedMap.get(row.id)
           }"
           @contextmenu.prevent="onRowContextmenu(row, $event)"
         >
@@ -65,8 +76,8 @@
             class="mx-table-cell is-checkbox"
           >
             <MxCheckbox
-              v-model:checked="row.isSelected"
-              @change="onRowSelectionChange(row, $event)"
+              :checked="selectedMap.get(row.id)"
+              @change="toggleSelectedItem(row, $event)"
             />
           </div>
           <!-- 内容：slot优先 -->
@@ -98,7 +109,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, useSlots, onMounted } from 'vue';
+import { ref, reactive, computed, watch, useSlots, onMounted } from 'vue';
 import { useVirtualList, useStorage } from '@vueuse/core';
 
 const slots = useSlots();
@@ -106,10 +117,11 @@ const emits = defineEmits(['row-contextmenu', 'selection-change']);
 
 // 参数
 const props = defineProps({
-  // 高度
-  height: { type: String, default: null },
+  // 样式
+  tableHeight: { type: Number, default: null },
+  rowHeight: { type: Number, default: 35 },
   // 行数据
-  rows: { type: Array, default: null },
+  rows: { type: Array, default: () => [] },
   // 列数据： { key: 'key', title: 'title', width: 300 },
   columns: { type: Array, default: null },
   // 当前 ID
@@ -122,66 +134,24 @@ const props = defineProps({
   storageKey: { type: String, default: null }
 });
 
-// 保存选中状态
-const selectedMap = ref(new Map());
-
-// 格式化行
-const formattedRows = ref([]);
-const formatRows = data => {
-  return data?.map(item => {
-    return {
-      ...item,
-      isSelected: props.keepSelected ? selectedMap.value.get(item.id) : false
-    };
-  });
-};
-
-// 数据变化时重新处理数据
-watch(
-  () => props.rows,
-  newData => {
-    formattedRows.value = formatRows(newData);
-    if (!props.keepSelected) {
-      emits('selection-change', []);
-    }
-  },
-  { immediate: true }
-);
+// 高度
+const tableStyles = computed(() => ({
+  'height': `${props.tableHeight}px`,
+  '--mx-table-row-height': `${props.rowHeight}px`
+}));
 
 // 虚拟列表
 const {
   list: virtualList,
-  containerProps: scrollbarProps,
-  wrapperProps: bodyProps
-} = useVirtualList(formattedRows, {
-  itemHeight: 35,
-  overscan: 5
-});
-
-// 单选
-const onRowSelectionChange = (item, newState) => {
-  selectedMap.value.set(item.id, newState);
-  const items = formattedRows.value.filter(item => item.isSelected);
-  emits('selection-change', items);
-};
-
-// 全选
-const selectedAll = computed({
-  get: () => formattedRows.value.length > 0 && formattedRows.value.every(item => item.isSelected),
-  set: newState => {
-    formattedRows.value.forEach(item => {
-      item.isSelected = newState;
-      selectedMap.value.set(item.id, newState);
-    });
-    const items = newState ? [...formattedRows.value] : [];
-    emits('selection-change', items);
+  containerProps: bodyProps,
+  wrapperProps: viewProps
+} = useVirtualList(
+  computed(() => props.rows),
+  {
+    itemHeight: props.rowHeight,
+    overscan: 5
   }
-});
-
-// 右键点击节点
-function onRowContextmenu(item, event) {
-  emits('row-contextmenu', item, event);
-}
+);
 
 // 表格列宽度
 const tableRef = ref(null);
@@ -195,12 +165,152 @@ onMounted(() => {
   }, {});
 });
 
-// 表身滚动时同步表头状态
+// 表身滚动时带动表头
 const headerStyles = ref(null);
 function onBodyScroll(event) {
   headerStyles.value = {
     transform: `translateX(-${event.target.scrollLeft}px)`
   };
+}
+
+// 右键点击节点
+function onRowContextmenu(item, event) {
+  emits('row-contextmenu', item, event);
+}
+
+// 选中状态
+const selectedMap = reactive(new Map());
+watch(selectedMap, () => {
+  const items = props.rows.filter(item => selectedMap.get(item.id));
+  emits('selection-change', items);
+});
+
+// 是否全选
+const selectedAll = computed(() => {
+  if (!props.selectable) return;
+  return props.rows.length > 0 && props.rows.every(item => selectedMap.get(item.id));
+});
+
+// 切换全选
+function toggleSelectedAll(newState) {
+  if (!props.selectable) return;
+  props.rows.forEach(item => selectedMap.set(item.id, newState));
+}
+
+// 切换单选
+function toggleSelectedItem(item, newState) {
+  if (!props.selectable) return;
+  selectedMap.set(item.id, newState);
+}
+
+// ctrl+a 切换全选
+window.addEventListener('keydown', event => {
+  if (!props.selectable) return;
+  if (event.key === 'a' && event.ctrlKey) {
+    event.preventDefault();
+    const newState = !selectedAll.value;
+    toggleSelectedAll(newState);
+  }
+});
+
+// 更新数据时切换全选
+watch(
+  () => props.rows,
+  () => {
+    if (props.selectable && !props.keepSelected) {
+      toggleSelectedAll(false);
+    }
+  }
+);
+
+// 鼠标框选
+let viewRect = null; // x轴用到，宽度完全一致
+let tbodyRect = null; // y轴用到
+let tbodyEl = null; // 获取实时的scrolltop
+
+// 选择框相对于父元素的位置
+const isSelecting = ref(false);
+const selectboxStartPos = ref({ x: 0, y: 0 });
+const selectboxCurrentPos = ref({ x: 0, y: 0 });
+
+// 选择框相对定位的样式
+const selectboxStyles = computed(() => ({
+  left: `${Math.min(selectboxStartPos.value.x, selectboxCurrentPos.value.x)}px`,
+  top: `${Math.min(selectboxStartPos.value.y, selectboxCurrentPos.value.y)}px`,
+  width: `${Math.abs(selectboxStartPos.value.x - selectboxCurrentPos.value.x)}px`,
+  height: `${Math.abs(selectboxStartPos.value.y - selectboxCurrentPos.value.y)}px`
+}));
+
+// 开始框选
+function onSelectStart(e) {
+  if (!props.selectable) return;
+
+  // 父元素
+  viewRect = document.querySelector('.mx-table-view').getBoundingClientRect();
+  tbodyEl = document.querySelector('.mx-table-body');
+  tbodyRect = tbodyEl.getBoundingClientRect();
+
+  // 记录初始数据
+  isSelecting.value = true;
+  selectboxStartPos.value = {
+    x: e.clientX - viewRect.x,
+    y: e.clientY - tbodyRect.y + tbodyEl.scrollTop
+  };
+  selectboxCurrentPos.value = { ...selectboxStartPos.value };
+
+  window.addEventListener('mousemove', onSelectMove);
+  window.addEventListener('mouseup', onSelectionStop);
+}
+
+// 框选中
+function onSelectMove(e) {
+  if (!isSelecting.value) return;
+
+  // 选择框当前位置：不能超出父元素
+  selectboxCurrentPos.value = {
+    x: Math.max(0, Math.min(e.clientX - viewRect.x, viewRect.width)),
+    y: Math.max(0, Math.min(e.clientY - tbodyRect.y + tbodyEl.scrollTop, tbodyRect.height + tbodyEl.scrollTop))
+  };
+
+  checkSelectedRows();
+}
+
+// 结束框选
+function onSelectionStop() {
+  isSelecting.value = false;
+
+  window.removeEventListener('mousemove', onSelectMove);
+  window.removeEventListener('mouseup', onSelectionStop);
+}
+
+// 检测选中项
+function checkSelectedRows() {
+  // 选择框位置
+  const selectboxRect = {
+    x1: Math.min(selectboxStartPos.value.x, selectboxCurrentPos.value.x),
+    x2: Math.max(selectboxStartPos.value.x, selectboxCurrentPos.value.x),
+    y1: Math.min(selectboxStartPos.value.y, selectboxCurrentPos.value.y),
+    y2: Math.max(selectboxStartPos.value.y, selectboxCurrentPos.value.y)
+  };
+
+  // 检查所有项
+  props.rows.forEach((row, index) => {
+    // 当前行的位置
+    const rowRect = {
+      x1: 0,
+      x2: viewRect.width,
+      y1: props.rowHeight * index,
+      y2: props.rowHeight * (index + 1)
+    };
+
+    // X轴是否包含
+    const isInX = rowRect.x1 < selectboxRect.x2 && rowRect.x2 > selectboxRect.x1;
+    // Y轴是否包含
+    const isInY = rowRect.y1 < selectboxRect.y2 && rowRect.y2 > selectboxRect.y1;
+
+    // 更新选中状态
+    selectedMap.set(row.id, isInX && isInY);
+  });
 }
 </script>
 
@@ -211,10 +321,14 @@ function onBodyScroll(event) {
   flex: auto;
   flex-direction: column;
   overflow: hidden;
-  &-fixedbar {
+  &.is-selecting {
+    user-select: none;
+  }
+  &-header {
     flex: none;
   }
-  &-scrollbar {
+  &-body {
+    position: relative;
     flex: auto;
   }
 
@@ -227,7 +341,7 @@ function onBodyScroll(event) {
       background-color: var(--mx-table-row-active-bg-color);
     }
   }
-  &-fixedbar &-row {
+  &-header &-row {
     font-weight: bold;
   }
 
@@ -237,7 +351,7 @@ function onBodyScroll(event) {
     flex: none;
     gap: 4px;
     align-items: center;
-    height: 35px;
+    height: var(--mx-table-row-height);
     padding: 0 8px;
     white-space: nowrap;
   }
@@ -264,6 +378,15 @@ function onBodyScroll(event) {
     &:hover {
       background-color: var(--mx-brand-color-default);
     }
+  }
+
+  // 鼠标框选
+  &-select-box {
+    position: absolute;
+    z-index: 999;
+    pointer-events: none;
+    background-color: var(--mx-brand-color-a10);
+    border: 1px solid var(--mx-brand-color-default);
   }
 }
 </style>
