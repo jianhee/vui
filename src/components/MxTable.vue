@@ -66,8 +66,9 @@
         <div
           v-for="{ data: row } in virtualList"
           :key="row.id"
-          class="mx-table-row"
+          :title="rowTitle ? rowTitle(row) : null"
           :class="{
+            'mx-table-row': true,
             'is-current': row.id === currentId,
             'is-selected': selectedMap.get(row.id)
           }"
@@ -88,7 +89,7 @@
             v-for="col in columns"
             :key="col.key"
             class="mx-table-cell"
-            :class="col.className"
+            :class="col.cellClassName"
             :style="{ width: `${tableColsWidth[col.key]}px` }"
           >
             <!-- 优先显示slot -->
@@ -120,6 +121,8 @@ const emits = defineEmits(['row-contextmenu', 'selection-change']);
 
 // 参数
 const props = defineProps({
+  // 唯一标识：用于存储数据
+  name: { type: String, default: null },
   // 样式
   tableHeight: { type: Number, default: null },
   rowHeight: { type: Number, default: 35 },
@@ -133,8 +136,8 @@ const props = defineProps({
   selectable: { type: Boolean, default: false },
   // 数据刷新时是否保留选中状态
   keepSelected: { type: Boolean, default: false },
-  // 列宽本地存储的 key
-  storageKey: { type: String, default: null }
+  // 自定义方法
+  rowTitle: { type: Function, default: null }
 });
 
 // 高度
@@ -158,7 +161,7 @@ const {
 
 // 表格列宽度
 const tableRef = ref(null);
-const tableColsWidth = props.storageKey ? useStorage(`mx-${props.storageKey}-cols-width`, {}) : ref({});
+const tableColsWidth = props.name ? useStorage(`mx-table-cols-width-${props.name}`, {}) : ref({});
 onMounted(() => {
   if (Object.keys(tableColsWidth.value).length) return;
   const colWidth = (tableRef.value.clientWidth - 50) / props.columns.length;

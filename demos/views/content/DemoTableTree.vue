@@ -8,12 +8,12 @@
     </template>
     <DemoRow>
       <MxTable
+        name="demo"
         :table-height="300"
         :rows="tableRows"
         :columns="tableCols"
         selectable
         :keep-selected="keepSelected"
-        storage-key="demo-table"
         @row-contextmenu="writeLog('row-contextmenu', $event)"
         @selection-change="writeLog('selection-change', $event)"
       />
