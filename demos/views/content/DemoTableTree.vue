@@ -2,7 +2,7 @@
 <template>
   <DemoCard title="表格">
     <template #desc>
-      <DemoRow>1.虚拟列表、固定表头、拖拽调整列宽、多选</DemoRow>
+      <DemoRow>1.虚拟列表、拖拽排序、多选、鼠标框选、保持选中状态、固定表头、拖拽调整列宽</DemoRow>
       <DemoRow>2.表头显示值：<code>col.title</code></DemoRow>
       <DemoRow>3.每行显示值：优先显示 <code>slot</code> 其次显示 <code>row[col.key]</code></DemoRow>
     </template>
@@ -12,6 +12,7 @@
         :table-height="300"
         :rows="tableRows"
         :columns="tableCols"
+        sortable
         selectable
         :keep-selected="keepSelected"
         @row-contextmenu="writeLog('row-contextmenu', $event)"

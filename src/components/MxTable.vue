@@ -1,7 +1,8 @@
 <!-- 表格组件 -->
 <!-- 1.虚拟列表 -->
-<!-- 2.多选、鼠标框选、保持选中状态 -->
-<!-- 3.固定表头、拖拽调整列宽 -->
+<!-- 2.拖拽排序 -->
+<!-- 3.多选、鼠标框选、保持选中状态 -->
+<!-- 4.固定表头、拖拽调整列宽 -->
 <template>
   <div
     ref="tableRef"
@@ -46,10 +47,9 @@
 
     <!-- 表身 -->
     <div
-      v-bind="bodyProps"
+      v-bind="tbodyProps"
       class="mx-table-body"
       @scroll="onBodyScroll"
-      @mousedown="onSelectStart"
     >
       <!-- 框选层 -->
       <div
@@ -114,7 +114,7 @@
 
 <script setup>
 import { ref, reactive, computed, watch, useSlots, onMounted } from 'vue';
-import { useVirtualList, useStorage } from '@vueuse/core';
+import { useVirtualList, useStorage, onLongPress } from '@vueuse/core';
 
 const slots = useSlots();
 const emits = defineEmits(['row-contextmenu', 'selection-change']);
@@ -132,6 +132,8 @@ const props = defineProps({
   columns: { type: Array, default: null },
   // 当前 ID
   currentId: { type: Number, default: null },
+  // 是否可排序
+  sortable: { type: Boolean, default: false },
   // 是否可选择
   selectable: { type: Boolean, default: false },
   // 数据刷新时是否保留选中状态
@@ -149,7 +151,7 @@ const tableStyles = computed(() => ({
 // 虚拟列表
 const {
   list: virtualList,
-  containerProps: bodyProps,
+  containerProps: tbodyProps,
   wrapperProps: viewProps
 } = useVirtualList(
   computed(() => props.rows),
@@ -232,7 +234,6 @@ watch(
 // 鼠标框选
 let viewRect = null; // x轴用到，宽度完全一致
 let tbodyRect = null; // y轴用到
-let tbodyEl = null; // 获取实时的scrolltop
 
 // 选择框相对于父元素的位置
 const isSelecting = ref(false);
@@ -247,35 +248,35 @@ const selectboxStyles = computed(() => ({
   height: `${Math.abs(selectboxStartPos.value.y - selectboxCurrentPos.value.y)}px`
 }));
 
-// 开始框选
-function onSelectStart(e) {
+// 长按开始框选
+onLongPress(tbodyProps.ref, e => {
   if (!props.selectable) return;
 
   // 父元素
   viewRect = document.querySelector('.mx-table-view').getBoundingClientRect();
-  tbodyEl = document.querySelector('.mx-table-body');
-  tbodyRect = tbodyEl.getBoundingClientRect();
+  tbodyRect = tbodyProps.ref.value.getBoundingClientRect();
 
   // 记录初始数据
   isSelecting.value = true;
   selectboxStartPos.value = {
     x: e.clientX - viewRect.x,
-    y: e.clientY - tbodyRect.y + tbodyEl.scrollTop
+    y: e.clientY - tbodyRect.y + tbodyProps.ref.value.scrollTop
   };
   selectboxCurrentPos.value = { ...selectboxStartPos.value };
 
   window.addEventListener('mousemove', onSelectMove);
   window.addEventListener('mouseup', onSelectionStop);
-}
+});
 
 // 框选中
 function onSelectMove(e) {
   if (!isSelecting.value) return;
 
   // 选择框当前位置：不能超出父元素
+  const { scrollTop } = tbodyProps.ref.value;
   selectboxCurrentPos.value = {
     x: Math.max(0, Math.min(e.clientX - viewRect.x, viewRect.width)),
-    y: Math.max(0, Math.min(e.clientY - tbodyRect.y + tbodyEl.scrollTop, tbodyRect.height + tbodyEl.scrollTop))
+    y: Math.max(0, Math.min(e.clientY - tbodyRect.y + scrollTop, tbodyRect.height + scrollTop))
   };
 
   checkSelectedRows();
@@ -343,6 +344,7 @@ function checkSelectedRows() {
     display: flex;
     font-size: 14px;
     &:hover,
+    &.is-selected,
     &.is-current {
       background-color: var(--mx-table-row-active-bg-color);
     }
