@@ -1,4 +1,4 @@
-<!-- 拖拽 -->
+<!-- 拖拽移动+缩放 -->
 <template>
   <DemoCard title="缩放">
     <MxDragbox
