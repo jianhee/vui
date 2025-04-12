@@ -17,7 +17,7 @@
         class="mx-tree-node"
         :class="{ 'is-current': node.id === currentId }"
         :style="{ paddingLeft: `${treeIndent + nodeIndent * node.level}px` }"
-        @click.stop="onNodeClick(node)"
+        @click="onNodeClick(node)"
         @contextmenu.prevent="onNodeContextmenu(node, $event)"
       >
         <!-- 折叠图标 -->

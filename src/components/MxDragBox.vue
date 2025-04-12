@@ -19,7 +19,7 @@
       :key="handle"
       class="mx-drag-handle"
       :class="`is-${handle}`"
-      @mousedown.stop="onResizeStart($event, handle)"
+      @mousedown="onResizeStart($event, handle)"
     />
   </div>
 </template>
