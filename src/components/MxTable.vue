@@ -53,7 +53,7 @@
     >
       <!-- 框选层 -->
       <div
-        v-show="isSelecting"
+        v-if="isSelecting"
         class="mx-table-select-box"
         :style="selectboxStyles"
       />
@@ -142,7 +142,7 @@ const props = defineProps({
   rowTitle: { type: Function, default: null }
 });
 
-// 高度
+// 表格样式
 const tableStyles = computed(() => ({
   'height': `${props.tableHeight}px`,
   '--mx-table-row-height': `${props.rowHeight}px`
@@ -232,11 +232,12 @@ watch(
 );
 
 // 鼠标框选
+const isSelecting = ref(false);
+const viewRef = ref(null);
 let viewRect = null; // x轴用到，宽度完全一致
 let tbodyRect = null; // y轴用到
 
 // 选择框相对于父元素的位置
-const isSelecting = ref(false);
 const selectboxStartPos = ref({ x: 0, y: 0 });
 const selectboxCurrentPos = ref({ x: 0, y: 0 });
 
@@ -250,6 +251,7 @@ const selectboxStyles = computed(() => ({
 
 // 长按开始框选
 onLongPress(tbodyProps.ref, e => {
+  // 是否可以框选
   if (!props.selectable) return;
 
   // 父元素
