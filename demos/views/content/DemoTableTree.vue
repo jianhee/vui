@@ -8,13 +8,13 @@
     </template>
     <DemoRow>
       <MxTable
-        name="demo"
         :table-height="300"
-        :rows="tableRows"
-        :columns="tableCols"
-        sortable
+        :cols-data="tableCols"
+        cols-width-storage-key="demo-table-cols-width"
+        :rows-data="tableRows"
         selectable
         :keep-selected="keepSelected"
+        sortable
         @row-contextmenu="writeLog('row-contextmenu', $event)"
         @selection-change="writeLog('selection-change', $event)"
       />

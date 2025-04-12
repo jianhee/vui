@@ -7,7 +7,7 @@
   <div
     ref="tableRef"
     class="mx-table"
-    :class="{ 'is-selecting': isSelecting }"
+    :class="tableClasses"
     :style="tableStyles"
   >
     <!-- 表头 -->
@@ -18,6 +18,7 @@
       <div
         class="mx-table-row"
         :class="{ 'is-selected': selectedAll }"
+        :style="{ height: `${rowHeight}px` }"
       >
         <!-- 复选框 -->
         <div
@@ -31,9 +32,9 @@
         </div>
         <!-- 拖拽调整宽度 -->
         <MxDragbox
-          v-for="col in columns"
+          v-for="col in colsData"
           :key="col.key"
-          v-model:width="tableColsWidth[col.key]"
+          v-model:width="colsCurrentWidth[col.key]"
           :min-width="100"
           :fixed="false"
           resizable
@@ -50,6 +51,7 @@
       v-bind="tbodyProps"
       class="mx-table-body"
       @scroll="onBodyScroll"
+      @mousedown="onMousedown(null, $event)"
     >
       <!-- 框选层 -->
       <div
@@ -59,6 +61,7 @@
       />
       <!-- 虚拟列表 -->
       <div
+        ref="viewRef"
         v-bind="viewProps"
         class="mx-table-view"
       >
@@ -69,9 +72,12 @@
           :title="rowTitle ? rowTitle(row) : null"
           :class="{
             'mx-table-row': true,
-            'is-current': row.id === currentId,
-            'is-selected': selectedMap.get(row.id)
+            'is-current': row.id === currentRowId,
+            'is-selected ': selectedMap.get(row.id),
+            'is-sortable': selectedMap.get(row.id) && sortable
           }"
+          :style="{ height: `${rowHeight}px` }"
+          @mousedown.stop="onMousedown(row, $event)"
           @contextmenu.prevent="onRowContextmenu(row, $event)"
         >
           <!-- 复选框 -->
@@ -86,11 +92,11 @@
           </div>
           <!-- 内容：slot优先 -->
           <div
-            v-for="col in columns"
+            v-for="col in colsData"
             :key="col.key"
             class="mx-table-cell"
             :class="col.cellClassName"
-            :style="{ width: `${tableColsWidth[col.key]}px` }"
+            :style="{ width: `${colsCurrentWidth[col.key]}px` }"
           >
             <!-- 优先显示slot -->
             <slot
@@ -113,40 +119,47 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed, watch, useSlots, onMounted } from 'vue';
-import { useVirtualList, useStorage, onLongPress } from '@vueuse/core';
+import { ref, reactive, computed, watch, useSlots } from 'vue';
+import { useVirtualList, useStorage } from '@vueuse/core';
 
 const slots = useSlots();
 const emits = defineEmits(['row-contextmenu', 'selection-change']);
 
 // 参数
 const props = defineProps({
-  // 唯一标识：用于存储数据
-  name: { type: String, default: null },
-  // 样式
+  // 表格
   tableHeight: { type: Number, default: null },
+  // 列： { key: 'key', title: 'title', width: 300 },
+  colsData: { type: Array, default: null },
+  colsWidthStorageKey: { type: String, default: null },
+  // 行
+  rowsData: { type: Array, default: () => [] },
   rowHeight: { type: Number, default: 35 },
-  // 行数据
-  rows: { type: Array, default: () => [] },
-  // 列数据： { key: 'key', title: 'title', width: 300 },
-  columns: { type: Array, default: null },
-  // 当前 ID
-  currentId: { type: Number, default: null },
-  // 是否可排序
-  sortable: { type: Boolean, default: false },
+  rowTitle: { type: Function, default: null },
+  currentRowId: { type: Number, default: null },
   // 是否可选择
   selectable: { type: Boolean, default: false },
-  // 数据刷新时是否保留选中状态
+  // 是否在数据刷新时保留选中状态
   keepSelected: { type: Boolean, default: false },
-  // 自定义方法
-  rowTitle: { type: Function, default: null }
+  // 是否可排序
+  sortable: { type: Boolean, default: false }
 });
 
-// 表格样式
-const tableStyles = computed(() => ({
-  'height': `${props.tableHeight}px`,
-  '--mx-table-row-height': `${props.rowHeight}px`
+// 类名
+const tableClasses = computed(() => ({
+  'is-draging': isSelecting.value || isSorting.value
 }));
+
+// 样式
+const tableStyles = computed(() => ({
+  height: `${props.tableHeight}px`
+}));
+
+// 元素
+const tableRef = ref(null);
+const viewRef = ref(null);
+let viewRect = null;
+let tbodyRect = null;
 
 // 虚拟列表
 const {
@@ -154,24 +167,19 @@ const {
   containerProps: tbodyProps,
   wrapperProps: viewProps
 } = useVirtualList(
-  computed(() => props.rows),
+  computed(() => props.rowsData),
   {
     itemHeight: props.rowHeight,
     overscan: 5
   }
 );
 
-// 表格列宽度
-const tableRef = ref(null);
-const tableColsWidth = props.name ? useStorage(`mx-table-cols-width-${props.name}`, {}) : ref({});
-onMounted(() => {
-  if (Object.keys(tableColsWidth.value).length) return;
-  const colWidth = (tableRef.value.clientWidth - 50) / props.columns.length;
-  tableColsWidth.value = props.columns.reduce((map, col) => {
-    map[col.key] = col.width || colWidth;
-    return map;
-  }, {});
-});
+// 列宽
+const colsDefaultWidth = props.colsData.reduce((map, col) => {
+  map[col.key] = col.width || 100;
+  return map;
+}, {});
+const colsCurrentWidth = props.colsWidthStorageKey ? useStorage(props.colsWidthStorageKey, colsDefaultWidth) : ref(colsDefaultWidth);
 
 // 表身滚动时带动表头
 const headerStyles = ref(null);
@@ -189,20 +197,20 @@ function onRowContextmenu(item, event) {
 // 选中状态
 const selectedMap = reactive(new Map());
 watch(selectedMap, () => {
-  const items = props.rows.filter(item => selectedMap.get(item.id));
+  const items = props.rowsData.filter(item => selectedMap.get(item.id));
   emits('selection-change', items);
 });
 
 // 是否全选
 const selectedAll = computed(() => {
   if (!props.selectable) return;
-  return props.rows.length > 0 && props.rows.every(item => selectedMap.get(item.id));
+  return props.rowsData.length > 0 && props.rowsData.every(item => selectedMap.get(item.id));
 });
 
 // 切换全选
 function toggleSelectedAll(newState) {
   if (!props.selectable) return;
-  props.rows.forEach(item => selectedMap.set(item.id, newState));
+  props.rowsData.forEach(item => selectedMap.set(item.id, newState));
 }
 
 // 切换单选
@@ -223,7 +231,7 @@ window.addEventListener('keydown', event => {
 
 // 更新数据时切换全选
 watch(
-  () => props.rows,
+  () => props.rowsData,
   () => {
     if (props.selectable && !props.keepSelected) {
       toggleSelectedAll(false);
@@ -233,9 +241,6 @@ watch(
 
 // 鼠标框选
 const isSelecting = ref(false);
-const viewRef = ref(null);
-let viewRect = null; // x轴用到，宽度完全一致
-let tbodyRect = null; // y轴用到
 
 // 选择框相对于父元素的位置
 const selectboxStartPos = ref({ x: 0, y: 0 });
@@ -249,13 +254,17 @@ const selectboxStyles = computed(() => ({
   height: `${Math.abs(selectboxStartPos.value.y - selectboxCurrentPos.value.y)}px`
 }));
 
-// 长按开始框选
-onLongPress(tbodyProps.ref, e => {
+// 按下鼠标时区分状态
+function onMousedown(row, e) {
   // 是否可以框选
   if (!props.selectable) return;
 
-  // 父元素
-  viewRect = document.querySelector('.mx-table-view').getBoundingClientRect();
+  // 如果已选中的行：开始拖拽排序
+  const isSelected = row && selectedMap.get(row.id);
+  if (isSelected) return;
+
+  // 开始
+  viewRect = viewRef.value.getBoundingClientRect();
   tbodyRect = tbodyProps.ref.value.getBoundingClientRect();
 
   // 记录初始数据
@@ -268,7 +277,7 @@ onLongPress(tbodyProps.ref, e => {
 
   window.addEventListener('mousemove', onSelectMove);
   window.addEventListener('mouseup', onSelectionStop);
-});
+}
 
 // 框选中
 function onSelectMove(e) {
@@ -303,7 +312,7 @@ function checkSelectedRows() {
   };
 
   // 检查所有项
-  props.rows.forEach((row, index) => {
+  props.rowsData.forEach((row, index) => {
     // 当前行的位置
     const rowRect = {
       x1: 0,
@@ -321,6 +330,16 @@ function checkSelectedRows() {
     selectedMap.set(row.id, isInX && isInY);
   });
 }
+
+// 拖拽排序
+const isSorting = ref(false);
+function onSortStart(row, e) {
+  // 是否可以排序
+  if (!props.sortable) return;
+
+  // 开始
+  isSorting.value = true;
+}
 </script>
 
 <style lang="scss">
@@ -330,9 +349,11 @@ function checkSelectedRows() {
   flex: auto;
   flex-direction: column;
   overflow: hidden;
-  &.is-selecting {
+  &.is-draging {
     user-select: none;
   }
+
+  // 布局
   &-header {
     flex: none;
   }
@@ -345,10 +366,14 @@ function checkSelectedRows() {
   &-row {
     display: flex;
     font-size: 14px;
+    transition: transform 0.15s ease;
     &:hover,
-    &.is-selected,
-    &.is-current {
+    &.is-current,
+    &.is-selected {
       background-color: var(--mx-table-row-active-bg-color);
+    }
+    &.is-sortable {
+      cursor: move;
     }
   }
   &-header &-row {
@@ -361,12 +386,11 @@ function checkSelectedRows() {
     flex: none;
     gap: 4px;
     align-items: center;
-    height: var(--mx-table-row-height);
     padding: 0 8px;
     white-space: nowrap;
   }
 
-  // 复选框
+  // 多选
   .is-checkbox {
     visibility: hidden;
     width: 30px;
@@ -378,7 +402,7 @@ function checkSelectedRows() {
     }
   }
 
-  // 拖拽手柄
+  // 表头拖拽手柄
   .mx-drag-handle {
     top: 5px !important;
     bottom: 5px !important;
@@ -397,6 +421,11 @@ function checkSelectedRows() {
     pointer-events: none;
     background-color: var(--mx-brand-color-a10);
     border: 1px solid var(--mx-brand-color-default);
+  }
+
+  // 拖拽排序
+  &.is-draging .is-sortable {
+    display: none;
   }
 }
 </style>
