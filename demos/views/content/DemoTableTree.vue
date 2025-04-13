@@ -2,7 +2,7 @@
 <template>
   <DemoCard title="表格">
     <template #desc>
-      <DemoRow>1.虚拟列表、拖拽排序、多选、鼠标框选、保持选中状态、固定表头、拖拽调整列宽</DemoRow>
+      <DemoRow>1.固定表头、拖拽调整列宽、虚拟列表、多选、鼠标框选、保持选中状态、拖拽排序</DemoRow>
       <DemoRow>2.表头显示值：<code>col.title</code></DemoRow>
       <DemoRow>3.每行显示值：优先显示 <code>slot</code> 其次显示 <code>row[col.key]</code></DemoRow>
     </template>
@@ -12,14 +12,17 @@
         :cols-data="tableCols"
         cols-width-storage-key="demo-table-cols-width"
         :rows-data="tableRows"
-        selectable
+        :selectable="selectable"
         :keep-selected="keepSelected"
-        sortable
+        :sortable="sortable"
+        :sort-merge="sortMerge ? row => true : null"
         @row-contextmenu="writeLog('row-contextmenu', $event)"
         @selection-change="writeLog('selection-change', $event)"
+        @sort="writeLog('sort', $event)"
+        @merge="writeLog('merge', $event)"
       />
     </DemoRow>
-    <DemoRow flex>
+    <DemoRow>
       <MxBtn
         type="primary"
         size="small"
@@ -27,8 +30,15 @@
       >
         刷新
       </MxBtn>
-      <MxCheckbox v-model:checked="keepSelected">刷新时保留选中状态</MxCheckbox>
     </DemoRow>
+    <DemoRow>
+      <MxCheckbox v-model:checked="selectable">多选+鼠标框选</MxCheckbox>
+      <MxCheckbox v-model:checked="keepSelected"> 刷新时保留选中状态 </MxCheckbox>
+    </DemoRow>
+    <div>
+      <MxCheckbox v-model:checked="sortable">排序</MxCheckbox>
+      <MxCheckbox v-model:checked="sortMerge">支持合并</MxCheckbox>
+    </div>
   </DemoCard>
   <DemoCard title="树结构">
     <template #desc>
@@ -66,8 +76,11 @@ import { writeLog } from '@/utils';
 // 刷新标识
 let refreshTag = 0;
 
-// 保留选中状态
+// 多选
+const selectable = ref(false);
 const keepSelected = ref(false);
+const sortable = ref(false);
+const sortMerge = ref(false);
 
 // 表格行数据
 const tableRows = ref(null);

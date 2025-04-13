@@ -1,8 +1,8 @@
 <!-- 表格组件 -->
-<!-- 1.虚拟列表 -->
-<!-- 2.拖拽排序 -->
+<!-- 1.固定表头、拖拽调整列宽 -->
+<!-- 2.虚拟列表 -->
 <!-- 3.多选、鼠标框选、保持选中状态 -->
-<!-- 4.固定表头、拖拽调整列宽 -->
+<!-- 4.拖拽排序 -->
 <template>
   <div
     ref="tableRef"
@@ -17,7 +17,7 @@
     >
       <div
         class="mx-table-row"
-        :class="{ 'is-selected': selectedAll }"
+        :class="{ 'is-selected': isAllSelected }"
         :style="{ height: `${rowHeight}px` }"
       >
         <!-- 复选框 -->
@@ -26,8 +26,8 @@
           class="mx-table-cell is-checkbox"
         >
           <MxCheckbox
-            :checked="selectedAll"
-            @change="toggleSelectedAll"
+            :checked="isAllSelected"
+            @change="toggleAllSelected"
           />
         </div>
         <!-- 拖拽调整宽度 -->
@@ -51,7 +51,6 @@
       v-bind="tbodyProps"
       class="mx-table-body"
       @scroll="onBodyScroll"
-      @mousedown="onMousedown(null, $event)"
     >
       <!-- 框选层 -->
       <div
@@ -69,16 +68,13 @@
         <div
           v-for="{ data: row } in virtualList"
           :key="row.id"
-          :title="rowTitle ? rowTitle(row) : null"
-          :class="{
-            'mx-table-row': true,
-            'is-current': row.id === currentRowId,
-            'is-selected ': selectedMap.get(row.id),
-            'is-sortable': selectedMap.get(row.id) && sortable
-          }"
-          :style="{ height: `${rowHeight}px` }"
-          @mousedown.stop="onMousedown(row, $event)"
+          class="mx-table-row"
+          v-bind="rowProps(row)"
           @contextmenu.prevent="onRowContextmenu(row, $event)"
+          @dragstart="onDragStart(row)"
+          @dragenter="onDragEnter(row, $event)"
+          @dragover="onDragOver(row, $event)"
+          @dragend="onDragEnd"
         >
           <!-- 复选框 -->
           <div
@@ -86,8 +82,8 @@
             class="mx-table-cell is-checkbox"
           >
             <MxCheckbox
-              :checked="selectedMap.get(row.id)"
-              @change="toggleSelectedItem(row, $event)"
+              :checked="isRowSelected(row)"
+              @change="toggleRowSelected(row, $event)"
             />
           </div>
           <!-- 内容：slot优先 -->
@@ -120,10 +116,10 @@
 
 <script setup>
 import { ref, reactive, computed, watch, useSlots } from 'vue';
-import { useVirtualList, useStorage } from '@vueuse/core';
+import { useVirtualList, useStorage, onLongPress } from '@vueuse/core';
 
 const slots = useSlots();
-const emits = defineEmits(['row-contextmenu', 'selection-change']);
+const emits = defineEmits(['row-contextmenu', 'selection-change', 'sort', 'merge']);
 
 // 参数
 const props = defineProps({
@@ -139,27 +135,40 @@ const props = defineProps({
   currentRowId: { type: Number, default: null },
   // 是否可选择
   selectable: { type: Boolean, default: false },
-  // 是否在数据刷新时保留选中状态
   keepSelected: { type: Boolean, default: false },
   // 是否可排序
-  sortable: { type: Boolean, default: false }
+  sortable: { type: Boolean, default: false },
+  sortMerge: { type: Function, default: null }
 });
 
-// 类名
+// 表格类名
 const tableClasses = computed(() => ({
-  'is-draging': isSelecting.value || isSorting.value
+  'is-draging': isSelecting.value || !!dragStartData.value
 }));
 
-// 样式
+// 表格样式
 const tableStyles = computed(() => ({
   height: `${props.tableHeight}px`
 }));
 
-// 元素
-const tableRef = ref(null);
-const viewRef = ref(null);
-let viewRect = null;
-let tbodyRect = null;
+// 行属性
+function rowProps(row) {
+  const isDragable = isRowDraggable(row);
+  return {
+    draggable: isDragable ? true : null,
+    title: props.rowTitle ? props.rowTitle(row) : null,
+    class: [
+      {
+        'is-current': row.id === props.currentRowId,
+        'is-selected ': isRowSelected(row),
+        'is-draggable': isDragable,
+        'is-draging': dragStartData.value?.items.some(item => item.id === row.id)
+      },
+      dragTargetData.value?.item.id === row.id ? `is-${dragNewData.value?.state}` : null
+    ],
+    style: { height: `${props.rowHeight}px` }
+  };
+}
 
 // 虚拟列表
 const {
@@ -174,11 +183,20 @@ const {
   }
 );
 
-// 列宽
+// 元素
+const tableRef = ref(null);
+const tbodyRef = tbodyProps.ref;
+const viewRef = ref(null);
+let tbodyRect = null;
+let viewRect = null;
+
+// 列宽默认值
 const colsDefaultWidth = props.colsData.reduce((map, col) => {
   map[col.key] = col.width || 100;
   return map;
 }, {});
+
+// 列宽当前值
 const colsCurrentWidth = props.colsWidthStorageKey ? useStorage(props.colsWidthStorageKey, colsDefaultWidth) : ref(colsDefaultWidth);
 
 // 表身滚动时带动表头
@@ -202,19 +220,25 @@ watch(selectedMap, () => {
 });
 
 // 是否全选
-const selectedAll = computed(() => {
-  if (!props.selectable) return;
+const isAllSelected = computed(() => {
+  if (!props.selectable) return false;
   return props.rowsData.length > 0 && props.rowsData.every(item => selectedMap.get(item.id));
 });
 
 // 切换全选
-function toggleSelectedAll(newState) {
+function toggleAllSelected(newState) {
   if (!props.selectable) return;
   props.rowsData.forEach(item => selectedMap.set(item.id, newState));
 }
 
-// 切换单选
-function toggleSelectedItem(item, newState) {
+// 是否选中行
+function isRowSelected(item) {
+  if (!props.selectable) return false;
+  return selectedMap.get(item.id);
+}
+
+// 切换选中行
+function toggleRowSelected(item, newState) {
   if (!props.selectable) return;
   selectedMap.set(item.id, newState);
 }
@@ -224,8 +248,8 @@ window.addEventListener('keydown', event => {
   if (!props.selectable) return;
   if (event.key === 'a' && event.ctrlKey) {
     event.preventDefault();
-    const newState = !selectedAll.value;
-    toggleSelectedAll(newState);
+    const newState = !isAllSelected.value;
+    toggleAllSelected(newState);
   }
 });
 
@@ -234,7 +258,7 @@ watch(
   () => props.rowsData,
   () => {
     if (props.selectable && !props.keepSelected) {
-      toggleSelectedAll(false);
+      toggleAllSelected(false);
     }
   }
 );
@@ -254,37 +278,43 @@ const selectboxStyles = computed(() => ({
   height: `${Math.abs(selectboxStartPos.value.y - selectboxCurrentPos.value.y)}px`
 }));
 
-// 按下鼠标时区分状态
-function onMousedown(row, e) {
+// 长按开始框选
+onLongPress(tbodyRef, e => {
   // 是否可以框选
   if (!props.selectable) return;
 
-  // 如果已选中的行：开始拖拽排序
-  const isSelected = row && selectedMap.get(row.id);
-  if (isSelected) return;
+  // 是否已选中
+  const row = e.target.closest('.mx-table-row');
+  const isSelected = row && row.classList.contains('is-selected');
 
-  // 开始
+  // 点击已选中的行：可排序时不再选择而是转到排序
+  if (isSelected && props.sortable) return;
+
+  // 清空选择
+  selectedMap.clear();
+
+  // 重新开始选择
   viewRect = viewRef.value.getBoundingClientRect();
-  tbodyRect = tbodyProps.ref.value.getBoundingClientRect();
+  tbodyRect = tbodyRef.value.getBoundingClientRect();
 
   // 记录初始数据
   isSelecting.value = true;
   selectboxStartPos.value = {
     x: e.clientX - viewRect.x,
-    y: e.clientY - tbodyRect.y + tbodyProps.ref.value.scrollTop
+    y: e.clientY - tbodyRect.y + tbodyRef.value.scrollTop
   };
   selectboxCurrentPos.value = { ...selectboxStartPos.value };
 
   window.addEventListener('mousemove', onSelectMove);
   window.addEventListener('mouseup', onSelectionStop);
-}
+});
 
 // 框选中
 function onSelectMove(e) {
   if (!isSelecting.value) return;
 
   // 选择框当前位置：不能超出父元素
-  const { scrollTop } = tbodyProps.ref.value;
+  const { scrollTop } = tbodyRef.value;
   selectboxCurrentPos.value = {
     x: Math.max(0, Math.min(e.clientX - viewRect.x, viewRect.width)),
     y: Math.max(0, Math.min(e.clientY - tbodyRect.y + scrollTop, tbodyRect.height + scrollTop))
@@ -332,13 +362,94 @@ function checkSelectedRows() {
 }
 
 // 拖拽排序
-const isSorting = ref(false);
-function onSortStart(row, e) {
-  // 是否可以排序
-  if (!props.sortable) return;
+const dragStartData = ref(null);
+const dragTargetData = ref(null);
+const dragNewData = ref(null);
 
-  // 开始
-  isSorting.value = true;
+// 行是否可以拖拽
+function isRowDraggable(row) {
+  // 是否可以排序
+  if (!props.sortable) return false;
+
+  // 是否可以选择
+  if (!props.selectable) return true;
+
+  // 是否正在选择
+  if (isSelecting.value) return false;
+
+  // 是否是已选中的项
+  return isRowSelected(row);
+}
+
+// dragstart  开始拖拽
+function onDragStart(statrItem) {
+  dragStartData.value = {
+    item: statrItem,
+    index: props.rowsData.indexOf(statrItem),
+    items: props.selectable ? props.rowsData.filter(item => selectedMap.get(item.id)) : [statrItem]
+  };
+}
+
+// dragenter  进入目标元素
+function onDragEnter(targetItem, event) {
+  dragTargetData.value = {
+    item: targetItem,
+    index: props.rowsData.indexOf(targetItem),
+    rect: event.currentTarget.getBoundingClientRect(),
+    // 是否可以合并
+    // 1.有判断方法
+    // 2.目标元素不是被拖拽的项
+    canMerge: props.sortMerge && props.sortMerge(targetItem) && !dragStartData.value.items.some(item => item.id === targetItem.id)
+  };
+
+  // 立即更新状态
+  onDragOver(targetItem, event);
+}
+
+// drag       拖拽中
+// dragover   在目标元素中移动
+function onDragOver(targetItem, event) {
+  if (!dragTargetData.value) return;
+
+  // 区分操作
+  const { rect, index, canMerge } = dragTargetData.value;
+  const deltaY = event.clientY - rect.top;
+  let newState = null;
+  if (canMerge) {
+    // 可以合并：前10在上方，后10在下方，其余在中间
+    newState = deltaY < 10 ? 'before' : deltaY > rect.height - 10 ? 'after' : 'merge';
+  } else {
+    // 不能合并：前半在上方，后半在下方
+    newState = deltaY < rect.height / 2 ? 'before' : 'after';
+  }
+
+  // 更新数据
+  dragNewData.value = {
+    // 当前状态：before, after, merge
+    state: newState,
+    // 新的索引
+    index: newState === 'before' ? index : index + 1
+  };
+}
+
+// dragleave    离开目标元素
+// dragend      停止拖拽
+function onDragEnd() {
+  const { item: dragItem, items: dragItems } = dragStartData.value;
+  const { item: targetItem } = dragTargetData.value;
+  const { state, index: newIndex } = dragNewData.value;
+  if (state === 'merge') {
+    // 合并
+    emits('merge', { dragItem, dragItems, targetItem });
+  } else {
+    // 排序
+    emits('sort', { dragItem, dragItems, targetItem, newIndex });
+  }
+
+  // 清空状态
+  dragStartData.value = null;
+  dragTargetData.value = null;
+  dragNewData.value = null;
 }
 </script>
 
@@ -363,21 +474,46 @@ function onSortStart(row, e) {
   }
 
   // 行
+  &-header &-row {
+    font-weight: bold;
+  }
   &-row {
+    position: relative;
     display: flex;
     font-size: 14px;
-    transition: transform 0.15s ease;
     &:hover,
     &.is-current,
     &.is-selected {
       background-color: var(--mx-table-row-active-bg-color);
     }
-    &.is-sortable {
+    &.is-draggable {
       cursor: move;
     }
-  }
-  &-header &-row {
-    font-weight: bold;
+    &.is-draging {
+      opacity: 0.5;
+    }
+    &.is-merge {
+      background-color: var(--mx-table-row-active-bg-color);
+      opacity: 0.8;
+    }
+    &.is-before,
+    &.is-after {
+      &::after {
+        position: absolute;
+        right: 0;
+        left: 0;
+        z-index: 99;
+        height: 2px;
+        content: '';
+        background-color: var(--mx-brand-color-default);
+      }
+    }
+    &.is-before::after {
+      top: -1px;
+    }
+    &.is-after::after {
+      bottom: -1px;
+    }
   }
 
   // 单元格
@@ -421,11 +557,6 @@ function onSortStart(row, e) {
     pointer-events: none;
     background-color: var(--mx-brand-color-a10);
     border: 1px solid var(--mx-brand-color-default);
-  }
-
-  // 拖拽排序
-  &.is-draging .is-sortable {
-    display: none;
   }
 }
 </style>
