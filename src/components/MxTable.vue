@@ -385,7 +385,7 @@ function isRowDraggable(row) {
 function onDragStart(statrItem) {
   dragStartData.value = {
     item: statrItem,
-    index: props.rowsData.indexOf(statrItem),
+    index: props.rowsData.findIndex(item => item.id === statrItem.id),
     items: props.selectable ? props.rowsData.filter(item => selectedMap.get(item.id)) : [statrItem]
   };
 }
@@ -394,7 +394,7 @@ function onDragStart(statrItem) {
 function onDragEnter(targetItem, event) {
   dragTargetData.value = {
     item: targetItem,
-    index: props.rowsData.indexOf(targetItem),
+    index: props.rowsData.findIndex(item => item.id === targetItem.id),
     rect: event.currentTarget.getBoundingClientRect(),
     // 是否可以合并
     // 1.有判断方法
