@@ -14,6 +14,7 @@
         :rows-data="tableRows"
         :selectable="selectable"
         :keep-selected="keepSelected"
+        :select-area-width="20"
         :sortable="sortable"
         :sort-merge="sortMerge ? row => true : null"
         @row-contextmenu="writeLog('row-contextmenu', $event)"
@@ -77,9 +78,9 @@ import { writeLog } from '@/utils';
 let refreshTag = 0;
 
 // 多选
-const selectable = ref(false);
+const selectable = ref(true);
 const keepSelected = ref(false);
-const sortable = ref(false);
+const sortable = ref(true);
 const sortMerge = ref(false);
 
 // 表格行数据

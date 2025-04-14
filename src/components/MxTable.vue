@@ -18,7 +18,7 @@
       <div
         class="mx-table-row"
         :class="{ 'is-selected': isAllSelected }"
-        :style="{ height: `${rowHeight}px` }"
+        :style="rowStyles"
       >
         <!-- 复选框 -->
         <div
@@ -57,67 +57,42 @@
       <!-- 框选层 -->
       <div
         v-if="isSelecting"
-        class="mx-table-select-box"
         :style="selectboxStyles"
+        class="mx-table-select-box"
       />
       <!-- 虚拟列表 -->
       <div
         ref="viewRef"
-        v-bind="viewProps"
         class="mx-table-view"
+        v-bind="viewProps"
       >
         <!-- 行 -->
-        <div
+        <MxTableRow
           v-for="{ data: row } in virtualList"
           :key="row.id"
-          class="mx-table-row"
-          v-bind="rowProps(row)"
+          :row-data="row"
+          :style="rowStyles"
+          :class="{ 'is-current': row.id === currentRowId }"
           @contextmenu.prevent="onRowContextmenu(row, $event)"
-          @dragstart="onDragStart(row)"
-          @dragenter="onDragEnter(row, $event)"
-          @dragover="onDragOver(row, $event)"
-          @dragend="onDragEnd"
         >
-          <!-- 复选框 -->
-          <div
-            v-if="selectable"
-            class="mx-table-cell is-checkbox"
+          <!-- 自定义内容：name 和 col.key 一致 -->
+          <template
+            v-for="(_, name) in slots"
+            #[name]
           >
-            <MxCheckbox
-              :checked="isRowSelected(row)"
-              @change="toggleRowSelected(row, $event)"
-            />
-          </div>
-          <!-- 内容：slot优先 -->
-          <div
-            v-for="col in colsData"
-            :key="col.key"
-            class="mx-table-cell"
-            :class="col.cellClassName"
-            :style="{ width: `${colsWidth[col.key]}px` }"
-          >
-            <!-- 优先显示slot -->
             <slot
-              v-if="slots[col.key]"
-              :name="col.key"
+              :name="name"
               :row="row"
-              :col="col"
             />
-            <MxRow
-              v-else
-              ellipsis
-            >
-              {{ row[col.key] }}
-            </MxRow>
-          </div>
-        </div>
+          </template>
+        </MxTableRow>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, reactive, computed, watch, useSlots, onMounted } from 'vue';
+import { ref, reactive, computed, watch, useSlots, onMounted, provide } from 'vue';
 import { useVirtualList, useStorage } from '@vueuse/core';
 
 const slots = useSlots();
@@ -183,24 +158,10 @@ const headerStyles = ref({
   transform: null
 });
 
-// 行属性
-function rowProps(row) {
-  const isDragable = isRowDraggable(row);
-  return {
-    draggable: isDragable ? true : null,
-    title: props.rowTitle ? props.rowTitle(row) : null,
-    class: [
-      {
-        'is-current': row.id === props.currentRowId,
-        'is-selected ': isRowSelected(row),
-        'is-draggable': isDragable,
-        'is-draging': dragStartData.value?.items.some(item => item.id === row.id)
-      },
-      dragTargetData.value?.item.id === row.id ? `is-${dragNewData.value?.state}` : null
-    ],
-    style: { height: `${props.rowHeight}px` }
-  };
-}
+// 行样式
+const rowStyles = ref({
+  height: `${props.rowHeight}px`
+});
 
 // 虚拟列表
 const {
@@ -258,18 +219,6 @@ const isAllSelected = computed(() => {
 function toggleAllSelected(newState) {
   if (!props.selectable) return;
   props.rowsData.forEach(item => selectedMap.set(item.id, newState));
-}
-
-// 是否选中行
-function isRowSelected(item) {
-  if (!props.selectable) return false;
-  return selectedMap.get(item.id);
-}
-
-// 切换选中行
-function toggleRowSelected(item, newState) {
-  if (!props.selectable) return;
-  selectedMap.set(item.id, newState);
 }
 
 // ctrl+a 切换全选
@@ -387,92 +336,17 @@ function checkSelectedRows() {
 const dragStartData = ref(null);
 const dragTargetData = ref(null);
 const dragNewData = ref(null);
+const dragEnd = (type, data) => emits(type, data);
 
-// 行是否可以拖拽
-function isRowDraggable(row) {
-  // 是否可以排序
-  if (!props.sortable) return false;
-
-  // 是否可以选择
-  if (!props.selectable) return true;
-
-  // 是否正在选择
-  if (isSelecting.value) return false;
-
-  // 是否是已选中的项
-  return isRowSelected(row);
-}
-
-// dragstart  开始拖拽
-function onDragStart(statrItem) {
-  dragStartData.value = {
-    item: statrItem,
-    index: props.rowsData.findIndex(item => item.id === statrItem.id),
-    items: props.selectable ? props.rowsData.filter(item => selectedMap.get(item.id)) : [statrItem]
-  };
-}
-
-// dragenter  进入目标元素
-function onDragEnter(targetItem, event) {
-  dragTargetData.value = {
-    item: targetItem,
-    index: props.rowsData.findIndex(item => item.id === targetItem.id),
-    rect: event.currentTarget.getBoundingClientRect(),
-    // 是否可以合并
-    // 1.有判断方法
-    // 2.目标元素不是被拖拽的项
-    canMerge: props.sortMerge && props.sortMerge(targetItem) && !dragStartData.value.items.some(item => item.id === targetItem.id)
-  };
-
-  // 立即更新状态
-  onDragOver(targetItem, event);
-}
-
-// drag       拖拽中
-// dragover   在目标元素中移动
-function onDragOver(targetItem, event) {
-  if (!dragTargetData.value) return;
-
-  // 区分操作
-  const { rect, index, canMerge } = dragTargetData.value;
-  const deltaY = event.clientY - rect.top;
-  let newState = null;
-  if (canMerge) {
-    // 可以合并：前10在上方，后10在下方，其余在中间
-    newState = deltaY < 10 ? 'before' : deltaY > rect.height - 10 ? 'after' : 'merge';
-  } else {
-    // 不能合并：前半在上方，后半在下方
-    newState = deltaY < rect.height / 2 ? 'before' : 'after';
-  }
-
-  // 更新数据
-  dragNewData.value = {
-    // 当前状态：before, after, merge
-    state: newState,
-    // 新的索引
-    index: newState === 'before' ? index : index + 1
-  };
-}
-
-// dragleave    离开目标元素
-// dragend      停止拖拽
-function onDragEnd() {
-  const { item: dragItem, items: dragItems } = dragStartData.value;
-  const { item: targetItem } = dragTargetData.value;
-  const { state, index: newIndex } = dragNewData.value;
-  if (state === 'merge') {
-    // 合并
-    emits('merge', { dragItem, dragItems, targetItem });
-  } else {
-    // 排序
-    emits('sort', { dragItem, dragItems, targetItem, newIndex, state });
-  }
-
-  // 清空状态
-  dragStartData.value = null;
-  dragTargetData.value = null;
-  dragNewData.value = null;
-}
+// 子组件共享
+provide('tableProps', props);
+provide('colsWidth', colsWidth);
+provide('selectedMap', selectedMap);
+provide('isSelecting', isSelecting);
+provide('dragStartData', dragStartData);
+provide('dragTargetData', dragTargetData);
+provide('dragNewData', dragNewData);
+provide('dragEnd', dragEnd);
 </script>
 
 <style lang="scss">
