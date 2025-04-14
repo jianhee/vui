@@ -34,7 +34,7 @@
         <MxDragbox
           v-for="col in colsData"
           :key="col.key"
-          v-model:width="colsCurrentWidth[col.key]"
+          v-model:width="colsWidth[col.key]"
           :min-width="100"
           :fixed="false"
           resizable
@@ -92,7 +92,7 @@
             :key="col.key"
             class="mx-table-cell"
             :class="col.cellClassName"
-            :style="{ width: `${colsCurrentWidth[col.key]}px` }"
+            :style="{ width: `${colsWidth[col.key]}px` }"
           >
             <!-- 优先显示slot -->
             <slot
@@ -115,7 +115,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed, watch, useSlots } from 'vue';
+import { ref, reactive, computed, watch, useSlots, onMounted } from 'vue';
 import { useVirtualList, useStorage, onLongPress } from '@vueuse/core';
 
 const slots = useSlots();
@@ -190,14 +190,20 @@ const viewRef = ref(null);
 let tbodyRect = null;
 let viewRect = null;
 
-// 列宽默认值
-const colsDefaultWidth = props.colsData.reduce((map, col) => {
-  map[col.key] = col.width || 100;
-  return map;
-}, {});
+// 列宽
+const colsWidth = props.colsWidthStorageKey ? useStorage(props.colsWidthStorageKey, {}) : ref({});
 
-// 列宽当前值
-const colsCurrentWidth = props.colsWidthStorageKey ? useStorage(props.colsWidthStorageKey, colsDefaultWidth) : ref(colsDefaultWidth);
+// 动态初始化列宽
+onMounted(() => {
+  const tableWidth = tableRef.value?.offsetWidth;
+  const totalWidth = props.selectable ? tableWidth - 30 : tableWidth;
+  const itemWidth = totalWidth / props.colsData.length;
+  props.colsData.forEach(col => {
+    if (!colsWidth.value[col.key]) {
+      colsWidth.value[col.key] = col.width || itemWidth;
+    }
+  });
+});
 
 // 表身滚动时带动表头
 const headerStyles = ref(null);
