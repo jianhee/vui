@@ -125,19 +125,29 @@ const emits = defineEmits(['row-contextmenu', 'selection-change', 'sort', 'merge
 const props = defineProps({
   // 表格
   tableHeight: { type: Number, default: null },
-  // 列： { key: 'key', title: 'title', width: 300 },
+  // 列
+  // 列数据：{ key: 'key', title: 'title', width: 300 },
   colsData: { type: Array, default: null },
+  // 列宽本地存储的key
   colsWidthStorageKey: { type: String, default: null },
   // 行
+  // 行数据：{ id: '1', ... },
   rowsData: { type: Array, default: () => [] },
+  // 行高
   rowHeight: { type: Number, default: 35 },
+  // 行title
   rowTitle: { type: Function, default: null },
+  // 当前行
   currentRowId: { type: Number, default: null },
+  // 多选
   // 是否可选择
   selectable: { type: Boolean, default: false },
+  // 刷新后是否保留选中状态
   keepSelected: { type: Boolean, default: false },
+  // 排序
   // 是否可排序
   sortable: { type: Boolean, default: false },
+  // 可合并时的规则
   sortMerge: { type: Function, default: null }
 });
 
