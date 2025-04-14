@@ -118,7 +118,7 @@
 
 <script setup>
 import { ref, reactive, computed, watch, useSlots, onMounted } from 'vue';
-import { useVirtualList, useStorage, onLongPress } from '@vueuse/core';
+import { useVirtualList, useStorage } from '@vueuse/core';
 
 const slots = useSlots();
 const emits = defineEmits(['row-contextmenu', 'selection-change', 'sort', 'merge']);
