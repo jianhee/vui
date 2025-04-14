@@ -49,8 +49,10 @@
     <!-- 表身 -->
     <div
       v-bind="tbodyProps"
+      :style="selectStyles"
       class="mx-table-body"
       @scroll="onBodyScroll"
+      @mousedown.self="onSelectStart"
     >
       <!-- 框选层 -->
       <div
@@ -144,6 +146,8 @@ const props = defineProps({
   selectable: { type: Boolean, default: false },
   // 刷新后是否保留选中状态
   keepSelected: { type: Boolean, default: false },
+  // 鼠标框选两侧宽度
+  selectAreaWidth: { type: Number, default: 0 },
   // 排序
   // 是否可排序
   sortable: { type: Boolean, default: false },
@@ -151,15 +155,33 @@ const props = defineProps({
   sortMerge: { type: Function, default: null }
 });
 
+// 元素
+const tableRef = ref(null);
+const viewRef = ref(null);
+let tbodyRect = null;
+let viewRect = null;
+
 // 表格类名
 const tableClasses = computed(() => ({
   'is-draging': isSelecting.value || !!dragStartData.value
 }));
 
 // 表格样式
-const tableStyles = computed(() => ({
-  height: `${props.tableHeight}px`
-}));
+const tableStyles = ref({
+  'height': `${props.tableHeight}px`,
+  'margin-left': `-${props.selectAreaWidth}px`
+});
+
+// 全选间距
+const selectStyles = ref({
+  'padding-left': `${props.selectAreaWidth}px`
+});
+
+// 表头样式
+const headerStyles = ref({
+  ...selectStyles.value,
+  transform: null
+});
 
 // 行属性
 function rowProps(row) {
@@ -189,16 +211,9 @@ const {
   computed(() => props.rowsData),
   {
     itemHeight: props.rowHeight,
-    overscan: 5
+    overscan: 20
   }
 );
-
-// 元素
-const tableRef = ref(null);
-const tbodyRef = tbodyProps.ref;
-const viewRef = ref(null);
-let tbodyRect = null;
-let viewRect = null;
 
 // 列宽
 const colsWidth = props.colsWidthStorageKey ? useStorage(props.colsWidthStorageKey, {}) : ref({});
@@ -206,7 +221,8 @@ const colsWidth = props.colsWidthStorageKey ? useStorage(props.colsWidthStorageK
 // 动态初始化列宽
 onMounted(() => {
   const tableWidth = tableRef.value?.offsetWidth;
-  const totalWidth = props.selectable ? tableWidth - 30 : tableWidth;
+  const checkboxWidth = 30;
+  const totalWidth = props.selectable ? tableWidth - checkboxWidth - props.selectAreaWidth * 2 : tableWidth;
   const itemWidth = totalWidth / props.colsData.length;
   props.colsData.forEach(col => {
     if (!colsWidth.value[col.key]) {
@@ -216,11 +232,8 @@ onMounted(() => {
 });
 
 // 表身滚动时带动表头
-const headerStyles = ref(null);
 function onBodyScroll(event) {
-  headerStyles.value = {
-    transform: `translateX(-${event.target.scrollLeft}px)`
-  };
+  headerStyles.value.transform = `translateX(-${event.target.scrollLeft}px)`;
 }
 
 // 右键点击节点
@@ -294,45 +307,38 @@ const selectboxStyles = computed(() => ({
   height: `${Math.abs(selectboxStartPos.value.y - selectboxCurrentPos.value.y)}px`
 }));
 
-// 长按开始框选
-onLongPress(tbodyRef, e => {
+// 开始框选
+function onSelectStart(e) {
   // 是否可以框选
   if (!props.selectable) return;
-
-  // 是否已选中
-  const row = e.target.closest('.mx-table-row');
-  const isSelected = row && row.classList.contains('is-selected');
-
-  // 点击已选中的行：可排序时不再选择而是转到排序
-  if (isSelected && props.sortable) return;
 
   // 清空选择
   selectedMap.clear();
 
   // 重新开始选择
   viewRect = viewRef.value.getBoundingClientRect();
-  tbodyRect = tbodyRef.value.getBoundingClientRect();
+  tbodyRect = tbodyProps.ref.value.getBoundingClientRect();
 
   // 记录初始数据
   isSelecting.value = true;
   selectboxStartPos.value = {
-    x: e.clientX - viewRect.x,
-    y: e.clientY - tbodyRect.y + tbodyRef.value.scrollTop
+    x: e.clientX - tbodyRect.x,
+    y: e.clientY - tbodyRect.y + tbodyProps.ref.value.scrollTop
   };
   selectboxCurrentPos.value = { ...selectboxStartPos.value };
 
   window.addEventListener('mousemove', onSelectMove);
   window.addEventListener('mouseup', onSelectionStop);
-});
+}
 
 // 框选中
 function onSelectMove(e) {
   if (!isSelecting.value) return;
 
   // 选择框当前位置：不能超出父元素
-  const { scrollTop } = tbodyRef.value;
+  const { scrollTop } = tbodyProps.ref.value;
   selectboxCurrentPos.value = {
-    x: Math.max(0, Math.min(e.clientX - viewRect.x, viewRect.width)),
+    x: Math.max(0, Math.min(e.clientX - tbodyRect.x, tbodyRect.width)),
     y: Math.max(0, Math.min(e.clientY - tbodyRect.y + scrollTop, tbodyRect.height + scrollTop))
   };
 
@@ -361,8 +367,8 @@ function checkSelectedRows() {
   props.rowsData.forEach((row, index) => {
     // 当前行的位置
     const rowRect = {
-      x1: 0,
-      x2: viewRect.width,
+      x1: props.selectAreaWidth,
+      x2: props.selectAreaWidth + viewRect.width,
       y1: props.rowHeight * index,
       y2: props.rowHeight * (index + 1)
     };
@@ -459,7 +465,7 @@ function onDragEnd() {
     emits('merge', { dragItem, dragItems, targetItem });
   } else {
     // 排序
-    emits('sort', { dragItem, dragItems, targetItem, newIndex });
+    emits('sort', { dragItem, dragItems, targetItem, newIndex, state });
   }
 
   // 清空状态
@@ -503,7 +509,7 @@ function onDragEnd() {
       background-color: var(--mx-table-row-active-bg-color);
     }
     &.is-draggable {
-      cursor: move;
+      cursor: pointer;
     }
     &.is-draging {
       opacity: 0.5;
