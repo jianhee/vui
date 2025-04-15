@@ -11,9 +11,9 @@
     <!-- 显示下拉 -->
     <select
       v-else
-      v-model="valRef"
+      v-model="modelValue"
       class="mx-select-inner"
-      @change="onValueChange"
+      @change="onValueChange(item)"
     >
       <option
         v-for="item in items"
@@ -31,18 +31,20 @@ const emits = defineEmits(['change']);
 
 // 参数
 defineProps({
-  // 数据 { value: '', label: ''}
+  // option 的项
+  // value  值
+  // label  显示内容
   items: { type: Array, default: null },
   // 作为文本显示
   text: { type: [String, Number], default: null }
 });
 
 // 当前值
-const valRef = defineModel('value', { type: [String, Number], default: null });
+const modelValue = defineModel('value', { type: [String, Number], default: null });
 
 // 修改值
-function onValueChange() {
-  emits('change', valRef.value);
+function onValueChange(item) {
+  emits('change', item);
 }
 </script>
 

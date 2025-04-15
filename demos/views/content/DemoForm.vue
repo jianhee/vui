@@ -83,9 +83,11 @@
   </DemoCard>
   <DemoCard title="选择器">
     <template #desc>
-      <DemoRow>绑定值：<code>v-model:value</code> 等同于选中项的值</DemoRow>
-      <DemoRow>每项的值：<code>item.value</code> 等同于 option 的 <code>value</code></DemoRow>
-      <DemoRow>每项的显示值：<code>item.label</code></DemoRow>
+      <DemoRow>
+        1.<code>v-model:value</code> 选中项的 <code>value</code>，当前为 <code>{{ selectValue }}</code>
+      </DemoRow>
+      <DemoRow>2.<code>item.value</code> 选项的值，<code>item.label</code> 选项的文本</DemoRow>
+      <DemoRow>3.<code>@change</code> 切换选项时触发，返回此项的所有数据</DemoRow>
     </template>
     <MxForm label-width="4em">
       <MxFormFiled label="基础用法">
@@ -94,9 +96,9 @@
           :items="selectOptions"
           @change="writeLog('change', $event)"
         />
-        <DemoRow>
-          当前值：<code>{{ selectValue }}</code>
-        </DemoRow>
+      </MxFormFiled>
+      <MxFormFiled label="作为文本使用">
+        <MxSelect :text="selectValue" />
       </MxFormFiled>
     </MxForm>
   </DemoCard>
@@ -173,16 +175,6 @@ const checkboxValue3 = ref(false);
 const checkboxValue4 = ref(false);
 const checkboxValue5 = ref(false);
 const checkboxValue6 = ref(true);
-
-// 单选框
-const radioValue1 = ref(2);
-const radioValue2 = ref(3);
-const radioItems1 = [
-  { value: 1, label: '选项1' },
-  { value: 2, label: '选项2' },
-  { value: 3, label: '选项3' }
-];
-const radioItems2 = [{ value: 1 }, { value: 2 }, { value: 3 }];
 
 // 选择器
 const selectValue = ref(2);
