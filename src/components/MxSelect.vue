@@ -62,7 +62,7 @@ function onValueChange() {
     padding-left: 8px;
     appearance: none;
     outline: 0;
-    background-image: url('../assets/images/mx-select-arrow.svg');
+    background-image: url('@mxui/assets/images/mx-select-arrow.svg');
     background-repeat: no-repeat;
     background-position: right 8px center;
     background-size: 10px;
