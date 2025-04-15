@@ -1,4 +1,6 @@
+import { toast } from '@mxui/plugins/toast';
 // log
-export function writeLog(...arg) {
-  console.log(...arg);
+export function writeLog(name, ...args) {
+  console.log(name, ...args);
+  toast.success(`do ${name}`);
 }

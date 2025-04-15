@@ -1,77 +1,67 @@
 <!-- 菜单 -->
 <template>
   <div class="mx-menu">
-    <template
+    <MxMenuItem
       v-for="(item, index) in items"
       :key="index"
-    >
-      <!-- 菜单项 -->
-      <div
-        :title="item.title"
-        class="mx-menu-item"
-        @click="onClick(item)"
-      >
-        <!-- 优先显示slot -->
-        <slot
-          v-if="slots.default"
-          :item="item"
-        />
-        <template v-else>
-          <MxIconInside
-            v-if="item.icon"
-            :icon="item.icon"
-          />
-          <span>{{ item.title }}</span>
-        </template>
-      </div>
-      <!-- 分隔符 -->
-      <hr
-        v-if="item.divider"
-        class="mx-menu-divider"
-      />
-    </template>
+      :item="item"
+    />
   </div>
 </template>
 
 <script setup>
-import { useSlots } from 'vue';
-import MxIconInside from './MxIconInside.vue';
+import { provide } from 'vue';
 
-const emits = defineEmits(['select']);
-const slots = useSlots();
+const emits = defineEmits(['select', 'selectChange']);
 
 // 参数
-defineProps({
-  // 菜单项：{ title: 'title', divider: true, icon: 'MxIcon 组件的 name/component/props' }
-  items: { type: Array, default: null }
+const props = defineProps({
+  // 菜单项
+  items: { type: Array, default: null },
+  // 是否显示选中图标：在选中项的最后加一个 √ 图标，此时每项必需 key
+  showSelectedIcon: { type: Boolean, default: false }
 });
 
-// 点击菜单项
-function onClick(item) {
+// 选中项的 key
+const selectedKeyRef = defineModel('selectedKey', { type: [String, Number], default: null });
+
+// 选中一项
+const onSelect = item => {
   emits('select', item);
-}
+  if (item.key !== selectedKeyRef.value) {
+    selectedKeyRef.value = item.key;
+    emits('selectChange', item);
+  }
+};
+
+// 共享数据
+provide('selectedKey', selectedKeyRef);
+provide('showSelectedIcon', props.showSelectedIcon);
+provide('onSelect', onSelect);
 </script>
 
 <style lang="scss">
 @use '../assets/styles/vars';
 .mx-menu {
+  max-width: 240px;
   &-item {
     display: flex;
     gap: 5px;
     align-items: center;
-    max-width: 240px;
     padding: 8px 20px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 12px;
-    line-height: 20px;
     color: var(--mx-menu-text-color);
-    white-space: nowrap;
-    text-decoration: none;
     cursor: pointer;
+    transition: background-color 0.3s ease;
     &:hover {
       background-color: var(--mx-menu-hover-bg-color);
     }
+  }
+  &-label {
+    flex: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 12px;
+    white-space: nowrap;
   }
   &-divider {
     height: 1px;

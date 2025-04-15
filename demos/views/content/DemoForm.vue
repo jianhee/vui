@@ -1,24 +1,5 @@
 <!-- 表单元素 -->
 <template>
-  <DemoCard
-    v-for="item in layoutItems"
-    :key="item.title"
-    :title="item.title"
-  >
-    <MxForm
-      label-width="4em"
-      :derection="item.derection"
-    >
-      <MxFormFiled
-        v-for="n in 3"
-        :key="n"
-        label="纯文本"
-        is-text
-      >
-        这是一段文本文本这是一段文本文本这是一段文本文本这是一段文本文本这是一段文本文本这是一段文本文本这是一段文本文本
-      </MxFormFiled>
-    </MxForm>
-  </DemoCard>
   <DemoCard title="输入框">
     <template #desc>绑定值：<code>v-model:value</code> 等同于输入框的值 <code>value</code></template>
     <MxForm label-width="4em">
@@ -179,6 +160,25 @@
         <DemoRow>
           当前值：<code>{{ switchVal3 }}</code>
         </DemoRow>
+      </MxFormFiled>
+    </MxForm>
+  </DemoCard>
+  <DemoCard
+    v-for="item in layoutItems"
+    :key="item.title"
+    :title="item.title"
+  >
+    <MxForm
+      label-width="4em"
+      :derection="item.derection"
+    >
+      <MxFormFiled
+        v-for="n in 3"
+        :key="n"
+        label="纯文本"
+        is-text
+      >
+        这是一段文本文本这是一段文本文本这是一段文本文本这是一段文本文本这是一段文本文本这是一段文本文本这是一段文本文本
       </MxFormFiled>
     </MxForm>
   </DemoCard>
