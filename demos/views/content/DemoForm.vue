@@ -81,37 +81,6 @@
       </MxFormFiled>
     </MxForm>
   </DemoCard>
-  <DemoCard title="单选框">
-    <template #desc>
-      <DemoRow>绑定值：<code>v-model:value</code> 等同于选中项的值</DemoRow>
-      <DemoRow>每项的值：<code>item.value</code> 等同于单选框的值 <code>value</code></DemoRow>
-      <DemoRow>每项的显示值：优先显示 <code>slot</code> 其次显示 <code>item.label</code></DemoRow>
-    </template>
-    <MxForm label-width="4em">
-      <MxFormFiled label="横向">
-        <MxRadioGroup
-          v-model:value="radioValue1"
-          :items="radioItems1"
-          @change="writeLog('change', $event)"
-        />
-        <DemoRow>
-          当前值：<code>{{ radioValue1 }}</code>
-        </DemoRow>
-      </MxFormFiled>
-      <MxFormFiled label="纵向">
-        <MxRadioGroup
-          v-model:value="radioValue2"
-          :items="radioItems2"
-          block
-        >
-          <template #default="{ item }">选项{{ item.value }} 的 value {{ item.value }}</template>
-        </MxRadioGroup>
-        <DemoRow>
-          当前值：<code>{{ radioValue2 }}</code>
-        </DemoRow>
-      </MxFormFiled>
-    </MxForm>
-  </DemoCard>
   <DemoCard title="选择器">
     <template #desc>
       <DemoRow>绑定值：<code>v-model:value</code> 等同于选中项的值</DemoRow>

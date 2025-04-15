@@ -1,20 +1,16 @@
 <!-- 菜单 -->
 <template>
   <DemoCard title="基础用法">
-    <template #desc>
-      <DemoRow>1.<code>item.label</code> 指定显示文本</DemoRow>
-      <DemoRow>2.<code>item.icon</code> 指定前置图标</DemoRow>
-    </template>
+    <template #desc><code>item.label</code> 菜单项的文本，<code>item.icon</code> 菜单项的前置图标</template>
     <MxMenu :items="menuItems1" />
   </DemoCard>
-  <DemoCard title="数据交互">
+  <DemoCard title="选中项">
     <template #desc>
       <DemoRow>
         1.<code>v-model:selected-key</code> 选中项的 <code>key</code>，当前为 <code>{{ seletedKey }}</code>
       </DemoRow>
       <DemoRow>2.<code>show-selected-icon</code> 是否显示选中图标</DemoRow>
-      <DemoRow>3.<code>@select</code> 选中一项时触发，返回选中项的值</DemoRow>
-      <DemoRow>4.<code>@select-change</code> 选中项改变时触发，返回选中项的值</DemoRow>
+      <DemoRow>3.<code>@select</code> 点击菜单项时触发，<code>@select-change</code> 切换菜单项时触发，返回此项的所有数据</DemoRow>
     </template>
     <MxMenu
       v-model:selected-key="seletedKey"

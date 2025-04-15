@@ -1,59 +1,42 @@
-<!-- 单选框 -->
+<!-- 单选框-组 -->
 <template>
-  <div class="mx-radio-group">
-    <label
-      v-for="item in items"
-      :key="item.value"
-      class="mx-radio-item"
-      :class="{
-        'is-checked': item.value === valRef,
-        'is-block': block
-      }"
+  <div :class="`mx-radio-group is-${layout}`">
+    <MxRadioItem
+      v-for="(item, index) in items"
+      :key="index"
+      :item="item"
     >
-      <input
-        :value="item.value"
-        :checked="item.value === valRef"
-        type="radio"
-        class="mx-radio-input"
-        @change="onValueChange(item)"
-      />
-      <MxIcon
-        :component="IconRadio"
-        class="mx-radio-icon"
-      />
-      <!-- 优先显示slot -->
-      <slot
-        v-if="slots.default"
-        :item="item"
-      />
-      <span v-else-if="item.label">{{ item.label }}</span>
-    </label>
+      <slot :item="item" />
+    </MxRadioItem>
   </div>
 </template>
 
 <script setup>
-import { useSlots } from 'vue';
-import IconRadio from '../assets/icons/radio.vue';
+import { provide } from 'vue';
 
-const slots = useSlots();
 const emits = defineEmits(['change']);
 
 // 参数
 defineProps({
-  // 数据 { value: '', label: ''}
+  // 单选框项
   items: { type: Array, default: null },
-  // 是否块级
-  block: { type: Boolean, default: false }
+  // 布局：block, inline
+  layout: { type: String, default: 'inline' }
 });
 
 // 当前值
-const valRef = defineModel('value', { type: [String, Number], default: null });
+const modelValue = defineModel('value', { type: [String, Number], default: null });
 
 // 修改值
 function onValueChange(item) {
-  valRef.value = item.value;
+  if (item.value === modelValue.value) return;
+  modelValue.value = item.value;
   emits('change', item);
 }
+
+// 共享数据
+provide('modelValue', modelValue);
+provide('onValueChange', onValueChange);
 </script>
 
 <style lang="scss">
@@ -61,7 +44,6 @@ function onValueChange(item) {
 .mx-radio {
   &-item {
     position: relative;
-    display: inline-flex;
     gap: 8px;
     align-items: center;
     height: 32px;
@@ -70,13 +52,16 @@ function onValueChange(item) {
     white-space: nowrap;
     cursor: pointer;
     user-select: none;
-    &.is-block {
-      display: flex;
-    }
     &.is-checked,
     &.is-checked .mx-radio-icon {
       color: var(--mx-checkbox-active-color);
     }
+  }
+  &-group.is-inline &-item {
+    display: inline-flex;
+  }
+  &-group.is-block &-item {
+    display: flex;
   }
   &-input {
     position: absolute;

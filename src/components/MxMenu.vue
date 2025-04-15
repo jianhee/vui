@@ -23,19 +23,19 @@ const props = defineProps({
 });
 
 // 选中项的 key
-const selectedKeyRef = defineModel('selectedKey', { type: [String, Number], default: null });
+const modelSelectedKey = defineModel('selectedKey', { type: [String, Number], default: null });
 
 // 选中一项
 const onSelect = item => {
   emits('select', item);
-  if (item.key !== selectedKeyRef.value) {
-    selectedKeyRef.value = item.key;
+  if (item.key !== modelSelectedKey.value) {
+    modelSelectedKey.value = item.key;
     emits('selectChange', item);
   }
 };
 
 // 共享数据
-provide('selectedKey', selectedKeyRef);
+provide('modelSelectedKey', modelSelectedKey);
 provide('showSelectedIcon', props.showSelectedIcon);
 provide('onSelect', onSelect);
 </script>

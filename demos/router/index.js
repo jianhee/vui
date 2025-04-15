@@ -5,6 +5,7 @@ export const navItems = [
   { name: 'icon', title: '图标', file: 'DemoIcon' },
   { name: 'btn', title: '按钮', file: 'DemoBtn' },
   { name: 'form', title: '表单', file: 'DemoForm' },
+  { name: 'radio', title: '单选框', file: 'DemoRadio' },
   { name: 'menu', title: '菜单', file: 'DemoMenu' },
   { name: 'dropdown', title: '下拉框', file: 'DemoDropdown' },
   { name: 'dialog', title: '弹窗', file: 'DemoDialog' },

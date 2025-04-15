@@ -12,7 +12,7 @@
     />
     <span class="mx-menu-label">{{ item.label }}</span>
     <MxIconInside
-      v-if="showSelectedIcon && item.key === selectedKey"
+      v-if="showSelectedIcon && item.key === modelSelectedKey"
       :icon="IconSelected"
     />
   </div>
@@ -39,7 +39,7 @@ defineProps({
 });
 
 // 共享数据
-const selectedKey = inject('selectedKey');
+const modelSelectedKey = inject('modelSelectedKey');
 const showSelectedIcon = inject('showSelectedIcon');
 const onSelect = inject('onSelect');
 </script>
