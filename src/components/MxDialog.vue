@@ -4,7 +4,7 @@
     <Transition name="mx-dialog">
       <!-- mask -->
       <div
-        v-show="isVisible"
+        v-show="modelVisible"
         class="mx-dialog"
       >
         <!-- 主体 -->
@@ -13,9 +13,10 @@
           class="mx-dialog-content"
           :style="contentStyles"
         >
-          <!-- 顶栏 -->
           <div class="mx-dialog-header">
+            <!-- 标题 -->
             <span class="mx-dialog-title">{{ title }}</span>
+            <!-- 关闭按钮 -->
             <MxIcon
               v-if="showClose"
               class="mx-dialog-close"
@@ -43,7 +44,7 @@ import MxIcon from './MxIcon.vue';
 import IconClose from '../assets/icons/close.vue';
 
 defineOptions({ inheritAttrs: false });
-const emits = defineEmits(['close']);
+const emits = defineEmits(['open', 'close']);
 
 // 参数
 const props = defineProps({
@@ -56,7 +57,7 @@ const props = defineProps({
 });
 
 // 是否显示
-const isVisible = defineModel('visible', { type: Boolean, default: false });
+const modelVisible = defineModel('visible', { type: Boolean, default: false });
 
 // 获取样式
 const contentStyles = computed(() => {
@@ -67,12 +68,14 @@ const contentStyles = computed(() => {
 
 // 关闭弹窗
 function closeDialog() {
-  isVisible.value = false;
+  modelVisible.value = false;
 }
 
 // 关闭时触发关闭事件：外部关闭也能触发
-watch(isVisible, val => {
-  if (!val) {
+watch(modelVisible, val => {
+  if (val) {
+    emits('open');
+  } else {
     emits('close');
   }
 });

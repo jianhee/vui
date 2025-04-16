@@ -64,6 +64,7 @@ function onCheckedChange() {
   height: 32px;
   margin-right: 10px;
   font-size: 14px;
+  line-height: 32px;
   white-space: nowrap;
   cursor: pointer;
   user-select: none;

@@ -1,14 +1,10 @@
 <!-- 拖拽 -->
-<!-- 有两个功能 -->
 <!-- 1.移动位置 -->
 <!-- 2.缩放大小 -->
 <template>
   <div
     ref="boxRef"
-    :class="{
-      'mx-drag-box': true,
-      'is-draging': boxIsDraging || !!handleDragingName
-    }"
+    :class="['mx-drag-box', { 'is-draging': boxIsDraging || !!handleDragingName }]"
     :style="boxStyles"
   >
     <!-- 内容 -->
@@ -18,7 +14,7 @@
       v-for="handle in handleItems"
       :key="handle"
       class="mx-drag-handle"
-      :class="`is-${handle}`"
+      :class="`mx-drag-handle-${handle}`"
       @mousedown="onResizeStart($event, handle)"
     />
   </div>
@@ -30,19 +26,19 @@ import { onLongPress } from '@vueuse/core';
 
 // 参数
 const props = defineProps({
-  // 最小尺寸
-  minWidth: { type: Number, default: 10 },
-  minHeight: { type: Number, default: 10 },
-  // 是否固定定位
-  fixed: { type: Boolean, default: true },
-  // 是否计算样式：比如状态1可拖拽，绑定了定位和宽高，状态2普通div，不需要使用绑定信息，可以设置 false 清除绑定样式
-  useStyles: { type: Boolean, default: true },
   // 是否可移动：自动转成定位元素
   draggable: { type: Boolean, default: false },
   // 是否可缩放
   resizable: { type: Boolean, default: false },
   // 缩放时可拖拽的轴：定位元素支持四个边，非定位元素只支持右边和下边
-  handles: { type: String, default: 'left, right, top, bottom' }
+  handles: { type: String, default: 'left, right, top, bottom' },
+  // 是否固定定位
+  fixed: { type: Boolean, default: true },
+  // 是否计算样式：比如状态1可拖拽，绑定了定位和宽高，状态2普通div，不需要使用绑定信息，可以设置 false 清除绑定样式
+  useStyles: { type: Boolean, default: true },
+  // 最小尺寸
+  minWidth: { type: Number, default: 10 },
+  minHeight: { type: Number, default: 10 }
 });
 
 // 盒子
@@ -204,30 +200,30 @@ function onResizeStop() {
     &:hover {
       background-color: var(--mx-drag-handle-bg-color);
     }
-    &.is-left,
-    &.is-right {
+    &-left,
+    &-right {
       top: 0;
       bottom: 0;
       width: 2px;
       cursor: ew-resize;
     }
-    &.is-left {
+    &-left {
       left: 0;
     }
-    &.is-right {
+    &-right {
       right: 0;
     }
-    &.is-top,
-    &.is-bottom {
+    &-top,
+    &-bottom {
       right: 0;
       left: 0;
       height: 2px;
       cursor: ns-resize;
     }
-    &.is-top {
+    &-top {
       top: 0;
     }
-    &.is-bottom {
+    &-bottom {
       bottom: 0;
     }
   }

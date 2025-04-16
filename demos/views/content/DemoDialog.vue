@@ -1,15 +1,28 @@
 <!-- 弹窗 -->
 <template>
   <DemoCard title="基本用法">
+    <template #desc>
+      <DemoRow>
+        1.<code>v-model:visible</code> 弹窗显示状态，当前为 <code>{{ isVisible1 }}</code>
+      </DemoRow>
+      <DemoRow>2.<code>props.title</code> 弹窗标题，<code>slot.default</code> 弹窗内容</DemoRow>
+      <DemoRow>3.<code>@open</code> 和 <code>@close</code> 切换显示状态时触发</DemoRow>
+    </template>
     <MxBtn @click="isVisible1 = true">打开弹窗</MxBtn>
   </DemoCard>
-  <DemoCard title="自定义底栏+不显示关闭按钮">
+  <DemoCard title="更多用法">
+    <template #desc>
+      <DemoRow>1.<code>props.width</code> 弹窗宽度</DemoRow>
+      <DemoRow>2.<code>props.showClose</code> 是否显示关闭按钮</DemoRow>
+      <DemoRow>3.<code>slot.footer</code> 自定义底栏</DemoRow>
+    </template>
     <MxBtn @click="isVisible2 = true">打开弹窗</MxBtn>
   </DemoCard>
 
   <MxDialog
     v-model:visible="isVisible1"
     title="标题"
+    @open="writeLog('open')"
     @close="writeLog('close')"
   >
     内容
@@ -18,17 +31,11 @@
   <MxDialog
     v-model:visible="isVisible2"
     title="标题"
+    width="800px"
     :show-close="false"
-    @close="writeLog('close')"
   >
     内容
     <template #footer>
-      <MxBtn
-        type="primary"
-        @click="isVisible2 = false"
-      >
-        确定
-      </MxBtn>
       <MxBtn @click="isVisible2 = false">取消</MxBtn>
     </template>
   </MxDialog>
