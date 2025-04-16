@@ -1,19 +1,38 @@
-<!-- 表单 -->
+<!-- 表单-容器 -->
 <template>
-  <div
-    class="mx-form"
-    :class="`is-${derection}`"
-    :style="{ '--mx-form-lable-width': labelWidth }"
-  >
+  <div :class="`mx-form mx-form-${layout}`">
     <slot />
   </div>
 </template>
 
 <script setup>
-defineProps({
-  // 表单项布局方向：row, column
-  derection: { type: String, default: 'row' },
-  // 表单项label宽度
-  labelWidth: { type: String, default: '5em' }
+import { provide } from 'vue';
+
+// 参数
+const props = defineProps({
+  // 布局：horizontal, vertical, inline
+  layout: { type: String, default: 'horizontal' },
+  // 标签宽度
+  labelWidth: { type: String, default: null }
 });
+
+// 共享数据
+provide('layout', props.layout);
+provide('labelWidth', props.labelWidth);
 </script>
+
+<style lang="scss">
+.mx-form {
+  display: flex;
+  gap: 10px;
+
+  // 布局
+  &-horizontal,
+  &-vertical {
+    flex-direction: column;
+  }
+  &-inline {
+    flex-wrap: wrap;
+  }
+}
+</style>

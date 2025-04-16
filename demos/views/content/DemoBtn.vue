@@ -1,12 +1,14 @@
 <!-- 按钮 -->
 <template>
   <DemoCard title="类型">
+    <template #desc><code>props.type</code></template>
     <DemoRow>
       <MxBtn>default</MxBtn>
       <MxBtn type="primary">primary</MxBtn>
     </DemoRow>
   </DemoCard>
   <DemoCard title="尺寸">
+    <template #desc><code>props.size</code></template>
     <DemoRow>
       <MxBtn size="small"> small </MxBtn>
       <MxBtn>medium</MxBtn>
@@ -14,6 +16,7 @@
     </DemoRow>
   </DemoCard>
   <DemoCard title="铺满状态">
+    <template #desc><code>props.block</code></template>
     <MxBtn block>default</MxBtn>
     <MxBtn
       type="primary"
@@ -23,6 +26,7 @@
     </MxBtn>
   </DemoCard>
   <DemoCard title="禁用状态">
+    <template #desc><code>props.disabled</code></template>
     <DemoRow>
       <MxBtn disabled>default</MxBtn>
       <MxBtn
@@ -34,6 +38,7 @@
     </DemoRow>
   </DemoCard>
   <DemoCard title="加载状态">
+    <template #desc><code>props.loading</code></template>
     <DemoRow>
       <MxBtn loading>default</MxBtn>
       <MxBtn
@@ -45,6 +50,7 @@
     </DemoRow>
   </DemoCard>
   <DemoCard title="前置图标">
+    <template #desc><code>props.icon</code></template>
     <DemoRow>
       <MxBtn icon="close">图标 name</MxBtn>
       <MxBtn :icon="IconClose">图标 component</MxBtn>

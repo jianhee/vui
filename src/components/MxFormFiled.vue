@@ -1,22 +1,38 @@
-<!-- 表单项 -->
+<!-- 表单-项 -->
 <template>
   <div class="mx-form-filed">
-    <label class="mx-form-label">{{ label }}</label>
-    <div
-      class="mx-form-control"
-      :class="{ 'is-text': isText }"
+    <label
+      class="mx-form-label"
+      :style="labelStyles"
     >
+      {{ label }}
+    </label>
+    <div class="mx-form-control">
       <slot />
     </div>
   </div>
 </template>
 
 <script setup>
+import { computed, inject } from 'vue';
+
+// 参数
 defineProps({
   // 表单项label
-  label: { type: String, default: null },
-  // 表单项的内容是否是文本
-  isText: { type: Boolean, default: false }
+  label: { type: String, default: null }
+});
+
+// 共享数据
+const layout = inject('layout');
+const labelWidth = inject('labelWidth');
+
+// 标签样式
+const labelStyles = computed(() => {
+  if (layout === 'horizontal') {
+    return { width: labelWidth };
+  } else {
+    return null;
+  }
 });
 </script>
 
@@ -25,8 +41,8 @@ defineProps({
 .mx-form {
   &-filed {
     display: flex;
-    margin-bottom: 10px;
     font-size: 14px;
+    line-height: 32px;
   }
   &-label {
     flex: none;
@@ -35,21 +51,17 @@ defineProps({
   &-control {
     position: relative;
   }
-  &-label,
-  &-control.is-text {
-    padding: 4px 0;
-    line-height: 24px;
-  }
 
   // 布局
-  &.is-row &-filed {
+  &-horizontal &-filed,
+  &-inline &-filed {
     gap: 10px;
   }
-  &.is-row &-label {
-    width: var(--mx-form-lable-width);
-  }
-  &.is-column &-filed {
+  &-vertical &-filed {
     flex-direction: column;
+  }
+  &-horizontal &-label {
+    text-align: right;
   }
 }
 </style>

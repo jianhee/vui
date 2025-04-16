@@ -31,7 +31,8 @@
       </MxDropdown>
     </DemoRow>
   </DemoCard>
-  <DemoCard title="使用 open 方法打开">
+  <DemoCard title="手动打开">
+    <template #desc><code>dropdownRef.open()</code></template>
     <DemoRow>
       <MxBtn @click="openDropdown">点击打开</MxBtn>
       <MxDropdown

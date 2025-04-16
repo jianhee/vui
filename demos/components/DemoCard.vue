@@ -26,6 +26,13 @@ defineProps({
     margin: 10px 0;
     font-size: 12px;
     color: var(--demo-card-desc-text-color);
+    ol {
+      padding-left: 20px;
+    }
+    li {
+      margin-top: 10px;
+      list-style: decimal;
+    }
   }
   &-content {
     padding: 20px;

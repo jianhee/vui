@@ -11,16 +11,13 @@
     <MxCheckbox
       v-model:checked="checkboxValue"
       label="内容"
-      :block="isBlock"
       @change="writeLog('change', $event)"
     >
       （checked：{{ checkboxValue }}）
     </MxCheckbox>
   </DemoCard>
   <DemoCard title="布局方式">
-    <template #desc>
-      <DemoRow><code>props.block</code> 是否独占一行</DemoRow>
-    </template>
+    <template #desc><code>props.block</code></template>
     <DemoRow>
       <MxBtn @click="isBlock = !isBlock">切换布局</MxBtn>
     </DemoRow>
