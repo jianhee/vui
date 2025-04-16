@@ -1,5 +1,4 @@
 <!-- 下拉框 -->
-<!-- 有两种打开方式 -->
 <!-- 1.使用 trigger 打开 -->
 <!-- 2.使用 open 方法打开 -->
 <template>
@@ -11,8 +10,8 @@
     v-bind="$attrs"
     @mouseenter="onMouseEnter"
     @mouseleave="onMouseLeave"
-    @click="onClickTrigger"
-    @contextmenu.prevent="onContextMenuTrigger"
+    @click="onTriggerClick"
+    @contextmenu.prevent="onTriggerContextmenu"
   >
     <slot />
   </div>
@@ -27,6 +26,7 @@
         :style="contentStyles"
         @mouseenter="onMouseEnter"
         @mouseleave="onMouseLeave"
+        @click="onContentClick"
       >
         <slot name="content" />
       </div>
@@ -44,7 +44,10 @@ const emits = defineEmits(['open', 'close']);
 
 // 参数
 const props = defineProps({
-  // 触发方式：hover, click, contextmenu
+  // 触发方式
+  // hover        对齐元素
+  // click        对齐元素
+  // contextmenu  对齐鼠标
   trigger: { type: String, default: 'hover' }
 });
 
@@ -58,105 +61,111 @@ const contentVisible = ref(false);
 const contentStyles = ref(null);
 const contentOffset = 5;
 
-// 定时器
-let closeTimer = null;
-
 // 鼠标进入：对齐元素
+let hoverTimer = null;
 function onMouseEnter() {
   if (props.trigger !== 'hover') return;
-  openDropdown(triggerRef.value);
+  clearTimeout(hoverTimer);
+  openDropdownByEl(triggerRef.value);
 }
 
 // 鼠标离开
 function onMouseLeave() {
   if (props.trigger !== 'hover') return;
-  closeDropdown();
+  hoverTimer = setTimeout(() => {
+    clearTimeout(hoverTimer);
+    closeDropdown();
+  }, 100);
 }
 
 // 点击 trigger：对齐元素
-function onClickTrigger() {
+function onTriggerClick() {
   if (props.trigger !== 'click') return;
-  openDropdown(triggerRef.value);
+  if (contentVisible.value) {
+    closeDropdown();
+  } else {
+    openDropdownByEl(triggerRef.value);
+  }
 }
 
 // 右键 trigger：对齐鼠标
-function onContextMenuTrigger(event) {
+function onTriggerContextmenu(event) {
   if (props.trigger !== 'contextmenu') return;
-  openDropdown(event);
+  openDropdownByEvent(event);
+}
+
+// 点击 content 内部
+function onContentClick() {
+  closeDropdown();
 }
 
 // 点击 content 外部
-onClickOutside(contentRef, closeDropdown);
+onClickOutside(contentRef, closeDropdown, { ignore: [triggerRef] });
+
+// 打开下拉框：通过元素
+function openDropdownByEl(el) {
+  if (!contentVisible.value) {
+    emits('open');
+    contentVisible.value = true;
+    const { left, top, bottom } = el.getBoundingClientRect();
+    updatePosition({
+      triggerLeft: left,
+      triggerTop: top,
+      triggerBottom: bottom
+    });
+  }
+}
+
+// 打开下拉框：通过事件
+function openDropdownByEvent({ clientX, clientY }) {
+  if (!contentVisible.value) {
+    emits('open');
+    contentVisible.value = true;
+  }
+  updatePosition({
+    triggerLeft: clientX,
+    triggerTop: clientY,
+    triggerBottom: clientY
+  });
+}
 
 // 关闭下拉框
 function closeDropdown() {
   if (!contentVisible.value) return;
-  closeTimer = setTimeout(() => {
-    clearTimeout(closeTimer);
-    contentVisible.value = false;
-    emits('close');
-  }, 100);
+  emits('close');
+  contentVisible.value = false;
 }
 
-// 打开下拉框
-function openDropdown(target) {
-  // 停止关闭
-  clearTimeout(closeTimer);
-  // 未打开时：更新打开状态
-  if (!contentVisible.value) {
-    contentVisible.value = true;
-    emits('open');
-    updatePosition(target);
-    return;
-  }
-  // 已打开时：如果是对齐鼠标每次都要更新定位
-  const isEl = target instanceof HTMLElement;
-  if (!isEl) {
-    updatePosition(target);
-  }
-}
-
-// 更新定位：target可以是触发元素或鼠标事件
-function updatePosition(target) {
-  // 更新定位
-  const isEl = target instanceof HTMLElement;
+// 更新定位
+function updatePosition({ triggerLeft, triggerTop, triggerBottom }) {
   nextTick(() => {
-    // 触发元素
-    const triggerRect = isEl ? target.getBoundingClientRect() : null;
-    const triggerTop = triggerRect?.top || target?.clientY || 0;
-    const triggerLeft = triggerRect?.left || target?.clientX || 0;
-    const triggerBottom = triggerRect?.bottom || target?.clientY || 0;
-
     // 内容元素
-    const contentRect = contentRef.value.getBoundingClientRect();
-    let contentTop = triggerBottom + contentOffset;
-    let contentLeft = triggerLeft;
+    const { clientWidth: contentWidth, clientHeight: contentHeight } = contentRef.value;
 
-    // 垂直方向溢出
-    if (contentTop < 0) {
-      contentTop = 0;
-    } else if (contentTop + contentRect.height > windowHeight.value) {
-      contentTop = triggerTop - contentRect.height - contentOffset;
+    // 水平方向
+    const currentLeft = triggerLeft;
+    const maxLeft = windowWidth.value - contentWidth;
+    const contentLeft = Math.max(0, Math.min(maxLeft, currentLeft));
+
+    // 垂直方向
+    let currentTop = triggerBottom + contentOffset;
+    const maxTop = windowHeight.value - contentHeight - contentOffset;
+    if (currentTop > maxTop) {
+      currentTop = triggerTop - contentHeight - contentOffset;
     }
+    const contentTop = Math.max(0, currentTop);
 
-    // 水平方向溢出
-    if (contentLeft < 0) {
-      contentLeft = 0;
-    } else if (contentLeft + contentRect.width > windowWidth.value) {
-      contentLeft = windowWidth.value - contentRect.width;
-    }
-
+    // 更新样式
     contentStyles.value = {
-      top: `${contentTop}px`,
-      left: `${contentLeft}px`
+      left: `${contentLeft}px`,
+      top: `${contentTop}px`
     };
   });
 }
 
 // 外部调用方法，比如v-for渲染多个触发元素时，直接调用方法更方便
 defineExpose({
-  open: openDropdown,
-  close: closeDropdown
+  open: openDropdownByEvent
 });
 </script>
 
