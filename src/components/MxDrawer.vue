@@ -4,9 +4,9 @@
     <Transition name="mx-drawer">
       <!-- mask -->
       <div
-        v-show="isVisible"
+        v-show="modelVisible"
         class="mx-drawer"
-        @click.self="isVisible = false"
+        @click.self="modelVisible = false"
       >
         <!-- 主体 -->
         <div
@@ -41,25 +41,23 @@ defineOptions({ inheritAttrs: false });
 const props = defineProps({
   // 标题
   title: { type: String, default: null },
-  // 位置：left, right
-  placement: { type: String, default: 'left' },
   // 宽度
-  width: { type: String, default: '378px' }
+  width: { type: String, default: '378px' },
+  // 出现位置：left, right
+  placement: { type: String, default: 'left' }
 });
 
 // 是否显示
-const isVisible = defineModel('visible', { type: Boolean, default: false });
+const modelVisible = defineModel('visible', { type: Boolean, default: false });
 
 // 获取类名
 const contentClasses = computed(() => {
-  return `is-${props.placement}`;
+  return `mx-drawer-content-${props.placement}`;
 });
 
 // 获取样式
 const contentStyles = computed(() => {
-  return {
-    '--mx-drawer-content-width': props.width
-  };
+  return { width: props.width };
 });
 </script>
 
@@ -74,17 +72,15 @@ const contentStyles = computed(() => {
     position: absolute;
     top: 0;
     bottom: 0;
-    width: var(--mx-drawer-content-width);
     max-width: 100vw;
     word-break: break-word;
     background-color: var(--mx-drawer-content-bg-color);
-    &.is-left {
+    transition: all 0.3s ease;
+    &-left {
       left: 0;
-      transition: left 0.3s ease;
     }
-    &.is-right {
+    &-right {
       right: 0;
-      transition: right 0.3s ease;
     }
   }
   &-title {
@@ -98,11 +94,11 @@ const contentStyles = computed(() => {
 }
 .mx-drawer-enter-from .mx-drawer-content,
 .mx-drawer-leave-to .mx-drawer-content {
-  &.is-left {
-    left: calc(min(var(--mx-drawer-content-width), 100vw) * -1);
+  &-left {
+    transform: translateX(-100%);
   }
-  &.is-right {
-    right: calc(min(var(--mx-drawer-content-width), 100vw) * -1);
+  &-right {
+    transform: translateX(100%);
   }
 }
 </style>
