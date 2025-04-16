@@ -4,8 +4,9 @@
     class="mx-checkbox"
     :class="boxClasses"
   >
+    <!-- 图标 -->
     <input
-      v-model="isChecked"
+      v-model="modelChecked"
       type="checkbox"
       class="mx-checkbox-input"
       @change="onCheckedChange"
@@ -14,18 +15,18 @@
       :component="IconCheckbox"
       class="mx-checkbox-icon"
     />
-    <!-- 优先显示slot -->
-    <slot v-if="slots.default" />
-    <span v-else-if="label">{{ label }}</span>
+    <!-- 文本 -->
+    <span>{{ label }}</span>
+    <!-- 自定义内容 -->
+    <slot />
   </label>
 </template>
 
 <script setup>
-import { computed, useSlots } from 'vue';
+import { computed } from 'vue';
 import MxIcon from './MxIcon.vue';
 import IconCheckbox from '../assets/icons/checkbox.vue';
 
-const slots = useSlots();
 const emits = defineEmits(['change']);
 
 // 参数
@@ -37,19 +38,19 @@ const props = defineProps({
 });
 
 // 是否选中
-const isChecked = defineModel('checked', { type: Boolean, default: false });
+const modelChecked = defineModel('checked', { type: Boolean, default: false });
 
 // 获取类名
 const boxClasses = computed(() => {
   return {
-    'is-checked': isChecked.value,
-    'is-block': props.block
+    'is-block': props.block,
+    'is-checked': modelChecked.value
   };
 });
 
 // 切换选中状态
 function onCheckedChange() {
-  emits('change', isChecked.value);
+  emits('change', modelChecked.value);
 }
 </script>
 

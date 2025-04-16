@@ -44,7 +44,7 @@
       </MxBtn>
     </DemoRow>
   </DemoCard>
-  <DemoCard title="图标按钮">
+  <DemoCard title="前置图标">
     <DemoRow>
       <MxBtn icon="close">图标 name</MxBtn>
       <MxBtn :icon="IconClose">图标 component</MxBtn>

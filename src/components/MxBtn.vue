@@ -2,9 +2,9 @@
 <template>
   <button
     type="button"
-    :disabled="isDisabled"
     :class="btnClasses"
     :style="btnStyles"
+    :disabled="isDisabled"
   >
     <!-- loading -->
     <MxIcon
@@ -40,7 +40,7 @@ const props = defineProps({
   disabled: { type: Boolean, default: false },
   // 加载状态
   loading: { type: Boolean, default: false },
-  // 图标：MxIcon 组件的 name/component/props
+  // 前置图标：MxIcon 组件的 name/component/props
   icon: { type: [String, Object], default: null },
   // 圆角
   radius: { type: String, default: null }
@@ -51,20 +51,18 @@ const isDisabled = computed(() => props.disabled || props.loading);
 
 // 获取样式
 const btnStyles = computed(() => {
-  return {
-    borderRadius: props.radius
-  };
+  return { borderRadius: props.radius };
 });
 
 // 获取类名
 const btnClasses = computed(() => {
   return [
     'mx-btn',
-    `is-type-${props.type}`,
-    `is-size-${props.size}`,
+    `mx-btn-type-${props.type}`,
+    `mx-btn-size-${props.size}`,
     {
       'is-block': props.block,
-      'mx-state-disabled': isDisabled.value
+      'mx-disabled': isDisabled.value
     }
   ];
 });
@@ -95,37 +93,8 @@ const btnClasses = computed(() => {
     margin-left: 10px;
   }
 
-  // 是否块级元素
-  &.is-block {
-    display: flex;
-    width: 100%;
-  }
-  &.is-block + &.is-block {
-    margin-top: 10px;
-    margin-left: 0;
-  }
-
-  // 尺寸
-  &.is-size {
-    &-small {
-      height: 24px;
-      padding: 0 20px;
-      font-size: 12px;
-    }
-    &-medium {
-      height: 32px;
-      padding: 0 20px;
-      font-size: 14px;
-    }
-    &-large {
-      height: 40px;
-      padding: 0 20px;
-      font-size: 16px;
-    }
-  }
-
   // 类型
-  &.is-type {
+  &-type {
     &-default {
       color: var(--mx-btn-brand-color);
       border-color: var(--mx-btn-default-border-color);
@@ -144,6 +113,35 @@ const btnClasses = computed(() => {
         opacity: 0.8;
       }
     }
+  }
+
+  // 尺寸
+  &-size {
+    &-small {
+      height: 24px;
+      padding: 0 20px;
+      font-size: 12px;
+    }
+    &-medium {
+      height: 32px;
+      padding: 0 20px;
+      font-size: 14px;
+    }
+    &-large {
+      height: 40px;
+      padding: 0 20px;
+      font-size: 16px;
+    }
+  }
+
+  // 是否块级元素
+  &.is-block {
+    display: flex;
+    width: 100%;
+  }
+  &.is-block + &.is-block {
+    margin-top: 10px;
+    margin-left: 0;
   }
 }
 </style>

@@ -10,35 +10,35 @@ $sizes: 5, 10, 15, 20, 25, 30;
   }
 }
 
-// 文本
-.mx-text {
-  &-center {
-    text-align: center;
-  }
-  &-ellipsis {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
+// 文本居中
+.mx-center {
+  text-align: center;
 }
 
-// 状态
-.mx-state {
-  &-clickable {
-    cursor: pointer !important;
-  }
-  &-disabled {
-    cursor: not-allowed !important;
-    opacity: var(--mx-disabled-opcity, 0.6);
-  }
+// 文本溢出隐藏
+.mx-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// 可点击
+.mx-clickable {
+  cursor: pointer !important;
+}
+
+// 禁用
+.mx-disabled {
+  cursor: not-allowed !important;
+  opacity: var(--mx-disabled-opcity, 0.6);
 }
 
 // 旋转动画
-.mx-animation-spin {
-  animation: mx-animation-spin 1s linear infinite;
+.mx-spin {
+  animation: mx-spin 1s linear infinite;
 }
 
-@keyframes mx-animation-spin {
+@keyframes mx-spin {
   0% {
     transform: rotate(0deg);
   }
