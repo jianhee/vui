@@ -13,9 +13,9 @@
       spin
     />
     <!-- 前置图标 -->
-    <MxIconInside
+    <MxIcon
       v-if="icon"
-      :icon="icon"
+      v-bind="iconProps"
     />
     <!-- 内容 -->
     <slot />
@@ -24,8 +24,8 @@
 
 <script setup>
 import { computed } from 'vue';
+import { getIconProps } from '../composables';
 import MxIcon from './MxIcon.vue';
-import MxIconInside from './MxIconInside.vue';
 import IconLoading from '../assets/icons/loading.vue';
 
 // 参数
@@ -66,6 +66,9 @@ const btnClasses = computed(() => {
     }
   ];
 });
+
+// 获取图标 props
+const iconProps = computed(() => getIconProps(props.icon));
 </script>
 
 <style lang="scss">
