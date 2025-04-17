@@ -2,9 +2,8 @@
 <template>
   <div class="mx-loading">
     <!-- 图标 -->
-    <MxIconInside
-      :icon="iconProps"
-      :default-props="{ spin: true }"
+    <MxIcon
+      v-bind="iconProps"
       class="mx-loading-icon"
     />
     <!-- 文本 -->
@@ -19,23 +18,23 @@
 
 <script setup>
 import { computed } from 'vue';
-import MxIconInside from './MxIconInside.vue';
+import { getIconProps } from '../composables';
 import IconLoading from '../assets/icons/loading.vue';
 
 // 参数
 const props = defineProps({
   // 图标：MxIcon 组件的 name/component/props
   icon: { type: [String, Object], default: null },
-  // 文本
+  // 文本内容
   text: { type: String, default: 'Loading...' },
   // 是否显示文本
   showText: { type: Boolean, default: true }
 });
 
-// 图标
+// 图标 props
 const iconProps = computed(() => {
-  if (props.icon) return props.icon;
-  return { component: IconLoading };
+  const data = props.icon ? getIconProps(props.icon) : { component: IconLoading };
+  return { spin: true, ...data };
 });
 </script>
 

@@ -15,7 +15,7 @@
 
 <script setup>
 import { RouterLink } from 'vue-router';
-import { navItems } from '@/router';
+import navItems from '@/assets/data/navs.js';
 </script>
 
 <style lang="scss">
