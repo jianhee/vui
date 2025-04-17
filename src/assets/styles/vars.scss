@@ -1,8 +1,5 @@
 // vars
 :root {
-  // 通用值
-  --mx-disabled-opcity: 0.6;
-
   // 品牌色
   --mx-brand-color-default: #458ff3;
   --mx-brand-color-a10: #458ff31a;
@@ -19,13 +16,6 @@
 
   // 通用边框色
   --mx-border-color: #dcdfe6;
-
-  // 按钮
-  --mx-btn-brand-color: var(--mx-brand-color-default);
-  --mx-btn-default-bg-color: var(--mx-brand-color-a10);
-  --mx-btn-default-border-color: var(--mx-border-color);
-  --mx-btn-default-hover-bg-color: var(--mx-brand-color-a30);
-  --mx-btn-primary-text-color: #fff;
 
   // 表单
   --mx-form-label-text-color: var(--mx-text-color-regular);

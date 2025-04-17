@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="demo-row"
-    :class="{ 'is-flex': flex }"
-  >
+  <div :class="['demo-row', { 'demo-row-flex': flex }]">
     <slot />
   </div>
 </template>
@@ -19,7 +16,7 @@ defineProps({
   &:first-child {
     margin-top: 0;
   }
-  &.is-flex {
+  &-flex {
     display: flex;
     gap: 10px;
     align-items: flex-start;

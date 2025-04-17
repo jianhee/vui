@@ -30,42 +30,45 @@ import IconLoading from '../assets/icons/loading.vue';
 
 // 参数
 const props = defineProps({
+  // 样式
   // 类型：custom, default, primary
   type: { type: String, default: 'default' },
   // 尺寸：small, medium, large
   size: { type: String, default: 'medium' },
   // 块级元素
   block: { type: Boolean, default: false },
+  // 圆角
+  radius: { type: String, default: null },
+  // 状态
   // 禁用状态
   disabled: { type: Boolean, default: false },
   // 加载状态
   loading: { type: Boolean, default: false },
+  // 内容
   // 前置图标：MxIcon 组件的 name/component/props
-  icon: { type: [String, Object], default: null },
-  // 圆角
-  radius: { type: String, default: null }
-});
-
-// 是否禁用
-const isDisabled = computed(() => props.disabled || props.loading);
-
-// 获取样式
-const btnStyles = computed(() => {
-  return { borderRadius: props.radius };
+  icon: { type: [String, Object], default: null }
 });
 
 // 获取类名
 const btnClasses = computed(() => {
   return [
     'mx-btn',
-    `mx-btn-type-${props.type}`,
-    `mx-btn-size-${props.size}`,
+    `mx-btn-${props.type}`,
+    `mx-btn-${props.size}`,
     {
-      'is-block': props.block,
+      'mx-btn-block': props.block,
       'mx-disabled': isDisabled.value
     }
   ];
 });
+
+// 获取样式
+const btnStyles = computed(() => {
+  return { borderRadius: props.radius };
+});
+
+// 是否禁用
+const isDisabled = computed(() => props.disabled || props.loading);
 
 // 获取图标 props
 const iconProps = computed(() => getIconProps(props.icon));
@@ -80,71 +83,57 @@ const iconProps = computed(() => getIconProps(props.icon));
   gap: 5px;
   align-items: center;
   justify-content: center;
+  padding: 0 20px;
   line-height: 1;
+  color: var(--mx-btn-text-color);
   white-space: nowrap;
   text-decoration: none;
   cursor: pointer;
   user-select: none;
   outline: 0;
-  background-color: transparent;
-  border: 1px solid transparent;
+  background-color: var(--mx-btn-bg-color);
+  border: 1px solid var(--mx-btn-border-color);
   border-radius: 4px;
   transition: all 0.3s ease;
-
-  // 间距
-  & + .mx-btn {
-    margin-left: 10px;
+  &:not(:disabled):hover {
+    background-color: var(--mx-btn-active-bg-color, var(--mx-btn-bg-color));
+    border: 1px solid var(--mx-btn-active-border-color, var(--mx-btn-border-color));
+    opacity: var(--mx-btn-active-opacity, 1);
   }
 
   // 类型
-  &-type {
-    &-default {
-      color: var(--mx-btn-brand-color);
-      border-color: var(--mx-btn-default-border-color);
-      &:hover:not(:disabled),
-      &:focus:not(:disabled) {
-        background-color: var(--mx-btn-default-bg-color);
-        border-color: var(--mx-btn-default-hover-bg-color);
-      }
-    }
-    &-primary {
-      color: var(--mx-btn-primary-text-color);
-      background-color: var(--mx-btn-brand-color);
-      border-color: var(--mx-btn-brand-color);
-      &:hover:not(:disabled),
-      &:focus:not(:disabled) {
-        opacity: 0.8;
-      }
-    }
+  &-default {
+    --mx-btn-text-color: var(--mx-brand-color-default);
+    --mx-btn-bg-color: transparent;
+    --mx-btn-border-color: var(--mx-border-color);
+    --mx-btn-active-bg-color: var(--mx-brand-color-a10);
+    --mx-btn-active-border-color: var(--mx-brand-color-a30);
+  }
+  &-primary {
+    --mx-btn-text-color: #fff;
+    --mx-btn-bg-color: var(--mx-brand-color-default);
+    --mx-btn-border-color: var(--mx-brand-color-default);
+    --mx-btn-active-opacity: 0.8;
   }
 
   // 尺寸
-  &-size {
-    &-small {
-      height: 24px;
-      padding: 0 20px;
-      font-size: 12px;
-    }
-    &-medium {
-      height: 32px;
-      padding: 0 20px;
-      font-size: 14px;
-    }
-    &-large {
-      height: 40px;
-      padding: 0 20px;
-      font-size: 16px;
-    }
+  &-small {
+    height: 24px;
+    font-size: 12px;
+  }
+  &-medium {
+    height: 32px;
+    font-size: 14px;
+  }
+  &-large {
+    height: 40px;
+    font-size: 16px;
   }
 
-  // 是否块级元素
-  &.is-block {
+  // 块级元素
+  &-block {
     display: flex;
     width: 100%;
-  }
-  &.is-block + &.is-block {
-    margin-top: 10px;
-    margin-left: 0;
   }
 }
 </style>
