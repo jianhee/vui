@@ -1,6 +1,6 @@
 <!-- 表单-项 -->
 <template>
-  <div class="mx-form-filed">
+  <div :class="`mx-form-filed mx-form-filed-${layout}`">
     <label
       class="mx-form-label"
       :style="labelStyles"
@@ -43,6 +43,15 @@ const labelStyles = computed(() => {
     display: flex;
     font-size: 14px;
     line-height: 32px;
+
+    // 布局
+    &-horizontal,
+    &-inline {
+      gap: 10px;
+    }
+    &-vertical {
+      flex-direction: column;
+    }
   }
   &-label {
     flex: none;
@@ -50,18 +59,6 @@ const labelStyles = computed(() => {
   }
   &-control {
     position: relative;
-  }
-
-  // 布局
-  &-horizontal &-filed,
-  &-inline &-filed {
-    gap: 10px;
-  }
-  &-vertical &-filed {
-    flex-direction: column;
-  }
-  &-horizontal &-label {
-    text-align: right;
   }
 }
 </style>

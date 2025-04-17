@@ -19,7 +19,6 @@
       :layout="layout"
       label-width="4em"
     >
-      <MxFormFiled label="文本"> 文本文本 </MxFormFiled>
       <MxFormFiled label="输入框">
         <MxInput
           v-model:value="inputValue"
@@ -47,6 +46,7 @@
       <MxFormFiled label="开关">
         <MxSwitch v-model:checked="switchVal" />
       </MxFormFiled>
+      <MxFormFiled label="文本"> 文本文本 </MxFormFiled>
     </MxForm>
   </DemoCard>
 </template>
