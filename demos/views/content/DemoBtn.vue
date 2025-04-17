@@ -2,18 +2,14 @@
 <template>
   <DemoCard title="类型">
     <template #desc><code>props.type</code></template>
-    <DemoRow>
-      <MxBtn>default</MxBtn>
-      <MxBtn type="primary">primary</MxBtn>
-    </DemoRow>
+    <MxBtn>default</MxBtn>
+    <MxBtn type="primary">primary</MxBtn>
   </DemoCard>
   <DemoCard title="尺寸">
     <template #desc><code>props.size</code></template>
-    <DemoRow>
-      <MxBtn size="small"> small </MxBtn>
-      <MxBtn>medium</MxBtn>
-      <MxBtn size="large"> large </MxBtn>
-    </DemoRow>
+    <MxBtn size="small"> small </MxBtn>
+    <MxBtn>medium</MxBtn>
+    <MxBtn size="large"> large </MxBtn>
   </DemoCard>
   <DemoCard title="铺满状态">
     <template #desc><code>props.block</code></template>
@@ -27,36 +23,30 @@
   </DemoCard>
   <DemoCard title="禁用状态">
     <template #desc><code>props.disabled</code></template>
-    <DemoRow>
-      <MxBtn disabled>default</MxBtn>
-      <MxBtn
-        type="primary"
-        disabled
-      >
-        primary
-      </MxBtn>
-    </DemoRow>
+    <MxBtn disabled>default</MxBtn>
+    <MxBtn
+      type="primary"
+      disabled
+    >
+      primary
+    </MxBtn>
   </DemoCard>
   <DemoCard title="加载状态">
     <template #desc><code>props.loading</code></template>
-    <DemoRow>
-      <MxBtn loading>default</MxBtn>
-      <MxBtn
-        type="primary"
-        loading
-      >
-        primary
-      </MxBtn>
-    </DemoRow>
+    <MxBtn loading>default</MxBtn>
+    <MxBtn
+      type="primary"
+      loading
+    >
+      primary
+    </MxBtn>
   </DemoCard>
   <DemoCard title="前置图标">
-    <template #desc><code>props.icon</code></template>
-    <DemoRow>
-      <MxBtn icon="close">图标 name</MxBtn>
-      <MxBtn :icon="IconClose">图标 component</MxBtn>
-      <MxBtn :icon="{ name: 'close' }">图标 props.name</MxBtn>
-      <MxBtn :icon="{ component: IconClose }">图标 props.component</MxBtn>
-    </DemoRow>
+    <template #desc><code>props.icon</code> MxIcon 组件的 name/component/props</template>
+    <MxBtn icon="close">传入 name</MxBtn>
+    <MxBtn :icon="IconClose">传入 component</MxBtn>
+    <MxBtn :icon="{ name: 'close' }">传入 { name }</MxBtn>
+    <MxBtn :icon="{ component: IconClose }">传入 { component }</MxBtn>
   </DemoCard>
 </template>
 

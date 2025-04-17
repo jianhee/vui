@@ -35,17 +35,15 @@
   </DemoCard>
   <DemoCard title="手动打开">
     <template #desc><code>dropdownRef.open()</code></template>
-    <DemoRow>
-      <MxBtn @click="openDropdown">点击打开</MxBtn>
-      <MxDropdown
-        ref="contentRef"
-        trigger="click"
-      >
-        <template #content>
-          <div class="demo-dropdown-content">1231</div>
-        </template>
-      </MxDropdown>
-    </DemoRow>
+    <MxBtn @click="openDropdown">点击打开</MxBtn>
+    <MxDropdown
+      ref="contentRef"
+      trigger="click"
+    >
+      <template #content>
+        <div class="demo-dropdown-content">1231</div>
+      </template>
+    </MxDropdown>
   </DemoCard>
 </template>
 

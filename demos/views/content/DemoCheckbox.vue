@@ -20,9 +20,7 @@
   </DemoCard>
   <DemoCard title="布局方式">
     <template #desc><code>props.block</code></template>
-    <DemoRow>
-      <MxBtn @click="isBlock = !isBlock">切换布局</MxBtn>
-    </DemoRow>
+    <MxBtn @click="isBlock = !isBlock">切换布局</MxBtn>
     <DemoRow>
       <MxCheckbox
         v-model:checked="checkboxValue1"

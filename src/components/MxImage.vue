@@ -4,12 +4,12 @@
     class="mx-image"
     :style="imageStyles"
   >
-    <!-- 加载中 -->
-    <MxSkeleton
-      v-if="isLoading && !placeholder"
+    <!-- 骨架屏 -->
+    <MxSkeletonItem
+      v-if="isShowSkeleton"
       :aspect-ratio="skeletonAspectRatio"
     />
-    <!-- 其它状态 -->
+    <!-- 图片 -->
     <img
       v-else
       class="mx-image-inner"
@@ -22,31 +22,23 @@
 <script setup>
 import { computed } from 'vue';
 import { useImage } from '@vueuse/core';
-import MxSkeleton from './MxSkeleton.vue';
-import errorImg from '../assets/images/mx-error.png';
+import MxSkeletonItem from './MxSkeletonItem.vue';
+import mxErrorImg from '../assets/images/mx-error.png';
 
 // 参数
 const props = defineProps({
   // 图片地址
   src: { type: String, default: null },
   // 加载中的图片地址
-  placeholder: { type: String, default: null },
+  loadingImg: { type: String, default: null },
   // 加载失败的图片地址
-  error: { type: String, default: errorImg },
-  // 尺寸
+  errorImg: { type: String, default: mxErrorImg },
+  // 宽度
   width: { type: String, default: null },
-  // 长宽比：默认为空，按照图片自身比例完整展示，设置后按比例显示图片的一部分
+  // 宽高比：默认为空，按照原始比例展示完整图片，设置后按指定比例展示部分图片
   aspectRatio: { type: String, default: null },
   // 圆角
   radius: { type: String, default: null }
-});
-
-// 加载状态
-const { isLoading, error } = useImage({ src: props.src });
-
-// 图片地址
-const imgUrl = computed(() => {
-  return isLoading.value ? props.placeholder : error.value ? props.error : props.src;
 });
 
 // 获取样式
@@ -58,9 +50,20 @@ const imageStyles = computed(() => {
   };
 });
 
+// 加载状态
+const { isLoading, error } = useImage({ src: props.src });
+
+// 是否显示骨架屏
+const isShowSkeleton = computed(() => isLoading.value && !props.loadingImg);
+
 // 骨架屏长宽比
 const skeletonAspectRatio = computed(() => {
   return props.aspectRatio || '16/9';
+});
+
+// 图片地址
+const imgUrl = computed(() => {
+  return isLoading.value ? props.loadingImg : error.value ? props.errorImg : props.src;
 });
 </script>
 
