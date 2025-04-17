@@ -41,31 +41,7 @@ provide('onSelect', onSelect);
 </script>
 
 <style lang="scss">
-@use '../assets/styles/vars';
 .mx-menu {
   max-width: 240px;
-  &-item {
-    display: flex;
-    gap: 5px;
-    align-items: center;
-    padding: 8px 20px;
-    color: var(--mx-menu-text-color);
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    &:hover {
-      background-color: var(--mx-menu-hover-bg-color);
-    }
-  }
-  &-label {
-    flex: auto;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 12px;
-    white-space: nowrap;
-  }
-  &-divider {
-    height: 1px;
-    background-color: var(--mx-menu-divider-bg-color);
-  }
 }
 </style>

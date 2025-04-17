@@ -6,14 +6,14 @@
     :title="item.label"
     @click="onSelect(item)"
   >
-    <MxIconInside
+    <MxIcon
       v-if="item.icon"
-      :icon="item.icon"
+      v-bind="iconProps"
     />
     <span class="mx-menu-label">{{ item.label }}</span>
-    <MxIconInside
+    <MxIcon
       v-if="showSelectedIcon && item.key === modelSelectedKey"
-      :icon="IconSelected"
+      :component="IconSelected"
     />
   </div>
   <!-- 分隔符 -->
@@ -24,14 +24,14 @@
 </template>
 
 <script setup>
-import { inject } from 'vue';
-import MxIconInside from './MxIconInside.vue';
+import { inject, computed } from 'vue';
+import { getIconProps } from '../composables';
 import IconSelected from '../assets/icons/selected.vue';
 
-defineProps({
+const props = defineProps({
   // 菜单项
   // key      唯一标识，需要选中状态时必填
-  // label    显示内容，必填
+  // label    文本，必填
   // icon     前置图标，可选，MxIcon 组件的 name/component/props
   // divider  分隔符，默认 false
   // ...      其他自定义属性
@@ -42,4 +42,36 @@ defineProps({
 const modelSelectedKey = inject('modelSelectedKey');
 const showSelectedIcon = inject('showSelectedIcon');
 const onSelect = inject('onSelect');
+
+// 图标 props
+const iconProps = computed(() => getIconProps(props.item.icon));
 </script>
+
+<style lang="scss">
+@use '../assets/styles/vars';
+.mx-menu {
+  &-item {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    padding: 8px 20px;
+    color: var(--mx-menu-text-color);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    &:hover {
+      background-color: var(--mx-menu-hover-bg-color);
+    }
+  }
+  &-label {
+    flex: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+  &-divider {
+    height: 1px;
+    background-color: var(--mx-menu-divider-bg-color);
+  }
+}
+</style>
