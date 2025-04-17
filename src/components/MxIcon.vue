@@ -1,8 +1,8 @@
 <!-- 图标 -->
-<!-- 本组件用于处理参数，然后传给 MxIconSingle 和 MxIconMulti -->
+<!-- 单图标：适用于单色图标或者无需切换状态，通过 css 设置 color 对应不同状态 -->
+<!-- 多图标：适用于多色图标并且需要切换状态，通过 js 切换图标对应不同状态 -->
+<!-- 分成单独的组件是为了减少不必要的性能开销 -->
 <template>
-  <!-- 单个值：用于单色图标，使用 color 切换颜色 -->
-  <!-- 多个值：用于多色图标，使用 js 切换图标，分成单独的组件是为了减少不必要的性能开销 -->
   <component
     :is="isMultiIcons ? MxIconMulti : MxIconSingle"
     class="mx-icon"
@@ -21,8 +21,8 @@ import MxIconMulti from './MxIconMulti.vue';
 // 参数
 const props = defineProps({
   // 图标名称
-  // 单个值：name="close"
-  // 多个值：name="{ default: 'close', hover: 'close-hover', dark: 'close-dark', darkHover: 'close-dark-hover' }"
+  // 单图标：name="close"
+  // 多图标：name="{ default: 'close', hover: 'close-hover', dark: 'close-dark', darkHover: 'close-dark-hover' }"
   name: { type: [String, Object], default: null },
   // 图标组件：同上
   component: { type: Object, default: null },
@@ -36,18 +36,18 @@ const props = defineProps({
   disabled: { type: Boolean, default: false },
   // 旋转角度
   rotate: { type: [String, Number], default: null },
-  // 旋转动画
+  // 是否使用旋转动画
   spin: { type: Boolean, default: false }
 });
 
-// 是否多个图标
+// 是否多图标
 const isMultiIcons = computed(() => props.name?.default || props.component?.default);
 
 // 获取类名
 const iconClasses = computed(() => ({
-  'mx-state-clickable': props.clickable,
-  'mx-state-disabled': props.disabled,
-  'mx-animation-spin': props.spin
+  'mx-clickable': props.clickable,
+  'mx-disabled': props.disabled,
+  'mx-spin': props.spin
 }));
 
 // 获取样式

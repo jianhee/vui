@@ -2,17 +2,21 @@
 <template>
   <DemoCard title="基本用法">
     <template #desc>
-      <DemoRow>
-        1.<code>v-model:visible</code> 抽屉显示状态，当前为 <code>{{ isVisible1 }}</code>
-      </DemoRow>
-      <DemoRow>2.<code>props.title</code> 抽屉标题，<code>slot.default</code> 抽屉内容</DemoRow>
+      <ol>
+        <li>
+          <code>v-model:visible</code> 抽屉显示状态，当前为 <code>{{ isVisible1 }}</code>
+        </li>
+        <li><code>props.title</code> 抽屉标题，<code>slot.default</code> 抽屉内容</li>
+      </ol>
     </template>
     <MxBtn @click="isVisible1 = true">打开抽屉</MxBtn>
   </DemoCard>
   <DemoCard title="更多用法">
     <template #desc>
-      <DemoRow>1.<code>props.width</code> 抽屉宽度</DemoRow>
-      <DemoRow>2.<code>props.placement</code> 出现位置</DemoRow>
+      <ol>
+        <li><code>props.width</code> 抽屉宽度</li>
+        <li><code>props.placement</code> 出现位置</li>
+      </ol>
     </template>
     <MxBtn @click="isVisible2 = true">右侧打开</MxBtn>
   </DemoCard>

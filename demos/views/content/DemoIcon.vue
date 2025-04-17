@@ -1,10 +1,23 @@
 <!-- 图标 -->
 <template>
   <DemoCard title="基础用法">
-    <template #desc>依次展示默认状态、可点击状态、禁用状态、旋转45度、旋转动画</template>
+    <template #desc>
+      <ol>
+        <li><code>props.name</code> 图标名称，或者 <code>props.component</code> 图标组件</li>
+        <li><code>props.color</code> 图标颜色，为空继承 css <code>color</code></li>
+        <li><code>props.clickable</code> 是否可点击</li>
+        <li><code>props.disabled</code> 是否禁用</li>
+        <li><code>props.rotate</code> 旋转角度</li>
+        <li><code>props.spin</code> 是否使用旋转动画</li>
+      </ol>
+    </template>
     <DemoRow>使用 name</DemoRow>
     <DemoRow flex>
       <MxIcon name="close" />
+      <MxIcon
+        name="close"
+        color="red"
+      />
       <MxIcon
         name="close"
         clickable
@@ -27,6 +40,10 @@
       <MxIcon :component="IconClose" />
       <MxIcon
         :component="IconClose"
+        color="red"
+      />
+      <MxIcon
+        :component="IconClose"
         clickable
       />
       <MxIcon
@@ -43,7 +60,8 @@
       />
     </DemoRow>
   </DemoCard>
-  <DemoCard title="图标尺寸">
+  <DemoCard title="图标大小">
+    <template #desc><code>props.size</code>，为空继承 css <code>font-size</code></template>
     <DemoRow>使用 name</DemoRow>
     <DemoRow flex>
       <MxIcon name="close" />
@@ -77,7 +95,13 @@
       />
     </DemoRow>
   </DemoCard>
-  <DemoCard title="多色图标切换">
+  <DemoCard title="多图标">
+    <template #desc>
+      <ol>
+        <li>单图标：适用于单色图标或者无需切换状态，手动设置 color 对应不同状态，比如 <code>props.name="close"</code></li>
+        <li>多图标：适用于多色图标并且需要切换状态，内部自动切换图标对应不同状态，比如 <code>props.name="{ default: 'close', hover: 'close-hover', dark: 'close-dark', darkHover: 'close-dark-hover' }</code></li>
+      </ol>
+    </template>
     <DemoRow>使用 name</DemoRow>
     <DemoRow>
       <MxIcon
@@ -114,8 +138,5 @@ import IconToggleDarkHover from '@/assets/icons/toggle-dark-hover.svg?component'
 <style scoped>
 .mx-icon {
   font-size: 24px;
-}
-.mx-icon:hover {
-  color: pink;
 }
 </style>

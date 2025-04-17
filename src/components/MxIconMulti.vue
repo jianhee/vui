@@ -1,5 +1,4 @@
 <!-- 多图标 -->
-<!-- 本组件用于区分不同状态下的图标，然后传给 MxIconSingle -->
 <template>
   <MxIconSingle
     ref="elRef"

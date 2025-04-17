@@ -2,11 +2,13 @@
 <template>
   <DemoCard title="基础用法">
     <template #desc>
-      <DemoRow>
-        1.<code>v-model:checked</code> 多选框的选中状态，当前为 <code>{{ checkboxValue }}</code>
-      </DemoRow>
-      <DemoRow>2.<code>props.label</code> 文本内容，<code>slot.default</code> 追加自定义内容（括号内）</DemoRow>
-      <DemoRow>3.<code>@change</code> 切换选中状态时触发，返回选中状态</DemoRow>
+      <ol>
+        <li>
+          <code>v-model:checked</code> 多选框的选中状态，当前为 <code>{{ checkboxValue }}</code>
+        </li>
+        <li><code>props.label</code> 文本内容，<code>slot.default</code> 追加自定义内容（括号内）</li>
+        <li><code>@change</code> 切换选中状态时触发，返回选中状态</li>
+      </ol>
     </template>
     <MxCheckbox
       v-model:checked="checkboxValue"

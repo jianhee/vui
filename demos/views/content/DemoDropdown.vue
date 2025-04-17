@@ -2,9 +2,11 @@
 <template>
   <DemoCard title="基础用法">
     <template #desc>
-      <DemoRow>1.<code>slot.default</code> 触发元素，<code>slot.content</code> 显示内容</DemoRow>
-      <DemoRow>2.<code>props.trigger</code> 触发方式</DemoRow>
-      <DemoRow>3.<code>@open</code> 和 <code>@close</code> 切换显示状态时触发</DemoRow>
+      <ol>
+        <li><code>slot.default</code> 触发元素，<code>slot.content</code> 显示内容</li>
+        <li><code>props.trigger</code> 触发方式</li>
+        <li><code>@open</code> 和 <code>@close</code> 切换显示状态时触发</li>
+      </ol>
     </template>
     <DemoRow flex>
       <MxDropdown

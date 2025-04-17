@@ -2,19 +2,23 @@
 <template>
   <DemoCard title="基本用法">
     <template #desc>
-      <DemoRow>
-        1.<code>v-model:visible</code> 弹窗显示状态，当前为 <code>{{ isVisible1 }}</code>
-      </DemoRow>
-      <DemoRow>2.<code>props.title</code> 弹窗标题，<code>slot.default</code> 弹窗内容</DemoRow>
-      <DemoRow>3.<code>@open</code> 和 <code>@close</code> 切换显示状态时触发</DemoRow>
+      <ol>
+        <li>
+          <code>v-model:visible</code> 弹窗显示状态，当前为 <code>{{ isVisible1 }}</code>
+        </li>
+        <li><code>props.title</code> 弹窗标题，<code>slot.default</code> 弹窗内容</li>
+        <li><code>@open</code> 和 <code>@close</code> 切换显示状态时触发</li>
+      </ol>
     </template>
     <MxBtn @click="isVisible1 = true">打开弹窗</MxBtn>
   </DemoCard>
   <DemoCard title="更多用法">
     <template #desc>
-      <DemoRow>1.<code>props.width</code> 弹窗宽度</DemoRow>
-      <DemoRow>2.<code>props.showClose</code> 是否显示关闭按钮</DemoRow>
-      <DemoRow>3.<code>slot.footer</code> 自定义底栏</DemoRow>
+      <ol>
+        <li><code>props.width</code> 弹窗宽度</li>
+        <li><code>props.showClose</code> 是否显示关闭按钮</li>
+        <li><code>slot.footer</code> 自定义底栏</li>
+      </ol>
     </template>
     <MxBtn @click="isVisible2 = true">打开弹窗</MxBtn>
   </DemoCard>

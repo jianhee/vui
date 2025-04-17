@@ -31,6 +31,7 @@ defineProps({
     }
     li {
       margin-top: 10px;
+      line-height: 24px;
       list-style: decimal;
     }
   }
