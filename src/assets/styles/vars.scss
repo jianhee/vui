@@ -18,17 +18,19 @@
   --mx-border-color: #dcdfe6;
 
   // 复选框
-  --mx-checkbox-default-color: var(--mx-border-color);
-  --mx-checkbox-active-color: var(--mx-brand-color-default);
+  --mx-checkbox-icon-color: var(--mx-border-color);
+  --mx-checkbox-icon-active-color: var(--mx-brand-color-default);
+
+  // ......................................
+
+  // 遮罩
+  --mx-overlay-bg-color: rgb(0 0 0 / 20%);
 
   // 弹窗
-  --mx-dialog-mask-bg-color: rgb(0 0 0 / 20%);
-  --mx-dialog-content-bg-color: #fff;
+  --mx-dialog-bg-color: #fff;
   --mx-dialog-title-text-color: var(--mx-text-color-primary);
   --mx-dialog-close-icon-color: var(--mx-text-color-secondary);
   --mx-dialog-close-icon-active-color: var(--mx-brand-color-default);
-
-  // ......................................
 
   // 表单
   --mx-form-label-text-color: var(--mx-text-color-regular);
@@ -50,10 +52,6 @@
   --mx-dropdown-border-color: var(--mx-border-color);
   --mx-dropdown-bg-color: #fff;
   --mx-dropdown-shadow: 0 3px 6px rgb(0 0 0 / 16%);
-
-  // 抽屉
-  --mx-drawer-title-text-color: var(--mx-text-color-primary);
-  --mx-drawer-content-bg-color: #f7f7f7;
 
   // 骨架屏
   --mx-skeleton-from-bg-color: #f0f2f5;
@@ -87,8 +85,8 @@
     --mx-dropdown-bg-color: #2b2b2b;
 
     // 弹窗
-    --mx-dialog-mask-bg-color: rgb(0 0 0 / 60%);
-    --mx-dialog-content-bg-color: #333;
+    --mx-overlay-bg-color: rgb(0 0 0 / 60%);
+    --mx-dialog-bg-color: #333;
 
     // 骨架屏
     --mx-skeleton-from-bg-color: #303030;

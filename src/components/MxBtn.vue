@@ -30,7 +30,6 @@ import IconLoading from '../assets/icons/loading.vue';
 
 // 参数
 const props = defineProps({
-  // 样式
   // 类型：custom, default, primary
   type: { type: String, default: 'default' },
   // 尺寸：small, medium, large
@@ -39,12 +38,10 @@ const props = defineProps({
   block: { type: Boolean, default: false },
   // 圆角
   radius: { type: String, default: null },
-  // 状态
   // 禁用状态
   disabled: { type: Boolean, default: false },
   // 加载状态
   loading: { type: Boolean, default: false },
-  // 内容
   // 前置图标：MxIcon 组件的 name/component/props
   icon: { type: [String, Object], default: null }
 });

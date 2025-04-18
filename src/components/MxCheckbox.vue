@@ -25,7 +25,7 @@ import MxIcon from './MxIcon.vue';
 import IconCheckbox from '../assets/icons/checkbox.vue';
 
 const emits = defineEmits(['change']);
-const checkboxGroup = inject('checkboxGroup', null);
+const parentGroup = inject('parentGroup', null);
 
 // 参数
 const props = defineProps({
@@ -53,8 +53,8 @@ const modelChecked = defineModel('checked', { type: Boolean, default: false });
 
 // 是否选中
 const isChecked = computed(() => {
-  if (checkboxGroup) {
-    return checkboxGroup.modelValue.value.includes(props.value);
+  if (parentGroup) {
+    return parentGroup.modelValue.value.includes(props.value);
   } else {
     return modelChecked.value;
   }
@@ -63,8 +63,8 @@ const isChecked = computed(() => {
 // 切换选中状态
 function onCheckedChange() {
   const newState = !isChecked.value;
-  if (checkboxGroup) {
-    checkboxGroup.onValueChange(newState, props.value);
+  if (parentGroup) {
+    parentGroup.onValueChange(newState, props.value);
   } else {
     modelChecked.value = newState;
     emits('change', newState);
@@ -91,6 +91,7 @@ function onCheckedChange() {
   // 块级元素
   &-block {
     display: flex;
+    margin-right: 0;
   }
 
   // 图标
@@ -102,14 +103,14 @@ function onCheckedChange() {
   }
   &-icon {
     overflow: hidden;
-    color: var(--mx-checkbox-default-color);
+    color: var(--mx-checkbox-icon-color);
     border-radius: 2px;
   }
 
   // 选中状态
   &.is-checked,
   &.is-checked &-icon {
-    color: var(--mx-checkbox-active-color);
+    color: var(--mx-checkbox-icon-active-color);
   }
 }
 </style>

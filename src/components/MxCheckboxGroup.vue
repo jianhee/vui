@@ -33,7 +33,7 @@ const modelValue = defineModel('value', { type: Array, default: () => [] });
 
 // 修改值
 function onValueChange(isChecked, checkedVal) {
-  const index = modelValue.value.findIndex(n => n === checkedVal);
+  const index = modelValue.value.findIndex(val => val === checkedVal);
   if (index === -1) {
     modelValue.value.push(checkedVal);
   } else {
@@ -43,7 +43,7 @@ function onValueChange(isChecked, checkedVal) {
 }
 
 // 共享数据
-provide('checkboxGroup', {
+provide('parentGroup', {
   modelValue,
   onValueChange
 });
