@@ -86,7 +86,7 @@ function onCheckedChange() {
   white-space: nowrap;
   cursor: pointer;
   user-select: none;
-  transition: all 0.3s ease;
+  transition: color 0.3s ease;
 
   // 块级元素
   &-block {
