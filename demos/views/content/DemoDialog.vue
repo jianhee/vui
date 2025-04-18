@@ -19,6 +19,7 @@
 
   <MxDialog
     v-model:visible="isVisible"
+    :width="width"
     :title="showTitle ? '标题' : null"
     :show-close="showClose"
     :close-on-click-modal="closeOnClickModal"
@@ -28,7 +29,7 @@
     <DemoRow>
       <MxInput
         v-model:value="width"
-        placeholder="宽度"
+        placeholder="宽度默认 500px"
       />
       <MxCheckbox
         v-model:checked="showTitle"
@@ -71,7 +72,7 @@ import { ref } from 'vue';
 import { writeLog } from '@/utils';
 
 const isVisible = ref(false);
-const width = ref(null);
+const width = ref(undefined);
 const showTitle = ref(true);
 const showClose = ref(true);
 const closeOnClickModal = ref(true);
