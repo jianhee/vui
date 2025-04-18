@@ -30,6 +30,12 @@
   --mx-dialog-close-icon-color: var(--mx-text-color-secondary);
   --mx-dialog-close-icon-active-color: var(--mx-brand-color-default);
 
+  // 遮罩
+  --mx-drawer-bg-color: var(--mx-dialog-bg-color);
+  --mx-drawer-title-text-color: var(--mx-dialog-title-text-color);
+  --mx-drawer-close-icon-color: var(--mx-dialog-close-icon-color);
+  --mx-drawer-close-icon-active-color: var(--mx-dialog-close-icon-active-color);
+
   // 拖拽
   --mx-dragbox-handle-active-bg-color: var(--mx-brand-color-default);
 

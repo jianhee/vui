@@ -8,7 +8,7 @@ export default [
   { name: 'menu', title: '菜单', file: 'DemoMenu' },
   { name: 'dropdown', title: '下拉框', file: 'DemoDropdown' },
   { name: 'dialog', title: '弹窗', file: 'DemoDialog' },
-  { name: 'drawer', title: '抽屉', file: 'DemoDrawer' },
+  { name: 'drawer', title: '抽屉', file: 'DemoDialog' },
   { name: 'image', title: '图片', file: 'DemoImage' },
   { name: 'loading', title: '加载状态', file: 'DemoLoading' },
   { name: 'skeleton', title: '骨架屏', file: 'DemoSkeleton' },

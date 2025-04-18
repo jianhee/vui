@@ -2,47 +2,64 @@
 <template>
   <Teleport to="body">
     <Transition name="mx-drawer">
-      <!-- mask -->
-      <div
+      <!-- 遮罩 -->
+      <MxOverlay
         v-show="modelVisible"
-        class="mx-drawer"
-        @click.self="modelVisible = false"
+        @click.self="onClickMode"
       >
         <!-- 主体 -->
         <div
           v-bind="$attrs"
-          class="mx-drawer-content"
-          :class="contentClasses"
-          :style="contentStyles"
+          class="mx-drawer"
+          :class="drawerClasses"
+          :style="drawerStyles"
         >
-          <!-- 标题 -->
           <div
             v-if="title"
-            class="mx-drawer-title"
+            class="mx-drawer-header"
           >
-            {{ title }}
+            <!-- 标题 -->
+            <div class="mx-drawer-title">{{ title }}</div>
+            <!-- 关闭按钮 -->
+            <MxIcon
+              v-if="showClose"
+              class="mx-drawer-close"
+              :component="IconClose"
+              @click="onClickCloseIcon"
+            />
           </div>
           <!-- 内容 -->
           <div class="mx-drawer-body">
             <slot />
           </div>
+          <!-- 底栏 -->
+          <div class="mx-drawer-footer">
+            <slot name="footer" />
+          </div>
         </div>
-      </div>
+      </MxOverlay>
     </Transition>
   </Teleport>
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, watch } from 'vue';
+import MxIcon from './MxIcon.vue';
+import IconClose from '../assets/icons/close.vue';
 
 defineOptions({ inheritAttrs: false });
+const emits = defineEmits(['open', 'close']);
 
 // 参数
 const props = defineProps({
+  // 宽度
+  width: { type: String, default: '360px' },
   // 标题
   title: { type: String, default: null },
-  // 宽度
-  width: { type: String, default: '378px' },
+  // 是否显示关闭按钮
+  showClose: { type: Boolean, default: true },
+  // 点击 modal 时是否可以关闭
+  closeOnClickModal: { type: Boolean, default: true },
   // 出现位置：left, right
   placement: { type: String, default: 'left' }
 });
@@ -51,54 +68,103 @@ const props = defineProps({
 const modelVisible = defineModel('visible', { type: Boolean, default: false });
 
 // 获取类名
-const contentClasses = computed(() => {
-  return `mx-drawer-content-${props.placement}`;
+const drawerClasses = computed(() => {
+  return `mx-drawer-${props.placement}`;
 });
 
 // 获取样式
-const contentStyles = computed(() => {
+const drawerStyles = computed(() => {
   return { width: props.width };
+});
+
+// 点击遮罩
+function onClickMode() {
+  if (!props.closeOnClickModal) return;
+  closeDrawer();
+}
+
+// 点击关闭按钮
+function onClickCloseIcon() {
+  closeDrawer();
+}
+
+// 关闭抽屉
+function closeDrawer() {
+  modelVisible.value = false;
+}
+
+// 切换显示状态：外部关闭也能触发
+watch(modelVisible, val => {
+  if (val) {
+    emits('open');
+  } else {
+    emits('close');
+  }
 });
 </script>
 
 <style lang="scss">
 @use '../assets/styles/vars';
 .mx-drawer {
-  position: fixed;
-  inset: 0;
-  z-index: 999;
-  transition: opacity 0.3s ease;
-  &-content {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    max-width: 100vw;
-    word-break: break-word;
-    background-color: var(--mx-drawer-content-bg-color);
-    transition: all 0.3s ease;
-    &-left {
-      left: 0;
-    }
-    &-right {
-      right: 0;
-    }
-  }
-  &-title {
-    padding: 0 20px;
-    font-size: 20px;
-    font-weight: bold;
-    line-height: 48px;
-    color: var(--mx-drawer-title-text-color);
-    text-align: center;
-  }
-}
-.mx-drawer-enter-from .mx-drawer-content,
-.mx-drawer-leave-to .mx-drawer-content {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  max-width: 100vw;
+  height: 100vh;
+  padding: 16px 0;
+  background-color: var(--mx-drawer-bg-color);
+  transition: transform 0.3s ease;
   &-left {
-    transform: translateX(-100%);
+    left: 0;
   }
   &-right {
-    transform: translateX(100%);
+    right: 0;
+  }
+  &-header {
+    display: flex;
+    flex: none;
+    gap: 10px;
+    justify-content: space-between;
+    padding: 0 16px 16px;
+    font-size: 16px;
+  }
+  &-title {
+    line-height: 24px;
+    color: var(--mx-drawer-title-text-color);
+  }
+  &-close {
+    align-self: flex-start;
+    color: var(--mx-drawer-close-icon-color);
+    cursor: pointer;
+  }
+  &-close:hover {
+    color: var(--mx-drawer-close-icon-active-color);
+  }
+  &-body {
+    flex: auto;
+    padding: 0 16px;
+    overflow: auto;
+    font-size: 14px;
+  }
+  &-footer {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    padding: 16px 16px 0;
+  }
+}
+
+// 动画
+.mx-drawer-enter-from,
+.mx-drawer-leave-to {
+  opacity: 0;
+  > .mx-drawer {
+    &-left {
+      transform: translateX(-100%);
+    }
+    &-right {
+      transform: translateX(100%);
+    }
   }
 }
 </style>

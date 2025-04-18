@@ -11,7 +11,7 @@
         <div
           v-bind="$attrs"
           class="mx-dialog"
-          :style="contentStyles"
+          :style="dialogStyles"
         >
           <div
             v-if="title"
@@ -65,7 +65,7 @@ const props = defineProps({
 const modelVisible = defineModel('visible', { type: Boolean, default: false });
 
 // 获取样式
-const contentStyles = computed(() => {
+const dialogStyles = computed(() => {
   return { width: props.width };
 });
 
