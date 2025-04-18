@@ -21,6 +21,13 @@
   --mx-checkbox-default-color: var(--mx-border-color);
   --mx-checkbox-active-color: var(--mx-brand-color-default);
 
+  // 弹窗
+  --mx-dialog-mask-bg-color: rgb(0 0 0 / 20%);
+  --mx-dialog-content-bg-color: #fff;
+  --mx-dialog-title-text-color: var(--mx-text-color-primary);
+  --mx-dialog-close-icon-color: var(--mx-text-color-secondary);
+  --mx-dialog-close-icon-active-color: var(--mx-brand-color-default);
+
   // ......................................
 
   // 表单
@@ -43,13 +50,6 @@
   --mx-dropdown-border-color: var(--mx-border-color);
   --mx-dropdown-bg-color: #fff;
   --mx-dropdown-shadow: 0 3px 6px rgb(0 0 0 / 16%);
-
-  // 弹窗
-  --mx-dialog-mask-bg-color: rgb(0 0 0 / 20%);
-  --mx-dialog-content-bg-color: #fff;
-  --mx-dialog-title-text-color: var(--mx-text-color-primary);
-  --mx-dialog-close-text-color: var(--mx-text-color-secondary);
-  --mx-dialog-close-active-text-color: var(--mx-brand-color-default);
 
   // 抽屉
   --mx-drawer-title-text-color: var(--mx-text-color-primary);

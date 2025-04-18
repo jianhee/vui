@@ -114,10 +114,10 @@ watch(modelVisible, val => {
     top: 10px;
     right: 10px;
     font-size: 16px;
-    color: var(--mx-dialog-close-text-color);
+    color: var(--mx-dialog-close-icon-color);
     cursor: pointer;
     &:hover {
-      color: var(--mx-dialog-close-active-text-color);
+      color: var(--mx-dialog-close-icon-active-color);
     }
   }
   &-body {
@@ -125,10 +125,14 @@ watch(modelVisible, val => {
     font-size: 14px;
   }
   &-footer {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
     padding: 10px 20px 20px;
-    text-align: right;
   }
 }
+
+// 动画
 .mx-dialog-enter-from,
 .mx-dialog-leave-to {
   opacity: 0;

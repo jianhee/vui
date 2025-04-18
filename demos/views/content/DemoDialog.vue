@@ -40,6 +40,12 @@
   >
     内容
     <template #footer>
+      <MxBtn
+        type="primary"
+        @click="isVisible2 = false"
+      >
+        确定
+      </MxBtn>
       <MxBtn @click="isVisible2 = false">取消</MxBtn>
     </template>
   </MxDialog>
