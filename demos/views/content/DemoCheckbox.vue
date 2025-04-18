@@ -6,7 +6,7 @@
         <li>
           <code>v-model:checked</code> 复选框的选中状态，当前为 <code>{{ checkboxValue1 }}</code> <code>{{ checkboxValue2 }}</code>
         </li>
-        <li><code>props.label</code> 复选框的文本，<code>slot.default</code> 追加自定义内容（括号内）</li>
+        <li><code>props.label</code> 文本，<code>slot.default</code> 文本后的自定义内容（括号内）</li>
         <li>
           <code>props.block</code> 块级元素
           <MxBtn
@@ -44,8 +44,8 @@
         </li>
         <li><code>props.items</code> 选项</li>
         <ol>
-          <li><code>item.value</code> 多选框的值</li>
-          <li><code>item.label</code> 多选框的文本，<code>slot.default</code> 追加自定义内容（括号内）</li>
+          <li><code>item.value</code> 每项的值</li>
+          <li><code>item.label</code> 每项的文本，<code>slot.default</code> 文本后的自定义内容（括号内）</li>
         </ol>
         <li>
           <code>props.direction</code> 排列方向

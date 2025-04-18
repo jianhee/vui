@@ -4,52 +4,64 @@
     <template #desc>
       <ol>
         <li>
-          <code>v-model:visible</code> 弹窗显示状态，当前为 <code>{{ isVisible1 }}</code>
+          <code>v-model:visible</code> 弹窗显示状态，当前为 <code>{{ isVisible }}</code>
         </li>
-        <li><code>props.title</code> 弹窗标题</li>
+        <li><code>props.width</code> 弹窗宽度</li>
+        <li><code>props.title</code> 弹窗标题，为空不显示顶栏</li>
+        <li><code>props.showClose</code> 是否显示关闭按钮</li>
+        <li><code>props.closeOnClickModal</code> 是否在点击 modal 时关闭弹窗</li>
         <li><code>slot.default</code> 弹窗内容，<code>slot.footer</code> 底栏内容</li>
         <li><code>@open</code> 和 <code>@close</code> 切换显示状态时触发</li>
       </ol>
     </template>
-    <MxBtn @click="isVisible1 = true">打开弹窗</MxBtn>
-  </DemoCard>
-  <DemoCard title="更多用法">
-    <template #desc>
-      <ol>
-        <li><code>props.width</code> 弹窗宽度</li>
-        <li><code>props.showClose</code> 是否显示关闭按钮</li>
-      </ol>
-    </template>
-    <MxBtn @click="isVisible2 = true">打开弹窗</MxBtn>
+    <MxBtn @click="isVisible = true">打开弹窗</MxBtn>
   </DemoCard>
 
   <MxDialog
-    v-model:visible="isVisible1"
-    title="标题"
+    v-model:visible="isVisible"
+    :title="showTitle ? '标题' : null"
+    :show-close="showClose"
+    :close-on-click-modal="closeOnClickModal"
     @open="writeLog('open')"
     @close="writeLog('close')"
   >
-    内容
-    <template #footer>
+    <DemoRow>
+      <MxInput
+        v-model:value="width"
+        placeholder="宽度"
+      />
+      <MxCheckbox
+        v-model:checked="showTitle"
+        label="是否有标题"
+        block
+      />
+      <MxCheckbox
+        v-model:checked="showClose"
+        label="是否显示关闭按钮"
+        block
+      />
+      <MxCheckbox
+        v-model:checked="closeOnClickModal"
+        label="点击 modal 时是否可以关闭"
+        block
+      />
+      <MxCheckbox
+        v-model:checked="showFooter"
+        label="是否显示底栏"
+        block
+      />
+    </DemoRow>
+    <template
+      v-if="showFooter"
+      #footer
+    >
       <MxBtn
         type="primary"
-        @click="isVisible1 = false"
+        @click="isVisible = false"
       >
         确定
       </MxBtn>
-      <MxBtn @click="isVisible1 = false">取消</MxBtn>
-    </template>
-  </MxDialog>
-
-  <MxDialog
-    v-model:visible="isVisible2"
-    title="标题"
-    width="300px"
-    :show-close="false"
-  >
-    内容
-    <template #footer>
-      <MxBtn @click="isVisible2 = false">取消</MxBtn>
+      <MxBtn @click="isVisible = false">取消</MxBtn>
     </template>
   </MxDialog>
 </template>
@@ -58,6 +70,10 @@
 import { ref } from 'vue';
 import { writeLog } from '@/utils';
 
-const isVisible1 = ref(false);
-const isVisible2 = ref(false);
+const isVisible = ref(false);
+const width = ref(null);
+const showTitle = ref(true);
+const showClose = ref(true);
+const closeOnClickModal = ref(true);
+const showFooter = ref(true);
 </script>

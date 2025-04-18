@@ -2,18 +2,21 @@
 <template>
   <Teleport to="body">
     <Transition name="mx-dialog">
-      <!-- mask -->
-      <div
+      <!-- 遮罩 -->
+      <MxOverlay
         v-show="modelVisible"
-        class="mx-dialog"
+        @click.self="onClickMode"
       >
         <!-- 主体 -->
         <div
           v-bind="$attrs"
-          class="mx-dialog-content"
+          class="mx-dialog"
           :style="contentStyles"
         >
-          <div class="mx-dialog-header">
+          <div
+            v-if="title"
+            class="mx-dialog-header"
+          >
             <!-- 标题 -->
             <span class="mx-dialog-title">{{ title }}</span>
             <!-- 关闭按钮 -->
@@ -21,7 +24,7 @@
               v-if="showClose"
               class="mx-dialog-close"
               :component="IconClose"
-              @click="closeDialog"
+              @click="onClickCloseIcon"
             />
           </div>
           <!-- 内容 -->
@@ -33,7 +36,7 @@
             <slot name="footer" />
           </div>
         </div>
-      </div>
+      </MxOverlay>
     </Transition>
   </Teleport>
 </template>
@@ -48,12 +51,14 @@ const emits = defineEmits(['open', 'close']);
 
 // 参数
 const props = defineProps({
+  // 宽度
+  width: { type: String, default: '500px' },
   // 标题
   title: { type: String, default: null },
   // 是否显示关闭按钮
   showClose: { type: Boolean, default: true },
-  // 宽度
-  width: { type: String, default: '500px' }
+  // 是否在点击 modal 时关闭弹窗
+  closeOnClickModal: { type: Boolean, default: true }
 });
 
 // 是否显示
@@ -61,17 +66,26 @@ const modelVisible = defineModel('visible', { type: Boolean, default: false });
 
 // 获取样式
 const contentStyles = computed(() => {
-  return {
-    width: props.width
-  };
+  return { width: props.width };
 });
+
+// 点击遮罩
+function onClickMode() {
+  if (!props.closeOnClickModal) return;
+  closeDialog();
+}
+
+// 点击关闭按钮
+function onClickCloseIcon() {
+  closeDialog();
+}
 
 // 关闭弹窗
 function closeDialog() {
   modelVisible.value = false;
 }
 
-// 关闭时触发关闭事件：外部关闭也能触发
+// 切换显示状态：外部关闭也能触发
 watch(modelVisible, val => {
   if (val) {
     emits('open');
@@ -84,51 +98,40 @@ watch(modelVisible, val => {
 <style lang="scss">
 @use '../assets/styles/vars';
 .mx-dialog {
-  position: fixed;
-  inset: 0;
-  z-index: 999;
+  max-width: 100vw;
+  padding: 16px;
+  margin: 50px auto;
   overflow: auto;
-  background-color: var(--mx-dialog-mask-bg-color);
-  backdrop-filter: blur(2px);
-  transition: opacity 0.3s ease;
-  &-content {
-    margin: 50px auto;
-    background-color: var(--mx-dialog-content-bg-color);
-    border-radius: 4px;
-    transition: transform 0.3s ease;
-  }
+  background-color: var(--mx-dialog-bg-color);
+  border-radius: 4px;
+  transition: transform 0.3s ease;
   &-header {
-    position: relative;
     display: flex;
-    align-items: center;
+    gap: 10px;
     justify-content: space-between;
-    padding: 20px 20px 10px;
-    line-height: 24px;
+    padding-bottom: 16px;
+    font-size: 16px;
   }
   &-title {
-    font-size: 16px;
+    line-height: 24px;
     color: var(--mx-dialog-title-text-color);
   }
   &-close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 16px;
+    align-self: flex-start;
     color: var(--mx-dialog-close-icon-color);
     cursor: pointer;
-    &:hover {
-      color: var(--mx-dialog-close-icon-active-color);
-    }
+  }
+  &-close:hover {
+    color: var(--mx-dialog-close-icon-active-color);
   }
   &-body {
-    padding: 30px 20px;
     font-size: 14px;
   }
   &-footer {
     display: flex;
     gap: 10px;
     justify-content: flex-end;
-    padding: 10px 20px 20px;
+    padding-top: 16px;
   }
 }
 
@@ -136,7 +139,7 @@ watch(modelVisible, val => {
 .mx-dialog-enter-from,
 .mx-dialog-leave-to {
   opacity: 0;
-  .mx-dialog-content {
+  > .mx-dialog {
     transform: translateY(-20px);
   }
 }
