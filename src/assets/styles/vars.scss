@@ -30,6 +30,9 @@
   --mx-dialog-close-icon-color: var(--mx-text-color-secondary);
   --mx-dialog-close-icon-active-color: var(--mx-brand-color-default);
 
+  // 拖拽
+  --mx-dragbox-handle-active-bg-color: var(--mx-brand-color-default);
+
   // ......................................
 
   // 表单
@@ -63,9 +66,6 @@
 
   // 树
   --mx-tree-node-active-bg-color: var(--mx-bg-color-active);
-
-  // 拖拽
-  --mx-drag-handle-bg-color: var(--mx-brand-color-default);
 }
 
 @media (prefers-color-scheme: dark) {

@@ -27,10 +27,6 @@
     @close="writeLog('close')"
   >
     <DemoRow>
-      <MxInput
-        v-model:value="width"
-        placeholder="宽度默认 500px"
-      />
       <MxCheckbox
         v-model:checked="showTitle"
         label="是否有标题"
@@ -52,6 +48,10 @@
         block
       />
     </DemoRow>
+    <MxRadioGroup
+      v-model:value="width"
+      :items="widthItems"
+    />
     <template
       v-if="showFooter"
       #footer
@@ -73,6 +73,7 @@ import { writeLog } from '@/utils';
 
 const isVisible = ref(false);
 const width = ref(undefined);
+const widthItems = ['500px', '600px', '700px'].map(val => ({ value: val, label: `宽度${val}` }));
 const showTitle = ref(true);
 const showClose = ref(true);
 const closeOnClickModal = ref(true);

@@ -208,7 +208,7 @@ function onResizeStop() {
     z-index: 999;
     transition: background-color 0.3s ease;
     &:hover {
-      background-color: var(--mx-drag-handle-bg-color);
+      background-color: var(--mx-dragbox-handle-active-bg-color);
     }
     &-left,
     &-right {
