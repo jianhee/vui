@@ -30,11 +30,16 @@
   --mx-dialog-close-icon-color: var(--mx-text-color-secondary);
   --mx-dialog-close-icon-active-color: var(--mx-brand-color-default);
 
-  // 遮罩
+  // 抽屉
   --mx-drawer-bg-color: var(--mx-dialog-bg-color);
   --mx-drawer-title-text-color: var(--mx-dialog-title-text-color);
   --mx-drawer-close-icon-color: var(--mx-dialog-close-icon-color);
   --mx-drawer-close-icon-active-color: var(--mx-dialog-close-icon-active-color);
+
+  // 下拉框
+  --mx-dropdown-content-bg-color: #fff;
+  --mx-dropdown-content-border-color: var(--mx-border-color);
+  --mx-dropdown-content-shadow: 0 3px 6px rgb(0 0 0 / 16%);
 
   // 拖拽
   --mx-dragbox-handle-active-bg-color: var(--mx-brand-color-default);
@@ -56,11 +61,6 @@
   --mx-menu-divider-bg-color: var(--mx-border-color);
   --mx-menu-text-color: var(--mx-text-color-primary);
   --mx-menu-hover-bg-color: var(--mx-bg-color-active);
-
-  // 下拉框
-  --mx-dropdown-border-color: var(--mx-border-color);
-  --mx-dropdown-bg-color: #fff;
-  --mx-dropdown-shadow: 0 3px 6px rgb(0 0 0 / 16%);
 
   // 骨架屏
   --mx-skeleton-from-bg-color: #f0f2f5;

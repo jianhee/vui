@@ -186,10 +186,10 @@ defineExpose({
     padding-top: 5px;
     padding-bottom: 5px;
     overflow: auto;
-    background-color: var(--mx-dropdown-bg-color);
-    border: 1px solid var(--mx-dropdown-border-color);
+    background-color: var(--mx-dropdown-content-bg-color);
+    border: 1px solid var(--mx-dropdown-content-border-color);
     border-radius: 4px;
-    box-shadow: var(--mx-dropdown-shadow);
+    box-shadow: var(--mx-dropdown-content-shadow);
     transition:
       opacity 0.3s ease,
       transform 0.3s ease,

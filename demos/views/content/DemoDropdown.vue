@@ -1,6 +1,6 @@
 <!-- 下拉框 -->
 <template>
-  <DemoCard title="基础用法">
+  <DemoCard title="基本用法">
     <template #desc>
       <ol>
         <li><code>slot.default</code> 触发元素，<code>slot.content</code> 显示内容</li>
@@ -63,7 +63,7 @@ function openDropdown(event) {
 <style>
 .demo-dropdown-content {
   width: 200px;
-  height: 400px;
+  height: 200px;
   padding: 10px;
 }
 </style>
