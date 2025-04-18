@@ -17,15 +17,17 @@
   // 通用边框色
   --mx-border-color: #dcdfe6;
 
+  // 复选框
+  --mx-checkbox-default-color: var(--mx-border-color);
+  --mx-checkbox-active-color: var(--mx-brand-color-default);
+
+  // ......................................
+
   // 表单
   --mx-form-label-text-color: var(--mx-text-color-regular);
 
   // 输入框
   --mx-input-icon-color: var(--mx-text-color-placeholder);
-
-  // 复选框
-  --mx-checkbox-default-color: var(--mx-border-color);
-  --mx-checkbox-active-color: var(--mx-brand-color-default);
 
   // 开关
   --mx-switch-on-bg-color: var(--mx-brand-color-default);
