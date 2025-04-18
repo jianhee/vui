@@ -4,7 +4,7 @@
 <template>
   <div
     ref="boxRef"
-    :class="['mx-drag-box', { 'is-draging': boxIsDraging || !!handleDragingName }]"
+    :class="boxClasses"
     :style="boxStyles"
   >
     <!-- 内容 -->
@@ -70,6 +70,16 @@ const boxCurrentX = defineModel('x', { type: Number, default: null });
 const boxCurrentY = defineModel('y', { type: Number, default: null });
 const boxCurrentWidth = defineModel('width', { type: Number, default: null });
 const boxCurrentHeight = defineModel('height', { type: Number, default: null });
+
+// 获取类名
+const boxClasses = computed(() => {
+  return [
+    'mx-drag-box',
+    {
+      'is-draging': boxIsDraging.value || !!handleDragingName.value
+    }
+  ];
+});
 
 // 获取样式
 const boxStyles = computed(() => {

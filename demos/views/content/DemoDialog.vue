@@ -6,7 +6,8 @@
         <li>
           <code>v-model:visible</code> 弹窗显示状态，当前为 <code>{{ isVisible1 }}</code>
         </li>
-        <li><code>props.title</code> 弹窗标题，<code>slot.default</code> 弹窗内容</li>
+        <li><code>props.title</code> 弹窗标题</li>
+        <li><code>slot.default</code> 弹窗内容，<code>slot.footer</code> 底栏内容</li>
         <li><code>@open</code> 和 <code>@close</code> 切换显示状态时触发</li>
       </ol>
     </template>
@@ -17,7 +18,6 @@
       <ol>
         <li><code>props.width</code> 弹窗宽度</li>
         <li><code>props.showClose</code> 是否显示关闭按钮</li>
-        <li><code>slot.footer</code> 自定义底栏</li>
       </ol>
     </template>
     <MxBtn @click="isVisible2 = true">打开弹窗</MxBtn>
@@ -30,22 +30,25 @@
     @close="writeLog('close')"
   >
     内容
+    <template #footer>
+      <MxBtn
+        type="primary"
+        @click="isVisible1 = false"
+      >
+        确定
+      </MxBtn>
+      <MxBtn @click="isVisible1 = false">取消</MxBtn>
+    </template>
   </MxDialog>
 
   <MxDialog
     v-model:visible="isVisible2"
     title="标题"
-    width="800px"
+    width="300px"
     :show-close="false"
   >
     内容
     <template #footer>
-      <MxBtn
-        type="primary"
-        @click="isVisible2 = false"
-      >
-        确定
-      </MxBtn>
       <MxBtn @click="isVisible2 = false">取消</MxBtn>
     </template>
   </MxDialog>

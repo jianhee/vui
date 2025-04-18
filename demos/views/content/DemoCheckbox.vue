@@ -48,10 +48,10 @@
           <li><code>item.label</code> 多选框的文本，<code>slot.default</code> 追加自定义内容（括号内）</li>
         </ol>
         <li>
-          <code>props.direction</code> 横向还是纵向
+          <code>props.direction</code> 排列方向
           <MxBtn
             size="small"
-            @click="direction = direction === 'horizontal' ? 'vertical' : 'horizontal'"
+            @click="isVertical = !isVertical"
           >
             切换
           </MxBtn>
@@ -63,7 +63,7 @@
       v-slot="{ item }"
       v-model:value="checkboxValue3"
       :items="checkboxItems"
-      :direction="direction"
+      :direction="isVertical ? 'vertical' : 'horizontal'"
       @change="writeLog('change', $event)"
     >
       (value {{ item.value }})
@@ -77,7 +77,7 @@ import { writeLog } from '@/utils';
 
 // 切换
 const isBlock = ref(false);
-const direction = ref('horizontal');
+const isVertical = ref(false);
 
 // 值
 const checkboxValue1 = ref(false);

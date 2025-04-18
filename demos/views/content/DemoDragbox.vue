@@ -10,7 +10,7 @@
     <MxDragbox
       draggable
       :x="500"
-      :y="100"
+      :y="150"
       :width="180"
       :height="100"
     >
@@ -42,7 +42,7 @@
     <MxDragbox
       resizable
       :x="500"
-      :y="450"
+      :y="510"
       :width="180"
       :height="100"
       :min-width="50"
@@ -56,7 +56,7 @@
       resizable
       handles="right"
       :x="800"
-      :y="450"
+      :y="510"
       :width="180"
       :height="100"
       :min-width="50"

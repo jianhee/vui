@@ -10,9 +10,9 @@
   <DemoCard title="尺寸">
     <template #desc><code>props.size</code></template>
     <DemoRow flex>
-      <MxBtn size="small"> small </MxBtn>
+      <MxBtn size="small">small</MxBtn>
       <MxBtn>medium</MxBtn>
-      <MxBtn size="large"> large </MxBtn>
+      <MxBtn size="large">large</MxBtn>
     </DemoRow>
   </DemoCard>
   <DemoCard title="铺满状态">
