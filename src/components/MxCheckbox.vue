@@ -1,6 +1,6 @@
 <!-- 多选框-项 -->
 <template>
-  <label :class="['mx-checkbox', { 'mx-checkbox-block': block, 'is-checked': isChecked }]">
+  <label :class="checkboxClasses">
     <!-- 图标 -->
     <input
       :checked="isChecked"
@@ -35,6 +35,17 @@ const props = defineProps({
   label: { type: String, default: null },
   // 块级元素
   block: { type: Boolean, default: false }
+});
+
+// 获取类名
+const checkboxClasses = computed(() => {
+  return [
+    'mx-checkbox',
+    {
+      'mx-checkbox-block': props.block,
+      'is-checked': isChecked.value
+    }
+  ];
 });
 
 // 选中状态：单独使用时传入

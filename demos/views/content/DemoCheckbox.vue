@@ -32,7 +32,7 @@
         :block="isBlock"
         @change="writeLog('change', $event)"
       >
-        （checked {{ checkboxValue2 }}）
+        (checked {{ checkboxValue2 }})
       </MxCheckbox>
     </DemoRow>
   </DemoCard>
@@ -66,7 +66,7 @@
       :direction="direction"
       @change="writeLog('change', $event)"
     >
-      （value {{ item.value }}）
+      (value {{ item.value }})
     </MxCheckboxGroup>
   </DemoCard>
 </template>
