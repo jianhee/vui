@@ -3,67 +3,121 @@
   <DemoCard title="类型">
     <template #desc><code>props.type</code></template>
     <DemoRow flex>
-      <MxBtn>default</MxBtn>
-      <MxBtn type="primary">primary</MxBtn>
-    </DemoRow>
-  </DemoCard>
-  <DemoCard title="尺寸">
-    <template #desc><code>props.size</code></template>
-    <DemoRow flex>
-      <MxBtn size="small">small</MxBtn>
-      <MxBtn>medium</MxBtn>
-      <MxBtn size="large">large</MxBtn>
-    </DemoRow>
-  </DemoCard>
-  <DemoCard title="铺满状态">
-    <template #desc><code>props.block</code></template>
-    <DemoRow>
-      <MxBtn block>default</MxBtn>
-    </DemoRow>
-    <DemoRow>
       <MxBtn
-        type="primary"
-        block
+        v-for="type in btnTypes"
+        :key="type"
+        :type="type"
       >
-        primary
+        {{ type }}
       </MxBtn>
     </DemoRow>
   </DemoCard>
   <DemoCard title="禁用状态">
     <template #desc><code>props.disabled</code></template>
     <DemoRow flex>
-      <MxBtn disabled>default</MxBtn>
       <MxBtn
-        type="primary"
+        v-for="type in btnTypes"
+        :key="type"
+        :type="type"
         disabled
       >
-        primary
+        {{ type }}
       </MxBtn>
     </DemoRow>
   </DemoCard>
-  <DemoCard title="加载状态">
+  <DemoCard title="链接按钮">
+    <template #desc><code>props.link</code></template>
+    <DemoRow flex>
+      <MxBtn
+        v-for="type in btnTypes"
+        :key="type"
+        :type="type"
+        link
+      >
+        {{ type }}
+      </MxBtn>
+    </DemoRow>
+  </DemoCard>
+  <DemoCard title="图标按钮">
+    <template #desc><code>props.icon</code> MxIcon 组件的 name/component/props</template>
+    <DemoRow
+      v-for="type in btnTypes"
+      :key="type"
+      flex
+    >
+      <MxBtn
+        :type="type"
+        icon="close"
+      >
+        传入 name
+      </MxBtn>
+      <MxBtn
+        :type="type"
+        :icon="IconClose"
+      >
+        传入 component
+      </MxBtn>
+      <MxBtn
+        :type="type"
+        :icon="{ name: 'close' }"
+      >
+        传入 { name }
+      </MxBtn>
+      <MxBtn
+        :type="type"
+        :icon="{ component: IconClose }"
+      >
+        传入 { component }
+      </MxBtn>
+    </DemoRow>
+  </DemoCard>
+  <DemoCard title="加载状态按钮">
     <template #desc><code>props.loading</code></template>
     <DemoRow flex>
-      <MxBtn loading>default</MxBtn>
       <MxBtn
-        type="primary"
+        v-for="type in btnTypes"
+        :key="type"
+        :type="type"
         loading
       >
-        primary
+        {{ type }}
       </MxBtn>
     </DemoRow>
   </DemoCard>
-  <DemoCard title="前置图标">
-    <template #desc><code>props.icon</code> MxIcon 组件的 name/component/props</template>
-    <DemoRow flex>
-      <MxBtn icon="close">传入 name</MxBtn>
-      <MxBtn :icon="IconClose">传入 component</MxBtn>
-      <MxBtn :icon="{ name: 'close' }">传入 { name }</MxBtn>
-      <MxBtn :icon="{ component: IconClose }">传入 { component }</MxBtn>
+  <DemoCard title="尺寸">
+    <template #desc><code>props.size</code></template>
+    <DemoRow
+      v-for="type in btnTypes"
+      :key="type"
+      flex
+    >
+      <MxBtn
+        v-for="size in ['small', 'medium', 'large']"
+        :key="size"
+        :type="type"
+        :size="size"
+      >
+        {{ size }}
+      </MxBtn>
+    </DemoRow>
+  </DemoCard>
+  <DemoCard title="显示类型">
+    <template #desc><code>props.display="block"</code> 铺满整行</template>
+    <DemoRow
+      v-for="type in btnTypes"
+      :key="type"
+    >
+      <MxBtn
+        :type="type"
+        display="block"
+      >
+        default
+      </MxBtn>
     </DemoRow>
   </DemoCard>
 </template>
 
 <script setup>
 import IconClose from '@/assets/icons/close.svg?component';
+const btnTypes = ['default', 'primary'];
 </script>

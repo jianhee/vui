@@ -10,9 +10,8 @@
     <MxIcon
       v-if="loading"
       :component="IconLoading"
-      spin
     />
-    <!-- 前置图标 -->
+    <!-- 图标 -->
     <MxIcon
       v-if="icon"
       v-bind="iconProps"
@@ -32,18 +31,20 @@ import IconLoading from '../assets/icons/loading.vue';
 const props = defineProps({
   // 类型：custom, default, primary
   type: { type: String, default: 'default' },
-  // 尺寸：small, medium, large
-  size: { type: String, default: 'medium' },
-  // 块级元素
-  block: { type: Boolean, default: false },
-  // 圆角
-  radius: { type: String, default: null },
   // 禁用状态
   disabled: { type: Boolean, default: false },
-  // 加载状态
+  // 链接按钮
+  link: { type: Boolean, default: false },
+  // 图标按钮：MxIcon 组件的 name/component/props
+  icon: { type: [String, Object], default: null },
+  // 加载状态按钮
   loading: { type: Boolean, default: false },
-  // 前置图标：MxIcon 组件的 name/component/props
-  icon: { type: [String, Object], default: null }
+  // 尺寸：small, medium, large
+  size: { type: String, default: 'medium' },
+  // 显示类型：block, inline
+  display: { type: String, default: null },
+  // 圆角
+  radius: { type: String, default: null }
 });
 
 // 获取类名
@@ -53,8 +54,9 @@ const btnClasses = computed(() => {
     `mx-btn-${props.type}`,
     `mx-btn-${props.size}`,
     {
-      'mx-btn-block': props.block,
-      'mx-disabled': isDisabled.value
+      'mx-disabled': isDisabled.value,
+      'is-link': props.link,
+      'mx-btn-block': props.display === 'block'
     }
   ];
 });
@@ -93,6 +95,7 @@ const iconProps = computed(() => getIconProps(props.icon));
   border-radius: 4px;
   transition: all 0.3s ease;
   &:not(:disabled):hover {
+    color: var(--mx-btn-active-text-color, var(--mx-btn-text-color));
     background-color: var(--mx-btn-active-bg-color, var(--mx-btn-bg-color));
     border: 1px solid var(--mx-btn-active-border-color, var(--mx-btn-border-color));
     opacity: var(--mx-btn-active-opacity, 1);
@@ -100,17 +103,36 @@ const iconProps = computed(() => getIconProps(props.icon));
 
   // 类型
   &-default {
-    --mx-btn-text-color: var(--mx-brand-color-default);
+    --mx-btn-text-color: var(--mx-text-color-regular);
     --mx-btn-bg-color: transparent;
     --mx-btn-border-color: var(--mx-border-color);
+    --mx-btn-active-text-color: var(--mx-brand-color-default);
     --mx-btn-active-bg-color: var(--mx-brand-color-a10);
     --mx-btn-active-border-color: var(--mx-brand-color-a30);
+    &.is-link {
+      --mx-btn-active-text-color: var(--mx-btn-text-color);
+      --mx-btn-active-opacity: 0.8;
+    }
   }
   &-primary {
     --mx-btn-text-color: #fff;
     --mx-btn-bg-color: var(--mx-brand-color-default);
     --mx-btn-border-color: var(--mx-brand-color-default);
     --mx-btn-active-opacity: 0.8;
+    &.is-link {
+      --mx-btn-text-color: var(--mx-brand-color-default);
+    }
+  }
+
+  // 链接按钮
+  &.is-link {
+    --mx-btn-bg-color: transparent;
+    --mx-btn-border-color: transparent;
+    --mx-btn-active-bg-color: transparent;
+    --mx-btn-active-border-color: transparent;
+
+    height: auto;
+    padding: 2px;
   }
 
   // 尺寸
