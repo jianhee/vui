@@ -4,7 +4,7 @@
     <template #desc>
       <ol>
         <li><code>props.name</code> 图标名称，或者 <code>props.component</code> 图标组件</li>
-        <li><code>props.color</code> 图标颜色，为空继承 css <code>color</code></li>
+        <li><code>props.color</code> 图标颜色，默认继承 css <code>color</code></li>
         <li><code>props.clickable</code> 是否可点击</li>
         <li><code>props.disabled</code> 是否禁用</li>
         <li><code>props.rotate</code> 旋转角度</li>
@@ -61,7 +61,7 @@
     </DemoRow>
   </DemoCard>
   <DemoCard title="图标大小">
-    <template #desc><code>props.size</code>，为空继承 css <code>font-size</code></template>
+    <template #desc><code>props.size</code>，默认继承 css <code>font-size</code></template>
     <DemoRow>使用 name</DemoRow>
     <DemoRow flex>
       <MxIcon name="close" />
@@ -98,7 +98,7 @@
   <DemoCard title="多图标">
     <template #desc>
       <ol>
-        <li>单图标：适用于单色图标或者无需切换状态，手动设置 color 对应不同状态，比如 <code>props.name="close"</code></li>
+        <li>单图标：适用于单色图标或者无需切换状态，手动设置 <code>color</code> 对应不同状态，比如 <code>props.name="close"</code></li>
         <li>多图标：适用于多色图标并且需要切换状态，内部自动切换图标对应不同状态，比如 <code>props.name="{ default: 'close', hover: 'close-hover', dark: 'close-dark', darkHover: 'close-dark-hover' }</code></li>
       </ol>
     </template>
