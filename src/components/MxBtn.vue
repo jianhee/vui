@@ -9,7 +9,7 @@
     <!-- loading -->
     <MxIcon
       v-if="loading"
-      :component="IconLoading"
+      :component="IconLoadingLoop"
     />
     <!-- 图标 -->
     <MxIcon
@@ -25,7 +25,7 @@
 import { computed } from 'vue';
 import { getIconProps } from '../composables';
 import MxIcon from './MxIcon.vue';
-import IconLoading from '../assets/icons/loading.vue';
+import IconLoadingLoop from '../assets/icons/loading-loop.vue';
 
 // 参数
 const props = defineProps({

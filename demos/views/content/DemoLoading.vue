@@ -1,16 +1,20 @@
 <!-- 加载状态 -->
 <template>
   <DemoCard title="基础用法">
-    <MxLoading />
-  </DemoCard>
-  <DemoCard title="自定义图标">
-    <template #desc><code>props.icon</code></template>
+    <template #desc><code>props.animation</code> 动画，默认 <code>loop</code> 转圈，<code>bubble</code> 气泡</template>
     <DemoRow flex>
-      <MxLoading :icon="IconClose" />
-      <MxLoading :icon="{ component: IconLoading, spin: false, size: 100 }" />
+      <MxLoading />
+      <MxLoading animate="bubble" />
     </DemoRow>
   </DemoCard>
-  <DemoCard title="自定义文本">
+  <DemoCard title="图标">
+    <template #desc><code>props.icon</code> 自定义图标，MxIcon 组件的 name/component/props</template>
+    <DemoRow flex>
+      <MxLoading :icon="IconClose" />
+      <MxLoading :icon="{ component: IconClose, size: 100 }" />
+    </DemoRow>
+  </DemoCard>
+  <DemoCard title="文本">
     <template #desc>
       <ol>
         <li><code>props.text</code> 文本内容</li>
@@ -26,5 +30,4 @@
 
 <script setup>
 import IconClose from '@/assets/icons/close.svg?component';
-import IconLoading from '@/assets/icons/loading2.svg?component';
 </script>
