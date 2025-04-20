@@ -1,8 +1,10 @@
 export default [
   { name: 'icon', title: '图标', file: 'DemoIcon' },
   { name: 'btn', title: '按钮', file: 'DemoBtn' },
+  { name: 'row', title: '行', file: 'DemoRow' },
   { name: 'form', title: '表单', file: 'DemoForm' },
   { name: 'input', title: '输入框', file: 'DemoInput' },
+  { name: 'select', title: '选择器', file: 'DemoSelect' },
   { name: 'checkbox', title: '多选框', file: 'DemoCheckbox' },
   { name: 'radio', title: '单选框', file: 'DemoCheckbox' },
   { name: 'menu', title: '菜单', file: 'DemoMenu' },

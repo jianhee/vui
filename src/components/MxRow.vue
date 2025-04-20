@@ -2,12 +2,13 @@
 <template>
   <component
     :is="tag"
-    :class="{
-      'mx-text-center': center,
-      'mx-text-ellipsis': ellipsis,
-      'mx-state-clickable': clickable,
-      'mx-state-disabled': disabled
-    }"
+    :class="[
+      'mx-row',
+      {
+        'mx-center': center,
+        'mx-ellipsis': ellipsis
+      }
+    ]"
   >
     <slot />
   </component>
@@ -15,15 +16,12 @@
 
 <script setup>
 defineProps({
+  // 标签
   tag: { type: String, default: 'div' },
-  // 居中
+  // 是否居中
   center: { type: Boolean, default: false },
-  // 单行省略
-  ellipsis: { type: Boolean, default: false },
-  // 是否可点击
-  clickable: { type: Boolean, default: false },
-  // 是否禁用
-  disabled: { type: Boolean, default: false }
+  // 是否溢出隐藏
+  ellipsis: { type: Boolean, default: false }
 });
 </script>
 
