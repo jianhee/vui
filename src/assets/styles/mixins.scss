@@ -1,0 +1,6 @@
+// 溢出隐藏
+@mixin mx-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

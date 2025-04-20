@@ -2,7 +2,7 @@
 <template>
   <DemoCard title="基础用法">
     <template #desc>
-      <DemoRow><code>props.items</code> 菜单项，每项的内容如下：</DemoRow>
+      <DemoRow><code>props.items</code> 菜单项</DemoRow>
       <ol>
         <li><code>item.key</code> 唯一标识，需要选中状态时必填</li>
         <li><code>item.label</code> 文本</li>
@@ -19,7 +19,8 @@
           <code>v-model:selected-key</code> 选中项的 <code>key</code>，当前为 <code>{{ seletedKey }}</code>
         </li>
         <li><code>show-selected-icon</code> 是否显示选中图标</li>
-        <li><code>@select</code> 点击菜单项时触发，<code>@select-change</code> 切换菜单项时触发，返回此项的所有数据</li>
+        <li><code>@select</code> 点击菜单项时触发，返回此项的所有数据</li>
+        <li><code>@select-change</code> 切换菜单项时触发，返回此项的所有数据</li>
       </ol>
     </template>
     <MxMenu

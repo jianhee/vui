@@ -16,7 +16,7 @@ const emits = defineEmits(['select', 'selectChange']);
 
 // 参数
 const props = defineProps({
-  // 菜单项
+  // 菜单项：{ key, label, icon, divider }
   items: { type: Array, default: null },
   // 是否显示选中图标：在选中项的最后加一个 √ 图标，此时每项必需 key
   showSelectedIcon: { type: Boolean, default: false }
@@ -35,9 +35,11 @@ const onSelect = item => {
 };
 
 // 共享数据
-provide('modelSelectedKey', modelSelectedKey);
-provide('showSelectedIcon', props.showSelectedIcon);
-provide('onSelect', onSelect);
+provide('parentMenu', {
+  modelSelectedKey,
+  showSelectedIcon: props.showSelectedIcon,
+  onSelect
+});
 </script>
 
 <style lang="scss">
