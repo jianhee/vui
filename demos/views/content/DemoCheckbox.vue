@@ -4,7 +4,7 @@
     <template #desc>
       <ol>
         <li>
-          <code>v-model:checked</code> 复选框的选中状态，当前为 <code>{{ checkboxValue1 }}</code> <code>{{ checkboxValue2 }}</code>
+          <code>v-model:checked</code> 复选框的 <code>checked</code>，当前为 <code>{{ checkboxValue1 }}</code> <code>{{ checkboxValue2 }}</code>
         </li>
         <li><code>props.label</code> 复选框的文本，<code>slot.default</code> 文本后的自定义内容（括号内）</li>
         <li>

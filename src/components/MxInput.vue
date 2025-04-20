@@ -1,9 +1,6 @@
 <!-- 输入框 -->
 <template>
-  <div
-    class="mx-input"
-    :class="inputClasses"
-  >
+  <div :class="wraperClasses">
     <!-- 前置图标 -->
     <MxIcon
       v-if="icon"
@@ -16,8 +13,9 @@
       :maxlength="maxlength"
       :disabled="disabled"
       type="text"
-      class="mx-input-inner"
       :class="innerClasses"
+      @focus="isFocus = true"
+      @blur="isFocus = false"
       @input="onValueInput"
       @change="onValueChange"
       @keyup.enter="onKeyupEnter"
@@ -27,14 +25,13 @@
       v-if="modelValue && !disabled"
       :component="IconClear"
       clickable
-      class="mx-input-clear"
       @click="clearValue"
     />
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { ref, computed } from 'vue';
 import { getIconProps } from '../composables';
 import IconClear from '../assets/icons/clear.vue';
 
@@ -44,20 +41,32 @@ const emits = defineEmits(['input', 'change', 'clear', 'enter']);
 const props = defineProps({
   // 原生属性
   placeholder: { type: String, default: null },
-  maxlength: { type: [Number, String], default: null },
   disabled: { type: Boolean, default: false },
-  // 尺寸：small, medium
-  size: { type: String, default: 'medium' },
+  maxlength: { type: [Number, String], default: null },
   // 前置图标：MxIcon 组件的 name/component/props
-  icon: { type: [String, Object], default: null }
+  icon: { type: [String, Object], default: null },
+  // 尺寸：small, medium
+  size: { type: String, default: 'medium' }
 });
 
-// 获取类名
-const inputClasses = computed(() => {
-  return [`mx-input-${props.size}`, { 'mx-disabled': props.disabled }];
+// 是否获取焦点
+const isFocus = ref(false);
+
+// 获取容器类名
+const wraperClasses = computed(() => {
+  return [
+    'mx-input',
+    `mx-input-${props.size}`,
+    {
+      'mx-disabled': props.disabled,
+      'is-focus': isFocus.value
+    }
+  ];
 });
+
+// 获取内容类名
 const innerClasses = computed(() => {
-  return { 'mx-disabled': props.disabled };
+  return ['mx-input-inner', { 'mx-disabled': props.disabled }];
 });
 
 // 获取图标 props
@@ -91,15 +100,16 @@ function clearValue() {
 
 <style lang="scss">
 .mx-input {
-  display: flex;
+  display: inline-flex;
   gap: 8px;
   align-items: center;
   width: 240px;
   padding: 0 8px;
-  border: 1px solid var(--mx-border-color);
+  border: 1px solid var(--mx-input-border-color);
   border-radius: 4px;
-  &:hover:not(.mx-disabled) {
-    border-color: var(--mx-brand-color-default);
+  &:not(.mx-disabled):hover,
+  &:not(.mx-disabled).is-focus {
+    border-color: var(--mx-input-active-border-color);
   }
 
   // 尺寸
@@ -117,6 +127,7 @@ function clearValue() {
     flex: auto;
     height: 100%;
     font-size: inherit;
+    color: var(--mx-input-text-color);
     outline: 0;
     background-color: transparent;
   }
@@ -124,14 +135,6 @@ function clearValue() {
   // 图标
   .mx-icon {
     color: var(--mx-input-icon-color);
-  }
-
-  // 清空按钮
-  &-clear {
-    display: none !important;
-  }
-  &:hover &-clear {
-    display: inline-flex !important;
   }
 }
 </style>
