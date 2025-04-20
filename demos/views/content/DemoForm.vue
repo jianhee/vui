@@ -3,21 +3,68 @@
   <DemoCard title="基础用法">
     <template #desc>
       <ol>
-        <li>根组件 <code>MxForm</code> 是容器</li>
+        <li><code>MxForm</code> 父组件容器</li>
         <ol>
-          <li><code>props.layout</code> 表单的布局</li>
-          <li><code>props.label-width</code> 表单项的标签宽度</li>
+          <li>
+            <code>props.direction</code> 排列方向，默认
+            <MxBtn
+              type="primary"
+              link
+              @click="direction = 'vertical'"
+            >
+              vertical
+            </MxBtn>
+            纵向（每项独占一行），
+            <MxBtn
+              type="primary"
+              link
+              @click="direction = 'horizontal'"
+            >
+              horizontal
+            </MxBtn>
+            横向（所有项共用一行）
+          </li>
+          <li>
+            <code>props.labelPosition</code> 表单项的标签位置，默认
+            <MxBtn
+              type="primary"
+              link
+              @click="labelPosition = 'left'"
+            >
+              left
+            </MxBtn>
+            左对齐，
+            <MxBtn
+              type="primary"
+              link
+              @click="labelPosition = 'right'"
+            >
+              right
+            </MxBtn>
+            右对齐，
+            <MxBtn
+              type="primary"
+              link
+              @click="labelPosition = 'top'"
+            >
+              top
+            </MxBtn>
+            顶部对齐
+          </li>
+          <li><code>props.labelWidth</code> 表单项的标签宽度</li>
         </ol>
-        <li>子组件 <code>MxFormFiled</code> 是表单项</li>
+        <li><code>MxFormFiled</code> 子组件表单项</li>
         <ol>
-          <li><code>props.label</code> 文本</li>
+          <li><code>props.label</code> 左侧文本</li>
+          <li><code>slot.default</code> 右侧内容</li>
         </ol>
       </ol>
     </template>
     <MxForm
-      :key="layout"
-      :layout="layout"
-      label-width="4em"
+      :key="direction + labelPosition"
+      :direction="direction"
+      :label-position="labelPosition"
+      label-width="5em"
     >
       <MxFormFiled label="输入框">
         <MxInput
@@ -25,22 +72,23 @@
           placeholder="请输入内容"
         />
       </MxFormFiled>
+      <MxFormFiled label="选择器">
+        <MxSelect
+          v-model:value="selectValue"
+          :items="selectOptions"
+        />
+      </MxFormFiled>
       <MxFormFiled label="多选框">
         <MxCheckbox
-          v-model:value="checkboxValue"
+          v-model:checked="checkboxValue"
           label="选项"
         />
       </MxFormFiled>
       <MxFormFiled label="单选框">
         <MxRadioGroup
-          v-model:value="layout"
-          :items="layoutItems"
-        />
-      </MxFormFiled>
-      <MxFormFiled label="选择器">
-        <MxSelect
-          v-model:value="selectValue"
-          :items="selectOptions"
+          v-model:value="radioValue"
+          :items="radioItems"
+          direction="horizontal"
         />
       </MxFormFiled>
       <MxFormFiled label="开关">
@@ -54,6 +102,10 @@
 <script setup>
 import { ref } from 'vue';
 
+// 表单
+const direction = ref('vertical');
+const labelPosition = ref('left');
+
 // 输入框
 const inputValue = ref('内容');
 
@@ -61,11 +113,10 @@ const inputValue = ref('内容');
 const checkboxValue = ref(false);
 
 // 单选框
-const layout = ref('horizontal');
-const layoutItems = [
-  { label: '横向', value: 'horizontal' },
-  { label: '纵向', value: 'vertical' },
-  { label: '内联', value: 'inline' }
+const radioValue = ref(1);
+const radioItems = [
+  { value: 1, label: '选项1' },
+  { value: 2, label: '选项2' }
 ];
 
 // 选择器
