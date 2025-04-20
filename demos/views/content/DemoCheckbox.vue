@@ -8,14 +8,23 @@
         </li>
         <li><code>props.label</code> 复选框的文本，<code>slot.default</code> 文本后的自定义内容（括号内）</li>
         <li>
-          <code>props.display</code> 默认 <code>inline</code> 行内，<code>block</code> 独占一行
+          <code>props.display</code> 显示类型，默认
           <MxBtn
             type="primary"
             link
-            @click="isBlock = !isBlock"
+            @click="display = 'inline'"
           >
-            切换
+            inline
           </MxBtn>
+          行内，
+          <MxBtn
+            type="primary"
+            link
+            @click="display = 'block'"
+          >
+            block
+          </MxBtn>
+          独占一行
         </li>
         <li><code>@change</code> 切换选中状态时触发，返回选中状态</li>
       </ol>
@@ -23,14 +32,14 @@
     <MxCheckbox
       v-model:checked="checkboxValue1"
       label="选项1"
-      :display="isBlock ? 'block' : undefined"
+      :display="display"
+      class="mx-mr-10"
       @change="writeLog('change', $event)"
     />
     <MxCheckbox
       v-model:checked="checkboxValue2"
       label="选项2"
-      :display="isBlock ? 'block' : undefined"
-      :class="{ 'mx-ml-10': !isBlock }"
+      :display="display"
       @change="writeLog('change', $event)"
     >
       (checked {{ checkboxValue2 }})
@@ -48,14 +57,23 @@
           <li><code>item.label</code> 每项的文本，<code>slot.default</code> 文本后的自定义内容（括号内）</li>
         </ol>
         <li>
-          <code>props.direction</code> 排列方向，默认 <code>vertical</code> 纵向（每个选项占一行），<code>horizontal</code> 横向（所有选项在一行）
+          <code>props.direction</code> 排列方向，默认
           <MxBtn
             type="primary"
             link
-            @click="isHorizontal = !isHorizontal"
+            @click="direction = 'vertical'"
           >
-            切换
+            vertical
           </MxBtn>
+          纵向（每项独占一行），
+          <MxBtn
+            type="primary"
+            link
+            @click="direction = 'horizontal'"
+          >
+            horizontal
+          </MxBtn>
+          横向（所有项共用一行）
         </li>
         <li><code>@change</code> 切换选项时触发，返回选中项的值</li>
       </ol>
@@ -64,7 +82,7 @@
       v-slot="{ item }"
       v-model:value="checkboxValue3"
       :items="checkboxItems"
-      :direction="isHorizontal ? 'horizontal' : undefined"
+      :direction="direction"
       @change="writeLog('change', $event)"
     >
       (value {{ item.value }})
@@ -76,9 +94,9 @@
 import { ref } from 'vue';
 import { writeLog } from '@/utils';
 
-// 切换显示方式
-const isBlock = ref(false);
-const isHorizontal = ref(false);
+// 显示方式
+const display = ref('inline');
+const direction = ref('vertical');
 
 // 值
 const checkboxValue1 = ref(true);

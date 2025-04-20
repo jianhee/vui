@@ -21,7 +21,7 @@ const emits = defineEmits(['change']);
 defineProps({
   // 选项：{ value: '值', label: '文本' }
   items: { type: Array, default: () => [] },
-  // 排列方向：默认 vertical 纵向（每个选项占一行），horizontal 横向（所有选项在一行）
+  // 排列方向：默认 vertical 纵向（每项独占一行），horizontal 横向（所有项共用一行）
   direction: { type: String, default: 'vertical' }
 });
 

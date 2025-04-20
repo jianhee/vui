@@ -102,22 +102,44 @@
     </DemoRow>
   </DemoCard>
   <DemoCard title="显示类型">
-    <template #desc><code>props.display</code> 默认 <code>inline</code> 行内，<code>block</code> 独占一行</template>
-    <DemoRow
+    <template #desc>
+      <code>props.display</code> 默认
+      <MxBtn
+        type="primary"
+        link
+        @click="display = 'inline'"
+      >
+        inline
+      </MxBtn>
+      行内，
+      <MxBtn
+        type="primary"
+        link
+        @click="display = 'block'"
+      >
+        block
+      </MxBtn>
+      独占一行
+    </template>
+    <MxBtn
       v-for="type in btnTypes"
       :key="type"
+      :type="type"
+      :display="display"
+      :class="{
+        'mx-mr-10': display === 'inline',
+        'mx-mb-10': display === 'block'
+      }"
     >
-      <MxBtn
-        :type="type"
-        display="block"
-      >
-        default
-      </MxBtn>
-    </DemoRow>
+      default
+    </MxBtn>
   </DemoCard>
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import IconClose from '@/assets/icons/close.svg?component';
+
 const btnTypes = ['default', 'primary'];
+const display = ref('block');
 </script>
