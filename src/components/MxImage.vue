@@ -14,7 +14,7 @@
       v-else
       class="mx-image-inner"
       :src="imgUrl"
-      :data-src="src"
+      :data-src="error ? src : null"
     />
   </div>
 </template>
@@ -29,13 +29,13 @@ import mxErrorImg from '../assets/images/mx-error.png';
 const props = defineProps({
   // 图片地址
   src: { type: String, default: null },
-  // 加载中的图片地址
+  // 加载中的图片地址：默认使用骨架屏
   loadingImg: { type: String, default: null },
   // 加载失败的图片地址
   errorImg: { type: String, default: mxErrorImg },
   // 宽度
   width: { type: String, default: null },
-  // 宽高比：默认为空，按照原始比例展示完整图片，设置后按指定比例展示部分图片
+  // 宽高比：默认按照原始比例展示完整图片，设置后按指定比例展示部分图片
   aspectRatio: { type: String, default: null },
   // 圆角
   radius: { type: String, default: null }

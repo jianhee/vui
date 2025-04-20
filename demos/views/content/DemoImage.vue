@@ -1,6 +1,6 @@
 <!-- 图片 -->
 <template>
-  <DemoCard title="基本用法">
+  <DemoCard title="基础用法">
     <template #desc>
       <ol>
         <li><code>props.src</code> 图片地址</li>
@@ -33,7 +33,7 @@
     </DemoRow>
   </DemoCard>
   <DemoCard title="图片宽高比">
-    <template #desc><code>props.aspectRatio</code> 默认为空，按照原始比例展示完整图片，设置后按指定比例展示部分图片</template>
+    <template #desc><code>props.aspectRatio</code> 默认按照原始比例展示完整图片，设置后按指定比例展示部分图片</template>
     <DemoRow flex>
       <MxImage
         src="https://pc-newtab.maxthonimg.com/mxbg/horizontal/1031.jpg"
