@@ -38,9 +38,6 @@ import { ref } from 'vue';
 import { writeLog } from '@/utils';
 import IconClose from '@/assets/icons/close.svg?component';
 
-// 当前选中项的key
-const seletedKey = ref(1);
-
 // 菜单1
 const menuItems1 = [
   // 文本
@@ -54,6 +51,7 @@ const menuItems1 = [
 ];
 
 // 菜单2
+const seletedKey = ref(1);
 const menuItems2 = [1, 2, 3, 4].map(key => ({
   key,
   label: `选项${key}`

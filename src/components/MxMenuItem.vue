@@ -12,7 +12,7 @@
     />
     <span class="mx-menu-label">{{ item.label }}</span>
     <MxIcon
-      v-if="parentMenu.showSelectedIcon && item.key === parentMenu.modelSelectedKey"
+      v-if="parentMenu.showSelectedIcon && item.key === parentMenu.modelSelectedKey.value"
       :component="IconSelected"
     />
   </div>
