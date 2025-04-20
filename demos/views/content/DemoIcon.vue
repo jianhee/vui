@@ -61,7 +61,7 @@
     </DemoRow>
   </DemoCard>
   <DemoCard title="图标大小">
-    <template #desc><code>props.size</code>，默认继承 css <code>font-size</code></template>
+    <template #desc><code>props.size</code> 默认继承 css <code>font-size</code></template>
     <DemoRow>使用 name</DemoRow>
     <DemoRow flex>
       <MxIcon name="close" />
@@ -98,8 +98,8 @@
   <DemoCard title="多图标">
     <template #desc>
       <ol>
-        <li>单图标：适用于单色图标或者无需切换状态，手动设置 <code>color</code> 对应不同状态，比如 <code>props.name="close"</code></li>
-        <li>多图标：适用于多色图标并且需要切换状态，内部自动切换图标对应不同状态，比如 <code>props.name="{ default: 'close', hover: 'close-hover', dark: 'close-dark', darkHover: 'close-dark-hover' }</code></li>
+        <li>单图标：适用于单色图标和无需切换状态的多色图标，手动设置 <code>color</code> 对应不同状态，传入单个图标 <code>props.name="close"</code></li>
+        <li>多图标：适用于需要切换状态的多色图标，内部自动切换图标对应不同状态，传入多个图标 <code>props.name="{ default: 'close', hover: 'close-hover', dark: 'close-dark', darkHover: 'close-dark-hover' }</code></li>
       </ol>
     </template>
     <DemoRow>使用 name</DemoRow>
