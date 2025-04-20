@@ -4,7 +4,7 @@ export default [
   { name: 'form', title: '表单', file: 'DemoForm' },
   { name: 'input', title: '输入框', file: 'DemoInput' },
   { name: 'checkbox', title: '多选框', file: 'DemoCheckbox' },
-  { name: 'radio', title: '单选框', file: 'DemoRadio' },
+  { name: 'radio', title: '单选框', file: 'DemoCheckbox' },
   { name: 'menu', title: '菜单', file: 'DemoMenu' },
   { name: 'dropdown', title: '下拉框', file: 'DemoDropdown' },
   { name: 'dialog', title: '弹窗', file: 'DemoDialog' },

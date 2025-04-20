@@ -27,6 +27,10 @@
   --mx-checkbox-icon-color: var(--mx-border-color);
   --mx-checkbox-icon-active-color: var(--mx-brand-color-default);
 
+  // 单选框
+  --mx-radio-icon-color: var(--mx-checkbox-icon-color);
+  --mx-radio-icon-active-color: var(--mx-checkbox-icon-active-color);
+
   // 遮罩
   --mx-overlay-bg-color: rgb(0 0 0 / 20%);
 
