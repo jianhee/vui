@@ -1,12 +1,11 @@
 <!-- 多选框-组 -->
 <template>
-  <div class="mx-checkbox-group">
+  <div :class="['mx-checkbox-group', `mx-checkbox-${direction}`]">
     <MxCheckbox
       v-for="(item, index) in items"
       :key="index"
       :value="item.value"
       :label="item.label"
-      :block="direction === 'vertical'"
     >
       <slot :item="item" />
     </MxCheckbox>
@@ -20,12 +19,10 @@ const emits = defineEmits(['change']);
 
 // 参数
 defineProps({
-  // 选项
-  // value    值
-  // label    文本
+  // 选项：{ value: '值', label: '文本' }
   items: { type: Array, default: () => [] },
-  // 排列方向：horizontal, vertical
-  direction: { type: String, default: 'horizontal' }
+  // 排列方向：默认 vertical 纵向（每个选项占一行），horizontal 横向（所有选项在一行）
+  direction: { type: String, default: 'vertical' }
 });
 
 // 当前值
@@ -48,3 +45,14 @@ provide('parentGroup', {
   onValueChange
 });
 </script>
+
+<style lang="scss">
+.mx-checkbox {
+  &-horizontal .mx-checkbox:not(:last-child) {
+    margin-right: 10px;
+  }
+  &-vertical .mx-checkbox {
+    display: flex;
+  }
+}
+</style>

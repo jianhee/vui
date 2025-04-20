@@ -102,7 +102,7 @@
     </DemoRow>
   </DemoCard>
   <DemoCard title="显示类型">
-    <template #desc><code>props.display="block"</code> 铺满整行</template>
+    <template #desc><code>props.display</code> 默认 <code>inline</code> 行内，<code>block</code> 独占一行</template>
     <DemoRow
       v-for="type in btnTypes"
       :key="type"

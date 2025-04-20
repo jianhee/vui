@@ -6,11 +6,12 @@
         <li>
           <code>v-model:checked</code> 复选框的选中状态，当前为 <code>{{ checkboxValue1 }}</code> <code>{{ checkboxValue2 }}</code>
         </li>
-        <li><code>props.label</code> 文本，<code>slot.default</code> 文本后的自定义内容（括号内）</li>
+        <li><code>props.label</code> 复选框的文本，<code>slot.default</code> 文本后的自定义内容（括号内）</li>
         <li>
-          <code>props.block</code> 块级元素
+          <code>props.display</code> 默认 <code>inline</code> 行内，<code>block</code> 独占一行
           <MxBtn
-            size="small"
+            type="primary"
+            link
             @click="isBlock = !isBlock"
           >
             切换
@@ -19,22 +20,21 @@
         <li><code>@change</code> 切换选中状态时触发，返回选中状态</li>
       </ol>
     </template>
-    <DemoRow>
-      <MxCheckbox
-        v-model:checked="checkboxValue1"
-        label="选项1"
-        :block="isBlock"
-        @change="writeLog('change', $event)"
-      />
-      <MxCheckbox
-        v-model:checked="checkboxValue2"
-        label="选项2"
-        :block="isBlock"
-        @change="writeLog('change', $event)"
-      >
-        (checked {{ checkboxValue2 }})
-      </MxCheckbox>
-    </DemoRow>
+    <MxCheckbox
+      v-model:checked="checkboxValue1"
+      label="选项1"
+      :display="isBlock ? 'block' : undefined"
+      @change="writeLog('change', $event)"
+    />
+    <MxCheckbox
+      v-model:checked="checkboxValue2"
+      label="选项2"
+      :display="isBlock ? 'block' : undefined"
+      :class="{ 'mx-ml-10': !isBlock }"
+      @change="writeLog('change', $event)"
+    >
+      (checked {{ checkboxValue2 }})
+    </MxCheckbox>
   </DemoCard>
   <DemoCard title="分组用法">
     <template #desc>
@@ -48,10 +48,11 @@
           <li><code>item.label</code> 每项的文本，<code>slot.default</code> 文本后的自定义内容（括号内）</li>
         </ol>
         <li>
-          <code>props.direction</code> 排列方向
+          <code>props.direction</code> 排列方向，默认 <code>vertical</code> 纵向（每个选项占一行），<code>horizontal</code> 横向（所有选项在一行）
           <MxBtn
-            size="small"
-            @click="isVertical = !isVertical"
+            type="primary"
+            link
+            @click="isHorizontal = !isHorizontal"
           >
             切换
           </MxBtn>
@@ -63,7 +64,7 @@
       v-slot="{ item }"
       v-model:value="checkboxValue3"
       :items="checkboxItems"
-      :direction="isVertical ? 'vertical' : 'horizontal'"
+      :direction="isHorizontal ? 'horizontal' : undefined"
       @change="writeLog('change', $event)"
     >
       (value {{ item.value }})
@@ -75,12 +76,12 @@
 import { ref } from 'vue';
 import { writeLog } from '@/utils';
 
-// 切换
+// 切换显示方式
 const isBlock = ref(false);
-const isVertical = ref(false);
+const isHorizontal = ref(false);
 
 // 值
-const checkboxValue1 = ref(false);
+const checkboxValue1 = ref(true);
 const checkboxValue2 = ref(false);
 const checkboxValue3 = ref([1]);
 

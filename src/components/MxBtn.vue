@@ -41,8 +41,8 @@ const props = defineProps({
   loading: { type: Boolean, default: false },
   // 尺寸：small, medium, large
   size: { type: String, default: 'medium' },
-  // 显示类型：block, inline
-  display: { type: String, default: null },
+  // 显示类型：inline 行内，block 独占一行
+  display: { type: String, default: 'inline' },
   // 圆角
   radius: { type: String, default: null }
 });
@@ -54,9 +54,9 @@ const btnClasses = computed(() => {
     `mx-btn-${props.type}`,
     `mx-btn-${props.size}`,
     {
+      'mx-btn-block': props.display === 'block',
       'mx-disabled': isDisabled.value,
-      'is-link': props.link,
-      'mx-btn-block': props.display === 'block'
+      'is-link': props.link
     }
   ];
 });

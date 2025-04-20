@@ -44,10 +44,7 @@ const emits = defineEmits(['open', 'close']);
 
 // 参数
 const props = defineProps({
-  // 触发方式
-  // hover        对齐元素
-  // click        对齐元素
-  // contextmenu  对齐鼠标
+  // 触发方式：hover-对齐元素, click-对齐元素, contextmenu-对齐鼠标
   trigger: { type: String, default: 'hover' }
 });
 
@@ -59,7 +56,7 @@ const triggerRef = ref(null);
 const contentRef = ref(null);
 const contentVisible = ref(false);
 const contentStyles = ref(null);
-const contentOffset = 5;
+const contentMargin = 5;
 
 // 鼠标进入：对齐元素
 let hoverTimer = null;
@@ -148,10 +145,10 @@ function updatePosition({ triggerLeft, triggerTop, triggerBottom }) {
     const contentLeft = Math.max(0, Math.min(maxLeft, currentLeft));
 
     // 垂直方向
-    let currentTop = triggerBottom + contentOffset;
-    const maxTop = windowHeight.value - contentHeight - contentOffset;
+    let currentTop = triggerBottom + contentMargin;
+    const maxTop = windowHeight.value - contentHeight - contentMargin;
     if (currentTop > maxTop) {
-      currentTop = triggerTop - contentHeight - contentOffset;
+      currentTop = triggerTop - contentHeight - contentMargin;
     }
     const contentTop = Math.max(0, currentTop);
 

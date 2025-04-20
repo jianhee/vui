@@ -5,7 +5,7 @@
       <!-- 遮罩 -->
       <MxOverlay
         v-show="modelVisible"
-        @click.self="onClickMode"
+        @click.self="onClickModal"
       >
         <!-- 主体 -->
         <div
@@ -14,10 +14,8 @@
           :class="drawerClasses"
           :style="drawerStyles"
         >
-          <div
-            v-if="title"
-            class="mx-drawer-header"
-          >
+          <!-- 顶栏 -->
+          <div class="mx-drawer-header">
             <!-- 标题 -->
             <div class="mx-drawer-title">{{ title }}</div>
             <!-- 关闭按钮 -->
@@ -53,15 +51,15 @@ const emits = defineEmits(['open', 'close']);
 // 参数
 const props = defineProps({
   // 宽度
-  width: { type: String, default: '360px' },
+  width: { type: String, default: '30vh' },
+  // 出现位置：left, right
+  placement: { type: String, default: 'left' },
   // 标题
   title: { type: String, default: null },
   // 是否显示关闭按钮
   showClose: { type: Boolean, default: true },
   // 点击 modal 时是否可以关闭
-  closeOnClickModal: { type: Boolean, default: true },
-  // 出现位置：left, right
-  placement: { type: String, default: 'left' }
+  closeOnClickModal: { type: Boolean, default: true }
 });
 
 // 是否显示
@@ -78,7 +76,7 @@ const drawerStyles = computed(() => {
 });
 
 // 点击遮罩
-function onClickMode() {
+function onClickModal() {
   if (!props.closeOnClickModal) return;
   closeDrawer();
 }
@@ -106,6 +104,7 @@ watch(modelVisible, val => {
 <style lang="scss">
 @use '../assets/styles/vars';
 .mx-drawer {
+  // 主体
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -120,6 +119,8 @@ watch(modelVisible, val => {
   &-right {
     right: 0;
   }
+
+  // 顶栏
   &-header {
     display: flex;
     flex: none;
@@ -140,12 +141,16 @@ watch(modelVisible, val => {
   &-close:hover {
     color: var(--mx-drawer-close-icon-active-color);
   }
+
+  // 内容
   &-body {
     flex: auto;
     padding: 0 16px;
     overflow: auto;
     font-size: 14px;
   }
+
+  // 底栏
   &-footer {
     display: flex;
     gap: 10px;

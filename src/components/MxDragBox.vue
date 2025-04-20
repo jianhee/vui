@@ -30,7 +30,7 @@ const props = defineProps({
   draggable: { type: Boolean, default: false },
   // 是否可缩放
   resizable: { type: Boolean, default: false },
-  // 缩放时可拖拽的轴：定位元素支持四个边，非定位元素只支持右边和下边
+  // 缩放时可拖拽的轴
   handles: { type: String, default: 'left, right, top, bottom' },
   // 是否固定定位
   fixed: { type: Boolean, default: true },
@@ -48,10 +48,16 @@ const boxIsDraging = ref(false);
 // 手柄
 const handleDragingName = ref(null);
 const handleItems = computed(() => {
+  // 是否可缩放
   if (!props.resizable) return null;
+
+  // 拖拽盒子时不能缩放
   if (boxIsDraging.value) return null;
+
+  // 拖拽手柄时不显示其它手柄
   if (handleDragingName.value) return [handleDragingName.value];
 
+  // 定位元素支持四个边，非定位元素只支持右边和下边
   const items = props.handles.replace(/\s/g, '').split(',');
   if (props.fixed) {
     return items;
@@ -60,14 +66,18 @@ const handleItems = computed(() => {
   }
 });
 
-// 开始位置和尺寸
+// 开始位置
 let mouseStartPos = { x: 0, y: 0 };
 let boxStartPos = { x: 0, y: 0 };
+
+// 开始尺寸
 let boxStartSize = { width: 0, height: 0 };
 
-// 当前位置和尺寸：只支持left和top
+// 当前位置：只支持left和top
 const boxCurrentX = defineModel('x', { type: Number, default: null });
 const boxCurrentY = defineModel('y', { type: Number, default: null });
+
+// 当前尺寸
 const boxCurrentWidth = defineModel('width', { type: Number, default: null });
 const boxCurrentHeight = defineModel('height', { type: Number, default: null });
 
@@ -95,7 +105,7 @@ const boxStyles = computed(() => {
   };
 });
 
-// 长按开始移动：修复移动时无法选中文本的问题
+// 长按开始移动
 onLongPress(boxRef, e => {
   if (!props.draggable) return;
   if (!props.fixed) return;
@@ -138,7 +148,7 @@ function onBoxMoveStop() {
   window.removeEventListener('mouseup', onBoxMoveStop);
 }
 
-// 缩放开始
+// 开始缩放
 function onResizeStart(e, _handleName) {
   if (!props.resizable) return;
 
@@ -185,7 +195,7 @@ function onBoxResizing(e) {
   }
 }
 
-// 拖拽结束
+// 缩放结束
 function onResizeStop() {
   handleDragingName.value = null;
   window.removeEventListener('mousemove', onBoxResizing);
@@ -196,6 +206,7 @@ function onResizeStop() {
 <style lang="scss">
 @use '../assets/styles/vars';
 .mx-drag {
+  // 盒子
   &-box {
     z-index: 999;
   }
@@ -203,6 +214,8 @@ function onResizeStop() {
     user-select: none;
     transition: none;
   }
+
+  // 手柄
   &-handle {
     position: absolute;
     z-index: 999;

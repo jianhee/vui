@@ -1,9 +1,9 @@
 <!-- 下拉框 -->
 <template>
-  <DemoCard title="基本用法">
+  <DemoCard title="基础用法">
     <template #desc>
       <ol>
-        <li><code>slot.default</code> 触发元素，<code>slot.content</code> 显示内容</li>
+        <li><code>slot.default</code> 触发元素，<code>slot.content</code> 内容元素</li>
         <li><code>props.trigger</code> 触发方式</li>
         <li><code>@open</code> 和 <code>@close</code> 切换显示状态时触发</li>
       </ol>
@@ -37,7 +37,7 @@
     <template #desc><code>dropdownRef.open()</code></template>
     <MxBtn @click="openDropdown">点击打开</MxBtn>
     <MxDropdown
-      ref="contentRef"
+      ref="dropdownRef"
       trigger="click"
     >
       <template #content>
@@ -52,11 +52,11 @@ import { ref } from 'vue';
 import { writeLog } from '@/utils';
 
 // 下拉框
-const contentRef = ref(null);
+const dropdownRef = ref(null);
 
 // 打开下拉框
 function openDropdown(event) {
-  contentRef.value.open(event);
+  dropdownRef.value.open(event);
 }
 </script>
 

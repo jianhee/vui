@@ -5,7 +5,7 @@
       <!-- 遮罩 -->
       <MxOverlay
         v-show="modelVisible"
-        @click.self="onClickMode"
+        @click.self="onClickModal"
       >
         <!-- 主体 -->
         <div
@@ -13,10 +13,8 @@
           class="mx-dialog"
           :style="dialogStyles"
         >
-          <div
-            v-if="title"
-            class="mx-dialog-header"
-          >
+          <!-- 顶栏 -->
+          <div class="mx-dialog-header">
             <!-- 标题 -->
             <span class="mx-dialog-title">{{ title }}</span>
             <!-- 关闭按钮 -->
@@ -57,7 +55,7 @@ const props = defineProps({
   title: { type: String, default: null },
   // 是否显示关闭按钮
   showClose: { type: Boolean, default: true },
-  // 是否在点击 modal 时关闭弹窗
+  // 是否在点击 modal 时关闭
   closeOnClickModal: { type: Boolean, default: true }
 });
 
@@ -70,7 +68,7 @@ const dialogStyles = computed(() => {
 });
 
 // 点击遮罩
-function onClickMode() {
+function onClickModal() {
   if (!props.closeOnClickModal) return;
   closeDialog();
 }
@@ -98,13 +96,16 @@ watch(modelVisible, val => {
 <style lang="scss">
 @use '../assets/styles/vars';
 .mx-dialog {
-  max-width: 100vw;
+  // 主体
+  max-width: 98vw;
   padding: 16px;
-  margin: 50px auto;
+  margin: 15vh auto;
   overflow: auto;
   background-color: var(--mx-dialog-bg-color);
   border-radius: 4px;
   transition: transform 0.3s ease;
+
+  // 顶栏
   &-header {
     display: flex;
     gap: 10px;
@@ -124,9 +125,13 @@ watch(modelVisible, val => {
   &-close:hover {
     color: var(--mx-dialog-close-icon-active-color);
   }
+
+  // 内容
   &-body {
     font-size: 14px;
   }
+
+  // 底栏
   &-footer {
     display: flex;
     gap: 10px;

@@ -29,12 +29,12 @@ const parentGroup = inject('parentGroup', null);
 
 // 参数
 const props = defineProps({
-  // 值：分组使用时传入
+  // 值：单独使用无效
   value: { type: [String, Number], default: null },
   // 文本
   label: { type: String, default: null },
-  // 块级元素
-  block: { type: Boolean, default: false }
+  // 显示类型：inline 行内，block 独占一行，分组使用无效
+  display: { type: String, default: 'inline' }
 });
 
 // 获取类名
@@ -42,13 +42,13 @@ const checkboxClasses = computed(() => {
   return [
     'mx-checkbox',
     {
-      'mx-checkbox-block': props.block,
+      'mx-checkbox-block': props.display === 'block',
       'is-checked': isChecked.value
     }
   ];
 });
 
-// 选中状态：单独使用时传入
+// 选中状态：分组使用无效
 const modelChecked = defineModel('checked', { type: Boolean, default: false });
 
 // 是否选中
@@ -80,7 +80,6 @@ function onCheckedChange() {
   gap: 8px;
   align-items: center;
   height: 32px;
-  margin-right: 10px;
   font-size: 14px;
   line-height: 32px;
   white-space: nowrap;
@@ -91,7 +90,6 @@ function onCheckedChange() {
   // 块级元素
   &-block {
     display: flex;
-    margin-right: 0;
   }
 
   // 图标
