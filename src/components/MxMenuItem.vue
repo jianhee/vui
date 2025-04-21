@@ -12,7 +12,7 @@
     />
     <span class="mx-menu-label">{{ item.label }}</span>
     <MxIcon
-      v-if="parentMenu.showSelectedIcon && item.key === parentMenu.modelSelectedKey.value"
+      v-if="isShowSelectedIcon"
       :component="IconSelected"
     />
   </div>
@@ -33,7 +33,7 @@ const parentMenu = inject('parentMenu', null);
 // 参数
 const props = defineProps({
   // 菜单项
-  // key      唯一标识，需要选中状态时必填
+  // key      唯一标识，需要选中状态时必填，也可以是 parentMenu.keyName 指定的其它键名
   // label    文本
   // icon     前置图标，MxIcon 组件的 name/component/props
   // divider  分隔符
@@ -42,6 +42,12 @@ const props = defineProps({
 
 // 图标 props
 const iconProps = computed(() => getIconProps(props.item.icon));
+
+// 是否显示选中图标
+const isShowSelectedIcon = computed(() => {
+  const isSelected = props.item[parentMenu.keyName] === parentMenu.modelSelectedKey.value;
+  return parentMenu.showSelectedIcon && isSelected;
+});
 </script>
 
 <style lang="scss">

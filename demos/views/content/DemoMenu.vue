@@ -1,35 +1,47 @@
 <!-- 菜单 -->
 <template>
+  <DemoRow>通常搭配 <code>MxDropdown</code> 一起使用</DemoRow>
   <DemoCard title="基础用法">
     <template #desc>
       <DemoRow><code>props.items</code> 菜单项</DemoRow>
       <ol>
-        <li><code>item.key</code> 唯一标识，需要选中状态时必填</li>
+        <li><code>item.key</code> 唯一标识，需要选中状态时必填，也可以是 <code>props.keyName</code> 指定的其它键名</li>
         <li><code>item.label</code> 文本</li>
         <li><code>item.icon</code> 前置图标， MxIcon 组件的 name/component/props</li>
         <li><code>item.divider</code> 分隔符</li>
       </ol>
     </template>
-    <MxMenu :items="menuItems1" />
+    <MxDropdown>
+      <MxBtn>基本用法</MxBtn>
+      <template #content>
+        <MxMenu :items="menuItems1" />
+      </template>
+    </MxDropdown>
   </DemoCard>
   <DemoCard title="选中项">
     <template #desc>
       <ol>
         <li>
-          <code>v-model:selected-key</code> 选中项的 <code>key</code>，当前为 <code>{{ seletedKey }}</code>
+          <code>v-model:selectedKey</code> 选中项的 <code>key</code>，当前为 <code>{{ seletedKey }}</code>
         </li>
-        <li><code>show-selected-icon</code> 是否显示选中图标</li>
+        <li><code>props.keyName</code> 自定义键名，默认 <code>key</code></li>
+        <li><code>props.showSelectedIcon</code> 是否显示选中图标</li>
         <li><code>@select</code> 点击菜单项时触发，返回此项的所有数据</li>
         <li><code>@select-change</code> 切换菜单项时触发，返回此项的所有数据</li>
       </ol>
     </template>
-    <MxMenu
-      v-model:selected-key="seletedKey"
-      :items="menuItems2"
-      show-selected-icon
-      @select="writeLog('select', $event)"
-      @select-change="writeLog('select-change', $event)"
-    />
+    <MxDropdown>
+      <MxBtn>选中项</MxBtn>
+      <template #content>
+        <MxMenu
+          v-model:selected-key="seletedKey"
+          :items="menuItems2"
+          show-selected-icon
+          @select="writeLog('select', $event)"
+          @select-change="writeLog('select-change', $event)"
+        />
+      </template>
+    </MxDropdown>
   </DemoCard>
 </template>
 
