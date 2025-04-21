@@ -35,7 +35,7 @@
 </template>
 
 <script setup>
-import { ref, useSlots, nextTick } from 'vue';
+import { ref, useSlots } from 'vue';
 import { onClickOutside, useWindowSize } from '@vueuse/core';
 
 defineOptions({ inheritAttrs: false });
@@ -135,29 +135,27 @@ function closeDropdown() {
 
 // 更新定位
 function updatePosition({ triggerLeft, triggerTop, triggerBottom }) {
-  nextTick(() => {
-    // 内容元素
-    const { clientWidth: contentWidth, clientHeight: contentHeight } = contentRef.value;
+  // 内容元素
+  const { clientWidth: contentWidth, clientHeight: contentHeight } = contentRef.value;
 
-    // 水平方向
-    const currentLeft = triggerLeft;
-    const maxLeft = windowWidth.value - contentWidth;
-    const contentLeft = Math.max(0, Math.min(maxLeft, currentLeft));
+  // 水平方向
+  const currentLeft = triggerLeft;
+  const maxLeft = windowWidth.value - contentWidth;
+  const contentLeft = Math.max(0, Math.min(maxLeft, currentLeft));
 
-    // 垂直方向
-    let currentTop = triggerBottom + contentMargin;
-    const maxTop = windowHeight.value - contentHeight - contentMargin;
-    if (currentTop > maxTop) {
-      currentTop = triggerTop - contentHeight - contentMargin;
-    }
-    const contentTop = Math.max(0, currentTop);
+  // 垂直方向
+  let currentTop = triggerBottom + contentMargin;
+  const maxTop = windowHeight.value - contentHeight - contentMargin;
+  if (currentTop > maxTop) {
+    currentTop = triggerTop - contentHeight - contentMargin;
+  }
+  const contentTop = Math.max(0, currentTop);
 
-    // 更新样式
-    contentStyles.value = {
-      left: `${contentLeft}px`,
-      top: `${contentTop}px`
-    };
-  });
+  // 更新样式
+  contentStyles.value = {
+    left: `${contentLeft}px`,
+    top: `${contentTop}px`
+  };
 }
 
 // 外部调用方法，比如v-for渲染多个触发元素时，直接调用方法更方便

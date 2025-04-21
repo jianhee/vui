@@ -29,7 +29,7 @@ defineProps({
 const modelValue = defineModel('value', { type: [String, Number], default: null });
 
 // 修改值
-function onValueChange(isChecked, checkedVal) {
+function onValueChange(checkedVal) {
   modelValue.value = checkedVal;
   emits('change', checkedVal);
 }

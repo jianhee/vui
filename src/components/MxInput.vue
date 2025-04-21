@@ -92,9 +92,8 @@ function onKeyupEnter() {
 
 // 清空值
 function clearValue() {
-  const newVal = '';
-  modelValue.value = newVal;
-  emits('clear', newVal);
+  modelValue.value = '';
+  emits('clear');
 }
 </script>
 
@@ -107,6 +106,7 @@ function clearValue() {
   padding: 0 8px;
   border: 1px solid var(--mx-input-border-color);
   border-radius: 4px;
+  transition: border-color 0.3s ease;
   &:not(.mx-disabled):hover,
   &:not(.mx-disabled).is-focus {
     border-color: var(--mx-input-active-border-color);

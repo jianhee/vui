@@ -4,10 +4,11 @@
     <template #desc>
       <ol>
         <li>
-          <code>v-model:value</code> 输入框的 <code>value</code>，当前值为 <code>{{ inputValue1 }}</code>
+          <code>v-model:value</code> 输入框的值，当前值为 <code>{{ inputValue1 }}</code>
         </li>
-        <li><code>@input</code>, <code>@change</code> 原生事件</li>
-        <li><code>@enter</code> 按下 Enter 键时触发</li>
+        <li><code>@input</code> 输入值时触发，返回输入框的值</li>
+        <li><code>@change</code> 修改值时触发，返回输入框的值</li>
+        <li><code>@enter</code> 按下 Enter 键时触发，返回输入框的值</li>
         <li><code>@clear</code> 点击清空按钮时触发</li>
       </ol>
     </template>
@@ -17,7 +18,7 @@
       @input="writeLog('input', $event)"
       @change="writeLog('change', $event)"
       @enter="writeLog('enter', $event)"
-      @clear="writeLog('clear', $event)"
+      @clear="writeLog('clear')"
     />
   </DemoCard>
   <DemoCard title="原生属性">

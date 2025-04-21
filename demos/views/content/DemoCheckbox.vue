@@ -4,7 +4,7 @@
     <template #desc>
       <ol>
         <li>
-          <code>v-model:checked</code> 选中状态 <code>checked</code>，当前为 <code>{{ checked1 }}</code> <code>{{ checked2 }}</code>
+          <code>v-model:checked</code> 选中状态，当前为 <code>{{ checked1 }}</code> <code>{{ checked2 }}</code>
         </li>
         <li><code>props.label</code> 文本，<code>slot.default</code> 文本后的自定义内容（括号内）</li>
         <li>
@@ -77,7 +77,7 @@
           </MxBtn>
           横向（所有项共用一行）
         </li>
-        <li><code>@change</code> 切换选项时触发，返回选中项的值</li>
+        <li><code>@change</code> 切换选项时触发，返回选中项的 <code>value</code></li>
       </ol>
     </template>
     <component

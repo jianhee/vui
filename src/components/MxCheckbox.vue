@@ -62,12 +62,12 @@ const isChecked = computed(() => {
 
 // 切换选中状态
 function onCheckedChange() {
-  const newState = !isChecked.value;
   if (parentGroup) {
-    parentGroup.onValueChange(newState, props.value);
+    parentGroup.onValueChange(props.value);
   } else {
-    modelChecked.value = newState;
-    emits('change', newState);
+    const newChecked = !isChecked.value;
+    modelChecked.value = newChecked;
+    emits('change', newChecked);
   }
 }
 </script>

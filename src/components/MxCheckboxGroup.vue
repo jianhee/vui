@@ -29,7 +29,7 @@ defineProps({
 const modelValue = defineModel('value', { type: Array, default: () => [] });
 
 // 修改值
-function onValueChange(isChecked, checkedVal) {
+function onValueChange(checkedVal) {
   const index = modelValue.value.findIndex(val => val === checkedVal);
   if (index === -1) {
     modelValue.value.push(checkedVal);
