@@ -98,43 +98,6 @@ function clearValue() {
 </script>
 
 <style lang="scss">
-.mx-input {
-  display: inline-flex;
-  gap: 8px;
-  align-items: center;
-  width: 240px;
-  padding: 0 8px;
-  border: 1px solid var(--mx-input-border-color);
-  border-radius: 4px;
-  transition: border-color 0.3s ease;
-  &:not(.mx-disabled):hover,
-  &:not(.mx-disabled).is-focus {
-    border-color: var(--mx-input-active-border-color);
-  }
-
-  // 尺寸
-  &-medium {
-    height: 32px;
-    font-size: 14px;
-  }
-  &-small {
-    height: 24px;
-    font-size: 12px;
-  }
-
-  // 输入框
-  &-inner {
-    flex: auto;
-    height: 100%;
-    font-size: inherit;
-    color: var(--mx-input-text-color);
-    outline: 0;
-    background-color: transparent;
-  }
-
-  // 图标
-  .mx-icon {
-    color: var(--mx-input-icon-color);
-  }
-}
+@use '../assets/styles/mixins';
+@include mixins.mx-input('mx-input');
 </style>
