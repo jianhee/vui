@@ -74,11 +74,11 @@
 import { ref } from 'vue';
 import { writeLog } from '@/utils';
 
-const inputValue1 = ref('');
-const inputValue2 = ref('');
-const inputValue3 = ref('');
-const inputValue4 = ref('');
-const inputValue5 = ref('');
-const inputValue6 = ref('');
-const inputValue7 = ref('');
+const inputValue1 = ref(null);
+const inputValue2 = ref(null);
+const inputValue3 = ref(null);
+const inputValue4 = ref(null);
+const inputValue5 = ref(null);
+const inputValue6 = ref(null);
+const inputValue7 = ref(null);
 </script>

@@ -1,42 +1,79 @@
 <!-- 选择器 -->
 <template>
-  <div class="mx-select">
+  <div :class="wraperClasses">
     <!-- 显示文本 -->
     <span
       v-if="text"
-      class="mx-select-inner"
+      :class="innerClasses"
     >
       {{ text }}
     </span>
     <!-- 显示下拉 -->
     <select
       v-else
+      ref="target"
       v-model="modelValue"
-      class="mx-select-inner"
-      @change="onValueChange(item)"
+      :disabled="disabled"
+      :class="innerClasses"
+      @focus="isFocus = true"
+      @blur="isFocus = false"
+      @change="onValueChange"
     >
       <option
         v-for="item in items"
         :key="item.value"
         :value="item.value"
+        class="mx-select-option"
       >
         {{ item.label }}
       </option>
     </select>
+    <!-- 图标 -->
+    <MxIcon
+      class="mx-select-icon"
+      :component="IconArrow"
+    />
   </div>
 </template>
 
 <script setup>
+import { shallowRef, computed } from 'vue';
+import { useFocus } from '@vueuse/core';
+import IconArrow from '../assets/icons/select-arrow.vue';
+
 const emits = defineEmits(['change']);
 
 // 参数
-defineProps({
-  // option 的项
-  // value  值
-  // label  显示内容
+const props = defineProps({
+  // 选项：{ value: '值', label: '文本' }
   items: { type: Array, default: null },
+  // 原生属性
+  disabled: { type: Boolean, default: false },
+  // 尺寸：small, medium
+  size: { type: String, default: 'medium' },
   // 作为文本显示
   text: { type: [String, Number], default: null }
+});
+
+// 是否获取焦点
+const target = shallowRef();
+const { focused } = useFocus(target);
+
+// 获取容器类名
+const wraperClasses = computed(() => {
+  return [
+    'mx-select',
+    `mx-select-${props.size}`,
+    {
+      'mx-disabled': props.disabled,
+      'is-focus': focused.value
+    }
+  ];
+});
+
+// 获取内容类名
+const innerClasses = computed(() => {
+  return ['mx-select-inner', { 'mx-disabled': props.disabled }];
 });
 
 // 当前值
@@ -49,31 +86,26 @@ function onValueChange(item) {
 </script>
 
 <style lang="scss">
+@use '../assets/styles/mixins';
+@include mixins.mx-input('mx-select');
 .mx-select {
-  width: 240px;
-  height: 32px;
-  overflow: hidden;
-  font-size: 14px;
-  line-height: 30px;
+  position: relative;
   cursor: pointer;
   &-inner {
-    display: block;
-    width: 100%;
-    height: 100%;
-    padding-right: 26px;
+    padding-right: 18px;
     padding-left: 8px;
-    appearance: none;
-    outline: 0;
-    background-image: url('@mxui/assets/images/mx-select-arrow.svg');
-    background-repeat: no-repeat;
-    background-position: right 8px center;
-    background-size: 10px;
-    border: 1px solid var(--mx-border-color);
-    border-radius: 4px;
-    &:hover,
-    &:focus {
-      border-color: var(--mx-brand-color-default);
-    }
+    cursor: pointer;
+  }
+  &-icon {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    z-index: -1;
+    transform: translateY(-7px);
+  }
+  &-option {
+    cursor: pointer;
+    background-color: var(--mx-option-bg-color);
   }
 }
 </style>

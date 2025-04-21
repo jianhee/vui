@@ -21,7 +21,7 @@ export function getIconProps(iconProp) {
   }
 
   // 传入 props
-  // icon="{ name: 'close' }"
-  // icon="{ name: { default: 'close', hover: 'close-hover' } }"
+  // icon="{ name: 'close', size: 20, ... }"
+  // icon="{ name: { default: 'close', hover: 'close-hover' }, size: 20, ... }"
   return iconProp;
 }

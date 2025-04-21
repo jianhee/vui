@@ -61,7 +61,6 @@ const iconStyles = computed(() => ({
 <style lang="scss">
 @use '../assets/styles/base';
 .mx-icon {
-  position: relative;
   display: inline-flex;
   flex: none;
   align-items: center;

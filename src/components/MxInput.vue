@@ -1,6 +1,9 @@
 <!-- 输入框 -->
 <template>
-  <div :class="wraperClasses">
+  <div
+    :class="wraperClasses"
+    @click="focused = true"
+  >
     <!-- 前置图标 -->
     <MxIcon
       v-if="icon"
@@ -8,14 +11,13 @@
     />
     <!-- 输入框 -->
     <input
+      ref="target"
       v-model="modelValue"
-      :placeholder="placeholder"
-      :maxlength="maxlength"
-      :disabled="disabled"
       type="text"
+      :placeholder="placeholder"
+      :disabled="disabled"
+      :maxlength="maxlength"
       :class="innerClasses"
-      @focus="isFocus = true"
-      @blur="isFocus = false"
       @input="onValueInput"
       @change="onValueChange"
       @keyup.enter="onKeyupEnter"
@@ -25,13 +27,14 @@
       v-if="modelValue && !disabled"
       :component="IconClear"
       clickable
-      @click="clearValue"
+      @click.stop="clearValue"
     />
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { shallowRef, computed } from 'vue';
+import { useFocus } from '@vueuse/core';
 import { getIconProps } from '../composables';
 import IconClear from '../assets/icons/clear.vue';
 
@@ -50,7 +53,8 @@ const props = defineProps({
 });
 
 // 是否获取焦点
-const isFocus = ref(false);
+const target = shallowRef();
+const { focused } = useFocus(target);
 
 // 获取容器类名
 const wraperClasses = computed(() => {
@@ -59,7 +63,7 @@ const wraperClasses = computed(() => {
     `mx-input-${props.size}`,
     {
       'mx-disabled': props.disabled,
-      'is-focus': isFocus.value
+      'is-focus': focused.value
     }
   ];
 });
@@ -100,4 +104,8 @@ function clearValue() {
 <style lang="scss">
 @use '../assets/styles/mixins';
 @include mixins.mx-input('mx-input');
+.mx-input {
+  padding: 0 8px;
+  cursor: text;
+}
 </style>

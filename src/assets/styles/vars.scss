@@ -17,7 +17,7 @@
   --mx-bg-color-active: #f1f1f1;
 
   // 通用填充色
-  --mx-fill-color-light: #f5f7fa;
+  --mx-fill-color: #f5f7fa;
 
   // 通用边框色
   --mx-border-color: #dcdfe6;
@@ -30,8 +30,10 @@
 
   // 选择器
   --mx-select-text-color: var(--mx-text-color-regular);
+  --mx-select-icon-color: var(--mx-text-color-placeholder);
   --mx-select-border-color: var(--mx-border-color);
   --mx-select-active-border-color: var(--mx-brand-color-default);
+  --mx-option-bg-color: var(--mx-bg-color-overlay);
 
   // 复选框
   --mx-checkbox-icon-color: var(--mx-border-color);
@@ -63,7 +65,7 @@
 
   // 菜单
   --mx-menu-divider-bg-color: var(--mx-border-color);
-  --mx-menu-item-active-bg-color: var(--mx-fill-color-light);
+  --mx-menu-item-active-bg-color: var(--mx-fill-color);
 
   // 加载
   --mx-loading-icon-color: var(--mx-brand-color-default);
@@ -104,7 +106,7 @@
     --mx-bg-color: #141414;
     --mx-bg-color-overlay: #1d1e1f;
     --mx-bg-color-active: #444;
-    --mx-fill-color-light: #262727;
+    --mx-fill-color: #262727;
     --mx-border-color: #4c4d4f;
 
     // ......................................
