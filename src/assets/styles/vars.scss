@@ -81,12 +81,12 @@
   // 拖拽
   --mx-dragbox-handle-active-bg-color: var(--mx-brand-color-default);
 
-  // ......................................
-
   // 开关
   --mx-switch-on-bg-color: var(--mx-brand-color-default);
-  --mx-switch-off-bg-color: #bec1c7;
+  --mx-switch-off-bg-color: var(--mx-border-color);
   --mx-switch-action-bg-color: #fff;
+
+  // ......................................
 
   // 表格
   --mx-table-row-active-bg-color: var(--mx-bg-color-active);

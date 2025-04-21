@@ -1,5 +1,11 @@
 @use "./vars";
 
+// 禁用
+@mixin mx-disabled {
+  cursor: not-allowed !important;
+  opacity: 0.6;
+}
+
 // 溢出隐藏
 @mixin mx-ellipsis {
   overflow: hidden;

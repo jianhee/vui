@@ -7,6 +7,7 @@ export default [
   { name: 'select', title: '选择器', file: 'DemoSelect' },
   { name: 'checkbox', title: '多选框', file: 'DemoCheckbox' },
   { name: 'radio', title: '单选框', file: 'DemoCheckbox' },
+  { name: 'switch', title: '开关', file: 'DemoSwitch' },
   { name: 'dropdown', title: '下拉框', file: 'DemoDropdown' },
   { name: 'menu', title: '菜单', file: 'DemoMenu' },
   { name: 'dialog', title: '弹窗', file: 'DemoDialog' },
