@@ -1,6 +1,6 @@
 <!-- 多选框-组 -->
 <template>
-  <div :class="['mx-checkbox-group', `mx-checkbox-${direction}`]">
+  <div :class="['mx-checkbox-group', `mx-checkbox-group-${direction}`]">
     <MxCheckbox
       v-for="(item, index) in items"
       :key="index"
@@ -47,12 +47,6 @@ provide('parentGroup', {
 </script>
 
 <style lang="scss">
-.mx-checkbox {
-  &-horizontal .mx-checkbox:not(:last-child) {
-    margin-right: 10px;
-  }
-  &-vertical .mx-checkbox {
-    display: flex;
-  }
-}
+@use '../assets/styles/mixins';
+@include mixins.mx-checkbox-group('mx-checkbox');
 </style>

@@ -1,6 +1,6 @@
 <!-- 单选框-组 -->
 <template>
-  <div :class="['mx-radio-group', `mx-radio-${direction}`]">
+  <div :class="['mx-radio-group', `mx-radio-group-${direction}`]">
     <MxRadio
       v-for="(item, index) in items"
       :key="index"
@@ -42,12 +42,6 @@ provide('parentGroup', {
 </script>
 
 <style lang="scss">
-.mx-radio {
-  &-horizontal .mx-radio:not(:last-child) {
-    margin-right: 10px;
-  }
-  &-vertical .mx-radio {
-    display: flex;
-  }
-}
+@use '../assets/styles/mixins';
+@include mixins.mx-checkbox-group('mx-radio');
 </style>

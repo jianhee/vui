@@ -73,42 +73,6 @@ function onCheckedChange() {
 </script>
 
 <style lang="scss">
-@use '../assets/styles/vars';
-.mx-radio {
-  position: relative;
-  display: inline-flex;
-  gap: 8px;
-  align-items: center;
-  height: 32px;
-  font-size: 14px;
-  line-height: 32px;
-  white-space: nowrap;
-  cursor: pointer;
-  user-select: none;
-  transition: color 0.3s ease;
-
-  // 块级元素
-  &-block {
-    display: flex;
-  }
-
-  // 图标
-  &-input {
-    position: absolute;
-    width: 0;
-    height: 0;
-    opacity: 0;
-  }
-  &-icon {
-    overflow: hidden;
-    color: var(--mx-radio-icon-color);
-    border-radius: 2px;
-  }
-
-  // 选中状态
-  &.is-checked,
-  &.is-checked &-icon {
-    color: var(--mx-radio-icon-active-color);
-  }
-}
+@use '../assets/styles/mixins';
+@include mixins.mx-checkbox('mx-radio');
 </style>
