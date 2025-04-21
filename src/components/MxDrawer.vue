@@ -102,7 +102,8 @@ watch(modelVisible, val => {
 </script>
 
 <style lang="scss">
-@use '../assets/styles/vars';
+@use '../assets/styles/mixins';
+@include mixins.mx-dialog('mx-drawer');
 .mx-drawer {
   // 主体
   position: absolute;
@@ -111,8 +112,6 @@ watch(modelVisible, val => {
   max-width: 100vw;
   height: 100vh;
   padding: 16px 0;
-  background-color: var(--mx-drawer-bg-color);
-  transition: transform 0.3s ease;
   &-left {
     left: 0;
   }
@@ -122,24 +121,8 @@ watch(modelVisible, val => {
 
   // 顶栏
   &-header {
-    display: flex;
     flex: none;
-    gap: 10px;
-    justify-content: space-between;
     padding: 0 16px 16px;
-    font-size: 16px;
-  }
-  &-title {
-    line-height: 24px;
-    color: var(--mx-drawer-title-text-color);
-  }
-  &-close {
-    align-self: flex-start;
-    color: var(--mx-drawer-close-icon-color);
-    cursor: pointer;
-  }
-  &-close:hover {
-    color: var(--mx-drawer-close-icon-active-color);
   }
 
   // 内容
@@ -147,23 +130,11 @@ watch(modelVisible, val => {
     flex: auto;
     padding: 0 16px;
     overflow: auto;
-    font-size: 14px;
   }
 
-  // 底栏
-  &-footer {
-    display: flex;
-    gap: 10px;
-    justify-content: flex-end;
-    padding: 16px 16px 0;
-  }
-}
-
-// 动画
-.mx-drawer-enter-from,
-.mx-drawer-leave-to {
-  opacity: 0;
-  > .mx-drawer {
+  // 动画
+  &-enter-from > &,
+  &-leave-to > & {
     &-left {
       transform: translateX(-100%);
     }

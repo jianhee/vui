@@ -94,57 +94,24 @@ watch(modelVisible, val => {
 </script>
 
 <style lang="scss">
-@use '../assets/styles/vars';
+@use '../assets/styles/mixins';
+@include mixins.mx-dialog('mx-dialog');
 .mx-dialog {
   // 主体
   max-width: 98vw;
   padding: 16px;
   margin: 15vh auto;
   overflow: auto;
-  background-color: var(--mx-dialog-bg-color);
   border-radius: 4px;
-  transition: transform 0.3s ease;
 
   // 顶栏
   &-header {
-    display: flex;
-    gap: 10px;
-    justify-content: space-between;
     padding-bottom: 16px;
-    font-size: 16px;
-  }
-  &-title {
-    line-height: 24px;
-    color: var(--mx-dialog-title-text-color);
-  }
-  &-close {
-    align-self: flex-start;
-    color: var(--mx-dialog-close-icon-color);
-    cursor: pointer;
-  }
-  &-close:hover {
-    color: var(--mx-dialog-close-icon-active-color);
   }
 
-  // 内容
-  &-body {
-    font-size: 14px;
-  }
-
-  // 底栏
-  &-footer {
-    display: flex;
-    gap: 10px;
-    justify-content: flex-end;
-    padding-top: 16px;
-  }
-}
-
-// 动画
-.mx-dialog-enter-from,
-.mx-dialog-leave-to {
-  opacity: 0;
-  > .mx-dialog {
+  // 动画
+  &-enter-from > &,
+  &-leave-to > & {
     transform: translateY(-20px);
   }
 }
