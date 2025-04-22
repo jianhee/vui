@@ -95,10 +95,10 @@ const iconProps = computed(() => getIconProps(props.icon));
   border-radius: 4px;
   transition: all 0.3s ease;
   &:not(:disabled):hover {
-    color: var(--mx-btn-active-text-color, var(--mx-btn-text-color));
-    background-color: var(--mx-btn-active-bg-color, var(--mx-btn-bg-color));
-    border: 1px solid var(--mx-btn-active-border-color, var(--mx-btn-border-color));
-    opacity: var(--mx-btn-active-opacity, 1);
+    color: var(--mx-btn-hover-text-color, var(--mx-btn-text-color));
+    background-color: var(--mx-btn-hover-bg-color, var(--mx-btn-bg-color));
+    border-color: var(--mx-btn-hover-border-color, var(--mx-btn-border-color));
+    opacity: var(--mx-btn-hover-opacity, 1);
   }
 
   // 类型
@@ -106,33 +106,32 @@ const iconProps = computed(() => getIconProps(props.icon));
     --mx-btn-text-color: var(--mx-text-color-regular);
     --mx-btn-bg-color: transparent;
     --mx-btn-border-color: var(--mx-border-color);
-    --mx-btn-active-text-color: var(--mx-brand-color-default);
-    --mx-btn-active-bg-color: var(--mx-brand-color-a10);
-    --mx-btn-active-border-color: var(--mx-brand-color-a30);
+    --mx-btn-hover-text-color: var(--mx-brand-color);
+    --mx-btn-hover-bg-color: var(--mx-brand-color-a10);
+    --mx-btn-hover-border-color: var(--mx-brand-color-a30);
     &.is-link {
-      --mx-btn-active-text-color: var(--mx-btn-text-color);
-      --mx-btn-active-opacity: 0.8;
+      --mx-btn-hover-text-color: var(--mx-btn-text-color);
     }
   }
   &-primary {
     --mx-btn-text-color: #fff;
-    --mx-btn-bg-color: var(--mx-brand-color-default);
-    --mx-btn-border-color: var(--mx-brand-color-default);
-    --mx-btn-active-opacity: 0.8;
+    --mx-btn-bg-color: var(--mx-brand-color);
+    --mx-btn-border-color: var(--mx-brand-color);
+    --mx-btn-hover-opacity: 0.8;
     &.is-link {
-      --mx-btn-text-color: var(--mx-brand-color-default);
+      --mx-btn-text-color: var(--mx-brand-color);
     }
   }
 
   // 链接按钮
   &.is-link {
     --mx-btn-bg-color: transparent;
-    --mx-btn-border-color: transparent;
-    --mx-btn-active-bg-color: transparent;
-    --mx-btn-active-border-color: transparent;
+    --mx-btn-hover-bg-color: transparent;
+    --mx-btn-hover-opacity: 0.8;
 
     height: auto;
     padding: 2px;
+    border: 0;
   }
 
   // 尺寸

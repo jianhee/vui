@@ -47,6 +47,6 @@ provide('parentGroup', {
 </script>
 
 <style lang="scss">
-@use '../assets/styles/mixins';
-@include mixins.mx-checkbox-group('mx-checkbox');
+@use '../assets/styles/modules/checkbox';
+@include checkbox.mx-checkbox-group('mx-checkbox');
 </style>

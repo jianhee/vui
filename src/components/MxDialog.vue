@@ -94,13 +94,21 @@ watch(modelVisible, val => {
 </script>
 
 <style lang="scss">
-@use '../assets/styles/mixins';
-@include mixins.mx-dialog('mx-dialog');
+@use '../assets/styles/modules/dialog';
+@include dialog.mx-dialog('mx-dialog');
 .mx-dialog {
+  // 颜色
+  --mx-dialog-bg-color: var(--mx-bg-color);
+  --mx-dialog-box-shadow: var(--mx-box-shadow);
+  --mx-dialog-title-text-color: var(--mx-text-color-primary);
+  --mx-dialog-content-text-color: var(--mx-text-color-regular);
+  --mx-dialog-close-icon-color: var(--mx-text-color-secondary);
+  --mx-dialog-close-icon-active-color: var(--mx-brand-color);
+
   // 主体
   max-width: 98vw;
   padding: 16px;
-  margin: 15vh auto;
+  margin: 15vh auto 50px;
   overflow: auto;
   border-radius: 4px;
 

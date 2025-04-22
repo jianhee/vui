@@ -1,0 +1,50 @@
+// 弹窗/抽屉
+@use "./vars";
+
+@mixin mx-dialog($prefix: "mx-dialog") {
+  .#{$prefix} {
+    line-height: 24px;
+    background-color: var(--#{$prefix}-bg-color);
+    box-shadow: var(--#{$prefix}-box-shadow);
+    transition: transform 0.3s ease;
+
+    // 顶栏
+    &-header {
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+    }
+    &-title {
+      font-size: 18px;
+      color: var(--#{$prefix}-title-text-color);
+    }
+    &-close {
+      align-self: flex-start;
+      color: var(--#{$prefix}-close-icon-color);
+      cursor: pointer;
+    }
+    &-close:hover {
+      color: var(--#{$prefix}-close-icon-active-color);
+    }
+
+    // 内容
+    &-body {
+      font-size: 14px;
+      color: var(--#{$prefix}-content-text-color);
+    }
+
+    // 底栏
+    &-footer {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+      padding-top: 16px;
+    }
+
+    // 动画
+    &-enter-from,
+    &-leave-to {
+      opacity: 0;
+    }
+  }
+}

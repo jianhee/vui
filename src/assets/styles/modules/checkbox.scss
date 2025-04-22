@@ -1,0 +1,61 @@
+// 多选框/单选框
+@use "../vars";
+
+// 组
+@mixin mx-checkbox-group($prefix: "mx-checkbox") {
+  .#{$prefix}-group {
+    // 横向
+    &-horizontal .#{$prefix}:not(:last-child) {
+      margin-right: 10px;
+    }
+
+    // 纵向
+    &-vertical .#{$prefix} {
+      display: flex;
+    }
+  }
+}
+
+// 项
+@mixin mx-checkbox($prefix: "mx-checkbox") {
+  .#{$prefix} {
+    position: relative;
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+    height: 32px;
+    font-size: 14px;
+    line-height: 32px;
+    color: var(--#{$prefix}-text-color);
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.3s ease;
+
+    // 块级元素
+    &-block {
+      display: flex;
+    }
+
+    // 图标
+    &-input {
+      position: absolute;
+      width: 0;
+      height: 0;
+      opacity: 0;
+    }
+    &-icon {
+      overflow: hidden;
+      color: var(--#{$prefix}-icon-color);
+      border-radius: 2px;
+    }
+
+    // 选中状态
+    &.is-checked {
+      color: var(--#{$prefix}-checked-text-color);
+    }
+    &.is-checked &-icon {
+      color: var(--#{$prefix}-checked-icon-color);
+    }
+  }
+}

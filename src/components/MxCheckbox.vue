@@ -73,6 +73,12 @@ function onCheckedChange() {
 </script>
 
 <style lang="scss">
-@use '../assets/styles/mixins';
-@include mixins.mx-checkbox('mx-checkbox');
+@use '../assets/styles/modules/checkbox';
+@include checkbox.mx-checkbox('mx-checkbox');
+.mx-checkbox {
+  --mx-checkbox-text-color: var(--mx-text-color-regular);
+  --mx-checkbox-icon-color: var(--mx-border-color);
+  --mx-checkbox-checked-text-color: var(--mx-brand-color);
+  --mx-checkbox-checked-icon-color: var(--mx-brand-color);
+}
 </style>
