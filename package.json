@@ -1,27 +1,10 @@
 {
   "name": "vui",
+  "description": "UI for Vue3",
   "version": "1.0.0",
-  "private": true,
+  "author": "jianhe",
   "exports": {
-    "*": "./src/*"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.26.9",
-    "@babel/eslint-parser": "^7.26.8",
-    "eslint": "^8.57.1",
-    "eslint-config-standard": "^17.1.0",
-    "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-n": "^15.7.0",
-    "eslint-plugin-promise": "^6.6.0",
-    "eslint-plugin-vue": "^9.32.0",
-    "linter-configs": "file:.yalc/linter-configs",
-    "postcss-html": "^1.8.0",
-    "prettier": "^3.5.3",
-    "sass": "^1.85.1",
-    "stylelint": "^16.15.0",
-    "stylelint-config-html": "^1.1.0",
-    "stylelint-config-recess-order": "^6.0.0",
-    "stylelint-config-standard-scss": "^14.0.0"
+    "./*": "./packages/*"
   },
   "prettier": "linter-configs/prettier",
   "eslintConfig": {
@@ -29,5 +12,8 @@
   },
   "stylelint": {
     "extends": "linter-configs/stylelint/html-scss"
+  },
+  "devDependencies": {
+    "linter-configs": "file:.yalc/linter-configs"
   }
 }
