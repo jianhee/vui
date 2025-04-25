@@ -1,0 +1,47 @@
+@use "./vars";
+
+// 可点击
+@mixin vui-clickable {
+  cursor: pointer !important;
+}
+
+// 禁用
+@mixin vui-disabled {
+  cursor: not-allowed !important;
+  opacity: 0.6;
+}
+
+// 居中
+@mixin vui-center {
+  text-align: center;
+}
+
+// 溢出隐藏
+@mixin vui-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// 旋转动画
+@mixin vui-spin {
+  animation: vui-spin 1s linear infinite;
+}
+
+@keyframes vui-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

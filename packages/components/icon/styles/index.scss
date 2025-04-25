@@ -1,0 +1,23 @@
+@use "../../../styles/mixins";
+.vui-icon {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  line-height: 1em;
+  transition: all 0.3s ease;
+  > svg {
+    width: 1em;
+    height: 1em;
+    fill: currentcolor;
+  }
+  &.is-clickable {
+    @include mixins.vui-clickable;
+  }
+  &.is-disabled {
+    @include mixins.vui-disabled;
+  }
+  &.is-spin {
+    @include mixins.vui-spin;
+  }
+}

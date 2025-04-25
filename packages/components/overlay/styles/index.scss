@@ -1,0 +1,13 @@
+// 颜色
+:root {
+  --vui-overlay-bg-color: var(--vui-overlay-color-lighter);
+}
+
+// 样式
+.vui-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background-color: var(--vui-overlay-bg-color);
+  transition: opacity 0.3s ease;
+}

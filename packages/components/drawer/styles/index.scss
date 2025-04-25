@@ -1,0 +1,47 @@
+@use "../../dialog/styles/mixins";
+@include mixins.vui-dialog("vui-drawer");
+.vui-drawer {
+  // 主体
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  max-width: 100vw;
+  height: 100vh;
+  padding: 16px 0;
+  &-left {
+    left: 0;
+  }
+  &-right {
+    right: 0;
+  }
+
+  // 顶栏
+  &-header {
+    flex: none;
+    padding: 0 16px 16px;
+  }
+
+  // 内容
+  &-body {
+    flex: auto;
+    padding: 0 16px;
+    overflow: auto;
+  }
+
+  // 底栏
+  &-footer {
+    flex: none;
+    padding: 16px 16px 0;
+  }
+
+  // 动画
+  &-enter-from > &,
+  &-leave-to > & {
+    &-left {
+      transform: translateX(-100%);
+    }
+    &-right {
+      transform: translateX(100%);
+    }
+  }
+}

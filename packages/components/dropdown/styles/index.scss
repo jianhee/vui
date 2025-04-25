@@ -1,0 +1,42 @@
+// 颜色
+:root {
+  --vui-dropdown-content-bg-color: var(--vui-bg-color-overlay);
+  --vui-dropdown-content-border-color: var(--vui-border-color-light);
+  --vui-dropdown-content-shadow: var(--vui-box-shadow-light);
+}
+
+// 样式
+.vui-dropdown {
+  // 触发元素
+  &-trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  // 内容元素
+  &-content {
+    position: fixed;
+    z-index: 999;
+    max-width: 95vw;
+    max-height: 95vh;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    overflow: auto;
+    background-color: var(--vui-dropdown-content-bg-color);
+    border: 1px solid var(--vui-dropdown-content-border-color);
+    border-radius: 4px;
+    box-shadow: var(--vui-dropdown-content-shadow);
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease,
+      left 0.1s ease,
+      top 0.1s ease;
+  }
+  &-enter-from,
+  &-leave-to {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+}

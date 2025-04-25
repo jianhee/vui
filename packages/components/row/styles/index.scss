@@ -1,0 +1,9 @@
+@use "../../../styles/mixins";
+.vui-row {
+  &.is-center {
+    @include mixins.vui-center;
+  }
+  &.is-ellipsis {
+    @include mixins.vui-ellipsis;
+  }
+}

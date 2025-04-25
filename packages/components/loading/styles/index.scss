@@ -1,0 +1,21 @@
+// 颜色
+:root {
+  --vui-loading-icon-color: var(--vui-color-brand-base);
+  --vui-loading-text-color: var(--vui-text-color-secondary);
+}
+
+// 样式
+.vui-loading {
+  width: 100%;
+  padding: 20px 0;
+  text-align: center;
+  &-icon {
+    font-size: 16px;
+    color: var(--vui-loading-icon-color);
+  }
+  &-text {
+    margin-top: 10px;
+    font-size: 14px;
+    color: var(--vui-loading-text-color);
+  }
+}

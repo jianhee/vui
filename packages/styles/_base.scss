@@ -1,0 +1,38 @@
+@use "./mixins";
+
+// 间距
+$positions: (mt, top), (mr, right), (mb, bottom), (ml, left);
+$sizes: 5, 10, 15, 20, 25, 30;
+
+@each $p1, $p2 in $positions {
+  @each $size in $sizes {
+    .vui-#{$p1}-#{$size} {
+      margin-#{$p2}: #{$size}px !important;
+    }
+  }
+}
+
+// 可点击
+.vui-clickable {
+  @include mixins.vui-clickable;
+}
+
+// 禁用
+.vui-disabled {
+  @include mixins.vui-disabled;
+}
+
+// 文本居中
+.vui-center {
+  @include mixins.vui-center;
+}
+
+// 文本溢出隐藏
+.vui-ellipsis {
+  @include mixins.vui-ellipsis;
+}
+
+// 旋转动画
+.vui-spin {
+  @include mixins.vui-spin;
+}

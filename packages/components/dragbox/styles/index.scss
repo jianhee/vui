@@ -1,0 +1,54 @@
+// 颜色
+:root {
+  --vui-dragbox-handle-color: transparent;
+  --vui-dragbox-handle-hover-color: var(--vui-color-brand-base);
+}
+
+// 样式
+.vui-dragbox {
+  // 盒子
+  z-index: 999;
+
+  // 手柄
+  &-handle {
+    position: absolute;
+    z-index: 999;
+    background-color: var(--vui-dragbox-handle-color);
+    transition: background-color 0.3s ease;
+    &:hover {
+      background-color: var(--vui-dragbox-handle-hover-color);
+    }
+    &-left,
+    &-right {
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      cursor: ew-resize;
+    }
+    &-left {
+      left: 0;
+    }
+    &-right {
+      right: 0;
+    }
+    &-top,
+    &-bottom {
+      right: 0;
+      left: 0;
+      height: 2px;
+      cursor: ns-resize;
+    }
+    &-top {
+      top: 0;
+    }
+    &-bottom {
+      bottom: 0;
+    }
+  }
+
+  // 拖拽中
+  &.is-draging {
+    user-select: none;
+    transition: none;
+  }
+}

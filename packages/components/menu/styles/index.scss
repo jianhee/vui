@@ -1,0 +1,37 @@
+@use "../../../styles/mixins";
+
+// 颜色
+:root {
+  --vui-menu-text-color: var(--vui-text-color-regular);
+  --vui-menu-divider-color: var(--vui-border-color-lighter);
+  --vui-menu-item-hover-text-color: var(--vui-color-brand-base);
+  --vui-menu-item-hover-bg-color: var(--vui-color-brand-a10);
+}
+
+// 样式
+.vui-menu {
+  max-width: 240px;
+  font-size: 14px;
+  color: var(--vui-menu-text-color);
+  &-item {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    padding: 8px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  &-item:hover {
+    color: var(--vui-menu-item-hover-text-color);
+    background-color: var(--vui-menu-item-hover-bg-color);
+  }
+  &-label {
+    @include mixins.vui-ellipsis;
+
+    flex: auto;
+  }
+  &-divider {
+    height: 1px;
+    background-color: var(--vui-menu-divider-color);
+  }
+}

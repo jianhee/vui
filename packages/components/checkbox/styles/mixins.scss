@@ -1,0 +1,65 @@
+// 多选框/单选框
+@mixin vui-checkbox($prefix: "vui-checkbox") {
+  // 颜色
+  :root {
+    --#{$prefix}-text-color: var(--vui-text-color-regular);
+    --#{$prefix}-icon-color: var(--vui-border-color-base);
+    --#{$prefix}-checked-color: var(--vui-color-brand-base);
+  }
+
+  // 组
+  .#{$prefix}-group {
+    display: flex;
+
+    // 组排列方向
+    &-horizontal {
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    &-vertical {
+      flex-direction: column;
+    }
+  }
+
+  // 项
+  .#{$prefix} {
+    position: relative;
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+    height: 32px;
+    font-size: 14px;
+    line-height: 32px;
+    color: var(--#{$prefix}-text-color);
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.3s ease;
+
+    // 输入框
+    &-input {
+      position: absolute;
+      width: 0;
+      height: 0;
+      opacity: 0;
+    }
+
+    // 图标
+    &-icon {
+      overflow: hidden;
+      color: var(--#{$prefix}-icon-color);
+      border-radius: 2px;
+    }
+
+    // 块级元素
+    &-block {
+      display: flex;
+    }
+
+    // 选中状态
+    &.is-checked,
+    &.is-checked &-icon {
+      color: var(--#{$prefix}-checked-color);
+    }
+  }
+}

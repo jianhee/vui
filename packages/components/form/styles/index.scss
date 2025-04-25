@@ -1,0 +1,43 @@
+// 颜色
+:root {
+  --vui-form-label-text-color: var(--vui-text-color-regular);
+}
+
+// 样式
+.vui-form {
+  // 容器
+  display: flex;
+  gap: 15px;
+  font-size: 14px;
+  line-height: 32px;
+
+  // 容器排列方向
+  &-horizontal {
+    flex-wrap: wrap;
+  }
+  &-vertical {
+    flex-direction: column;
+  }
+
+  // 项
+  &-filed {
+    display: flex;
+    gap: 10px;
+  }
+  &-label {
+    flex: none;
+    color: var(--vui-form-label-text-color);
+  }
+  &-control {
+    position: relative;
+    flex: auto;
+  }
+
+  // 标签位置
+  &-filed-label-right &-label {
+    text-align: right;
+  }
+  &-filed-label-top {
+    display: block;
+  }
+}

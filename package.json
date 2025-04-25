@@ -3,8 +3,8 @@
   "description": "UI for Vue3",
   "version": "1.0.0",
   "author": "jianhe",
-  "exports": {
-    "./*": "./packages/*"
+  "devDependencies": {
+    "linter-configs": "file:.yalc/linter-configs"
   },
   "prettier": "linter-configs/prettier",
   "eslintConfig": {
@@ -12,8 +12,5 @@
   },
   "stylelint": {
     "extends": "linter-configs/stylelint/html-scss"
-  },
-  "devDependencies": {
-    "linter-configs": "file:.yalc/linter-configs"
   }
 }

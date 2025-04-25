@@ -1,0 +1,10 @@
+.vui-image {
+  flex: none;
+  overflow: hidden;
+  &-inner {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}

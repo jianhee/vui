@@ -1,0 +1,37 @@
+// 颜色
+:root {
+  --vui-skeleton-bg-color: var(--vui-fill-color-base);
+  --vui-skeleton-to-bg-color: var(--vui-fill-color-darker);
+  --vui-skeleton-devider-color: var(--vui-border-color-base);
+}
+
+// 样式
+.vui-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  &-item {
+    background: linear-gradient(90deg, var(--vui-skeleton-bg-color) 25%, var(--vui-skeleton-to-bg-color) 37%, var(--vui-skeleton-bg-color) 63%);
+    background-size: 400% 100%;
+    border-radius: 4px;
+    animation: vui-skeleton 1.4s ease infinite;
+  }
+  &-devider {
+    height: 1px;
+    background-color: var(--vui-skeleton-devider-color);
+  }
+
+  // 居中
+  &-center {
+    align-self: center;
+  }
+}
+
+@keyframes vui-skeleton {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}

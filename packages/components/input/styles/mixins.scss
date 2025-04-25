@@ -1,0 +1,70 @@
+// 输入框/选择器
+@use "../../../styles/mixins";
+
+@mixin vui-input($prefix: "vui-input") {
+  :root {
+    // 颜色
+    --#{$prefix}-text-color: var(--vui-text-color-regular);
+    --#{$prefix}-bg-color: var(--vui-fill-color-blank);
+    --#{$prefix}-border-color: var(--vui-border-color-base);
+    --#{$prefix}-icon-color: var(--vui-text-color-placeholder);
+    --#{$prefix}-hover-border-color: var(--vui-text-color-disabled);
+    --#{$prefix}-focus-border-color: var(--vui-color-brand-base);
+    --#{$prefix}-clear-hover-color: var(--vui-text-color-secondary);
+  }
+
+  // 样式
+  .#{$prefix} {
+    // 容器
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+    width: 240px;
+    line-height: 30px;
+    background-color: var(--#{$prefix}-bg-color);
+    border: 1px solid var(--#{$prefix}-border-color);
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+    &:not(.is-disabled):hover {
+      border-color: var(--#{$prefix}-hover-border-color);
+    }
+    &:not(.is-disabled).is-focus {
+      border-color: var(--#{$prefix}-focus-border-color);
+    }
+    &.is-disabled,
+    &.is-disabled &-inner {
+      @include mixins.vui-disabled;
+    }
+
+    // 内容
+    &-inner {
+      @include mixins.vui-ellipsis;
+
+      flex: auto;
+      height: 100%;
+      font-size: inherit;
+      color: var(--#{$prefix}-text-color);
+      appearance: none;
+      outline: 0;
+      background-color: transparent;
+    }
+
+    // 尺寸
+    &-medium {
+      height: 32px;
+      font-size: 14px;
+    }
+    &-small {
+      height: 24px;
+      font-size: 12px;
+    }
+
+    // 图标
+    .vui-icon {
+      color: var(--#{$prefix}-icon-color);
+    }
+    &-clear:hover {
+      color: var(--#{$prefix}-clear-hover-color);
+    }
+  }
+}

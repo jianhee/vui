@@ -1,0 +1,75 @@
+@use "../../../styles/mixins";
+.vui-btn {
+  display: inline-flex;
+  flex: none;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  line-height: 1;
+  color: var(--vui-btn-text-color);
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  outline: 0;
+  background-color: var(--vui-btn-bg-color);
+  border: 1px solid var(--vui-btn-border-color);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  &:not(:disabled):hover {
+    color: var(--vui-btn-hover-text-color, var(--vui-btn-text-color));
+    background-color: var(--vui-btn-hover-bg-color, var(--vui-btn-bg-color));
+    border-color: var(--vui-btn-hover-border-color, var(--vui-btn-border-color));
+    opacity: var(--vui-btn-hover-opacity, 1);
+  }
+
+  // 类型
+  &-default {
+    --vui-btn-text-color: var(--vui-text-color-regular);
+    --vui-btn-bg-color: var(--vui-fill-color-blank);
+    --vui-btn-border-color: var(--vui-border-color-base);
+    --vui-btn-hover-text-color: var(--vui-color-brand-base);
+    --vui-btn-hover-bg-color: var(--vui-color-brand-a10);
+    --vui-btn-hover-border-color: var(--vui-color-brand-a30);
+  }
+  &-primary {
+    --vui-btn-text-color: var(--vui-color-white);
+    --vui-btn-bg-color: var(--vui-color-brand-base);
+    --vui-btn-border-color: var(--vui-color-brand-base);
+    --vui-btn-hover-opacity: 0.8;
+  }
+  &-link {
+    --vui-btn-text-color: var(--vui-color-brand-base);
+    --vui-btn-bg-color: transparent;
+    --vui-btn-hover-opacity: 0.8;
+
+    padding: 2px;
+    border: 0;
+  }
+
+  // 禁用状态
+  &.is-disabled {
+    @include mixins.vui-disabled;
+  }
+
+  // 尺寸
+  &-small {
+    height: 24px;
+    font-size: 12px;
+  }
+  &-medium {
+    height: 32px;
+    font-size: 14px;
+  }
+  &-large {
+    height: 40px;
+    font-size: 16px;
+  }
+
+  // 块级元素
+  &-block {
+    display: flex;
+    width: 100%;
+  }
+}

@@ -1,0 +1,29 @@
+@use "../../input/styles/mixins";
+@include mixins.vui-input("vui-select");
+
+// 颜色
+:root {
+  --vui-option-bg-color: var(--vui-bg-color-overlay);
+}
+
+// 样式
+.vui-select {
+  position: relative;
+  z-index: 1;
+  &-inner {
+    padding-right: 22px;
+    padding-left: 8px;
+    cursor: pointer;
+  }
+  &-icon {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    z-index: -1;
+    transform: translateY(-7px);
+  }
+  &-option {
+    cursor: pointer;
+    background-color: var(--vui-option-bg-color);
+  }
+}
