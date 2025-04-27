@@ -59,7 +59,7 @@ const dragClass = computed(() => {
 
   // 目标元素
   if (parentTable.dragTargetData.value?.item.id === props.rowData.id) {
-    return `is-${parentTable.dragNewData.value?.state}`;
+    return `is-${parentTable.dragTargetData.value?.state}`;
   }
 
   return null;
@@ -91,6 +91,7 @@ function onDragEnter(event) {
 
   // 初始数据
   parentTable.dragTargetData.value = {
+    state: null,
     item: props.rowData,
     rect: event.currentTarget.getBoundingClientRect(),
     // 是否可以合并
@@ -108,25 +109,17 @@ function onDragEnter(event) {
 function onDragOver(event) {
   if (!parentTable.dragTargetData.value) return;
 
-  // 区分操作
-  const { rect, index, canMerge } = parentTable.dragTargetData.value;
+  // 更新状态：before, after, merge
+  const { rect, canMerge } = parentTable.dragTargetData.value;
   const deltaY = event.clientY - rect.top;
-  let newState = null;
+
   if (canMerge) {
     // 可以合并：前10在上方，后10在下方，其余在中间
-    newState = deltaY < 10 ? 'before' : deltaY > rect.height - 10 ? 'after' : 'merge';
+    parentTable.dragTargetData.value.state = deltaY < 10 ? 'before' : deltaY > rect.height - 10 ? 'after' : 'merge';
   } else {
     // 不能合并：前半在上方，后半在下方
-    newState = deltaY < rect.height / 2 ? 'before' : 'after';
+    parentTable.dragTargetData.value.state = deltaY < rect.height / 2 ? 'before' : 'after';
   }
-
-  // 更新数据
-  parentTable.dragNewData.value = {
-    // 当前状态：before, after, merge
-    state: newState,
-    // 新的索引
-    index: newState === 'before' ? index : index + 1
-  };
 }
 
 // dragleave    离开目标元素
@@ -135,14 +128,18 @@ function onDragEnd() {
   if (!parentTable.dragTargetData.value) return;
 
   const { item: dragItem, items: dragItems } = parentTable.dragStartData.value;
-  const { item: targetItem } = parentTable.dragTargetData.value;
-  const { state, index: newIndex } = parentTable.dragNewData.value;
+  const { item: targetItem, state } = parentTable.dragTargetData.value;
+
+  // 新的索引
+  const index = parentTable.props.rowsData.findIndex(item => item.id === targetItem.id);
+  const newIndex = state === 'before' ? index : index + 1;
+
+  // 触发事件
   const type = state === 'merge' ? 'merge' : 'sort';
   parentTable.dragEnd(type, { dragItem, dragItems, targetItem, state, newIndex });
 
   // 清空状态
   parentTable.dragStartData.value = null;
   parentTable.dragTargetData.value = null;
-  parentTable.dragNewData.value = null;
 }
 </script>
