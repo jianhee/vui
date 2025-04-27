@@ -19,9 +19,5 @@ const props = defineProps({
 });
 
 // 共享数据
-provide('parentForm', {
-  direction: props.direction,
-  labelPosition: props.labelPosition,
-  labelWidth: props.labelWidth
-});
+provide('parentForm', { props });
 </script>

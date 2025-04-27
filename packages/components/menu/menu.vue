@@ -39,9 +39,8 @@ const onSelect = item => {
 
 // 共享数据
 provide('parentMenu', {
+  props,
   modelSelectedKey,
-  keyName: props.keyName,
-  showSelectedIcon: props.showSelectedIcon,
   onSelect
 });
 </script>

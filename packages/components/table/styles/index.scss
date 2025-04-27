@@ -1,0 +1,114 @@
+// 颜色
+:root {
+  --vui-table-text-color: var(--vui-text-color-regular);
+  --vui-table-row-active-bg-color: var(--vui-fill-color-light);
+  --vui-table-row-sort-border-color: var(--vui-color-brand-base);
+  --vui-table-dragbox-handle-color: var(--vui-border-color-base);
+  --vui-table-dragbox-handle-hover-color: var(--vui-color-brand-base);
+  --vui-table-selectbox-bg-color: var(--vui-color-brand-a10);
+  --vui-table-merge-bg-color: var(--vui-color-brand-a10);
+  --vui-table-selectbox-border-color: var(--vui-color-brand-base);
+}
+
+// 样式
+.vui-table {
+  display: flex;
+  flex: auto;
+  flex-direction: column;
+  overflow: hidden;
+  font-size: 14px;
+  color: var(--vui-table-text-color);
+
+  // 拖拽中
+  &.is-draging {
+    user-select: none;
+  }
+
+  // 布局
+  &-header {
+    flex: none;
+    font-weight: bold;
+  }
+  &-body {
+    position: relative;
+    flex: auto;
+  }
+
+  // 行
+  &-row {
+    position: relative;
+    display: flex;
+    height: var(--vui-table-row-height);
+    &:hover,
+    &.is-current,
+    &.is-selected {
+      background-color: var(--vui-table-row-active-bg-color);
+    }
+    &.is-merge {
+      background-color: var(--vui-table-merge-bg-color);
+      opacity: 0.8;
+    }
+    &.is-draggable {
+      cursor: pointer;
+    }
+    &.is-draging {
+      opacity: 0.5;
+    }
+    &.is-before,
+    &.is-after {
+      &::after {
+        position: absolute;
+        right: 0;
+        left: 0;
+        z-index: 99;
+        height: 2px;
+        content: "";
+        background-color: var(--vui-table-row-sort-border-color);
+      }
+    }
+    &.is-before::after {
+      top: -1px;
+    }
+    &.is-after::after {
+      bottom: -1px;
+    }
+  }
+
+  // 单元格
+  &-cell {
+    display: inline-flex;
+    flex: none;
+    gap: 4px;
+    align-items: center;
+    padding: 0 8px;
+    white-space: nowrap;
+  }
+
+  // 多选
+  &-checkbox {
+    display: none;
+  }
+  &-row:hover &-checkbox,
+  &-row.is-selected &-checkbox {
+    display: inline-flex;
+  }
+
+  // 表头拖拽手柄
+  .vui-dragbox-handle {
+    top: 5px !important;
+    bottom: 5px !important;
+  }
+  &-cell:hover .vui-dragbox-handle {
+    --vui-dragbox-handle-color: var(--vui-table-dragbox-handle-color);
+    --vui-dragbox-handle-hover-color: var(--vui-table-dragbox-handle-hover-color);
+  }
+
+  // 鼠标框选
+  &-selectbox {
+    position: absolute;
+    z-index: 999;
+    pointer-events: none;
+    background-color: var(--vui-table-selectbox-bg-color);
+    border: 1px solid var(--vui-table-selectbox-border-color);
+  }
+}

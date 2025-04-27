@@ -15,7 +15,8 @@ export default [
   { name: 'image', title: '图片', file: 'DemoImage' },
   { name: 'loading', title: '加载状态', file: 'DemoLoading' },
   { name: 'skeleton', title: '骨架屏', file: 'DemoSkeleton' },
-  { name: 'tableTree', title: '表格+树结构', file: 'DemoTableTree' },
+  { name: 'table', title: '表格', file: 'DemoTable' },
+  { name: 'tree', title: '树结构', file: 'DemoTree' },
   { name: 'dragbox', title: '拖拽', file: 'DemoDragbox' },
   { name: 'utils', title: '插件+方法', file: 'DemoUtils' }
 ];
