@@ -1,5 +1,6 @@
 // 颜色
 :root {
+  --vui-table-font-size: 14px;
   --vui-table-text-color: var(--vui-text-color-regular);
   --vui-table-row-active-bg-color: var(--vui-fill-color-light);
   --vui-table-row-sort-border-color: var(--vui-color-brand-base);
@@ -16,7 +17,7 @@
   flex: auto;
   flex-direction: column;
   overflow: hidden;
-  font-size: 14px;
+  font-size: var(--vui-table-font-size);
   color: var(--vui-table-text-color);
 
   // 拖拽中

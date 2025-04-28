@@ -2,6 +2,7 @@
 
 // 颜色
 :root {
+  --vui-menu-font-size: 14px;
   --vui-menu-text-color: var(--vui-text-color-regular);
   --vui-menu-divider-color: var(--vui-border-color-lighter);
   --vui-menu-item-hover-text-color: var(--vui-color-brand-base);
@@ -11,7 +12,7 @@
 // 样式
 .vui-menu {
   max-width: 240px;
-  font-size: 14px;
+  font-size: var(--vui-menu-font-size);
   color: var(--vui-menu-text-color);
   &-item {
     display: flex;
