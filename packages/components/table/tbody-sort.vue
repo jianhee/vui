@@ -1,4 +1,4 @@
-<!-- 表格-表身-行 -->
+<!-- 表格-表身-行排序 -->
 <template>
   <div
     :class="[{ 'is-draggable': isDraggable }, dragClass]"
@@ -8,13 +8,13 @@
     @dragover="onDragOver"
     @dragend="onDragEnd"
   >
+    <!-- 多选 -->
     <slot />
     <!-- 内容 -->
     <div
       v-for="col in parentTable.props.colsData"
       :key="col.key"
-      class="vui-table-cell"
-      :class="col.cellClassName"
+      :class="['vui-table-cell', col.className]"
       :style="{ width: `${parentTable.colsWidth.value[col.key]}px` }"
     >
       <!-- 优先显示slot -->
@@ -136,7 +136,7 @@ function onDragEnd() {
 
   // 触发事件
   const type = state === 'merge' ? 'merge' : 'sort';
-  parentTable.dragEnd(type, { dragItem, dragItems, targetItem, state, newIndex });
+  parentTable.emits(type, { dragItem, dragItems, targetItem, state, newIndex });
 
   // 清空状态
   parentTable.dragStartData.value = null;

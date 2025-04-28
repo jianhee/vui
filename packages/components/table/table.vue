@@ -1,15 +1,12 @@
 <!-- 表格 -->
-<!-- 1.固定表头、拖拽调整列宽 -->
+<!-- 1.固定表头+拖拽调整列宽 -->
 <!-- 2.虚拟列表 -->
 <!-- 3.多选+鼠标框选、保持选中状态 -->
 <!-- 4.拖拽排序+合并 -->
 <template>
   <div
     ref="tableRef"
-    class="vui-table"
-    :class="{
-      'is-draging': isSelecting || dragStartData
-    }"
+    :class="['vui-table', { 'is-draging': isSelecting || dragStartData }]"
     :style="tableStyles"
   >
     <!-- 表头 -->
@@ -45,7 +42,6 @@
           :key="row.id"
           :row-data="row"
           type="body"
-          @contextmenu.prevent="onRowContextmenu(row, $event)"
         >
           <!-- 自定义内容：name 和 col.key 一致 -->
           <template
@@ -160,11 +156,6 @@ function onBodyScroll(event) {
   headerStyles.value.transform = `translateX(-${event.target.scrollLeft}px)`;
 }
 
-// 右键点击节点
-function onRowContextmenu(item, event) {
-  emits('row-contextmenu', item, event);
-}
-
 // 框选
 const isSelecting = ref(false);
 const selectFn = useSelect(props, emits);
@@ -174,22 +165,21 @@ const onSelectStart = e => selectboxRef.value?.onSelectStart(e);
 // 排序
 const dragStartData = ref(null);
 const dragTargetData = ref(null);
-const dragNewData = ref(null);
 
 // 共享数据
 provide('parentTable', {
+  emits,
   props,
+  // 元素
+  viewRef,
+  tbodyRef: tbodyProps.ref,
   // 列宽
   colsWidth,
   // 多选
   isSelecting,
   selectFn,
-  viewRef,
-  tbodyRef: tbodyProps.ref,
   // 排序
   dragStartData,
-  dragTargetData,
-  dragNewData,
-  dragEnd: (type, data) => emits(type, data)
+  dragTargetData
 });
 </script>

@@ -1,0 +1,32 @@
+// 颜色
+:root {
+  --vui-tree-text-color: var(--vui-text-color-regular);
+  --vui-tree-icon-color: var(--vui-text-color-placeholder);
+  --vui-tree-node-active-bg-color: var(--vui-fill-color-light);
+}
+
+// 样式
+.vui-tree {
+  flex: auto;
+  overflow: hidden;
+  font-size: 14px;
+  color: var(--vui-tree-text-color);
+  &-node {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    height: var(--vui-tree-node-height);
+    padding-right: 10px;
+    cursor: pointer;
+    &:hover,
+    &.is-current {
+      background-color: var(--vui-tree-node-active-bg-color);
+    }
+  }
+  &-hidden {
+    visibility: hidden;
+  }
+  .vui-icon {
+    color: var(--vui-tree-icon-color);
+  }
+}

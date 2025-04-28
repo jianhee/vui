@@ -6,8 +6,9 @@
     :row-data="rowData"
     :is-selected="isSelected"
     :class="rowClasses"
+    @contextmenu.prevent="onRowContextmenu"
   >
-    <!-- 列-多选 -->
+    <!-- 多选列 -->
     <div
       v-if="parentTable.props.selectable"
       class="vui-table-cell"
@@ -66,6 +67,7 @@ const rowProps = computed(() => {
 
 // 是否选中
 const isSelected = computed(() => {
+  if (!parentTable.props.selectable) return null;
   if (props.type === 'head') {
     return parentTable.selectFn.isAllSelected.value;
   } else {
@@ -81,5 +83,11 @@ function toggleSelected() {
   } else {
     return parentTable.selectFn.toggleRowSelected(props.rowData.id, newState);
   }
+}
+
+// 右键点击节点
+function onRowContextmenu(event) {
+  if (props.type === 'head') return;
+  parentTable.emits('row-contextmenu', props.rowData, event);
 }
 </script>
