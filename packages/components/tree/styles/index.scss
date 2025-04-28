@@ -1,5 +1,6 @@
 // 颜色
 :root {
+  --vui-tree-font-size: 14px;
   --vui-tree-text-color: var(--vui-text-color-regular);
   --vui-tree-icon-color: var(--vui-text-color-placeholder);
   --vui-tree-node-active-bg-color: var(--vui-fill-color-light);
@@ -9,7 +10,7 @@
 .vui-tree {
   flex: auto;
   overflow: hidden;
-  font-size: 14px;
+  font-size: var(--vui-tree-font-size);
   color: var(--vui-tree-text-color);
   &-node {
     display: flex;
