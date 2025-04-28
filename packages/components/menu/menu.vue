@@ -28,19 +28,10 @@ const props = defineProps({
 // 选中项的 key
 const modelSelectedKey = defineModel('selectedKey', { type: [String, Number], default: null });
 
-// 选中一项
-const onSelect = item => {
-  emits('select', item);
-  if (item[props.keyName] !== modelSelectedKey.value) {
-    modelSelectedKey.value = item[props.keyName];
-    emits('selectChange', item);
-  }
-};
-
 // 共享数据
 provide('parentMenu', {
+  emits,
   props,
-  modelSelectedKey,
-  onSelect
+  modelSelectedKey
 });
 </script>

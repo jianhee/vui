@@ -4,7 +4,7 @@
   <div
     class="vui-menu-item"
     :title="item.label"
-    @click="parentMenu.onSelect(item)"
+    @click="onClickItem"
   >
     <VIcon
       v-if="item.icon"
@@ -48,4 +48,16 @@ const isShowSelectedIcon = computed(() => {
   const isSelected = props.item[parentMenu.props.keyName] === parentMenu.modelSelectedKey.value;
   return parentMenu.props.showSelectedIcon && isSelected;
 });
+
+// 点击一项
+const onClickItem = () => {
+  // 选中事件
+  parentMenu.emits('select', props.item);
+  // 切换事件
+  const selectedKey = props.item[parentMenu.props.keyName];
+  if (selectedKey !== parentMenu.modelSelectedKey.value) {
+    parentMenu.modelSelectedKey.value = selectedKey;
+    parentMenu.emits('selectChange', props.item);
+  }
+};
 </script>
