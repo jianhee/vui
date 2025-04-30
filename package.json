@@ -1,10 +1,22 @@
 {
   "name": "vui",
-  "description": "UI for Vue3",
+  "description": "Vue 3 组件库 + 工具集",
   "version": "1.0.0",
   "author": "jianhe",
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "dependencies": {},
   "devDependencies": {
-    "linter-configs": "file:.yalc/linter-configs"
+    "@vitepress-demo-preview/component": "^2.3.2",
+    "@vitepress-demo-preview/plugin": "^1.4.0",
+    "linter-configs": "file:.yalc/linter-configs",
+    "sass-embedded": "^1.87.0",
+    "vite-plugin-svg-icons": "^2.0.1",
+    "vite-svg-loader": "^5.1.0",
+    "vitepress": "^1.6.3"
   },
   "prettier": "linter-configs/prettier",
   "eslintConfig": {

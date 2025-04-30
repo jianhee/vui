@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 33 33">
+  <defs>
+    <filter id="prefix__a" x="0" y="0" width="33" height="33" filterUnits="userSpaceOnUse">
+      <feOffset />
+      <feGaussianBlur stdDeviation="1.5" result="b" />
+      <feFlood flood-opacity=".161" />
+      <feComposite operator="in" in2="b" />
+      <feComposite in="SourceGraphic" />
+    </filter>
+    <style>
+      .prefix__b {
+        fill: #fff
+      }
+    </style>
+  </defs>
+  <g filter="url(#prefix__a)">
+    <rect width="24" height="24" rx="12" transform="translate(4.5 4.5)" fill="#8ab4f8" />
+  </g>
+  <path class="prefix__b"
+    d="M16.237 21.812a.5.5 0 01-.379-.174l-4.474-5.193a.5.5 0 01.027-.681l4.474-4.434a.5.5 0 01.7.71l-4.142 4.105 4.169 4.839a.5.5 0 01-.379.826z" />
+  <path class="prefix__b"
+    d="M21.237 21.812a.5.5 0 01-.379-.174l-4.474-5.193a.5.5 0 01.027-.681l4.474-4.434a.5.5 0 01.7.71l-4.142 4.105 4.169 4.839a.5.5 0 01-.379.826z" />
+</svg>

@@ -34,3 +34,7 @@ coverage
 *eslint*
 *stylelint*
 *yalc*
+
+# vitepress
+docs/.vitepress/cache
+docs/.vitepress/dist
