@@ -2,33 +2,6 @@
 
 ## 导入 SVG 图标
 
-### 使用 component
-
-:::code-group
-
-```sh [npm]
-npm i -D vite-svg-loader
-```
-
-```js [vite.config.js]
-import svgLoader from 'vite-svg-loader';
-export default defineConfig({
-  plugins: [svgLoader()]
-});
-```
-
-```vue [*.vue]
-<template>
-  <VIcon :component="IconClose" />
-</template>
-
-<script setup>
-import IconClose from '@icons/close.svg?component';
-</script>
-```
-
-:::
-
 ### 使用 name
 
 :::code-group
@@ -62,6 +35,33 @@ import 'virtual:svg-icons-register';
 
 :::
 
+### 使用 component
+
+:::code-group
+
+```sh [npm]
+npm i -D vite-svg-loader
+```
+
+```js [vite.config.js]
+import svgLoader from 'vite-svg-loader';
+export default defineConfig({
+  plugins: [svgLoader()]
+});
+```
+
+```vue [*.vue]
+<template>
+  <VIcon :component="IconClose" />
+</template>
+
+<script setup>
+import IconClose from '@icons/close.svg?component';
+</script>
+```
+
+:::
+
 ## 基础用法
 
 1. `props.name`, `props.component` 图标名称和图标组件，二选一
@@ -75,7 +75,7 @@ import 'virtual:svg-icons-register';
 demo-preview=@demos/icon/basic.vue
 :::
 
-## 图标大小
+## 图标尺寸
 
 1. `props.size` 默认继承 `font-size`
 
@@ -83,10 +83,10 @@ demo-preview=@demos/icon/basic.vue
 demo-preview=@demos/icon/size.vue
 :::
 
-## 切换状态
+## 切换图标
 
-- 单色图标：设置不同状态的 `color` 即可
-- 多色图标：传入 `default`, `hover`, `dark`, `darkHover` 等状态对应的图标，内部自动切换
+1. 单色图标：设置不同状态的 `color` 即可
+1. 多色图标：传入 `default`, `hover`, `dark`, `darkHover` 等状态对应的图标，内部自动切换
 
 :::preview
 demo-preview=@demos/icon/state.vue

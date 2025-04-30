@@ -1,6 +1,6 @@
 # Btn 按钮
 
-## 类型
+## 按钮类型
 
 `props.type`
 
@@ -16,14 +16,6 @@ demo-preview=@demos/btn/type.vue
 demo-preview=@demos/btn/disabled.vue
 :::
 
-## 图标按钮
-
-`props.icon` 它的值是 `VIcon` 组件的 `name/component/props`
-
-:::preview
-demo-preview=@demos/btn/icon.vue
-:::
-
 ## 加载状态
 
 `props.loading`
@@ -32,7 +24,15 @@ demo-preview=@demos/btn/icon.vue
 demo-preview=@demos/btn/loading.vue
 :::
 
-## 尺寸
+## 图标按钮
+
+`props.icon` 它的值是 `VIcon` 组件的 `name/component/props`
+
+:::preview
+demo-preview=@demos/btn/icon.vue
+:::
+
+## 按钮尺寸
 
 `props.size`
 
