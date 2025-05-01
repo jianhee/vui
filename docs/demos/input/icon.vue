@@ -1,7 +1,7 @@
 <template>
   <VInput
     v-model:value="inputValue"
-    icon="close"
+    icon="search"
   />
 </template>
 
