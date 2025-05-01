@@ -8,18 +8,11 @@
       flex
       class="demo-icons"
     >
-      <VIcon v-bind="item.props" />
       <VIcon
+        v-for="size in [null, '28', '32', '36']"
         v-bind="item.props"
-        size="28"
-      />
-      <VIcon
-        v-bind="item.props"
-        size="32"
-      />
-      <VIcon
-        v-bind="item.props"
-        size="36"
+        :key="size"
+        :size="size"
       />
     </DemoRow>
   </template>
