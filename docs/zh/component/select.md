@@ -15,7 +15,6 @@ demo-preview=@demos/select/basic.vue
 ## 原生属性
 
 1. `props.disabled` 是否禁用
-1. `props.readonly` 是否只读（模拟原生属性）
 
 :::preview
 demo-preview=@demos/select/origin.vue
@@ -27,4 +26,12 @@ demo-preview=@demos/select/origin.vue
 
 :::preview
 demo-preview=@demos/select/size.vue
+:::
+
+## 显示文本
+
+1. `props.text` 有时只需要显示文本，不需要选项，此时可以使用 `props.text` 来指定文本内容
+
+:::preview
+demo-preview=@demos/select/text.vue
 :::

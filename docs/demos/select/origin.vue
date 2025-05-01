@@ -1,18 +1,9 @@
 <template>
-  <DemoRow>
-    <VSelect
-      v-model:value="selectValue"
-      :items="selectOptions"
-      disabled
-    />
-  </DemoRow>
-  <DemoRow>
-    <VSelect
-      v-model:value="selectValue"
-      :items="selectOptions"
-      readonly
-    />
-  </DemoRow>
+  <VSelect
+    v-model:value="selectValue"
+    :items="selectOptions"
+    disabled
+  />
 </template>
 
 <script setup>
