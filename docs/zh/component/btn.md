@@ -26,7 +26,7 @@ demo-preview=@demos/btn/loading.vue
 
 ## 图标按钮
 
-1. `props.icon` 可选的值有 `VIcon` 组件的 `name`, `component`, `props`
+1. `props.icon` 可选的值有 `VIcon` 组件的 `name/component/props`
 
 :::preview
 demo-preview=@demos/btn/icon.vue
