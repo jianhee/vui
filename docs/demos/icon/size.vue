@@ -1,18 +1,17 @@
 <template>
   <template
-    v-for="item in typeItems"
-    :key="item.type"
+    v-for="type in iconTypes"
+    :key="type.name"
   >
-    <DemoRow>使用 {{ item.type }}</DemoRow>
+    <DemoRow>使用 {{ type.name }}</DemoRow>
     <DemoRow
       flex
       class="demo-icons"
     >
       <VIcon
-        v-for="size in [null, '28', '32', '36']"
-        v-bind="item.props"
+        v-for="size in sizeItems"
         :key="size"
-        :size="size"
+        v-bind="{ ...type.icon, size }"
       />
     </DemoRow>
   </template>
@@ -21,8 +20,12 @@
 <script setup>
 import IconClose from '@icons/close.svg?component';
 
-const typeItems = [
-  { type: 'name', props: { name: 'close' } },
-  { type: 'component', props: { component: IconClose } }
+// 图标类型
+const iconTypes = [
+  { name: 'name', icon: { name: 'close' } },
+  { name: 'component', icon: { component: IconClose } }
 ];
+
+// 图标大小
+const sizeItems = [undefined, '28', '32', '36'];
 </script>

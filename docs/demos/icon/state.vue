@@ -1,18 +1,18 @@
 <template>
   <template
-    v-for="item in typeItems"
-    :key="item.type"
+    v-for="type in iconTypes"
+    :key="type.name"
   >
-    <DemoRow>使用 {{ item.type }}</DemoRow>
+    <DemoRow>使用 {{ type.name }}</DemoRow>
     <DemoRow
       flex
       class="demo-icons"
     >
       <VIcon
-        v-bind="item.props1"
+        v-bind="type.singleIcon"
         class="demo-icon-hover"
       />
-      <VIcon v-bind="item.props2" />
+      <VIcon v-bind="type.multiIcon" />
     </DemoRow>
   </template>
 </template>
@@ -24,11 +24,12 @@ import IconToggleLightHover from '@icons/toggle-light-hover.svg?component';
 import IconToggleDark from '@icons/toggle-dark.svg?component';
 import IconToggleDarkHover from '@icons/toggle-dark-hover.svg?component';
 
-const typeItems = [
+// 图标类型
+const iconTypes = [
   {
-    type: 'name',
-    props1: { name: 'close' },
-    props2: {
+    name: 'name',
+    singleIcon: { name: 'close' },
+    multiIcon: {
       name: {
         default: 'toggle-light',
         hover: 'toggle-light-hover',
@@ -38,9 +39,9 @@ const typeItems = [
     }
   },
   {
-    type: 'component',
-    props1: { component: IconClose },
-    props2: {
+    name: 'component',
+    singleIcon: { component: IconClose },
+    multiIcon: {
       component: {
         default: IconToggleLight,
         hover: IconToggleLightHover,

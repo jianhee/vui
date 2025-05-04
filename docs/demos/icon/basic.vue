@@ -1,33 +1,17 @@
 <template>
   <template
-    v-for="item in typeItems"
-    :key="item.type"
+    v-for="type in iconTypes"
+    :key="type.name"
   >
-    <DemoRow>使用 {{ item.type }}</DemoRow>
+    <DemoRow>使用 {{ type.name }}</DemoRow>
     <DemoRow
       flex
       class="demo-icons"
     >
-      <VIcon v-bind="item.props" />
       <VIcon
-        v-bind="item.props"
-        color="red"
-      />
-      <VIcon
-        v-bind="item.props"
-        clickable
-      />
-      <VIcon
-        v-bind="item.props"
-        disabled
-      />
-      <VIcon
-        v-bind="item.props"
-        rotate="45"
-      />
-      <VIcon
-        v-bind="item.props"
-        spin
+        v-for="(prop, index) in basicProps"
+        :key="index"
+        v-bind="{ ...type.icon, ...prop }"
       />
     </DemoRow>
   </template>
@@ -36,8 +20,20 @@
 <script setup>
 import IconClose from '@icons/close.svg?component';
 
-const typeItems = [
-  { type: 'name', props: { name: 'close' } },
-  { type: 'component', props: { component: IconClose } }
+// 图标类型
+const iconTypes = [
+  { name: 'name', icon: { name: 'close' } },
+  { name: 'component', icon: { component: IconClose } }
+];
+
+// 基础属性
+const basicProps = [
+  //
+  {},
+  { color: 'red' },
+  { clickable: true },
+  { disabled: true },
+  { rotate: 45 },
+  { spin: true }
 ];
 </script>

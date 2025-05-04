@@ -1,13 +1,16 @@
 <template>
-  <DemoRow
-    v-for="type in ['default', 'primary']"
+  <VBtn
+    v-for="type in btnTypes"
     :key="type"
+    :type="type"
+    display="block"
+    class="vui-mb-10"
   >
-    <VBtn
-      :type="type"
-      display="block"
-    >
-      {{ type }}
-    </VBtn>
-  </DemoRow>
+    {{ type || 'default' }}
+  </VBtn>
 </template>
+
+<script setup>
+// 按钮类型
+const btnTypes = [undefined, 'primary'];
+</script>

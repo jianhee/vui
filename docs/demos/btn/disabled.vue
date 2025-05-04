@@ -4,12 +4,17 @@
     flex-center
   >
     <VBtn
-      v-for="type in ['default', 'primary', 'link']"
+      v-for="type in btnTypes"
       :key="type"
       :type="type"
       disabled
     >
-      {{ type }}
+      {{ type || 'default' }}
     </VBtn>
   </DemoRow>
 </template>
+
+<script setup>
+// 按钮类型
+const btnTypes = [undefined, 'primary', 'link'];
+</script>
