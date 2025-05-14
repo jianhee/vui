@@ -17,11 +17,8 @@ export default defineConfig({
   locales: locales,
   // 路由
   cleanUrls: true,
-  // 默认指向 zh
-  rewrites: {
-    'zh/:page': ':page',
-    'zh/:pkg/:page': ':pkg/:page'
-  },
+  // 构建
+  srcDir: 'zh',
   // 主题
   lastUpdated: true,
   themeConfig: {
