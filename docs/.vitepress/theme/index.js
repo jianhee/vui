@@ -4,7 +4,7 @@ import defaultTheme from 'vitepress/theme';
 // demo-preview
 // AntDesignContainer, ElementPlusContainer, NaiveUIContainer
 // https://www.npmjs.com/package/@vitepress-demo-preview/plugin
-import { ElementPlusContainer } from '@vitepress-demo-preview/component';
+import { AntDesignContainer } from '@vitepress-demo-preview/component';
 import '@vitepress-demo-preview/component/dist/style.css';
 
 // icon
@@ -22,7 +22,7 @@ export default {
   extends: defaultTheme,
   enhanceApp({ app }) {
     app.use(vui);
-    app.component('demo-preview', ElementPlusContainer);
+    app.component('demo-preview', AntDesignContainer);
     app.component('DemoRow', DemoRow);
   }
 };

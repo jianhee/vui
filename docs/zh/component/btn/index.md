@@ -4,41 +4,31 @@
 
 1. `props.type` 可选的值有以下几种
 
-:::preview
-demo-preview=./demos/type.vue
-:::
+<preview path="./demos/type.vue"></preview>
 
 ## 禁用状态
 
 1. `props.disabled`
 
-:::preview
-demo-preview=./demos/disabled.vue
-:::
+<preview path="./demos/disabled.vue"></preview>
 
 ## 加载状态
 
 1. `props.loading`
 
-:::preview
-demo-preview=./demos/loading.vue
-:::
+<preview path="./demos/loading.vue"></preview>
 
 ## 图标按钮
 
 1. `props.icon` 可选的值有 `VIcon` 组件的 `name/component/props`
 
-:::preview
-demo-preview=./demos/icon.vue
-:::
+<preview path="./demos/icon.vue"></preview>
 
 ## 按钮尺寸
 
 1. `props.size` 可选的值有以下几种
 
-:::preview
-demo-preview=./demos/size.vue
-:::
+<preview path="./demos/size.vue"></preview>
 
 ## 显示类型
 
@@ -46,6 +36,4 @@ demo-preview=./demos/size.vue
    1. `inline` 行内（默认）
    2. `block` 独占一行
 
-:::preview
-demo-preview=./demos/display.vue
-:::
+<preview path="./demos/display.vue"></preview>
