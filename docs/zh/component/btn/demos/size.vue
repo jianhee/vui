@@ -1,24 +1,16 @@
 <template>
   <DemoRow
-    v-for="type in btnTypes"
-    :key="type"
+    v-for="btnType in ['default', 'primary']"
+    :key="btnType"
     flex
   >
     <VBtn
-      v-for="size in btnSizes"
-      :key="size"
-      :type="type"
-      :size="size"
+      v-for="btnSize in ['small', 'medium', 'large']"
+      :key="btnSize"
+      :type="btnType"
+      :size="btnSize"
     >
-      {{ size }}
+      {{ btnSize }}
     </VBtn>
   </DemoRow>
 </template>
-
-<script setup>
-// 按钮类型
-const btnTypes = [undefined, 'primary'];
-
-// 按钮尺寸
-const btnSizes = ['small', 'medium', 'large'];
-</script>

@@ -12,8 +12,8 @@ import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 // path
 export const alias = {
   'vui': fileURLToPath(new URL('../../../packages', import.meta.url)),
-  '@utils': fileURLToPath(new URL('../theme/utils', import.meta.url)),
-  '@icons': fileURLToPath(new URL('../theme/icons', import.meta.url))
+  '@icons': fileURLToPath(new URL('../theme/icons', import.meta.url)),
+  '@utils': fileURLToPath(new URL('../theme/utils', import.meta.url))
 };
 
 // vite

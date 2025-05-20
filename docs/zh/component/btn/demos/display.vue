@@ -1,16 +1,11 @@
 <template>
   <VBtn
-    v-for="type in btnTypes"
-    :key="type"
-    :type="type"
+    v-for="btnType in ['default', 'primary']"
+    :key="btnType"
+    :type="btnType"
     display="block"
     class="vui-mb-10"
   >
-    {{ type || 'default' }}
+    {{ btnType }}
   </VBtn>
 </template>
-
-<script setup>
-// 按钮类型
-const btnTypes = [undefined, 'primary'];
-</script>

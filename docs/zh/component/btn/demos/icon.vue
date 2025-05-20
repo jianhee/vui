@@ -1,6 +1,6 @@
 <template>
   <DemoRow
-    v-for="btnType in btnTypes"
+    v-for="btnType in ['default', 'primary']"
     :key="btnType"
     flex
   >
@@ -17,9 +17,6 @@
 
 <script setup>
 import IconClose from '@icons/close.svg?component';
-
-// 按钮类型
-const btnTypes = [undefined, 'primary'];
 
 // 图标类型
 const iconTypes = [

@@ -1,17 +1,12 @@
 <template>
   <DemoRow flex>
     <VBtn
-      v-for="type in btnTypes"
-      :key="type"
-      :type="type"
+      v-for="btnType in ['default', 'primary']"
+      :key="btnType"
+      :type="btnType"
       loading
     >
-      {{ type || 'default' }}
+      {{ btnType }}
     </VBtn>
   </DemoRow>
 </template>
-
-<script setup>
-// 按钮类型
-const btnTypes = [undefined, 'primary'];
-</script>
