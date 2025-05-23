@@ -1,15 +1,7 @@
 <template>
-  <DemoRow
-    flex
-    flex-center
-  >
-    <VBtn
-      v-for="btnType in ['default', 'primary', 'link']"
-      :key="btnType"
-      :type="btnType"
-      disabled
-    >
-      {{ btnType }}
-    </VBtn>
-  </DemoRow>
+  <BtnBasic disabled />
 </template>
+
+<script setup>
+import BtnBasic from './basic.vue';
+</script>

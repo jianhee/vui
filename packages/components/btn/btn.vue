@@ -9,7 +9,7 @@
     <!-- loading -->
     <VIcon
       v-if="loading"
-      :component="VIconLoadingLoop"
+      :component="IconLoadingLoop"
     />
     <!-- 图标 -->
     <VIcon
@@ -23,24 +23,24 @@
 
 <script setup>
 import { computed } from 'vue';
-import { getIconProps } from '../icon/utils';
-import VIconLoadingLoop from '../../icons/loading-loop.vue';
+import { useIcon } from '../icon/composables';
+import IconLoadingLoop from '../../icons/loading-loop.vue';
 
 // 参数
 const props = defineProps({
-  // 类型：custom, default, primary, link
+  // 按钮类型：primary, default, link
   type: { type: String, default: 'default' },
   // 禁用状态
   disabled: { type: Boolean, default: false },
-  // 图标按钮：VIcon 组件的 name/component/props
-  icon: { type: [String, Object], default: null },
-  // 加载状态按钮
+  // 加载状态
   loading: { type: Boolean, default: false },
-  // 尺寸：small, medium, large
-  size: { type: String, default: 'medium' },
-  // 显示类型：inline 行内，block 独占一行
+  // 图标按钮：`VIcon` 组件的 `name/component/props`
+  icon: { type: [String, Object], default: null },
+  // 按钮尺寸：small, default, large
+  size: { type: String, default: 'default' },
+  // 显示类型：`inline` 行内（默认），`block` 独占一行
   display: { type: String, default: 'inline' },
-  // 圆角
+  // 圆角尺寸
   radius: { type: String, default: null }
 });
 
@@ -48,10 +48,10 @@ const props = defineProps({
 const btnClasses = computed(() => {
   return [
     'vui-btn',
-    `vui-btn-${props.type}`,
+    `vui-btn--type-${props.type}`,
     {
-      [`vui-btn-${props.size}`]: props.type !== 'link',
-      [`vui-btn-${props.display}`]: props.display === 'block',
+      [`vui-btn--size-${props.size}`]: props.type !== 'link',
+      'vui-btn--display-block': props.display === 'block',
       'is-disabled': isDisabled.value
     }
   ];
@@ -66,5 +66,5 @@ const btnStyles = computed(() => {
 const isDisabled = computed(() => props.disabled || props.loading);
 
 // 获取图标 props
-const iconProps = computed(() => getIconProps(props.icon));
+const { iconProps } = useIcon(props.icon);
 </script>

@@ -1,10 +1,11 @@
 # Btn 按钮
 
-## 按钮类型
+## 基础用法
 
-1. `props.type` 可选的值有以下几种
+1. `props.type` 按钮类型，可选的值有以下几种
+2. `slot.default` 显示内容
 
-<preview path="./demos/type.vue"></preview>
+<preview path="./demos/basic.vue"></preview>
 
 ## 禁用状态
 
@@ -37,3 +38,9 @@
    2. `block` 独占一行
 
 <preview path="./demos/display.vue"></preview>
+
+## 圆角尺寸
+
+1. `props.radius`
+
+<preview path="./demos/radius.vue"></preview>

@@ -1,16 +1,20 @@
 <template>
-  <DemoRow
-    v-for="btnType in ['default', 'primary']"
-    :key="btnType"
-    flex
+  <template
+    v-for="btnSize in btnSizes"
+    :key="btnSize.label"
   >
-    <VBtn
-      v-for="btnSize in ['small', 'medium', 'large']"
-      :key="btnSize"
-      :type="btnType"
-      :size="btnSize"
-    >
-      {{ btnSize }}
-    </VBtn>
-  </DemoRow>
+    <DemoRow>{{ btnSize.label }}</DemoRow>
+    <BtnBasic :size="btnSize.prop" />
+  </template>
 </template>
+
+<script setup>
+import BtnBasic from './basic.vue';
+
+// 按钮尺寸
+const btnSizes = [
+  { label: 'Large', prop: 'large' },
+  { label: 'Default', prop: undefined },
+  { label: 'Small', prop: 'small' }
+];
+</script>

@@ -6,13 +6,13 @@
   align-items: center;
   justify-content: center;
   padding: 0 20px;
-  line-height: 1;
+  font-size: inherit;
+  line-height: 1em;
   color: var(--vui-btn-text-color);
   white-space: nowrap;
   text-decoration: none;
   cursor: pointer;
   user-select: none;
-  outline: 0;
   background-color: var(--vui-btn-bg-color);
   border: 1px solid var(--vui-btn-border-color);
   border-radius: 4px;
@@ -25,27 +25,29 @@
   }
 
   // 类型
-  &-default {
-    --vui-btn-text-color: var(--vui-text-color-regular);
-    --vui-btn-bg-color: var(--vui-fill-color-blank);
-    --vui-btn-border-color: var(--vui-border-color-base);
-    --vui-btn-hover-text-color: var(--vui-color-brand-base);
-    --vui-btn-hover-bg-color: var(--vui-color-brand-a10);
-    --vui-btn-hover-border-color: var(--vui-color-brand-a30);
-  }
-  &-primary {
-    --vui-btn-text-color: var(--vui-color-white);
-    --vui-btn-bg-color: var(--vui-color-brand-base);
-    --vui-btn-border-color: var(--vui-color-brand-base);
-    --vui-btn-hover-opacity: 0.8;
-  }
-  &-link {
-    --vui-btn-text-color: var(--vui-color-brand-base);
-    --vui-btn-bg-color: transparent;
-    --vui-btn-hover-opacity: 0.8;
+  &--type {
+    &-default {
+      --vui-btn-text-color: var(--vui-text-color-regular);
+      --vui-btn-bg-color: var(--vui-fill-color-blank);
+      --vui-btn-border-color: var(--vui-border-color-base);
+      --vui-btn-hover-text-color: var(--vui-color-brand-base);
+      --vui-btn-hover-bg-color: var(--vui-color-brand-a10);
+      --vui-btn-hover-border-color: var(--vui-color-brand-a30);
+    }
+    &-primary {
+      --vui-btn-text-color: var(--vui-color-white);
+      --vui-btn-bg-color: var(--vui-color-brand-base);
+      --vui-btn-border-color: var(--vui-color-brand-base);
+      --vui-btn-hover-opacity: 0.8;
+    }
+    &-link {
+      --vui-btn-text-color: var(--vui-color-brand-base);
+      --vui-btn-bg-color: transparent;
+      --vui-btn-hover-opacity: 0.8;
 
-    padding: 2px;
-    border: 0;
+      padding: 2px;
+      border: 0;
+    }
   }
 
   // 禁用状态
@@ -54,21 +56,23 @@
   }
 
   // 尺寸
-  &-small {
-    height: 24px;
-    font-size: 12px;
-  }
-  &-medium {
-    height: 32px;
-    font-size: 14px;
-  }
-  &-large {
-    height: 40px;
-    font-size: 16px;
+  &--size {
+    &-small {
+      height: 24px;
+      font-size: 12px;
+    }
+    &-default {
+      height: 32px;
+      font-size: 14px;
+    }
+    &-large {
+      height: 40px;
+      font-size: 16px;
+    }
   }
 
   // 块级元素
-  &-block {
+  &--display-block {
     display: flex;
     width: 100%;
   }

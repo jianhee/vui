@@ -29,5 +29,12 @@ defineProps({
   &-flex-center {
     align-items: center !important;
   }
+  > .vui-btn {
+    margin-right: 10px;
+  }
+  > .vui-btn--display-block {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
 }
 </style>

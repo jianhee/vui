@@ -1,28 +1,22 @@
 <template>
-  <DemoRow
-    v-for="btnType in ['default', 'primary']"
-    :key="btnType"
-    flex
+  <template
+    v-for="iconType in iconTypes"
+    :key="iconType.label"
   >
-    <VBtn
-      v-for="iconType in iconTypes"
-      :key="iconType.label"
-      :type="btnType"
-      :icon="iconType.icon"
-    >
-      {{ iconType.label }}
-    </VBtn>
-  </DemoRow>
+    <DemoRow>{{ iconType.label }}</DemoRow>
+    <BtnBasic :icon="iconType.prop" />
+  </template>
 </template>
 
 <script setup>
+import BtnBasic from './basic.vue';
 import IconClose from '@icons/close.svg?component';
 
 // 图标类型
 const iconTypes = [
-  { label: '传入 name', icon: 'close' },
-  { label: '传入 component', icon: IconClose },
-  { label: '传入 { name }', icon: { name: 'close' } },
-  { label: '传入 { component }', icon: { component: IconClose } }
+  { label: '传入 name', prop: 'close' },
+  { label: '传入 component', prop: IconClose },
+  { label: '传入 { name }', prop: { name: 'close' } },
+  { label: '传入 { component }', prop: { component: IconClose } }
 ];
 </script>
