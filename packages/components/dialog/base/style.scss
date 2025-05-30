@@ -1,6 +1,7 @@
-// 弹窗/抽屉
-@mixin vui-dialog($prefix: "vui-dialog") {
-  // 颜色
+// 对话框 vui-dialog
+// 抽屉   vui-drawer
+@mixin vui-modal($prefix) {
+  // vars
   :root {
     --#{$prefix}-bg-color: var(--vui-bg-color-base);
     --#{$prefix}-box-shadow: var(--vui-box-shadow-base);
@@ -10,7 +11,7 @@
     --#{$prefix}-close-icon-hover-color: var(--vui-color-brand-base);
   }
 
-  // 样式
+  // 通用样式
   .#{$prefix} {
     // 主体
     line-height: 24px;
@@ -55,6 +56,80 @@
     &-enter-from,
     &-leave-to {
       opacity: 0;
+    }
+  }
+}
+
+// 对话框
+@mixin vui-dialog() {
+  @include vui-modal("vui-dialog");
+  .vui-dialog {
+    // 主体
+    max-width: 98vw;
+    padding: 16px;
+    margin: 15vh auto 50px;
+    overflow: auto;
+    border-radius: 4px;
+
+    // 顶栏
+    &-header {
+      padding-bottom: 16px;
+    }
+
+    // 动画
+    &-enter-from > &,
+    &-leave-to > & {
+      transform: translateY(-20px);
+    }
+  }
+}
+
+// 抽屉
+@mixin vui-drawer() {
+  @include vui-modal("vui-drawer");
+  .vui-drawer {
+    // 主体
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    max-width: 100vw;
+    height: 100vh;
+    padding: 16px 0;
+    &-left {
+      left: 0;
+    }
+    &-right {
+      right: 0;
+    }
+
+    // 顶栏
+    &-header {
+      flex: none;
+      padding: 0 16px 16px;
+    }
+
+    // 内容
+    &-body {
+      flex: auto;
+      padding: 0 16px;
+      overflow: auto;
+    }
+
+    // 底栏
+    &-footer {
+      flex: none;
+      padding: 16px 16px 0;
+    }
+
+    // 动画
+    &-enter-from > &,
+    &-leave-to > & {
+      &-left {
+        transform: translateX(-100%);
+      }
+      &-right {
+        transform: translateX(100%);
+      }
     }
   }
 }

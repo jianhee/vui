@@ -1,4 +1,4 @@
-// 顶栏导航链接
+// 顶栏导航
 export const headerNavs = [
   { text: '起步', link: '/start/install/', activeMatch: '/start/' },
   { text: '组件', link: '/component/icon/', activeMatch: '/component/' },
@@ -12,7 +12,7 @@ export const socialLinks = [
   { icon: 'twitter', link: 'https://github.com/vuejs/vitepress' }
 ];
 
-// 侧边栏导航链接
+// 侧边栏导航
 export const sidebarNavs = {
   '/start/': [
     { text: '安装', link: '/start/install/' },
@@ -57,7 +57,7 @@ export const sidebarNavs = {
     {
       text: '反馈',
       items: [
-        { text: 'Dialog 弹窗', link: '/component/dialog/' },
+        { text: 'Dialog 对话框', link: '/component/dialog/' },
         { text: 'Drawer 抽屉', link: '/component/drawer/' },
         { text: 'Loading 加载状态', link: '/component/loading/' }
       ]

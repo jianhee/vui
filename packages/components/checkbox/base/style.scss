@@ -1,0 +1,114 @@
+// 多选框 vui-checkbox
+// 单选框 vui-radio
+@mixin vui-option($prefix) {
+  // vars
+  :root {
+    --#{$prefix}-text-color: var(--vui-text-color-regular);
+    --#{$prefix}-icon-color: var(--vui-border-color-base);
+    --#{$prefix}-checked-color: var(--vui-color-brand-base);
+    --#{$prefix}-btn-text-color: var(--vui-text-color-primary);
+    --#{$prefix}-btn-bg-color: var(--vui-fill-color-blank);
+    --#{$prefix}-btn-border-color: var(--vui-border-color-base);
+    --#{$prefix}-btn-hover-text-color: var(--vui-color-brand-base);
+    --#{$prefix}-btn-checked-text-color: var(--vui-color-white);
+    --#{$prefix}-btn-checked-bg-color: var(--vui-color-brand-base);
+    --#{$prefix}-btn-checked-border-color: var(--vui-color-brand-base);
+  }
+
+  // 通用样式
+  .#{$prefix},
+  .#{$prefix}-btn {
+    position: relative;
+    display: inline-flex;
+    gap: 4px;
+    align-items: center;
+    height: 32px;
+    font-size: 14px;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.3s ease;
+  }
+
+  // 基础选项
+  .#{$prefix} {
+    line-height: 32px;
+    color: var(--#{$prefix}-text-color);
+
+    // 隐藏输入框
+    .#{$prefix}-input {
+      position: absolute;
+      width: 0;
+      height: 0;
+      opacity: 0;
+    }
+
+    // 图标
+    .#{$prefix}-icon {
+      overflow: hidden;
+      color: var(--#{$prefix}-icon-color);
+      border-radius: 2px;
+    }
+
+    // 选中状态
+    &.is-checked,
+    &.is-checked &-icon {
+      color: var(--#{$prefix}-checked-color);
+    }
+  }
+
+  // 按钮选项
+  .#{$prefix}-btn {
+    padding: 0 18px;
+    line-height: 30px;
+    color: var(--#{$prefix}-btn-text-color);
+    background-color: var(--#{$prefix}-btn-bg-color);
+    border: 1px solid var(--#{$prefix}-btn-border-color);
+    border-radius: 4px;
+    &:hover {
+      color: var(--#{$prefix}-btn-hover-text-color);
+    }
+    &.is-checked {
+      color: var(--#{$prefix}-btn-checked-text-color);
+      background-color: var(--#{$prefix}-btn-checked-bg-color);
+      border-color: var(--#{$prefix}-btn-checked-border-color);
+    }
+  }
+
+  // 选项组
+  .#{$prefix}-group {
+    display: inline-block;
+  }
+  .#{$prefix}-group > .#{$prefix} {
+    margin-right: 10px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  // 按钮组
+  .#{$prefix}-group > .#{$prefix}-btn {
+    border-left-color: transparent;
+    border-radius: 0;
+    &:first-child {
+      border-left-color: var(--#{$prefix}-btn-border-color);
+      border-radius: 4px 0 0 4px;
+    }
+    &:last-child {
+      border-radius: 0 4px 4px 0;
+    }
+    &.is-checked {
+      box-shadow: -1px 0 0 0 var(--#{$prefix}-btn-border-color);
+    }
+    &.is-checked:first-child {
+      border-color: var(--#{$prefix}-btn-checked-border-color);
+      box-shadow: none;
+    }
+  }
+
+  // 显示方式
+  .#{$prefix}--block {
+    display: flex;
+    width: fit-content;
+  }
+}

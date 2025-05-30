@@ -1,2 +1,2 @@
-@use "./mixins";
-@include mixins.vui-checkbox("vui-checkbox");
+@use "../base/style";
+@include style.vui-option("vui-checkbox");

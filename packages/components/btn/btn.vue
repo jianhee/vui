@@ -36,10 +36,11 @@ const props = defineProps({
   loading: { type: Boolean, default: false },
   // 图标按钮：`VIcon` 组件的 `name/component/props`
   icon: { type: [String, Object], default: null },
-  // 按钮尺寸：small, default, large
-  size: { type: String, default: 'default' },
-  // 显示类型：`inline` 行内（默认），`block` 独占一行
-  display: { type: String, default: 'inline' },
+  // 按钮尺寸：large, medium, small
+  size: { type: String, default: 'medium' },
+  // 显示模式：默认行内模式
+  block: { type: Boolean, default: false },
+  inline: { type: Boolean, default: true },
   // 圆角尺寸
   radius: { type: String, default: null }
 });
@@ -48,11 +49,10 @@ const props = defineProps({
 const btnClasses = computed(() => {
   return [
     'vui-btn',
-    `vui-btn--type-${props.type}`,
+    `vui-btn--${props.type}`,
     {
-      [`vui-btn--size-${props.size}`]: props.type !== 'link',
-      'vui-btn--display-block': props.display === 'block',
-      'is-disabled': isDisabled.value
+      [`vui-btn--${props.size}`]: props.type !== 'link',
+      'vui-btn--block': props.block || !props.inline
     }
   ];
 });

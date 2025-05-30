@@ -1,3 +1,3 @@
-# Checkbox 多选框
+# Dialog 对话框
 
 <!--@include: ./parts/basic.md-->

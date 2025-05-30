@@ -1,6 +1,4 @@
-<!-- 拖拽 -->
-<!-- 1.移动位置 -->
-<!-- 2.缩放大小 -->
+<!-- 拖拽框 -->
 <template>
   <div
     ref="boxRef"
@@ -26,7 +24,7 @@ import { useResize } from './composables/resize.js';
 
 // 参数
 const props = defineProps({
-  // 是否可移动：自动转成定位元素
+  // 是否可移动：设置后盒子自动转成定位元素
   draggable: { type: Boolean, default: false },
   // 是否可缩放
   resizable: { type: Boolean, default: false },
@@ -34,11 +32,13 @@ const props = defineProps({
   handles: { type: String, default: 'left, right, top, bottom' },
   // 是否固定定位
   fixed: { type: Boolean, default: true },
-  // 是否计算样式：比如状态1可拖拽，绑定了定位和宽高，状态2普通div，不需要使用绑定信息，可以设置 false 清除绑定样式
-  useStyles: { type: Boolean, default: true },
   // 最小尺寸
   minWidth: { type: Number, default: 10 },
-  minHeight: { type: Number, default: 10 }
+  minHeight: { type: Number, default: 10 },
+  // 是否计算样式
+  // 状态1可拖拽，绑定了定位和尺寸
+  // 状态2不可拖拽，可设置 `false` 清除绑定样式
+  useStyles: { type: Boolean, default: true }
 });
 
 // 盒子

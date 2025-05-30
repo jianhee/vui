@@ -1,53 +1,46 @@
-<!-- 多选框/单选框 -->
 <template>
-  <VBtn
-    type="link"
-    @click="direction = 'vertical'"
-  >
-    vertical
-  </VBtn>
-
-  <VBtn
-    type="link"
-    @click="direction = 'horizontal'"
-  >
-    horizontal
-  </VBtn>
   <component
-    :is="component2"
-    v-slot="{ item }"
-    v-model:value="value1"
-    :items="valueItems"
-    :direction="direction"
-    @change="writeLog('change', $event)"
+    :is="GroupComponent"
+    v-slot="{ option }"
+    v-model:value="checkedVal"
+    :options="options"
+    v-bind="$attrs"
+    @change="onChange"
   >
-    (value {{ item.value }})
+    <template v-if="option.value === 3">（自定义内容）</template>
   </component>
+
+  <DemoSpace>
+    绑定值为
+    <code>{{ checkedVal }}</code>
+  </DemoSpace>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
-import { useRoute } from 'vue-router';
+import { ref } from 'vue';
+import { useRoute } from 'vitepress';
 import { writeLog } from '@utils';
 
-// 区分页面
+defineOptions({ inheritAttrs: false });
+
+// 区分类型
 const route = useRoute();
-const isRadio = computed(() => route.path === '/radio');
+const isCheckbox = /checkbox/.test(route.path);
+const GroupComponent = isCheckbox ? 'VCheckboxGroup' : 'VRadioGroup';
+const defaultVal = isCheckbox ? [1] : 1;
 
-// 单独使用
-const component1 = computed(() => (isRadio.value ? 'VRadio' : 'VCheckbox'));
-const display = ref('inline');
-const checked1 = ref(true);
-const checked2 = ref(false);
+// 选中值
+const checkedVal = ref(defaultVal);
 
-// 分组使用
-const component2 = computed(() => (isRadio.value ? 'VRadioGroup' : 'VCheckboxGroup'));
-const direction = ref('vertical');
-const defaultVal = computed(() => (isRadio.value ? 1 : [1]));
-const value1 = ref(defaultVal.value);
-const valueItems = [
-  { value: 1, label: '选项1' },
-  { value: 2, label: '选项2' },
-  { value: 3, label: '选项3' }
+// 选项
+const options = [
+  { label: '选项1', value: 1 },
+  { label: '选项2', value: 2 },
+  { label: '选项3', value: 3 }
 ];
+
+// 切换选项
+function onChange(...arg) {
+  writeLog('change', ...arg);
+}
 </script>

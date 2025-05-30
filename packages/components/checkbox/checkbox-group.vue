@@ -1,47 +1,30 @@
-<!-- 多选框-组 -->
+<!-- 多选框-选项组 -->
 <template>
-  <div :class="['vui-checkbox-group', `vui-checkbox-group-${direction}`]">
+  <div class="vui-checkbox-group">
     <VCheckbox
-      v-for="(item, index) in items"
-      :key="index"
-      :value="item.value"
-      :label="item.label"
+      v-for="option in options"
+      :key="option.value"
+      :option="option"
     >
-      <slot :item="item" />
+      <slot :option="option" />
     </VCheckbox>
   </div>
 </template>
 
 <script setup>
 import { provide } from 'vue';
-
-const emits = defineEmits(['change']);
+import { groupProps, groupEmits, useGroup } from './base/composable';
 
 // 参数
-defineProps({
-  // 选项：{ value: '值', label: '文本' }
-  items: { type: Array, default: () => [] },
-  // 排列方向：默认 vertical 纵向（每项独占一行），horizontal 横向（所有项共用一行）
-  direction: { type: String, default: 'vertical' }
-});
-
-// 当前值
-const modelValue = defineModel('value', { type: Array, default: () => [] });
-
-// 修改值
-function onValueChange(checkedVal) {
-  const index = modelValue.value.findIndex(val => val === checkedVal);
-  if (index === -1) {
-    modelValue.value.push(checkedVal);
-  } else {
-    modelValue.value.splice(index, 1);
-  }
-  emits('change', modelValue.value);
-}
+const emits = defineEmits(groupEmits);
+const props = defineProps(groupProps);
+const modelValue = defineModel('value', { type: Array, default: null });
+const { options } = useGroup(props);
 
 // 共享数据
 provide('parentGroup', {
-  modelValue,
-  onValueChange
+  emits,
+  props,
+  modelValue
 });
 </script>

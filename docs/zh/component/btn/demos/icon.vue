@@ -3,20 +3,22 @@
     v-for="iconType in iconTypes"
     :key="iconType.label"
   >
-    <DemoRow>{{ iconType.label }}</DemoRow>
-    <BtnBasic :icon="iconType.prop" />
+    <DemoSpace>
+      <code>{{ iconType.label }}</code>
+    </DemoSpace>
+    <DemoBasic :icon="iconType.value" />
   </template>
 </template>
 
 <script setup>
-import BtnBasic from './basic.vue';
+import DemoBasic from './basic.vue';
 import IconClose from '@icons/close.svg?component';
 
 // 图标类型
 const iconTypes = [
-  { label: '传入 name', prop: 'close' },
-  { label: '传入 component', prop: IconClose },
-  { label: '传入 { name }', prop: { name: 'close' } },
-  { label: '传入 { component }', prop: { component: IconClose } }
+  { label: ':icon="name"', value: 'close' },
+  { label: ':icon="component"', value: IconClose },
+  { label: ':icon="{ name: "xxx" }"', value: { name: 'close' } },
+  { label: ':icon="{ component: xxx }"', value: { component: IconClose } }
 ];
 </script>

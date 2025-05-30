@@ -1,7 +1,7 @@
 <template>
-  <BtnBasic loading />
+  <DemoBasic loading />
 </template>
 
 <script setup>
-import BtnBasic from './basic.vue';
+import DemoBasic from './basic.vue';
 </script>

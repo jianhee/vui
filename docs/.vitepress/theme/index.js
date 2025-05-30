@@ -13,7 +13,7 @@ import vui from 'vui/components/index.js';
 import 'vui/styles/index.scss';
 
 // custom
-import DemoRow from './components/DemoRow.vue';
+import DemoSpace from './components/DemoSpace.vue';
 import './styles/index.scss';
 
 export default {
@@ -21,6 +21,6 @@ export default {
   enhanceApp({ app }) {
     app.use(vui);
     app.component('DemoPreview', AntDesignContainer);
-    app.component('DemoRow', DemoRow);
+    app.component('DemoSpace', DemoSpace);
   }
 };

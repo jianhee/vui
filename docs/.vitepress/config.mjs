@@ -1,10 +1,10 @@
 // vitepress
-// https://vitepress.dev/reference/site-config
+// https://vitepress.dev/zh/reference/site-config
 import { defineConfig } from 'vitepress';
 
 // config
 import { locales } from './config/locales.js';
-import { headerNavs, socialLinks, sidebarNavs } from './config/theme.js';
+import { headerNavs, socialLinks, sidebarNavs } from './config/navs.js';
 import { markdown } from './config/markdown.js';
 import { vite } from './config/vite.js';
 

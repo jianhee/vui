@@ -1,21 +1,2 @@
-@use "./mixins";
-@include mixins.vui-dialog("vui-dialog");
-.vui-dialog {
-  // 主体
-  max-width: 98vw;
-  padding: 16px;
-  margin: 15vh auto 50px;
-  overflow: auto;
-  border-radius: 4px;
-
-  // 顶栏
-  &-header {
-    padding-bottom: 16px;
-  }
-
-  // 动画
-  &-enter-from > &,
-  &-leave-to > & {
-    transform: translateY(-20px);
-  }
-}
+@use "../base/style";
+@include style.vui-dialog;

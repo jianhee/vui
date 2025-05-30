@@ -1,12 +1,11 @@
-// 颜色
+// vars
 :root {
   --vui-dragbox-handle-color: transparent;
   --vui-dragbox-handle-hover-color: var(--vui-color-brand-base);
 }
 
-// 样式
+// 盒子
 .vui-dragbox {
-  // 盒子
   z-index: 999;
 
   // 手柄

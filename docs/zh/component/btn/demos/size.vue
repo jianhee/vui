@@ -3,18 +3,18 @@
     v-for="btnSize in btnSizes"
     :key="btnSize.label"
   >
-    <DemoRow>{{ btnSize.label }}</DemoRow>
-    <BtnBasic :size="btnSize.prop" />
+    <DemoSpace>{{ btnSize.label }}</DemoSpace>
+    <DemoBasic :size="btnSize.value" />
   </template>
 </template>
 
 <script setup>
-import BtnBasic from './basic.vue';
+import DemoBasic from './basic.vue';
 
 // 按钮尺寸
 const btnSizes = [
-  { label: 'Large', prop: 'large' },
-  { label: 'Default', prop: undefined },
-  { label: 'Small', prop: 'small' }
+  { label: 'Large', value: 'large' },
+  { label: 'Medium（默认）', value: undefined },
+  { label: 'Small', value: 'small' }
 ];
 </script>
