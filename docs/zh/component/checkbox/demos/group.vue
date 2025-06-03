@@ -1,14 +1,16 @@
 <template>
-  <component
-    :is="GroupComponent"
-    v-slot="{ option }"
-    v-model:value="checkedVal"
-    :options="options"
-    v-bind="$attrs"
-    @change="onChange"
-  >
-    <template v-if="option.value === 3">（自定义内容）</template>
-  </component>
+  <DemoSpace>
+    <component
+      :is="GroupComponent"
+      v-slot="{ option }"
+      v-model:value="checkedVal"
+      :options="options"
+      v-bind="$attrs"
+      @change="onChange"
+    >
+      <template v-if="option.value === 3">（自定义内容）</template>
+    </component>
+  </DemoSpace>
 
   <DemoSpace>
     绑定值为

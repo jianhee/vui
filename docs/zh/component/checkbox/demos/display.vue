@@ -1,26 +1,27 @@
 <template>
-  <VRadioGroup
-    v-model:value="displayVal"
-    :options="['inline', 'block']"
-    option-type="button"
-  />
-
-  <VForm class="vui-mt-20">
+  <VForm>
     <VFormFiled label="单个选项">
+      <VSwitch
+        v-model:checked="isBlock"
+        active-text="块级模式"
+      />
       <DemoOption :block="isBlock" />
     </VFormFiled>
     <VFormFiled label="选项组">
+      <VSwitch
+        v-model:checked="isInline"
+        active-text="行内模式"
+      />
       <DemoGroup :option-inline="isInline" />
     </VFormFiled>
   </VForm>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import DemoOption from './option.vue';
 import DemoGroup from './group.vue';
 
-const displayVal = ref(undefined);
-const isBlock = computed(() => displayVal.value === 'block');
-const isInline = computed(() => displayVal.value === 'inline');
+const isBlock = ref(false);
+const isInline = ref(false);
 </script>

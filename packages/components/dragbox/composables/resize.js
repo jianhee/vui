@@ -2,26 +2,29 @@
 import { ref, computed } from 'vue';
 
 export const useResize = parentBox => {
+  // 是否可缩放
+  const isResizable = computed(() => {
+    return (parentBox.props.resizable || !!parentBox.props.resizeHandles) && !parentBox.props.disabled;
+  });
+
   // 当前拖拽的手柄
-  const handleDragingName = ref(null);
+  const dragingHandleName = ref(null);
 
-  // 所有手柄
+  // 可缩放手柄
   const handleItems = computed(() => {
-    // 是否可缩放
-    if (!parentBox.props.resizable) return null;
+    if (!isResizable.value) return null;
 
-    // 拖拽盒子时不能缩放
+    // 移动时不显示
     if (parentBox.isMoving.value) return null;
 
-    // 拖拽手柄时不显示其它手柄
-    if (handleDragingName.value) return [handleDragingName.value];
+    // 拖拽当前手柄时不显示其它手柄
+    if (dragingHandleName.value) return [dragingHandleName.value];
 
-    // 定位元素支持四个边，非定位元素只支持右边和下边
-    const items = parentBox.props.handles.replace(/\s/g, '').split(',');
-    if (parentBox.props.fixed) {
-      return items;
+    // 可缩放手柄
+    if (parentBox.props.resizeHandles) {
+      return parentBox.props.resizeHandles.replace(/\s/g, '').split(',');
     } else {
-      return items.filter(item => item === 'right' || item === 'bottom');
+      return ['left', 'right', 'top', 'bottom'];
     }
   });
 
@@ -31,36 +34,45 @@ export const useResize = parentBox => {
 
   // 开始缩放
   function onResizeStart(e, _handleName) {
-    if (!parentBox.props.resizable) return;
+    if (!isResizable.value) return;
+
+    // 非定位元素只支持 `right, bottom`
+    const computedStyle = window.getComputedStyle(parentBox.boxRef.value);
+    const boxIsFixed = computedStyle.position === 'fixed';
+    const handleIsDragable = ['right', 'bottom'].includes(_handleName);
+    if (!boxIsFixed && !handleIsDragable) return;
 
     // 记录初始数据
     const { offsetWidth, offsetHeight } = parentBox.boxRef.value;
-    handleDragingName.value = _handleName;
+    dragingHandleName.value = _handleName;
     mouseStartPos = { x: e.clientX, y: e.clientY };
     boxStartSize = { width: offsetWidth, height: offsetHeight };
 
-    window.addEventListener('mousemove', onBoxResizing);
+    window.addEventListener('mousemove', onResizing);
     window.addEventListener('mouseup', onResizeStop);
   }
 
   // 缩放中
-  function onBoxResizing(e) {
-    if (!handleDragingName.value) return;
+  function onResizing(e) {
+    if (!dragingHandleName.value) return;
 
     // 需要扣除的边框宽度
-    const handleBoderWidth = /right|bottom/.test(handleDragingName.value) ? 2 : 0;
+    const useBorder = ['right', 'bottom'].includes(dragingHandleName.value);
+    const handleBoderWidth = useBorder ? 2 : 0;
 
     // 水平方向
-    if (/left|right/.test(handleDragingName.value)) {
+    const isHorizontal = ['left', 'right'].includes(dragingHandleName.value);
+    if (isHorizontal) {
       const maxWidth = document.documentElement.clientWidth - handleBoderWidth;
       const mouseCurrentX = Math.max(0, Math.min(e.clientX, maxWidth));
       // 盒子当前宽度
       const deltaX = mouseCurrentX - mouseStartPos.x;
-      const newWidth = handleDragingName.value === 'left' ? boxStartSize.width - deltaX : boxStartSize.width + deltaX;
+      const isLeft = dragingHandleName.value === 'left';
+      const newWidth = isLeft ? boxStartSize.width - deltaX : boxStartSize.width + deltaX;
       parentBox.boxCurrentWidth.value = Math.max(newWidth, parentBox.props.minWidth);
       // 盒子当前位置
-      if (handleDragingName.value === 'left' && newWidth >= parentBox.props.minWidth) {
-        parentBox.boxCurrentX.value = mouseCurrentX;
+      if (isLeft && newWidth >= parentBox.props.minWidth) {
+        parentBox.boxCurrentLeft.value = mouseCurrentX;
       }
       return;
     }
@@ -69,23 +81,25 @@ export const useResize = parentBox => {
     const mouseCurrentY = Math.max(0, Math.min(e.clientY, maxHeight));
     // 盒子当前宽度
     const deltaY = mouseCurrentY - mouseStartPos.y;
-    const newHeight = handleDragingName.value === 'top' ? boxStartSize.height - deltaY : boxStartSize.height + deltaY;
+    const isTop = dragingHandleName.value === 'top';
+    const newHeight = isTop ? boxStartSize.height - deltaY : boxStartSize.height + deltaY;
     parentBox.boxCurrentHeight.value = Math.max(newHeight, parentBox.props.minHeight);
     // 盒子当前位置
-    if (handleDragingName.value === 'top' && newHeight >= parentBox.props.minHeight) {
-      parentBox.boxCurrentY.value = mouseCurrentY;
+    if (isTop && newHeight >= parentBox.props.minHeight) {
+      parentBox.boxCurrentTop.value = mouseCurrentY;
     }
   }
 
   // 缩放结束
   function onResizeStop() {
-    handleDragingName.value = null;
-    window.removeEventListener('mousemove', onBoxResizing);
+    dragingHandleName.value = null;
+    window.removeEventListener('mousemove', onResizing);
     window.removeEventListener('mouseup', onResizeStop);
   }
 
   return {
-    handleDragingName,
+    isResizable,
+    isResizing: computed(() => !!dragingHandleName.value),
     handleItems,
     onResizeStart
   };

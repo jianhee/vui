@@ -37,12 +37,14 @@ const inputType = isCheckbox ? 'checkbox' : 'radio';
 const IconComponent = isCheckbox ? IconCheckbox : IconRadio;
 
 // 是否按钮
-const isBtn = parentGroup?.props.optionType === 'button' || parentOption?.props.type === 'button';
+const isBtn = computed(() => {
+  return parentGroup?.props.optionType === 'button' || parentOption?.props.type === 'button';
+});
 
 // 是否行内
 const isInline = computed(() => {
   // 按钮类型
-  if (isBtn) return true;
+  if (isBtn.value) return true;
 
   // 行内表单
   if (parentForm?.props.filedInline) return true;
@@ -59,7 +61,7 @@ const isInline = computed(() => {
 // 获取类名
 const optionClasses = computed(() => {
   return [
-    isBtn ? [`vui-${inputType}-btn`] : [`vui-${inputType}`],
+    isBtn.value ? [`vui-${inputType}-btn`] : [`vui-${inputType}`],
     {
       [`vui-${inputType}--block`]: !isInline.value,
       'is-checked': isChecked.value

@@ -6,7 +6,25 @@
 
 // 盒子
 .vui-dragbox {
-  z-index: 999;
+  // 拖拽
+  &.is-resizable {
+    position: relative;
+  }
+  &.is-resizing {
+    user-select: none;
+    transition: none;
+  }
+
+  // 移动
+  &.is-movable {
+    position: fixed;
+    z-index: 999;
+  }
+  &.is-moving {
+    cursor: move;
+    user-select: none;
+    transition: none;
+  }
 
   // 手柄
   &-handle {
@@ -43,11 +61,5 @@
     &-bottom {
       bottom: 0;
     }
-  }
-
-  // 拖拽中
-  &.is-draging {
-    user-select: none;
-    transition: none;
   }
 }

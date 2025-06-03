@@ -21,13 +21,13 @@
 ## 按钮类型
 
 1. 单个选项：`props.type` 设置为 `button`
-2. 选项组子选项：`props.optionType` 设置为 `button`
+2. 选项组：`props.optionType` 设置为 `button`
 
 <preview path="@src/component/checkbox/demos/type.vue"></preview>
 
 ## 显示模式
 
-1. 单个选项：`props.block` 或 `props.inline` 默认行内模式
-2. 选项组：`props.optionBlock` 或 `props.optionInline` 子选项默认块级模式
+1. 单个选项：`props.block` 或 `props.inline` 二选一，默认行内模式
+2. 选项组：`props.optionBlock` 或 `props.optionInline` 二选一，子选项默认块级模式
 
 <preview path="@src/component/checkbox/demos/display.vue"></preview>

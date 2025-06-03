@@ -18,17 +18,24 @@
     @open="writeLog('open')"
     @close="writeLog('close')"
   >
-    <VForm label-width="10em">
-      <VFormFiled label="是否显示关闭按钮">
-        <VSwitch v-model:checked="showClose" />
+    <VForm label-width="5em">
+      <VFormFiled label="切换状态">
+        <VSwitch
+          v-model:checked="showClose"
+          active-text="显示关闭按钮"
+        />
+        <br />
+        <VSwitch
+          v-model:checked="closeOnClickModal"
+          active-text="点击遮罩时关闭"
+        />
+        <br />
+        <VSwitch
+          v-model:checked="showFooter"
+          active-text="显示底栏"
+        />
       </VFormFiled>
-      <VFormFiled label="是否显示底栏">
-        <VSwitch v-model:checked="showFooter" />
-      </VFormFiled>
-      <VFormFiled label="是否在点击遮罩时关闭">
-        <VSwitch v-model:checked="closeOnClickModal" />
-      </VFormFiled>
-      <VFormFiled label="自定义宽度">
+      <VFormFiled label="切换宽度">
         <VRadioGroup
           v-model:value="width"
           :options="widthOptions"
@@ -67,8 +74,8 @@ const isVisible = ref(false);
 // 基础属性
 const placement = ref(undefined);
 const showClose = ref(true);
-const showFooter = ref(true);
 const closeOnClickModal = ref(true);
+const showFooter = ref(true);
 
 // 宽度
 const width = ref(undefined);

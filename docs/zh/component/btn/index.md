@@ -33,7 +33,7 @@
 
 ## 显示模式
 
-1. `props.block` 或 `props.inline` 默认行内模式
+1. `props.block` 或 `props.inline` 二选一，默认行内模式
 
 <preview path="./demos/display.vue"></preview>
 
