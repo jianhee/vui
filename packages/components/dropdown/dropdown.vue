@@ -36,19 +36,16 @@
 
 <script setup>
 import { ref, nextTick } from 'vue';
-import { onClickOutside, useWindowSize } from '@vueuse/core';
+import { onClickOutside } from '@vueuse/core';
 
 defineOptions({ inheritAttrs: false });
 const emits = defineEmits(['open', 'close']);
 
 // 参数
 const props = defineProps({
-  // 触发方式：hover-对齐元素, click-对齐元素, contextmenu-对齐鼠标
+  // 触发方式：hover, click, contextmenu
   trigger: { type: String, default: 'hover' }
 });
-
-// 窗口
-const { width: windowWidth, height: windowHeight } = useWindowSize();
 
 // 触发器和内容
 const triggerRef = ref(null);
@@ -62,16 +59,18 @@ let hoverTimer = null;
 function onMouseEnter() {
   if (props.trigger !== 'hover') return;
   clearTimeout(hoverTimer);
-  openDropdownByEl(triggerRef.value);
+  hoverTimer = setTimeout(() => {
+    openDropdownByEl(triggerRef.value);
+  }, 150);
 }
 
 // 鼠标离开
 function onMouseLeave() {
   if (props.trigger !== 'hover') return;
+  clearTimeout(hoverTimer);
   hoverTimer = setTimeout(() => {
-    clearTimeout(hoverTimer);
     closeDropdown();
-  }, 100);
+  }, 150);
 }
 
 // 点击 trigger：对齐元素
@@ -98,11 +97,16 @@ function onContentClick() {
 // 点击 content 外部
 onClickOutside(contentRef, closeDropdown, { ignore: [triggerRef] });
 
+// 打开
+function openDropdown() {
+  contentVisible.value = true;
+  emits('open');
+}
+
 // 打开下拉框：通过元素
 function openDropdownByEl(el) {
   if (!contentVisible.value) {
-    emits('open');
-    contentVisible.value = true;
+    openDropdown();
     const { left, top, bottom } = el.getBoundingClientRect();
     updatePosition({
       triggerLeft: left,
@@ -115,8 +119,7 @@ function openDropdownByEl(el) {
 // 打开下拉框：通过事件
 function openDropdownByEvent({ clientX, clientY }) {
   if (!contentVisible.value) {
-    emits('open');
-    contentVisible.value = true;
+    openDropdown();
   }
   updatePosition({
     triggerLeft: clientX,
@@ -133,30 +136,32 @@ function closeDropdown() {
 }
 
 // 更新定位
-function updatePosition({ triggerLeft, triggerTop, triggerBottom }) {
-  nextTick(() => {
-    // 内容元素
-    const { clientWidth: contentWidth, clientHeight: contentHeight } = contentRef.value;
+async function updatePosition({ triggerLeft, triggerTop, triggerBottom }) {
+  await nextTick();
+  // 内容元素
+  const { clientWidth: contentWidth, clientHeight: contentHeight } = contentRef.value;
 
-    // 水平方向
-    const currentLeft = triggerLeft;
-    const maxLeft = windowWidth.value - contentWidth;
-    const contentLeft = Math.max(0, Math.min(maxLeft, currentLeft));
+  // 窗口
+  const { clientWidth: windowWidth, clientHeight: windowHeight } = document.documentElement;
 
-    // 垂直方向
-    let currentTop = triggerBottom + contentMargin;
-    const maxTop = windowHeight.value - contentHeight - contentMargin;
-    if (currentTop > maxTop) {
-      currentTop = triggerTop - contentHeight - contentMargin;
-    }
-    const contentTop = Math.max(0, currentTop);
+  // 水平方向
+  const currentLeft = triggerLeft;
+  const maxLeft = windowWidth - contentWidth;
+  const contentLeft = Math.max(0, Math.min(maxLeft, currentLeft));
 
-    // 更新样式
-    contentStyles.value = {
-      left: `${contentLeft}px`,
-      top: `${contentTop}px`
-    };
-  });
+  // 垂直方向
+  let currentTop = triggerBottom + contentMargin;
+  const maxTop = windowHeight - contentHeight - contentMargin;
+  if (currentTop > maxTop) {
+    currentTop = triggerTop - contentHeight - contentMargin;
+  }
+  const contentTop = Math.max(0, currentTop);
+
+  // 更新样式
+  contentStyles.value = {
+    left: `${contentLeft}px`,
+    top: `${contentTop}px`
+  };
 }
 
 // 外部调用方法，比如v-for渲染多个触发元素时，直接调用方法更方便

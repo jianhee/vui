@@ -1,11 +1,11 @@
-// 颜色
+// vars
 :root {
   --vui-dropdown-content-bg-color: var(--vui-bg-color-overlay);
   --vui-dropdown-content-border-color: var(--vui-border-color-light);
   --vui-dropdown-content-shadow: var(--vui-box-shadow-light);
 }
 
-// 样式
+// 下拉框
 .vui-dropdown {
   // 触发元素
   &-trigger {
@@ -29,8 +29,8 @@
     border-radius: 4px;
     box-shadow: var(--vui-dropdown-content-shadow);
     transition:
-      opacity 0.3s ease,
-      transform 0.3s ease,
+      opacity 0.15s ease,
+      transform 0.15s ease,
       left 0.1s ease,
       top 0.1s ease;
   }

@@ -23,13 +23,13 @@ import { useMove } from './composables/move.js';
 import { useResize } from './composables/resize.js';
 
 // 参数
-// 有两种方式启用缩放
-// 1. `props.resizeHandles` 为空时，`props.resizable` 设为 `true`，启用所有手柄
-// 2. `props.resizeHandles` 有值时，`props.resizable` 可省略，启用指定手柄
 const props = defineProps({
   // 是否可移动：可移动盒子会自动转成定位元素
   moveable: { type: Boolean, default: false },
   // 是否可缩放
+  // 有两种方式启用缩放
+  // 1. `props.resizeHandles` 为空时，`props.resizable` 设为 `true`，启用所有手柄
+  // 2. `props.resizeHandles` 有值时，`props.resizable` 可省略，启用指定手柄
   resizable: { type: Boolean, default: false },
   // 可缩放手柄
   // 定位元素支持 `['left', 'right', 'top', 'bottom']` 四个轴

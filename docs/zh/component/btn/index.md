@@ -3,7 +3,7 @@
 ## 基础用法
 
 1. `props.type` 按钮类型，可选的值有 `primary` 主按钮、`default` 默认按钮、`link` 链接按钮
-2. `slot.default` 显示内容
+2. `slots.default` 显示内容
 
 <preview path="./demos/basic.vue"></preview>
 
@@ -33,12 +33,12 @@
 
 ## 显示模式
 
-默认行内模式，`props.block` 设为 `true`，或者 `props.inline` 设为 `false` 变为块级模式
+默认行内模式，`props.block` 设为 `true` 或 `props.inline` 设为 `false` 变为块级模式
 
 <preview path="./demos/display.vue"></preview>
 
 ## 圆角尺寸
 
-`props.radius` 可选的值是带有单位的 `String`
+`props.radius` 可选的值是带有单位的字符串
 
 <preview path="./demos/radius.vue"></preview>

@@ -18,7 +18,8 @@
   > .vui-checkbox,
   > .vui-checkbox-btn,
   > .vui-radio,
-  > .vui-radio-btn {
+  > .vui-radio-btn,
+  > .vui-dropdown-trigger {
     margin-right: 10px;
   }
   > .vui-btn--block {
