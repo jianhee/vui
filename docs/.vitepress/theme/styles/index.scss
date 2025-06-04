@@ -12,14 +12,3 @@
 .vitepress-demo-preview-source > div {
   border-top: 1px dashed var(--component-preview-border);
 }
-
-// demo 样式
-.demo-dragbox {
-  width: 400px;
-  height: 200px;
-  padding: 10px;
-  background-color: var(--vp-c-bg);
-  border: 1px solid var(--component-preview-border);
-  border-radius: 4px;
-  box-shadow: 0 0 10px var(--component-preview-border);
-}

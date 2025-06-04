@@ -21,11 +21,7 @@ export const useResize = parentBox => {
     if (dragingHandleName.value) return [dragingHandleName.value];
 
     // 可缩放手柄
-    if (parentBox.props.resizeHandles) {
-      return parentBox.props.resizeHandles.replace(/\s/g, '').split(',');
-    } else {
-      return ['left', 'right', 'top', 'bottom'];
-    }
+    return parentBox.props.resizeHandles || ['left', 'right', 'top', 'bottom'];
   });
 
   // 开始位置

@@ -1,6 +1,6 @@
 <!-- 抽屉 -->
 <template>
-  <BaseModal :class="classes">
+  <BaseModal>
     <slot />
     <template #footer>
       <slot name="footer" />
@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import { computed, provide } from 'vue';
+import { provide } from 'vue';
 import { modalEmits, drawerProps } from '../dialog/base/composable';
 import BaseModal from '../dialog/base/base-modal.vue';
 
@@ -17,9 +17,6 @@ import BaseModal from '../dialog/base/base-modal.vue';
 const emits = defineEmits(modalEmits);
 const props = defineProps(drawerProps);
 const modelVisible = defineModel('visible', { type: Boolean, default: false });
-const classes = computed(() => {
-  return `vui-drawer--${props.placement}`;
-});
 
 // 共享数据
 provide('parentModal', {

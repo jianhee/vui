@@ -23,15 +23,18 @@ import { useMove } from './composables/move.js';
 import { useResize } from './composables/resize.js';
 
 // 参数
+// 有两种方式启用缩放
+// 1. `props.resizeHandles` 为空时，`props.resizable` 设为 `true`，启用所有手柄
+// 2. `props.resizeHandles` 有值时，`props.resizable` 可省略，启用指定手柄
 const props = defineProps({
-  // 是否可移动：设置后盒子会自动转成定位元素
+  // 是否可移动：可移动盒子会自动转成定位元素
   moveable: { type: Boolean, default: false },
   // 是否可缩放
   resizable: { type: Boolean, default: false },
-  // 可缩放手柄：默认 'left, right, top, bottom'，非定位元素只支持 `right, bottom`
-  //  1. 设置 `props.resizable` 为 `true` 启用缩放，`props.resizeHandles` 使用默认值
-  //  2. 或者设置 `props.resizeHandles` 为任意值启用缩放，`props.resizable` 可省略
-  resizeHandles: { type: String, default: null },
+  // 可缩放手柄
+  // 定位元素支持 `['left', 'right', 'top', 'bottom']` 四个轴
+  // 非定位元素只支持 `['right', 'bottom']` 两个轴
+  resizeHandles: { type: Array, default: null },
   // 最小尺寸
   minWidth: { type: Number, default: 10 },
   minHeight: { type: Number, default: 10 },
@@ -42,7 +45,7 @@ const props = defineProps({
 // 盒子
 const boxRef = ref(null);
 
-// 当前位置：只支持 `left, top`
+// 当前位置
 const boxCurrentLeft = defineModel('left', { type: Number, default: null });
 const boxCurrentTop = defineModel('top', { type: Number, default: null });
 

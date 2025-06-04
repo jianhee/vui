@@ -9,36 +9,36 @@
 
 ## 禁用状态
 
-1. `props.disabled`
+`props.disabled` 设为 `true`
 
 <preview path="./demos/disabled.vue"></preview>
 
 ## 加载状态
 
-1. `props.loading`
+`props.loading` 设为 `true`
 
 <preview path="./demos/loading.vue"></preview>
 
 ## 图标按钮
 
-1. `props.icon` 可选的值有 `VIcon` 组件的 `name/component/props`
+`props.icon` 可选的值有 `VIcon` 组件的 `name/component/props`
 
 <preview path="./demos/icon.vue"></preview>
 
 ## 按钮尺寸
 
-1. `props.size` 可选的值有 `large` 大按钮、`medium` 中按钮（默认）、`small` 小按钮
+`props.size` 可选的值有 `large` 大按钮、`medium` 中按钮（默认）、`small` 小按钮
 
 <preview path="./demos/size.vue"></preview>
 
 ## 显示模式
 
-1. `props.block` 或 `props.inline` 二选一，默认行内模式
+默认行内模式，`props.block` 设为 `true`，或者 `props.inline` 设为 `false` 变为块级模式
 
 <preview path="./demos/display.vue"></preview>
 
 ## 圆角尺寸
 
-1. `props.radius`
+`props.radius` 可选的值是带有单位的 `String`
 
 <preview path="./demos/radius.vue"></preview>

@@ -10,7 +10,7 @@
         <!-- 主体 -->
         <div
           v-bind="$attrs"
-          :class="`vui-${modalType}`"
+          :class="modalClasses"
           :style="modalStyles"
         >
           <!-- 顶栏 -->
@@ -48,6 +48,16 @@ const parentModal = inject('parentModal', null);
 
 // 区分类型
 const modalType = parentModal.modalType;
+
+// 获取类名
+const modalClasses = computed(() => {
+  return [
+    `vui-${modalType}`,
+    {
+      [`vui-drawer--${parentModal.props.placement}`]: parentModal.modalType === 'drawer'
+    }
+  ];
+});
 
 // 获取样式
 const modalStyles = computed(() => {

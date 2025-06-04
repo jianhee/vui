@@ -19,7 +19,7 @@
     @close="writeLog('close')"
   >
     <VForm label-width="5em">
-      <VFormFiled label="切换状态">
+      <VFormItem label="切换状态">
         <VSwitch
           v-model:checked="showClose"
           active-text="显示关闭按钮"
@@ -34,14 +34,14 @@
           v-model:checked="showFooter"
           active-text="显示底栏"
         />
-      </VFormFiled>
-      <VFormFiled label="切换宽度">
+      </VFormItem>
+      <VFormItem label="切换宽度">
         <VRadioGroup
           v-model:value="width"
           :options="widthOptions"
           option-inline
         />
-      </VFormFiled>
+      </VFormItem>
     </VForm>
     <template
       v-if="showFooter"
@@ -68,10 +68,8 @@ const route = useRoute();
 const isDialog = /dialog/.test(route.path);
 const ModalComponent = isDialog ? 'VDialog' : 'VDrawer';
 
-// 是否显示
-const isVisible = ref(false);
-
 // 基础属性
+const isVisible = ref(false);
 const placement = ref(undefined);
 const showClose = ref(true);
 const closeOnClickModal = ref(true);

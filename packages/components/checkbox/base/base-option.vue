@@ -85,7 +85,7 @@ const isChecked = computed(() => {
   if (parentGroup) {
     // 多选框
     if (isCheckbox) {
-      return parentGroup.modelValue.value.includes(valueRef.value);
+      return parentGroup.modelValue.value?.includes(valueRef.value);
     }
     // 单选框
     return parentGroup.modelValue.value === valueRef.value;
@@ -100,13 +100,15 @@ function onCheckedChange() {
   if (parentGroup) {
     // 多选框
     if (isCheckbox) {
+      const vals = parentGroup.modelValue.value || [];
       if (isChecked.value) {
-        const index = parentGroup.modelValue.value.findIndex(val => val === valueRef.value);
-        parentGroup.modelValue.value.splice(index, 1);
+        const index = vals.findIndex(val => val === valueRef.value);
+        vals.splice(index, 1);
       } else {
-        parentGroup.modelValue.value.push(valueRef.value);
+        vals.push(valueRef.value);
       }
-      parentGroup.emits('change', parentGroup.modelValue.value, parentOption.props.option);
+      parentGroup.modelValue.value = vals;
+      parentGroup.emits('change', vals, parentOption.props.option);
       return;
     }
     // 单选框

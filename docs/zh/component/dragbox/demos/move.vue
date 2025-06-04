@@ -1,11 +1,4 @@
 <template>
-  <DemoSpace>
-    <VSwitch
-      v-model:checked="isDisabled"
-      active-text="禁用状态"
-    />
-  </DemoSpace>
-
   <VDragbox
     v-model:left="leftRef"
     v-model:top="topRef"
@@ -13,11 +6,20 @@
     :disabled="isDisabled"
     class="demo-dragbox"
   >
-    移动
-    <br />
-    <code>v-model:left="{{ leftRef }}"</code>
-    <br />
-    <code>v-model:top="{{ topRef }}"</code>
+    <VForm>
+      <VFormItem label="操作">移动</VFormItem>
+      <VFormItem label="当前值">
+        <code>v-model:left="{{ leftRef }}"</code>
+        <br />
+        <code>v-model:top="{{ topRef }}"</code>
+      </VFormItem>
+      <VFormItem label="切换状态">
+        <VSwitch
+          v-model:checked="isDisabled"
+          active-text="禁用状态"
+        />
+      </VFormItem>
+    </VForm>
   </VDragbox>
 </template>
 
