@@ -1,10 +1,10 @@
 <!-- 对话框/抽屉 -->
 <template>
   <Teleport to="body">
-    <Transition :name="`vui-${modalType}`">
+    <Transition :name="`vui-${typeName}`">
       <!-- 遮罩 -->
       <VOverlay
-        v-show="parentModal.modelVisible.value"
+        v-show="modelVisible"
         @click.self="onClickOverlay"
       >
         <!-- 主体 -->
@@ -14,23 +14,23 @@
           :style="modalStyles"
         >
           <!-- 顶栏 -->
-          <div :class="`vui-${modalType}-header`">
+          <div :class="`vui-${typeName}-header`">
             <!-- 标题 -->
-            <span :class="`vui-${modalType}-title`">{{ parentModal.props.title }}</span>
+            <span :class="`vui-${typeName}-title`">{{ props.title }}</span>
             <!-- 关闭按钮 -->
             <VIcon
-              v-if="parentModal.props.showClose"
-              :class="`vui-${modalType}-close`"
+              v-if="props.showClose"
+              :class="`vui-${typeName}-close`"
               :component="IconClose"
               @click="onClickCloseIcon"
             />
           </div>
           <!-- 内容 -->
-          <div :class="`vui-${modalType}-body`">
+          <div :class="`vui-${typeName}-body`">
             <slot />
           </div>
           <!-- 底栏 -->
-          <div :class="`vui-${modalType}-footer`">
+          <div :class="`vui-${typeName}-footer`">
             <slot name="footer" />
           </div>
         </div>
@@ -44,29 +44,47 @@ import { computed, watch, inject } from 'vue';
 import IconClose from '../../../icons/close.vue';
 
 defineOptions({ inheritAttrs: false });
-const parentModal = inject('parentModal', null);
 
 // 区分类型
-const modalType = parentModal.modalType;
+const typeName = inject('typeName', null);
+const isDialog = typeName === 'dialog';
+
+// 处理数据
+const emits = defineEmits(['open', 'close']);
+const props = defineProps({
+  // 标题
+  title: { type: String, default: null },
+  // 内容宽度：对话框默认 `50%`，抽屉默认 `30%`
+  width: { type: String, default: null },
+  // 是否显示关闭按钮
+  showClose: { type: Boolean, default: true },
+  // 是否在点击遮罩时关闭
+  closeOnClickModal: { type: Boolean, default: true },
+  // 抽屉出现位置：left, right
+  placement: { type: String, default: 'left' }
+});
+
+// 是否显示
+const modelVisible = defineModel('visible', { type: Boolean, default: false });
 
 // 获取类名
 const modalClasses = computed(() => {
   return [
-    `vui-${modalType}`,
+    `vui-${typeName}`,
     {
-      [`vui-drawer--${parentModal.props.placement}`]: parentModal.modalType === 'drawer'
+      [`vui-drawer--${props.placement}`]: !isDialog
     }
   ];
 });
 
 // 获取样式
 const modalStyles = computed(() => {
-  return { width: parentModal.props.width };
+  return { width: props.width };
 });
 
 // 点击遮罩
 function onClickOverlay() {
-  if (!parentModal.props.closeOnClickModal) return;
+  if (!props.closeOnClickModal) return;
   closeDialog();
 }
 
@@ -77,15 +95,15 @@ function onClickCloseIcon() {
 
 // 关闭弹窗
 function closeDialog() {
-  parentModal.modelVisible.value = false;
+  modelVisible.value = false;
 }
 
 // 切换显示状态：外部关闭也能触发
-watch(parentModal.modelVisible, val => {
+watch(modelVisible, val => {
   if (val) {
-    parentModal.emits('open');
+    emits('open');
   } else {
-    parentModal.emits('close');
+    emits('close');
   }
 });
 </script>

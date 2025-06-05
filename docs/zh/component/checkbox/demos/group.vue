@@ -8,7 +8,7 @@
       v-bind="$attrs"
       @change="onChange"
     >
-      <template v-if="option.value === 3">（自定义内容）</template>
+      <template v-if="option.value === 3">+ 自定义内容</template>
     </component>
   </DemoSpace>
 

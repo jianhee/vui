@@ -21,13 +21,8 @@
 <script setup>
 import { ref } from 'vue';
 
-// 记录当前右键菜单对应的条目
 const nRef = ref(null);
-
-// 下拉框
 const dropdownRef = ref(null);
-
-// 打开下拉框
 function openDropdown(event, n) {
   nRef.value = n;
   dropdownRef.value.open(event);

@@ -10,8 +10,8 @@
 ## 更多用法
 
 1. `props.width` 内容宽度，对话框默认 `50%`，抽屉默认 `30%`
-2. `props.placement` 抽屉出现位置，可选的值有 `left` 左侧（默认）、`right` 右侧
-3. `props.showClose` 是否显示关闭按钮，默认 `true`
-4. `props.closeOnClickModal` 是否在点击遮罩时关闭，默认 `true`
+2. `props.showClose` 是否显示关闭按钮，默认 `true`
+3. `props.closeOnClickModal` 是否在点击遮罩时关闭，默认 `true`
+4. `props.placement` 抽屉出现位置，可选的值有 `left` 左侧（默认）、`right` 右侧
 
 <preview path="@src/component/dialog/demos/more.vue"></preview>

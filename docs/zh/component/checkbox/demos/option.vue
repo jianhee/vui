@@ -9,7 +9,7 @@
       v-bind="$attrs"
       @change="writeLog('change', $event)"
     >
-      <template v-if="option.label === '选项3'">（自定义内容）</template>
+      <template v-if="option.label === '选项3'">+ 自定义内容</template>
     </component>
   </DemoSpace>
 

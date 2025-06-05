@@ -1,6 +1,4 @@
 <!-- 下拉框 -->
-<!-- 1.使用 trigger 打开 -->
-<!-- 2.使用 open 方法打开 -->
 <template>
   <!-- 触发器 -->
   <div
@@ -44,6 +42,8 @@ const emits = defineEmits(['open', 'close']);
 // 参数
 const props = defineProps({
   // 触发方式：hover, click, contextmenu
+  // 1. 内部打开：通过 `slots.default` 自动处理，适用于单一元素
+  // 2. 外部打开：通过 `dropdownRef.open(event)` 方法手动处理，适用于多个元素打开同一个下拉框，比如列表项的右键菜单
   trigger: { type: String, default: 'hover' }
 });
 
@@ -164,7 +164,7 @@ async function updatePosition({ triggerLeft, triggerTop, triggerBottom }) {
   };
 }
 
-// 外部调用方法，比如v-for渲染多个触发元素时，直接调用方法更方便
+// 下拉方法
 defineExpose({
   open: openDropdownByEvent
 });

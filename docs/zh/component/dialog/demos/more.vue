@@ -16,7 +16,7 @@
     :show-close="isShowClose"
     :close-on-click-modal="isCloseOnClickModal"
   >
-    <VForm label-width="5em">
+    <VForm>
       <VFormItem label="切换宽度">
         <VRadioGroup
           v-model:value="widthRef"

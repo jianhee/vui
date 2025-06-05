@@ -29,6 +29,11 @@
   }
 
   // 类型
+  &--primary {
+    --vui-btn-text-color: var(--vui-color-white);
+    --vui-btn-bg-color: var(--vui-color-brand-base);
+    --vui-btn-border-color: var(--vui-color-brand-base);
+  }
   &--default {
     --vui-btn-text-color: var(--vui-text-color-regular);
     --vui-btn-bg-color: var(--vui-fill-color-blank);
@@ -37,11 +42,6 @@
     --vui-btn-hover-bg-color: var(--vui-color-brand-a10);
     --vui-btn-hover-border-color: var(--vui-color-brand-a30);
   }
-  &--primary {
-    --vui-btn-text-color: var(--vui-color-white);
-    --vui-btn-bg-color: var(--vui-color-brand-base);
-    --vui-btn-border-color: var(--vui-color-brand-base);
-  }
   &--link {
     --vui-btn-text-color: var(--vui-color-brand-base);
     --vui-btn-bg-color: transparent;
@@ -49,20 +49,20 @@
   }
 
   // 尺寸
-  &--small {
-    height: 24px;
-    padding: 0 20px;
-    font-size: 12px;
+  &--large {
+    height: 40px;
+    padding: 0 19px;
+    font-size: 14px;
   }
   &--medium {
     height: 32px;
-    padding: 0 20px;
+    padding: 0 15px;
     font-size: 14px;
   }
-  &--large {
-    height: 40px;
-    padding: 0 20px;
-    font-size: 16px;
+  &--small {
+    height: 24px;
+    padding: 0 11px;
+    font-size: 12px;
   }
 
   // 显示模式

@@ -2,33 +2,23 @@
 
 ## 基础用法
 
-1. `VForm` 父组件容器
-   1. `props.labelWidth` 表单项的标签宽度
-2. `VFormFiled` 子组件表单项
+1. `VForm` 表单容器
+   1. `slots.default` 只能是 `VFormItem` 组件
+2. `VFormItem` 表单项
    1. `props.label` 左侧文本
-   2. `slot.default` 右侧内容
+   2. `slots.default` 右侧内容
 
-:::preview
-demo-preview=./demos/basic.vue
-:::
+<preview path="./demos/basic.vue"></preview>
 
-## 排列方向
+## 显示模式
 
-1. `props.direction` 可选的值有以下几种
-   1. `vertical` 纵向（每项独占一行，默认）
-   2. `horizontal` 横向（所有项共用一行）
+表单项默认块级模式，`props.filedInline` 设为 `true` 或 `props.filedBlock` 设为 `false` 变为行内模式
 
-:::preview
-demo-preview=./demos/direction.vue
-:::
+<preview path="./demos/filed-display.vue"></preview>
 
-## 对齐方式
+## 标签
 
-1. `props.labelPosition` 可选的值有以下几种
-   1. `left` 左对齐（默认）
-   2. `right` 右对齐
-   3. `top` 顶部对齐
+1. `props.labelPosition` 标签位置，可选的值有 `left` 左侧（默认）、`right` 右侧、`top` 顶部
+2. `props.labelWidth` 标签宽度，默认 `4em`，并且行内模式和顶部标签不生效
 
-:::preview
-demo-preview=./demos/label-position.vue
-:::
+<preview path="./demos/label.vue"></preview>

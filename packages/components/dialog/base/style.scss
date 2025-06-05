@@ -65,6 +65,7 @@
   @include vui-modal("vui-dialog");
   .vui-dialog {
     // 主体
+    width: 50%;
     max-width: 98vw;
     padding: 16px;
     margin: 15vh auto 50px;
@@ -92,6 +93,7 @@
     position: absolute;
     display: flex;
     flex-direction: column;
+    width: 30%;
     max-width: 100vw;
     height: 100vh;
     padding: 16px 0;

@@ -1,28 +1,12 @@
 <!-- 抽屉 -->
-<template>
-  <BaseModal>
-    <slot />
-    <template #footer>
-      <slot name="footer" />
-    </template>
-  </BaseModal>
-</template>
-
-<script setup>
-import { provide } from 'vue';
-import { modalEmits, drawerProps } from '../dialog/base/composable';
+<script>
 import BaseModal from '../dialog/base/base-modal.vue';
+import { h, provide } from 'vue';
 
-// 参数
-const emits = defineEmits(modalEmits);
-const props = defineProps(drawerProps);
-const modelVisible = defineModel('visible', { type: Boolean, default: false });
-
-// 共享数据
-provide('parentModal', {
-  modalType: 'drawer',
-  emits,
-  props,
-  modelVisible
-});
+export default {
+  setup(props, { slots }) {
+    provide('typeName', 'drawer');
+    return () => h(BaseModal, null, slots);
+  }
+};
 </script>

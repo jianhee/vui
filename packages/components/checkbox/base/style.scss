@@ -82,7 +82,8 @@
   }
   .#{$prefix}-group > .#{$prefix} {
     margin-right: 10px;
-    &:last-child {
+    &:last-child,
+    &--block {
       margin-right: 0;
     }
   }
