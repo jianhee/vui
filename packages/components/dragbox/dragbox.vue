@@ -27,14 +27,11 @@ const props = defineProps({
   // 是否可移动：可移动盒子会自动转成定位元素
   moveable: { type: Boolean, default: false },
   // 是否可缩放
-  // 有两种方式启用缩放
-  // 1. `props.resizeHandles` 为空时，`props.resizable` 设为 `true`，启用所有手柄
-  // 2. `props.resizeHandles` 有值时，`props.resizable` 可省略，启用指定手柄
   resizable: { type: Boolean, default: false },
-  // 可缩放手柄
-  // 定位元素支持 `['left', 'right', 'top', 'bottom']` 四个轴
-  // 非定位元素只支持 `['right', 'bottom']` 两个轴
-  resizeHandles: { type: Array, default: null },
+  // 可缩放手柄：默认启用所有手柄
+  // 定位元素支持 `left, right, top, bottom` 四个轴
+  // 非定位元素只支持 `right, bottom` 两个轴
+  resizeHandles: { type: String, default: 'left, right, top, bottom' },
   // 最小尺寸
   minWidth: { type: Number, default: 10 },
   minHeight: { type: Number, default: 10 },

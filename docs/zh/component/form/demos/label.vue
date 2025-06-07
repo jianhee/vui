@@ -1,5 +1,5 @@
 <template>
-  <VForm class="vui-mb-20">
+  <VForm class="vui-mb-30">
     <VFormItem label="标签位置">
       <VRadioGroup
         v-model:value="labelPosition"
@@ -8,11 +8,7 @@
       />
     </VFormItem>
     <VFormItem label="标签宽度">
-      <VRadioGroup
-        v-model:value="labelWidth"
-        :options="labelWidths"
-        option-type="button"
-      />
+      <DemoValue v-model:value="labelWidth" />
     </VFormItem>
   </VForm>
 
@@ -27,10 +23,9 @@ import { ref } from 'vue';
 import DemoBasic from './basic.vue';
 
 // 标签位置
-const labelPosition = ref('right');
+const labelPosition = ref(undefined);
 const labelPositions = ['left', 'right', 'top'];
 
 // 标签宽度
 const labelWidth = ref(undefined);
-const labelWidths = ['10em', '100px', '10%'];
 </script>

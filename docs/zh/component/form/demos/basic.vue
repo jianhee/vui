@@ -25,7 +25,16 @@
       />
     </VFormItem>
     <VFormItem label="开关">
-      <VSwitch v-model:checked="switchVal" />
+      <VSwitch
+        v-model:checked="switchVal"
+        active-text="开启状态"
+      />
+    </VFormItem>
+    <VFormItem label="滑块">
+      <VSlider
+        v-model:value="sliderVal"
+        style="width: 200px"
+      />
     </VFormItem>
   </VForm>
 </template>
@@ -39,6 +48,7 @@ const selectValue = ref(1);
 const checkboxGroupValue = ref([1]);
 const radioGroupValue = ref(1);
 const switchVal = ref(true);
+const sliderVal = ref(50);
 
 // 选项
 const options = [

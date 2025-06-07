@@ -6,7 +6,7 @@
     v-model:width="widthRef1"
     v-model:height="heightRef1"
     resizable
-    :resize-handles="handles1"
+    :resize-handles="handlesRef1?.join(',')"
     :min-width="100"
     :min-height="100"
     :disabled="isDisabled1"
@@ -32,8 +32,8 @@
       </VFormItem>
       <VFormItem label="切换手柄">
         <VCheckboxGroup
-          v-model:value="handles1"
-          :options="['left', 'right', 'top', 'bottom']"
+          v-model:value="handlesRef1"
+          :options="handlesOptions1"
           option-type="button"
         />
       </VFormItem>
@@ -47,7 +47,7 @@
     v-model:width="widthRef2"
     v-model:height="heightRef2"
     resizable
-    :resize-handles="handles2"
+    :resize-handles="handlesRef2?.join(',')"
     :min-width="100"
     :min-height="100"
     :disabled="isDisabled2"
@@ -68,8 +68,8 @@
       </VFormItem>
       <VFormItem label="切换手柄">
         <VCheckboxGroup
-          v-model:value="handles2"
-          :options="['right', 'bottom']"
+          v-model:value="handlesRef2"
+          :options="handlesOptions2"
           option-type="button"
         />
       </VFormItem>
@@ -82,7 +82,8 @@ import { ref } from 'vue';
 
 // 定位元素
 const isDisabled1 = ref(true);
-const handles1 = ref(undefined);
+const handlesRef1 = ref(undefined);
+const handlesOptions1 = ['left', 'right', 'top', 'bottom'];
 const leftRef1 = ref(300);
 const topRef1 = ref(100);
 const widthRef1 = ref(400);
@@ -90,7 +91,8 @@ const heightRef1 = ref(400);
 
 // 非定位元素
 const isDisabled2 = ref(true);
-const handles2 = ref(undefined);
+const handlesRef2 = ref(undefined);
+const handlesOptions2 = ['right', 'bottom'];
 const widthRef2 = ref(400);
 const heightRef2 = ref(260);
 </script>

@@ -9,8 +9,8 @@
 </template>
 
 <script setup>
+// 左侧文本
 defineProps({
-  // 左侧文本
   label: { type: String, default: null }
 });
 </script>

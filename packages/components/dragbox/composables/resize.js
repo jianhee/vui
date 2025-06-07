@@ -3,9 +3,7 @@ import { ref, computed } from 'vue';
 
 export const useResize = parentBox => {
   // 是否可缩放
-  const isResizable = computed(() => {
-    return (parentBox.props.resizable || !!parentBox.props.resizeHandles) && !parentBox.props.disabled;
-  });
+  const isResizable = computed(() => parentBox.props.resizable && !parentBox.props.disabled);
 
   // 当前拖拽的手柄
   const dragingHandleName = ref(null);
@@ -21,7 +19,7 @@ export const useResize = parentBox => {
     if (dragingHandleName.value) return [dragingHandleName.value];
 
     // 可缩放手柄
-    return parentBox.props.resizeHandles || ['left', 'right', 'top', 'bottom'];
+    return parentBox.props.resizeHandles.replace(/\s+/g, '').split(',');
   });
 
   // 开始位置

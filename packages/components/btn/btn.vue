@@ -25,6 +25,7 @@
 import { computed } from 'vue';
 import { useIcon } from '../icon/composables';
 import IconLoadingLoop from '../../icons/loading-loop.vue';
+import { addUnit } from '../../utils';
 
 // 参数
 const props = defineProps({
@@ -41,8 +42,8 @@ const props = defineProps({
   // 显示模式：默认行内模式
   block: { type: Boolean, default: false },
   inline: { type: Boolean, default: true },
-  // 圆角尺寸
-  radius: { type: String, default: null }
+  // 圆角尺寸：数字或字符串，默认 `4px`，省略单位时默认 `px`
+  radius: { type: [Number, String], default: null }
 });
 
 // 获取类名
@@ -59,7 +60,7 @@ const btnClasses = computed(() => {
 
 // 获取样式
 const btnStyles = computed(() => {
-  return { borderRadius: props.radius };
+  return { borderRadius: addUnit(props.radius, 'px') };
 });
 
 // 是否禁用

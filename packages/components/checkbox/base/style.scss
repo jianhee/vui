@@ -82,8 +82,7 @@
   }
   .#{$prefix}-group > .#{$prefix} {
     margin-right: 10px;
-    &:last-child,
-    &--block {
+    &:last-child {
       margin-right: 0;
     }
   }
@@ -112,5 +111,8 @@
   .#{$prefix}--block {
     display: flex;
     width: fit-content;
+  }
+  .#{$prefix}-group > .#{$prefix}--block {
+    margin-right: 0;
   }
 }

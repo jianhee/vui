@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-import { writeLog } from '@utils';
+import { writeLog } from '@vp/utils';
 </script>
 
 <style>

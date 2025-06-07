@@ -21,7 +21,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useRoute } from 'vitepress';
-import { writeLog } from '@utils';
+import { writeLog } from '@vp/utils';
 
 defineOptions({ inheritAttrs: false });
 

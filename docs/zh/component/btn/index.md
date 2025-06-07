@@ -39,6 +39,6 @@
 
 ## 圆角尺寸
 
-`props.radius` 默认 `4px`
+`props.radius` 数字或字符串，默认 `4px`，省略单位时默认 `px`
 
 <preview path="./demos/radius.vue"></preview>

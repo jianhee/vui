@@ -5,7 +5,7 @@
 3. `slots.default` 选项文本后的自定义内容
 4. `@change` 切换选中状态时触发，参数为 `v-model:checked` 的值
 
-<preview path="@src/component/checkbox/demos/option.vue"></preview>
+<preview path="@doc/component/checkbox/demos/option.vue"></preview>
 
 ## 选项组
 
@@ -16,7 +16,7 @@
 3. `slots.default` 选项文本后的自定义内容，参数为 `{ option }`
 4. `@change` 切换选项时触发，参数为 `v-model:value` 的值和当前 `option` 的值
 
-<preview path="@src/component/checkbox/demos/group.vue"></preview>
+<preview path="@doc/component/checkbox/demos/group.vue"></preview>
 
 ## 按钮类型
 
@@ -24,13 +24,13 @@
 
 `props.type` 设为 `button`
 
-<preview path="@src/component/checkbox/demos/option-type.vue"></preview>
+<preview path="@doc/component/checkbox/demos/option-type.vue"></preview>
 
 ### 选项组
 
 `props.optionType` 设为 `button`
 
-<preview path="@src/component/checkbox/demos/group-type.vue"></preview>
+<preview path="@doc/component/checkbox/demos/group-type.vue"></preview>
 
 ## 显示模式
 
@@ -38,10 +38,10 @@
 
 默认行内模式，`props.block` 设为 `true` 或 `props.inline` 设为 `false` 变为块级模式
 
-<preview path="@src/component/checkbox/demos/option-display.vue"></preview>
+<preview path="@doc/component/checkbox/demos/option-display.vue"></preview>
 
 ### 选项组
 
 和单个选项相反，子选项默认块级模式，`props.optionInline` 设为 `true` 或 `props.optionBlock` 设为 `false` 变为行内模式
 
-<preview path="@src/component/checkbox/demos/group-display.vue"></preview>
+<preview path="@doc/component/checkbox/demos/group-display.vue"></preview>

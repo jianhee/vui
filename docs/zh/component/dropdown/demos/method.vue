@@ -21,7 +21,10 @@
 <script setup>
 import { ref } from 'vue';
 
+// 当前点击的条目
 const nRef = ref(null);
+
+// 打开菜单
 const dropdownRef = ref(null);
 function openDropdown(event, n) {
   nRef.value = n;

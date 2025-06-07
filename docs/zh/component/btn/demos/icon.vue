@@ -12,13 +12,13 @@
 
 <script setup>
 import DemoBasic from './basic.vue';
-import IconClose from '@icons/close.svg?component';
+import IconClose from '@vp/icons/close.svg?component';
 
 // 图标类型
 const iconTypes = [
   { label: ':icon="name"', value: 'close' },
   { label: ':icon="component"', value: IconClose },
-  { label: ':icon="{ name: "xxx" }"', value: { name: 'close' } },
-  { label: ':icon="{ component: xxx }"', value: { component: IconClose } }
+  { label: ':icon="{ name: "xxx", size: "xxx", ... }"', value: { name: 'close' } },
+  { label: ':icon="{ component: xxx, size: "xxx", ... }"', value: { component: IconClose } }
 ];
 </script>

@@ -12,9 +12,8 @@ import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 // path
 export const alias = {
   'vui': fileURLToPath(new URL('../../../packages', import.meta.url)),
-  '@icons': fileURLToPath(new URL('../theme/icons', import.meta.url)),
-  '@utils': fileURLToPath(new URL('../theme/utils', import.meta.url)),
-  '@src/component': fileURLToPath(new URL('../../zh/component', import.meta.url))
+  '@vp': fileURLToPath(new URL('../../vp', import.meta.url)),
+  '@doc': fileURLToPath(new URL('../../zh', import.meta.url))
 };
 
 // vite
@@ -23,7 +22,7 @@ export const vite = defineConfig({
   plugins: [
     svgLoader(),
     createSvgIconsPlugin({
-      iconDirs: [fileURLToPath(new URL('../theme/icons', import.meta.url))],
+      iconDirs: [fileURLToPath(new URL('../../vp/icons', import.meta.url))],
       symbolId: 'icon-[dir]-[name]'
     })
   ]

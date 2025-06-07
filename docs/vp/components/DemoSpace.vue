@@ -14,6 +14,7 @@
   &:last-child {
     margin-bottom: 0;
   }
+  > .vui-icon,
   > .vui-btn,
   > .vui-checkbox,
   > .vui-checkbox-btn,

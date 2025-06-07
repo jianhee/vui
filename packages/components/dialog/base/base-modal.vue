@@ -14,7 +14,10 @@
           :style="modalStyles"
         >
           <!-- 顶栏 -->
-          <div :class="`vui-${typeName}-header`">
+          <div
+            v-if="title"
+            :class="`vui-${typeName}-header`"
+          >
             <!-- 标题 -->
             <span :class="`vui-${typeName}-title`">{{ props.title }}</span>
             <!-- 关闭按钮 -->
@@ -41,6 +44,7 @@
 
 <script setup>
 import { computed, watch, inject } from 'vue';
+import { addUnit } from '../../../utils';
 import IconClose from '../../../icons/close.vue';
 
 defineOptions({ inheritAttrs: false });
@@ -54,8 +58,8 @@ const emits = defineEmits(['open', 'close']);
 const props = defineProps({
   // 标题
   title: { type: String, default: null },
-  // 内容宽度：对话框默认 `50%`，抽屉默认 `30%`
-  width: { type: String, default: null },
+  // 内容宽度：数字或字符串，对话框默认 `50%`，抽屉默认 `30%`，省略单位时默认 `px`
+  width: { type: [Number, String], default: null },
   // 是否显示关闭按钮
   showClose: { type: Boolean, default: true },
   // 是否在点击遮罩时关闭
@@ -79,7 +83,7 @@ const modalClasses = computed(() => {
 
 // 获取样式
 const modalStyles = computed(() => {
-  return { width: props.width };
+  return { width: addUnit(props.width, 'px') };
 });
 
 // 点击遮罩

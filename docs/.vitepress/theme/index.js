@@ -13,8 +13,9 @@ import vui from 'vui/components/index.js';
 import 'vui/styles/index.scss';
 
 // custom
-import DemoSpace from './components/DemoSpace.vue';
-import './styles/index.scss';
+import DemoSpace from '@vp/components/DemoSpace.vue';
+import DemoValue from '@vp/components/DemoValue.vue';
+import '@vp/styles/index.scss';
 
 export default {
   extends: defaultTheme,
@@ -22,5 +23,6 @@ export default {
     app.use(vui);
     app.component('DemoPreview', AntDesignContainer);
     app.component('DemoSpace', DemoSpace);
+    app.component('DemoValue', DemoValue);
   }
 };

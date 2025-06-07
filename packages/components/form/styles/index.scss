@@ -8,7 +8,7 @@
   // 表单项
   &-item {
     display: flex;
-    gap: 10px;
+    gap: 12px;
     margin-bottom: 15px;
     font-size: 14px;
     line-height: 32px;
@@ -18,7 +18,7 @@
   }
   &-label {
     flex: none;
-    width: var(--vui-form-label-width, "auto");
+    width: var(--vui-form-label-width);
     color: var(--vui-form-label-text-color);
   }
   &-control {
