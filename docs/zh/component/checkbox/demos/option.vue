@@ -40,7 +40,7 @@ const OptionComponent = isCheckbox ? 'VCheckbox' : 'VRadio';
 // 选项
 const options = ref([
   { label: '选项1', checked: true },
-  { label: '选项2', checked: false },
+  { label: '选项2', checked: true },
   { label: '选项3', checked: false }
 ]);
 </script>

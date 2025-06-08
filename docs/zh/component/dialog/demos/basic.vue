@@ -22,7 +22,7 @@
     >
       <VRadioGroup
         v-model:value="placementRef"
-        :options="['left', 'right']"
+        :options="placementOptions"
         option-type="button"
       />
     </VFormItem>
@@ -65,7 +65,8 @@ const isVisible = ref(false);
 const isShowTitle = ref(true);
 const isShowContent = ref(true);
 const isShowFooter = ref(true);
-const placementRef = ref(undefined);
+const placementRef = ref('left');
+const placementOptions = ['left', 'right'];
 
 // 打开弹窗
 function openModal() {

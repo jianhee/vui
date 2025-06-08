@@ -23,9 +23,9 @@ import { ref } from 'vue';
 import DemoBasic from './basic.vue';
 
 // 标签位置
-const labelPosition = ref(undefined);
+const labelPosition = ref('left');
 const labelPositions = ['left', 'right', 'top'];
 
 // 标签宽度
-const labelWidth = ref(undefined);
+const labelWidth = ref(60);
 </script>

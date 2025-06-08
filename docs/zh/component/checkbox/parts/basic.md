@@ -1,7 +1,12 @@
+多选框/单选框的 API 几乎完全一致，UI 略有差异，都提供两个组件
+
+1. 单个选项：`VCheckbox` 和 `VRadio`
+2. 选项组：`VCheckboxGroup` 和 `VRadioGroup`
+
 ## 单个选项
 
-1. `v-model:checked` 选中状态
-2. `props.label` 选项文本
+1. `v-model:checked` 选中状态，默认 `false`
+2. `props.label` 选项文本，默认 `null`
 3. `slots.default` 选项文本后的自定义内容
 4. `@change` 切换选中状态时触发，参数为 `v-model:checked` 的值
 
@@ -9,10 +14,10 @@
 
 ## 选项组
 
-1. `v-model:value` 选中项的 `value`
-2. `props.options` 选项组
-   1. 对象格式 `[{ label: '文本', value: '值' }]`
-   2. 字符串/数字格式 `[1, 2, 3, 4]` 选项的文本和值相同
+1. `v-model:value` 选中项的 `value`，默认多选框 `[]` / 单选框 `null`
+2. `props.options` 选项组，默认 `null`，数组项的格式为 `Object|Number|String`
+   1. 选项的文本和值不同 `[{ label: '文本', value: '值' }]`
+   2. 选项的文本和值相同 `[1, 2, 3, 4]`
 3. `slots.default` 选项文本后的自定义内容，参数为 `{ option }`
 4. `@change` 切换选项时触发，参数为 `v-model:value` 的值和当前 `option` 的值
 

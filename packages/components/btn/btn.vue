@@ -42,7 +42,7 @@ const props = defineProps({
   // 显示模式：默认行内模式
   block: { type: Boolean, default: false },
   inline: { type: Boolean, default: true },
-  // 圆角尺寸：数字或字符串，默认 `4px`，省略单位时默认 `px`
+  // 圆角尺寸：默认值 `4px`，默认单位 `px`
   radius: { type: [Number, String], default: null }
 });
 

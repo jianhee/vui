@@ -1,16 +1,16 @@
 <template>
   <DemoValue
-    v-model:value="sizeRef"
-    label="图标尺寸"
-    unit="px"
+    v-model:value="rotateRef"
+    label="旋转角度"
+    unit="deg"
   />
 
-  <DemoBasic :size="sizeRef" />
+  <DemoBasic :rotate="rotateRef" />
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import DemoBasic from './basic.vue';
 
-const sizeRef = ref(30);
+const rotateRef = ref(45);
 </script>

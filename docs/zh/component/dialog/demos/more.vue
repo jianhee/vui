@@ -45,11 +45,12 @@ import { useRoute } from 'vitepress';
 // 区分类型
 const route = useRoute();
 const isDialog = /dialog/.test(route.path);
+const defaultWidth = isDialog ? 50 : 30;
 const ModalComponent = isDialog ? 'VDialog' : 'VDrawer';
 
 // 基础属性
 const isVisible = ref(false);
-const widthRef = ref(undefined);
+const widthRef = ref(defaultWidth);
 const isShowClose = ref(true);
 const isCloseOnClickModal = ref(true);
 

@@ -20,8 +20,7 @@ const props = defineProps({
   filedBlock: { type: Boolean, default: true },
   // 标签位置：left, right, top
   labelPosition: { type: String, default: 'left' },
-  // 标签宽度：数字或字符串，默认取最长标签的宽度，省略单位时默认 `px`
-  // 行内模式和顶部标签不生效
+  // 标签宽度：仅块级模式的左侧/右侧标签有效，默认值取最长标签的宽度，默认单位 `px`
   labelWidth: { type: [Number, String], default: null }
 });
 
@@ -52,8 +51,8 @@ const formClasses = computed(() => {
 // 获取样式
 const labelWidthStyles = computed(() => {
   // 是否使用宽度
-  const noWidth = isInline.value || props.labelPosition === 'top';
-  if (noWidth) return null;
+  const useWidth = !isInline.value && props.labelPosition !== 'top';
+  if (!useWidth) return null;
 
   // 设置宽度
   const width = props.labelWidth || maxLabelWidth.value;

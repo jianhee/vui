@@ -1,7 +1,12 @@
 <!-- 切换值 -->
 <template>
   <DemoSpace class="demo-value">
-    <span class="demo-value-label">{{ label }}</span>
+    <span
+      v-if="label"
+      class="demo-value-label"
+    >
+      {{ label }}
+    </span>
     <VSlider
       v-model:value="modelValue"
       :tip-format="val => `${val}${unit}`"
@@ -13,7 +18,7 @@
 
 <script setup>
 defineProps({
-  label: { type: String, default: '' },
+  label: { type: String, default: null },
   unit: { type: String, default: 'px' }
 });
 
@@ -36,6 +41,7 @@ const modelValue = defineModel('value', { type: [Number, String], default: 0 });
   &-text {
     flex: none;
     width: 4em;
+    text-align: right;
   }
 }
 </style>

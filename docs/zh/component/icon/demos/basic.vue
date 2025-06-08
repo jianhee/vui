@@ -1,39 +1,40 @@
 <template>
-  <template
-    v-for="type in iconTypes"
-    :key="type.name"
-  >
-    <DemoRow>使用 {{ type.name }}</DemoRow>
-    <DemoRow
-      flex
-      class="demo-icons"
-    >
-      <VIcon
-        v-for="(prop, index) in basicProps"
-        :key="index"
-        v-bind="{ ...type.icon, ...prop }"
-      />
-    </DemoRow>
-  </template>
+  <DemoSpace>使用名称</DemoSpace>
+  <DemoSpace class="demo-icons-size">
+    <VIcon
+      v-for="iconName in iconNames"
+      :key="iconName"
+      :name="iconName"
+      v-bind="$attrs"
+    />
+  </DemoSpace>
+  <DemoSpace>使用组件</DemoSpace>
+  <DemoSpace class="demo-icons-size">
+    <VIcon
+      v-for="iconComponent in iconComponents"
+      :key="iconComponent"
+      :component="iconComponent"
+      v-bind="$attrs"
+    />
+  </DemoSpace>
 </template>
 
 <script setup>
-import IconClose from '@icons/close.svg?component';
+import IconFace from '@vp/icons/face.svg?component';
+import IconLike from '@vp/icons/like.svg?component';
+import IconSearch from '@vp/icons/search.svg?component';
+import IconSetting from '@vp/icons/setting.svg?component';
+import IconClose from '@vp/icons/close.svg?component';
+import IconLoading from '@vp/icons/loading.svg?component';
 
-// 图标类型
-const iconTypes = [
-  { name: 'name', icon: { name: 'close' } },
-  { name: 'component', icon: { component: IconClose } }
-];
+defineOptions({ inheritAttrs: false });
 
-// 基础属性
-const basicProps = [
-  //
-  {},
-  { color: 'red' },
-  { clickable: true },
-  { disabled: true },
-  { rotate: 45 },
-  { spin: true }
-];
+const iconNames = ['face', 'like', 'search', 'setting', 'close', 'loading'];
+const iconComponents = [IconFace, IconLike, IconSearch, IconSetting, IconClose, IconLoading];
 </script>
+
+<style>
+.demo-icons-size {
+  font-size: 24px;
+}
+</style>

@@ -1,15 +1,16 @@
+// 图标
 @use "../../../styles/mixins";
 .vui-icon {
-  display: inline-flex;
+  display: inline-block;
   flex: none;
-  align-items: center;
-  justify-content: center;
+  width: 1em;
+  height: 1em;
   line-height: 1em;
+  vertical-align: top; /* 消除父元素间距 */
   transition: all 0.3s ease;
   > svg {
     width: 1em;
     height: 1em;
-    fill: currentcolor;
   }
   &.is-clickable {
     @include mixins.vui-clickable;

@@ -29,7 +29,7 @@ defineOptions({ inheritAttrs: false });
 const route = useRoute();
 const isCheckbox = /checkbox/.test(route.path);
 const GroupComponent = isCheckbox ? 'VCheckboxGroup' : 'VRadioGroup';
-const defaultVal = isCheckbox ? [1] : 1;
+const defaultVal = isCheckbox ? [1, 2] : 1;
 
 // 选中值
 const checkedVal = ref(defaultVal);

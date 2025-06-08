@@ -10,5 +10,5 @@
 import { ref } from 'vue';
 import DemoBasic from './basic.vue';
 
-const radiusRef = ref(undefined);
+const radiusRef = ref(4);
 </script>
