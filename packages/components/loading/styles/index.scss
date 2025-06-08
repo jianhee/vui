@@ -1,10 +1,10 @@
-// 颜色
+// vars
 :root {
   --vui-loading-icon-color: var(--vui-color-brand-base);
   --vui-loading-text-color: var(--vui-text-color-secondary);
 }
 
-// 样式
+// 加载状态
 .vui-loading {
   width: 100%;
   padding: 20px 0;

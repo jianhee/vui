@@ -1,9 +1,18 @@
 <!-- 间距 -->
 <template>
-  <div class="demo-space">
+  <div
+    class="demo-space"
+    :class="{ 'demo-space-flex': flex }"
+  >
     <slot />
   </div>
 </template>
+
+<script setup>
+defineProps({
+  flex: { type: Boolean, default: false }
+});
+</script>
 
 <style lang="scss">
 .demo-space {
@@ -13,6 +22,9 @@
   }
   &:last-child {
     margin-bottom: 0;
+  }
+  &-flex {
+    display: flex;
   }
   > .vui-icon,
   > .vui-btn,
