@@ -1,42 +1,12 @@
-<!-- 单选框-组 -->
-<template>
-  <div :class="['vui-radio-group', `vui-radio-group-${direction}`]">
-    <VRadio
-      v-for="(item, index) in items"
-      :key="index"
-      :value="item.value"
-      :label="item.label"
-    >
-      <slot :item="item" />
-    </VRadio>
-  </div>
-</template>
+<!-- 单选框-选项组 -->
+<script>
+import { h, provide } from 'vue';
+import BaseGroup from '../checkbox/components/base-group.vue';
 
-<script setup>
-import { provide } from 'vue';
-
-const emits = defineEmits(['change']);
-
-// 参数
-defineProps({
-  // 选项：{ value: '值', label: '文本' }
-  items: { type: Array, default: () => [] },
-  // 排列方向：默认 vertical 纵向（每项独占一行），horizontal 横向（所有项共用一行）
-  direction: { type: String, default: 'vertical' }
-});
-
-// 当前值
-const modelValue = defineModel('value', { type: [String, Number], default: null });
-
-// 修改值
-function onValueChange(checkedVal) {
-  modelValue.value = checkedVal;
-  emits('change', checkedVal);
-}
-
-// 共享数据
-provide('parentGroup', {
-  modelValue,
-  onValueChange
-});
+export default {
+  setup(props, { slots }) {
+    provide('typeName', 'radio');
+    return () => h(BaseGroup, null, slots);
+  }
+};
 </script>

@@ -20,7 +20,7 @@
    2. `Object.value` 选项值
    3. `Number|String` 自动格式化为 `Object.label` 和 `Object.value`
 3. `slots.default` 选项文本后的自定义内容，参数为 `{ option }`
-4. `@change` 切换选项时触发，参数为 `v-model:value` 的值和当前项的所有数据
+4. `@change` 切换选项时触发，参数为 `{ option: '当前项', value: '绑定值' }`
 
 <preview path="@doc/component/checkbox/demos/group.vue"></preview>
 

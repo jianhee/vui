@@ -6,7 +6,7 @@
       v-model:value="checkedVal"
       :options="options"
       v-bind="$attrs"
-      @change="onChange"
+      @change="writeLog('change', $event)"
     >
       <template v-if="option === 3"> + 自定义内容</template>
     </component>
@@ -42,9 +42,4 @@ const options = [
   // Number|String
   3
 ];
-
-// 切换选项
-function onChange(...arg) {
-  writeLog('change', ...arg);
-}
 </script>

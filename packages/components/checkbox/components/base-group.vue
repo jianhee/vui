@@ -47,14 +47,14 @@ function onCheckboxChange(formatOption, rawOption) {
     checkedValues.splice(index, 1);
   }
   modelValue.value = checkedValues;
-  emits('change', checkedValues, rawOption);
+  emits('change', { option: rawOption, value: checkedValues });
 }
 
 // 单选框
 function onRadioChange(formatOption, rawOption) {
   const checkedValue = formatOption.value;
   modelValue.value = checkedValue;
-  emits('change', checkedValue, rawOption);
+  emits('change', checkedValue, { option: rawOption, value: checkedValue });
 }
 
 // 共享数据
