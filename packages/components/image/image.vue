@@ -22,30 +22,32 @@
 <script setup>
 import { computed } from 'vue';
 import { useImage } from '@vueuse/core';
+import { addUnit } from '../../utils';
 import defaultErrorImg from './images/error.png';
 
 // 参数
 const props = defineProps({
   // 图片地址
-  src: { type: String, default: null },
+  src: { type: String, required: true },
   // 加载中的图片地址：默认使用骨架屏
   loadingImg: { type: String, default: null },
   // 加载失败的图片地址
   errorImg: { type: String, default: defaultErrorImg },
-  // 宽度
-  width: { type: String, default: null },
-  // 宽高比：默认按照原始比例展示完整图片，设置后按指定比例展示部分图片
+  // ---------- 设置样式 ----------
+  // 宽度：默认单位 `px`
+  width: { type: [Number, String], default: null },
+  // 宽高比：格式为 `n1/n2`，设置后可能显示不全
   aspectRatio: { type: String, default: null },
-  // 圆角
-  radius: { type: String, default: null }
+  // 圆角尺寸：默认单位 `px`
+  radius: { type: [Number, String], default: null }
 });
 
 // 获取样式
 const imageStyles = computed(() => {
   return {
-    'width': props.width,
+    'width': addUnit(props.width, 'px'),
     'aspect-ratio': props.aspectRatio,
-    'border-radius': props.radius
+    'border-radius': addUnit(props.radius, 'px')
   };
 });
 

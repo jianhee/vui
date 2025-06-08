@@ -1,14 +1,9 @@
 <template>
   <VForm>
-    <VFormItem label="切换状态">
-      <VSwitch
-        v-model:checked="isShowClose"
-        active-text="显示关闭按钮"
-      />
-      <br />
-      <VSwitch
-        v-model:checked="isCloseOnClickModal"
-        active-text="点击遮罩时关闭"
+    <VFormItem label="切换宽度">
+      <DemoValue
+        v-model:value="widthRef"
+        unit="%"
       />
     </VFormItem>
     <VFormItem label="操作">
@@ -21,8 +16,7 @@
     :is="ModalComponent"
     v-model:visible="isVisible"
     title="标题"
-    :show-close="isShowClose"
-    :close-on-click-modal="isCloseOnClickModal"
+    :width="`${widthRef}%`"
   >
     内容
     <template #footer>
@@ -36,9 +30,9 @@ import { ref } from 'vue';
 import { useModal } from '../composables';
 
 // 区分类型
-const { ModalComponent, isVisible, openModal, closeModal } = useModal();
+const { isDialog, ModalComponent, isVisible, openModal, closeModal } = useModal();
+const defaultWidth = isDialog ? 50 : 30;
 
 // 基础属性
-const isShowClose = ref(true);
-const isCloseOnClickModal = ref(true);
+const widthRef = ref(defaultWidth);
 </script>

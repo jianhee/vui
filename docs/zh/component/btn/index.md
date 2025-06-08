@@ -37,7 +37,9 @@
 
 <preview path="./demos/display.vue"></preview>
 
-## 圆角尺寸
+<!--@include: ../../_parts/style.md-->
+
+### 圆角尺寸
 
 `props.radius` 默认值 `4px`，默认单位 `px`，格式为 `Number|String`
 

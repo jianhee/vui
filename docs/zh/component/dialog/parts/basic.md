@@ -18,6 +18,13 @@
 
 1. `props.showClose` 是否显示关闭按钮，默认 `true`
 2. `props.closeOnClickModal` 是否在点击遮罩时关闭，默认 `true`
-3. `props.width` 内容宽度，默认值对话框 `50%` / 抽屉 `30%`，默认单位 `px`，格式为 `Number|String`
 
 <preview path="@doc/component/dialog/demos/more.vue"></preview>
+
+<!--@include: ../../../_parts/style.md-->
+
+### 内容宽度
+
+`props.width` 默认值对话框 `50%` / 抽屉 `30%`，默认单位 `px`，格式为 `Number|String`
+
+<preview path="@doc/component/dialog/demos/width.vue"></preview>

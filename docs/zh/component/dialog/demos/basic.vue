@@ -52,29 +52,16 @@
 
 <script setup>
 import { ref } from 'vue';
-import { useRoute } from 'vitepress';
+import { useModal } from '../composables';
 import { writeLog } from '@vp/utils';
 
 // 区分类型
-const route = useRoute();
-const isDialog = /dialog/.test(route.path);
-const ModalComponent = isDialog ? 'VDialog' : 'VDrawer';
+const { isDialog, ModalComponent, isVisible, openModal, closeModal } = useModal();
 
 // 基础属性
-const isVisible = ref(false);
 const isShowTitle = ref(true);
 const isShowContent = ref(true);
 const isShowFooter = ref(true);
 const placementRef = ref('left');
 const placementOptions = ['left', 'right'];
-
-// 打开弹窗
-function openModal() {
-  isVisible.value = true;
-}
-
-// 关闭弹窗
-function closeModal() {
-  isVisible.value = false;
-}
 </script>

@@ -103,21 +103,23 @@ import IconClose from './close.svg?component';
 
 <preview path="./demos/spin.vue"></preview>
 
-## 旋转角度
+<!--@include: ../../_parts/style.md-->
 
-`props.rotate` 默认值 `null`，默认单位 `deg`，格式为 `Number|String`
-
-<preview path="./demos/rotate.vue"></preview>
-
-## 图标尺寸
-
-`props.size` 默认值继承 `font-size`，默认单位 `px`，格式为 `Number|String`
-
-<preview path="./demos/size.vue"></preview>
-
-## 图标颜色
+### 图标颜色
 
 1. `props.color` 描边颜色，默认继承 `color`
 2. `props.twoOneColor` 填充颜色，仅双色图标有效，默认继承 `--vui-icon-two-one-color`
 
 <preview path="./demos/color.vue"></preview>
+
+### 图标尺寸
+
+`props.size` 默认值继承 `font-size`，默认单位 `px`，格式为 `Number|String`
+
+<preview path="./demos/size.vue"></preview>
+
+### 旋转角度
+
+`props.rotate` 默认值 `null`，默认单位 `deg`，格式为 `Number|String`
+
+<preview path="./demos/rotate.vue"></preview>

@@ -9,6 +9,7 @@
     </span>
     <VSlider
       v-model:value="modelValue"
+      :max="max"
       :tip-format="val => `${val}${unit}`"
       class="demo-value-slider"
     />
@@ -18,6 +19,7 @@
 
 <script setup>
 defineProps({
+  max: { type: [Number, String], default: 100 },
   label: { type: String, default: null },
   unit: { type: String, default: 'px' }
 });

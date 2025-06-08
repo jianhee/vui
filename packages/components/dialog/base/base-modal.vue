@@ -58,14 +58,15 @@ const emits = defineEmits(['open', 'close']);
 const props = defineProps({
   // 标题
   title: { type: String, default: null },
-  // 内容宽度：默认值对话框 `50%` / 抽屉 `30%`，默认单位 `px`
-  width: { type: [Number, String], default: null },
   // 是否显示关闭按钮
   showClose: { type: Boolean, default: true },
   // 是否在点击遮罩时关闭
   closeOnClickModal: { type: Boolean, default: true },
   // 抽屉出现位置：left, right
-  placement: { type: String, default: 'left' }
+  placement: { type: String, default: 'left' },
+  // ---------- 设置样式 ----------
+  // 内容宽度：默认值对话框 `50%` / 抽屉 `30%`，默认单位 `px`
+  width: { type: [Number, String], default: null }
 });
 
 // 是否显示
