@@ -4,8 +4,8 @@ import { onLongPress } from '@vueuse/core';
 
 export const useMove = parentBox => {
   // 是否可移动
-  const isMoveable = computed(() => {
-    return parentBox.props.moveable && !parentBox.props.disabled;
+  const isMovable = computed(() => {
+    return parentBox.props.movable && !parentBox.props.disabled;
   });
 
   // 是否正在移动
@@ -15,7 +15,7 @@ export const useMove = parentBox => {
 
   // 长按开始移动
   onLongPress(parentBox.boxRef, e => {
-    if (!isMoveable.value) return;
+    if (!isMovable.value) return;
 
     isMoving.value = true;
 
@@ -56,7 +56,7 @@ export const useMove = parentBox => {
   }
 
   return {
-    isMoveable,
+    isMovable,
     isMoving
   };
 };

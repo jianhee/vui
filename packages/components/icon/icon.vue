@@ -32,7 +32,7 @@ const props = defineProps({
   // 旋转动画
   spin: { type: Boolean, default: false },
   // ---------- 设置样式 ----------
-  // 描边颜色：默认继承 `color`
+  // 描边颜色：默认继承 `--vui-icon-color` 或 `color`
   color: { type: String, default: null },
   // 填充颜色：仅双色图标有效，默认继承 `--vui-icon-two-one-color`
   twoToneColor: { type: String, default: null },
@@ -54,7 +54,7 @@ const iconClasses = computed(() => [
 
 // 获取样式
 const iconStyles = computed(() => ({
-  'color': props.color,
+  '--vui-icon-color': props.color,
   '--vui-icon-two-tone-color': props.twoToneColor,
   'font-size': addUnit(props.size, 'px'),
   'transform': `rotate(${addUnit(props.rotate, 'deg')})`

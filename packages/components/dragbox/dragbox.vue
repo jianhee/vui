@@ -25,7 +25,7 @@ import { useResize } from './composables/resize.js';
 // 参数
 const props = defineProps({
   // 是否可移动：可移动盒子会自动转成定位元素
-  moveable: { type: Boolean, default: false },
+  movable: { type: Boolean, default: false },
   // 是否可缩放
   resizable: { type: Boolean, default: false },
   // 可缩放手柄：默认启用所有手柄
@@ -51,7 +51,7 @@ const boxCurrentWidth = defineModel('width', { type: Number, default: null });
 const boxCurrentHeight = defineModel('height', { type: Number, default: null });
 
 // 移动
-const { isMoveable, isMoving } = useMove({
+const { isMovable, isMoving } = useMove({
   props,
   boxRef,
   boxCurrentLeft,
@@ -74,7 +74,7 @@ const boxClasses = computed(() => {
   return [
     'vui-dragbox',
     {
-      'is-movable': isMoveable.value,
+      'is-movable': isMovable.value,
       'is-moving': isMoving.value,
       'is-resizable': isResizable.value,
       'is-resizing': isResizing.value

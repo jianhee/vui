@@ -2,7 +2,7 @@
   <VDragbox
     v-model:left="leftRef"
     v-model:top="topRef"
-    moveable
+    movable
     :disabled="isDisabled"
     class="demo-dragbox"
   >

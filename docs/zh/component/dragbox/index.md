@@ -2,7 +2,7 @@
 
 ## 移动
 
-1. `props.moveable` 是否可移动，默认 `false`，可移动盒子会自动转成定位元素
+1. `props.movable` 是否可移动，默认 `false`，可移动盒子会自动转成定位元素
 2. `v-model:left` 和 `v-model:top` 当前位置，默认 `null`，格式为 `Number`
 3. `props.disabled` 是否禁用，默认 `false`，禁用会清空绑定样式，但不会清除已记录的数据，切换状态后可恢复
 

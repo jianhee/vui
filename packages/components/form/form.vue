@@ -10,7 +10,8 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, watchEffect } from 'vue';
+import { useElementVisibility } from '@vueuse/core';
 import { addUnit } from '../../utils';
 
 // 参数
@@ -28,11 +29,17 @@ const props = defineProps({
 const isInline = computed(() => props.filedInline || !props.filedBlock);
 
 // 计算最长标签的宽度
-const formRef = ref(null);
 const maxLabelWidth = ref(null);
-onMounted(() => {
+const formRef = ref(null);
+const formIsVisible = useElementVisibility(formRef);
+watchEffect(async () => {
+  // 初始隐藏时无法获取宽度
+  if (!formIsVisible.value) return;
+  // 设置的值
   if (props.labelWidth) return;
+  // 最长的值
   const labels = formRef.value.querySelectorAll('.vui-form-label');
+  if (!labels.length) return;
   const labelWidths = Array.from(labels).map(label => label.offsetWidth);
   maxLabelWidth.value = Math.max(...labelWidths);
 });

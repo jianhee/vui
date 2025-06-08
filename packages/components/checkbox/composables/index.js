@@ -1,5 +1,5 @@
 // 多选框/单选框
-import { computed } from 'vue';
+import { computed, inject } from 'vue';
 
 // emits
 export const optionEmits = ['change'];
@@ -34,17 +34,18 @@ export const groupProps = {
 
 // 格式化选项
 export function useOption(props) {
+  const parentGroup = inject('parentGroup', null);
   const formatOption = computed(() => {
-    // 单个选项
-    if (props.label) {
-      return { label: props.label };
-    }
     // 选项组
-    if (typeof props.option === 'object') {
-      return props.option;
-    } else {
-      return { label: props.option, value: props.option };
+    if (parentGroup) {
+      if (typeof props.option === 'object') {
+        return props.option;
+      } else {
+        return { label: props.option, value: props.option };
+      }
     }
+    // 单个选项
+    return { label: props.label };
   });
 
   return { formatOption };

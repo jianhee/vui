@@ -107,7 +107,7 @@ import IconClose from './close.svg?component';
 
 ### 图标颜色
 
-1. `props.color` 描边颜色，默认继承 `color`
+1. `props.color` 描边颜色，默认继承 `--vui-icon-color` 或 `color`
 2. `props.twoOneColor` 填充颜色，仅双色图标有效，默认继承 `--vui-icon-two-one-color`
 
 <preview path="./demos/color.vue"></preview>

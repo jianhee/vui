@@ -4,7 +4,7 @@
     v-model:top="topRef"
     v-model:width="widthRef"
     v-model:height="heightRef"
-    moveable
+    movable
     resizable
     :min-width="100"
     :min-height="100"
