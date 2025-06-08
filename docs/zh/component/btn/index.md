@@ -21,7 +21,7 @@
 
 ## 图标按钮
 
-`props.icon` 可选的值有 `VIcon` 组件的 `name/component/props`
+<!--@include: ../../_parts/icon.md-->
 
 <preview path="./demos/icon.vue"></preview>
 

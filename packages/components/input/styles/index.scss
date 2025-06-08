@@ -1,6 +1,3 @@
-@use "../../input/styles/mixins";
-@include mixins.vui-input("vui-input");
-.vui-input {
-  padding: 0 8px;
-  cursor: text;
-}
+@use "./base";
+@include base.vui-base("vui-input");
+@include base.vui-input;

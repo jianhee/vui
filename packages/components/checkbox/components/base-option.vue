@@ -23,7 +23,7 @@
 
 <script setup>
 import { computed, inject } from 'vue';
-import { optionEmits, optionProps } from './composable';
+import { optionEmits, optionProps } from '../composables';
 import IconCheckbox from '../../../icons/checkbox.vue';
 import IconRadio from '../../../icons/radio.vue';
 

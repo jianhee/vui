@@ -62,7 +62,6 @@
 
 // 对话框
 @mixin vui-dialog() {
-  @include vui-modal("vui-dialog");
   .vui-dialog {
     // 主体
     width: 50%;
@@ -87,7 +86,6 @@
 
 // 抽屉
 @mixin vui-drawer() {
-  @include vui-modal("vui-drawer");
   .vui-drawer {
     // 主体
     position: absolute;

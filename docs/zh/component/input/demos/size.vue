@@ -1,17 +1,23 @@
 <template>
-  <DemoRow flex>
+  <DemoSpace>Medium（默认）</DemoSpace>
+  <DemoSpace>
     <VInput
-      v-for="size in ['medium', 'small']"
-      :key="size"
       v-model:value="inputValue"
-      :size="size"
-      :placeholder="size"
+      placeholder="请输入内容"
     />
-  </DemoRow>
+  </DemoSpace>
+  <DemoSpace>Small</DemoSpace>
+  <DemoSpace>
+    <VInput
+      v-model:value="inputValue"
+      placeholder="请输入内容"
+      size="small"
+    />
+  </DemoSpace>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 
-const inputValue = ref('');
+const inputValue = ref(null);
 </script>

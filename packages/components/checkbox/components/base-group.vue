@@ -13,7 +13,7 @@
 
 <script setup>
 import { computed, provide, inject } from 'vue';
-import { groupProps, groupEmits } from './composable';
+import { groupProps, groupEmits } from '../composables';
 import BaseOption from './base-option.vue';
 
 // 区分类型

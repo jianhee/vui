@@ -2,6 +2,7 @@
 <template>
   <div
     :class="wraperClasses"
+    v-bind="wraperAttrs"
     @click="focused = true"
   >
     <!-- 前置图标 -->
@@ -11,13 +12,12 @@
     />
     <!-- 输入框 -->
     <input
-      ref="target"
+      ref="inputRef"
       v-model="modelValue"
       type="text"
       class="vui-input-inner"
-      :placeholder="placeholder"
       :disabled="disabled"
-      :maxlength="maxlength"
+      v-bind="innerAttrs"
       @input="onValueInput"
       @change="onValueChange"
       @keyup.enter="onKeyupEnter"
@@ -36,41 +36,41 @@
 <script setup>
 import { shallowRef, computed } from 'vue';
 import { useFocus } from '@vueuse/core';
-import { getIconProps } from '../icon/utils';
+import { useProps } from './composables';
+import { useIcon } from '../icon/composables';
 import IconClear from '../../icons/clear.vue';
 
-const emits = defineEmits(['input', 'change', 'clear', 'enter']);
+const emits = defineEmits(['input', 'change', 'enter', 'clear']);
 
 // 参数
 const props = defineProps({
-  // 原生属性
-  placeholder: { type: String, default: null },
-  disabled: { type: Boolean, default: false },
-  maxlength: { type: [Number, String], default: null },
   // 前置图标：VIcon 组件的 name/component/props
   icon: { type: [String, Object], default: null },
-  // 尺寸：small, medium
-  size: { type: String, default: 'medium' }
+  // 尺寸：medium, small
+  size: { type: String, default: 'medium' },
+  // 单独处理的原生属性
+  disabled: { type: Boolean, default: false }
 });
 
-// 是否获取焦点
-const target = shallowRef();
-const { focused } = useFocus(target);
+// 接收参数
+const { wraperAttrs, innerAttrs } = useProps();
+const { iconProps } = useIcon(props.icon);
 
-// 获取容器类名
+// 是否获取焦点
+const inputRef = shallowRef();
+const { focused } = useFocus(inputRef);
+
+// 获取外层类名
 const wraperClasses = computed(() => {
   return [
     'vui-input',
-    `vui-input-${props.size}`,
+    `vui-input--${props.size}`,
     {
       'is-disabled': props.disabled,
       'is-focus': focused.value
     }
   ];
 });
-
-// 获取图标 props
-const iconProps = computed(() => getIconProps(props.icon));
 
 // 当前值
 const modelValue = defineModel('value', { type: String, default: null });
@@ -85,14 +85,15 @@ function onValueChange() {
   emits('change', modelValue.value);
 }
 
-// 按下enter键
+// 按下 `Enter` 键
 function onKeyupEnter() {
+  focused.value = false;
   emits('enter', modelValue.value);
 }
 
 // 清空值
 function clearValue() {
   modelValue.value = '';
-  emits('clear');
+  emits('clear', '');
 }
 </script>

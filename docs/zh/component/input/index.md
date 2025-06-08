@@ -2,38 +2,28 @@
 
 ## 基础用法
 
-1. `v-model:value` 输入框的值
-1. `@input` 输入值时触发，返回输入框的值
-1. `@change` 修改值时触发，返回输入框的值
-1. `@enter` 按下 Enter 键时触发，返回输入框的值
-1. `@clear` 点击清空按钮时触发
+1. `v-model:value` 输入框的值，默认 `null`
+2. `@input` 输入值时触发，参数为 `v-model:value` 的值，下同
+3. `@change` 修改值时触发
+4. `@enter` 按下 `Enter` 键时触发
+5. `@clear` 点击清空按钮时触发
 
-:::preview
-demo-preview=./demos/basic.vue
-:::
+<preview path="./demos/basic.vue"></preview>
 
 ## 原生属性
 
-1. `props.placeholder` 占位文本
-1. `props.disabled` 是否禁用
-1. `props.maxlength` 最大输入长度
+支持所有原生 `input` 标签的属性
 
-:::preview
-demo-preview=./demos/origin.vue
-:::
+<preview path="./demos/origin.vue"></preview>
 
 ## 前置图标
 
-1. `props.icon` 可选的值有 `VIcon` 组件的 `name/component/props`
+<!--@include: ../../_parts/icon.md-->
 
-:::preview
-demo-preview=./demos/icon.vue
-:::
+<preview path="./demos/icon.vue"></preview>
 
 ## 输入框尺寸
 
-1. `props.size` 可选的值有以下几种
+`props.size` 可选的值有 `medium` 中号（默认）、`small` 小号
 
-:::preview
-demo-preview=./demos/size.vue
-:::
+<preview path="./demos/size.vue"></preview>

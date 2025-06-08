@@ -1,7 +1,7 @@
 <!-- 对话框 -->
 <script>
-import BaseModal from './base/base-modal.vue';
 import { h, provide } from 'vue';
+import BaseModal from './components/base-modal.vue';
 
 export default {
   setup(props, { slots }) {

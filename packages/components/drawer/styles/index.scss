@@ -1,2 +1,3 @@
-@use "../../dialog/base/style";
-@include style.vui-drawer;
+@use "../../dialog/styles/base";
+@include base.vui-modal("vui-drawer");
+@include base.vui-drawer;

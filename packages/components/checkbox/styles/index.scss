@@ -1,2 +1,2 @@
-@use "../base/style";
-@include style.vui-option("vui-checkbox");
+@use "./base";
+@include base.vui-option("vui-checkbox");
