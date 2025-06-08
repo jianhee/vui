@@ -15,11 +15,12 @@
 ## 选项组
 
 1. `v-model:value` 选中项的 `value`，默认多选框 `[]` / 单选框 `null`
-2. `props.options` 选项组，默认 `null`，数组项的格式为 `Object|Number|String`
-   1. 选项的文本和值不同 `[{ label: '文本', value: '值' }]`
-   2. 选项的文本和值相同 `[1, 2, 3, 4]`
+2. `props.options` 选项组，默认 `null`，格式为 `[{ label, value }, 1, '1']`
+   1. `Object.label` 选项文本
+   2. `Object.value` 选项值
+   3. `Number|String` 自动格式化为 `Object.label` 和 `Object.value`
 3. `slots.default` 选项文本后的自定义内容，参数为 `{ option }`
-4. `@change` 切换选项时触发，参数为 `v-model:value` 的值和当前 `option` 的值
+4. `@change` 切换选项时触发，参数为 `v-model:value` 的值和当前项的所有数据
 
 <preview path="@doc/component/checkbox/demos/group.vue"></preview>
 

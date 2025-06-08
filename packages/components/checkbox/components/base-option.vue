@@ -15,7 +15,7 @@
       :class="`vui-${typeName}-icon`"
     />
     <!-- 文本 -->
-    <span v-if="lableRef">{{ lableRef }}</span>
+    <span v-if="formatOption.label">{{ formatOption.label }}</span>
     <!-- 自定义内容 -->
     <slot />
   </label>
@@ -23,7 +23,7 @@
 
 <script setup>
 import { computed, inject } from 'vue';
-import { optionEmits, optionProps } from '../composables';
+import { optionEmits, optionProps, useOption } from '../composables';
 import IconCheckbox from '../../../icons/checkbox.vue';
 import IconRadio from '../../../icons/radio.vue';
 
@@ -37,6 +37,9 @@ const parentGroup = inject('parentGroup', null);
 const emits = defineEmits(optionEmits);
 const props = defineProps(optionProps);
 const modelChecked = defineModel('checked', { type: Boolean, default: false });
+
+// 格式化选项
+const { formatOption } = useOption(props);
 
 // 是否按钮
 const isBtn = computed(() => props.type === 'button' || parentGroup?.props.optionType === 'button');
@@ -61,15 +64,12 @@ const optionClasses = computed(() => {
   ];
 });
 
-// 文本
-const lableRef = computed(() => props.label || props.option?.label);
-
 // 是否选中
 const isChecked = computed(() => {
   if (parentGroup) {
     // 选项组
     const checkedValue = parentGroup.modelValue.value;
-    const optionValue = props.option.value;
+    const optionValue = formatOption.value.value;
     if (isCheckbox) {
       return checkedValue?.includes(optionValue);
     } else {
@@ -84,7 +84,7 @@ const isChecked = computed(() => {
 // 切换选中状态
 function onCheckedChange() {
   if (parentGroup) {
-    parentGroup.onValueChange(props.option);
+    parentGroup.onValueChange(formatOption.value, props.option);
   } else {
     onOptionChange();
   }

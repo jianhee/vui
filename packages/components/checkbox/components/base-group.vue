@@ -2,8 +2,8 @@
 <template>
   <div :class="`vui-${typeName}-group`">
     <BaseOption
-      v-for="option in options"
-      :key="option.value"
+      v-for="(option, index) in options"
+      :key="index"
       :option="option"
     >
       <slot :option="option" />
@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import { computed, provide, inject } from 'vue';
+import { provide, inject } from 'vue';
 import { groupProps, groupEmits } from '../composables';
 import BaseOption from './base-option.vue';
 
@@ -28,44 +28,33 @@ const modelValue = defineModel('value', {
   default: null
 });
 
-// 格式化选项
-const options = computed(() => {
-  return props.options.map(option => {
-    if (typeof option === 'object') {
-      return option;
-    } else {
-      return { label: option, value: option };
-    }
-  });
-});
-
 // 切换选项
-const onValueChange = option => {
+const onValueChange = (formatOption, rawOption) => {
   if (isCheckbox) {
-    onCheckboxChange(option);
+    onCheckboxChange(formatOption, rawOption);
   } else {
-    onRadioChange(option);
+    onRadioChange(formatOption, rawOption);
   }
 };
 
 // 多选框
-function onCheckboxChange(option) {
-  const values = modelValue.value || [];
-  const index = values.findIndex(value => value === option.value);
+function onCheckboxChange(formatOption, rawOption) {
+  const checkedValues = modelValue.value || [];
+  const index = checkedValues.findIndex(value => value === formatOption.value);
   if (index === -1) {
-    values.push(option.value);
+    checkedValues.push(formatOption.value);
   } else {
-    values.splice(index, 1);
+    checkedValues.splice(index, 1);
   }
-  modelValue.value = values;
-  emits('change', values, option);
+  modelValue.value = checkedValues;
+  emits('change', checkedValues, rawOption);
 }
 
 // 单选框
-function onRadioChange(option) {
-  const newValue = option.value;
-  modelValue.value = newValue;
-  emits('change', newValue, option);
+function onRadioChange(formatOption, rawOption) {
+  const checkedValue = formatOption.value;
+  modelValue.value = checkedValue;
+  emits('change', checkedValue, rawOption);
 }
 
 // 共享数据
