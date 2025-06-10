@@ -27,15 +27,15 @@
       />
     </VFormItem>
     <VFormItem label="操作">
-      <VBtn @click="openModal">打开弹窗</VBtn>
+      <VBtn @click="openDialog">打开</VBtn>
     </VFormItem>
   </VForm>
 
   <!-- 弹窗 -->
   <component
-    :is="ModalComponent"
+    :is="componentName"
     v-model:visible="isVisible"
-    :title="isShowTitle ? '标题' : undefined"
+    :title="title"
     :placement="placementRef"
     @open="writeLog('open')"
     @close="writeLog('close')"
@@ -45,21 +45,22 @@
       v-if="isShowFooter"
       #footer
     >
-      <VBtn @click="closeModal">关闭</VBtn>
+      <VBtn @click="closeDialog">关闭</VBtn>
     </template>
   </component>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { useModal } from '../composables';
+import { ref, computed } from 'vue';
+import { useDialog } from '../composables';
 import { writeLog } from '@vp/utils';
 
 // 区分类型
-const { isDialog, ModalComponent, isVisible, openModal, closeModal } = useModal();
+const { isDialog, isVisible, componentName, openDialog, closeDialog } = useDialog();
 
 // 基础属性
 const isShowTitle = ref(true);
+const title = computed(() => (isShowTitle.value ? '标题' : undefined));
 const isShowContent = ref(true);
 const isShowFooter = ref(true);
 const placementRef = ref('left');

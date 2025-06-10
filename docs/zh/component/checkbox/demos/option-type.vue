@@ -12,7 +12,5 @@ import { ref, computed } from 'vue';
 import DemoOption from './option.vue';
 
 const isBtn = ref(true);
-const type = computed(() => {
-  return isBtn.value ? 'button' : undefined;
-});
+const type = computed(() => (isBtn.value ? 'button' : undefined));
 </script>

@@ -27,7 +27,7 @@ import IconCheckbox from '../../icons/checkbox.vue';
 import IconRadio from '../../icons/radio.vue';
 
 // 处理数据
-const modelChecked = defineModel('checked', checkboxModel);
+const modelChecked = defineModel('checked', checkboxModel.checked);
 const props = defineProps(checkboxProps);
 const emits = defineEmits(checkboxEmits);
 const { checkboxType, isCheckbox, isBtn, rootClasses, formattedOption, isChecked, onCheckedChange } = useCheckbox({

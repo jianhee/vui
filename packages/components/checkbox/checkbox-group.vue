@@ -16,7 +16,7 @@ import { inject, provide } from 'vue';
 import { checkboxGroupModel, checkboxGroupProps, checkboxGroupEmits } from './composables';
 
 // 处理数据
-const modelValue = defineModel('value', checkboxGroupModel);
+const modelValue = defineModel('value', checkboxGroupModel.value);
 const props = defineProps(checkboxGroupProps);
 const emits = defineEmits(checkboxGroupEmits);
 

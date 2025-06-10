@@ -7,30 +7,30 @@
       />
     </VFormItem>
     <VFormItem label="操作">
-      <VBtn @click="openModal">打开弹窗</VBtn>
+      <VBtn @click="openDialog">打开</VBtn>
     </VFormItem>
   </VForm>
 
   <!-- 弹窗 -->
   <component
-    :is="ModalComponent"
+    :is="componentName"
     v-model:visible="isVisible"
     title="标题"
     :width="`${widthRef}%`"
   >
     内容
     <template #footer>
-      <VBtn @click="closeModal">关闭</VBtn>
+      <VBtn @click="closeDialog">关闭</VBtn>
     </template>
   </component>
 </template>
 
 <script setup>
 import { ref } from 'vue';
-import { useModal } from '../composables';
+import { useDialog } from '../composables';
 
 // 区分类型
-const { isDialog, ModalComponent, isVisible, openModal, closeModal } = useModal();
+const { isDialog, isVisible, componentName, openDialog, closeDialog } = useDialog();
 const defaultWidth = isDialog ? 50 : 30;
 
 // 基础属性

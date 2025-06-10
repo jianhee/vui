@@ -1,6 +1,6 @@
 // 多选框 vui-checkbox
 // 单选框 vui-radio
-@mixin vui-checkbox($prefix) {
+@mixin base-checkbox($prefix) {
   // vars
   :root {
     // 默认样式

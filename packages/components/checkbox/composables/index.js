@@ -5,9 +5,17 @@ import { computed, inject } from 'vue';
 export const checkboxEmits = ['change'];
 export const checkboxGroupEmits = ['change'];
 
-// model
-export const checkboxModel = { type: Boolean, default: false };
-export const checkboxGroupModel = { type: [Array, Number, String], default: null };
+// 多选框 v-model
+export const checkboxModel = {
+  // 是否选中
+  checked: { type: Boolean, default: false }
+};
+
+// 多选框组 v-model
+export const checkboxGroupModel = {
+  // 选中值
+  value: { type: [Array, Number, String], default: null }
+};
 
 // 多选框 props
 export const checkboxProps = {
