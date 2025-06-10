@@ -13,7 +13,8 @@
   </DemoSpace>
 
   <DemoSpace>
-    绑定值为
+    <code>v-model:value</code>
+    的值为
     <code>{{ checkedVal }}</code>
   </DemoSpace>
 </template>

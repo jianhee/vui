@@ -16,15 +16,15 @@ import { inject, provide } from 'vue';
 import { checkboxGroupModel, checkboxGroupProps, checkboxGroupEmits } from './composables';
 
 // 处理数据
-const modelValue = defineModel(checkboxGroupModel);
+const modelValue = defineModel('value', checkboxGroupModel);
 const props = defineProps(checkboxGroupProps);
 const emits = defineEmits(checkboxGroupEmits);
 
 // 共享数据
 const checkboxType = inject('checkboxType', 'checkbox');
 provide('checkboxGroup', {
-  emits,
+  modelValue,
   props,
-  modelValue
+  emits
 });
 </script>

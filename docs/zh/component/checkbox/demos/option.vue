@@ -1,5 +1,5 @@
 <template>
-  <DemoSpace>
+  <DemoSpace class="demo-checkboxs">
     <component
       :is="OptionComponent"
       v-for="option in options"
@@ -14,13 +14,13 @@
   </DemoSpace>
 
   <DemoSpace>
-    绑定值分别为
+    <code>v-model:value</code> 的值分别为
     <template
       v-for="option in options"
       :key="option.label"
     >
       <code>{{ option.checked }}</code>
-      &nbsp;
+      {{ ` ` }}
     </template>
   </DemoSpace>
 </template>
@@ -44,3 +44,9 @@ const options = ref([
   { label: '选项3', checked: false }
 ]);
 </script>
+
+<style>
+.demo-checkboxs > label {
+  margin-right: 10px;
+}
+</style>

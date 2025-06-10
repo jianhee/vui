@@ -15,7 +15,7 @@
       :class="`vui-${checkboxType}-icon`"
     />
     <!-- 文本 -->
-    <span v-if="formatOption.itemLabel">{{ formatOption.itemLabel }}</span>
+    <span v-if="formattedOption.label">{{ formattedOption.label }}</span>
     <!-- 自定义内容 -->
     <slot />
   </label>
@@ -27,12 +27,12 @@ import IconCheckbox from '../../icons/checkbox.vue';
 import IconRadio from '../../icons/radio.vue';
 
 // 处理数据
-const modelChecked = defineModel(checkboxModel);
+const modelChecked = defineModel('checked', checkboxModel);
 const props = defineProps(checkboxProps);
 const emits = defineEmits(checkboxEmits);
-const { isCheckbox, isBtn, formatOption, isChecked, onCheckedChange } = useCheckbox({
-  props,
+const { checkboxType, isCheckbox, isBtn, rootClasses, formattedOption, isChecked, onCheckedChange } = useCheckbox({
   modelChecked,
+  props,
   emits
 });
 

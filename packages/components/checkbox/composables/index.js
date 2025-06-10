@@ -45,7 +45,7 @@ export function useCheckbox(checkbox) {
   const isCheckbox = checkboxType === 'checkbox';
 
   // 是否按钮
-  const isBtn = computed(() => checkbox.props.type === 'button' || checkboxGroup.props?.optionType === 'button');
+  const isBtn = computed(() => checkbox.props.type === 'button' || checkboxGroup?.props.optionType === 'button');
 
   // 是否块级
   const isBlock = computed(() => {
@@ -68,7 +68,7 @@ export function useCheckbox(checkbox) {
   });
 
   // 格式化选项
-  const formatOption = computed(() => {
+  const formattedOption = computed(() => {
     // 单个选项
     if (!checkboxGroup) {
       return { label: checkbox.props.label };
@@ -90,7 +90,7 @@ export function useCheckbox(checkbox) {
     }
     // 选项组
     const checkedValue = checkboxGroup.modelValue.value;
-    const optionValue = formatOption.value.value;
+    const optionValue = formattedOption.value.value;
     if (isCheckbox) {
       return checkedValue?.includes(optionValue);
     } else {
@@ -100,10 +100,12 @@ export function useCheckbox(checkbox) {
 
   // 切换选中状态
   function onCheckedChange() {
+    // 单个选项
     if (!checkboxGroup) {
       onCheckboxChange();
       return;
     }
+    // 选项组
     if (isCheckbox) {
       onCheckboxGroupChange();
     } else {
@@ -121,7 +123,7 @@ export function useCheckbox(checkbox) {
   // 切换多选框组
   function onCheckboxGroupChange() {
     const checkedValues = checkboxGroup.modelValue.value || [];
-    const optionValue = formatOption.value.value;
+    const optionValue = formattedOption.value.value;
     const index = checkedValues.findIndex(value => value === optionValue);
     if (index === -1) {
       checkedValues.push(optionValue);
@@ -133,7 +135,7 @@ export function useCheckbox(checkbox) {
 
   // 切换单选框组
   function onRadioGroupChange() {
-    const checkedValue = formatOption.value.value;
+    const checkedValue = formattedOption.value.value;
     onGroupChange(checkedValue);
   }
 
@@ -147,10 +149,11 @@ export function useCheckbox(checkbox) {
   }
 
   return {
+    checkboxType,
     isCheckbox,
     isBtn,
     rootClasses,
-    formatOption,
+    formattedOption,
     isChecked,
     onCheckedChange
   };
