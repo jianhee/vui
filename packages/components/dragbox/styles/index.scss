@@ -25,6 +25,9 @@
     user-select: none;
     transition: none;
   }
+  &.is-moving &-handle {
+    display: none;
+  }
 
   // 手柄
   &-handle {

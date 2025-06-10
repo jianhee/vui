@@ -1,4 +1,5 @@
-::: tip 多选框和单选框的 API 几乎完全一致，UI 略有差异，都提供两个组件
+::: tip
+多选框和单选框的 API 几乎完全一致，UI 略有差异。
 
 - `<VCheckbox>` 和 `<VRadio>` 用于单个选项
 - `<VCheckboxGroup>` 和 `<VRadioGroup>` 用于选项组
@@ -16,7 +17,7 @@
 
 ## 选项组
 
-1. `v-model:value` 选中项的 `value`，多选框格式为 `Array` 单选框格式为 `Number|String`
+1. `v-model:value` 选中项的 `value`，多选框为 `Array` 类型，单选框为 `Number|String` 类型
 2. `props.options` 选项组，格式为 `[{ label, value }, 1, '1']`
    1. `Object.label` 选项文本
    2. `Object.value` 选项值

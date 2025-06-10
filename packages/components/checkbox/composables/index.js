@@ -149,7 +149,7 @@ export function useCheckbox(checkbox) {
 
   // 切换选项组
   function onGroupChange(newValue) {
-    checkbox.modelChecked.value = newValue;
+    checkboxGroup.modelValue.value = newValue;
     checkboxGroup.emits('change', {
       option: checkbox.props.option,
       value: newValue

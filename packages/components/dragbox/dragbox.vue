@@ -2,8 +2,8 @@
 <template>
   <div
     ref="boxRef"
-    :class="boxClasses"
-    :style="boxStyles"
+    :class="rootClasses"
+    :style="rootStyles"
   >
     <!-- 内容 -->
     <slot />
@@ -18,78 +18,21 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
-import { useMove } from './composables/move.js';
-import { useResize } from './composables/resize.js';
-
-// 参数
-const props = defineProps({
-  // 是否可移动：可移动盒子会自动转成定位元素
-  movable: { type: Boolean, default: false },
-  // 是否可缩放
-  resizable: { type: Boolean, default: false },
-  // 可缩放手柄：默认启用所有手柄
-  // 定位元素支持 `left, right, top, bottom` 四个轴
-  // 非定位元素只支持 `right, bottom` 两个轴
-  resizeHandles: { type: String, default: 'left, right, top, bottom' },
-  // 最小尺寸
-  minWidth: { type: Number, default: 10 },
-  minHeight: { type: Number, default: 10 },
-  // 是否禁用：禁用会清空状态和绑定样式，但不会清除已记录的数据，切换状态后可恢复
-  disabled: { type: Boolean, default: false }
-});
+import { ref } from 'vue';
+import { dragboxModel, dragboxProps, useDragbox } from './composables';
 
 // 盒子
 const boxRef = ref(null);
 
-// 当前位置
-const boxCurrentLeft = defineModel('left', { type: Number, default: null });
-const boxCurrentTop = defineModel('top', { type: Number, default: null });
-
-// 当前尺寸
-const boxCurrentWidth = defineModel('width', { type: Number, default: null });
-const boxCurrentHeight = defineModel('height', { type: Number, default: null });
-
-// 移动
-const { isMovable, isMoving } = useMove({
-  props,
+// 处理数据
+const props = defineProps(dragboxProps);
+const boxLeft = defineModel('left', dragboxModel);
+const boxTop = defineModel('top', dragboxModel);
+const boxWidth = defineModel('width', dragboxModel);
+const boxHeight = defineModel('height', dragboxModel);
+const { rootClasses, rootStyles, handleItems, onResizeStart } = useDragbox({
   boxRef,
-  boxCurrentLeft,
-  boxCurrentTop
-});
-
-// 缩放
-const { isResizable, isResizing, handleItems, onResizeStart } = useResize({
   props,
-  boxRef,
-  isMoving,
-  boxCurrentLeft,
-  boxCurrentTop,
-  boxCurrentWidth,
-  boxCurrentHeight
-});
-
-// 获取类名
-const boxClasses = computed(() => {
-  return [
-    'vui-dragbox',
-    {
-      'is-movable': isMovable.value,
-      'is-moving': isMoving.value,
-      'is-resizable': isResizable.value,
-      'is-resizing': isResizing.value
-    }
-  ];
-});
-
-// 获取样式
-const boxStyles = computed(() => {
-  if (props.disabled) return null;
-  return {
-    left: `${boxCurrentLeft.value}px`,
-    top: `${boxCurrentTop.value}px`,
-    width: `${boxCurrentWidth.value}px`,
-    height: `${boxCurrentHeight.value}px`
-  };
+  styles: { boxLeft, boxTop, boxWidth, boxHeight }
 });
 </script>

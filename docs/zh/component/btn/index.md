@@ -19,7 +19,7 @@
 
 <preview path="./demos/loading.vue"></preview>
 
-## 图标按钮
+## 前置图标
 
 <!--@include: @/component/@parts/props-icon.md-->
 

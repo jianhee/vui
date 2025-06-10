@@ -2,11 +2,9 @@
 import { ref, computed } from 'vue';
 import { onLongPress } from '@vueuse/core';
 
-export const useMove = parentBox => {
+export const useMove = ({ boxRef, props, styles }) => {
   // 是否可移动
-  const isMovable = computed(() => {
-    return parentBox.props.movable && !parentBox.props.disabled;
-  });
+  const isMovable = computed(() => props.movable && !props.disabled);
 
   // 是否正在移动
   const isMoving = ref(false);
@@ -14,13 +12,13 @@ export const useMove = parentBox => {
   let boxStartPos = { x: 0, y: 0 };
 
   // 长按开始移动
-  onLongPress(parentBox.boxRef, e => {
+  onLongPress(boxRef, e => {
     if (!isMovable.value) return;
 
     isMoving.value = true;
 
     // 记录初始数据
-    const rect = parentBox.boxRef.value.getBoundingClientRect();
+    const rect = boxRef.value.getBoundingClientRect();
     mouseStartPos = { x: e.clientX, y: e.clientY };
     boxStartPos = { x: rect.left, y: rect.top };
 
@@ -43,8 +41,8 @@ export const useMove = parentBox => {
     const deltaY = mouseCurrentPos.y - mouseStartPos.y;
 
     // 盒子当前位置
-    parentBox.boxCurrentLeft.value = boxStartPos.x + deltaX;
-    parentBox.boxCurrentTop.value = boxStartPos.y + deltaY;
+    styles.boxLeft.value = boxStartPos.x + deltaX;
+    styles.boxTop.value = boxStartPos.y + deltaY;
   }
 
   // 移动结束

@@ -6,7 +6,7 @@
     v-model:width="widthRef1"
     v-model:height="heightRef1"
     resizable
-    :resize-handles="handlesRef1?.join(',')"
+    :resize-handles="handlesRef1"
     :min-width="100"
     :min-height="100"
     :disabled="isDisabled1"
@@ -47,7 +47,7 @@
     v-model:width="widthRef2"
     v-model:height="heightRef2"
     resizable
-    :resize-handles="handlesRef2?.join(',')"
+    :resize-handles="handlesRef2"
     :min-width="100"
     :min-height="100"
     :disabled="isDisabled2"

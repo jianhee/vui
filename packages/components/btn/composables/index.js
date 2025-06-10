@@ -10,7 +10,7 @@ export const btnProps = {
   disabled: { type: Boolean, default: false },
   // 加载状态
   loading: { type: Boolean, default: false },
-  // 图标按钮：`VIcon` 组件的 `name/component/props`
+  // 前置图标：`<VIcon>` 组件的 `name|component|props`
   icon: { type: [String, Object], default: null },
   // 按钮尺寸：large, medium, small
   size: { type: String, default: 'medium' },

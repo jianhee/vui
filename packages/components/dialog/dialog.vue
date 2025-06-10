@@ -52,7 +52,7 @@ defineOptions({ inheritAttrs: false });
 const modelVisible = defineModel('visible', dialogModel.visible);
 const props = defineProps(dialogProps);
 const emits = defineEmits(dialogEmits);
-const { dialogType } = useDialog({
+const { dialogType, dialogClasses, dialogStyles, onClickOverlay, onClickCloseIcon } = useDialog({
   modelVisible,
   props,
   emits
