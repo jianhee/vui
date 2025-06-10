@@ -1,6 +1,7 @@
 <template>
   <VSwitch
     v-model:checked="isInline"
+    inactive-text="块级模式"
     active-text="行内模式"
   />
 

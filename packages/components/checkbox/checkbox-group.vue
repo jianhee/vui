@@ -1,12 +1,30 @@
 <!-- 多选框-选项组 -->
-<script>
-import { h, provide } from 'vue';
-import BaseGroup from './components/base-group.vue';
+<template>
+  <div :class="`vui-${checkboxType}-group`">
+    <VCheckbox
+      v-for="(option, index) in options"
+      :key="index"
+      :option="option"
+    >
+      <slot :option="option" />
+    </VCheckbox>
+  </div>
+</template>
 
-export default {
-  setup(props, { slots }) {
-    provide('typeName', 'checkbox');
-    return () => h(BaseGroup, null, slots);
-  }
-};
+<script setup>
+import { inject, provide } from 'vue';
+import { checkboxGroupModel, checkboxGroupProps, checkboxGroupEmits } from './composables';
+
+// 处理数据
+const modelValue = defineModel(checkboxGroupModel);
+const props = defineProps(checkboxGroupProps);
+const emits = defineEmits(checkboxGroupEmits);
+
+// 共享数据
+const checkboxType = inject('checkboxType', 'checkbox');
+provide('checkboxGroup', {
+  emits,
+  props,
+  modelValue
+});
 </script>

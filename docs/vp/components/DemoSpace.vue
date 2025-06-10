@@ -26,18 +26,5 @@ defineProps({
   &-flex {
     display: flex;
   }
-  > .vui-icon,
-  > .vui-btn,
-  > .vui-checkbox,
-  > .vui-checkbox-btn,
-  > .vui-radio,
-  > .vui-radio-btn,
-  > .vui-dropdown-trigger {
-    margin-right: 10px;
-  }
-  > .vui-btn--block {
-    margin-right: 0;
-    margin-bottom: 10px;
-  }
 }
 </style>

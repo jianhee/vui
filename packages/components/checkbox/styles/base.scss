@@ -1,11 +1,14 @@
 // 多选框 vui-checkbox
 // 单选框 vui-radio
-@mixin vui-option($prefix) {
+@mixin vui-checkbox($prefix) {
   // vars
   :root {
+    // 默认样式
     --#{$prefix}-text-color: var(--vui-text-color-regular);
     --#{$prefix}-icon-color: var(--vui-border-color-base);
     --#{$prefix}-checked-color: var(--vui-color-brand-base);
+
+    // 按钮样式
     --#{$prefix}-btn-text-color: var(--vui-text-color-primary);
     --#{$prefix}-btn-bg-color: var(--vui-fill-color-blank);
     --#{$prefix}-btn-border-color: var(--vui-border-color-base);
@@ -31,7 +34,7 @@
     transition: all 0.3s ease;
   }
 
-  // 基础选项
+  // 默认样式
   .#{$prefix} {
     line-height: 32px;
     color: var(--#{$prefix}-text-color);
@@ -58,7 +61,7 @@
     }
   }
 
-  // 按钮选项
+  // 按钮样式
   .#{$prefix}-btn {
     padding: 0 18px;
     line-height: 30px;

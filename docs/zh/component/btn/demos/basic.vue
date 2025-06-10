@@ -1,5 +1,5 @@
 <template>
-  <DemoSpace>
+  <DemoSpace class="demo-btns">
     <VBtn
       v-for="btnType in btnTypes"
       :key="btnType.label"
@@ -21,3 +21,13 @@ const btnTypes = [
   { label: 'Link Btn', value: 'link' }
 ];
 </script>
+
+<style>
+.demo-btns > .vui-btn {
+  margin-right: 10px;
+}
+.demo-btns > .vui-btn--block {
+  margin-right: 0;
+  margin-bottom: 10px;
+}
+</style>

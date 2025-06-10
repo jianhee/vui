@@ -1,8 +1,6 @@
 // vitepress
 // https://vitepress.dev/zh/reference/site-config
 import { defineConfig } from 'vitepress';
-
-// config
 import { locales } from './config/locales.js';
 import { headerNavs, socialLinks, sidebarNavs } from './config/navs.js';
 import { markdown } from './config/markdown.js';
@@ -17,6 +15,9 @@ export default defineConfig({
   locales: locales,
   // 路由
   cleanUrls: true,
+  // rewrites: {
+  //   'zh/:rest*': ':rest*'
+  // },
   // 构建
   srcDir: 'zh',
   // 主题

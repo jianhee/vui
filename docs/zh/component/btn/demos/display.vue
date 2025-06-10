@@ -1,6 +1,7 @@
 <template>
   <VSwitch
     v-model:checked="isBlock"
+    inactive-text="行内模式"
     active-text="块级模式"
   />
 

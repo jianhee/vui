@@ -21,7 +21,7 @@
 
 ## 图标按钮
 
-<!--@include: ../../_parts/icon.md-->
+<!--@include: @/component/@parts/props-icon.md-->
 
 <preview path="./demos/icon.vue"></preview>
 
@@ -33,14 +33,17 @@
 
 ## 显示模式
 
-默认行内模式，`props.block` 设为 `true` 或 `props.inline` 设为 `false` 变为块级模式
+1. 行内模式（默认）
+2. 块级模式 `props.inline` 设为 `false` 或 `props.block` 设为 `true`
 
 <preview path="./demos/display.vue"></preview>
 
-<!--@include: ../../_parts/style.md-->
+<!--@include: @/component/@parts/props-style.md-->
 
 ### 圆角尺寸
 
-`props.radius` 默认值 `4px`，默认单位 `px`，格式为 `Number|String`
+1. `props.radius`
+2. `style.border-radius` 默认 `4px`
+3. `style.--vui-btn-radius`
 
 <preview path="./demos/radius.vue"></preview>

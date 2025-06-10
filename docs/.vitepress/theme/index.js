@@ -1,18 +1,19 @@
-// vitepress-theme
+// vp 主题配置
 import defaultTheme from 'vitepress/theme';
 
-// demo
+// 图标
+import 'virtual:group-icons.css';
+import 'virtual:svg-icons-register';
+
+// 预览插件
 import { AntDesignContainer, ElementPlusContainer, NaiveUIContainer } from '@vitepress-demo-preview/component';
 import '@vitepress-demo-preview/component/dist/style.css';
 
-// icon
-import 'virtual:svg-icons-register';
-
-// vui-components
+// vui 组件
 import vui from 'vui/components/index.js';
 import 'vui/styles/index.scss';
 
-// custom
+// 自定义组件
 import DemoSpace from '@vp/components/DemoSpace.vue';
 import DemoValue from '@vp/components/DemoValue.vue';
 import '@vp/styles/index.scss';
