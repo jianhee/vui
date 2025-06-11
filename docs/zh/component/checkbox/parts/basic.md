@@ -1,5 +1,5 @@
 ::: tip
-多选框和单选框的 API 几乎完全一致，UI 略有差异。
+多选框和单选框的 API 几乎完全一致，UI 略有差异，各自有两个独立的组件：
 
 - `<VCheckbox>` 和 `<VRadio>` 用于单个选项
 - `<VCheckboxGroup>` 和 `<VRadioGroup>` 用于选项组
@@ -18,16 +18,16 @@
 ## 选项组
 
 1. `v-model:value` 选中项的 `value`，多选框为 `Array` 类型，单选框为 `Number|String` 类型
-2. `props.options` 选项组，格式为 `[{ label, value }, 1, '1']`
+2. `props.options` 选项组，支持 `Object|Number|String` 类型
    1. `Object.label` 选项文本
    2. `Object.value` 选项值
-   3. `Number|String` 自动格式化为 `Object.label` 和 `Object.value`
+   3. `Number|String` 类型的选项会格式化为 `Object.label` 和 `Object.value`
 3. `slots.default` 选项文本后的自定义内容，参数为 `{ option }`
 4. `@change` 切换选项时触发，参数为 `{ option: '当前项', value: 'v-model:value 的值' }`
 
 <preview path="@docs/component/checkbox/demos/group.vue"></preview>
 
-## 选项的按钮类型
+## 按钮类型的选项
 
 ### 单个选项
 

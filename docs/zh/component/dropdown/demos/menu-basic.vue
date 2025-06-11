@@ -1,11 +1,16 @@
 <template>
-  <VDropdown :menus="menuItems">
+  <VDropdown
+    :menus="menus"
+    @menu-click="writeLog('menu-click', $event)"
+  >
     <VBtn>下拉菜单</VBtn>
   </VDropdown>
 </template>
 
 <script setup>
-const menuItems = [
+import { writeLog } from '@vp/utils';
+
+const menus = [
   // Object
   { label: '文本1' },
   { title: '文本2', divider: true },

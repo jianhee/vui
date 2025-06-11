@@ -1,19 +1,19 @@
 // 移动
-import { ref, computed } from 'vue';
+import { computed } from 'vue';
 import { onLongPress } from '@vueuse/core';
 
-export const useMove = ({ boxRef, props, styles }) => {
+export const useMove = ({ boxRef, props, styles, isMoving, dragingHandleName }) => {
   // 是否可移动
   const isMovable = computed(() => props.movable && !props.disabled);
 
-  // 是否正在移动
-  const isMoving = ref(false);
+  // 初始数据
   let mouseStartPos = { x: 0, y: 0 };
   let boxStartPos = { x: 0, y: 0 };
 
   // 长按开始移动
   onLongPress(boxRef, e => {
     if (!isMovable.value) return;
+    if (dragingHandleName.value) return;
 
     isMoving.value = true;
 
@@ -47,14 +47,14 @@ export const useMove = ({ boxRef, props, styles }) => {
 
   // 移动结束
   function onMoveStop() {
-    isMoving.value = false;
+    if (!isMoving.value) return;
 
+    isMoving.value = false;
     window.removeEventListener('mousemove', onMoving);
     window.removeEventListener('mouseup', onMoveStop);
   }
 
   return {
-    isMovable,
-    isMoving
+    isMovable
   };
 };

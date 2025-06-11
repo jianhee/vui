@@ -1,8 +1,13 @@
 // 下拉菜单
-import { computed } from 'vue';
+import { inject, computed } from 'vue';
 
 // emits
-export const menuEmits = ['menu-click', 'menu-select-change'];
+export const menuEmits = ['menu-click', 'select-change'];
+
+// 菜单的 v-model
+export const menuModel = {
+  selectedKey: { type: [String, Number], default: null }
+};
 
 // 菜单的 props
 export const menuProps = {
@@ -11,26 +16,62 @@ export const menuProps = {
   // 2. `Object.label|title` 文本
   // 3. `Object.icon` 前置图标
   // 4. `Object.divider` 是否添加分隔符
-  // 5. `Number|String` 自动格式化为 `Object.label`
+  // 5. `Number|String` 类型的选项会自动格式化为 `Object.label`
   menus: { type: Array, default: null },
   // 是否可以选中：设为 `true` 时菜单项的 `key` 必传
   selectable: { type: Boolean, default: false }
 };
 
-// 菜单的 props
-export const itemProps = {
+// 菜单项的 props
+export const menuItemProps = {
   item: { type: [Object, Number, String], required: true }
 };
 
-// 格式化选项
-export function useMenu(props) {
-  const formatItem = computed(() => {
-    if (typeof props.item === 'object') {
-      return { label: props.item.label || props.item.title, ...props.item };
+// 使用菜单项
+export function useMenuItem(menuItem) {
+  // 菜单
+  const menu = inject('menu');
+
+  // 格式化菜单项
+  const formattedMenuItem = computed(() => {
+    const item = menuItem.props.item;
+    if (typeof item === 'object') {
+      return { label: item.label || item.title, ...item };
     } else {
-      return { label: props.item };
+      return { label: item };
     }
   });
 
-  return { formatItem };
+  // 是否选中
+  const isSelected = computed(() => {
+    if (!menu.props.selectable) return false;
+
+    return formattedMenuItem.value.key === menu.modelSelectedKey.value;
+  });
+
+  // 点击一项
+  const onClickItem = () => {
+    // 关闭下拉框
+    menu.closeDropdown();
+
+    // 处理数据
+    const selectedKey = formattedMenuItem.value.key;
+    const params = { item: menuItem.props.item, key: selectedKey };
+
+    // 点击事件
+    menu.emits('menu-click', params);
+
+    // 切换选中事件
+    if (!menu.props.selectable) return;
+    if (!isSelected.value) {
+      menu.modelSelectedKey.value = selectedKey;
+      menu.emits('select-change', params);
+    }
+  };
+
+  return {
+    formattedMenuItem,
+    isSelected,
+    onClickItem
+  };
 }

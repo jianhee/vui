@@ -15,7 +15,7 @@
   >
     <VForm>
       <VFormItem label="操作">定位元素缩放</VFormItem>
-      <VFormItem label="当前值">
+      <VFormItem label="绑定值">
         <code>v-model:left="{{ leftRef1 }}"</code>
         <br />
         <code>v-model:top="{{ topRef1 }}"</code>
@@ -55,7 +55,7 @@
   >
     <VForm>
       <VFormItem label="操作">非定位元素缩放</VFormItem>
-      <VFormItem label="当前值">
+      <VFormItem label="绑定值">
         <code>v-model:width="{{ widthRef2 }}"</code>
         <br />
         <code>v-model:height="{{ heightRef2 }}"</code>

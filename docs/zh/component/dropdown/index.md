@@ -2,40 +2,39 @@
 
 ## 基础用法
 
-1. `props.trigger` 触发方式，可选的值有 `hover`（默认）、`click`、`contextmenu`
-2. `slots.default` 触发元素，`slots.content` 内容元素
-3. `@open` 和 `@close` 切换显示状态时触发
+1. 下拉框由两个插槽组成，分别为 `slots.default` 触发器和 `slots.dropdown` 下拉框
+2. `@open` 和 `@close` 切换显示状态时触发
 
-<preview path="./demos/basic.vue"></preview>
+<preview path="./demos/dropdown-basic.vue"></preview>
+
+## 触发方式
+
+`props.trigger` 可选的值有 `hover`（默认）、`click`、`contextmenu`
+
+<preview path="./demos/dropdown-trigger.vue"></preview>
 
 ## 下拉方法
 
-1. 内部打开：通过 `slots.default` 自动处理，适用于单一元素
-2. 外部打开：通过 `dropdownRef.open(event)` 方法手动处理，可以脱离触发元素，适用于多个元素打开同一个下拉框，比如列表项的右键菜单
+如果不需要插槽，可以通过 `dropdownRef.open(event)` 方法手动打开下拉框。适用于多个元素打开同一个下拉框的情况，比如列表项的右键菜单。
 
-<preview path="./demos/method.vue"></preview>
+<preview path="./demos/dropdown-method.vue"></preview>
 
 ## 下拉菜单
 
-`props.menus` 默认 `null`，格式为 `[{ key, label|title, icon, divider }, 1, '1']`
+1. `props.menus` 有值时自动将下拉框渲染成菜单项，支持 `Object|Number|String` 类型
+   1. `Object.key` 唯一标识
+   2. `Object.label|title` 文本
+   3. `Object.icon` 前置图标，参考 [Btn 按钮](/component/btn#前置图标) 组件的 `icon` 属性
+   4. `Object.divider` 是否添加分隔符
+   5. `Number|String` 类型的选项会自动格式化为 `Object.label`
+2. `@menu-click` 点击菜单项时触发，参数为 `{ item: '当前项', key: '当前项的 key'}`
 
-1. `Object.key` 唯一标识
-2. `Object.label|title` 文本
-3. `Object.icon` 前置图标，参考 [Btn 图标按钮](/component/btn#图标按钮)
-4. `Object.divider` 是否添加分隔符
-5. `Number|String` 自动格式化为 `Object.label`
+<preview path="./demos/menu-basic.vue"></preview>
 
-<preview path="./demos/menu.vue"></preview>
-
-## 菜单选中
+## 选中菜单
 
 1. `props.selectable` 是否可以选中，默认 `false`，设为 `true` 时菜单项的 `key` 必传
-2. `v-model:selectedKey` 选中项的 `key`，默认 `null`
-3. `@menu-click` 点击菜单项时触发，参数为 `{ item: '当前项', key: '当前项的 key'}`
-4. `@menu-select-change` 切换菜单项时触发，参数为 `{ item: '当前项', key: '绑定值'}`
+2. `v-model:selectedKey` 选中项的 `key`
+3. `@select-change` 切换菜单项时触发，参数为 `{ item: '当前项', key: '绑定值'}`
 
 <preview path="./demos/menu-select.vue"></preview>
-
-## 其它
-
-样式和类名默认绑定到触发元素上，通过 `props.contentClass` 和 `props.contentStyle` 可以绑定到内容元素上

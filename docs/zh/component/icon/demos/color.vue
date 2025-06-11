@@ -1,11 +1,11 @@
 <template>
-  <DemoSpace>描边颜色</DemoSpace>
+  <DemoSpace>主要颜色</DemoSpace>
   <VRadioGroup
     v-model:value="colorRef"
     :options="colorOptions"
     option-type="button"
   />
-  <DemoSpace>填充颜色</DemoSpace>
+  <DemoSpace>次要颜色</DemoSpace>
   <VRadioGroup
     v-model:value="twoToneColorRef"
     :options="colorOptions"

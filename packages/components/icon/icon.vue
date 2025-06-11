@@ -1,8 +1,8 @@
 <!-- 图标 -->
 <template>
   <i
-    :class="iconClasses"
-    :style="iconStyles"
+    :class="rootClasses"
+    :style="rootStyles"
   >
     <!-- 使用 svg 名称：依赖 vite-plugin-svg-icons 插件 -->
     <svg v-if="name">
@@ -17,46 +17,9 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import { addUnit } from '../../utils';
+import { iconProps, useIcons } from './composables';
 
-// 参数
-const props = defineProps({
-  // 图标名称或组件：二选一
-  name: { type: String, default: null },
-  component: { type: Object, default: null },
-  // 是否可点击
-  clickable: { type: Boolean, default: false },
-  // 是否禁用
-  disabled: { type: Boolean, default: false },
-  // 旋转动画
-  spin: { type: Boolean, default: false },
-  // ---------- 设置样式 ----------
-  // 描边颜色：默认继承 `--vui-icon-color` 或 `color`
-  color: { type: String, default: null },
-  // 填充颜色：仅双色图标有效，默认继承 `--vui-icon-two-one-color`
-  twoToneColor: { type: String, default: null },
-  // 图标尺寸: 默认值继承 `font-size`，默认单位 `px`
-  size: { type: [Number, String], default: null },
-  // 旋转角度：默认单位 `deg`
-  rotate: { type: [Number, String], default: null }
-});
-
-// 获取类名
-const iconClasses = computed(() => [
-  'vui-icon',
-  {
-    'is-clickable': props.clickable,
-    'is-disabled': props.disabled,
-    'is-spin': props.spin
-  }
-]);
-
-// 获取样式
-const iconStyles = computed(() => ({
-  '--vui-icon-color': props.color,
-  '--vui-icon-two-tone-color': props.twoToneColor,
-  'font-size': addUnit(props.size, 'px'),
-  'transform': `rotate(${addUnit(props.rotate, 'deg')})`
-}));
+// 处理数据
+const props = defineProps(iconProps);
+const { rootClasses, rootStyles } = useIcons(props);
 </script>

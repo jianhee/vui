@@ -1,13 +1,18 @@
 <template>
-  <VDropdown
-    v-model:selected-key="seletedKey"
-    :menus="menus"
-    selectable
-    @menu-click="writeLog('menu-click', $event)"
-    @menu-select-change="writeLog('menu-select-change', $event)"
-  >
-    <VBtn>当前值为 {{ seletedKey }}</VBtn>
-  </VDropdown>
+  <DemoSpace class="demo-dropdown-trigger">
+    <VDropdown
+      v-model:selected-key="seletedKey"
+      :menus="menus"
+      selectable
+      @select-change="writeLog('select-change', $event)"
+    >
+      <VBtn>下拉菜单</VBtn>
+    </VDropdown>
+
+    <span>
+      绑定值 <code>`v-model:selected-key`</code> 的值为 <code>{{ seletedKey }}</code>
+    </span>
+  </DemoSpace>
 </template>
 
 <script setup>

@@ -2,7 +2,7 @@
 <template>
   <div class="vui-menu">
     <VMenuItem
-      v-for="(item, index) in parentMenu.props.menus"
+      v-for="(item, index) in menu.props.menus"
       :key="index"
       :item="item"
     />
@@ -13,5 +13,5 @@
 import { inject } from 'vue';
 import VMenuItem from './menu-item.vue';
 
-const parentMenu = inject('parentMenu', null);
+const menu = inject('menu', null);
 </script>

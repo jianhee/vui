@@ -14,13 +14,12 @@
   </DemoSpace>
 
   <DemoSpace>
-    <code>v-model:value</code> 的值分别为
+    绑定值 <code>v-model:value</code> 的值分别为
     <template
       v-for="option in options"
       :key="option.label"
     >
-      <code>{{ option.checked }}</code>
-      {{ ` ` }}
+      <code>{{ option.checked }}</code> {{ ` ` }}
     </template>
   </DemoSpace>
 </template>

@@ -1,31 +1,24 @@
 // 缩放
-import { ref, computed } from 'vue';
+import { computed } from 'vue';
 
-export const useResize = ({ boxRef, props, styles }) => {
+export const useResize = ({ boxRef, props, styles, isMoving, dragingHandleName }) => {
   // 是否可缩放
   const isResizable = computed(() => props.resizable && !props.disabled);
-
-  // 当前拖拽的手柄
-  const dragingHandleName = ref(null);
 
   // 可缩放手柄
   const handleItems = computed(() => {
     if (!isResizable.value) return null;
-
-    // 拖拽当前手柄时不显示其它手柄
-    if (dragingHandleName.value) return [dragingHandleName.value];
-
-    // 可缩放手柄
     return props.resizeHandles;
   });
 
-  // 开始位置
+  // 初始数据
   let mouseStartPos = { x: 0, y: 0 };
   let boxStartSize = { width: 0, height: 0 };
 
   // 开始缩放
   function onResizeStart(e, _handleName) {
     if (!isResizable.value) return;
+    if (isMoving.value) return;
 
     // 非定位元素只支持 `right, bottom`
     const { position } = window.getComputedStyle(boxRef.value);
@@ -83,6 +76,8 @@ export const useResize = ({ boxRef, props, styles }) => {
 
   // 缩放结束
   function onResizeStop() {
+    if (!dragingHandleName.value) return;
+
     dragingHandleName.value = null;
     window.removeEventListener('mousemove', onResizing);
     window.removeEventListener('mouseup', onResizeStop);
@@ -90,8 +85,8 @@ export const useResize = ({ boxRef, props, styles }) => {
 
   return {
     isResizable,
-    isResizing: computed(() => !!dragingHandleName.value),
     handleItems,
+    dragingHandleName,
     onResizeStart
   };
 };

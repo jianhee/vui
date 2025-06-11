@@ -2,7 +2,7 @@
   <div
     v-for="n in 10"
     :key="n"
-    class="demo-dropdown-rect"
+    class="demo-dropdown-row"
     @contextmenu.prevent="openDropdown($event, n)"
   >
     第 {{ n }} 个条目，右键点击任意区域打开菜单
@@ -11,10 +11,9 @@
   <VDropdown
     ref="dropdownRef"
     trigger="contextmenu"
+    class="demo-dropdown"
   >
-    <template #content>
-      <div class="demo-dropdown">第 {{ nRef }} 个条目的右键菜单</div>
-    </template>
+    <template #dropdown>第 {{ nRef }} 个条目的右键菜单</template>
   </VDropdown>
 </template>
 
@@ -33,7 +32,7 @@ function openDropdown(event, n) {
 </script>
 
 <style>
-.demo-dropdown-rect {
+.demo-dropdown-row {
   padding: 5px 10px;
   margin: 10px 0;
   background-color: pink;

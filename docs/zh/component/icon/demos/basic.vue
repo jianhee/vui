@@ -34,7 +34,8 @@ const iconComponents = [IconFace, IconLike, IconSearch, IconSetting, IconClose, 
 </script>
 
 <style>
-.demo-icons-size {
+.demo-icons-size .vui-icon {
+  margin-right: 10px;
   font-size: 24px;
 }
 </style>

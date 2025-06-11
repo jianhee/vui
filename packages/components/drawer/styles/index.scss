@@ -1,3 +1,2 @@
 @use "../../dialog/styles/base";
-@include base.base-dialog("vui-drawer");
-@include base.vui-drawer;
+@include base.vui-dialog("vui-drawer");

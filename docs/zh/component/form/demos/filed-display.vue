@@ -1,7 +1,8 @@
 <template>
-  <DemoSpace>
+  <DemoSpace class="vui-mb-30">
     <VSwitch
       v-model:checked="inInline"
+      inactive-text="块级模式"
       active-text="行内模式"
     />
   </DemoSpace>

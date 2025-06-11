@@ -1,31 +1,30 @@
 <!-- 下拉框 -->
 <template>
   <!-- 触发器 -->
-  <div
+  <slot ref="triggerRef" />
+  <!-- 为了获取 slots.default 根元素 -->
+  <span
     v-if="$slots.default"
-    ref="triggerRef"
-    class="vui-dropdown-trigger"
-    v-bind="$attrs"
-  >
-    <slot />
-  </div>
+    ref="triggerNextRef"
+    style="display: none"
+  />
 
-  <!-- 内容 -->
+  <!-- 下拉框 -->
   <Teleport to="body">
     <Transition name="vui-dropdown">
       <div
-        v-show="contentVisible"
-        ref="contentRef"
-        class="vui-dropdown-content"
-        :class="contentClass"
-        :style="{ ...contentStyle, ...contentStyles }"
+        v-show="dropdownVisible"
+        ref="dropdownRef"
+        v-bind="$attrs"
+        class="vui-dropdown"
+        :style="dropdownStyles"
       >
         <!-- 使用菜单 -->
         <VMenu v-if="menus" />
         <!-- 使用自定义内容 -->
         <slot
           v-else
-          name="content"
+          name="dropdown"
         />
       </div>
     </Transition>
@@ -33,36 +32,45 @@
 </template>
 
 <script setup>
-import { ref, provide } from 'vue';
-import { dropdownEmits, dropdownProps, useDropdown } from './composables/dropdown';
-import { menuEmits, menuProps } from './composables/menu';
+import { ref, provide, onMounted } from 'vue';
+import { dropdownProps, dropdownEmits, useDropdown } from './composables/dropdown';
+import { menuModel, menuProps, menuEmits } from './composables/menu';
 import VMenu from './menu.vue';
 
 // 处理数据
 defineOptions({ inheritAttrs: false });
-const emits = defineEmits([...dropdownEmits, ...menuEmits]);
 const props = defineProps({ ...dropdownProps, ...menuProps });
+const emits = defineEmits([...dropdownEmits, ...menuEmits]);
 
-// 触发器和内容
+// 当前选中的菜单键
+const modelSelectedKey = defineModel('selectedKey', menuModel.selectedKey);
+
+// 触发器和下拉框
 const triggerRef = ref(null);
-const contentRef = ref(null);
+const triggerNextRef = ref(null);
+const dropdownRef = ref(null);
+onMounted(() => {
+  triggerRef.value = triggerNextRef.value?.previousElementSibling;
+});
 
 // 下拉框
-const { contentVisible, contentStyles, openDropdownByEvent, closeDropdown } = useDropdown(props, emits, triggerRef, contentRef);
+const { dropdownVisible, dropdownStyles, openDropdown, closeDropdown } = useDropdown({
+  triggerRef,
+  dropdownRef,
+  props,
+  emits
+});
 
 // 下拉方法
 defineExpose({
-  open: openDropdownByEvent
+  open: openDropdown
 });
 
-// 菜单选中项的 key
-const modelSelectedKey = defineModel('selectedKey', { type: [String, Number], default: null });
-
 // 菜单共享数据
-provide('parentMenu', {
-  emits,
-  props,
+provide('menu', {
   modelSelectedKey,
+  props,
+  emits,
   closeDropdown
 });
 </script>

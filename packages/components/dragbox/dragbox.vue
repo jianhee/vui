@@ -11,7 +11,7 @@
     <div
       v-for="handle in handleItems"
       :key="handle"
-      :class="['vui-dragbox-handle', `vui-dragbox-handle-${handle}`]"
+      :class="['vui-dragbox-handle', `vui-dragbox-handle-${handle}`, { 'is-active': handle === dragingHandleName }]"
       @mousedown="onResizeStart($event, handle)"
     />
   </div>
@@ -30,7 +30,7 @@ const boxLeft = defineModel('left', dragboxModel);
 const boxTop = defineModel('top', dragboxModel);
 const boxWidth = defineModel('width', dragboxModel);
 const boxHeight = defineModel('height', dragboxModel);
-const { rootClasses, rootStyles, handleItems, onResizeStart } = useDragbox({
+const { rootClasses, rootStyles, handleItems, dragingHandleName, onResizeStart } = useDragbox({
   boxRef,
   props,
   styles: { boxLeft, boxTop, boxWidth, boxHeight }

@@ -25,17 +25,19 @@
     user-select: none;
     transition: none;
   }
-  &.is-moving &-handle {
-    display: none;
-  }
 
   // 手柄
+  &.is-moving &-handle,
+  &.is-resizing &-handle:not(.is-active) {
+    display: none;
+  }
   &-handle {
     position: absolute;
     z-index: 999;
     background-color: var(--vui-dragbox-handle-color);
     transition: background-color 0.3s ease;
-    &:hover {
+    &:hover,
+    &.is-active {
       background-color: var(--vui-dragbox-handle-hover-color);
     }
     &-left,

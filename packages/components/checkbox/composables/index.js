@@ -32,10 +32,10 @@ export const checkboxProps = {
 
 // 多选框组 props
 export const checkboxGroupProps = {
-  // 选项组：格式为 `[{ label, value }, 1, '1']`
-  //  1. `Object.label` 选项文本
-  //  2. `Object.value` 选项值
-  //  3. `Number|String` 自动格式化为 `Object.label` 和 `Object.value`
+  // 选项组：支持 `Object|Number|String` 类型
+  // 1. `Object.label` 选项文本
+  // 2. `Object.value` 选项值
+  // 3. `Number|String` 类型的选项会自动格式化为 `Object.label`
   options: { type: Array, required: true },
   // 选项类型：button 按钮
   optionType: { type: String, default: null },

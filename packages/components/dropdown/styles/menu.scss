@@ -11,14 +11,14 @@
 
 // 下拉菜单
 .vui-menu {
+  font-size: var(--vui-menu-font-size);
+  color: var(--vui-menu-text-color);
   &-item {
     display: flex;
     gap: 5px;
     align-items: center;
     max-width: 240px;
     padding: 8px 20px;
-    font-size: var(--vui-menu-font-size);
-    color: var(--vui-menu-text-color);
     cursor: pointer;
     transition: background-color 0.3s ease;
   }

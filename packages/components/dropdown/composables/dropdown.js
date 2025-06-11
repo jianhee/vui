@@ -8,142 +8,128 @@ export const dropdownEmits = ['open', 'close'];
 // props
 export const dropdownProps = {
   // 触发方式：hover, click, contextmenu
-  // 1. 内部打开：通过 `slots.default` 自动处理，适用于单一元素
-  // 2. 外部打开：通过 `dropdownRef.open(event)` 方法手动处理，可以脱离触发元素，适用于多个元素打开同一个下拉框，比如列表项的右键菜单
-  trigger: { type: String, default: 'hover' },
-  // 内容元素
-  contentClass: { type: String, default: null },
-  contentStyle: { type: String, default: null }
+  trigger: { type: String, default: 'hover' }
 };
 
 // 使用方法
-export const useDropdown = (props, emits, triggerRef, contentRef) => {
-  const contentVisible = ref(false);
-  const contentStyles = ref(null);
-  const contentMargin = 5;
+export const useDropdown = ({ triggerRef, dropdownRef, props, emits }) => {
+  const dropdownVisible = ref(false);
+  const dropdownStyles = ref(null);
+  const dropdownMargin = 5;
   let hoverTimer = null;
 
-  // 鼠标进入：对齐元素
-  function onMouseEnter() {
+  // 鼠标进入/离开：对齐元素
+  function onMouseToggle(type) {
     if (props.trigger !== 'hover') return;
     clearTimeout(hoverTimer);
     hoverTimer = setTimeout(() => {
-      openDropdownByEl(triggerRef.value);
-    }, 150);
-  }
-
-  // 鼠标离开
-  function onMouseLeave() {
-    if (props.trigger !== 'hover') return;
-    clearTimeout(hoverTimer);
-    hoverTimer = setTimeout(() => {
-      closeDropdown();
+      if (type === 'enter') {
+        openDropdown();
+      } else {
+        closeDropdown();
+      }
     }, 150);
   }
 
   // 点击 trigger：对齐元素
   function onTriggerClick() {
     if (props.trigger !== 'click') return;
-    if (contentVisible.value) {
+    if (dropdownVisible.value) {
       closeDropdown();
     } else {
-      openDropdownByEl(triggerRef.value);
+      openDropdown();
     }
   }
 
   // 右键 trigger：对齐鼠标
   function onTriggerContextmenu(event) {
     if (props.trigger !== 'contextmenu') return;
-    openDropdownByEvent(event);
+    openDropdown(event);
   }
 
-  // 点击 content 外部
-  onClickOutside(contentRef, closeDropdown, { ignore: [triggerRef] });
+  // 点击 dropdown 外部
+  onClickOutside(dropdownRef, closeDropdown, { ignore: [triggerRef] });
 
   // 关闭下拉框
   function closeDropdown() {
-    if (!contentVisible.value) return;
+    if (!dropdownVisible.value) return;
+    dropdownVisible.value = false;
     emits('close');
-    contentVisible.value = false;
   }
 
-  // 打开下拉框：通过元素
-  function openDropdownByEl(el) {
-    if (!contentVisible.value) {
-      openDropdown();
-      const { left, top, bottom } = el.getBoundingClientRect();
+  // 打开下拉框
+  async function openDropdown(event) {
+    // 通过事件：每次都更新定位
+    if (event) {
+      updatePosition({
+        triggerLeft: event.clientX,
+        triggerTop: event.clientY,
+        triggerBottom: event.clientY
+      });
+    }
+
+    // 通过元素：只有重新打开时更新定位
+    if (dropdownVisible.value) return;
+    if (!event) {
+      const { left, top, bottom } = triggerRef.value.getBoundingClientRect();
       updatePosition({
         triggerLeft: left,
         triggerTop: top,
         triggerBottom: bottom
       });
     }
-  }
 
-  // 打开下拉框：通过事件
-  function openDropdownByEvent({ clientX, clientY }) {
-    if (!contentVisible.value) {
-      openDropdown();
-    }
-    updatePosition({
-      triggerLeft: clientX,
-      triggerTop: clientY,
-      triggerBottom: clientY
-    });
+    // 触发事件
+    dropdownVisible.value = true;
+    emits('open');
   }
 
   // 更新定位
   async function updatePosition({ triggerLeft, triggerTop, triggerBottom }) {
     await nextTick();
     // 内容元素
-    const { clientWidth: contentWidth, clientHeight: contentHeight } = contentRef.value;
+    const { clientWidth: dropdownWidth, clientHeight: dropdownHeight } = dropdownRef.value;
 
     // 窗口
     const { clientWidth: windowWidth, clientHeight: windowHeight } = document.documentElement;
 
     // 水平方向
     const currentLeft = triggerLeft;
-    const maxLeft = windowWidth - contentWidth;
-    const contentLeft = Math.max(0, Math.min(maxLeft, currentLeft));
+    const maxLeft = windowWidth - dropdownWidth;
+    const dropdownLeft = Math.max(0, Math.min(maxLeft, currentLeft));
 
     // 垂直方向
-    let currentTop = triggerBottom + contentMargin;
-    const maxTop = windowHeight - contentHeight - contentMargin;
+    let currentTop = triggerBottom + dropdownMargin;
+    const maxTop = windowHeight - dropdownHeight - dropdownMargin;
     if (currentTop > maxTop) {
-      currentTop = triggerTop - contentHeight - contentMargin;
+      currentTop = triggerTop - dropdownHeight - dropdownMargin;
     }
-    const contentTop = Math.max(0, currentTop);
+    const dropdownTop = Math.max(0, currentTop);
 
     // 更新样式
-    contentStyles.value = {
-      left: `${contentLeft}px`,
-      top: `${contentTop}px`
+    dropdownStyles.value = {
+      left: `${dropdownLeft}px`,
+      top: `${dropdownTop}px`
     };
   }
 
-  // 打开
-  function openDropdown() {
-    contentVisible.value = true;
-    emits('open');
-  }
-
   // 触发器
-  useEventListener(triggerRef, 'mouseenter', onMouseEnter);
-  useEventListener(triggerRef, 'mouseleave', onMouseLeave);
+  useEventListener(triggerRef, 'mouseenter', () => onMouseToggle('enter'));
+  useEventListener(triggerRef, 'mouseleave', () => onMouseToggle('leave'));
   useEventListener(triggerRef, 'click', onTriggerClick);
   useEventListener(triggerRef, 'contextmenu', e => {
     e.preventDefault();
     onTriggerContextmenu(e);
   });
 
-  // 内容
-  useEventListener(contentRef, 'mouseenter', onMouseEnter);
-  useEventListener(contentRef, 'mouseleave', onMouseLeave);
+  // 下拉框
+  useEventListener(dropdownRef, 'mouseenter', () => onMouseToggle('enter'));
+  useEventListener(dropdownRef, 'mouseleave', () => onMouseToggle('leave'));
 
   return {
-    contentVisible,
-    contentStyles,
-    openDropdownByEvent,
+    dropdownVisible,
+    dropdownStyles,
+    openDropdown,
     closeDropdown
   };
 };

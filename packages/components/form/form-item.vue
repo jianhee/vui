@@ -9,8 +9,7 @@
 </template>
 
 <script setup>
-// 左侧文本
-defineProps({
-  label: { type: String, default: null }
-});
+import { formItemProps } from './composables';
+
+defineProps(formItemProps);
 </script>

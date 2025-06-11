@@ -8,7 +8,7 @@
   >
     <VForm>
       <VFormItem label="操作">移动</VFormItem>
-      <VFormItem label="当前值">
+      <VFormItem label="绑定值">
         <code>v-model:left="{{ leftRef }}"</code>
         <br />
         <code>v-model:top="{{ topRef }}"</code>
