@@ -21,12 +21,12 @@
 <script setup>
 defineProps({
   label: { type: String, default: null },
-  min: { type: [Number, String], default: undefined },
-  max: { type: [Number, String], default: undefined },
+  min: { type: Number, default: undefined },
+  max: { type: Number, default: undefined },
   unit: { type: String, default: 'px' }
 });
 
-const modelValue = defineModel('value', { type: [Number, String], default: 0 });
+const modelValue = defineModel('value', { type: Number, default: null });
 </script>
 
 <style lang="scss">

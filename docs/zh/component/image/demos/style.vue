@@ -3,14 +3,14 @@
     <VFormItem label="图片宽度">
       <DemoValue
         v-model:value="widthRef"
-        max="1000"
+        :max="1000"
         unit="px"
       />
     </VFormItem>
     <VFormItem label="图片宽高比">
       <DemoValue
         v-model:value="aspectRatioRef"
-        max="200"
+        :max="200"
         unit="/100"
       />
     </VFormItem>

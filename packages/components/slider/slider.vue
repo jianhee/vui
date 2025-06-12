@@ -1,0 +1,46 @@
+<!-- 滑块 -->
+<template>
+  <div :class="rootClasses">
+    <!-- 轨道 -->
+    <div
+      ref="railEl"
+      class="vui-slider-rail"
+      @click.stop="onClickRail"
+    />
+    <!-- 填充 -->
+    <div
+      class="vui-slider-track"
+      :style="trackStyles"
+      @click.stop="onClickRail"
+    />
+    <!-- 滑块 -->
+    <div
+      ref="handleEl"
+      class="vui-slider-handle"
+      :style="handleStyles"
+      @mousedown.stop="onSliderDragStart"
+    />
+    <!-- 提示框 -->
+    <div
+      v-if="showTip"
+      class="vui-slider-tooltip"
+      :style="handleStyles"
+    >
+      {{ tipText }}
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { useTemplateRef } from 'vue';
+import { sliderModel, sliderProps, useSlider } from './composables';
+
+// 轨道
+const railEl = useTemplateRef('railEl');
+const handleEl = useTemplateRef('handleEl');
+
+// 处理数据
+const modelValue = defineModel('value', sliderModel.value);
+const props = defineProps(sliderProps);
+const { rootClasses, trackStyles, handleStyles, tipText, onClickRail, onSliderDragStart } = useSlider({ railEl, handleEl, modelValue, props });
+</script>
