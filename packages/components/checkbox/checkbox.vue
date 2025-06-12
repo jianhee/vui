@@ -23,19 +23,14 @@
 
 <script setup>
 import { checkboxModel, checkboxProps, checkboxEmits, useCheckbox } from './composables';
-import IconCheckbox from '../../icons/checkbox.vue';
-import IconRadio from '../../icons/radio.vue';
 
 // 处理数据
 const modelChecked = defineModel('checked', checkboxModel.checked);
 const props = defineProps(checkboxProps);
 const emits = defineEmits(checkboxEmits);
-const { checkboxType, isCheckbox, isBtn, rootClasses, formattedOption, isChecked, onCheckedChange } = useCheckbox({
+const { checkboxType, IconComponent, isBtn, rootClasses, formattedOption, isChecked, onCheckedChange } = useCheckbox({
   modelChecked,
   props,
   emits
 });
-
-// 图标
-const IconComponent = isCheckbox ? IconCheckbox : IconRadio;
 </script>

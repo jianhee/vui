@@ -6,14 +6,14 @@
 
 <preview path="./demos/basic.vue"></preview>
 
-## 自定义图标
-
-<!--@include:../../_parts/icon.md-->
-
-<preview path="./demos/icon.vue"></preview>
-
 ## 自定义文本
 
-`props.text` 默认 `Loading...`，传入 `null` 不显示文本
+`props.text` 默认 `Loading...`，传入空值不显示文本
 
 <preview path="./demos/text.vue"></preview>
+
+## 自定义图标
+
+<!--@include: @/component/@parts/props-icon.md-->
+
+<preview path="./demos/icon.vue"></preview>

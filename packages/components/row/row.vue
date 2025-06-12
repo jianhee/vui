@@ -1,26 +1,16 @@
-<!-- 常用样式 -->
+<!-- 行：常用样式集合 -->
 <template>
   <component
     :is="tag"
-    :class="[
-      'vui-row',
-      {
-        'is-center': center,
-        'is-ellipsis': ellipsis
-      }
-    ]"
+    :class="rootClasses"
   >
     <slot />
   </component>
 </template>
 
 <script setup>
-defineProps({
-  // 标签
-  tag: { type: String, default: 'div' },
-  // 是否居中
-  center: { type: Boolean, default: false },
-  // 是否溢出隐藏
-  ellipsis: { type: Boolean, default: false }
-});
+import { rowProps, useRow } from './composables';
+
+const props = defineProps(rowProps);
+const { rootClasses } = useRow(props);
 </script>

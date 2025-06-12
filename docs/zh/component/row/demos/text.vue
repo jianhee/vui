@@ -1,4 +1,0 @@
-<template>
-  <VRow center>居中</VRow>
-  <VRow ellipsis>溢出隐藏溢出隐藏溢出隐藏溢出隐藏溢出隐藏溢出隐藏溢出隐藏溢出隐藏溢出隐藏溢出隐藏溢出隐藏溢出隐藏</VRow>
-</template>

@@ -1,10 +1,10 @@
 <template>
-  <DemoRow
+  <DemoSpace
     v-for="tag in tagTypes"
     :key="tag"
   >
-    <VRow :tag="tag">{{ tag || 'default' }}</VRow>
-  </DemoRow>
+    <VRow :tag="tag">{{ tag || 'div（默认）' }}</VRow>
+  </DemoSpace>
 </template>
 
 <script setup>
