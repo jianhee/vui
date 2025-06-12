@@ -2,7 +2,7 @@
 import { computed } from 'vue';
 import { onLongPress } from '@vueuse/core';
 
-export const useMove = ({ boxRef, props, styles, isMoving, dragingHandleName }) => {
+export const useMove = ({ boxRef, dragFlag, props, styles }) => {
   // 是否可移动
   const isMovable = computed(() => props.movable && !props.disabled);
 
@@ -13,9 +13,9 @@ export const useMove = ({ boxRef, props, styles, isMoving, dragingHandleName }) 
   // 长按开始移动
   onLongPress(boxRef, e => {
     if (!isMovable.value) return;
-    if (dragingHandleName.value) return;
+    if (dragFlag.value) return;
 
-    isMoving.value = true;
+    dragFlag.value = 'move';
 
     // 记录初始数据
     const rect = boxRef.value.getBoundingClientRect();
@@ -28,7 +28,7 @@ export const useMove = ({ boxRef, props, styles, isMoving, dragingHandleName }) 
 
   // 移动中
   function onMoving(e) {
-    if (!isMoving.value) return;
+    if (!dragFlag.value) return;
 
     // 鼠标当前位置：不能超出窗口
     const mouseCurrentPos = {
@@ -47,9 +47,9 @@ export const useMove = ({ boxRef, props, styles, isMoving, dragingHandleName }) 
 
   // 移动结束
   function onMoveStop() {
-    if (!isMoving.value) return;
+    if (!dragFlag.value) return;
 
-    isMoving.value = false;
+    dragFlag.value = null;
     window.removeEventListener('mousemove', onMoving);
     window.removeEventListener('mouseup', onMoveStop);
   }

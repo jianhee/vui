@@ -2,7 +2,7 @@
 
 ## 基础用法
 
-1. `v-model:value` 输入框的值，默认 `null`
+1. `v-model:value` 输入框的值
 2. `@input` 输入值时触发，参数为 `v-model:value` 的值，下同
 3. `@change` 修改值时触发
 4. `@enter` 按下 `Enter` 键时触发
@@ -12,13 +12,13 @@
 
 ## 原生属性
 
-支持所有原生 `input` 标签的属性
+支持 `<input>` 标签的所有原生属性
 
-<preview path="./demos/origin.vue"></preview>
+<preview path="./demos/native.vue"></preview>
 
 ## 前置图标
 
-<!--@include: ../../_parts/icon.md-->
+<!--@include: @/component/@parts/props-icon.md-->
 
 <preview path="./demos/icon.vue"></preview>
 

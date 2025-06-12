@@ -17,9 +17,9 @@
 </template>
 
 <script setup>
-import { iconProps, useIcons } from './composables';
+import { iconProps, useIcon } from './composables';
 
 // 处理数据
 const props = defineProps(iconProps);
-const { rootClasses, rootStyles } = useIcons(props);
+const { rootClasses, rootStyles } = useIcon(props);
 </script>

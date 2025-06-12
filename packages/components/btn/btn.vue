@@ -23,7 +23,7 @@
 
 <script setup>
 import { btnProps, useBtn } from './composables';
-import { useIcon } from '../icon/composables';
+import { useIconProps } from '../icon/composables/base';
 import IconLoadingLoop from '../../icons/loading-loop.vue';
 
 // 按钮
@@ -31,5 +31,5 @@ const props = defineProps(btnProps);
 const { isDisabled, rootClasses, rootStyles } = useBtn(props);
 
 // 图标
-const { iconProps } = useIcon(props.icon);
+const { iconProps } = useIconProps(props.icon);
 </script>

@@ -19,46 +19,12 @@
     box-shadow: var(--#{$prefix}-box-shadow);
     transition: transform 0.3s ease;
 
-    @if $prefix == "vui-dialog" {
-      width: var(--vui-dialog-width, 50%);
-      max-width: 98vw;
-      padding: 16px;
-      margin: 15vh auto 50px;
-      overflow: auto;
-      border-radius: 4px;
-    }
-
-    @if $prefix == "vui-drawer" {
-      position: absolute;
-      display: flex;
-      flex-direction: column;
-      width: var(--vui-drawer-width, 30%);
-      max-width: 100vw;
-      height: 100vh;
-      padding: 16px 0;
-      &--left {
-        left: 0;
-      }
-      &--right {
-        right: 0;
-      }
-    }
-
     // 顶栏
     &-header {
       display: flex;
       gap: 10px;
       justify-content: space-between;
       font-size: 16px;
-
-      @if $prefix == "vui-dialog" {
-        padding-bottom: 16px;
-      }
-
-      @if $prefix == "vui-drawer" {
-        flex: none;
-        padding: 0 16px 16px;
-      }
     }
     &-title {
       color: var(--#{$prefix}-title-text-color);
@@ -76,12 +42,6 @@
     &-body {
       font-size: 14px;
       color: var(--#{$prefix}-content-text-color);
-
-      @if $prefix == "vui-drawer" {
-        flex: auto;
-        padding: 0 16px;
-        overflow: auto;
-      }
     }
 
     // 底栏
@@ -90,11 +50,6 @@
       gap: 10px;
       justify-content: flex-end;
       padding-top: 16px;
-
-      @if $prefix == "vui-drawer" {
-        flex: none;
-        padding: 16px 16px 0;
-      }
     }
 
     // 动画
@@ -102,13 +57,72 @@
     &-leave-to {
       opacity: 0;
     }
-    &-enter-from > &,
-    &-leave-to > & {
-      @if $prefix == "vui-dialog" {
-        transform: translateY(-20px);
+  }
+
+  // 对话框
+  @if $prefix == "vui-dialog" () {
+    .vui-dialog {
+      // 主体
+      width: var(--vui-dialog-width, 50%);
+      max-width: 98vw;
+      padding: 16px;
+      margin: 15vh auto 50px;
+      overflow: auto;
+      border-radius: 4px;
+
+      // 顶栏
+      &-header {
+        padding-bottom: 16px;
       }
 
-      @if $prefix == "vui-drawer" {
+      // 动画
+      &-enter-from > &,
+      &-leave-to > & {
+        transform: translateY(-20px);
+      }
+    }
+  }
+
+  // 抽屉
+  @if $prefix == "vui-drawer" () {
+    .vui-drawer {
+      // 主体
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      width: var(--vui-drawer-width, 30%);
+      max-width: 100vw;
+      height: 100vh;
+      padding: 16px 0;
+      &--left {
+        left: 0;
+      }
+      &--right {
+        right: 0;
+      }
+
+      // 顶栏
+      &-header {
+        flex: none;
+        padding: 0 16px 16px;
+      }
+
+      // 内容
+      &-body {
+        flex: auto;
+        padding: 0 16px;
+        overflow: auto;
+      }
+
+      // 底栏
+      &-footer {
+        flex: none;
+        padding: 16px 16px 0;
+      }
+
+      // 动画
+      &-enter-from > &,
+      &-leave-to > & {
         &--left {
           transform: translateX(-100%);
         }

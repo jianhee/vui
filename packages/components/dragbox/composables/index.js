@@ -1,7 +1,5 @@
 // 拖拽框
-import { computed, ref } from 'vue';
-import { useMove } from './move';
-import { useResize } from './resize';
+import { computed } from 'vue';
 
 // v-model
 export const dragboxModel = { type: Number, default: null };
@@ -24,25 +22,16 @@ export const dragboxProps = {
 };
 
 // use
-export const useDragbox = ({ boxRef, props, styles }) => {
-  const isMoving = ref(false);
-  const dragingHandleName = ref(null);
-
-  // 移动
-  const { isMovable } = useMove({ boxRef, props, styles, isMoving, dragingHandleName });
-
-  // 缩放
-  const { isResizable, handleItems, onResizeStart } = useResize({ boxRef, props, styles, isMoving, dragingHandleName });
-
+export const useDragbox = ({ dragFlag, isMovable, isResizable, props, styles }) => {
   // 获取类名
   const rootClasses = computed(() => {
     return [
       'vui-dragbox',
       {
         'is-movable': isMovable.value,
-        'is-moving': isMoving.value,
+        'is-moving': dragFlag.value === 'move',
         'is-resizable': isResizable.value,
-        'is-resizing': !!dragingHandleName.value
+        'is-resizing': dragFlag.value && dragFlag.value !== 'move'
       }
     ];
   });
@@ -60,9 +49,6 @@ export const useDragbox = ({ boxRef, props, styles }) => {
 
   return {
     rootClasses,
-    rootStyles,
-    handleItems,
-    dragingHandleName,
-    onResizeStart
+    rootStyles
   };
 };

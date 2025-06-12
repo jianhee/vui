@@ -11,7 +11,7 @@
     <div
       v-for="handle in handleItems"
       :key="handle"
-      :class="['vui-dragbox-handle', `vui-dragbox-handle-${handle}`, { 'is-active': handle === dragingHandleName }]"
+      :class="['vui-dragbox-handle', `vui-dragbox-handle-${handle}`, { 'is-active': handle === dragFlag }]"
       @mousedown="onResizeStart($event, handle)"
     />
   </div>
@@ -20,6 +20,8 @@
 <script setup>
 import { ref } from 'vue';
 import { dragboxModel, dragboxProps, useDragbox } from './composables';
+import { useMove } from './composables/move';
+import { useResize } from './composables/resize';
 
 // 盒子
 const boxRef = ref(null);
@@ -30,9 +32,32 @@ const boxLeft = defineModel('left', dragboxModel);
 const boxTop = defineModel('top', dragboxModel);
 const boxWidth = defineModel('width', dragboxModel);
 const boxHeight = defineModel('height', dragboxModel);
-const { rootClasses, rootStyles, handleItems, dragingHandleName, onResizeStart } = useDragbox({
+
+// 拖拽标识
+const dragFlag = ref(null); // move, left, right, top, bottom
+
+// 移动
+const { isMovable } = useMove({
   boxRef,
+  dragFlag,
+  props,
+  styles: { boxLeft, boxTop }
+});
+
+// 缩放
+const { isResizable, handleItems, onResizeStart } = useResize({
+  boxRef,
+  dragFlag,
   props,
   styles: { boxLeft, boxTop, boxWidth, boxHeight }
+});
+
+// 拖拽框
+const { rootClasses, rootStyles } = useDragbox({
+  dragFlag,
+  props,
+  styles: { boxLeft, boxTop, boxWidth, boxHeight },
+  isMovable,
+  isResizable
 });
 </script>

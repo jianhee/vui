@@ -3,7 +3,7 @@
 @use "../../../styles/mixins";
 
 // 通用样式
-@mixin vui-base($prefix) {
+@mixin vui-input($prefix) {
   // vars
   :root {
     --#{$prefix}-text-color: var(--vui-text-color-regular);
@@ -13,7 +13,6 @@
     --#{$prefix}-hover-border-color: var(--vui-text-color-disabled);
     --#{$prefix}-focus-border-color: var(--vui-color-brand-base);
     --#{$prefix}-clear-hover-color: var(--vui-text-color-secondary);
-    --vui-option-bg-color: var(--vui-bg-color-overlay);
   }
 
   // 通用样式
@@ -27,6 +26,8 @@
     border: 1px solid var(--#{$prefix}-border-color);
     border-radius: 4px;
     transition: border-color 0.3s ease;
+
+    // 状态
     &:not(.is-disabled):hover {
       border-color: var(--#{$prefix}-hover-border-color);
     }
@@ -69,36 +70,45 @@
       color: var(--#{$prefix}-clear-hover-color);
     }
   }
-}
 
-// 输入框
-@mixin vui-input() {
-  .vui-input {
-    padding: 0 8px;
-    cursor: text;
+  // 输入框
+  @if $prefix == "vui-input" () {
+    .vui-input {
+      padding: 0 8px;
+      cursor: text;
+    }
   }
-}
 
-// 选择器
-@mixin vui-select() {
-  .vui-select {
-    position: relative;
-    z-index: 1;
-    &-inner {
-      padding-right: 22px;
-      padding-left: 8px;
-      cursor: pointer;
+  // 选择器
+  @if $prefix == "vui-select" () {
+    :root {
+      --vui-option-bg-color: var(--vui-bg-color-overlay);
     }
-    &-icon {
-      position: absolute;
-      top: 50%;
-      right: 8px;
-      z-index: -1;
-      transform: translateY(-7px);
-    }
-    &-option {
-      cursor: pointer;
-      background-color: var(--vui-option-bg-color);
+    .vui-select {
+      position: relative;
+      z-index: 1;
+
+      // 内容
+      &-inner {
+        padding-right: 22px;
+        padding-left: 8px;
+        cursor: pointer;
+      }
+
+      // 下拉图标
+      &-icon {
+        position: absolute;
+        top: 50%;
+        right: 8px;
+        z-index: -1;
+        transform: translateY(-7px);
+      }
+
+      // 下拉选项
+      &-option {
+        cursor: pointer;
+        background-color: var(--vui-option-bg-color);
+      }
     }
   }
 }

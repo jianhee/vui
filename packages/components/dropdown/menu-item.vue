@@ -28,11 +28,13 @@
 
 <script setup>
 import { menuItemProps, useMenuItem } from './composables/menu';
-import { useIcon } from '../icon/composables';
+import { useIconProps } from '../icon/composables/base';
 import IconSelected from '../../icons/selected.vue';
 
-// 处理数据
+// 菜单
 const props = defineProps(menuItemProps);
 const { formattedMenuItem, isSelected, onClickItem } = useMenuItem({ props });
-const { iconProps } = useIcon(formattedMenuItem.value.icon);
+
+// 图标
+const { iconProps } = useIconProps(formattedMenuItem.value.icon);
 </script>

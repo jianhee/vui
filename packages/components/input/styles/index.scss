@@ -1,3 +1,2 @@
 @use "./base";
-@include base.vui-base("vui-input");
-@include base.vui-input;
+@include base.vui-input("vui-input");
