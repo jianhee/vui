@@ -25,6 +25,7 @@
       cy="3.5"
       r="3.5"
       transform="translate(3.5 3.5)"
+      fill="currentColor"
     />
   </svg>
 </template>
