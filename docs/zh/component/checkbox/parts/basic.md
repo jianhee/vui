@@ -1,5 +1,5 @@
 ::: tip
-多选框和单选框的 API 几乎完全一致，UI 略有差异，各自有两个独立的组件：
+多选框和单选框的 API 几乎完全一致，UI 略有差异，各自提供两个独立的组件：
 
 - `<VCheckbox>` 和 `<VRadio>` 用于单个选项
 - `<VCheckboxGroup>` 和 `<VRadioGroup>` 用于选项组

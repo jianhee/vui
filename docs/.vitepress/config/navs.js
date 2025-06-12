@@ -61,7 +61,7 @@ export const sidebarNavs = {
     },
     {
       text: '其它',
-      items: [{ text: 'Dragbox 拖拽', link: '/component/dragbox/' }]
+      items: [{ text: 'Dragbox 拖拽框', link: '/component/dragbox/' }]
     }
   ],
   '/plugin/': [

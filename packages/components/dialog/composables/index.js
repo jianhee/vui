@@ -21,7 +21,7 @@ export const dialogProps = {
   // 抽屉出现位置：left, right
   placement: { type: String, default: 'left' },
   // ---------- 样式属性 ----------
-  // 内容宽度：省略单位时默认 `px`
+  // 内容宽度：缺省单位时默认 `px`
   width: { type: [Number, String], default: null }
 };
 

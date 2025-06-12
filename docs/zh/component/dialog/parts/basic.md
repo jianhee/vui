@@ -8,7 +8,7 @@
 2. `props.placement` 出现位置，抽屉特有的属性，可选的值有 `left` 左侧（默认）、`right` 右侧
 3. `@open` 和 `@close` 切换显示状态时触发
 
-对话框和抽屉各自由三部分组成
+对话框和抽屉各自由三部分组成：
 
 1.  `props.title` 标题，为空时不显示顶栏
 2.  `slots.default` 中间内容

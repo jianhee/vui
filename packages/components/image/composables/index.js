@@ -12,7 +12,7 @@ export const imageProps = {
   loadingImg: { type: String, default: null },
   // 加载失败的图片地址
   errorImg: { type: String, default: defaultErrorImg },
-  // ---------- 样式属性：省略单位时默认 `px` ----------
+  // ---------- 样式属性：缺省单位时默认 `px` ----------
   // 宽度
   width: { type: [Number, String], default: null },
   // 宽高比：设置后可能显示不全

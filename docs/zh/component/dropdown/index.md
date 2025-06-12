@@ -2,7 +2,7 @@
 
 ## 基础用法
 
-1. 下拉框由两个插槽组成，分别为 `slots.default` 触发器和 `slots.dropdown` 下拉框
+1. 下拉框由两个插槽组成，分别是 `slots.default` 触发器和 `slots.dropdown` 下拉框
 2. `@open` 和 `@close` 切换显示状态时触发
 
 <preview path="./demos/dropdown-basic.vue"></preview>
