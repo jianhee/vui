@@ -1,24 +1,21 @@
 <!-- 选择器 -->
 <template>
-  <div :class="wraperClasses">
-    <!-- 显示文本 -->
-    <span
-      v-if="text"
-      class="vui-select-inner"
-    >
-      {{ text }}
-    </span>
-    <!-- 显示下拉 -->
+  <div
+    v-bind="wraperAttrs"
+    :class="wraperClasses"
+  >
+    <!-- 显示选项 -->
     <select
-      v-else
-      ref="target"
+      v-if="options"
+      ref="selectRef"
       v-model="modelValue"
-      :disabled="disabled"
       class="vui-select-inner"
+      v-bind="innerAttrs"
+      :disabled="disabled"
       @change="onValueChange"
     >
       <option
-        v-for="item in items"
+        v-for="item in formattdOptions"
         :key="item.value"
         :value="item.value"
         class="vui-select-option"
@@ -26,6 +23,13 @@
         {{ item.label }}
       </option>
     </select>
+    <!-- 显示文本 -->
+    <span
+      v-else
+      class="vui-select-inner"
+    >
+      {{ modelValue }}
+    </span>
     <!-- 图标 -->
     <VIcon
       class="vui-select-icon"
@@ -35,45 +39,21 @@
 </template>
 
 <script setup>
-import { shallowRef, computed } from 'vue';
-import { useFocus } from '@vueuse/core';
+import { ref } from 'vue';
+import { selectModel, selectProps, selectEmits, useSelect } from './composables';
+import { useFormElement } from '../input/composables/base';
 import IconArrow from '../../icons/select-arrow.vue';
 
-const emits = defineEmits(['change']);
+// 表单元素
+const selectRef = ref(null);
 
-// 参数
-const props = defineProps({
-  // 选项：{ value: '值', label: '文本' }
-  items: { type: Array, default: null },
-  // 原生属性
-  disabled: { type: Boolean, default: false },
-  // 尺寸：small, medium
-  size: { type: String, default: 'medium' },
-  // 作为文本显示
-  text: { type: [String, Number], default: null }
-});
+// 选择器
+const modelValue = defineModel('value', selectModel.value);
+const props = defineProps(selectProps);
+const emits = defineEmits(selectEmits);
+const { wraperClasses, formattdOptions, onValueChange } = useSelect({ selectRef, modelValue, props, emits });
 
-// 是否获取焦点
-const target = shallowRef();
-const { focused } = useFocus(target);
-
-// 获取容器类名
-const wraperClasses = computed(() => {
-  return [
-    'vui-select',
-    `vui-select-${props.size}`,
-    {
-      'is-disabled': props.disabled,
-      'is-focus': focused.value
-    }
-  ];
-});
-
-// 当前值
-const modelValue = defineModel('value', { type: [String, Number], default: null });
-
-// 修改值
-function onValueChange(item) {
-  emits('change', item);
-}
+// 筛选属性
+defineOptions({ inheritAttrs: false });
+const { wraperAttrs, innerAttrs } = useFormElement();
 </script>

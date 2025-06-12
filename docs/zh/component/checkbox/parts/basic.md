@@ -18,10 +18,10 @@
 ## 选项组
 
 1. `v-model:value` 选中项的 `value`，多选框为 `Array` 类型，单选框为 `Number|String` 类型
-2. `props.options` 选项组，支持 `Object|Number|String` 类型
-   1. `Object.label` 选项文本
+2. `props.options` 选项组，支持 `[Object|Number|String]` 类型
+   1. `Object.label` 选项文本，为空时使用 `value` 的值
    2. `Object.value` 选项值
-   3. `Number|String` 类型的选项会格式化为 `Object.label` 和 `Object.value`
+   3. `Number|String` 格式化为 `Object.label` 和 `Object.value`
 3. `slots.default` 选项文本后的自定义内容，参数为 `{ option }`
 4. `@change` 切换选项时触发，参数为 `{ option: '当前项', value: 'v-model:value 的值' }`
 

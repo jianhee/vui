@@ -2,20 +2,20 @@
   <VForm>
     <VFormItem label="placeholder">
       <VInput
-        v-model:value="inputValue1"
+        v-model:value="inputValue"
         placeholder="请输入内容"
       />
     </VFormItem>
     <VFormItem label="disabled">
       <VInput
-        v-model:value="inputValue2"
+        v-model:value="inputValue"
         placeholder="禁用状态"
         disabled
       />
     </VFormItem>
     <VFormItem label="maxlength">
       <VInput
-        v-model:value="inputValue3"
+        v-model:value="inputValue"
         placeholder="5字以内"
         maxlength="5"
       />
@@ -26,7 +26,5 @@
 <script setup>
 import { ref } from 'vue';
 
-const inputValue1 = ref(null);
-const inputValue2 = ref(null);
-const inputValue3 = ref(null);
+const inputValue = ref(null);
 </script>

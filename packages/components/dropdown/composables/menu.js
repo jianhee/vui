@@ -11,12 +11,12 @@ export const menuModel = {
 
 // 菜单的 props
 export const menuProps = {
-  // 菜单项：格式为 `[{ key, label|title, icon, divider }, 1, '1']`
+  // 菜单项：支持 `[Object|Number|String]` 类型
   // 1. `Object.key` 唯一标识
   // 2. `Object.label|title` 文本
   // 3. `Object.icon` 前置图标
   // 4. `Object.divider` 是否添加分隔符
-  // 5. `Number|String` 类型的选项会自动格式化为 `Object.label`
+  // 5. `Number|String` 格式化为 `Object.label`
   menus: { type: Array, default: null },
   // 是否可以选中：设为 `true` 时菜单项的 `key` 必传
   selectable: { type: Boolean, default: false }
@@ -36,7 +36,7 @@ export function useMenuItem(menuItem) {
   const formattedMenuItem = computed(() => {
     const item = menuItem.props.item;
     if (typeof item === 'object') {
-      return { label: item.label || item.title, ...item };
+      return { ...item, label: item.label || item.title };
     } else {
       return { label: item };
     }

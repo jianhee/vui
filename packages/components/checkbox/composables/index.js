@@ -34,10 +34,10 @@ export const checkboxProps = {
 
 // 多选框组 props
 export const checkboxGroupProps = {
-  // 选项组：支持 `Object|Number|String` 类型
-  // 1. `Object.label` 选项文本
+  // 选项组：支持 `[Object|Number|String]` 类型
+  // 1. `Object.label` 选项文本，为空时使用 `value` 的值
   // 2. `Object.value` 选项值
-  // 3. `Number|String` 类型的选项会自动格式化为 `Object.label`
+  // 3. `Number|String` 格式化为 `Object.label` 和 `Object.value`
   options: { type: Array, required: true },
   // 选项类型：button 按钮
   optionType: { type: String, default: null },
@@ -87,7 +87,7 @@ export function useCheckbox(checkbox) {
     // 选项组
     const option = checkbox.props.option;
     if (typeof option === 'object') {
-      return option;
+      return { ...option, label: option.label || option.value };
     } else {
       return { label: option, value: option };
     }

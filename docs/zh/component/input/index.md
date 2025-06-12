@@ -10,9 +10,7 @@
 
 <preview path="./demos/basic.vue"></preview>
 
-## 原生属性
-
-支持 `<input>` 标签的所有原生属性
+<!--@include: @/component/@parts/props-native.md-->
 
 <preview path="./demos/native.vue"></preview>
 

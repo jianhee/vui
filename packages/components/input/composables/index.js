@@ -1,5 +1,5 @@
 // 输入框
-import { computed, useAttrs } from 'vue';
+import { computed } from 'vue';
 import { useFocus } from '@vueuse/core';
 
 // emits
@@ -16,20 +16,19 @@ export const inputProps = {
   // 前置图标：`<VIcon>` 组件的 `name|component|props`
   icon: { type: [String, Object], default: null },
   // 尺寸：medium, small
-  size: { type: String, default: 'medium' }
+  size: { type: String, default: 'medium' },
+  // 单独处理的原生属性
+  disabled: { type: Boolean, default: false }
 };
 
-// 组合
+// use
 export const useInput = ({ inputRef, modelValue, props, emits }) => {
-  // 原生属性
-  const $attrs = useAttrs();
-
   // 是否获取焦点
   const { focused } = useFocus(inputRef);
 
   // 是否显示清除按钮
   const isShowClearIcon = computed(() => {
-    return !!modelValue.value && !$attrs.disabled;
+    return !!modelValue.value && !props.disabled;
   });
 
   // 获取类名
@@ -38,7 +37,7 @@ export const useInput = ({ inputRef, modelValue, props, emits }) => {
       'vui-input',
       `vui-input--${props.size}`,
       {
-        'is-disabled': $attrs.disabled,
+        'is-disabled': props.disabled,
         'is-focus': focused.value
       }
     ];

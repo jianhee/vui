@@ -3,35 +3,20 @@
 ## 基础用法
 
 1. `v-model:value` 选中项的 `value`
-1. `props.items` 选项
-   1. `item.value` 选项的值
-   2. `item.label` 选项的文本
-1. `@change` 切换选项时触发，返回选中项的 `value`
+1. `props.items` 选项组，支持 `[Object|Number|String]` 类型
+   1. `Object.label` 选项文本，为空时使用 `value` 的值
+   2. `Object.value` 选项值
+   3. `Number|String` 格式化为 `Object.label` 和 `Object.value`
+1. `@change` 切换选项时触发，参数为 `{ option: '当前项', value: 'v-model:value 的值' }`
 
-:::preview
-demo-preview=./demos/basic.vue
-:::
+<preview path="./demos/basic.vue"></preview>
 
-## 原生属性
+<!--@include: @/component/@parts/props-native.md-->
 
-1. `props.disabled` 是否禁用
-
-:::preview
-demo-preview=./demos/origin.vue
-:::
+<preview path="./demos/native.vue"></preview>
 
 ## 选择器尺寸
 
-1. `props.size` 可选的值有以下几种
+`props.size` 可选的值有 `medium` 中号（默认）、`small` 小号
 
-:::preview
-demo-preview=./demos/size.vue
-:::
-
-## 显示文本
-
-1. `props.text` 有时只需要显示文本，不需要选项，此时可以使用 `props.text` 来指定文本内容
-
-:::preview
-demo-preview=./demos/text.vue
-:::
+<preview path="./demos/size.vue"></preview>

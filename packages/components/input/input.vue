@@ -17,6 +17,7 @@
       type="text"
       class="vui-input-inner"
       v-bind="innerAttrs"
+      :disabled="disabled"
       @input="onValueInput"
       @change="onValueChange"
       @keyup.enter="onKeyupEnter"
@@ -39,14 +40,14 @@ import { useFormElement } from './composables/base';
 import { useIconProps } from '../icon/composables/base';
 import IconClear from '../../icons/clear.vue';
 
-// 根元素
+// 表单元素
 const inputRef = shallowRef();
 
 // 输入框
 const modelValue = defineModel('value', inputModel.value);
 const props = defineProps(inputProps);
 const emits = defineEmits(inputEmits);
-const { focused, wraperClasses, isShowClearIcon, onValueInput, onValueChange, onKeyupEnter, onClearValue } = useInput({ modelValue, props, emits, inputRef });
+const { focused, wraperClasses, isShowClearIcon, onValueInput, onValueChange, onKeyupEnter, onClearValue } = useInput({ inputRef, modelValue, props, emits });
 
 // 筛选属性
 defineOptions({ inheritAttrs: false });

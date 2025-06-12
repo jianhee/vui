@@ -1,18 +1,26 @@
 <template>
-  <DemoRow flex>
-    <VSelect
-      v-for="size in ['medium', 'small']"
-      :key="size"
-      v-model:value="selectValue"
-      :items="selectOptions"
-      :size="size"
-    />
-  </DemoRow>
+  <template
+    v-for="selectSize in selectSizes"
+    :key="selectSize.label"
+  >
+    <DemoSpace>{{ selectSize.label }}</DemoSpace>
+    <DemoSpace>
+      <VSelect
+        v-model:value="selectValue"
+        :options="selectOptions"
+        :size="selectSize.value"
+      />
+    </DemoSpace>
+  </template>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 
+const selectSizes = [
+  { label: 'medium（默认）', value: undefined },
+  { label: 'small', value: 'small' }
+];
 const selectValue = ref(null);
 const selectOptions = [
   { value: 1, label: '选项1' },

@@ -7,6 +7,10 @@
     @enter="writeLog('enter', $event)"
     @clear="writeLog('clear', $event)"
   />
+
+  <DemoSpace>
+    绑定值 <code>v-model:value</code> 的值为 <code>{{ inputValue }}</code>
+  </DemoSpace>
 </template>
 
 <script setup>

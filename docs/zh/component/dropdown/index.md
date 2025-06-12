@@ -21,12 +21,12 @@
 
 ## 下拉菜单
 
-1. `props.menus` 有值时自动将下拉框渲染成菜单项，支持 `Object|Number|String` 类型
+1. `props.menus` 有值时自动将下拉框渲染成菜单项，支持 `[Object|Number|String]` 类型
    1. `Object.key` 唯一标识
    2. `Object.label|title` 文本
    3. `Object.icon` 前置图标，参考 [Btn 按钮](/component/btn#前置图标) 组件的 `icon` 属性
    4. `Object.divider` 是否添加分隔符
-   5. `Number|String` 类型的选项会自动格式化为 `Object.label`
+   5. `Number|String` 格式化为 `Object.label`
 2. `@menu-click` 点击菜单项时触发，参数为 `{ item: '当前项', key: '当前项的 key'}`
 
 <preview path="./demos/menu-basic.vue"></preview>
