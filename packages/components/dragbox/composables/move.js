@@ -54,7 +54,25 @@ export const useMove = ({ boxRef, dragFlag, props, styles }) => {
     window.removeEventListener('mouseup', onMoveStop);
   }
 
+  // 移动的类名
+  const moveClasses = computed(() => {
+    return {
+      'is-movable': isMovable.value,
+      'is-moving': dragFlag.value === 'move'
+    };
+  });
+
+  // 移动的样式
+  const moveStyles = computed(() => {
+    if (props.disabled) return null;
+    return {
+      left: `${styles.boxLeft.value}px`,
+      top: `${styles.boxTop.value}px`
+    };
+  });
+
   return {
-    isMovable
+    moveClasses,
+    moveStyles
   };
 };

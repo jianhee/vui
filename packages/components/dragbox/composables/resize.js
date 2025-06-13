@@ -83,8 +83,28 @@ export const useResize = ({ boxRef, dragFlag, props, styles }) => {
     window.removeEventListener('mouseup', onResizeStop);
   }
 
+  // 缩放的类名
+  const resizeClasses = computed(() => {
+    return {
+      'is-resizable': isResizable.value,
+      'is-resizing': dragFlag.value && dragFlag.value !== 'move'
+    };
+  });
+
+  // 缩放的样式
+  const resizeStyles = computed(() => {
+    if (props.disabled) return null;
+    return {
+      left: `${styles.boxLeft.value}px`,
+      top: `${styles.boxTop.value}px`,
+      width: `${styles.boxWidth.value}px`,
+      height: `${styles.boxHeight.value}px`
+    };
+  });
+
   return {
-    isResizable,
+    resizeClasses,
+    resizeStyles,
     handleItems,
     onResizeStart
   };

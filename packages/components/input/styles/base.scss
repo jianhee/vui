@@ -9,19 +9,17 @@
     --#{$prefix}-text-color: var(--vui-text-color-regular);
     --#{$prefix}-bg-color: var(--vui-fill-color-blank);
     --#{$prefix}-border-color: var(--vui-border-color-base);
-    --#{$prefix}-icon-color: var(--vui-text-color-placeholder);
     --#{$prefix}-hover-border-color: var(--vui-text-color-disabled);
     --#{$prefix}-focus-border-color: var(--vui-color-brand-base);
-    --#{$prefix}-clear-hover-color: var(--vui-text-color-secondary);
   }
 
   // 通用样式
   .#{$prefix} {
     // 容器
-    display: inline-flex;
+    display: flex;
     gap: 8px;
     align-items: center;
-    width: 240px;
+    width: var(--vui-input-width);
     background-color: var(--#{$prefix}-bg-color);
     border: 1px solid var(--#{$prefix}-border-color);
     border-radius: 4px;
@@ -67,11 +65,9 @@
     }
 
     // 图标
-    .vui-icon {
-      color: var(--#{$prefix}-icon-color);
-    }
+    --vui-icon-color: var(--vui-text-color-placeholder);
     &-clear:hover {
-      color: var(--#{$prefix}-clear-hover-color);
+      --vui-icon-color: var(--vui-text-color-secondary);
     }
   }
 

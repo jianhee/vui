@@ -7,6 +7,7 @@
     <DemoSpace>
       <VSelect
         v-model:value="selectValue"
+        class="demo-select"
         :options="selectOptions"
         :size="selectSize.value"
       />

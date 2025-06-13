@@ -1,6 +1,7 @@
 <template>
   <VInput
     v-model:value="inputValue"
+    class="demo-input"
     placeholder="请输入内容"
     @input="writeLog('input', $event)"
     @change="writeLog('change', $event)"
@@ -19,3 +20,9 @@ import { writeLog } from '@vp/utils';
 
 const inputValue = ref(null);
 </script>
+
+<style>
+.demo-input {
+  max-width: 240px;
+}
+</style>

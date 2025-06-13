@@ -10,6 +10,7 @@
 // 滑块
 .vui-slider {
   position: relative;
+  width: var(--vui-slider-width);
   height: 32px;
   padding: 14px 0;
   user-select: none;

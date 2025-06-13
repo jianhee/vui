@@ -1,6 +1,5 @@
 // vars
 :root {
-  --vui-loading-icon-color: var(--vui-color-brand-base);
   --vui-loading-text-color: var(--vui-text-color-secondary);
 }
 
@@ -10,8 +9,8 @@
   padding: 20px 0;
   text-align: center;
   &-icon {
-    font-size: 16px;
-    color: var(--vui-icon-color, var(--vui-loading-icon-color));
+    --vui-icon-color: var(--vui-color-brand-base);
+    --vui-icon-size: 16px;
   }
   &-text {
     margin-top: 10px;

@@ -47,6 +47,7 @@ export const checkboxGroupProps = {
 
 // 选项方法
 export function useCheckbox(checkbox) {
+  // 共享数据
   const checkboxType = inject('checkboxType', 'checkbox');
   const checkboxGroup = inject('checkboxGroup', null);
 
@@ -57,8 +58,8 @@ export function useCheckbox(checkbox) {
   // 是否按钮
   const isBtn = computed(() => checkbox.props.type === 'button' || checkboxGroup?.props.optionType === 'button');
 
-  // 是否块级
-  const isBlock = computed(() => {
+  // 是否使用块级样式
+  const isUseBlock = computed(() => {
     if (isBtn.value) return false;
     if (!checkboxGroup) {
       return checkbox.props.block || !checkbox.props.inline;
@@ -71,7 +72,7 @@ export function useCheckbox(checkbox) {
     return [
       isBtn.value ? `vui-${checkboxType}-btn` : `vui-${checkboxType}`,
       {
-        [`vui-${checkboxType}--block`]: isBlock.value,
+        [`vui-${checkboxType}--block`]: isUseBlock.value,
         'is-checked': isChecked.value
       }
     ];

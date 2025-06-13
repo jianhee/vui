@@ -3,6 +3,7 @@
     <VFormItem label="disabled">
       <VSelect
         v-model:value="selectValue"
+        class="demo-select"
         :options="selectOptions"
         disabled
       />

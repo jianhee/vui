@@ -15,6 +15,7 @@ const valueRef = ref(50);
 
 <style>
 .demo-slider {
+  max-width: 500px;
   padding-top: 20px;
 }
 </style>

@@ -40,7 +40,7 @@ export function useIcon(props) {
   const rootStyles = computed(() => ({
     '--vui-icon-color': props.color,
     '--vui-icon-two-tone-color': props.twoToneColor,
-    'font-size': addUnit(props.size, 'px'),
+    '--vui-icon-size': addUnit(props.size, 'px'),
     'transform': `rotate(${addUnit(props.rotate, 'deg')})`
   }));
 

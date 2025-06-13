@@ -28,7 +28,7 @@
 ### 内容宽度
 
 1. `props.width`
-2. `style.width` 对话框默认 `50%`，抽屉默认 `30%`
-3. `style.--vui-dialog-width` 和 `style.--vui-drawer-width`
+2. 对话框 `style.--vui-dialog-width` 默认 `50%`
+3. 抽屉 `style.--vui-drawer-width` 默认 `30%`
 
 <preview path="@docs/component/dialog/demos/width.vue"></preview>

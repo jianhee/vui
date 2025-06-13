@@ -26,9 +26,9 @@ export const useImage = props => {
   // 获取样式
   const rootStyles = computed(() => {
     return {
-      'width': addUnit(props.width, 'px'),
-      'aspect-ratio': props.aspectRatio,
-      'border-radius': addUnit(props.radius, 'px')
+      '--vui-image-width': addUnit(props.width, 'px'),
+      '--vui-image-aspect-ratio': props.aspectRatio,
+      '--vui-image-radius': addUnit(props.radius, 'px')
     };
   });
 

@@ -1,6 +1,4 @@
 // 拖拽框
-import { computed } from 'vue';
-
 // v-model
 export const dragboxModel = { type: Number, default: null };
 
@@ -19,36 +17,4 @@ export const dragboxProps = {
   minHeight: { type: Number, default: 0 },
   // 是否禁用：禁用会清空状态和绑定样式，但不会清除已记录的数据，切换状态后可恢复
   disabled: { type: Boolean, default: false }
-};
-
-// use
-export const useDragbox = ({ dragFlag, isMovable, isResizable, props, styles }) => {
-  // 获取类名
-  const rootClasses = computed(() => {
-    return [
-      'vui-dragbox',
-      {
-        'is-movable': isMovable.value,
-        'is-moving': dragFlag.value === 'move',
-        'is-resizable': isResizable.value,
-        'is-resizing': dragFlag.value && dragFlag.value !== 'move'
-      }
-    ];
-  });
-
-  // 获取样式
-  const rootStyles = computed(() => {
-    if (props.disabled) return null;
-    return {
-      left: `${styles.boxLeft.value}px`,
-      top: `${styles.boxTop.value}px`,
-      width: `${styles.boxWidth.value}px`,
-      height: `${styles.boxHeight.value}px`
-    };
-  });
-
-  return {
-    rootClasses,
-    rootStyles
-  };
 };

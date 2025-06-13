@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import { inject, provide } from 'vue';
+import { provide, inject } from 'vue';
 import { checkboxGroupModel, checkboxGroupProps, checkboxGroupEmits } from './composables';
 
 // 处理数据

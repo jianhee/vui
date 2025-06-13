@@ -1,7 +1,10 @@
 // 图片
 .vui-image {
   flex: none;
+  width: var(--vui-image-width);
+  aspect-ratio: var(--vui-image-aspect-ratio);
   overflow: hidden;
+  border-radius: var(--vui-image-radius);
   &-inner {
     display: block;
     width: 100%;

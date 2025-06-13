@@ -7,6 +7,7 @@
     <DemoSpace>
       <VInput
         v-model:value="inputValue"
+        class="demo-input"
         placeholder="请输入内容"
         :size="inputSize.value"
       />

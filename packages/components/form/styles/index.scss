@@ -5,11 +5,24 @@
 
 // 表单
 .vui-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px 30px;
+
+  // 表单项的显示模式
+  &--filed-inline {
+    --vui-input-width: 220px;
+    --vui-select-width: 220px;
+    --vui-slider-width: 220px;
+
+    display: inline-flex;
+    flex-flow: row wrap;
+  }
+
   // 表单项
   &-item {
     display: flex;
     gap: 12px;
-    margin-bottom: 15px;
     font-size: 14px;
     line-height: 32px;
     &:last-child {
@@ -24,12 +37,6 @@
   &-control {
     position: relative;
     flex: auto;
-  }
-
-  // 表单项的显示模式
-  &--filed-inline &-item {
-    display: inline-flex;
-    margin-right: 30px;
   }
 
   // 表单项的标签位置

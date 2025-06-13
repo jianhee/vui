@@ -43,7 +43,6 @@
 ### 圆角尺寸
 
 1. `props.radius`
-2. `style.border-radius` 默认 `4px`
-3. `style.--vui-btn-radius`
+2. `style.--vui-btn-radius` 默认 `4px`
 
 <preview path="./demos/radius.vue"></preview>

@@ -3,15 +3,15 @@
 .vui-icon {
   display: inline-block;
   flex: none;
-  width: 1em;
-  height: 1em;
-  line-height: 1em;
+  width: var(--vui-icon-size, 1em);
+  height: var(--vui-icon-size, 1em);
+  overflow: hidden;
   vertical-align: top; /* 消除父元素间距 */
   color: var(--vui-icon-color);
   transition: all 0.3s ease;
   > svg {
-    width: 1em;
-    height: 1em;
+    width: 100%;
+    height: 100%;
   }
   &.is-clickable {
     @include mixins.vui-clickable;

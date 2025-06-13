@@ -1,6 +1,7 @@
 <template>
   <VSelect
     v-model:value="selectValue"
+    class="demo-select"
     :options="selectOptions"
     @change="writeLog('change', $event)"
   />
@@ -23,3 +24,9 @@ const selectOptions = [
   3
 ];
 </script>
+
+<style>
+.demo-select {
+  max-width: 240px;
+}
+</style>

@@ -105,26 +105,23 @@ import IconClose from './close.svg?component';
 
 ### 图标颜色
 
-支持单色图标和双色图标，需要将 `svg` 中对应的色值改为 `currentColor` 和 `var(--vui-icon-two-one-color)`
+支持单色图标和双色图标，需要将 `svg` 中对应的色值改为 `currentColor` 和 `var(--vui-icon-two-tone-color)`
 
-1. `props.color` 和 `props.twoOneColor`
-2. `style.color` 双色图标不支持
-3. `style.--vui-icon-color` 和 `style.--vui-icon-two-one-color`
+1. 单色图标 `props.color`、`style.--vui-icon-color` 默认继承父元素 `color`
+2. 双色图标 `props.twoOneColor`、`style.--vui-icon-two-tone-color`
 
 <preview path="./demos/color.vue"></preview>
 
 ### 图标尺寸
 
 1. `props.size`
-2. `style.font-size` 默认继承父元素的字体大小
-3. `style.--vui-icon-size`
+2. `style.--vui-icon-size` 默认 `1em`
 
 <preview path="./demos/size.vue"></preview>
 
 ### 旋转角度
 
 1. `props.rotate`
-2. `style.transform(rotate(xxxdeg))`
-3. `style.--vui-icon-rotate`
+2. 不支持 CSS 变量，设置后容易覆盖其它 `transform` 属性
 
 <preview path="./demos/rotate.vue"></preview>

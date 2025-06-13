@@ -2,8 +2,9 @@
 <template>
   <div
     ref="boxRef"
-    :class="rootClasses"
-    :style="rootStyles"
+    class="vui-dragbox"
+    :class="{ ...moveClasses, ...resizeClasses }"
+    :style="{ ...moveStyles, ...resizeStyles }"
   >
     <!-- 内容 -->
     <slot />
@@ -19,7 +20,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { dragboxModel, dragboxProps, useDragbox } from './composables';
+import { dragboxModel, dragboxProps } from './composables';
 import { useMove } from './composables/move';
 import { useResize } from './composables/resize';
 
@@ -37,7 +38,7 @@ const boxHeight = defineModel('height', dragboxModel);
 const dragFlag = ref(null); // move, left, right, top, bottom
 
 // 移动
-const { isMovable } = useMove({
+const { moveClasses, moveStyles } = useMove({
   boxRef,
   dragFlag,
   props,
@@ -45,19 +46,10 @@ const { isMovable } = useMove({
 });
 
 // 缩放
-const { isResizable, handleItems, onResizeStart } = useResize({
+const { resizeClasses, resizeStyles, handleItems, onResizeStart } = useResize({
   boxRef,
   dragFlag,
   props,
   styles: { boxLeft, boxTop, boxWidth, boxHeight }
-});
-
-// 拖拽框
-const { rootClasses, rootStyles } = useDragbox({
-  dragFlag,
-  props,
-  styles: { boxLeft, boxTop, boxWidth, boxHeight },
-  isMovable,
-  isResizable
 });
 </script>

@@ -1,5 +1,8 @@
 <template>
-  <VForm v-bind="$attrs">
+  <VForm
+    v-bind="$attrs"
+    class="demo-form"
+  >
     <VFormItem label="输入框">
       <VInput v-model:value="inputValue" />
     </VFormItem>
@@ -31,10 +34,7 @@
       />
     </VFormItem>
     <VFormItem label="滑块">
-      <VSlider
-        v-model:value="sliderVal"
-        style="width: 200px"
-      />
+      <VSlider v-model:value="sliderVal" />
     </VFormItem>
   </VForm>
 </template>
@@ -57,3 +57,12 @@ const options = [
   { label: '选项3', value: 3 }
 ];
 </script>
+
+<style>
+.demo-form {
+  max-width: 500px;
+}
+.demo-form.vui-form--filed-inline {
+  max-width: none;
+}
+</style>

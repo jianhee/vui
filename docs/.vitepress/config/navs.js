@@ -36,7 +36,7 @@ export const sidebarNavs = {
         { text: 'Checkbox 多选框', link: '/component/checkbox/' },
         { text: 'Radio 单选框', link: '/component/radio/' },
         { text: 'Switch 开关', link: '/component/switch/' },
-        { text: 'Slideer 滑块', link: '/component/slider/' }
+        { text: 'Slider 滑块', link: '/component/slider/' }
       ]
     },
     {
