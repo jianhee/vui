@@ -13,10 +13,9 @@ export const selectModel = {
 
 // props
 export const selectProps = {
-  // 选项组：支持 `[Object|Number|String]` 类型
+  // 选项组：兼容 `Number|String` 类型，格式化为 `Object.label` 和 `Object.value`
   // 1. `Object.label` 选项文本，为空时使用 `value` 的值
   // 2. `Object.value` 选项值
-  // 3. `Number|String` 格式化为 `Object.label` 和 `Object.value`
   options: { type: Array, default: null },
   // 尺寸：medium, small
   size: { type: String, default: 'medium' },
