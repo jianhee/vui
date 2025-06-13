@@ -5,6 +5,8 @@
       :key="trigger"
       :trigger="trigger"
       class="demo-dropdown"
+      @open="writeLog('open')"
+      @close="writeLog('close')"
     >
       <VBtn>{{ trigger }} 触发</VBtn>
       <template #dropdown>下拉框</template>
@@ -13,6 +15,7 @@
 </template>
 
 <script setup>
+import { writeLog } from '@vp/utils';
 const triggers = ['hover', 'click', 'contextmenu'];
 </script>
 

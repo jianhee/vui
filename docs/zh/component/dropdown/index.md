@@ -15,7 +15,7 @@
 
 ## 下拉方法
 
-如果不需要插槽，可以通过 `dropdownRef.open(event)` 方法手动打开下拉框。适用于多个元素打开同一个下拉框的情况，比如列表项的右键菜单。
+如果不需要插槽，可以通过 `dropdown.open(event)` 方法手动打开下拉框。适用于多个元素打开同一个下拉框的情况，比如列表项的右键菜单。
 
 <preview path="./demos/dropdown-method.vue"></preview>
 

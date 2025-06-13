@@ -12,7 +12,7 @@ export const dropdownProps = {
 };
 
 // 使用方法
-export const useDropdown = ({ triggerRef, dropdownRef, props, emits }) => {
+export const useDropdown = ({ triggerEl, dropdownEl, props, emits }) => {
   const dropdownVisible = ref(false);
   const dropdownStyles = ref(null);
   const dropdownMargin = 5;
@@ -48,7 +48,7 @@ export const useDropdown = ({ triggerRef, dropdownRef, props, emits }) => {
   }
 
   // 点击 dropdown 外部
-  onClickOutside(dropdownRef, closeDropdown, { ignore: [triggerRef] });
+  onClickOutside(dropdownEl, closeDropdown, { ignore: [triggerEl] });
 
   // 关闭下拉框
   function closeDropdown() {
@@ -59,52 +59,43 @@ export const useDropdown = ({ triggerRef, dropdownRef, props, emits }) => {
 
   // 打开下拉框
   async function openDropdown(event) {
-    // 通过事件：每次都更新定位
-    if (event) {
-      updatePosition({
-        triggerLeft: event.clientX,
-        triggerTop: event.clientY,
-        triggerBottom: event.clientY
-      });
+    // 更新事件
+    if (!dropdownVisible.value) {
+      dropdownVisible.value = true;
+      emits('open');
     }
-
-    // 通过元素：只有重新打开时更新定位
-    if (dropdownVisible.value) return;
-    if (!event) {
-      const { left, top, bottom } = triggerRef.value.getBoundingClientRect();
-      updatePosition({
-        triggerLeft: left,
-        triggerTop: top,
-        triggerBottom: bottom
-      });
-    }
-
-    // 触发事件
-    dropdownVisible.value = true;
-    emits('open');
+    // 更新定位
+    updatePosition(event);
   }
 
   // 更新定位
-  async function updatePosition({ triggerLeft, triggerTop, triggerBottom }) {
+  async function updatePosition(event) {
     await nextTick();
-    // 内容元素
-    const { clientWidth: dropdownWidth, clientHeight: dropdownHeight } = dropdownRef.value;
+
+    // 参照物
+    const trigger = event || triggerEl.value.getBoundingClientRect();
+    const triggerLeft = trigger.clientX || trigger.left;
+    const triggerRight = trigger.clientX || trigger.right;
+    const triggerTop = trigger.clientY || trigger.top;
+    const triggerBottom = trigger.clientY || trigger.bottom;
+
+    // 下拉框
+    const { clientWidth: dropdownWidth, clientHeight: dropdownHeight } = dropdownEl.value;
 
     // 窗口
     const { clientWidth: windowWidth, clientHeight: windowHeight } = document.documentElement;
 
-    // 水平方向
-    const currentLeft = triggerLeft;
-    const maxLeft = windowWidth - dropdownWidth;
-    const dropdownLeft = Math.max(0, Math.min(maxLeft, currentLeft));
-
-    // 垂直方向
-    let currentTop = triggerBottom + dropdownMargin;
-    const maxTop = windowHeight - dropdownHeight - dropdownMargin;
-    if (currentTop > maxTop) {
-      currentTop = triggerTop - dropdownHeight - dropdownMargin;
+    // 水平方向：默认对齐左边，超出屏幕则对齐右边
+    let dropdownLeft = triggerLeft;
+    if (dropdownLeft + dropdownWidth > windowWidth) {
+      dropdownLeft = triggerRight - dropdownWidth;
     }
-    const dropdownTop = Math.max(0, currentTop);
+
+    // 垂直方向：默认在下方，超出屏幕则在上方
+    let dropdownTop = triggerBottom + dropdownMargin;
+    if (dropdownTop + dropdownHeight > windowHeight) {
+      dropdownTop = triggerTop - dropdownMargin - dropdownHeight;
+    }
 
     // 更新样式
     dropdownStyles.value = {
@@ -114,17 +105,17 @@ export const useDropdown = ({ triggerRef, dropdownRef, props, emits }) => {
   }
 
   // 触发器
-  useEventListener(triggerRef, 'mouseenter', () => onMouseToggle('enter'));
-  useEventListener(triggerRef, 'mouseleave', () => onMouseToggle('leave'));
-  useEventListener(triggerRef, 'click', onTriggerClick);
-  useEventListener(triggerRef, 'contextmenu', e => {
+  useEventListener(triggerEl, 'mouseenter', () => onMouseToggle('enter'));
+  useEventListener(triggerEl, 'mouseleave', () => onMouseToggle('leave'));
+  useEventListener(triggerEl, 'click', onTriggerClick);
+  useEventListener(triggerEl, 'contextmenu', e => {
     e.preventDefault();
     onTriggerContextmenu(e);
   });
 
   // 下拉框
-  useEventListener(dropdownRef, 'mouseenter', () => onMouseToggle('enter'));
-  useEventListener(dropdownRef, 'mouseleave', () => onMouseToggle('leave'));
+  useEventListener(dropdownEl, 'mouseenter', () => onMouseToggle('enter'));
+  useEventListener(dropdownEl, 'mouseleave', () => onMouseToggle('leave'));
 
   return {
     dropdownVisible,

@@ -1,5 +1,5 @@
 <template>
-  <DemoSpace class="demo-dropdown-trigger">
+  <DemoSpace>
     <VDropdown
       v-model:selected-key="seletedKey"
       :menus="menus"
@@ -8,10 +8,9 @@
     >
       <VBtn>下拉菜单</VBtn>
     </VDropdown>
-
-    <span>
-      绑定值 <code>`v-model:selected-key`</code> 的值为 <code>{{ seletedKey }}</code>
-    </span>
+  </DemoSpace>
+  <DemoSpace>
+    绑定值 <code>`v-model:selected-key`</code> 的值为 <code>{{ seletedKey }}</code>
   </DemoSpace>
 </template>
 

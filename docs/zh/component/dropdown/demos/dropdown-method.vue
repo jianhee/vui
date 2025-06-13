@@ -9,25 +9,28 @@
   </div>
 
   <VDropdown
-    ref="dropdownRef"
+    ref="dropdownEl"
     trigger="contextmenu"
     class="demo-dropdown"
+    @open="writeLog('open')"
+    @close="writeLog('close')"
   >
     <template #dropdown>第 {{ nRef }} 个条目的右键菜单</template>
   </VDropdown>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, useTemplateRef } from 'vue';
+import { writeLog } from '@vp/utils';
 
 // 当前点击的条目
 const nRef = ref(null);
 
 // 打开菜单
-const dropdownRef = ref(null);
+const dropdownEl = useTemplateRef('dropdownEl');
 function openDropdown(event, n) {
   nRef.value = n;
-  dropdownRef.value.open(event);
+  dropdownEl.value.open(event);
 }
 </script>
 

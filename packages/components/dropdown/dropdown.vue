@@ -1,11 +1,11 @@
 <!-- 下拉框 -->
 <template>
   <!-- 触发器 -->
-  <slot ref="triggerRef" />
+  <slot />
   <!-- 为了获取 slots.default 根元素 -->
   <span
     v-if="$slots.default"
-    ref="triggerNextRef"
+    ref="triggerNextEl"
     style="display: none"
   />
 
@@ -14,7 +14,7 @@
     <Transition name="vui-dropdown">
       <div
         v-show="dropdownVisible"
-        ref="dropdownRef"
+        ref="dropdownEl"
         v-bind="$attrs"
         class="vui-dropdown"
         :style="dropdownStyles"
@@ -32,7 +32,7 @@
 </template>
 
 <script setup>
-import { ref, provide, onMounted } from 'vue';
+import { ref, provide, onMounted, useTemplateRef } from 'vue';
 import { dropdownProps, dropdownEmits, useDropdown } from './composables/dropdown';
 import { menuModel, menuProps, menuEmits } from './composables/menu';
 import VMenu from './menu.vue';
@@ -46,17 +46,17 @@ const emits = defineEmits([...dropdownEmits, ...menuEmits]);
 const modelSelectedKey = defineModel('selectedKey', menuModel.selectedKey);
 
 // 触发器和下拉框
-const triggerRef = ref(null);
-const triggerNextRef = ref(null);
-const dropdownRef = ref(null);
+const triggerEl = ref(null);
+const triggerNextEl = useTemplateRef('triggerNextEl');
+const dropdownEl = useTemplateRef('dropdownEl');
 onMounted(() => {
-  triggerRef.value = triggerNextRef.value?.previousElementSibling;
+  triggerEl.value = triggerNextEl.value?.previousElementSibling;
 });
 
 // 下拉框
 const { dropdownVisible, dropdownStyles, openDropdown, closeDropdown } = useDropdown({
-  triggerRef,
-  dropdownRef,
+  triggerEl,
+  dropdownEl,
   props,
   emits
 });
