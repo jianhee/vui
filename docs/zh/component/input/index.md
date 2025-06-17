@@ -3,10 +3,10 @@
 ## 基础用法
 
 1. `v-model:value` 输入框的值
-2. `@input` 输入值时触发，参数为 `v-model:value` 的值，下同
-3. `@change` 修改值时触发
-4. `@enter` 按下 `Enter` 键时触发
-5. `@clear` 点击清空按钮时触发
+2. `emits.input` 输入值时触发，参数为 `v-model:value` 的值，下同
+3. `emits.change` 修改值时触发
+4. `emits.enter` 按下 `Enter` 键时触发
+5. `emits.clear` 点击清空按钮时触发
 
 <preview path="./demos/basic.vue"></preview>
 

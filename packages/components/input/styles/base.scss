@@ -43,13 +43,7 @@
 
       flex: auto;
       height: 100%;
-      font-family: inherit;
-      font-size: inherit;
       color: var(--#{$prefix}-text-color);
-      appearance: none;
-      outline: none;
-      background-color: transparent;
-      border: none;
     }
 
     // 尺寸
@@ -65,7 +59,9 @@
     }
 
     // 图标
-    --vui-icon-color: var(--vui-text-color-placeholder);
+    & {
+      --vui-icon-color: var(--vui-text-color-placeholder);
+    }
     &-clear:hover {
       --vui-icon-color: var(--vui-text-color-secondary);
     }

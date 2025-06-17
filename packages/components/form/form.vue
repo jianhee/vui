@@ -11,7 +11,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { formProps, useForm } from './composables';
+import { useForm, formProps } from './composables';
 
 // 处理数据
 const formRef = ref(null);

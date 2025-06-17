@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-import { checkboxModel, checkboxProps, checkboxEmits, useCheckbox } from './composables';
+import { useCheckbox, checkboxModel, checkboxProps, checkboxEmits } from './composables';
 
 // 处理数据
 const modelChecked = defineModel('checked', checkboxModel.checked);

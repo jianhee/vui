@@ -29,7 +29,7 @@ export const menuItemProps = {
 // 使用菜单项
 export function useMenuItem(menuItem) {
   // 菜单
-  const menu = inject('menu');
+  const menuRoot = inject('menuRoot');
 
   // 格式化菜单项
   const formattedMenuItem = computed(() => {
@@ -43,28 +43,28 @@ export function useMenuItem(menuItem) {
 
   // 是否选中
   const isSelected = computed(() => {
-    if (!menu.props.selectable) return false;
+    if (!menuRoot.props.selectable) return false;
 
-    return formattedMenuItem.value.key === menu.modelSelectedKey.value;
+    return formattedMenuItem.value.key === menuRoot.modelSelectedKey.value;
   });
 
   // 点击一项
   const onClickItem = () => {
     // 关闭下拉框
-    menu.closeDropdown();
+    menuRoot.closeDropdown();
 
     // 处理数据
     const selectedKey = formattedMenuItem.value.key;
     const params = { item: menuItem.props.item, key: selectedKey };
 
     // 点击事件
-    menu.emits('menu-click', params);
+    menuRoot.emits('menu-click', params);
 
     // 切换选中事件
-    if (!menu.props.selectable) return;
+    if (!menuRoot.props.selectable) return;
     if (!isSelected.value) {
-      menu.modelSelectedKey.value = selectedKey;
-      menu.emits('select-change', params);
+      menuRoot.modelSelectedKey.value = selectedKey;
+      menuRoot.emits('select-change', params);
     }
   };
 

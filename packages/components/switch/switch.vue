@@ -34,7 +34,7 @@
 </template>
 
 <script setup>
-import { switchModel, switchProps, switchEmits, useSwitch } from './composables';
+import { useSwitch, switchModel, switchProps, switchEmits } from './composables';
 import IconLoadingLoop from '../../icons/loading-loop.vue';
 
 // 处理数据

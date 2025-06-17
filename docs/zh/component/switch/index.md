@@ -3,7 +3,7 @@
 ## 基础用法
 
 1. `v-model:checked` 选中状态
-2. `@change` 切换选中状态时触发，参数为 `v-model:checked` 的值
+2. `emits.change` 切换选中状态时触发，参数为 `v-model:checked` 的值
 
 <preview path="./demos/basic.vue"></preview>
 
@@ -16,6 +16,6 @@
 
 ## 切换前钩子
 
-`before-change` 异步函数返回 `true` 时允许切换
+`props.beforeChange` 切换前执行的方法 `async () => true|false` 返回 `true` 允许切换
 
 <preview path="./demos/before-change.vue"></preview>

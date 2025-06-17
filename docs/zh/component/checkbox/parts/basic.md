@@ -11,7 +11,7 @@
 1. `v-model:checked` 选中状态，默认 `false`
 2. `props.label` 选项文本
 3. `slots.default` 选项文本后的自定义内容
-4. `@change` 切换选中状态时触发，参数为 `v-model:checked` 的值
+4. `emits.change` 切换选中状态时触发，参数为 `v-model:checked` 的值
 
 <preview path="@docs/component/checkbox/demos/option.vue"></preview>
 
@@ -22,7 +22,7 @@
    1. `Object.label` 选项文本，为空时使用 `value` 的值
    2. `Object.value` 选项值
 3. `slots.default` 选项文本后的自定义内容，参数为 `{ option }`
-4. `@change` 切换选项时触发，参数为 `{ option: '当前项', value: 'v-model:value 的值' }`
+4. `emits.change` 切换选项时触发，参数为 `{ option: '当前项', value: '当前项的 value' }`
 
 <preview path="@docs/component/checkbox/demos/group.vue"></preview>
 

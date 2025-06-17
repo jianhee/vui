@@ -27,7 +27,7 @@
 </template>
 
 <script setup>
-import { menuItemProps, useMenuItem } from './composables/menu';
+import { useMenuItem, menuItemProps } from './composables/menu';
 import { useIconProps } from '../icon/composables/base';
 import IconSelected from '../../icons/selected.vue';
 

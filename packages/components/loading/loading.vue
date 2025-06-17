@@ -17,7 +17,7 @@
 </template>
 
 <script setup>
-import { loadingProps, useLoading } from './composables';
+import { useLoading, loadingProps } from './composables';
 
 const props = defineProps(loadingProps);
 const { iconProps } = useLoading(props);

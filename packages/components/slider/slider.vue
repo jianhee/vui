@@ -33,7 +33,7 @@
 
 <script setup>
 import { useTemplateRef } from 'vue';
-import { sliderModel, sliderProps, useSlider } from './composables';
+import { useSlider, sliderModel, sliderProps } from './composables';
 
 // 轨道
 const railEl = useTemplateRef('railEl');

@@ -2,7 +2,7 @@
 import { computed } from 'vue';
 import { onLongPress } from '@vueuse/core';
 
-export const useMove = ({ boxRef, dragFlag, props, styles }) => {
+export const useDragboxMove = ({ boxRef, dragFlag, props, styles }) => {
   // 是否可移动
   const isMovable = computed(() => props.movable && !props.disabled);
 

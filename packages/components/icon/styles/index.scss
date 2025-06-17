@@ -1,8 +1,10 @@
 // 图标
 @use "../../../styles/mixins";
 .vui-icon {
-  display: inline-block;
+  display: inline-flex;
   flex: none;
+  align-items: center;
+  justify-content: center;
   width: var(--vui-icon-size, 1em);
   height: var(--vui-icon-size, 1em);
   overflow: hidden;

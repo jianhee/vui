@@ -18,7 +18,7 @@
 </template>
 
 <script setup>
-import { skeletonProps, useSkeleton } from './composables';
+import { useSkeleton, skeletonProps } from './composables';
 
 const props = defineProps(skeletonProps);
 const { formattedRows } = useSkeleton({ props });

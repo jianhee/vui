@@ -1,8 +1,8 @@
 <!-- 菜单 -->
 <template>
   <div class="vui-menu">
-    <VMenuItem
-      v-for="(item, index) in menu.props.menus"
+    <DropdownMenuItem
+      v-for="(item, index) in menuRoot.props.menus"
       :key="index"
       :item="item"
     />
@@ -11,7 +11,7 @@
 
 <script setup>
 import { inject } from 'vue';
-import VMenuItem from './menu-item.vue';
+import DropdownMenuItem from './menu-item.vue';
 
-const menu = inject('menu', null);
+const menuRoot = inject('menuRoot', null);
 </script>

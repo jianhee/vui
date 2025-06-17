@@ -1,7 +1,7 @@
 // 缩放
 import { computed } from 'vue';
 
-export const useResize = ({ boxRef, dragFlag, props, styles }) => {
+export const useDragboxResize = ({ boxRef, dragFlag, props, styles }) => {
   // 是否可缩放
   const isResizable = computed(() => props.resizable && !props.disabled);
 

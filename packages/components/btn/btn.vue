@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-import { btnProps, useBtn } from './composables';
+import { useBtn, btnProps } from './composables';
 import { useIconProps } from '../icon/composables/base';
 import IconLoadingLoop from '../../icons/loading-loop.vue';
 

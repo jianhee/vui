@@ -3,7 +3,8 @@
 ## 基础用法
 
 1. 下拉框由两个插槽组成，分别是 `slots.default` 触发器和 `slots.dropdown` 下拉框
-2. `@open` 和 `@close` 切换显示状态时触发
+2. `emits.open` 打开时触发
+3. `emits.close` 关闭时触发
 
 <preview path="./demos/dropdown-basic.vue"></preview>
 
@@ -26,7 +27,7 @@
    2. `Object.label|title` 文本
    3. `Object.icon` 前置图标，参考 [Btn 按钮](/component/btn#前置图标) 组件的 `icon` 属性
    4. `Object.divider` 是否添加分隔符
-2. `@menu-click` 点击菜单项时触发，参数为 `{ item: '当前项', key: '当前项的 key'}`
+2. `emits.menu-click` 点击菜单项时触发，参数为 `{ item: '当前项', key: '当前项的 key'}`
 
 <preview path="./demos/menu-basic.vue"></preview>
 
@@ -34,6 +35,6 @@
 
 1. `props.selectable` 是否可以选中，默认 `false`，设为 `true` 时菜单项的 `key` 必传
 2. `v-model:selectedKey` 选中项的 `key`
-3. `@select-change` 切换菜单项时触发，参数为 `{ item: '当前项', key: '绑定值'}`
+3. `emits.select-change` 切换菜单项时触发，参数为 `{ item: '当前项', key: '当前项的 key'}`
 
 <preview path="./demos/menu-select.vue"></preview>

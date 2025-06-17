@@ -16,6 +16,6 @@
 ## 提示框
 
 1. `props.showTip` 是否显示提示框，默认 `true`
-2. `props.tipFormat` 提示框内容格式化方法，参数为 `v-model:value` 的值
+2. `props.tipFormat` 格式化提示框内容的方法 `value => value`
 
 <preview path="./demos/tip.vue"></preview>

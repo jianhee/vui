@@ -35,8 +35,8 @@
 
 <script setup>
 import { shallowRef } from 'vue';
-import { inputModel, inputProps, inputEmits, useInput } from './composables';
-import { useFormElement } from './composables/base';
+import { useInput, inputModel, inputProps, inputEmits } from './composables';
+import { useFormElementAttrs } from './composables/base';
 import { useIconProps } from '../icon/composables/base';
 import IconClear from '../../icons/clear.vue';
 
@@ -51,7 +51,7 @@ const { focused, wraperClasses, isShowClearIcon, onValueInput, onValueChange, on
 
 // 筛选属性
 defineOptions({ inheritAttrs: false });
-const { wraperAttrs, innerAttrs } = useFormElement();
+const { wraperAttrs, innerAttrs } = useFormElementAttrs();
 
 // 图标
 const { iconProps } = useIconProps(props.icon);

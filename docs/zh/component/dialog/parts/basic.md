@@ -6,7 +6,8 @@
 
 1. `v-model:visible` 显示状态，默认 `false`
 2. `props.placement` 出现位置，抽屉特有的属性，可选的值有 `left` 左侧（默认）、`right` 右侧
-3. `@open` 和 `@close` 切换显示状态时触发
+3. `emits.open` 打开时触发
+4. `emits.close` 关闭时触发
 
 对话框和抽屉各自由三部分组成：
 

@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import { rowProps, useRow } from './composables';
+import { useRow, rowProps } from './composables';
 
 const props = defineProps(rowProps);
 const { rootClasses } = useRow(props);

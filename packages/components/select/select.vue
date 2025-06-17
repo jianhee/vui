@@ -40,8 +40,8 @@
 
 <script setup>
 import { ref } from 'vue';
-import { selectModel, selectProps, selectEmits, useSelect } from './composables';
-import { useFormElement } from '../input/composables/base';
+import { useSelect, selectModel, selectProps, selectEmits } from './composables';
+import { useFormElementAttrs } from '../input/composables/base';
 import IconArrow from '../../icons/select-arrow.vue';
 
 // 表单元素
@@ -55,5 +55,5 @@ const { wraperClasses, formattdOptions, onValueChange } = useSelect({ selectRef,
 
 // 筛选属性
 defineOptions({ inheritAttrs: false });
-const { wraperAttrs, innerAttrs } = useFormElement();
+const { wraperAttrs, innerAttrs } = useFormElementAttrs();
 </script>

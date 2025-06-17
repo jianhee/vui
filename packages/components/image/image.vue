@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-import { imageProps, useImage } from './composables';
+import { useImage, imageProps } from './composables';
 
 // 处理数据
 const props = defineProps(imageProps);

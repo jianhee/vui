@@ -1,7 +1,7 @@
 // 表单元素使用
 // 筛选外层属性和原生属性
 import { computed, useAttrs } from 'vue';
-export const useFormElement = () => {
+export const useFormElementAttrs = () => {
   const attrs = useAttrs();
 
   // 根元素的属性

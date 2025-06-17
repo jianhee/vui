@@ -47,8 +47,6 @@
     // 图标
     &-icon {
       --vui-icon-color: var(--vui-border-color-base);
-
-      border-radius: 2px;
     }
     &.is-checked &-icon {
       --vui-icon-color: var(--#{$prefix}-checked-color);

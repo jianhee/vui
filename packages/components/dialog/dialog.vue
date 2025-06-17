@@ -43,8 +43,8 @@
 </template>
 
 <script setup>
+import { useDialog, dialogModel, dialogProps, dialogEmits } from './composables';
 import IconClose from '../../icons/close.vue';
-import { dialogModel, dialogProps, dialogEmits, useDialog } from './composables';
 
 defineOptions({ inheritAttrs: false });
 

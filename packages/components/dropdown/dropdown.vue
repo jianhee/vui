@@ -20,7 +20,7 @@
         :style="dropdownStyles"
       >
         <!-- 使用菜单 -->
-        <VMenu v-if="menus" />
+        <DropdownMenu v-if="menus" />
         <!-- 使用自定义内容 -->
         <slot
           v-else
@@ -33,9 +33,9 @@
 
 <script setup>
 import { ref, provide, onMounted, useTemplateRef } from 'vue';
-import { dropdownProps, dropdownEmits, useDropdown } from './composables/dropdown';
+import { useDropdown, dropdownProps, dropdownEmits } from './composables/dropdown';
 import { menuModel, menuProps, menuEmits } from './composables/menu';
-import VMenu from './menu.vue';
+import DropdownMenu from './menu.vue';
 
 // 处理数据
 defineOptions({ inheritAttrs: false });
@@ -67,7 +67,7 @@ defineExpose({
 });
 
 // 菜单共享数据
-provide('menu', {
+provide('menuRoot', {
   modelSelectedKey,
   props,
   emits,
