@@ -10,8 +10,8 @@
 
 <!--@include: @/component/@parts/props-style.md-->
 
-1. 宽度 `props.width`、`style.--vui-image-width`
-2. 宽高比 `props.aspectRatio`、`style.--vui-image-aspect-ratio` 设置后可能显示不全
-3. 圆角尺寸 `props.radius`、`style.--vui-image-radius`
+1. `props.width` 宽度，不带单位时默认 `px`
+2. `props.aspectRatio` 宽高比，设置后可能显示不全
+3. `props.radius` 圆角尺寸，不带单位时默认 `px`
 
 <preview path="./demos/style.vue"></preview>

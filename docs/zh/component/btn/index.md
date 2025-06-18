@@ -42,7 +42,6 @@
 
 ### 圆角尺寸
 
-1. `props.radius`
-2. `style.--vui-btn-radius` 默认 `4px`
+`props.radius` 默认 `4px`，不带单位时默认 `px`
 
 <preview path="./demos/radius.vue"></preview>

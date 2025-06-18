@@ -24,6 +24,6 @@
 ## 标签的位置和宽度
 
 1. `formProps.labelPosition` 标签位置，可选的值有 `left` 左侧（默认）、`right` 右侧、`top` 顶部
-2. `formProps.labelWidth` 标签宽度，仅块级模式的左侧/右侧标签有效，默认取最长标签的宽度，缺省单位时默认 `px`
+2. `formProps.labelWidth` 标签宽度，仅块级模式的左侧/右侧标签有效，默认取最长标签的宽度，不带单位时默认 `px`
 
 <preview path="./demos/label.vue"></preview>

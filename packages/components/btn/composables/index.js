@@ -18,7 +18,7 @@ export const btnProps = {
   inline: { type: Boolean, default: true },
   block: { type: Boolean, default: false },
   // ---------- 样式属性 ----------
-  // 圆角尺寸：缺省单位时默认 `px`
+  // 圆角尺寸：不带单位时默认 `px`
   radius: { type: [Number, String], default: null }
 };
 

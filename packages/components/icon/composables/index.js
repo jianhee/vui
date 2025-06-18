@@ -18,9 +18,9 @@ export const iconProps = {
   color: { type: String, default: null },
   // 次要颜色：仅双色图标有效
   twoToneColor: { type: String, default: null },
-  // 图标尺寸: 缺省单位时默认 `px`
+  // 图标尺寸: 不带单位时默认 `px`
   size: { type: [Number, String], default: null },
-  // 旋转角度：缺省单位时默认 `deg`
+  // 旋转角度：不带单位时默认 `deg`
   rotate: { type: [Number, String], default: null }
 };
 

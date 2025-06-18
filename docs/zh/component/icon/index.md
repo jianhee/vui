@@ -1,14 +1,13 @@
 # Icon 图标
 
-## 导入图标
+## 使用图标
 
-可使用以下两种方式导入图标，后续使用的 API 和 UI 完全一致，二选一即可。
+支持以下两种方式，两者的 API 和 UI 完全一致，二选一即可。
 
 ### 使用 svg 名称
 
-1. 安装 `vite-plugin-svg-icons` 插件
-2. 自动导入所有 `.svg` 文件
-3. 在 `<VIcon>` 中使用 `name` 属性引入图标名称
+1. 安装 `vite-plugin-svg-icons` 插件，配置后即可自动导入所有 `.svg` 文件
+2. 使用 `<VIcon name="图标名称">` 展示图标
 
 :::code-group
 
@@ -46,9 +45,8 @@ import 'virtual:svg-icons-register';
 
 ### 使用 svg 组件
 
-1. 将 `.svg` 文件改写成 `.vue` 组件，或者安装 `vite-svg-loader` 插件自动转换
-2. 按需导入并注册图标组件
-3. 在 `<VIcon>` 中使用 `component` 属性引入图标组件
+1. 安装 `vite-svg-loader` 插件，配置后即可使用 `.svg?component` 将 `.svg` 文件导入为 `Vue` 组件
+2. 使用 `<VIcon :component="图标组件">` 展示图标
 
 :::code-group
 
@@ -105,23 +103,19 @@ import IconClose from './close.svg?component';
 
 ### 图标颜色
 
-支持单色图标和双色图标，需要将 `svg` 中对应的色值改为 `currentColor` 和 `var(--vui-icon-two-tone-color)`
-
-1. 单色图标 `props.color`、`style.--vui-icon-color` 默认继承父元素 `color`
-2. 双色图标 `props.twoOneColor`、`style.--vui-icon-two-tone-color`
+1. `props.color` 主要色值，默认继承父元素 `color`，需要将 `svg` 中对应的颜色改为 `currentColor`
+2. `props.twoOneColor` 双色图标的次要色值，仅双色图标有效，需要将 `svg` 中对应的颜色改为 `var(--vui-icon-two-tone-color)`
 
 <preview path="./demos/color.vue"></preview>
 
 ### 图标尺寸
 
-1. `props.size`
-2. `style.--vui-icon-size` 默认 `1em`
+`props.size` 默认 `1em`，不带单位时默认 `px`
 
 <preview path="./demos/size.vue"></preview>
 
 ### 旋转角度
 
-1. `props.rotate`
-2. 不支持 CSS 变量，设置后容易覆盖其它 `transform` 属性
+`props.rotate` 不带单位时默认 `deg`，不支持 CSS 变量，设置后容易覆盖其它 `transform` 属性
 
 <preview path="./demos/rotate.vue"></preview>

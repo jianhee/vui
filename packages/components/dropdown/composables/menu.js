@@ -11,11 +11,12 @@ export const menuModel = {
 
 // 菜单的 props
 export const menuProps = {
-  // 菜单项：兼容 `Number|String` 类型，格式化为 `Object.label`
+  // 菜单项 `[Object|Number|String]`
   // 1. `Object.key` 唯一标识
   // 2. `Object.label|title` 文本
   // 3. `Object.icon` 前置图标
   // 4. `Object.divider` 是否添加分隔符
+  // 5. `Number|String` 类型会格式化为 `Object.label`
   menus: { type: Array, default: null },
   // 是否可以选中：设为 `true` 时菜单项的 `key` 必传
   selectable: { type: Boolean, default: false }

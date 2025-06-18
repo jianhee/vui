@@ -10,7 +10,7 @@ export const formProps = {
   filedBlock: { type: Boolean, default: true },
   // 标签位置：left, right, top
   labelPosition: { type: String, default: 'left' },
-  // 标签宽度：仅块级模式的左侧/右侧标签有效，默认取最长标签的宽度，缺省单位时默认 `px`
+  // 标签宽度：仅块级模式的左侧/右侧标签有效，默认取最长标签的宽度，不带单位时默认 `px`
   labelWidth: { type: [Number, String], default: null }
 };
 

@@ -5,7 +5,7 @@
 ## 基础用法
 
 1. `v-model:visible` 显示状态，默认 `false`
-2. `props.placement` 出现位置，抽屉特有的属性，可选的值有 `left` 左侧（默认）、`right` 右侧
+2. `props.placement` 抽屉的出现位置，仅抽屉有效，可选的值有 `left` 左侧（默认）、`right` 右侧
 3. `emits.open` 打开时触发
 4. `emits.close` 关闭时触发
 
@@ -28,8 +28,6 @@
 
 ### 内容宽度
 
-1. `props.width`
-2. 对话框 `style.--vui-dialog-width` 默认 `50%`
-3. 抽屉 `style.--vui-drawer-width` 默认 `30%`
+`props.width` 对话框默认 `50%`，抽屉默认 `30%`，不带单位时默认 `px`
 
 <preview path="@docs/component/dialog/demos/width.vue"></preview>

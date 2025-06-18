@@ -15,7 +15,10 @@ export const sliderProps = {
   max: { type: Number, default: 100 },
   // 是否显示提示框
   showTip: { type: Boolean, default: true },
-  // 提示框内容格式化方法
+  // 提示框内容的格式化方法
+  //  1. 示例 `value => value`
+  //  2. 参数为 `v-model:value` 的值
+  //  3. 返回一个可以作为提示框内容的值
   tipFormat: { type: Function, default: value => value }
 };
 

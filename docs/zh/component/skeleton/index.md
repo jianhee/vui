@@ -13,8 +13,8 @@
 
 ## 构建模块
 
-1. `itemProps.width` 宽度，缺省单位时默认 `px`
-2. `itemProps.height` 高度，默认 `20px`，缺省单位时默认 `px`
+1. `itemProps.width` 宽度，不带单位时默认 `px`
+2. `itemProps.height` 高度，默认 `20px`，不带单位时默认 `px`
 3. `itemProps.aspectRatio` 宽高比，设置后忽略高度
 4. `itemProps.center` 是否水平居中，默认 `false`
 5. `itemProps.devider` 是否添加分割线，默认 `false`
