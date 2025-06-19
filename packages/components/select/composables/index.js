@@ -55,9 +55,10 @@ export const useSelect = ({ selectRef, modelValue, props, emits }) => {
   // 修改值
   function onValueChange() {
     const index = formattdOptions.value.findIndex(item => item.value === modelValue.value);
+    // 参数为当前项和 v-model:value 的值
     emits('change', {
-      value: modelValue.value,
-      option: props.options[index]
+      option: props.options[index],
+      value: modelValue.value
     });
   }
 

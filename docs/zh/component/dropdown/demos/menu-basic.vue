@@ -1,7 +1,7 @@
 <template>
   <VDropdown
     :menus="menus"
-    @menu-click="writeLog('menu-click', $event)"
+    @select="writeLog('select', $event)"
   >
     <VBtn>下拉菜单</VBtn>
   </VDropdown>

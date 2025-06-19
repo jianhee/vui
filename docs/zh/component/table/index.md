@@ -34,6 +34,14 @@
 
 1. `props.colResizable` 是否可以调整列宽，默认 `false`
 2. `props.colWidthsStorageKey` 列宽本地存储的 `key`
-3. `slots.default` 自定义单元格内容，参数为 `{ row: '当前行', col: '当前列' }`
+3. `slots.default` 自定义单元格内容，参数为 `{ ids: '当前行', col: '当前列' }`
 
 <preview path="./demos/cols.vue"></preview>
+
+## 可选择
+
+1. `props.selectable` 是否可选择，默认 `false`
+2. `v-model:selectedRowKeys` 选中项的 `key` 数组
+3. `emits.selection-change` 切换选中项时触发，参数为 `{ items: '选中项', key: 'v-model:selectedRowKeys 的值' }`
+
+<preview path="./demos/selection.vue"></preview>

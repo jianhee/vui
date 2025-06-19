@@ -25,7 +25,7 @@
    2. `Object.label` 选项文本，为空时使用 `Object.value` 的值
    3. `Number|String` 类型会格式化为 `Object.value` 和 `Object.label`
 3. `slots.default` 选项文本后的自定义内容，参数为 `{ option: '当前项' }`
-4. `emits.change` 切换选项时触发，参数为 `{ option: '当前项', value: '当前项的 value' }`
+4. `emits.change` 切换选项时触发，参数为 `{ option: '当前项', value: 'v-model:value 的值' }`
 
 <preview path="@docs/component/checkbox/demos/group.vue"></preview>
 

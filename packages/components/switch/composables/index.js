@@ -48,6 +48,7 @@ export const useSwitch = ({ modelChecked, props, emits }) => {
   function changeState() {
     const newState = !modelChecked.value;
     modelChecked.value = newState;
+    // 参数为 v-model:checked 的值
     emits('change', newState);
   }
 

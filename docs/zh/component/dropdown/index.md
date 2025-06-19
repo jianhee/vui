@@ -28,7 +28,7 @@
    3. `Object.icon` 前置图标，参考 [Btn 按钮](/component/btn#前置图标) 组件的 `icon` 属性
    4. `Object.divider` 是否添加分隔符
    5. `Number|String` 类型会格式化为 `Object.label`
-2. `emits.menu-click` 点击菜单项时触发，参数为 `{ item: '当前项', key: '当前项的 key'}`
+2. `emits.select` 选择一项时触发，参数为 `{ item: '当前项', key: '当前项的 key'}`
 
 <preview path="./demos/menu-basic.vue"></preview>
 
@@ -36,6 +36,6 @@
 
 1. `props.selectable` 是否可以选中，默认 `false`，设为 `true` 时菜单项的 `key` 必传
 2. `v-model:selectedKey` 选中项的 `key`
-3. `emits.selection-change` 切换菜单项时触发，参数为 `{ item: '当前项', key: '当前项的 key'}`
+3. `emits.selection-change` 切换选项时触发，参数为 `{ item: '当前项', key: 'v-model:selectedKey 的值'}`
 
 <preview path="./demos/menu-selection.vue"></preview>

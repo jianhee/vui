@@ -43,13 +43,14 @@
 import { computed, provide, useTemplateRef } from 'vue';
 import { useVirtualList } from '@vueuse/core';
 import { useTable, tableProps, tableEmits } from './composables/table';
+import { useSelection, selectionModel, selectionProps, selectionEmits } from './composables/selection';
 import TheadRow from './thead-row.vue';
 import TbodyRow from './tbody-row.vue';
 
 // 处理数据
 const tableEl = useTemplateRef('tableEl');
-const props = defineProps({ ...tableProps });
-const emits = defineEmits([...tableEmits]);
+const props = defineProps({ ...tableProps, ...selectionProps });
+const emits = defineEmits([...tableEmits, ...selectionEmits]);
 
 // 虚拟列表
 const {
@@ -70,6 +71,10 @@ const { rootClasses, rootStyles, headerStyles, colMinWidth, colWidths } = useTab
   tableEl,
   tbodyEl: tbodyProps.ref
 });
+
+// 处理多选
+const modelSelectedRowKeys = defineModel('selectedRowKeys', selectionModel.selectedRowKeys);
+useSelection({ modelSelectedRowKeys, props, emits });
 
 // 共享数据
 provide('tableRoot', {

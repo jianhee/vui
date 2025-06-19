@@ -2,7 +2,7 @@
 import { inject, computed } from 'vue';
 
 // emits
-export const menuEmits = ['menu-click', 'selection-change'];
+export const menuEmits = ['select', 'selection-change'];
 
 // 菜单的 v-model
 export const menuModel = {
@@ -51,23 +51,38 @@ export function useMenuItem(menuItem) {
 
   // 点击一项
   const onClickItem = () => {
-    // 关闭下拉框
     menuRoot.closeDropdown();
-
-    // 处理数据
-    const selectedKey = formattedMenuItem.value.key;
-    const params = { item: menuItem.props.item, key: selectedKey };
-
-    // 点击事件
-    menuRoot.emits('menu-click', params);
-
-    // 切换选中事件
-    if (!menuRoot.props.selectable) return;
-    if (!isSelected.value) {
-      menuRoot.modelSelectedKey.value = selectedKey;
-      menuRoot.emits('selection-change', params);
-    }
+    doSelect();
+    doSelectionChange();
   };
+
+  // 选中事件
+  function doSelect() {
+    // 参数为当前项和当前项的 key
+    menuRoot.emits('select', {
+      item: menuItem.props.item,
+      key: formattedMenuItem.value.key
+    });
+  }
+
+  // 切换事件
+  function doSelectionChange() {
+    // 是否可选
+    if (!menuRoot.props.selectable) return;
+
+    // 是否同一项
+    const newKey = formattedMenuItem.value.key;
+    if (newKey === menuRoot.modelSelectedKey.value) return;
+
+    // 切换
+    menuRoot.modelSelectedKey.value = newKey;
+
+    // 参数为当前项和 v-model:selectedKey 的值
+    menuRoot.emits('selection-change', {
+      item: menuItem.props.item,
+      key: newKey
+    });
+  }
 
   return {
     formattedMenuItem,

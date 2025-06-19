@@ -1,7 +1,17 @@
 <!-- 表头-行 -->
 <template>
   <div class="vui-table-row">
-    <!-- 单元格：支持拖拽调整宽度 -->
+    <!-- 全选 -->
+    <div
+      v-if="tableRoot.props.selectable"
+      class="vui-table-cell is-action"
+    >
+      <VCheckbox
+        :checked="isSelectedAll"
+        @change="toggleAllSelection"
+      />
+    </div>
+    <!-- 单元格：拖拽调整宽度 -->
     <VDragbox
       v-for="col in tableRoot.props.colItems"
       :key="col.key"
@@ -18,7 +28,9 @@
 
 <script setup>
 import { inject } from 'vue';
+import { useAllSelection } from './composables/selection';
 
 // 处理数据
 const tableRoot = inject('tableRoot', null);
+const { isSelectedAll, toggleAllSelection } = useAllSelection();
 </script>

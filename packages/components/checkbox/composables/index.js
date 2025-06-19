@@ -129,6 +129,7 @@ export function useCheckbox(checkbox) {
   function onCheckboxChange() {
     const newChecked = !isChecked.value;
     checkbox.modelChecked.value = newChecked;
+    // 参数为 v-model:checked 的值
     checkbox.emits('change', newChecked);
   }
 
@@ -154,6 +155,7 @@ export function useCheckbox(checkbox) {
   // 切换选项组
   function onGroupChange(newValue) {
     checkboxGroup.modelValue.value = newValue;
+    // 参数为当前项和 v-model:value 的值
     checkboxGroup.emits('change', {
       option: checkbox.props.option,
       value: newValue

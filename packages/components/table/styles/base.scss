@@ -1,0 +1,16 @@
+// 多选+拖拽
+@mixin vui-selection-drag($prefix) {
+  .#{$prefix} {
+    // 最左侧操作按钮图标
+    .is-action {
+      visibility: hidden;
+      padding-right: 0;
+      opacity: 0;
+    }
+    &:hover .is-action,
+    &.is-selected .is-action {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+}

@@ -1,3 +1,7 @@
+// 公共样式
+@use "./base";
+@include base.vui-selection-drag("vui-table-row");
+
 // vars
 :root {
   --vui-table-font-size: 14px;
@@ -32,7 +36,8 @@
     min-width: max-content;
     height: var(--vui-table-row-height);
     &:hover,
-    &.is-current {
+    &.is-current,
+    &.is-selected {
       background-color: var(--vui-table-row-active-bg-color);
     }
   }
