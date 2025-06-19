@@ -20,6 +20,6 @@
 
 1. 示例 `async checked => true|false`
 2. 参数为 `v-model:checked` 的值
-3. 异步返回 `true`（允许切换）或 `false`（停止切换）
+3. 返回 `true`（允许切换）或 `false`（停止切换）
 
 <preview path="./demos/before-change.vue"></preview>

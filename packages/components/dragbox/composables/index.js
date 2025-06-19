@@ -8,7 +8,7 @@ export const dragboxProps = {
   movable: { type: Boolean, default: false },
   // 是否可缩放
   resizable: { type: Boolean, default: false },
-  // 可缩放手柄：默认启用所有手柄
+  // 可缩放手柄：`[String]` 默认启用所有手柄
   // 定位元素支持 `['left', 'right', 'top', 'bottom']` 四个轴
   // 非定位元素只支持 `['right', 'bottom']` 两个轴
   resizeHandles: { type: Array, default: () => ['left', 'right', 'top', 'bottom'] },

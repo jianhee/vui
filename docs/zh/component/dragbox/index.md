@@ -11,7 +11,7 @@
 ## 缩放
 
 1. `props.resizable` 是否可缩放，默认 `false`
-2. `props.resizeHandles` 可缩放手柄，默认启用所有手柄
+2. `props.resizeHandles` 可缩放手柄 `[String]` 默认启用所有手柄
    1. 定位元素支持 `['left', 'right', 'top', 'bottom']` 四个轴
    2. 非定位元素只支持 `['right', 'bottom']` 两个轴
 3. `v-model:left` 和 `v-model:top` 当前位置，只能是 `Number` 类型，下同

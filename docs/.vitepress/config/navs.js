@@ -43,8 +43,8 @@ export const sidebarNavs = {
       text: '数据展示',
       items: [
         { text: 'Image 图片', link: '/component/image/' },
-        { text: 'Table 表格', link: '/component/table/' },
-        { text: 'Tree 树结构', link: '/component/tree/' },
+        { text: 'Table 虚拟化表格', link: '/component/table/' },
+        { text: 'Tree 虚拟化树', link: '/component/tree/' },
         { text: 'Skeleton 骨架屏', link: '/component/skeleton/' }
       ]
     },
