@@ -4,7 +4,7 @@
       v-model:selected-key="seletedKey"
       :menus="menus"
       selectable
-      @select-change="writeLog('select-change', $event)"
+      @selection-change="writeLog('selection-change', $event)"
     >
       <VBtn>下拉菜单</VBtn>
     </VDropdown>

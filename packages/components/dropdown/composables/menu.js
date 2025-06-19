@@ -2,7 +2,7 @@
 import { inject, computed } from 'vue';
 
 // emits
-export const menuEmits = ['menu-click', 'select-change'];
+export const menuEmits = ['menu-click', 'selection-change'];
 
 // 菜单的 v-model
 export const menuModel = {
@@ -65,7 +65,7 @@ export function useMenuItem(menuItem) {
     if (!menuRoot.props.selectable) return;
     if (!isSelected.value) {
       menuRoot.modelSelectedKey.value = selectedKey;
-      menuRoot.emits('select-change', params);
+      menuRoot.emits('selection-change', params);
     }
   };
 

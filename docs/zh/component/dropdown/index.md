@@ -36,6 +36,6 @@
 
 1. `props.selectable` 是否可以选中，默认 `false`，设为 `true` 时菜单项的 `key` 必传
 2. `v-model:selectedKey` 选中项的 `key`
-3. `emits.select-change` 切换菜单项时触发，参数为 `{ item: '当前项', key: '当前项的 key'}`
+3. `emits.selection-change` 切换菜单项时触发，参数为 `{ item: '当前项', key: '当前项的 key'}`
 
-<preview path="./demos/menu-select.vue"></preview>
+<preview path="./demos/menu-selection.vue"></preview>
