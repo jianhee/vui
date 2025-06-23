@@ -22,7 +22,7 @@ export const btnProps = {
   radius: { type: [Number, String], default: null }
 };
 
-// use
+// 使用按钮
 export const useBtn = props => {
   // 是否禁用
   const isDisabled = computed(() => props.disabled || props.loading);

@@ -19,6 +19,9 @@
 <script setup>
 import { useLoading, loadingProps } from './composables';
 
+// 加载
 const props = defineProps(loadingProps);
+
+// 使用加载
 const { iconProps } = useLoading(props);
 </script>

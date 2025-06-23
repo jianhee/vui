@@ -12,7 +12,7 @@
     <div
       v-for="handle in handleItems"
       :key="handle"
-      :class="['vui-dragbox-handle', `vui-dragbox-handle-${handle}`, { 'is-active': handle === dragFlag }]"
+      :class="['vui-dragbox-handle', `vui-dragbox-handle-${handle}`, { 'is-active': handle === handleActiveName }]"
       @mousedown="onResizeStart($event, handle)"
     />
   </div>
@@ -26,18 +26,16 @@ import { useDragboxResize } from './composables/resize';
 
 // 盒子
 const boxRef = ref(null);
-
-// 处理数据
 const props = defineProps(dragboxProps);
 const boxLeft = defineModel('left', dragboxModel);
 const boxTop = defineModel('top', dragboxModel);
 const boxWidth = defineModel('width', dragboxModel);
 const boxHeight = defineModel('height', dragboxModel);
 
-// 拖拽标识
-const dragFlag = ref(null); // move, left, right, top, bottom
+// 拖拽标识：move, resize
+const dragFlag = ref(null);
 
-// 移动
+// 使用移动
 const { moveClasses, moveStyles } = useDragboxMove({
   boxRef,
   dragFlag,
@@ -45,8 +43,8 @@ const { moveClasses, moveStyles } = useDragboxMove({
   styles: { boxLeft, boxTop }
 });
 
-// 缩放
-const { resizeClasses, resizeStyles, handleItems, onResizeStart } = useDragboxResize({
+// 使用缩放
+const { resizeClasses, resizeStyles, handleItems, handleActiveName, onResizeStart } = useDragboxResize({
   boxRef,
   dragFlag,
   props,

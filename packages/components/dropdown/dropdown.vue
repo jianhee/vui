@@ -32,41 +32,33 @@
 </template>
 
 <script setup>
-import { ref, provide, onMounted, useTemplateRef } from 'vue';
+import { provide, useTemplateRef } from 'vue';
 import { useDropdown, dropdownProps, dropdownEmits } from './composables/dropdown';
 import { menuModel, menuProps, menuEmits } from './composables/menu';
 import DropdownMenu from './menu.vue';
 
-// 处理数据
+// 下拉框
 defineOptions({ inheritAttrs: false });
+const triggerNextEl = useTemplateRef('triggerNextEl');
+const dropdownEl = useTemplateRef('dropdownEl');
+const modelSelectedKey = defineModel('selectedKey', menuModel.selectedKey);
 const props = defineProps({ ...dropdownProps, ...menuProps });
 const emits = defineEmits([...dropdownEmits, ...menuEmits]);
 
-// 当前选中的菜单键
-const modelSelectedKey = defineModel('selectedKey', menuModel.selectedKey);
-
-// 触发器和下拉框
-const triggerEl = ref(null);
-const triggerNextEl = useTemplateRef('triggerNextEl');
-const dropdownEl = useTemplateRef('dropdownEl');
-onMounted(() => {
-  triggerEl.value = triggerNextEl.value?.previousElementSibling;
-});
-
-// 下拉框
+// 使用下拉框
 const { dropdownVisible, dropdownStyles, openDropdown, closeDropdown } = useDropdown({
-  triggerEl,
+  triggerNextEl,
   dropdownEl,
   props,
   emits
 });
 
-// 下拉方法
+// 下拉框方法
 defineExpose({
   open: openDropdown
 });
 
-// 菜单共享数据
+// 菜单子组件使用
 provide('menuRoot', {
   modelSelectedKey,
   props,

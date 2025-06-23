@@ -1,5 +1,5 @@
-// 下拉菜单
-import { inject, computed } from 'vue';
+// 菜单
+import { computed } from 'vue';
 
 // emits
 export const menuEmits = ['select', 'selection-change'];
@@ -28,10 +28,7 @@ export const menuItemProps = {
 };
 
 // 使用菜单项
-export function useMenuItem(menuItem) {
-  // 菜单
-  const menuRoot = inject('menuRoot');
-
+export const useMenuItem = ({ menuRoot, menuItem }) => {
   // 格式化菜单项
   const formattedMenuItem = computed(() => {
     const item = menuItem.props.item;
@@ -49,7 +46,7 @@ export function useMenuItem(menuItem) {
     return formattedMenuItem.value.key === menuRoot.modelSelectedKey.value;
   });
 
-  // 点击一项
+  // 点击菜单
   const onClickItem = () => {
     menuRoot.closeDropdown();
     doSelect();
@@ -89,4 +86,4 @@ export function useMenuItem(menuItem) {
     isSelected,
     onClickItem
   };
-}
+};

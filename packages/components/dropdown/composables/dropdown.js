@@ -1,5 +1,5 @@
 // 下拉框
-import { ref, nextTick } from 'vue';
+import { ref, nextTick, onMounted } from 'vue';
 import { useEventListener, onClickOutside } from '@vueuse/core';
 
 // emits
@@ -11,12 +11,19 @@ export const dropdownProps = {
   trigger: { type: String, default: 'hover' }
 };
 
-// 使用方法
-export const useDropdown = ({ triggerEl, dropdownEl, props, emits }) => {
+// 使用下拉框
+export const useDropdown = ({ triggerNextEl, dropdownEl, props, emits }) => {
+  // 记录数据
+  const triggerEl = ref(null);
   const dropdownVisible = ref(false);
   const dropdownStyles = ref(null);
   const dropdownMargin = 5;
   let hoverTimer = null;
+
+  // 触发器
+  onMounted(() => {
+    triggerEl.value = triggerNextEl.value?.previousElementSibling;
+  });
 
   // 鼠标进入/离开：对齐元素
   function onMouseToggle(type) {

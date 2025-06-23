@@ -1,5 +1,5 @@
 // 多选框
-import { computed, inject } from 'vue';
+import { computed } from 'vue';
 import IconCheckbox from '../../../icons/checkbox.vue';
 import IconRadio from '../../../icons/radio.vue';
 
@@ -46,12 +46,8 @@ export const checkboxGroupProps = {
   optionBlock: { type: Boolean, default: true }
 };
 
-// 选项方法
-export function useCheckbox(checkbox) {
-  // 共享数据
-  const checkboxType = inject('checkboxType', 'checkbox');
-  const checkboxGroup = inject('checkboxGroup', null);
-
+// 使用选项
+export const useCheckbox = ({ checkboxType, checkboxGroup, checkbox }) => {
   // 区分类型
   const isCheckbox = checkboxType === 'checkbox';
   const IconComponent = isCheckbox ? IconCheckbox : IconRadio;
@@ -163,7 +159,6 @@ export function useCheckbox(checkbox) {
   }
 
   return {
-    checkboxType,
     IconComponent,
     isBtn,
     rootClasses,
@@ -171,4 +166,4 @@ export function useCheckbox(checkbox) {
     isChecked,
     onCheckedChange
   };
-}
+};

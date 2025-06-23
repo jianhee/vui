@@ -28,7 +28,7 @@ export const useDragboxMove = ({ boxRef, dragFlag, props, styles }) => {
 
   // 移动中
   function onMoving(e) {
-    if (!dragFlag.value) return;
+    if (dragFlag.value !== 'move') return;
 
     // 鼠标当前位置：不能超出窗口
     const mouseCurrentPos = {
@@ -47,7 +47,7 @@ export const useDragboxMove = ({ boxRef, dragFlag, props, styles }) => {
 
   // 移动结束
   function onMoveStop() {
-    if (!dragFlag.value) return;
+    if (dragFlag.value !== 'move') return;
 
     dragFlag.value = null;
     window.removeEventListener('mousemove', onMoving);

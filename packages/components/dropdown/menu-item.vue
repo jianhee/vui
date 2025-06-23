@@ -1,4 +1,4 @@
-<!-- 下拉菜单-项 -->
+<!-- 菜单-项 -->
 <template>
   <!-- 内容 -->
   <div
@@ -27,14 +27,23 @@
 </template>
 
 <script setup>
+import { inject } from 'vue';
 import { useMenuItem, menuItemProps } from './composables/menu';
 import { useIconProps } from '../icon/composables/base';
 import IconSelected from '../../icons/selected.vue';
 
 // 菜单
-const props = defineProps(menuItemProps);
-const { formattedMenuItem, isSelected, onClickItem } = useMenuItem({ props });
+const menuRoot = inject('menuRoot', null);
 
-// 图标
+// 菜单项
+const props = defineProps(menuItemProps);
+
+// 使用菜单项
+const { formattedMenuItem, isSelected, onClickItem } = useMenuItem({
+  menuRoot,
+  menuItem: { props }
+});
+
+// 使用图标
 const { iconProps } = useIconProps(formattedMenuItem.value.icon);
 </script>

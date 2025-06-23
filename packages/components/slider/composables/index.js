@@ -22,7 +22,7 @@ export const sliderProps = {
   tipFormat: { type: Function, default: value => value }
 };
 
-// use
+// 使用滑块
 export const useSlider = ({ railEl, handleEl, modelValue, props }) => {
   // 当前状态
   const isDragging = ref(false);
@@ -109,8 +109,8 @@ export const useSlider = ({ railEl, handleEl, modelValue, props }) => {
   });
 
   return {
-    trackStyles,
     rootClasses,
+    trackStyles,
     handleStyles,
     tipText,
     onClickRail,

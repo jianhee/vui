@@ -43,16 +43,22 @@
 </template>
 
 <script setup>
+import { inject } from 'vue';
 import { useDialog, dialogModel, dialogProps, dialogEmits } from './composables';
 import IconClose from '../../icons/close.vue';
 
-defineOptions({ inheritAttrs: false });
+// 区分类型
+const dialogType = inject('dialogType', 'dialog');
 
-// 处理数据
+// 弹窗
+defineOptions({ inheritAttrs: false });
 const modelVisible = defineModel('visible', dialogModel.visible);
 const props = defineProps(dialogProps);
 const emits = defineEmits(dialogEmits);
-const { dialogType, dialogClasses, dialogStyles, onClickOverlay, onClickCloseIcon } = useDialog({
+
+// 使用弹窗
+const { dialogClasses, dialogStyles, onClickOverlay, onClickCloseIcon } = useDialog({
+  dialogType,
   modelVisible,
   props,
   emits

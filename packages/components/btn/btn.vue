@@ -28,8 +28,10 @@ import IconLoadingLoop from '../../icons/loading-loop.vue';
 
 // 按钮
 const props = defineProps(btnProps);
+
+// 使用按钮
 const { isDisabled, rootClasses, rootStyles } = useBtn(props);
 
-// 图标
+// 使用图标
 const { iconProps } = useIconProps(props.icon);
 </script>

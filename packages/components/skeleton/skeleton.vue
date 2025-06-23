@@ -1,4 +1,4 @@
-<!-- 骨架屏-容器 -->
+<!-- 骨架屏 -->
 <template>
   <div class="vui-skeleton">
     <slot />

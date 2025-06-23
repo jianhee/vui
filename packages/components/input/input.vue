@@ -12,7 +12,7 @@
     />
     <!-- 输入框 -->
     <input
-      ref="inputRef"
+      ref="inputEl"
       v-model="modelValue"
       type="text"
       class="vui-input-inner"
@@ -34,25 +34,30 @@
 </template>
 
 <script setup>
-import { shallowRef } from 'vue';
+import { useTemplateRef } from 'vue';
 import { useInput, inputModel, inputProps, inputEmits } from './composables';
 import { useFormElementAttrs } from './composables/base';
 import { useIconProps } from '../icon/composables/base';
 import IconClear from '../../icons/clear.vue';
 
-// 表单元素
-const inputRef = shallowRef();
-
 // 输入框
+defineOptions({ inheritAttrs: false });
+const inputEl = useTemplateRef('inputEl');
 const modelValue = defineModel('value', inputModel.value);
 const props = defineProps(inputProps);
 const emits = defineEmits(inputEmits);
-const { focused, wraperClasses, isShowClearIcon, onValueInput, onValueChange, onKeyupEnter, onClearValue } = useInput({ inputRef, modelValue, props, emits });
 
 // 筛选属性
-defineOptions({ inheritAttrs: false });
 const { wraperAttrs, innerAttrs } = useFormElementAttrs();
 
-// 图标
+// 使用输入框
+const { focused, wraperClasses, isShowClearIcon, onValueInput, onValueChange, onKeyupEnter, onClearValue } = useInput({
+  inputEl,
+  modelValue,
+  props,
+  emits
+});
+
+// 使用图标
 const { iconProps } = useIconProps(props.icon);
 </script>

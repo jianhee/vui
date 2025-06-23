@@ -21,10 +21,10 @@ export const inputProps = {
   disabled: { type: Boolean, default: false }
 };
 
-// use
-export const useInput = ({ inputRef, modelValue, props, emits }) => {
+// 使用输入框
+export const useInput = ({ inputEl, modelValue, props, emits }) => {
   // 是否获取焦点
-  const { focused } = useFocus(inputRef);
+  const { focused } = useFocus(inputEl);
 
   // 是否显示清除按钮
   const isShowClearIcon = computed(() => {
@@ -67,8 +67,8 @@ export const useInput = ({ inputRef, modelValue, props, emits }) => {
 
   return {
     focused,
-    isShowClearIcon,
     wraperClasses,
+    isShowClearIcon,
     onValueInput,
     onValueChange,
     onKeyupEnter,

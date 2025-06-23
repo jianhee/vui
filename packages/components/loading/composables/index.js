@@ -14,8 +14,9 @@ export const loadingProps = {
   text: { type: String, default: 'Loading...' }
 };
 
-// use
-export function useLoading(props) {
+// 使用加载
+export const useLoading = props => {
+  // 格式化图标属性
   const iconProps = computed(() => {
     // 默认图标：本身带 spin
     const defaultIcon = props.animate === 'bubble' ? IconLoadingBubble : IconLoadingLoop;
@@ -32,5 +33,7 @@ export function useLoading(props) {
     };
   });
 
-  return { iconProps };
-}
+  return {
+    iconProps
+  };
+};

@@ -22,7 +22,9 @@
 <script setup>
 import { useImage, imageProps } from './composables';
 
-// 处理数据
+// 图片
 const props = defineProps(imageProps);
+
+// 使用图片
 const { rootStyles, isShowSkeleton, skeletonAspectRatio, imgSrc, dataSrc } = useImage(props);
 </script>

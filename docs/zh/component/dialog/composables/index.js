@@ -1,7 +1,8 @@
 import { ref } from 'vue';
 import { useRoute } from 'vitepress';
 
-export function useDialog() {
+// 使用弹窗
+export const useDialog = () => {
   // 区分类型
   const route = useRoute();
   const isDialog = /dialog/.test(route.path);
@@ -17,4 +18,4 @@ export function useDialog() {
     openDialog: () => (isVisible.value = true),
     closeDialog: () => (isVisible.value = false)
   };
-}
+};

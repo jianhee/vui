@@ -19,7 +19,9 @@
 <script setup>
 import { useIcon, iconProps } from './composables';
 
-// 处理数据
+// 图标
 const props = defineProps(iconProps);
+
+// 使用图标
 const { rootClasses, rootStyles } = useIcon(props);
 </script>

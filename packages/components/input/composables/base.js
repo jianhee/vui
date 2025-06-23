@@ -1,6 +1,7 @@
-// 表单元素使用
-// 筛选外层属性和原生属性
+// VInput/VSelect 等表单组件使用
 import { computed, useAttrs } from 'vue';
+
+// 使用表单元素属性
 export const useFormElementAttrs = () => {
   const attrs = useAttrs();
 

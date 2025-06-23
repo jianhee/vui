@@ -17,8 +17,8 @@ export const skeletonProps = {
   rows: { type: Number, default: 1 }
 };
 
-// use
-export const useSkeleton = ({ props }) => {
+// 使用骨架屏项
+export const useSkeletonItem = props => {
   // 获取宽度
   const getWidth = index => {
     if (props.width) return props.width;

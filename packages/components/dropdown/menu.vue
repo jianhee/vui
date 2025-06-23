@@ -13,5 +13,6 @@
 import { inject } from 'vue';
 import DropdownMenuItem from './menu-item.vue';
 
+// 菜单
 const menuRoot = inject('menuRoot', null);
 </script>

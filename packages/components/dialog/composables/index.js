@@ -1,5 +1,5 @@
 // 对话框
-import { computed, watch, inject } from 'vue';
+import { computed, watch } from 'vue';
 import { addUnit } from '../../../utils';
 
 // emits
@@ -25,10 +25,9 @@ export const dialogProps = {
   width: { type: [Number, String], default: null }
 };
 
-// use
-export const useDialog = ({ modelVisible, props, emits }) => {
+// 使用弹窗
+export const useDialog = ({ dialogType, modelVisible, props, emits }) => {
   // 区分类型
-  const dialogType = inject('dialogType', 'dialog');
   const isDialog = dialogType === 'dialog';
 
   // 获取类名
@@ -71,7 +70,6 @@ export const useDialog = ({ modelVisible, props, emits }) => {
   });
 
   return {
-    dialogType,
     dialogClasses,
     dialogStyles,
     onClickOverlay,

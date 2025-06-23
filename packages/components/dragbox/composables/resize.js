@@ -1,5 +1,5 @@
 // 缩放
-import { computed } from 'vue';
+import { ref, computed } from 'vue';
 
 export const useDragboxResize = ({ boxRef, dragFlag, props, styles }) => {
   // 是否可缩放
@@ -12,6 +12,7 @@ export const useDragboxResize = ({ boxRef, dragFlag, props, styles }) => {
   });
 
   // 初始数据
+  const handleActiveName = ref(null);
   let mouseStartPos = { x: 0, y: 0 };
   let boxStartSize = { width: 0, height: 0 };
 
@@ -26,9 +27,12 @@ export const useDragboxResize = ({ boxRef, dragFlag, props, styles }) => {
     const handleIsDragable = ['right', 'bottom'].includes(handleName);
     if (!boxIsFixed && !handleIsDragable) return;
 
+    // 记录状态
+    dragFlag.value = 'resize';
+    handleActiveName.value = handleName;
+
     // 记录初始数据
     const { offsetWidth, offsetHeight } = boxRef.value;
-    dragFlag.value = handleName;
     mouseStartPos = { x: e.clientX, y: e.clientY };
     boxStartSize = { width: offsetWidth, height: offsetHeight };
 
@@ -38,20 +42,20 @@ export const useDragboxResize = ({ boxRef, dragFlag, props, styles }) => {
 
   // 缩放中
   function onResizing(e) {
-    if (!dragFlag.value) return;
+    if (dragFlag.value !== 'resize') return;
 
     // 需要扣除的边框宽度
-    const useBorder = ['right', 'bottom'].includes(dragFlag.value);
+    const useBorder = ['right', 'bottom'].includes(handleActiveName.value);
     const handleBoderWidth = useBorder ? 2 : 0;
 
     // 水平方向
-    const isHorizontal = ['left', 'right'].includes(dragFlag.value);
+    const isHorizontal = ['left', 'right'].includes(handleActiveName.value);
     if (isHorizontal) {
       const maxWidth = document.documentElement.clientWidth - handleBoderWidth;
       const mouseX = Math.max(0, Math.min(e.clientX, maxWidth));
       // 盒子当前宽度
       const deltaX = mouseX - mouseStartPos.x;
-      const isLeft = dragFlag.value === 'left';
+      const isLeft = handleActiveName.value === 'left';
       const newWidth = isLeft ? boxStartSize.width - deltaX : boxStartSize.width + deltaX;
       styles.boxWidth.value = Math.max(newWidth, props.minWidth);
       // 盒子当前位置
@@ -65,7 +69,7 @@ export const useDragboxResize = ({ boxRef, dragFlag, props, styles }) => {
     const mouseY = Math.max(0, Math.min(e.clientY, maxHeight));
     // 盒子当前宽度
     const deltaY = mouseY - mouseStartPos.y;
-    const isTop = dragFlag.value === 'top';
+    const isTop = handleActiveName.value === 'top';
     const newHeight = isTop ? boxStartSize.height - deltaY : boxStartSize.height + deltaY;
     styles.boxHeight.value = Math.max(newHeight, props.minHeight);
     // 盒子当前位置
@@ -76,9 +80,10 @@ export const useDragboxResize = ({ boxRef, dragFlag, props, styles }) => {
 
   // 缩放结束
   function onResizeStop() {
-    if (!dragFlag.value) return;
+    if (dragFlag.value !== 'resize') return;
 
     dragFlag.value = null;
+    handleActiveName.value = null;
     window.removeEventListener('mousemove', onResizing);
     window.removeEventListener('mouseup', onResizeStop);
   }
@@ -87,7 +92,7 @@ export const useDragboxResize = ({ boxRef, dragFlag, props, styles }) => {
   const resizeClasses = computed(() => {
     return {
       'is-resizable': isResizable.value,
-      'is-resizing': dragFlag.value && dragFlag.value !== 'move'
+      'is-resizing': dragFlag.value === 'resize'
     };
   });
 
@@ -106,6 +111,7 @@ export const useDragboxResize = ({ boxRef, dragFlag, props, styles }) => {
     resizeClasses,
     resizeStyles,
     handleItems,
+    handleActiveName,
     onResizeStart
   };
 };

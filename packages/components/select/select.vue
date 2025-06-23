@@ -7,7 +7,7 @@
     <!-- 显示选项 -->
     <select
       v-if="options"
-      ref="selectRef"
+      ref="selectEl"
       v-model="modelValue"
       class="vui-select-inner"
       v-bind="innerAttrs"
@@ -39,21 +39,26 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { useTemplateRef } from 'vue';
 import { useSelect, selectModel, selectProps, selectEmits } from './composables';
 import { useFormElementAttrs } from '../input/composables/base';
 import IconArrow from '../../icons/select-arrow.vue';
 
-// 表单元素
-const selectRef = ref(null);
-
 // 选择器
+defineOptions({ inheritAttrs: false });
+const selectEl = useTemplateRef('selectEl');
 const modelValue = defineModel('value', selectModel.value);
 const props = defineProps(selectProps);
 const emits = defineEmits(selectEmits);
-const { wraperClasses, formattdOptions, onValueChange } = useSelect({ selectRef, modelValue, props, emits });
 
 // 筛选属性
-defineOptions({ inheritAttrs: false });
 const { wraperAttrs, innerAttrs } = useFormElementAttrs();
+
+// 使用选择器
+const { wraperClasses, formattdOptions, onValueChange } = useSelect({
+  selectEl,
+  modelValue,
+  props,
+  emits
+});
 </script>

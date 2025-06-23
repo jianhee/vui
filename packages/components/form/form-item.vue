@@ -10,6 +10,5 @@
 
 <script setup>
 import { formItemProps } from './composables';
-
 defineProps(formItemProps);
 </script>

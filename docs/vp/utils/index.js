@@ -1,6 +1,7 @@
 import { toast } from 'vui/plugins';
+
 // log
-export function writeLog(...args) {
+export const writeLog = (...args) => {
   toast.success(...args);
   console.log(...args);
-}
+};

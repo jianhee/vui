@@ -20,7 +20,7 @@ export const switchProps = {
   beforeChange: { type: Function, default: null }
 };
 
-// use
+// 使用开关
 export const useSwitch = ({ modelChecked, props, emits }) => {
   // 加载中
   const isLoading = ref(false);

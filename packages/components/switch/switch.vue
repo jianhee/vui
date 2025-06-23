@@ -37,9 +37,15 @@
 import { useSwitch, switchModel, switchProps, switchEmits } from './composables';
 import IconLoadingLoop from '../../icons/loading-loop.vue';
 
-// 处理数据
+// 开关
 const modelChecked = defineModel('checked', switchModel.checked);
 const props = defineProps(switchProps);
 const emits = defineEmits(switchEmits);
-const { rootClasses, activeClasses, inactiveClasses, isLoading, onClick } = useSwitch({ modelChecked, props, emits });
+
+// 使用开关
+const { rootClasses, activeClasses, inactiveClasses, isLoading, onClick } = useSwitch({
+  modelChecked,
+  props,
+  emits
+});
 </script>

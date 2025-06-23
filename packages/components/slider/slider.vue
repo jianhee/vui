@@ -35,12 +35,17 @@
 import { useTemplateRef } from 'vue';
 import { useSlider, sliderModel, sliderProps } from './composables';
 
-// 轨道
+// 滑块
 const railEl = useTemplateRef('railEl');
 const handleEl = useTemplateRef('handleEl');
-
-// 处理数据
 const modelValue = defineModel('value', sliderModel.value);
 const props = defineProps(sliderProps);
-const { rootClasses, trackStyles, handleStyles, tipText, onClickRail, onSliderDragStart } = useSlider({ railEl, handleEl, modelValue, props });
+
+// 使用滑块
+const { rootClasses, trackStyles, handleStyles, tipText, onClickRail, onSliderDragStart } = useSlider({
+  railEl,
+  handleEl,
+  modelValue,
+  props
+});
 </script>

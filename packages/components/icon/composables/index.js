@@ -25,7 +25,7 @@ export const iconProps = {
 };
 
 // 使用图标
-export function useIcon(props) {
+export const useIcon = props => {
   // 获取类名
   const rootClasses = computed(() => [
     'vui-icon',
@@ -48,4 +48,4 @@ export function useIcon(props) {
     rootClasses,
     rootStyles
   };
-}
+};

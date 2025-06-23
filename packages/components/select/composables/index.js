@@ -24,10 +24,10 @@ export const selectProps = {
   disabled: { type: Boolean, default: false }
 };
 
-// use
-export const useSelect = ({ selectRef, modelValue, props, emits }) => {
+// 使用选择器
+export const useSelect = ({ selectEl, modelValue, props, emits }) => {
   // 是否获取焦点
-  const { focused } = useFocus(selectRef);
+  const { focused } = useFocus(selectEl);
 
   // 格式化选项
   const formattdOptions = computed(() => {

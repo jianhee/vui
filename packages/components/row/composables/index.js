@@ -11,7 +11,7 @@ export const rowProps = {
   ellipsis: { type: Boolean, default: false }
 };
 
-// use
+// 使用行
 export const useRow = props => {
   const rootClasses = computed(() => {
     return [
