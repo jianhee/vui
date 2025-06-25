@@ -1,5 +1,5 @@
-// 多选
-import { computed, watch, inject, provide } from 'vue';
+// 行-多选
+import { computed, watch, provide, inject } from 'vue';
 import { useEventListener } from '@vueuse/core';
 
 // emits
@@ -7,64 +7,78 @@ export const selectionEmits = ['selection-change'];
 
 // v-model
 export const selectionModel = {
-  // 选中项的 `key` 数组
-  selectedRowKeys: { type: Array, default: null }
+  // 选中项的 `id`
+  selectedRowIds: { type: Array, default: null }
 };
 
 // props
 export const selectionProps = {
-  // 是否可选择
-  selectable: { type: Boolean, default: false }
+  // 是否可以选择行
+  selectable: { type: Boolean, default: false },
+  // 左侧鼠标框选区域的宽度
+  // 默认只能从底部空白区域开始框选，设置后也可以从左侧开始框选
+  selectAreaGap: { type: Number, default: 0 }
 };
 
 // 使用多选
-export const useSelection = ({ modelSelectedRowKeys, props, emits }) => {
+export const useSelection = ({ selectable, selectAreaGap, modelSelectedRowIds, rowItems, emits }) => {
   // 切换事件
-  function onSelectionChange(keys = [], items = []) {
-    if (!props.selectable) return;
-    modelSelectedRowKeys.value = keys;
-    // 参数为选中项和 v-model:selectedRowKeys 的值
-    emits('selection-change', { items, keys });
+  function onSelectionChange(selectedItems = [], selectedIds = []) {
+    if (!selectable) return;
+
+    // 更新值
+    modelSelectedRowIds.value = selectedIds;
+
+    // 参数为 选中项、选中项的 id
+    emits('selection-change', { selectedItems, selectedIds });
   }
 
   // 更新数据时取消选中
   watch(
-    () => props.rowItems,
+    () => rowItems,
     () => {
-      if (!props.selectable) return;
+      if (!selectable) return;
       onSelectionChange();
     }
   );
 
-  // 子集使用
-  provide('tableSelection', {
-    rowItems: props.rowItems,
-    selectable: props.selectable,
-    modelSelectedRowKeys,
+  // 子组件使用
+  provide('selectionRoot', {
     onSelectionChange
   });
+
+  // 鼠标框选的样式
+  const selectRootStyles = computed(() => ({ marginLeft: `-${selectAreaGap}px` }));
+  const selectInnerStyles = computed(() => ({ paddingLeft: `${selectAreaGap}px` }));
+
+  return {
+    selectRootStyles,
+    selectInnerStyles
+  };
 };
 
-// 全选
-export const useAllSelection = () => {
-  const tableSelection = inject('tableSelection', null);
+// 使用全选
+export const useAllSelection = ({ selectable, modelSelectedRowIds, rowItems }) => {
+  // 全局状态
+  const selectionRoot = inject('selectionRoot', null);
 
   // 是否全选
   const isSelectedAll = computed(() => {
-    if (!tableSelection.selectable) return false;
+    if (!selectable) return false;
 
-    return tableSelection.modelSelectedRowKeys.value?.length === tableSelection.rowItems?.length;
+    return modelSelectedRowIds.value?.length === rowItems?.length;
   });
 
   // 切换全选
   const toggleAllSelection = () => {
-    if (!tableSelection.selectable) return;
+    if (!selectable) return;
 
-    if (isSelectedAll.value) {
-      tableSelection.onSelectionChange();
+    const newState = !isSelectedAll.value;
+    if (newState) {
+      const selectedIds = rowItems?.map(item => item.id);
+      selectionRoot.onSelectionChange(rowItems, selectedIds);
     } else {
-      const ids = tableSelection.rowItems?.map(item => item.id);
-      tableSelection.onSelectionChange(ids, tableSelection.rowItems);
+      selectionRoot.onSelectionChange();
     }
   };
 
@@ -82,30 +96,32 @@ export const useAllSelection = () => {
   };
 };
 
-// 行选中
-export const useRowSelection = ({ props }) => {
-  const tableSelection = inject('tableSelection', null);
+// 使用行选中
+export const useRowSelection = ({ selectable, modelSelectedRowIds, rowItems, rowId }) => {
+  // 全局状态
+  const selectionRoot = inject('selectionRoot', null);
 
   // 是否选中
   const isSelectedRow = computed(() => {
-    if (!tableSelection.selectable) return false;
+    if (!selectable) return false;
 
-    return tableSelection.modelSelectedRowKeys.value?.includes(props.rowData?.id);
+    return modelSelectedRowIds.value?.includes(rowId);
   });
 
   // 切换选中
-  function toggleRowSelection() {
-    if (!tableSelection.selectable) return;
+  const toggleRowSelection = () => {
+    if (!selectable) return;
 
-    let ids = tableSelection.modelSelectedRowKeys.value || [];
-    if (isSelectedRow.value) {
-      ids = ids.filter(id => id !== props.rowData?.id);
+    const newState = !isSelectedRow.value;
+    let selectedIds = modelSelectedRowIds.value || [];
+    if (newState) {
+      selectedIds.push(rowId);
     } else {
-      ids.push(props.rowData?.id);
+      selectedIds = selectedIds.filter(id => id !== rowId);
     }
-    const items = tableSelection.rowItems.filter(item => ids.includes(item.id));
-    tableSelection.onSelectionChange(ids, items);
-  }
+    const selectedItems = rowItems.filter(item => selectedIds.includes(item.id));
+    selectionRoot.onSelectionChange(selectedItems, selectedIds);
+  };
 
   // 类名
   const rowSelectionClasses = computed(() => {

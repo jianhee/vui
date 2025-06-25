@@ -50,7 +50,7 @@
 
 <preview path="@docs/component/checkbox/demos/group-display.vue"></preview>
 
-## Option API
+## 单个选项 API
 
 ### 属性
 
@@ -74,7 +74,7 @@
 | -------- | ------------------ | -------------------------------------------- |
 | `change` | 切换选中状态时触发 | `{ event: '事件对象', checked: '是否选中' }` |
 
-## Group API
+## 选项组 API
 
 ### 属性
 
@@ -85,6 +85,15 @@
 | `optionType`    | 选项类型                   | `string`(`button`)                                          |         |
 | `optionInline`  | 是否为行内模式             | `boolean`                                                   | `false` |
 | `optionBlock`   | 是否为块级模式             | `boolean`                                                   | `true`  |
+
+#### options
+
+`string|number` 类型的选项会格式化为 `{ value, label }`
+
+| 名称    | 说明                              | 类型             | 默认值 |
+| ------- | --------------------------------- | ---------------- | ------ |
+| `value` | 选项值                            | `string\|number` |        |
+| `label` | 选项文本，为空时使用 `value` 的值 | `string\|number` |        |
 
 ### 插槽
 
@@ -97,12 +106,3 @@
 | 名称     | 说明           | 参数                                                                            |
 | -------- | -------------- | ------------------------------------------------------------------------------- |
 | `change` | 切换选项时触发 | `{ option: '当前项', value: '当前项的 value', checkedValue: '选中项的 value' }` |
-
-## Group.options
-
-`string|number` 类型的选项会格式化为 `{ value, label }`
-
-| 名称    | 说明                              | 类型             | 默认值 |
-| ------- | --------------------------------- | ---------------- | ------ |
-| `value` | 选项值                            | `string\|number` |        |
-| `label` | 选项文本，为空时使用 `value` 的值 | `string\|number` |        |

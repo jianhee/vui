@@ -15,25 +15,25 @@
 
 ## 下拉方法
 
-使用 `open()` 方法可以手动打开下拉框，此时可以省略插槽，通常用于多个元素打开同一个下拉框的情况，比如列表项中的右键菜单
+使用 `open()` 方法可以手动打开下拉框，此时可以省略 `default` 插槽，通常用于多个元素打开同一个下拉框的情况，比如列表项中的右键菜单
 
 <preview path="./demos/dropdown-method.vue"></preview>
 
-## 下拉菜单
+## 构建菜单
 
-1. 使用 `menus` 属性构建菜单项，此时下拉框自动渲染为菜单
+1. 使用 `menus` 属性可以在下拉框中自动构建菜单，此时可以省略 `dropdown` 插槽
 2. 点击菜单项时触发 `select` 事件
 
 <preview path="./demos/menu-basic.vue"></preview>
 
-## 选中菜单
+## 选择菜单
 
-1. 使用 `selectable` 属性控制是否可选，使用 `v-model:selectedKey` 属性绑定选中值
+1. 使用 `selectable` 属性控制菜单是否可选择，使用 `v-model:selectedKey` 属性绑定选中值
 2. 切换菜单项时触发 `selection-change` 事件
 
 <preview path="./demos/menu-selection.vue"></preview>
 
-## Dropdown API
+## 下拉框相关 API
 
 ### 属性
 
@@ -61,24 +61,17 @@
 | -------- | ---------- | ----------------------- |
 | `open()` | 打开下拉框 | `{ event: '事件对象' }` |
 
-## Menu API
+## 菜单相关 API
 
 ### 属性
 
-| 名称                  | 说明                                                          | 类型                            | 默认值  |
-| --------------------- | ------------------------------------------------------------- | ------------------------------- | ------- |
-| `menus`               | 菜单项                                                        | `Array[object\|string\|number]` |         |
-| `selectable`          | 菜单是否可选 <br> 可选时会记录选中值，所以菜单项的 `key` 必传 | `boolean`                       | `false` |
-| `v-model:selectedKey` | 菜单的选中值，即选中项的 `key`                                | `string\|number`                |         |
+| 名称                  | 说明                                                            | 类型                            | 默认值  |
+| --------------------- | --------------------------------------------------------------- | ------------------------------- | ------- |
+| `menus`               | 菜单项                                                          | `Array[object\|string\|number]` |         |
+| `selectable`          | 菜单是否可选择 <br> 可选时会记录选中值，所以菜单项的 `key` 必填 | `boolean`                       | `false` |
+| `v-model:selectedKey` | 菜单的选中值，即选中项的 `key`                                  | `string\|number`                |         |
 
-### 事件
-
-| 名称               | 说明             | 参数                                                                   |
-| ------------------ | ---------------- | ---------------------------------------------------------------------- |
-| `select`           | 点击菜单项时触发 | `{ item: '当前项', key: '当前项的 key' }`                              |
-| `selection-change` | 切换菜单项时触发 | `{ item: '当前项', key: '当前项的 key', selectedKey: '选中项的 key' }` |
-
-## Menu.menus
+#### menus
 
 `string|number` 类型的菜单项会格式化为 `{ label }`
 
@@ -88,3 +81,10 @@
 | `label\|title` | 文本                                                             | `string\|number`            |         |
 | `icon`         | 前置图标，参考 [Btn](/component/btn#前置图标) 组件的 `icon` 属性 | `string\|component\|object` |         |
 | `divider`      | 是否添加分隔符                                                   | `boolean`                   | `false` |
+
+### 事件
+
+| 名称               | 说明             | 参数                                                                   |
+| ------------------ | ---------------- | ---------------------------------------------------------------------- |
+| `select`           | 点击菜单项时触发 | `{ item: '当前项', key: '当前项的 key' }`                              |
+| `selection-change` | 切换菜单项时触发 | `{ item: '当前项', key: '当前项的 key', selectedKey: '选中项的 key' }` |

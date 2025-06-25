@@ -3,12 +3,12 @@
   <div
     ref="tableEl"
     :class="rootClasses"
-    :style="rootStyles"
+    :style="{ ...rootStyles, ...selectRootStyles }"
   >
     <!-- 表头 -->
     <div
       class="vui-table-header"
-      :style="headerStyles"
+      :style="{ ...headerStyles, ...selectInnerStyles }"
     >
       <TheadRow />
     </div>
@@ -16,11 +16,14 @@
     <div
       class="vui-table-body"
       v-bind="tbodyProps"
+      :style="selectInnerStyles"
     >
+      <!-- 鼠标框选 -->
+      <SelectRect v-if="selectable" />
       <!-- 虚拟列表 -->
       <div
         class="vui-table-view"
-        v-bind="tviewProps"
+        v-bind="viewProps"
       >
         <!-- 行 -->
         <TbodyRow
@@ -29,6 +32,7 @@
           :key="row.id"
           :row-data="row"
         >
+          <!-- 单元格内容 -->
           <slot
             :row="row"
             :col="col"
@@ -40,23 +44,28 @@
 </template>
 
 <script setup>
-import { computed, provide, useTemplateRef } from 'vue';
+import { ref, computed, provide, useTemplateRef } from 'vue';
 import { useVirtualList } from '@vueuse/core';
 import { useTable, tableProps, tableEmits } from './composables/table';
 import { useSelection, selectionModel, selectionProps, selectionEmits } from './composables/selection';
 import TheadRow from './thead-row.vue';
 import TbodyRow from './tbody-row.vue';
+import SelectRect from './select-rect.vue';
 
-// 处理数据
+// 表格
 const tableEl = useTemplateRef('tableEl');
+const modelSelectedRowIds = defineModel('selectedRowIds', selectionModel.selectedRowIds);
 const props = defineProps({ ...tableProps, ...selectionProps });
 const emits = defineEmits([...tableEmits, ...selectionEmits]);
 
-// 虚拟列表
+// 拖拽状态
+const dragFlag = ref(null);
+
+// 使用虚拟列表
 const {
   list: virtualList,
   containerProps: tbodyProps,
-  wrapperProps: tviewProps
+  wrapperProps: viewProps
 } = useVirtualList(
   computed(() => props.rowItems),
   {
@@ -65,22 +74,31 @@ const {
   }
 );
 
-// 处理表格
+// 使用表格
 const { rootClasses, rootStyles, headerStyles, colMinWidth, colWidths } = useTable({
-  props,
   tableEl,
-  tbodyEl: tbodyProps.ref
+  tbodyEl: tbodyProps.ref,
+  props,
+  dragFlag
 });
 
-// 处理多选
-const modelSelectedRowKeys = defineModel('selectedRowKeys', selectionModel.selectedRowKeys);
-useSelection({ modelSelectedRowKeys, props, emits });
+// 使用多选
+const { selectRootStyles, selectInnerStyles } = useSelection({
+  selectable: props.selectable,
+  selectAreaGap: props.selectAreaGap,
+  modelSelectedRowIds,
+  rowItems: props.rowItems,
+  emits
+});
 
-// 共享数据
+// 子组件使用
 provide('tableRoot', {
+  tbodyEl: tbodyProps.ref,
+  modelSelectedRowIds,
   props,
   emits,
-  colMinWidth,
-  colWidths
+  dragFlag,
+  colWidths,
+  colMinWidth
 });
 </script>

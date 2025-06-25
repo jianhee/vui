@@ -1,12 +1,22 @@
 // 公共样式
 @use "./base";
-@include base.vui-selection-drag("vui-table-row");
+@include base.vui-selection-drag-root("vui-table");
+@include base.vui-selection-drag-item("vui-table-row");
 
 // vars
 :root {
+  // 表格
   --vui-table-font-size: 14px;
   --vui-table-text-color: var(--vui-text-color-regular);
   --vui-table-row-active-bg-color: var(--vui-fill-color-light);
+
+  // 拖拽手柄
+  --vui-table-dragbox-handle-color: var(--vui-border-color-base);
+  --vui-table-dragbox-handle-hover-color: var(--vui-color-brand-base);
+
+  // 鼠标框选
+  --vui-table-select-rect-bg-color: var(--vui-color-brand-a10);
+  --vui-table-select-rect-border-color: var(--vui-color-brand-base);
 }
 
 // 表格
@@ -52,5 +62,20 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  // 表头拖拽手柄
+  &-cell:hover .vui-dragbox-handle {
+    --vui-dragbox-handle-color: var(--vui-table-dragbox-handle-color);
+    --vui-dragbox-handle-hover-color: var(--vui-table-dragbox-handle-hover-color);
+  }
+
+  // 鼠标框选
+  &-select-rect {
+    position: absolute;
+    z-index: 999;
+    pointer-events: none;
+    background-color: var(--vui-table-select-rect-bg-color);
+    border: 1px solid var(--vui-table-select-rect-border-color);
   }
 }

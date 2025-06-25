@@ -1,8 +1,8 @@
 <template>
   <VTable
     table-height="500"
-    :row-items="rowItems"
     :col-items="colItems"
+    :row-items="rowItems"
     :row-height="50"
     :current-row-id="1"
     :custom-row="setCustomRow"
@@ -14,6 +14,7 @@
 import { rowItems, colItems } from '../composables';
 import { writeLog } from '@vp/utils';
 
+// 自定义行属性
 function setCustomRow(row) {
   return {
     title: row.name,

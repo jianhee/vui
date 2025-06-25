@@ -18,7 +18,7 @@ export const menuProps = {
   // 4. `divider` 是否添加分隔符
   // 5. `string|number` 类型的菜单项会格式化为 `{ label }`
   menus: { type: Array, default: null },
-  // 菜单是否可选
-  // 可选时会记录选中值，所以菜单项的 `key` 必传
+  // 菜单是否可选择
+  // 可选时会记录选中值，所以菜单项的 `key` 必填
   selectable: { type: Boolean, default: false }
 };

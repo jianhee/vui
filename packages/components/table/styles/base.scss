@@ -1,5 +1,16 @@
-// 多选+拖拽
-@mixin vui-selection-drag($prefix) {
+// 表格 vui-table
+// 树   vui-tree
+@mixin vui-selection-drag-root($prefix) {
+  .#{$prefix} {
+    &.is-dragging {
+      user-select: none;
+    }
+  }
+}
+
+// 表格 vui-table-row
+// 树   vui-tree-node
+@mixin vui-selection-drag-item($prefix) {
   .#{$prefix} {
     // 最左侧操作按钮图标
     .is-action {

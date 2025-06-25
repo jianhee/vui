@@ -30,7 +30,13 @@
 import { inject } from 'vue';
 import { useAllSelection } from './composables/selection';
 
-// 处理数据
+// 表格
 const tableRoot = inject('tableRoot', null);
-const { isSelectedAll, toggleAllSelection } = useAllSelection();
+
+// 使用全选
+const { isSelectedAll, toggleAllSelection } = useAllSelection({
+  selectable: tableRoot.props.selectable,
+  modelSelectedRowIds: tableRoot.modelSelectedRowIds,
+  rowItems: tableRoot.props.rowItems
+});
 </script>
