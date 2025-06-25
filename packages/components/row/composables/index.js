@@ -3,11 +3,11 @@ import { computed } from 'vue';
 
 // props
 export const rowProps = {
-  // 标签
+  // 标签类型
   tag: { type: String, default: 'div' },
-  // 是否居中
+  // 文字是否居中
   center: { type: Boolean, default: false },
-  // 是否溢出隐藏
+  // 文字是否溢出隐藏
   ellipsis: { type: Boolean, default: false }
 };
 

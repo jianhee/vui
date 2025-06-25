@@ -7,7 +7,7 @@
   />
 
   <DemoSpace>
-    绑定值 <code>v-model:value</code> 的值为 <code>{{ selectValue }}</code>
+    当前值为 <code>{{ selectValue }}</code>
   </DemoSpace>
 </template>
 
@@ -20,7 +20,7 @@ const selectOptions = [
   // Object
   { value: 1, label: '选项1' },
   { value: 2, label: '选项2' },
-  // Number|String
+  // string|number
   3
 ];
 </script>

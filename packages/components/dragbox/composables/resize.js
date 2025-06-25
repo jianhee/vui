@@ -3,7 +3,7 @@ import { ref, computed } from 'vue';
 
 export const useDragboxResize = ({ boxRef, dragFlag, props, styles }) => {
   // 是否可缩放
-  const isResizable = computed(() => props.resizable && !props.disabled);
+  const isResizable = computed(() => props.resizable && props.enabled);
 
   // 可缩放手柄
   const handleItems = computed(() => {
@@ -98,7 +98,7 @@ export const useDragboxResize = ({ boxRef, dragFlag, props, styles }) => {
 
   // 缩放的样式
   const resizeStyles = computed(() => {
-    if (props.disabled) return null;
+    if (!props.enabled) return null;
     return {
       left: `${styles.boxLeft.value}px`,
       top: `${styles.boxTop.value}px`,

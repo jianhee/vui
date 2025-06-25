@@ -10,7 +10,7 @@
   />
 
   <DemoSpace>
-    绑定值 <code>v-model:value</code> 的值为 <code>{{ inputValue }}</code>
+    当前值为 <code>{{ inputValue }}</code>
   </DemoSpace>
 </template>
 

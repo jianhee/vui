@@ -8,7 +8,7 @@
     />
     <!-- 文本 -->
     <div
-      v-if="text"
+      v-if="showText"
       class="vui-loading-text"
     >
       {{ text }}

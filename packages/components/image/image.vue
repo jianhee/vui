@@ -14,7 +14,7 @@
       v-else
       class="vui-image-inner"
       :src="imgSrc"
-      :data-src="dataSrc"
+      :data-src="imgDataSrc"
     />
   </div>
 </template>
@@ -26,5 +26,5 @@ import { useImage, imageProps } from './composables';
 const props = defineProps(imageProps);
 
 // 使用图片
-const { rootStyles, isShowSkeleton, skeletonAspectRatio, imgSrc, dataSrc } = useImage(props);
+const { rootStyles, isShowSkeleton, skeletonAspectRatio, imgSrc, imgDataSrc } = useImage(props);
 </script>

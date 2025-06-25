@@ -27,7 +27,8 @@ export default defineConfig({
     search: { provider: 'local' },
     nav: headerNavs,
     socialLinks: socialLinks,
-    sidebar: sidebarNavs
+    sidebar: sidebarNavs,
+    outline: 'deep'
   },
   // 自定义
   markdown: markdown,

@@ -6,20 +6,21 @@ import { addUnit } from '../../../utils';
 export const btnProps = {
   // 按钮类型：primary, default, link
   type: { type: String, default: 'default' },
-  // 禁用状态
+  // 是否为禁用状态
   disabled: { type: Boolean, default: false },
-  // 加载状态
+  // 是否为加载状态
   loading: { type: Boolean, default: false },
-  // 前置图标：`<VIcon>` 组件的 `name|component|props`
+  // 前置图标：可选的值有 `<VIcon>` 组件的 `name` 属性值、`component` 属性值、完整的 `props` 对象
   icon: { type: [String, Object], default: null },
   // 按钮尺寸：large, medium, small
   size: { type: String, default: 'medium' },
-  // 显示模式：行内模式（默认）、块级模式
+  // 是否为行内模式
   inline: { type: Boolean, default: true },
+  // 是否为块级模式
   block: { type: Boolean, default: false },
   // ---------- 样式属性 ----------
-  // 圆角尺寸：不带单位时默认 `px`
-  radius: { type: [Number, String], default: null }
+  // 圆角尺寸：数字自动补全单位 `px`
+  radius: { type: [String, Number], default: null }
 };
 
 // 使用按钮
@@ -27,7 +28,7 @@ export const useBtn = props => {
   // 是否禁用
   const isDisabled = computed(() => props.disabled || props.loading);
 
-  // 获取类名
+  // 根元素类名
   const rootClasses = computed(() => {
     return [
       'vui-btn',
@@ -39,7 +40,7 @@ export const useBtn = props => {
     ];
   });
 
-  // 获取样式
+  // 根元素样式
   const rootStyles = computed(() => {
     return {
       '--vui-btn-radius': addUnit(props.radius, 'px')

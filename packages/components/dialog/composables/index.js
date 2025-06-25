@@ -7,58 +7,29 @@ export const dialogEmits = ['open', 'close'];
 
 // v-model
 export const dialogModel = {
+  // 是否显示
   visible: { type: Boolean, default: false }
 };
 
 // props
 export const dialogProps = {
-  // 标题
+  // 抽屉出现的位置：left, right
+  placement: { type: String, default: 'left' },
+  // 标题：为空时不显示顶栏
   title: { type: String, default: null },
   // 是否显示关闭按钮
   showClose: { type: Boolean, default: true },
   // 是否在点击遮罩时关闭
   closeOnClickModal: { type: Boolean, default: true },
-  // 抽屉出现位置：left, right
-  placement: { type: String, default: 'left' },
   // ---------- 样式属性 ----------
-  // 内容宽度：不带单位时默认 `px`
-  width: { type: [Number, String], default: null }
+  // 内容宽度：数字自动补全单位 `px`
+  width: { type: [String, Number], default: null }
 };
 
 // 使用弹窗
 export const useDialog = ({ dialogType, modelVisible, props, emits }) => {
   // 区分类型
   const isDialog = dialogType === 'dialog';
-
-  // 获取类名
-  const dialogClasses = computed(() => {
-    return [
-      `vui-${dialogType}`,
-      {
-        [`vui-drawer--${props.placement}`]: !isDialog
-      }
-    ];
-  });
-
-  // 获取样式
-  const dialogStyles = computed(() => {
-    const key = isDialog ? '--vui-dialog-width' : '--vui-drawer-width';
-    const value = addUnit(props.width, 'px');
-    return {
-      [key]: value
-    };
-  });
-
-  // 点击遮罩
-  function onClickOverlay() {
-    if (!props.closeOnClickModal) return;
-    modelVisible.value = false;
-  }
-
-  // 点击关闭按钮
-  function onClickCloseIcon() {
-    modelVisible.value = false;
-  }
 
   // 切换显示状态：外部关闭也能触发
   watch(modelVisible, val => {
@@ -69,10 +40,40 @@ export const useDialog = ({ dialogType, modelVisible, props, emits }) => {
     }
   });
 
+  // 点击遮罩层
+  function onClickOverlay() {
+    if (!props.closeOnClickModal) return;
+    modelVisible.value = false;
+  }
+
+  // 主体类名
+  const innerClasses = computed(() => {
+    return [
+      `vui-${dialogType}`,
+      {
+        [`vui-drawer--${props.placement}`]: !isDialog
+      }
+    ];
+  });
+
+  // 主体样式
+  const innerStyles = computed(() => {
+    const key = isDialog ? '--vui-dialog-width' : '--vui-drawer-width';
+    const value = addUnit(props.width, 'px');
+    return {
+      [key]: value
+    };
+  });
+
+  // 点击关闭按钮
+  function onClickCloseIcon() {
+    modelVisible.value = false;
+  }
+
   return {
-    dialogClasses,
-    dialogStyles,
     onClickOverlay,
+    innerClasses,
+    innerStyles,
     onClickCloseIcon
   };
 };

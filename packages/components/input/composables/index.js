@@ -13,9 +13,9 @@ export const inputModel = {
 
 // props
 export const inputProps = {
-  // 前置图标：`<VIcon>` 组件的 `name|component|props`
+  // 前置图标：可选的值有 `<VIcon>` 组件的 `name` 属性值、`component` 属性值、完整的 `props` 对象
   icon: { type: [String, Object], default: null },
-  // 尺寸：medium, small
+  // 输入框尺寸：medium, small
   size: { type: String, default: 'medium' },
   // 单独处理的原生属性
   disabled: { type: Boolean, default: false }
@@ -26,13 +26,8 @@ export const useInput = ({ inputEl, modelValue, props, emits }) => {
   // 是否获取焦点
   const { focused } = useFocus(inputEl);
 
-  // 是否显示清除按钮
-  const isShowClearIcon = computed(() => {
-    return !!modelValue.value && !props.disabled;
-  });
-
-  // 获取类名
-  const wraperClasses = computed(() => {
+  // 根元素类名
+  const rootClasses = computed(() => {
     return [
       'vui-input',
       `vui-input--${props.size}`,
@@ -43,35 +38,46 @@ export const useInput = ({ inputEl, modelValue, props, emits }) => {
     ];
   });
 
-  // 输入值
-  function onValueInput() {
-    emits('input', modelValue.value);
+  // 点击根元素获取焦点
+  function onClickRoot() {
+    focused.value = true;
   }
 
-  // 修改值
-  function onValueChange() {
-    emits('change', modelValue.value);
+  // 输入值时
+  function onInput(e) {
+    // 参数为 事件对象、当前值，下同
+    emits('input', { event: e, value: modelValue.value });
   }
 
-  // 按下 `Enter` 键
-  function onKeyupEnter() {
+  // 修改值时
+  function onChange(e) {
+    emits('change', { event: e, value: modelValue.value });
+  }
+
+  // 按下回车键时
+  function onEnter(e) {
     focused.value = false;
-    emits('enter', modelValue.value);
+    emits('enter', { event: e, value: modelValue.value });
   }
 
-  // 清空值
-  function onClearValue() {
+  // 是否显示清空按钮
+  const isShowClearIcon = computed(() => {
+    return !!modelValue.value && !props.disabled;
+  });
+
+  // 点击清空按钮时
+  function onClickClearIcon(e) {
     modelValue.value = '';
-    emits('clear', '');
+    emits('clear', { event: e, value: '' });
   }
 
   return {
-    focused,
-    wraperClasses,
+    rootClasses,
+    onClickRoot,
+    onInput,
+    onChange,
+    onEnter,
     isShowClearIcon,
-    onValueInput,
-    onValueChange,
-    onKeyupEnter,
-    onClearValue
+    onClickClearIcon
   };
 };

@@ -4,7 +4,7 @@ import { useElementHover } from '@vueuse/core';
 
 // v-model
 export const sliderModel = {
-  // 当前值
+  // 滑块的值
   value: { type: Number, default: null }
 };
 
@@ -17,9 +17,8 @@ export const sliderProps = {
   showTip: { type: Boolean, default: true },
   // 提示框内容的格式化方法
   //  1. 示例 `value => value`
-  //  2. 参数为 `v-model:value` 的值
-  //  3. 返回一个可以作为提示框内容的值
-  tipFormat: { type: Function, default: value => value }
+  //  2. 参数为当前值，返回一个可以作为提示框内容的值
+  tipFormatter: { type: Function, default: undefined }
 };
 
 // 使用滑块
@@ -39,9 +38,6 @@ export const useSlider = ({ railEl, handleEl, modelValue, props }) => {
     ];
   });
 
-  // 提示文字
-  const tipText = computed(() => props.tipFormat(modelValue.value));
-
   // 点击轨道/填充
   function onClickRail(e) {
     if (isDragging.value) return;
@@ -51,6 +47,8 @@ export const useSlider = ({ railEl, handleEl, modelValue, props }) => {
 
   // 开始拖动
   function onSliderDragStart(e) {
+    if (isDragging.value) return;
+
     isDragging.value = true;
 
     document.addEventListener('mousemove', onSliderDragging);
@@ -98,22 +96,25 @@ export const useSlider = ({ railEl, handleEl, modelValue, props }) => {
     return `${Math.round(limitPercent)}%`;
   });
 
-  // 填充宽度
-  const trackStyles = computed(() => {
-    return { width: percentValue.value };
-  });
+  // 填充样式
+  const trackStyles = computed(() => ({
+    width: percentValue.value
+  }));
 
-  // 滑块定位
-  const handleStyles = computed(() => {
-    return { left: percentValue.value };
-  });
+  // 手柄样式
+  const handleStyles = computed(() => ({
+    left: percentValue.value
+  }));
+
+  // 提示文字
+  const tipText = computed(() => props.tipFormatter?.(modelValue.value) ?? modelValue.value);
 
   return {
     rootClasses,
+    onClickRail,
+    onSliderDragStart,
     trackStyles,
     handleStyles,
-    tipText,
-    onClickRail,
-    onSliderDragStart
+    tipText
   };
 };

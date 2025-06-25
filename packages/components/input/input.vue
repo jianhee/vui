@@ -1,9 +1,9 @@
 <!-- 输入框 -->
 <template>
   <div
-    v-bind="wraperAttrs"
-    :class="wraperClasses"
-    @click="focused = true"
+    v-bind="rootAttrs"
+    :class="rootClasses"
+    @click="onClickRoot"
   >
     <!-- 前置图标 -->
     <VIcon
@@ -18,17 +18,16 @@
       class="vui-input-inner"
       v-bind="innerAttrs"
       :disabled="disabled"
-      @input="onValueInput"
-      @change="onValueChange"
-      @keyup.enter="onKeyupEnter"
+      @input="onInput"
+      @change="onChange"
+      @keyup.enter="onEnter"
     />
-    <!-- 清空 -->
+    <!-- 清空图标 -->
     <VIcon
       v-if="isShowClearIcon"
       class="vui-input-clear"
       :component="IconClear"
-      clickable
-      @click.stop="onClearValue"
+      @click.stop="onClickClearIcon"
     />
   </div>
 </template>
@@ -48,10 +47,10 @@ const props = defineProps(inputProps);
 const emits = defineEmits(inputEmits);
 
 // 筛选属性
-const { wraperAttrs, innerAttrs } = useFormElementAttrs();
+const { rootAttrs, innerAttrs } = useFormElementAttrs();
 
 // 使用输入框
-const { focused, wraperClasses, isShowClearIcon, onValueInput, onValueChange, onKeyupEnter, onClearValue } = useInput({
+const { rootClasses, onClickRoot, onInput, onChange, onEnter, isShowClearIcon, onClickClearIcon } = useInput({
   inputEl,
   modelValue,
   props,

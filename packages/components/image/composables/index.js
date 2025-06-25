@@ -13,17 +13,17 @@ export const imageProps = {
   // 加载失败的图片地址
   errorImg: { type: String, default: defaultErrorImg },
   // ---------- 样式属性 ----------
-  // 宽度：不带单位时默认 `px`
-  width: { type: [Number, String], default: null },
+  // 宽度：数字自动补全单位 `px`
+  width: { type: [String, Number], default: null },
   // 宽高比：设置后可能显示不全
   aspectRatio: { type: String, default: null },
-  // 圆角尺寸：不带单位时默认 `px`
-  radius: { type: [Number, String], default: null }
+  // 圆角尺寸：数字自动补全单位 `px`
+  radius: { type: [String, Number], default: null }
 };
 
 // 使用图片
 export const useImage = props => {
-  // 获取样式
+  // 根元素样式
   const rootStyles = computed(() => {
     return {
       '--vui-image-width': addUnit(props.width, 'px'),
@@ -43,13 +43,13 @@ export const useImage = props => {
     return props.aspectRatio || '16/9';
   });
 
-  // 图片地址
+  // 图片显示地址
   const imgSrc = computed(() => {
     return isLoading.value ? props.loadingImg : error.value ? props.errorImg : props.src;
   });
 
-  // 图片加载失败
-  const dataSrc = computed(() => {
+  // 图片原始地址
+  const imgDataSrc = computed(() => {
     return error.value ? props.src : null;
   });
 
@@ -58,6 +58,6 @@ export const useImage = props => {
     isShowSkeleton,
     skeletonAspectRatio,
     imgSrc,
-    dataSrc
+    imgDataSrc
   };
 };

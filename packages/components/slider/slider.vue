@@ -13,12 +13,12 @@
       :style="trackStyles"
       @click.stop="onClickRail"
     />
-    <!-- 滑块 -->
+    <!-- 手柄 -->
     <div
       ref="handleEl"
       class="vui-slider-handle"
       :style="handleStyles"
-      @mousedown.stop="onSliderDragStart"
+      @mousedown.left.stop="onSliderDragStart"
     />
     <!-- 提示框 -->
     <div
@@ -42,7 +42,7 @@ const modelValue = defineModel('value', sliderModel.value);
 const props = defineProps(sliderProps);
 
 // 使用滑块
-const { rootClasses, trackStyles, handleStyles, tipText, onClickRail, onSliderDragStart } = useSlider({
+const { rootClasses, onClickRail, onSliderDragStart, trackStyles, handleStyles, tipText } = useSlider({
   railEl,
   handleEl,
   modelValue,

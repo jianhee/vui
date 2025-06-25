@@ -25,13 +25,26 @@ export const useDropdown = ({ triggerNextEl, dropdownEl, props, emits }) => {
     triggerEl.value = triggerNextEl.value?.previousElementSibling;
   });
 
+  // 触发器事件
+  useEventListener(triggerEl, 'mouseenter', () => onMouseToggle('enter'));
+  useEventListener(triggerEl, 'mouseleave', () => onMouseToggle('leave'));
+  useEventListener(triggerEl, 'click', onTriggerClick);
+  useEventListener(triggerEl, 'contextmenu', e => {
+    e.preventDefault();
+    onTriggerContextmenu(e);
+  });
+
+  // 下拉框事件
+  useEventListener(dropdownEl, 'mouseenter', () => onMouseToggle('enter'));
+  useEventListener(dropdownEl, 'mouseleave', () => onMouseToggle('leave'));
+
   // 鼠标进入/离开：对齐元素
   function onMouseToggle(type) {
     if (props.trigger !== 'hover') return;
     clearTimeout(hoverTimer);
     hoverTimer = setTimeout(() => {
       if (type === 'enter') {
-        openDropdown();
+        openDropdown({ el: triggerEl.value });
       } else {
         closeDropdown();
       }
@@ -44,14 +57,14 @@ export const useDropdown = ({ triggerNextEl, dropdownEl, props, emits }) => {
     if (dropdownVisible.value) {
       closeDropdown();
     } else {
-      openDropdown();
+      openDropdown({ el: triggerEl.value });
     }
   }
 
   // 右键 trigger：对齐鼠标
   function onTriggerContextmenu(event) {
     if (props.trigger !== 'contextmenu') return;
-    openDropdown(event);
+    openDropdown({ event });
   }
 
   // 点击 dropdown 外部
@@ -65,22 +78,22 @@ export const useDropdown = ({ triggerNextEl, dropdownEl, props, emits }) => {
   }
 
   // 打开下拉框
-  async function openDropdown(event) {
+  async function openDropdown(params) {
     // 更新事件
     if (!dropdownVisible.value) {
       dropdownVisible.value = true;
       emits('open');
     }
     // 更新定位
-    updatePosition(event);
+    updatePosition(params);
   }
 
   // 更新定位
-  async function updatePosition(event) {
+  async function updatePosition({ event, el }) {
     await nextTick();
 
     // 参照物
-    const trigger = event || triggerEl.value.getBoundingClientRect();
+    const trigger = event || el.getBoundingClientRect();
     const triggerLeft = trigger.clientX || trigger.left;
     const triggerRight = trigger.clientX || trigger.right;
     const triggerTop = trigger.clientY || trigger.top;
@@ -110,19 +123,6 @@ export const useDropdown = ({ triggerNextEl, dropdownEl, props, emits }) => {
       top: `${dropdownTop}px`
     };
   }
-
-  // 触发器
-  useEventListener(triggerEl, 'mouseenter', () => onMouseToggle('enter'));
-  useEventListener(triggerEl, 'mouseleave', () => onMouseToggle('leave'));
-  useEventListener(triggerEl, 'click', onTriggerClick);
-  useEventListener(triggerEl, 'contextmenu', e => {
-    e.preventDefault();
-    onTriggerContextmenu(e);
-  });
-
-  // 下拉框
-  useEventListener(dropdownEl, 'mouseenter', () => onMouseToggle('enter'));
-  useEventListener(dropdownEl, 'mouseleave', () => onMouseToggle('leave'));
 
   return {
     dropdownVisible,

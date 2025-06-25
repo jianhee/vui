@@ -1,6 +1,6 @@
 <!-- 下拉框 -->
 <template>
-  <!-- 触发器 -->
+  <!-- 触发器：必须是有效的 html DOM 元素 -->
   <slot />
   <!-- 为了获取 slots.default 根元素 -->
   <span
@@ -19,9 +19,9 @@
         class="vui-dropdown"
         :style="dropdownStyles"
       >
-        <!-- 使用菜单 -->
+        <!-- 菜单内容 -->
         <DropdownMenu v-if="menus" />
-        <!-- 使用自定义内容 -->
+        <!-- 下拉框内容 -->
         <slot
           v-else
           name="dropdown"

@@ -9,7 +9,7 @@
   <DemoSpace class="demo-slider">
     <VSlider
       v-model:value="valueRef2"
-      :tip-format="val => `${val}%`"
+      :tip-formatter="val => `${val}%`"
     />
   </DemoSpace>
   <DemoSpace>格式化提示框</DemoSpace>

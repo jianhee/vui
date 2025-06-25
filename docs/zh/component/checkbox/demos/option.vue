@@ -14,7 +14,7 @@
   </DemoSpace>
 
   <DemoSpace>
-    绑定值 <code>v-model:value</code> 的值分别为
+    当前值分别为
     <template
       v-for="option in options"
       :key="option.label"

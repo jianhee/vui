@@ -1,7 +1,7 @@
 <template>
   <VSwitch
     v-model:checked="isSpin"
-    active-text="旋转动画"
+    active-text="旋转状态"
   />
   <DemoBasic :spin="isSpin" />
 </template>

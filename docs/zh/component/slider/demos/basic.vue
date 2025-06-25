@@ -3,7 +3,7 @@
     <VSlider v-model:value="valueRef" />
   </DemoSpace>
   <DemoSpace>
-    绑定值 <code>v-model:value</code> 的值为 <code>{{ valueRef }}</code>
+    当前值为 <code>{{ valueRef }}</code>
   </DemoSpace>
 </template>
 

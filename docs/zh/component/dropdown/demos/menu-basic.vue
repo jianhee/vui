@@ -17,7 +17,7 @@ const menus = [
   // 图标
   { label: '图标1', icon: 'close' },
   { label: '图标2', icon: 'search', divider: true },
-  // Number|String
+  // string|number
   '字符串'
 ];
 </script>

@@ -10,7 +10,7 @@
     </VDropdown>
   </DemoSpace>
   <DemoSpace>
-    绑定值 <code>`v-model:selected-key`</code> 的值为 <code>{{ seletedKey }}</code>
+    当前值为 <code>{{ seletedKey }}</code>
   </DemoSpace>
 </template>
 

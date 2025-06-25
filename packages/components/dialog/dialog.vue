@@ -10,8 +10,8 @@
         <!-- 主体 -->
         <div
           v-bind="$attrs"
-          :class="dialogClasses"
-          :style="dialogStyles"
+          :class="innerClasses"
+          :style="innerStyles"
         >
           <!-- 顶栏 -->
           <div
@@ -28,11 +28,11 @@
               @click="onClickCloseIcon"
             />
           </div>
-          <!-- 内容 -->
+          <!-- 中间内容 -->
           <div :class="`vui-${dialogType}-body`">
             <slot />
           </div>
-          <!-- 底栏 -->
+          <!-- 底栏内容 -->
           <div :class="`vui-${dialogType}-footer`">
             <slot name="footer" />
           </div>
@@ -57,7 +57,7 @@ const props = defineProps(dialogProps);
 const emits = defineEmits(dialogEmits);
 
 // 使用弹窗
-const { dialogClasses, dialogStyles, onClickOverlay, onClickCloseIcon } = useDialog({
+const { onClickOverlay, innerClasses, innerStyles, onClickCloseIcon } = useDialog({
   dialogType,
   modelVisible,
   props,

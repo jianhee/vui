@@ -18,10 +18,10 @@
 </template>
 
 <script setup>
-import { useSkeletonItem, skeletonProps } from './composables';
+import { useSkeletonItem, skeletonItemProps } from './composables';
 
 // 骨架屏项
-const props = defineProps(skeletonProps);
+const props = defineProps(skeletonItemProps);
 
 // 使用骨架屏项
 const { formattedRows } = useSkeletonItem(props);

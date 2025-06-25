@@ -1,29 +1,51 @@
 # Form 表单
 
-表单提供两个组件，必须将父子组件放在一起使用。
-
-1. 父组件 `<VForm>` 表单容器
-2. 子组件 `<VFormItem>` 表单项
-
 ## 基础用法
 
-将容器作为根组件，它只有一个默认插槽 `slots.default` 且内容只能是 `<VFormItem>`
-
-1. `itemProps.label` 表单项的左侧文本
-2. `itemSlots.default` 表单项的右侧内容
+1. 表单内容由表单容器 `<VForm>` 和表单项 `<VFormItem>` 两部分组成，必须将两个组件放在一起使用
+2. 表单项内容由 `label` 属性（左侧文本）和 `default` 插槽（右侧内容）两部分组成
 
 <preview path="./demos/basic.vue"></preview>
 
-## 表单项的显示模式
+## 行内模式
 
-1. 块级模式（默认）
-2. 行内模式 `formProps.filedInline` 设为 `true` 或 `formProps.filedBlock` 设为 `false`
+将表单的 `filedInline` 属性设为 `true`，或者将 `filedBlock` 属性设为 `false`
 
 <preview path="./demos/filed-display.vue"></preview>
 
-## 标签的位置和宽度
+## 定义标签
 
-1. `formProps.labelPosition` 标签位置，可选的值有 `left` 左侧（默认）、`right` 右侧、`top` 顶部
-2. `formProps.labelWidth` 标签宽度，仅块级模式的左侧/右侧标签有效，默认取最长标签的宽度，不带单位时默认 `px`
+使用表单的 `labelPosition` 和 `labelWidth` 属性定义标签的位置和宽度
 
 <preview path="./demos/label.vue"></preview>
+
+## Form API
+
+### 属性
+
+| 名称            | 说明                                                          | 类型                         | 默认值         |
+| --------------- | ------------------------------------------------------------- | ---------------------------- | -------------- |
+| `filedInline`   | 表单项是否为行内模式                                          | `boolean`                    | `false`        |
+| `filedBlock`    | 表单项是否为块级模式                                          | `boolean`                    | `true`         |
+| `labelPosition` | 标签位置                                                      | `string`(`left\|right\|top`) | `left`         |
+| `labelWidth`    | 标签宽度，数字自动补全单位 `px` <br> 行内模式和顶部标签不生效 | `string\|number`             | 最长标签的宽度 |
+
+### 插槽
+
+| 名称      | 说明                                | 参数 |
+| --------- | ----------------------------------- | ---- |
+| `default` | 显示内容，只能是 `<VFormItem>` 组件 |      |
+
+## FormItem API
+
+### 属性
+
+| 名称    | 说明     | 类型     | 默认值 |
+| ------- | -------- | -------- | ------ |
+| `label` | 左侧文本 | `string` |        |
+
+### 插槽
+
+| 名称      | 说明     | 参数 |
+| --------- | -------- | ---- |
+| `default` | 右侧内容 |      |

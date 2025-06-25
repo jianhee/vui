@@ -6,6 +6,7 @@
       :key="index"
       :option="option"
     >
+      <!-- 文本后的内容 -->
       <slot :option="option" />
     </VCheckbox>
   </div>
@@ -13,7 +14,7 @@
 
 <script setup>
 import { provide, inject } from 'vue';
-import { checkboxGroupModel, checkboxGroupProps, checkboxGroupEmits } from './composables';
+import { checkboxGroupModel, checkboxGroupProps, checkboxGroupEmits } from './composables/checkbox-group';
 
 // 区分类型
 const checkboxType = inject('checkboxType', 'checkbox');

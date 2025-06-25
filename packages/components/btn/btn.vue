@@ -16,7 +16,7 @@
       v-if="icon"
       v-bind="iconProps"
     />
-    <!-- 内容 -->
+    <!-- 显示内容 -->
     <slot />
   </button>
 </template>

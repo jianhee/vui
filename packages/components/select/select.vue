@@ -1,8 +1,8 @@
 <!-- 选择器 -->
 <template>
   <div
-    v-bind="wraperAttrs"
-    :class="wraperClasses"
+    v-bind="rootAttrs"
+    :class="rootClasses"
   >
     <!-- 显示选项 -->
     <select
@@ -12,7 +12,7 @@
       class="vui-select-inner"
       v-bind="innerAttrs"
       :disabled="disabled"
-      @change="onValueChange"
+      @change="onChange"
     >
       <option
         v-for="item in formattdOptions"
@@ -52,10 +52,10 @@ const props = defineProps(selectProps);
 const emits = defineEmits(selectEmits);
 
 // 筛选属性
-const { wraperAttrs, innerAttrs } = useFormElementAttrs();
+const { rootAttrs, innerAttrs } = useFormElementAttrs();
 
 // 使用选择器
-const { wraperClasses, formattdOptions, onValueChange } = useSelect({
+const { formattdOptions, onChange, rootClasses } = useSelect({
   selectEl,
   modelValue,
   props,

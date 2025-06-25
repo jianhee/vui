@@ -6,14 +6,14 @@
     :class="{ ...moveClasses, ...resizeClasses }"
     :style="{ ...moveStyles, ...resizeStyles }"
   >
-    <!-- 内容 -->
+    <!-- 显示内容 -->
     <slot />
     <!-- 手柄 -->
     <div
       v-for="handle in handleItems"
       :key="handle"
       :class="['vui-dragbox-handle', `vui-dragbox-handle-${handle}`, { 'is-active': handle === handleActiveName }]"
-      @mousedown="onResizeStart($event, handle)"
+      @mousedown.left="onResizeStart($event, handle)"
     />
   </div>
 </template>

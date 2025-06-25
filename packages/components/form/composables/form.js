@@ -3,21 +3,17 @@ import { computed, ref } from 'vue';
 import { useIntersectionObserver } from '@vueuse/core';
 import { addUnit } from '../../../utils';
 
-// 表单的 props
+// props
 export const formProps = {
-  // 表单项显示模式：默认块级模式
+  // 表单项是否为行内模式
   filedInline: { type: Boolean, default: false },
+  // 表单项是否为块级模式
   filedBlock: { type: Boolean, default: true },
   // 标签位置：left, right, top
   labelPosition: { type: String, default: 'left' },
-  // 标签宽度：仅块级模式的左侧/右侧标签有效，默认取最长标签的宽度，不带单位时默认 `px`
-  labelWidth: { type: [Number, String], default: null }
-};
-
-// 表单项的 props
-export const formItemProps = {
-  // 左侧文本
-  label: { type: String, default: null }
+  // 标签宽度：数字自动补全单位 `px`，默认取最长标签的宽度
+  // 行内模式和顶部标签不生效
+  labelWidth: { type: [String, Number], default: null }
 };
 
 // 使用表单
@@ -48,7 +44,7 @@ export const useForm = ({ formEl, props }) => {
     return props.labelWidth || labelAutoWidth.value;
   });
 
-  // 获取类名
+  // 根元素类名
   const rootClasses = computed(() => {
     return [
       'vui-form',
@@ -59,7 +55,7 @@ export const useForm = ({ formEl, props }) => {
     ];
   });
 
-  // 获取样式
+  // 根元素样式
   const rootStyles = computed(() => {
     return {
       '--vui-form-label-width': addUnit(labelWidth.value, 'px')

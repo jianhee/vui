@@ -13,7 +13,7 @@
   </DemoSpace>
 
   <DemoSpace>
-    绑定值 <code>v-model:value</code> 的值为 <code>{{ checkedVal }}</code>
+    当前值为 <code>{{ checkedVal }}</code>
   </DemoSpace>
 </template>
 
@@ -38,7 +38,7 @@ const options = [
   // Object
   { label: '选项1', value: 1 },
   { label: '选项2', value: 2 },
-  // Number|String
+  // string|number
   3
 ];
 </script>

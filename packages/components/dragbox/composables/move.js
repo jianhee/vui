@@ -4,7 +4,7 @@ import { onLongPress } from '@vueuse/core';
 
 export const useDragboxMove = ({ boxRef, dragFlag, props, styles }) => {
   // 是否可移动
-  const isMovable = computed(() => props.movable && !props.disabled);
+  const isMovable = computed(() => props.movable && props.enabled);
 
   // 初始数据
   let mouseStartPos = { x: 0, y: 0 };
@@ -64,7 +64,7 @@ export const useDragboxMove = ({ boxRef, dragFlag, props, styles }) => {
 
   // 移动的样式
   const moveStyles = computed(() => {
-    if (props.disabled) return null;
+    if (!props.enabled) return null;
     return {
       left: `${styles.boxLeft.value}px`,
       top: `${styles.boxTop.value}px`

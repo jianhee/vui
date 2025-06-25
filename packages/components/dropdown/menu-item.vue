@@ -1,10 +1,9 @@
 <!-- 菜单-项 -->
 <template>
-  <!-- 内容 -->
   <div
     class="vui-menu-item"
     :title="formattedMenuItem.label"
-    @click="onClickItem"
+    @click="onClickMenuItem"
   >
     <!-- 前置图标 -->
     <VIcon
@@ -28,7 +27,7 @@
 
 <script setup>
 import { inject } from 'vue';
-import { useMenuItem, menuItemProps } from './composables/menu';
+import { useMenuItem, menuItemProps } from './composables/menu-item';
 import { useIconProps } from '../icon/composables/base';
 import IconSelected from '../../icons/selected.vue';
 
@@ -39,7 +38,7 @@ const menuRoot = inject('menuRoot', null);
 const props = defineProps(menuItemProps);
 
 // 使用菜单项
-const { formattedMenuItem, isSelected, onClickItem } = useMenuItem({
+const { formattedMenuItem, isSelected, onClickMenuItem } = useMenuItem({
   menuRoot,
   menuItem: { props }
 });

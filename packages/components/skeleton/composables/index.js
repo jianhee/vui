@@ -1,19 +1,19 @@
-// 骨架屏
+// 骨架屏-项
 import { computed } from 'vue';
 import { addUnit } from '../../../utils/data-number';
 
 // props
-export const skeletonProps = {
+export const skeletonItemProps = {
   // 宽高
-  width: { type: [Number, String], default: null },
-  height: { type: [Number, String], default: 20 },
+  width: { type: [String, Number], default: null },
+  height: { type: [String, Number], default: 20 },
   // 宽高比：设置后忽略高度
   aspectRatio: { type: String, default: null },
   // 是否水平居中
   center: { type: Boolean, default: false },
   // 是否添加分割线
   devider: { type: Boolean, default: false },
-  // 自动生成多行
+  // 行数：多行时首行宽度 `40%`，尾行宽度 `60%`
   rows: { type: Number, default: 1 }
 };
 

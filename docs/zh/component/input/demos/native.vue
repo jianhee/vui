@@ -1,12 +1,5 @@
 <template>
   <VForm>
-    <VFormItem label="placeholder">
-      <VInput
-        v-model:value="inputValue"
-        class="demo-input"
-        placeholder="请输入内容"
-      />
-    </VFormItem>
     <VFormItem label="disabled">
       <VInput
         v-model:value="inputValue"
@@ -15,11 +8,18 @@
         disabled
       />
     </VFormItem>
+    <VFormItem label="placeholder">
+      <VInput
+        v-model:value="inputValue"
+        class="demo-input"
+        placeholder="占位文字"
+      />
+    </VFormItem>
     <VFormItem label="maxlength">
       <VInput
         v-model:value="inputValue"
         class="demo-input"
-        placeholder="5字以内"
+        placeholder="最多输入5个字符"
         maxlength="5"
       />
     </VFormItem>

@@ -7,18 +7,18 @@ export const selectEmits = ['change'];
 
 // v-model
 export const selectModel = {
-  // 选择器的值
+  // 选中项的 `value`
   value: { type: [String, Number], default: null }
 };
 
 // props
 export const selectProps = {
-  // 选项组 `[Object|Number|String]`
-  // 1. `Object.value` 选项值
-  // 2. `Object.label` 选项文本，为空时使用 `Object.value` 的值
-  // 3. `Number|String` 类型会格式化为 `Object.value` 和 `Object.label`
+  // 选项数组 `Array[object|string|number]`
+  // 1. `value` 选项值
+  // 2. `label` 选项文本，为空时使用 `value` 的值
+  // 3. `string|number` 类型的选项会格式化为 `{ value, label }`
   options: { type: Array, default: null },
-  // 尺寸：medium, small
+  // 选项数组：medium, small
   size: { type: String, default: 'medium' },
   // 单独处理的原生属性
   disabled: { type: Boolean, default: false }
@@ -40,8 +40,19 @@ export const useSelect = ({ selectEl, modelValue, props, emits }) => {
     });
   });
 
-  // 获取类名
-  const wraperClasses = computed(() => {
+  // 修改值
+  function onChange() {
+    const index = formattdOptions.value.findIndex(item => item.value === modelValue.value);
+    // 参数为 当前项、当前项的 value、选中项的 value
+    emits('change', {
+      option: props.options[index],
+      value: formattdOptions.value[index].value,
+      selectedValue: modelValue.value
+    });
+  }
+
+  // 根元素类名
+  const rootClasses = computed(() => {
     return [
       'vui-select',
       `vui-select--${props.size}`,
@@ -52,19 +63,9 @@ export const useSelect = ({ selectEl, modelValue, props, emits }) => {
     ];
   });
 
-  // 修改值
-  function onValueChange() {
-    const index = formattdOptions.value.findIndex(item => item.value === modelValue.value);
-    // 参数为当前项和 v-model:value 的值
-    emits('change', {
-      option: props.options[index],
-      value: modelValue.value
-    });
-  }
-
   return {
-    wraperClasses,
     formattdOptions,
-    onValueChange
+    onChange,
+    rootClasses
   };
 };

@@ -6,6 +6,7 @@ export const switchEmits = ['change'];
 
 // v-model
 export const switchModel = {
+  // 是否选中
   checked: { type: Boolean, default: false }
 };
 
@@ -14,15 +15,36 @@ export const switchProps = {
   // 文字描述
   activeText: { type: String, default: null },
   inactiveText: { type: String, default: null },
-  // 切换前执行的方法：async checked => true|false
-  // 1. 参数为 `v-model:checked` 的值
-  // 2. 异步返回 `true`（允许切换）或 `false`（停止切换）
+  // 切换前执行的方法
+  // 1. 示例 `async checked => Promise<boolean>`
+  // 2. 参数为当前值，返回 `true`允许切换，返回 `false`阻止切换
   beforeChange: { type: Function, default: null }
 };
 
 // 使用开关
 export const useSwitch = ({ modelChecked, props, emits }) => {
-  // 加载中
+  // 根元素类名
+  const rootClasses = computed(() => {
+    return [
+      'vui-switch',
+      {
+        'is-checked': modelChecked.value,
+        'is-loading': isLoading.value
+      }
+    ];
+  });
+
+  // 打开状态文本类名
+  const activeClasses = computed(() => {
+    return ['vui-switch-label', { 'is-active': modelChecked.value }];
+  });
+
+  // 关闭状态文本类名
+  const inactiveClasses = computed(() => {
+    return ['vui-switch-label', { 'is-active': !modelChecked.value }];
+  });
+
+  // 加载状态
   const isLoading = ref(false);
 
   // 点击开关
@@ -46,30 +68,15 @@ export const useSwitch = ({ modelChecked, props, emits }) => {
 
   // 切换选中状态
   function changeState() {
+    // 新值
     const newState = !modelChecked.value;
+    // 更新值
     modelChecked.value = newState;
-    // 参数为 v-model:checked 的值
-    emits('change', newState);
+    // 参数为 是否选中
+    emits('change', {
+      checked: newState
+    });
   }
-
-  // 获取根组件类名
-  const rootClasses = computed(() => {
-    return [
-      'vui-switch',
-      {
-        'is-checked': modelChecked.value,
-        'is-loading': isLoading.value
-      }
-    ];
-  });
-
-  // 获取文本类名
-  const activeClasses = computed(() => {
-    return ['vui-switch-label', { 'is-active': modelChecked.value }];
-  });
-  const inactiveClasses = computed(() => {
-    return ['vui-switch-label', { 'is-active': !modelChecked.value }];
-  });
 
   return {
     rootClasses,

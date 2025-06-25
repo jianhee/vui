@@ -5,29 +5,20 @@
     v-model:top="topRef1"
     v-model:width="widthRef1"
     v-model:height="heightRef1"
+    :enabled="isEnabled1"
     resizable
     :resize-handles="handlesRef1"
     :min-width="100"
     :min-height="100"
-    :disabled="isDisabled1"
     class="demo-dragbox"
-    :class="{ 'demo-dragbox-fixed': !isDisabled1 }"
+    :class="{ 'demo-dragbox-fixed': isEnabled1 }"
   >
     <VForm>
       <VFormItem label="操作">定位元素缩放</VFormItem>
-      <VFormItem label="绑定值">
-        <code>v-model:left="{{ leftRef1 }}"</code>
-        <br />
-        <code>v-model:top="{{ topRef1 }}"</code>
-        <br />
-        <code>v-model:width="{{ widthRef1 }}"</code>
-        <br />
-        <code>v-model:height="{{ heightRef1 }}"</code>
-      </VFormItem>
-      <VFormItem label="切换状态">
+      <VFormItem label="是否启用">
         <VSwitch
-          v-model:checked="isDisabled1"
-          active-text="禁用状态"
+          v-model:checked="isEnabled1"
+          active-text="启用组件"
         />
       </VFormItem>
       <VFormItem label="切换手柄">
@@ -36,6 +27,15 @@
           :options="handlesOptions1"
           option-type="button"
         />
+      </VFormItem>
+      <VFormItem label="绑定值">
+        <code>v-model:left="{{ leftRef1 }}"</code>
+        <br />
+        <code>v-model:top="{{ topRef1 }}"</code>
+        <br />
+        <code>v-model:width="{{ widthRef1 }}"</code>
+        <br />
+        <code>v-model:height="{{ heightRef1 }}"</code>
       </VFormItem>
     </VForm>
   </VDragbox>
@@ -46,24 +46,19 @@
   <VDragbox
     v-model:width="widthRef2"
     v-model:height="heightRef2"
+    :enabled="isEnabled2"
     resizable
     :resize-handles="handlesRef2"
     :min-width="100"
     :min-height="100"
-    :disabled="isDisabled2"
     class="demo-dragbox"
   >
     <VForm>
       <VFormItem label="操作">非定位元素缩放</VFormItem>
-      <VFormItem label="绑定值">
-        <code>v-model:width="{{ widthRef2 }}"</code>
-        <br />
-        <code>v-model:height="{{ heightRef2 }}"</code>
-      </VFormItem>
-      <VFormItem label="切换状态">
+      <VFormItem label="是否启用">
         <VSwitch
-          v-model:checked="isDisabled2"
-          active-text="禁用状态"
+          v-model:checked="isEnabled2"
+          active-text="启用组件"
         />
       </VFormItem>
       <VFormItem label="切换手柄">
@@ -73,6 +68,11 @@
           option-type="button"
         />
       </VFormItem>
+      <VFormItem label="绑定值">
+        <code>v-model:width="{{ widthRef2 }}"</code>
+        <br />
+        <code>v-model:height="{{ heightRef2 }}"</code>
+      </VFormItem>
     </VForm>
   </VDragbox>
 </template>
@@ -81,7 +81,7 @@
 import { ref } from 'vue';
 
 // 定位元素
-const isDisabled1 = ref(true);
+const isEnabled1 = ref(false);
 const handlesRef1 = ref(undefined);
 const handlesOptions1 = ['left', 'right', 'top', 'bottom'];
 const leftRef1 = ref(300);
@@ -90,7 +90,7 @@ const widthRef1 = ref(400);
 const heightRef1 = ref(400);
 
 // 非定位元素
-const isDisabled2 = ref(true);
+const isEnabled2 = ref(false);
 const handlesRef2 = ref(undefined);
 const handlesOptions2 = ['right', 'bottom'];
 const widthRef2 = ref(400);

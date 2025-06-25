@@ -30,7 +30,7 @@ const nRef = ref(null);
 const dropdownEl = useTemplateRef('dropdownEl');
 function openDropdown(event, n) {
   nRef.value = n;
-  dropdownEl.value.open(event);
+  dropdownEl.value.open({ event });
 }
 </script>
 

@@ -11,7 +11,7 @@
       v-model:value="modelValue"
       :min="min"
       :max="max"
-      :tip-format="val => `${val}${unit}`"
+      :tip-formatter="val => `${val}${unit}`"
       class="demo-value-slider"
     />
     <span class="demo-value-text">{{ `${modelValue}${unit}` }}</span>

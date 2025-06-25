@@ -7,7 +7,7 @@
   </DemoSpace>
 
   <DemoSpace>
-    绑定值 <code>v-model:checked</code> 的值为 <code>{{ valueRef }}</code>
+    当前值为 <code>{{ valueRef }}</code>
   </DemoSpace>
 </template>
 

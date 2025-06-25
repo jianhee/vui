@@ -4,15 +4,21 @@
     v-model:top="topRef"
     v-model:width="widthRef"
     v-model:height="heightRef"
+    :enabled="isEnabled"
     movable
     resizable
     :min-width="100"
     :min-height="100"
-    :disabled="isDisabled"
     class="demo-dragbox"
   >
     <VForm>
       <VFormItem label="操作">移动+缩放</VFormItem>
+      <VFormItem label="是否启用">
+        <VSwitch
+          v-model:checked="isEnabled"
+          active-text="启用组件"
+        />
+      </VFormItem>
       <VFormItem label="绑定值">
         <code>v-model:left="{{ leftRef }}"</code>
         <br />
@@ -22,12 +28,6 @@
         <br />
         <code>v-model:height="{{ heightRef }}"</code>
       </VFormItem>
-      <VFormItem label="切换状态">
-        <VSwitch
-          v-model:checked="isDisabled"
-          active-text="禁用状态"
-        />
-      </VFormItem>
     </VForm>
   </VDragbox>
 </template>
@@ -35,7 +35,7 @@
 <script setup>
 import { ref } from 'vue';
 
-const isDisabled = ref(true);
+const isEnabled = ref(false);
 const leftRef = ref(300);
 const topRef = ref(100);
 const widthRef = ref(360);

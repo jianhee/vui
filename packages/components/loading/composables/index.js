@@ -6,12 +6,14 @@ import IconLoadingBubble from '../../../icons/loading-bubble.vue';
 
 // props
 export const loadingProps = {
-  // 动画：`loop` 转圈、`bubble` 气泡
+  // 动画类型：`loop` 转圈、`bubble` 气泡
   animate: { type: String, default: 'loop' },
-  // 图标：`<VIcon>` 组件的 `name|component|props`
-  icon: { type: [String, Object], default: null },
-  // 文本：传入 `null` 不显示文本
-  text: { type: String, default: 'Loading...' }
+  // 是否显示文本
+  showText: { type: Boolean, default: true },
+  // 文本
+  text: { type: String, default: 'Loading...' },
+  // 图标：可选的值有 `<VIcon>` 组件的 `name` 属性值、`component` 属性值、完整的 `props` 对象
+  icon: { type: [String, Object], default: null }
 };
 
 // 使用加载

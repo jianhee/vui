@@ -3,27 +3,27 @@
   <label :class="rootClasses">
     <!-- 隐藏的 input -->
     <input
-      :checked="isChecked"
-      :type="checkboxType"
       :class="`vui-${checkboxType}-input`"
+      :type="checkboxType"
+      :checked="isChecked"
       @change="onCheckedChange"
     />
     <!-- 图标 -->
     <VIcon
       v-if="!isBtn"
-      :component="IconComponent"
       :class="`vui-${checkboxType}-icon`"
+      :component="iconComponent"
     />
     <!-- 文本 -->
-    <span v-if="formattedOption.label">{{ formattedOption.label }}</span>
-    <!-- 自定义内容 -->
+    <span v-if="labelText">{{ labelText }}</span>
+    <!-- 文本后的内容 -->
     <slot />
   </label>
 </template>
 
 <script setup>
 import { inject } from 'vue';
-import { useCheckbox, checkboxModel, checkboxProps, checkboxEmits } from './composables';
+import { useCheckbox, checkboxModel, checkboxProps, checkboxEmits } from './composables/checkbox';
 
 // 区分类型
 const checkboxType = inject('checkboxType', 'checkbox');
@@ -37,7 +37,7 @@ const props = defineProps(checkboxProps);
 const emits = defineEmits(checkboxEmits);
 
 // 使用选项
-const { IconComponent, isBtn, rootClasses, formattedOption, isChecked, onCheckedChange } = useCheckbox({
+const { isBtn, isChecked, onCheckedChange, rootClasses, iconComponent, labelText } = useCheckbox({
   checkboxType,
   checkboxGroup,
   checkbox: {

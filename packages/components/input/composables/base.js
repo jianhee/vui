@@ -6,19 +6,20 @@ export const useFormElementAttrs = () => {
   const attrs = useAttrs();
 
   // 根元素的属性
-  const wraperAttrs = computed(() => ({
+  const rootAttrs = computed(() => ({
+    id: attrs.id,
     class: attrs.class,
     style: attrs.style
   }));
 
   // 表单元素的属性
   const innerAttrs = computed(() => {
-    const { class: _, style: __, ...rest } = attrs;
+    const { id: _, class: __, style: ___, ...rest } = attrs;
     return rest;
   });
 
   return {
-    wraperAttrs,
+    rootAttrs,
     innerAttrs
   };
 };

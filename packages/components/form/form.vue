@@ -5,13 +5,14 @@
     :class="rootClasses"
     :style="rootStyles"
   >
+    <!-- 显示内容，只能是 `<VFormItem>` 组件 -->
     <slot />
   </div>
 </template>
 
 <script setup>
 import { useTemplateRef } from 'vue';
-import { useForm, formProps } from './composables';
+import { useForm, formProps } from './composables/form';
 
 // 表单
 const formEl = useTemplateRef('formEl');

@@ -10,6 +10,7 @@
   overflow: hidden;
   vertical-align: top; /* 消除父元素间距 */
   color: var(--vui-icon-color);
+  transform: rotate(var(--vui-icon-rotate));
   transition: all 0.3s ease;
   > svg {
     width: 100%;

@@ -1,14 +1,23 @@
 # Row 行
 
-## 标签
+## 标签类型
 
-`props.tag` 默认 `div`
+使用 `tag` 属性定义标签类型
 
 <preview path="./demos/tag.vue"></preview>
 
 ## 文本样式
 
-1. `props.center` 是否居中
-2. `props.ellipsis` 是否溢出隐藏
+使用 `center`、`ellipsis` 属性定义文本样式
 
 <preview path="./demos/text-style.vue"></preview>
+
+## API
+
+### 属性
+
+| 名称       | 说明             | 类型      | 默认值  |
+| ---------- | ---------------- | --------- | ------- |
+| `tag`      | 标签类型         | `string`  | `div`   |
+| `center`   | 文字是否居中     | `boolean` | `false` |
+| `ellipsis` | 文字是否溢出隐藏 | `boolean` | `false` |
