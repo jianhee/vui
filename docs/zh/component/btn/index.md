@@ -48,16 +48,16 @@
 
 ### 属性
 
-| 名称       | 说明                            | 类型                               | 默认值    |
-| ---------- | ------------------------------- | ---------------------------------- | --------- |
-| `type`     | 按钮类型                        | `string`(`primary\|default\|link`) | `default` |
-| `disabled` | 是否为禁用状态                  | `boolean`                          | `false`   |
-| `loading`  | 是否为加载状态                  | `boolean`                          | `false`   |
-| `icon`     | 前置图标                        | `string\|component\|object`        |           |
-| `size`     | 按钮尺寸                        | `string`(`large\|medium\|small`)   | `medium`  |
-| `inline`   | 是否为行内模式                  | `boolean`                          | `true`    |
-| `block`    | 是否为块级模式                  | `boolean`                          | `false`   |
-| `radius`   | 圆角尺寸，数字自动补全单位 `px` | `string\|number`                   | `4`       |
+| 名称       | 说明           | 类型                               | 默认值    |
+| ---------- | -------------- | ---------------------------------- | --------- |
+| `type`     | 按钮类型       | `string`(`primary\|default\|link`) | `default` |
+| `disabled` | 是否为禁用状态 | `boolean`                          | `false`   |
+| `loading`  | 是否为加载状态 | `boolean`                          | `false`   |
+| `icon`     | 前置图标       | `string\|component\|object`        |           |
+| `size`     | 按钮尺寸       | `string`(`large\|medium\|small`)   | `medium`  |
+| `inline`   | 是否为行内模式 | `boolean`                          | `true`    |
+| `block`    | 是否为块级模式 | `boolean`                          | `false`   |
+| `radius`   | 圆角尺寸       | `string(带单位)\|number(px)`       | `4`       |
 
 ### 插槽
 

@@ -3,7 +3,7 @@
   <div
     class="vui-menu-item"
     :title="formattedMenuItem.label"
-    @click="onClickMenuItem"
+    @click="onMenuItemClick"
   >
     <!-- 前置图标 -->
     <VIcon
@@ -38,7 +38,7 @@ const menuRoot = inject('menuRoot', null);
 const props = defineProps(menuItemProps);
 
 // 使用菜单项
-const { formattedMenuItem, isSelected, onClickMenuItem } = useMenuItem({
+const { formattedMenuItem, isSelected, onMenuItemClick } = useMenuItem({
   menuRoot,
   menuItem: { props }
 });

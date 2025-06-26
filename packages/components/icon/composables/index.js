@@ -22,9 +22,9 @@ export const iconProps = {
   // 需要将 `svg` 中对应的颜色改为 `var(--vui-icon-two-tone-color)`
   // 仅双色图标有效
   twoToneColor: { type: String, default: null },
-  // 图标尺寸: 数字自动补全单位 `px`
+  // 图标尺寸: 不带单位时默认 `px`
   size: { type: [String, Number], default: null },
-  // 旋转角度：数字自动补全单位 `deg`
+  // 旋转角度：不带单位时默认 `deg`
   rotate: { type: [String, Number], default: null }
 };
 

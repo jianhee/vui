@@ -5,13 +5,13 @@
     <div
       ref="railEl"
       class="vui-slider-rail"
-      @click.stop="onClickRail"
+      @click.stop="onRailClick"
     />
     <!-- 填充 -->
     <div
       class="vui-slider-track"
       :style="trackStyles"
-      @click.stop="onClickRail"
+      @click.stop="onRailClick"
     />
     <!-- 手柄 -->
     <div
@@ -42,7 +42,7 @@ const modelValue = defineModel('value', sliderModel.value);
 const props = defineProps(sliderProps);
 
 // 使用滑块
-const { rootClasses, onClickRail, onSliderDragStart, trackStyles, handleStyles, tipText } = useSlider({
+const { rootClasses, onRailClick, onSliderDragStart, trackStyles, handleStyles, tipText } = useSlider({
   railEl,
   handleEl,
   modelValue,

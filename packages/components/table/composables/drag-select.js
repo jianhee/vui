@@ -3,7 +3,7 @@ import { ref, computed, inject } from 'vue';
 import { useEventListener } from '@vueuse/core';
 
 // 使用框选
-export const useDragSelect = ({ dragSelectAreaWidth, parentEl, dragFlag, rowItems, rowHeight }) => {
+export const useDragSelect = ({ dragFlag, dragSelectAreaWidth, parentEl, rowItems, rowHeight }) => {
   // 全局状态
   const selectionRoot = inject('selectionRoot', null);
   let cacheIds = [];
@@ -34,12 +34,12 @@ export const useDragSelect = ({ dragSelectAreaWidth, parentEl, dragFlag, rowItem
     };
     selectionCurrentPos.value = { ...selectionStartPos.value };
 
-    window.addEventListener('mousemove', onSelectMove);
+    window.addEventListener('mousemove', onSelecting);
     window.addEventListener('mouseup', onSelectStop);
   });
 
   // 框选中
-  function onSelectMove(e) {
+  function onSelecting(e) {
     if (dragFlag.value !== 'select') return;
 
     // 更新选择框位置：不能超出父元素
@@ -58,7 +58,7 @@ export const useDragSelect = ({ dragSelectAreaWidth, parentEl, dragFlag, rowItem
     if (dragFlag.value !== 'select') return;
 
     dragFlag.value = null;
-    window.removeEventListener('mousemove', onSelectMove);
+    window.removeEventListener('mousemove', onSelecting);
     window.removeEventListener('mouseup', onSelectStop);
   }
 

@@ -3,7 +3,7 @@
   <div
     v-bind="rootAttrs"
     :class="rootClasses"
-    @click="onClickRoot"
+    @click="onRootClick"
   >
     <!-- 前置图标 -->
     <VIcon
@@ -27,7 +27,7 @@
       v-if="isShowClearIcon"
       class="vui-input-clear"
       :component="IconClear"
-      @click.stop="onClickClearIcon"
+      @click.stop="onClear"
     />
   </div>
 </template>
@@ -50,7 +50,7 @@ const emits = defineEmits(inputEmits);
 const { rootAttrs, innerAttrs } = useFormElementAttrs();
 
 // 使用输入框
-const { rootClasses, onClickRoot, onInput, onChange, onEnter, isShowClearIcon, onClickClearIcon } = useInput({
+const { rootClasses, onRootClick, onInput, onChange, onEnter, isShowClearIcon, onClear } = useInput({
   inputEl,
   modelValue,
   props,

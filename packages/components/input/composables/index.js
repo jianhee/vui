@@ -39,7 +39,7 @@ export const useInput = ({ inputEl, modelValue, props, emits }) => {
   });
 
   // 点击根元素获取焦点
-  function onClickRoot() {
+  function onRootClick() {
     focused.value = true;
   }
 
@@ -66,18 +66,18 @@ export const useInput = ({ inputEl, modelValue, props, emits }) => {
   });
 
   // 点击清空按钮时
-  function onClickClearIcon(e) {
+  function onClear(e) {
     modelValue.value = '';
     emits('clear', { event: e, value: '' });
   }
 
   return {
     rootClasses,
-    onClickRoot,
+    onRootClick,
     onInput,
     onChange,
     onEnter,
     isShowClearIcon,
-    onClickClearIcon
+    onClear
   };
 };

@@ -16,9 +16,9 @@ const tableRoot = inject('tableRoot', null);
 
 // 使用框选
 const { selectionStyles } = useDragSelect({
+  dragFlag: tableRoot.dragFlag,
   dragSelectAreaWidth: tableRoot.props.dragSelectAreaWidth,
   parentEl: tableRoot.tbodyEl,
-  dragFlag: tableRoot.dragFlag,
   rowItems: tableRoot.props.rowItems,
   rowHeight: tableRoot.props.rowHeight
 });

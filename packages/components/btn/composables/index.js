@@ -19,7 +19,7 @@ export const btnProps = {
   // 是否为块级模式
   block: { type: Boolean, default: false },
   // ---------- 样式属性 ----------
-  // 圆角尺寸：数字自动补全单位 `px`
+  // 圆角尺寸：不带单位时默认 `px`
   radius: { type: [String, Number], default: null }
 };
 

@@ -13,11 +13,11 @@ export const imageProps = {
   // 加载失败的图片地址
   errorImg: { type: String, default: defaultErrorImg },
   // ---------- 样式属性 ----------
-  // 宽度：数字自动补全单位 `px`
+  // 宽度：不带单位时默认 `px`
   width: { type: [String, Number], default: null },
   // 宽高比：设置后可能显示不全
   aspectRatio: { type: String, default: null },
-  // 圆角尺寸：数字自动补全单位 `px`
+  // 圆角尺寸：不带单位时默认 `px`
   radius: { type: [String, Number], default: null }
 };
 

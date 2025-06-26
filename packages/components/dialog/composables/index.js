@@ -22,7 +22,7 @@ export const dialogProps = {
   // 是否在点击遮罩时关闭
   closeOnClickModal: { type: Boolean, default: true },
   // ---------- 样式属性 ----------
-  // 内容宽度：数字自动补全单位 `px`
+  // 内容宽度：不带单位时默认 `px`
   width: { type: [String, Number], default: null }
 };
 
@@ -41,7 +41,7 @@ export const useDialog = ({ dialogType, modelVisible, props, emits }) => {
   });
 
   // 点击遮罩层
-  function onClickOverlay() {
+  function onOverlayClick() {
     if (!props.closeOnClickModal) return;
     modelVisible.value = false;
   }
@@ -66,14 +66,14 @@ export const useDialog = ({ dialogType, modelVisible, props, emits }) => {
   });
 
   // 点击关闭按钮
-  function onClickCloseIcon() {
+  function onClose() {
     modelVisible.value = false;
   }
 
   return {
-    onClickOverlay,
+    onOverlayClick,
     innerClasses,
     innerStyles,
-    onClickCloseIcon
+    onClose
   };
 };

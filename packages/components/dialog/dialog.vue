@@ -5,7 +5,7 @@
       <!-- 遮罩 -->
       <VOverlay
         v-show="modelVisible"
-        @click.self="onClickOverlay"
+        @click.self="onOverlayClick"
       >
         <!-- 主体 -->
         <div
@@ -25,7 +25,7 @@
               v-if="showClose"
               :class="`vui-${dialogType}-close`"
               :component="IconClose"
-              @click="onClickCloseIcon"
+              @click="onClose"
             />
           </div>
           <!-- 中间内容 -->
@@ -57,7 +57,7 @@ const props = defineProps(dialogProps);
 const emits = defineEmits(dialogEmits);
 
 // 使用弹窗
-const { onClickOverlay, innerClasses, innerStyles, onClickCloseIcon } = useDialog({
+const { onOverlayClick, innerClasses, innerStyles, onClose } = useDialog({
   dialogType,
   modelVisible,
   props,

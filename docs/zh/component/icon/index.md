@@ -122,14 +122,14 @@ import IconClose from './close.svg?component';
 
 ### 属性
 
-| 名称          | 说明                                                                                             | 类型             | 默认值           |
-| ------------- | ------------------------------------------------------------------------------------------------ | ---------------- | ---------------- |
-| `name`        | 图标名称                                                                                         | `string`         |                  |
-| `component`   | 图标组件                                                                                         | `component`      |                  |
-| `clickable`   | 是否为可点击状态                                                                                 | `boolean`        | `false`          |
-| `disabled`    | 是否为禁用状态                                                                                   | `boolean`        | `false`          |
-| `spin`        | 是否为旋转状态                                                                                   | `boolean`        | `false`          |
-| `color`       | 主要颜色 <br> 需要将 `svg` 中对应的颜色改为 `currentColor`                                       | `string`         | 继承 CSS `color` |
-| `twoOneColor` | 次要颜色 <br> 需要将 `svg` 中对应的颜色改为 `var(--vui-icon-two-tone-color)` <br> 仅双色图标有效 | `string`         |                  |
-| `size`        | 图标尺寸，数字自动补全单位 `px`                                                                  | `string\|number` | `1em`            |
-| `rotate`      | 旋转角度，数字自动补全单位 `deg`                                                                 | `string\|number` |                  |
+| 名称          | 说明                                                                                             | 类型                          | 默认值           |
+| ------------- | ------------------------------------------------------------------------------------------------ | ----------------------------- | ---------------- |
+| `name`        | 图标名称                                                                                         | `string`                      |                  |
+| `component`   | 图标组件                                                                                         | `component`                   |                  |
+| `clickable`   | 是否为可点击状态                                                                                 | `boolean`                     | `false`          |
+| `disabled`    | 是否为禁用状态                                                                                   | `boolean`                     | `false`          |
+| `spin`        | 是否为旋转状态                                                                                   | `boolean`                     | `false`          |
+| `color`       | 主要颜色 <br> 需要将 `svg` 中对应的颜色改为 `currentColor`                                       | `string`                      | 继承 CSS `color` |
+| `twoOneColor` | 次要颜色 <br> 需要将 `svg` 中对应的颜色改为 `var(--vui-icon-two-tone-color)` <br> 仅双色图标有效 | `string`                      |                  |
+| `size`        | 图标尺寸                                                                                         | `string(带单位)\|number(px)`  | `1em`            |
+| `rotate`      | 旋转角度                                                                                         | `string(带单位)\|number(deg)` |                  |

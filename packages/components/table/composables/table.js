@@ -8,7 +8,7 @@ export const tableEmits = ['row-contextmenu'];
 
 // props
 export const tableProps = {
-  // 表格高度：数字自动补全单位 `px`
+  // 表格高度：不带单位时默认 `px`
   // 必须使用表格属性或 CSS 限制高度，否则会渲染全部数据
   tableHeight: { type: [String, Number], default: null },
   // 行数据 `Array[Object]`

@@ -39,7 +39,7 @@ export const useSlider = ({ railEl, handleEl, modelValue, props }) => {
   });
 
   // 点击轨道/填充
-  function onClickRail(e) {
+  function onRailClick(e) {
     if (isDragging.value) return;
 
     updateValue(e);
@@ -111,7 +111,7 @@ export const useSlider = ({ railEl, handleEl, modelValue, props }) => {
 
   return {
     rootClasses,
-    onClickRail,
+    onRailClick,
     onSliderDragStart,
     trackStyles,
     handleStyles,

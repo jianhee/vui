@@ -26,7 +26,7 @@ export const useMenuItem = ({ menuRoot, menuItem }) => {
   });
 
   // 点击菜单项
-  const onClickMenuItem = () => {
+  const onMenuItemClick = () => {
     menuRoot.closeDropdown();
     doSelect();
     doSelectionChange();
@@ -64,6 +64,6 @@ export const useMenuItem = ({ menuRoot, menuItem }) => {
   return {
     formattedMenuItem,
     isSelected,
-    onClickMenuItem
+    onMenuItemClick
   };
 };
