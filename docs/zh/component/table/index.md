@@ -30,7 +30,7 @@
 ## 行多选
 
 1. 使用 `selectable` 属性控制是否可以选择行，使用 `v-model:selectedRowIds` 属性绑定选中值
-2. 使用 `selectAreaGap` 属性定义左侧框选区域的宽度
+2. 使用 `dragSelectable`、`dragSelectAreaWidth`、`ctrlASelectable` 等属性定义多种选择方式
 3. 切换选中项时触发 `selection-change` 事件
 
 <preview path="./demos/selection.vue"></preview>
@@ -81,11 +81,13 @@
 
 ### 属性
 
-| 名称                     | 说明                                                                                   | 类型                    | 默认值  |
-| ------------------------ | -------------------------------------------------------------------------------------- | ----------------------- | ------- |
-| `selectable`             | 是否可以选择行，支持点击选择、鼠标框选、`Ctrl + A` 全选                                | `boolean`               | `false` |
-| `selectAreaGap`          | 左侧鼠标框选区域的宽度 <br> 默认只能从底部空白区域开始框选，设置后也可以从左侧开始框选 | `number`                | `0`     |
-| `v-model:selectedRowIds` | 选中值，即选中项的 `id`                                                                | `Array[string\|number]` |         |
+| 名称                     | 说明                                                                                 | 类型                    | 默认值  |
+| ------------------------ | ------------------------------------------------------------------------------------ | ----------------------- | ------- |
+| `selectable`             | 是否可以选择行，这是多选的总开关                                                     | `boolean`               | `false` |
+| `v-model:selectedRowIds` | 选中值，即选中项的 `id`                                                              | `Array[string\|number]` |         |
+| `dragSelectable`         | 是否可以拖拽框选                                                                     | `boolean`               | `true`  |
+| `dragSelectAreaWidth`    | 左侧框选触发区域宽度 <br> 默认只能从底部空白区域开始框选，设置后也可以从左侧开始框选 | `number`                | `0`     |
+| `ctrlASelectable`        | 是否可以 `ctrl + a` 全选                                                             | `boolean`               | `true`  |
 
 ### 事件
 

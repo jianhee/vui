@@ -1,8 +1,8 @@
-// 移动
+// 拖拽移动
 import { computed } from 'vue';
 import { onLongPress } from '@vueuse/core';
 
-export const useDragboxMove = ({ boxRef, dragFlag, props, styles }) => {
+export const useDragMove = ({ boxRef, dragFlag, props, styles }) => {
   // 是否可移动
   const isMovable = computed(() => props.movable && props.enabled);
 
@@ -18,9 +18,9 @@ export const useDragboxMove = ({ boxRef, dragFlag, props, styles }) => {
     dragFlag.value = 'move';
 
     // 记录初始数据
-    const rect = boxRef.value.getBoundingClientRect();
+    const boxRect = boxRef.value.getBoundingClientRect();
     mouseStartPos = { x: e.clientX, y: e.clientY };
-    boxStartPos = { x: rect.left, y: rect.top };
+    boxStartPos = { x: boxRect.left, y: boxRect.top };
 
     window.addEventListener('mousemove', onMoving);
     window.addEventListener('mouseup', onMoveStop);

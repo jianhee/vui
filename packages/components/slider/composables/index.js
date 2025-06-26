@@ -75,11 +75,11 @@ export const useSlider = ({ railEl, handleEl, modelValue, props }) => {
   // 更新值
   function updateValue(e) {
     // 拖拽距离
-    const { left, width } = railEl.value.getBoundingClientRect();
-    const detaX = e.clientX - left;
+    const railRect = railEl.value.getBoundingClientRect();
+    const detaX = e.clientX - railRect.left;
 
     // 差值
-    const detaRatio = detaX / width;
+    const detaRatio = detaX / railRect.width;
     const detaValue = (props.max - props.min) * detaRatio + props.min;
 
     // 新值

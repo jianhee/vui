@@ -21,8 +21,8 @@
 <script setup>
 import { ref } from 'vue';
 import { dragboxModel, dragboxProps } from './composables';
-import { useDragboxMove } from './composables/move';
-import { useDragboxResize } from './composables/resize';
+import { useDragMove } from './composables/drag-move';
+import { useDragResize } from './composables/drag-resize';
 
 // 盒子
 const boxRef = ref(null);
@@ -36,7 +36,7 @@ const boxHeight = defineModel('height', dragboxModel);
 const dragFlag = ref(null);
 
 // 使用移动
-const { moveClasses, moveStyles } = useDragboxMove({
+const { moveClasses, moveStyles } = useDragMove({
   boxRef,
   dragFlag,
   props,
@@ -44,7 +44,7 @@ const { moveClasses, moveStyles } = useDragboxMove({
 });
 
 // 使用缩放
-const { resizeClasses, resizeStyles, handleItems, handleActiveName, onResizeStart } = useDragboxResize({
+const { resizeClasses, resizeStyles, handleItems, handleActiveName, onResizeStart } = useDragResize({
   boxRef,
   dragFlag,
   props,

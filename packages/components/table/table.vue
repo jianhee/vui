@@ -3,12 +3,12 @@
   <div
     ref="tableEl"
     :class="rootClasses"
-    :style="{ ...rootStyles, ...selectRootStyles }"
+    :style="{ ...rootStyles, ...selectionRootStyles }"
   >
     <!-- 表头 -->
     <div
       class="vui-table-header"
-      :style="{ ...headerStyles, ...selectInnerStyles }"
+      :style="{ ...headerStyles, ...selectionInnerStyles }"
     >
       <TheadRow />
     </div>
@@ -16,10 +16,10 @@
     <div
       class="vui-table-body"
       v-bind="tbodyProps"
-      :style="selectInnerStyles"
+      :style="selectionInnerStyles"
     >
-      <!-- 鼠标框选 -->
-      <SelectRect v-if="selectable" />
+      <!-- 拖拽框选 -->
+      <DragSelect v-if="selectable && dragSelectable" />
       <!-- 虚拟列表 -->
       <div
         class="vui-table-view"
@@ -50,7 +50,7 @@ import { useTable, tableProps, tableEmits } from './composables/table';
 import { useSelection, selectionModel, selectionProps, selectionEmits } from './composables/selection';
 import TheadRow from './thead-row.vue';
 import TbodyRow from './tbody-row.vue';
-import SelectRect from './select-rect.vue';
+import DragSelect from './drag-select.vue';
 
 // 表格
 const tableEl = useTemplateRef('tableEl');
@@ -83,9 +83,9 @@ const { rootClasses, rootStyles, headerStyles, colMinWidth, colWidths } = useTab
 });
 
 // 使用多选
-const { selectRootStyles, selectInnerStyles } = useSelection({
+const { selectionRootStyles, selectionInnerStyles } = useSelection({
   selectable: props.selectable,
-  selectAreaGap: props.selectAreaGap,
+  dragSelectAreaWidth: props.dragSelectAreaWidth,
   modelSelectedRowIds,
   rowItems: props.rowItems,
   emits

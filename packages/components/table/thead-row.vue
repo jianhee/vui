@@ -36,6 +36,7 @@ const tableRoot = inject('tableRoot', null);
 // 使用全选
 const { isSelectedAll, toggleAllSelection } = useAllSelection({
   selectable: tableRoot.props.selectable,
+  ctrlASelectable: tableRoot.props.ctrlASelectable,
   modelSelectedRowIds: tableRoot.modelSelectedRowIds,
   rowItems: tableRoot.props.rowItems
 });

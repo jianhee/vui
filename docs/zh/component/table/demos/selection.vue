@@ -5,7 +5,7 @@
     :row-items="rowItems"
     :col-items="colItems"
     :selectable="true"
-    :select-area-gap="20"
+    :drag-select-area-width="20"
     @selection-change="writeLog('selection-change', $event)"
   />
 

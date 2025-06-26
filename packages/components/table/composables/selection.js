@@ -13,15 +13,19 @@ export const selectionModel = {
 
 // props
 export const selectionProps = {
-  // 是否可以选择行
+  // 是否可以选择行：这是多选的总开关
   selectable: { type: Boolean, default: false },
-  // 左侧鼠标框选区域的宽度
+  // 是否可以拖拽框选
+  dragSelectable: { type: Boolean, default: true },
+  // 左侧框选触发区域宽度
   // 默认只能从底部空白区域开始框选，设置后也可以从左侧开始框选
-  selectAreaGap: { type: Number, default: 0 }
+  dragSelectAreaWidth: { type: Number, default: 0 },
+  // 是否可以 `ctrl + a` 全选
+  ctrlASelectable: { type: Boolean, default: true }
 };
 
 // 使用多选
-export const useSelection = ({ selectable, selectAreaGap, modelSelectedRowIds, rowItems, emits }) => {
+export const useSelection = ({ selectable, dragSelectAreaWidth, modelSelectedRowIds, rowItems, emits }) => {
   // 切换事件
   function onSelectionChange(selectedItems = [], selectedIds = []) {
     if (!selectable) return;
@@ -48,17 +52,17 @@ export const useSelection = ({ selectable, selectAreaGap, modelSelectedRowIds, r
   });
 
   // 鼠标框选的样式
-  const selectRootStyles = computed(() => ({ marginLeft: `-${selectAreaGap}px` }));
-  const selectInnerStyles = computed(() => ({ paddingLeft: `${selectAreaGap}px` }));
+  const selectionRootStyles = computed(() => ({ marginLeft: `-${dragSelectAreaWidth}px` }));
+  const selectionInnerStyles = computed(() => ({ paddingLeft: `${dragSelectAreaWidth}px` }));
 
   return {
-    selectRootStyles,
-    selectInnerStyles
+    selectionRootStyles,
+    selectionInnerStyles
   };
 };
 
 // 使用全选
-export const useAllSelection = ({ selectable, modelSelectedRowIds, rowItems }) => {
+export const useAllSelection = ({ selectable, ctrlASelectable, modelSelectedRowIds, rowItems }) => {
   // 全局状态
   const selectionRoot = inject('selectionRoot', null);
 
@@ -84,6 +88,7 @@ export const useAllSelection = ({ selectable, modelSelectedRowIds, rowItems }) =
 
   // ctrl+a 切换全选
   useEventListener(window, 'keydown', event => {
+    if (!ctrlASelectable) return;
     if (event.key === 'a' && event.ctrlKey) {
       event.preventDefault();
       toggleAllSelection();

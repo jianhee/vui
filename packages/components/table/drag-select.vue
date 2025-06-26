@@ -1,23 +1,22 @@
-<!-- 鼠标框选 -->
+<!-- 拖拽框选 -->
 <template>
   <div
     v-if="tableRoot.dragFlag.value === 'select'"
     class="vui-table-select-rect"
-    :style="rectStyles"
+    :style="selectionStyles"
   />
 </template>
 
 <script setup>
 import { inject } from 'vue';
-import { useSelectRect } from './composables/select-rect.js';
+import { useDragSelect } from './composables/drag-select.js';
 
 // 表格
 const tableRoot = inject('tableRoot', null);
 
 // 使用框选
-const { rectStyles } = useSelectRect({
-  selectable: tableRoot.props.selectable,
-  selectAreaGap: tableRoot.props.selectAreaGap,
+const { selectionStyles } = useDragSelect({
+  dragSelectAreaWidth: tableRoot.props.dragSelectAreaWidth,
   parentEl: tableRoot.tbodyEl,
   dragFlag: tableRoot.dragFlag,
   rowItems: tableRoot.props.rowItems,
