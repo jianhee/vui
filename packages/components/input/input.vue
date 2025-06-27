@@ -12,7 +12,7 @@
     />
     <!-- 输入框 -->
     <input
-      ref="inputEl"
+      ref="inputElRef"
       v-model="modelValue"
       type="text"
       class="vui-input-inner"
@@ -27,7 +27,7 @@
       v-if="isShowClearIcon"
       class="vui-input-clear"
       :component="IconClear"
-      @click.stop="onClear"
+      @click.stop="clearValue"
     />
   </div>
 </template>
@@ -41,7 +41,7 @@ import IconClear from '../../icons/clear.vue';
 
 // 输入框
 defineOptions({ inheritAttrs: false });
-const inputEl = useTemplateRef('inputEl');
+const inputElRef = useTemplateRef('inputElRef');
 const modelValue = defineModel('value', inputModel.value);
 const props = defineProps(inputProps);
 const emits = defineEmits(inputEmits);
@@ -50,8 +50,8 @@ const emits = defineEmits(inputEmits);
 const { rootAttrs, innerAttrs } = useFormElementAttrs();
 
 // 使用输入框
-const { rootClasses, onRootClick, onInput, onChange, onEnter, isShowClearIcon, onClear } = useInput({
-  inputEl,
+const { rootClasses, onRootClick, onInput, onChange, onEnter, isShowClearIcon, clearValue } = useInput({
+  inputElRef,
   modelValue,
   props,
   emits

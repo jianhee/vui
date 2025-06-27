@@ -18,7 +18,7 @@ export const skeletonItemProps = {
 };
 
 // 使用骨架屏项
-export const useSkeletonItem = props => {
+export const useSkeletonItem = ({ props }) => {
   // 获取宽度
   const getWidth = index => {
     if (props.width) return props.width;

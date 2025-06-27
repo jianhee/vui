@@ -1,7 +1,7 @@
 <!-- 拖拽框 -->
 <template>
   <div
-    ref="boxRef"
+    ref="boxElRef"
     class="vui-dragbox"
     :class="{ ...moveClasses, ...resizeClasses }"
     :style="{ ...moveStyles, ...resizeStyles }"
@@ -19,35 +19,39 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, useTemplateRef } from 'vue';
 import { dragboxModel, dragboxProps } from './composables';
 import { useDragMove } from './composables/drag-move';
 import { useDragResize } from './composables/drag-resize';
 
 // 盒子
-const boxRef = ref(null);
+const boxElRef = useTemplateRef('boxElRef');
 const props = defineProps(dragboxProps);
-const boxLeft = defineModel('left', dragboxModel);
-const boxTop = defineModel('top', dragboxModel);
-const boxWidth = defineModel('width', dragboxModel);
-const boxHeight = defineModel('height', dragboxModel);
+const modelLeft = defineModel('left', dragboxModel);
+const modelTop = defineModel('top', dragboxModel);
+const modelWidth = defineModel('width', dragboxModel);
+const modelHeight = defineModel('height', dragboxModel);
 
 // 拖拽标识：move, resize
-const dragFlag = ref(null);
+const dragFlagRef = ref(null);
 
 // 使用移动
 const { moveClasses, moveStyles } = useDragMove({
-  boxRef,
-  dragFlag,
+  boxElRef,
+  dragFlagRef,
   props,
-  styles: { boxLeft, boxTop }
+  modelLeft,
+  modelTop
 });
 
 // 使用缩放
 const { resizeClasses, resizeStyles, handleItems, handleActiveName, onResizeStart } = useDragResize({
-  boxRef,
-  dragFlag,
+  boxElRef,
+  dragFlagRef,
   props,
-  styles: { boxLeft, boxTop, boxWidth, boxHeight }
+  modelLeft,
+  modelTop,
+  modelWidth,
+  modelHeight
 });
 </script>

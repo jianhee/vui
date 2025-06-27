@@ -1,7 +1,7 @@
 <!-- 表单 -->
 <template>
   <div
-    ref="formEl"
+    ref="formElRef"
     :class="rootClasses"
     :style="rootStyles"
   >
@@ -15,12 +15,12 @@ import { useTemplateRef } from 'vue';
 import { useForm, formProps } from './composables/form';
 
 // 表单
-const formEl = useTemplateRef('formEl');
+const formElRef = useTemplateRef('formElRef');
 const props = defineProps(formProps);
 
 // 使用表单
 const { rootClasses, rootStyles } = useForm({
-  formEl,
+  formElRef,
   props
 });
 </script>

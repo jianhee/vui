@@ -25,10 +25,13 @@ export const selectionProps = {
 };
 
 // 使用多选
-export const useSelection = ({ selectable, dragSelectAreaWidth, modelSelectedRowIds, rowItems, emits }) => {
+export const useSelection = ({ selectable, dragSelectAreaWidth, modelSelectedRowIds, rowItemsRef, emits }) => {
   // 切换事件
   function onSelectionChange(selectedItems = [], selectedIds = []) {
     if (!selectable) return;
+
+    // 避免重复更新
+    if (JSON.stringify(selectedIds) === JSON.stringify(modelSelectedRowIds.value || '[]')) return;
 
     // 更新值
     modelSelectedRowIds.value = selectedIds;
@@ -38,18 +41,13 @@ export const useSelection = ({ selectable, dragSelectAreaWidth, modelSelectedRow
   }
 
   // 更新数据时取消选中
-  watch(
-    () => rowItems,
-    () => {
-      if (!selectable) return;
-      onSelectionChange();
-    }
-  );
+  watch(rowItemsRef, () => {
+    if (!selectable) return;
+    onSelectionChange();
+  });
 
   // 子组件使用
-  provide('selectionRoot', {
-    onSelectionChange
-  });
+  provide('onSelectionChange', onSelectionChange);
 
   // 鼠标框选的样式
   const selectionRootStyles = computed(() => ({ marginLeft: `-${dragSelectAreaWidth}px` }));
@@ -62,15 +60,15 @@ export const useSelection = ({ selectable, dragSelectAreaWidth, modelSelectedRow
 };
 
 // 使用全选
-export const useAllSelection = ({ selectable, ctrlASelectable, modelSelectedRowIds, rowItems }) => {
+export const useAllSelection = ({ selectable, ctrlASelectable, modelSelectedRowIds, rowItemsRef }) => {
   // 全局状态
-  const selectionRoot = inject('selectionRoot', null);
+  const onSelectionChange = inject('onSelectionChange', null);
 
   // 是否全选
   const isSelectedAll = computed(() => {
     if (!selectable) return false;
 
-    return modelSelectedRowIds.value?.length === rowItems?.length;
+    return modelSelectedRowIds.value?.length === rowItemsRef.value?.length;
   });
 
   // 切换全选
@@ -79,15 +77,16 @@ export const useAllSelection = ({ selectable, ctrlASelectable, modelSelectedRowI
 
     const newState = !isSelectedAll.value;
     if (newState) {
-      const selectedIds = rowItems?.map(item => item.id);
-      selectionRoot.onSelectionChange(rowItems, selectedIds);
+      const selectedIds = rowItemsRef.value?.map(item => item.id);
+      onSelectionChange(rowItemsRef.value, selectedIds);
     } else {
-      selectionRoot.onSelectionChange();
+      onSelectionChange();
     }
   };
 
   // ctrl+a 切换全选
   useEventListener(window, 'keydown', event => {
+    if (!selectable) return;
     if (!ctrlASelectable) return;
     if (event.key === 'a' && event.ctrlKey) {
       event.preventDefault();
@@ -95,16 +94,24 @@ export const useAllSelection = ({ selectable, ctrlASelectable, modelSelectedRowI
     }
   });
 
+  // 行类名
+  const allSelectionClasses = computed(() => {
+    return {
+      'is-selected': isSelectedAll.value
+    };
+  });
+
   return {
     isSelectedAll,
-    toggleAllSelection
+    toggleAllSelection,
+    allSelectionClasses
   };
 };
 
 // 使用行选中
-export const useRowSelection = ({ selectable, modelSelectedRowIds, rowItems, rowId }) => {
+export const useRowSelection = ({ selectable, modelSelectedRowIds, rowItemsRef, rowId }) => {
   // 全局状态
-  const selectionRoot = inject('selectionRoot', null);
+  const onSelectionChange = inject('onSelectionChange', null);
 
   // 是否选中
   const isSelectedRow = computed(() => {
@@ -118,17 +125,17 @@ export const useRowSelection = ({ selectable, modelSelectedRowIds, rowItems, row
     if (!selectable) return;
 
     const newState = !isSelectedRow.value;
-    let selectedIds = modelSelectedRowIds.value || [];
+    let selectedIds = [...(modelSelectedRowIds.value || [])];
     if (newState) {
       selectedIds.push(rowId);
     } else {
       selectedIds = selectedIds.filter(id => id !== rowId);
     }
-    const selectedItems = rowItems.filter(item => selectedIds.includes(item.id));
-    selectionRoot.onSelectionChange(selectedItems, selectedIds);
+    const selectedItems = rowItemsRef.value.filter(item => selectedIds.includes(item.id));
+    onSelectionChange(selectedItems, selectedIds);
   };
 
-  // 类名
+  // 行类名
   const rowSelectionClasses = computed(() => {
     return {
       'is-selected': isSelectedRow.value
@@ -136,8 +143,8 @@ export const useRowSelection = ({ selectable, modelSelectedRowIds, rowItems, row
   });
 
   return {
-    rowSelectionClasses,
     isSelectedRow,
-    toggleRowSelection
+    toggleRowSelection,
+    rowSelectionClasses
   };
 };

@@ -8,13 +8,13 @@
 
 ## 禁用状态
 
-使用 `disabled` 属性添加禁用状态
+使用 `disabled` 属性开启禁用状态
 
 <preview path="./demos/disabled.vue"></preview>
 
 ## 加载状态
 
-使用 `loading` 属性添加加载状态
+使用 `loading` 属性开启加载状态
 
 <preview path="./demos/loading.vue"></preview>
 
@@ -32,7 +32,7 @@
 
 ## 块级模式
 
-将 `inline` 属性设为 `false`，或者将 `block` 属性设为 `true`
+使用 `inline` 或 `block` 属性切换显示模式
 
 <preview path="./demos/display.vue"></preview>
 

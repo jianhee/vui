@@ -1,9 +1,9 @@
 <!-- 拖拽框选 -->
 <template>
   <div
-    v-if="tableRoot.dragFlag.value === 'select'"
+    v-if="tableRoot.dragFlagRef.value === 'select'"
     class="vui-table-select-rect"
-    :style="selectionStyles"
+    :style="boxStyles"
   />
 </template>
 
@@ -15,11 +15,11 @@ import { useDragSelect } from './composables/drag-select.js';
 const tableRoot = inject('tableRoot', null);
 
 // 使用框选
-const { selectionStyles } = useDragSelect({
-  dragFlag: tableRoot.dragFlag,
+const { boxStyles } = useDragSelect({
+  dragFlagRef: tableRoot.dragFlagRef,
   dragSelectAreaWidth: tableRoot.props.dragSelectAreaWidth,
-  parentEl: tableRoot.tbodyEl,
-  rowItems: tableRoot.props.rowItems,
+  parentElRef: tableRoot.tbodyElRef,
+  rowItemsRef: tableRoot.rowItemsRef,
   rowHeight: tableRoot.props.rowHeight
 });
 </script>

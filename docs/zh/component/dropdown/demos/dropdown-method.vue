@@ -9,7 +9,7 @@
   </div>
 
   <VDropdown
-    ref="dropdownEl"
+    ref="dropdownElRef"
     trigger="contextmenu"
     class="demo-dropdown"
     @open="writeLog('open')"
@@ -27,10 +27,10 @@ import { writeLog } from '@vp/utils';
 const nRef = ref(null);
 
 // 打开菜单
-const dropdownEl = useTemplateRef('dropdownEl');
+const dropdownElRef = useTemplateRef('dropdownElRef');
 function openDropdown(event, n) {
   nRef.value = n;
-  dropdownEl.value.open({ event });
+  dropdownElRef.value.open({ event });
 }
 </script>
 

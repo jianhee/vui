@@ -12,7 +12,7 @@ export const rowProps = {
 };
 
 // 使用行
-export const useRow = props => {
+export const useRow = ({ props }) => {
   const rootClasses = computed(() => {
     return [
       'vui-row',

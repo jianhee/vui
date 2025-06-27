@@ -23,5 +23,5 @@ import { useLoading, loadingProps } from './composables';
 const props = defineProps(loadingProps);
 
 // 使用加载
-const { iconProps } = useLoading(props);
+const { iconProps } = useLoading({ props });
 </script>

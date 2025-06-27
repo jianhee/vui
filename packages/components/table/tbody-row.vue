@@ -1,10 +1,25 @@
 <!-- 表身-行 -->
 <template>
   <div
-    :class="[...rowClasses, rowSelectionClasses]"
+    :class="['vui-table-row', rowClasses, rowSelectionClasses, dragClasses]"
     v-bind="customRowAttrs"
+    :draggable="tableRoot.props.dragSortable"
+    @dragstart="onDragStart"
+    @dragenter.prevent="onDragEnter"
+    @dragover.prevent="onDragOver"
+    @dragend="onDragEnd"
     @contextmenu.prevent="onRowContextmenu"
   >
+    <!-- 排序 -->
+    <div
+      v-if="tableRoot.props.dragSortable"
+      class="vui-table-cell is-action"
+    >
+      <VIcon
+        :component="IconDrag"
+        class="vui-table-drag-handle"
+      />
+    </div>
     <!-- 多选 -->
     <div
       v-if="tableRoot.props.selectable"
@@ -28,10 +43,12 @@
 </template>
 
 <script setup>
-import { inject } from 'vue';
+import { computed, inject } from 'vue';
 import { useTbodyRow, tbodyRowProps } from './composables/tbody-row';
 import { useRowSelection } from './composables/selection';
+import { useDragSortItem } from './composables/drag-sort';
 import TbodyCell from './tbody-cell.vue';
+import IconDrag from '../../icons/drag.vue';
 
 // 表格
 const tableRoot = inject('tableRoot', null);
@@ -46,10 +63,31 @@ const { rowClasses, customRowAttrs, onRowContextmenu } = useTbodyRow({
 });
 
 // 使用行选中
-const { rowSelectionClasses, isSelectedRow, toggleRowSelection } = useRowSelection({
+const { isSelectedRow, toggleRowSelection, rowSelectionClasses } = useRowSelection({
   selectable: tableRoot.props.selectable,
   modelSelectedRowIds: tableRoot.modelSelectedRowIds,
-  rowItems: tableRoot.props.rowItems,
+  rowItemsRef: tableRoot.rowItemsRef,
   rowId: props.rowData?.id
+});
+
+// 使用行排序
+// 当前行被选中时拖拽所有选中的行
+const selectedItemsRef = computed(() => {
+  if (isSelectedRow.value) {
+    return tableRoot.rowItemsRef.value.filter(item => tableRoot.modelSelectedRowIds.value?.includes(item.id));
+  } else {
+    return null;
+  }
+});
+
+// 处理数据
+const { dragClasses, onDragStart, onDragEnter, onDragOver, onDragEnd } = useDragSortItem({
+  dragFlagRef: tableRoot.dragFlagRef,
+  dragSortable: tableRoot.props.dragSortable,
+  canDropInto: tableRoot.props.canDropInto,
+  itemsDataRef: tableRoot.rowItemsRef,
+  itemData: props.rowData,
+  selectedItemsRef,
+  emits: tableRoot.emits
 });
 </script>

@@ -1,6 +1,12 @@
 <!-- 表头-行 -->
 <template>
-  <div class="vui-table-row">
+  <div :class="['vui-table-row', allSelectionClasses]">
+    <!-- 排序占位 -->
+    <div
+      v-if="tableRoot.props.dragSortable"
+      class="vui-table-cell is-action"
+      style="width: 24px"
+    />
     <!-- 全选 -->
     <div
       v-if="tableRoot.props.selectable"
@@ -15,7 +21,7 @@
     <VDragbox
       v-for="col in tableRoot.props.colItems"
       :key="col.key"
-      v-model:width="tableRoot.colWidths.value[col.key]"
+      v-model:width="tableRoot.colWidthsRef.value[col.key]"
       class="vui-table-cell"
       :resizable="tableRoot.props.colResizable"
       :resize-handles="['right']"
@@ -34,10 +40,10 @@ import { useAllSelection } from './composables/selection';
 const tableRoot = inject('tableRoot', null);
 
 // 使用全选
-const { isSelectedAll, toggleAllSelection } = useAllSelection({
+const { isSelectedAll, toggleAllSelection, allSelectionClasses } = useAllSelection({
   selectable: tableRoot.props.selectable,
   ctrlASelectable: tableRoot.props.ctrlASelectable,
   modelSelectedRowIds: tableRoot.modelSelectedRowIds,
-  rowItems: tableRoot.props.rowItems
+  rowItemsRef: tableRoot.rowItemsRef
 });
 </script>

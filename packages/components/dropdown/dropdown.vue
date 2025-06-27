@@ -5,7 +5,7 @@
   <!-- 为了获取 slots.default 根元素 -->
   <span
     v-if="$slots.default"
-    ref="triggerNextEl"
+    ref="triggerNextElRef"
     style="display: none"
   />
 
@@ -14,7 +14,7 @@
     <Transition name="vui-dropdown">
       <div
         v-show="dropdownVisible"
-        ref="dropdownEl"
+        ref="dropdownElRef"
         v-bind="$attrs"
         class="vui-dropdown"
         :style="dropdownStyles"
@@ -39,16 +39,16 @@ import DropdownMenu from './menu.vue';
 
 // 下拉框
 defineOptions({ inheritAttrs: false });
-const triggerNextEl = useTemplateRef('triggerNextEl');
-const dropdownEl = useTemplateRef('dropdownEl');
+const triggerNextElRef = useTemplateRef('triggerNextElRef');
+const dropdownElRef = useTemplateRef('dropdownElRef');
 const modelSelectedKey = defineModel('selectedKey', menuModel.selectedKey);
 const props = defineProps({ ...dropdownProps, ...menuProps });
 const emits = defineEmits([...dropdownEmits, ...menuEmits]);
 
 // 使用下拉框
 const { dropdownVisible, dropdownStyles, openDropdown, closeDropdown } = useDropdown({
-  triggerNextEl,
-  dropdownEl,
+  triggerNextElRef,
+  dropdownElRef,
   props,
   emits
 });

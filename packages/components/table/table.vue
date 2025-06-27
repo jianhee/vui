@@ -1,7 +1,7 @@
 <!-- 表格 -->
 <template>
   <div
-    ref="tableEl"
+    ref="tableElRef"
     :class="rootClasses"
     :style="{ ...rootStyles, ...selectionRootStyles }"
   >
@@ -44,42 +44,45 @@
 </template>
 
 <script setup>
-import { ref, computed, provide, useTemplateRef } from 'vue';
+import { ref, watch, provide, useTemplateRef } from 'vue';
 import { useVirtualList } from '@vueuse/core';
 import { useTable, tableProps, tableEmits } from './composables/table';
 import { useSelection, selectionModel, selectionProps, selectionEmits } from './composables/selection';
+import { useDragSort, dragSortProps, dragSortEmist } from './composables/drag-sort';
 import TheadRow from './thead-row.vue';
 import TbodyRow from './tbody-row.vue';
 import DragSelect from './drag-select.vue';
 
 // 表格
-const tableEl = useTemplateRef('tableEl');
+const tableElRef = useTemplateRef('tableElRef');
 const modelSelectedRowIds = defineModel('selectedRowIds', selectionModel.selectedRowIds);
-const props = defineProps({ ...tableProps, ...selectionProps });
-const emits = defineEmits([...tableEmits, ...selectionEmits]);
+const props = defineProps({ ...tableProps, ...selectionProps, ...dragSortProps });
+const emits = defineEmits([...tableEmits, ...selectionEmits, ...dragSortEmist]);
 
-// 拖拽状态
-const dragFlag = ref(null);
+// 全局数据
+const dragFlagRef = ref(null);
+const rowItemsRef = ref(props.rowItems);
+watch(
+  () => props.rowItems,
+  val => (rowItemsRef.value = val)
+);
 
 // 使用虚拟列表
 const {
   list: virtualList,
   containerProps: tbodyProps,
   wrapperProps: viewProps
-} = useVirtualList(
-  computed(() => props.rowItems),
-  {
-    itemHeight: props.rowHeight,
-    overscan: 20
-  }
-);
+} = useVirtualList(rowItemsRef, {
+  itemHeight: props.rowHeight,
+  overscan: 20
+});
 
 // 使用表格
-const { rootClasses, rootStyles, headerStyles, colMinWidth, colWidths } = useTable({
-  tableEl,
-  tbodyEl: tbodyProps.ref,
+const { rootClasses, rootStyles, headerStyles, colMinWidth, colWidthsRef } = useTable({
+  tableElRef,
+  tbodyElRef: tbodyProps.ref,
   props,
-  dragFlag
+  dragFlagRef
 });
 
 // 使用多选
@@ -87,18 +90,22 @@ const { selectionRootStyles, selectionInnerStyles } = useSelection({
   selectable: props.selectable,
   dragSelectAreaWidth: props.dragSelectAreaWidth,
   modelSelectedRowIds,
-  rowItems: props.rowItems,
+  rowItemsRef,
   emits
 });
 
+// 使用排序
+useDragSort();
+
 // 子组件使用
 provide('tableRoot', {
-  tbodyEl: tbodyProps.ref,
+  tbodyElRef: tbodyProps.ref,
   modelSelectedRowIds,
   props,
   emits,
-  dragFlag,
-  colWidths,
+  dragFlagRef,
+  rowItemsRef,
+  colWidthsRef,
   colMinWidth
 });
 </script>

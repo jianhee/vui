@@ -22,7 +22,7 @@ export const imageProps = {
 };
 
 // 使用图片
-export const useImage = props => {
+export const useImage = ({ props }) => {
   // 根元素样式
   const rootStyles = computed(() => {
     return {

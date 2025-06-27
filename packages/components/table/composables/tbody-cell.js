@@ -19,7 +19,7 @@ export const useTbodyCell = ({ tableRoot, tbodyCell }) => {
   // 单元格类名
   const cellStyles = computed(() => {
     return {
-      width: `${tableRoot.colWidths.value[tbodyCell.props.colData.key]}px`
+      width: `${tableRoot.colWidthsRef.value[tbodyCell.props.colData.key]}px`
     };
   });
 

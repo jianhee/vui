@@ -2,7 +2,7 @@
 import { computed } from 'vue';
 import { onLongPress } from '@vueuse/core';
 
-export const useDragMove = ({ boxRef, dragFlag, props, styles }) => {
+export const useDragMove = ({ boxElRef, dragFlagRef, props, modelLeft, modelTop }) => {
   // 是否可移动
   const isMovable = computed(() => props.movable && props.enabled);
 
@@ -11,14 +11,14 @@ export const useDragMove = ({ boxRef, dragFlag, props, styles }) => {
   let boxStartPos = { x: 0, y: 0 };
 
   // 长按开始移动
-  onLongPress(boxRef, e => {
+  onLongPress(boxElRef, e => {
     if (!isMovable.value) return;
-    if (dragFlag.value) return;
+    if (dragFlagRef.value) return;
 
-    dragFlag.value = 'move';
+    dragFlagRef.value = 'move';
 
     // 记录初始数据
-    const boxRect = boxRef.value.getBoundingClientRect();
+    const boxRect = boxElRef.value.getBoundingClientRect();
     mouseStartPos = { x: e.clientX, y: e.clientY };
     boxStartPos = { x: boxRect.left, y: boxRect.top };
 
@@ -28,7 +28,7 @@ export const useDragMove = ({ boxRef, dragFlag, props, styles }) => {
 
   // 移动中
   function onMoving(e) {
-    if (dragFlag.value !== 'move') return;
+    if (dragFlagRef.value !== 'move') return;
 
     // 鼠标当前位置：不能超出窗口
     const mouseCurrentPos = {
@@ -41,15 +41,15 @@ export const useDragMove = ({ boxRef, dragFlag, props, styles }) => {
     const deltaY = mouseCurrentPos.y - mouseStartPos.y;
 
     // 盒子当前位置
-    styles.boxLeft.value = boxStartPos.x + deltaX;
-    styles.boxTop.value = boxStartPos.y + deltaY;
+    modelLeft.value = boxStartPos.x + deltaX;
+    modelTop.value = boxStartPos.y + deltaY;
   }
 
   // 移动结束
   function onMoveStop() {
-    if (dragFlag.value !== 'move') return;
+    if (dragFlagRef.value !== 'move') return;
 
-    dragFlag.value = null;
+    dragFlagRef.value = null;
     window.removeEventListener('mousemove', onMoving);
     window.removeEventListener('mouseup', onMoveStop);
   }
@@ -58,7 +58,7 @@ export const useDragMove = ({ boxRef, dragFlag, props, styles }) => {
   const moveClasses = computed(() => {
     return {
       'is-movable': isMovable.value,
-      'is-moving': dragFlag.value === 'move'
+      'is-moving': dragFlagRef.value === 'move'
     };
   });
 
@@ -66,8 +66,8 @@ export const useDragMove = ({ boxRef, dragFlag, props, styles }) => {
   const moveStyles = computed(() => {
     if (!props.enabled) return null;
     return {
-      left: `${styles.boxLeft.value}px`,
-      top: `${styles.boxTop.value}px`
+      left: `${modelLeft.value}px`,
+      top: `${modelTop.value}px`
     };
   });
 

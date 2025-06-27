@@ -24,5 +24,5 @@ import { useSkeletonItem, skeletonItemProps } from './composables';
 const props = defineProps(skeletonItemProps);
 
 // 使用骨架屏项
-const { formattedRows } = useSkeletonItem(props);
+const { formattedRows } = useSkeletonItem({ props });
 </script>

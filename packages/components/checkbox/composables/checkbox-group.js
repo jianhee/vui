@@ -18,8 +18,8 @@ export const checkboxGroupProps = {
   options: { type: Array, required: true },
   // 选项类型：button 按钮
   optionType: { type: String, default: null },
-  // 是否为行内模式
+  // 选项是否为行内模式
   optionInline: { type: Boolean, default: false },
-  // 是否为块级模式
+  // 选项是否为块级模式
   optionBlock: { type: Boolean, default: true }
 };

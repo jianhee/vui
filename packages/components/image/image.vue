@@ -26,5 +26,5 @@ import { useImage, imageProps } from './composables';
 const props = defineProps(imageProps);
 
 // 使用图片
-const { rootStyles, isShowSkeleton, skeletonAspectRatio, imgSrc, imgDataSrc } = useImage(props);
+const { rootStyles, isShowSkeleton, skeletonAspectRatio, imgSrc, imgDataSrc } = useImage({ props });
 </script>

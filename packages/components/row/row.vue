@@ -15,5 +15,5 @@ import { useRow, rowProps } from './composables';
 const props = defineProps(rowProps);
 
 // 使用行
-const { rootClasses } = useRow(props);
+const { rootClasses } = useRow({ props });
 </script>

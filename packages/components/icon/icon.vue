@@ -23,5 +23,5 @@ import { useIcon, iconProps } from './composables';
 const props = defineProps(iconProps);
 
 // 使用图标
-const { rootClasses, rootStyles } = useIcon(props);
+const { rootClasses, rootStyles } = useIcon({ props });
 </script>

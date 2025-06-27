@@ -17,15 +17,15 @@ export const formProps = {
 };
 
 // 使用表单
-export const useForm = ({ formEl, props }) => {
+export const useForm = ({ formElRef, props }) => {
   // 是否行内
   const isInline = computed(() => props.filedInline || !props.filedBlock);
 
   // 计算标签宽度
   const labelAutoWidth = ref(null);
-  const { stop } = useIntersectionObserver(formEl, async ([entry]) => {
+  const { stop } = useIntersectionObserver(formElRef, async ([entry]) => {
     if (entry?.isIntersecting) {
-      const labels = formEl.value.querySelectorAll('.vui-form-label');
+      const labels = formElRef.value.querySelectorAll('.vui-form-label');
       const labelWidths = Array.from(labels).map(label => label.offsetWidth);
       labelAutoWidth.value = Math.max(...labelWidths);
       stop();

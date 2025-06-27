@@ -1,6 +1,6 @@
 <template>
   <VTable
-    table-height="500"
+    class="demo-table"
     :col-items="colItems"
     :row-items="rowItems"
     :row-height="50"
@@ -11,10 +11,11 @@
 </template>
 
 <script setup>
-import { rowItems, colItems } from '../composables';
+import { renderRows, colItems } from '../composables';
 import { writeLog } from '@vp/utils';
 
 // 自定义行属性
+const rowItems = renderRows();
 function setCustomRow(row) {
   return {
     title: row.name,

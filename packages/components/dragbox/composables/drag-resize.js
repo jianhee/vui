@@ -1,7 +1,7 @@
 // 拖拽缩放
 import { ref, computed } from 'vue';
 
-export const useDragResize = ({ boxRef, dragFlag, props, styles }) => {
+export const useDragResize = ({ boxElRef, dragFlagRef, props, modelLeft, modelTop, modelWidth, modelHeight }) => {
   // 是否可缩放
   const isResizable = computed(() => props.resizable && props.enabled);
 
@@ -19,20 +19,20 @@ export const useDragResize = ({ boxRef, dragFlag, props, styles }) => {
   // 开始缩放
   function onResizeStart(e, handleName) {
     if (!isResizable.value) return;
-    if (dragFlag.value) return;
+    if (dragFlagRef.value) return;
 
     // 非定位元素只支持 `right, bottom`
-    const { position } = window.getComputedStyle(boxRef.value);
+    const { position } = window.getComputedStyle(boxElRef.value);
     const boxIsFixed = position === 'fixed';
     const handleIsDragable = ['right', 'bottom'].includes(handleName);
     if (!boxIsFixed && !handleIsDragable) return;
 
     // 记录状态
-    dragFlag.value = 'resize';
+    dragFlagRef.value = 'resize';
     handleActiveName.value = handleName;
 
     // 记录初始数据
-    const { offsetWidth, offsetHeight } = boxRef.value;
+    const { offsetWidth, offsetHeight } = boxElRef.value;
     mouseStartPos = { x: e.clientX, y: e.clientY };
     boxStartSize = { width: offsetWidth, height: offsetHeight };
 
@@ -42,7 +42,7 @@ export const useDragResize = ({ boxRef, dragFlag, props, styles }) => {
 
   // 缩放中
   function onResizing(e) {
-    if (dragFlag.value !== 'resize') return;
+    if (dragFlagRef.value !== 'resize') return;
 
     // 需要扣除的边框宽度
     const useBorder = ['right', 'bottom'].includes(handleActiveName.value);
@@ -57,10 +57,10 @@ export const useDragResize = ({ boxRef, dragFlag, props, styles }) => {
       const deltaX = mouseX - mouseStartPos.x;
       const isLeft = handleActiveName.value === 'left';
       const newWidth = isLeft ? boxStartSize.width - deltaX : boxStartSize.width + deltaX;
-      styles.boxWidth.value = Math.max(newWidth, props.minWidth);
+      modelWidth.value = Math.max(newWidth, props.minWidth);
       // 盒子当前位置
       if (isLeft && newWidth >= props.minWidth) {
-        styles.boxLeft.value = mouseX;
+        modelLeft.value = mouseX;
       }
       return;
     }
@@ -71,18 +71,18 @@ export const useDragResize = ({ boxRef, dragFlag, props, styles }) => {
     const deltaY = mouseY - mouseStartPos.y;
     const isTop = handleActiveName.value === 'top';
     const newHeight = isTop ? boxStartSize.height - deltaY : boxStartSize.height + deltaY;
-    styles.boxHeight.value = Math.max(newHeight, props.minHeight);
+    modelHeight.value = Math.max(newHeight, props.minHeight);
     // 盒子当前位置
     if (isTop && newHeight >= props.minHeight) {
-      styles.boxTop.value = mouseY;
+      modelTop.value = mouseY;
     }
   }
 
   // 缩放结束
   function onResizeStop() {
-    if (dragFlag.value !== 'resize') return;
+    if (dragFlagRef.value !== 'resize') return;
 
-    dragFlag.value = null;
+    dragFlagRef.value = null;
     handleActiveName.value = null;
     window.removeEventListener('mousemove', onResizing);
     window.removeEventListener('mouseup', onResizeStop);
@@ -92,7 +92,7 @@ export const useDragResize = ({ boxRef, dragFlag, props, styles }) => {
   const resizeClasses = computed(() => {
     return {
       'is-resizable': isResizable.value,
-      'is-resizing': dragFlag.value === 'resize'
+      'is-resizing': dragFlagRef.value === 'resize'
     };
   });
 
@@ -100,10 +100,10 @@ export const useDragResize = ({ boxRef, dragFlag, props, styles }) => {
   const resizeStyles = computed(() => {
     if (!props.enabled) return null;
     return {
-      left: `${styles.boxLeft.value}px`,
-      top: `${styles.boxTop.value}px`,
-      width: `${styles.boxWidth.value}px`,
-      height: `${styles.boxHeight.value}px`
+      left: `${modelLeft.value}px`,
+      top: `${modelTop.value}px`,
+      width: `${modelWidth.value}px`,
+      height: `${modelHeight.value}px`
     };
   });
 

@@ -35,10 +35,10 @@ export const tableProps = {
 };
 
 // 使用表格
-export const useTable = ({ tableEl, tbodyEl, props, dragFlag }) => {
+export const useTable = ({ tableElRef, tbodyElRef, props, dragFlagRef }) => {
   // 根元素类名
   const rootClasses = computed(() => {
-    return ['vui-table', { 'is-dragging': !!dragFlag.value }];
+    return ['vui-table', { 'is-dragging': !!dragFlagRef.value }];
   });
 
   // 根元素样式
@@ -51,7 +51,7 @@ export const useTable = ({ tableEl, tbodyEl, props, dragFlag }) => {
 
   // 表身滚动时带动表头
   const headerStyles = ref({ transform: null });
-  useEventListener(tbodyEl, 'scroll', event => {
+  useEventListener(tbodyElRef, 'scroll', event => {
     const scrollLeft = Math.floor(event.target.scrollLeft);
     headerStyles.value.transform = `translateX(-${scrollLeft}px)`;
   });
@@ -59,19 +59,19 @@ export const useTable = ({ tableEl, tbodyEl, props, dragFlag }) => {
   // 计算平均列宽
   const colMinWidth = 50;
   const colAutoWidth = ref(0);
-  const { stop } = useIntersectionObserver(tableEl, ([entry]) => {
+  const { stop } = useIntersectionObserver(tableElRef, ([entry]) => {
     if (entry?.isIntersecting) {
-      const colMaxWidth = Math.floor((tableEl.value.offsetWidth - 100) / props.colItems.length);
+      const colMaxWidth = Math.floor((tableElRef.value.offsetWidth - 100) / props.colItems.length);
       colAutoWidth.value = Math.max(colMinWidth, colMaxWidth);
       stop();
     }
   });
 
   // 计算当前列宽
-  const colWidths = props.colWidthsStorageKey ? useStorage(props.colWidthsStorageKey, {}) : ref({});
+  const colWidthsRef = props.colWidthsStorageKey ? useStorage(props.colWidthsStorageKey, {}) : ref({});
   watchEffect(() => {
-    colWidths.value = props.colItems.reduce((acc, col) => {
-      acc[col.key] = colWidths.value[col.key] || col.width || colAutoWidth.value;
+    colWidthsRef.value = props.colItems.reduce((acc, col) => {
+      acc[col.key] = colWidthsRef.value[col.key] || col.width || colAutoWidth.value;
       return acc;
     }, {});
   });
@@ -81,6 +81,6 @@ export const useTable = ({ tableEl, tbodyEl, props, dragFlag }) => {
     rootStyles,
     headerStyles,
     colMinWidth,
-    colWidths
+    colWidthsRef
   };
 };

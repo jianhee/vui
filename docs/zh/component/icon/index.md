@@ -82,19 +82,19 @@ import IconClose from './close.svg?component';
 
 ## 可点击状态
 
-使用 `clickable` 属性添加可点击状态
+使用 `clickable` 属性开启可点击状态
 
 <preview path="./demos/clickable.vue"></preview>
 
 ## 禁用状态
 
-使用 `disabled` 属性添加禁用状态
+使用 `disabled` 属性开启禁用状态
 
 <preview path="./demos/disabled.vue"></preview>
 
 ## 旋转状态
 
-使用 `spin` 属性添加旋转状态
+使用 `spin` 属性开启旋转状态
 
 <preview path="./demos/spin.vue"></preview>
 

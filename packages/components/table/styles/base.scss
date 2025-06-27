@@ -2,8 +2,16 @@
 // 树   vui-tree
 @mixin vui-selection-drag-root($prefix) {
   .#{$prefix} {
+    // 拖拽状态
     &.is-dragging {
       user-select: none;
+    }
+
+    // 拖拽手柄
+    &-drag-handle {
+      --vui-icon-size: 16px;
+
+      cursor: grab;
     }
   }
 }
@@ -16,12 +24,40 @@
     .is-action {
       visibility: hidden;
       padding-right: 0;
+      padding-left: 8px;
       opacity: 0;
     }
     &:hover .is-action,
     &.is-selected .is-action {
       visibility: visible;
       opacity: 1;
+    }
+
+    // 拖拽项
+    &.is-draging {
+      opacity: 0.5;
+    }
+
+    // 目标项
+    &.is-center {
+      background-color: var(--vui-color-brand-a10);
+      opacity: 0.8;
+    }
+    &.is-top::before,
+    &.is-bottom::after {
+      position: absolute;
+      right: 0;
+      left: 0;
+      z-index: 99;
+      height: 2px;
+      content: "";
+      background-color: var(--vui-color-brand-base);
+    }
+    &.is-top::before {
+      top: -1px;
+    }
+    &.is-bottom::after {
+      bottom: -1px;
     }
   }
 }

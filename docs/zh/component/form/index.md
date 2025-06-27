@@ -9,7 +9,7 @@
 
 ## 行内模式
 
-将表单的 `filedInline` 属性设为 `true`，或者将 `filedBlock` 属性设为 `false`
+使用表单的 `filedInline` 或 `filedBlock` 属性切换表单项的显示模式
 
 <preview path="./demos/filed-display.vue"></preview>
 

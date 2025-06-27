@@ -24,7 +24,7 @@ export const btnProps = {
 };
 
 // 使用按钮
-export const useBtn = props => {
+export const useBtn = ({ props }) => {
   // 是否禁用
   const isDisabled = computed(() => props.disabled || props.loading);
 

@@ -22,9 +22,9 @@ export const inputProps = {
 };
 
 // 使用输入框
-export const useInput = ({ inputEl, modelValue, props, emits }) => {
+export const useInput = ({ inputElRef, modelValue, props, emits }) => {
   // 是否获取焦点
-  const { focused } = useFocus(inputEl);
+  const { focused } = useFocus(inputElRef);
 
   // 根元素类名
   const rootClasses = computed(() => {
@@ -65,8 +65,8 @@ export const useInput = ({ inputEl, modelValue, props, emits }) => {
     return !!modelValue.value && !props.disabled;
   });
 
-  // 点击清空按钮时
-  function onClear(e) {
+  // 清空输入框
+  function clearValue(e) {
     modelValue.value = '';
     emits('clear', { event: e, value: '' });
   }
@@ -78,6 +78,6 @@ export const useInput = ({ inputEl, modelValue, props, emits }) => {
     onChange,
     onEnter,
     isShowClearIcon,
-    onClear
+    clearValue
   };
 };

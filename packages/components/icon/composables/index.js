@@ -29,7 +29,7 @@ export const iconProps = {
 };
 
 // 使用图标
-export const useIcon = props => {
+export const useIcon = ({ props }) => {
   // 根元素类名
   const rootClasses = computed(() => [
     'vui-icon',

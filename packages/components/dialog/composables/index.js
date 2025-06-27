@@ -43,7 +43,7 @@ export const useDialog = ({ dialogType, modelVisible, props, emits }) => {
   // 点击遮罩层
   function onOverlayClick() {
     if (!props.closeOnClickModal) return;
-    modelVisible.value = false;
+    closeDialog();
   }
 
   // 主体类名
@@ -66,7 +66,7 @@ export const useDialog = ({ dialogType, modelVisible, props, emits }) => {
   });
 
   // 点击关闭按钮
-  function onClose() {
+  function closeDialog() {
     modelVisible.value = false;
   }
 
@@ -74,6 +74,6 @@ export const useDialog = ({ dialogType, modelVisible, props, emits }) => {
     onOverlayClick,
     innerClasses,
     innerStyles,
-    onClose
+    closeDialog
   };
 };

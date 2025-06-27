@@ -7,7 +7,7 @@
     <!-- 显示选项 -->
     <select
       v-if="options"
-      ref="selectEl"
+      ref="selectElRef"
       v-model="modelValue"
       class="vui-select-inner"
       v-bind="innerAttrs"
@@ -46,7 +46,7 @@ import IconArrow from '../../icons/select-arrow.vue';
 
 // 选择器
 defineOptions({ inheritAttrs: false });
-const selectEl = useTemplateRef('selectEl');
+const selectElRef = useTemplateRef('selectElRef');
 const modelValue = defineModel('value', selectModel.value);
 const props = defineProps(selectProps);
 const emits = defineEmits(selectEmits);
@@ -56,7 +56,7 @@ const { rootAttrs, innerAttrs } = useFormElementAttrs();
 
 // 使用选择器
 const { formattdOptions, onChange, rootClasses } = useSelect({
-  selectEl,
+  selectElRef,
   modelValue,
   props,
   emits

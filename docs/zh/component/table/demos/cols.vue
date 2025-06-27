@@ -1,7 +1,7 @@
 <template>
   <VTable
     v-slot="{ row, col }"
-    table-height="300"
+    class="demo-table"
     :row-items="rowItems"
     :col-items="colItems"
     col-resizable
@@ -19,5 +19,7 @@
 
 <script setup>
 import { writeLog } from '@vp/utils';
-import { rowItems, colItems } from '../composables';
+import { renderRows, colItems } from '../composables';
+
+const rowItems = renderRows();
 </script>

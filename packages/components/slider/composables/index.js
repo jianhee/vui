@@ -22,10 +22,10 @@ export const sliderProps = {
 };
 
 // 使用滑块
-export const useSlider = ({ railEl, handleEl, modelValue, props }) => {
+export const useSlider = ({ railElRef, handleElRef, modelValue, props }) => {
   // 当前状态
   const isDragging = ref(false);
-  const isHovered = useElementHover(handleEl);
+  const isHovered = useElementHover(handleElRef);
 
   // 根元素类名
   const rootClasses = computed(() => {
@@ -75,7 +75,7 @@ export const useSlider = ({ railEl, handleEl, modelValue, props }) => {
   // 更新值
   function updateValue(e) {
     // 拖拽距离
-    const railRect = railEl.value.getBoundingClientRect();
+    const railRect = railElRef.value.getBoundingClientRect();
     const detaX = e.clientX - railRect.left;
 
     // 差值

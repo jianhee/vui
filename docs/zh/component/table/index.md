@@ -22,33 +22,40 @@
 
 ## 列的用法
 
-1. 使用 `colResizable` 属性控制是否可以调整列宽，使用 `colWidthsStorageKey` 属性可以记住调整后的列宽
+1. 使用 `colResizable` 属性开启拖拽调整列宽的功能，使用 `colWidthsStorageKey` 属性可以记住调整后的列宽
 2. 单元格默认显示 `row[col.key]` 的值，可以使用 `default` 插槽自定义内容
 
 <preview path="./demos/cols.vue"></preview>
 
 ## 行多选
 
-1. 使用 `selectable` 属性控制是否可以选择行，使用 `v-model:selectedRowIds` 属性绑定选中值
+1. 使用 `selectable` 属性开启行多选的功能，使用 `v-model:selectedRowIds` 属性绑定选中值
 2. 使用 `dragSelectable`、`dragSelectAreaWidth`、`ctrlASelectable` 等属性定义多种选择方式
 3. 切换选中项时触发 `selection-change` 事件
 
 <preview path="./demos/selection.vue"></preview>
 
+## 行拖拽排序
+
+1. 使用 `dragSortable` 属性开启行拖拽排序的功能，可以拖拽多项，还可以使用 `canDropInto` 属性将拖拽项移入目标项
+2. 拖拽结束后触发`drag-sort-end` 事件
+
+<preview path="./demos/drag-sort.vue"></preview>
+
 ## 表格相关 API
 
 ### 属性
 
-| 名称                  | 说明                                                                                     | 类型                                       | 默认值  |
-| --------------------- | ---------------------------------------------------------------------------------------- | ------------------------------------------ | ------- |
-| `tableHeight`         | 表格高度，数字自动补全单位 `px` <br> 必须使用表格属性或 CSS 限制高度，否则会渲染全部数据 | `string\|number`                           |         |
-| `rowItems`            | 行数据                                                                                   | `Array[Object]`                            |         |
-| `rowHeight`           | 行高，用于计算虚拟列表的显示内容                                                         | `number`                                   | `35`    |
-| `currentRowId`        | 当前行 `id`，用于高亮当前行                                                              | `string\|number`                           |         |
-| `customRow`           | 自定义行属性的方法 <br> 参数为当前行，返回一个对象，使用 `v-bind` 绑定到行元素           | `function`(`row => ({ key: value, ... })`) |         |
-| `colItems`            | 列数据                                                                                   | `Array[Object]`                            | 必填    |
-| `colResizable`        | 是否可以调整列宽                                                                         | `boolean`                                  | `false` |
-| `colWidthsStorageKey` | 如果需要记住调整后的列宽，需要设置一个键名                                               | `string`                                   |         |
+| 名称                  | 说明                                                                           | 类型                                       | 默认值  |
+| --------------------- | ------------------------------------------------------------------------------ | ------------------------------------------ | ------- |
+| `tableHeight`         | 表格高度 <br> 必须使用表格属性或 CSS 限制高度，否则会渲染全部数据              | `string(带单位)\|number(px)`               |         |
+| `rowItems`            | 行数据                                                                         | `Array[Object]`                            |         |
+| `rowHeight`           | 行高，用于计算虚拟列表的显示内容                                               | `number`                                   | `35`    |
+| `currentRowId`        | 当前行 `id`，用于高亮当前行                                                    | `string\|number`                           |         |
+| `customRow`           | 自定义行属性的方法 <br> 参数为当前行，返回一个对象，使用 `v-bind` 绑定到行元素 | `function`(`row => ({ key: value, ... })`) |         |
+| `colItems`            | 列数据                                                                         | `Array[Object]`                            | 必填    |
+| `colResizable`        | 是否可以调整列宽                                                               | `boolean`                                  | `false` |
+| `colWidthsStorageKey` | 如果需要记住调整后的列宽，需要设置一个键名                                     | `string`                                   |         |
 
 #### rowItems
 
@@ -94,3 +101,18 @@
 | 名称               | 说明             | 参数                                                      |
 | ------------------ | ---------------- | --------------------------------------------------------- |
 | `selection-change` | 切换选中项时触发 | `{ selectedItems: '选中项', selectedIds: '选中项的 id' }` |
+
+## 拖拽排序 API
+
+### 属性
+
+| 名称           | 说明                                                             | 类型                            | 默认值  |
+| -------------- | ---------------------------------------------------------------- | ------------------------------- | ------- |
+| `dragSortable` | 是否可以拖拽排序，支持拖拽多项                                   | `boolean`                       | `false` |
+| `canDropInto`  | 校验是否可以移入目标项 <br> 参数为目标项，返回 `true` 时可以移入 | `function`(`target => Boolean`) |         |
+
+### 事件
+
+| 名称            | 说明           | 参数                               |
+| --------------- | -------------- | ---------------------------------- |
+| `drag-sort-end` | 拖拽结束时触发 | `{ newItems: '重新排序后的数据' }` |

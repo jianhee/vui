@@ -3,7 +3,7 @@
   <div :class="rootClasses">
     <!-- 轨道 -->
     <div
-      ref="railEl"
+      ref="railElRef"
       class="vui-slider-rail"
       @click.stop="onRailClick"
     />
@@ -15,7 +15,7 @@
     />
     <!-- 手柄 -->
     <div
-      ref="handleEl"
+      ref="handleElRef"
       class="vui-slider-handle"
       :style="handleStyles"
       @mousedown.left.stop="onSliderDragStart"
@@ -36,15 +36,15 @@ import { useTemplateRef } from 'vue';
 import { useSlider, sliderModel, sliderProps } from './composables';
 
 // 滑块
-const railEl = useTemplateRef('railEl');
-const handleEl = useTemplateRef('handleEl');
+const railElRef = useTemplateRef('railElRef');
+const handleElRef = useTemplateRef('handleElRef');
 const modelValue = defineModel('value', sliderModel.value);
 const props = defineProps(sliderProps);
 
 // 使用滑块
 const { rootClasses, onRailClick, onSliderDragStart, trackStyles, handleStyles, tipText } = useSlider({
-  railEl,
-  handleEl,
+  railElRef,
+  handleElRef,
   modelValue,
   props
 });

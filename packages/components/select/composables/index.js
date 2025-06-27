@@ -25,9 +25,9 @@ export const selectProps = {
 };
 
 // 使用选择器
-export const useSelect = ({ selectEl, modelValue, props, emits }) => {
+export const useSelect = ({ selectElRef, modelValue, props, emits }) => {
   // 是否获取焦点
-  const { focused } = useFocus(selectEl);
+  const { focused } = useFocus(selectElRef);
 
   // 格式化选项
   const formattdOptions = computed(() => {

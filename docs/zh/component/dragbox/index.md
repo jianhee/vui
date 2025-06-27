@@ -1,17 +1,17 @@
 # Dragbox 拖拽框
 
-使用 `enabled` 属性控制是否启用组件
+使用 `enabled` 属性启用组件
 
 ## 移动
 
-1. 使用 `movable` 属性控制是否可移动
+1. 使用 `movable` 属性开启移动功能
 2. 使用 `v-model:left` 和 `v-model:top` 属性绑定当前位置
 
 <preview path="./demos/move.vue"></preview>
 
 ## 缩放
 
-1. 使用 `resizable` 属性控制是否可缩放，使用 `resizeHandles` 属性定义手柄
+1. 使用 `resizable` 属性开启缩放功能，使用 `resizeHandles` 属性定义可缩放手柄
 2. 使用 `v-model:width` 和 `v-model:height` 绑定当前尺寸，位置同上
 3. 使用 `min-width` 和 `min-height` 属性设置最小尺寸
 

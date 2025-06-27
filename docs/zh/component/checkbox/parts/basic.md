@@ -18,13 +18,13 @@
 
 ### 按钮类型
 
-将 `type` 属性设为 `button`
+使用 `type` 属性切换显示类型
 
 <preview path="@docs/component/checkbox/demos/option-type.vue"></preview>
 
 ### 块级模式
 
-将 `inline` 属性设为 `false`，或者将 `block` 属性设为 `true`
+使用 `inline` 或 `block` 属性切换显示模式
 
 <preview path="@docs/component/checkbox/demos/option-display.vue"></preview>
 
@@ -40,13 +40,13 @@
 
 ### 按钮类型
 
-将 `optionType` 属性设为 `button`
+使用 `optionType` 属性切换选项的显示类型
 
 <preview path="@docs/component/checkbox/demos/group-type.vue"></preview>
 
 ### 行内模式
 
-将 `optionInline` 属性设为 `true`，或者将 `optionBlock` 属性设为 `false`
+使用 `optionInline` 或 `optionBlock` 属性切换选项的显示模式
 
 <preview path="@docs/component/checkbox/demos/group-display.vue"></preview>
 
@@ -83,8 +83,8 @@
 | `v-model:value` | 当前值，即选中项的 `value` | 多选框 `Array[string\|number]` <br> 单选框 `string\|number` |         |
 | `options`       | 选项数组                   | `Array[object\|string\|number]`                             |         |
 | `optionType`    | 选项类型                   | `string`(`button`)                                          |         |
-| `optionInline`  | 是否为行内模式             | `boolean`                                                   | `false` |
-| `optionBlock`   | 是否为块级模式             | `boolean`                                                   | `true`  |
+| `optionInline`  | 选项是否为行内模式         | `boolean`                                                   | `false` |
+| `optionBlock`   | 选项是否为块级模式         | `boolean`                                                   | `true`  |
 
 #### options
 
