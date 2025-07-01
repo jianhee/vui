@@ -1,7 +1,7 @@
 <template>
   <VTable
     v-model:selected-row-ids="selectedRowIds"
-    class="demo-table"
+    table-height="500"
     :row-items="rowItems"
     :col-items="colItems"
     :selectable="true"
@@ -19,7 +19,6 @@ import { ref } from 'vue';
 import { renderRows, colItems } from '../composables';
 import { writeLog } from '@vp/utils';
 
-// 选中项的 id 数组
 const rowItems = renderRows();
 const selectedRowIds = ref([1, 3, 4]);
 </script>

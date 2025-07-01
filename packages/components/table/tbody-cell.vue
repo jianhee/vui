@@ -7,7 +7,12 @@
     <!-- 优先显示 slot -->
     <slot v-if="$slots.default()[0].children.length" />
     <!-- 其次显示 row[col.key] 的值 -->
-    <template v-else>{{ rowData[colData.key] }}</template>
+    <span
+      v-else
+      class="vui-table-cell-inner"
+    >
+      {{ rowData[colData.key] }}
+    </span>
   </div>
 </template>
 

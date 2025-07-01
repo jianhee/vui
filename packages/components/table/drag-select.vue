@@ -1,4 +1,4 @@
-<!-- 拖拽框选 -->
+<!-- 拖拽鼠标框选 -->
 <template>
   <div
     v-if="tableRoot.dragFlagRef.value === 'select'"

@@ -1,4 +1,4 @@
-// 拖拽框选
+// 拖拽鼠标框选
 import { ref, computed, inject } from 'vue';
 import { useEventListener } from '@vueuse/core';
 

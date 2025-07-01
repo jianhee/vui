@@ -27,7 +27,7 @@
       :resize-handles="['right']"
       :min-width="tableRoot.colMinWidth"
     >
-      {{ col.title }}
+      <span class="vui-table-cell-inner">{{ col.title }}</span>
     </VDragbox>
   </div>
 </template>

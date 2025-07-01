@@ -11,38 +11,43 @@
 
 <preview path="./demos/basic.vue"></preview>
 
-## 行的用法
-
-1. 使用 `rowHeight` 属性定义行高
-2. 使用 `currentRowId` 属性高亮当前行
-3. 使用 `customRow` 属性自定义行属性
-4. 右键点击行时触发 `row-contextmenu` 事件
-
-<preview path="./demos/rows.vue"></preview>
-
 ## 列的用法
 
-1. 使用 `colResizable` 属性开启拖拽调整列宽的功能，使用 `colWidthsStorageKey` 属性可以记住调整后的列宽
-2. 单元格默认显示 `row[col.key]` 的值，可以使用 `default` 插槽自定义内容
+1. 使用 `colResizable`、`colWidthsStorageKey` 等属性拖拽调整列宽并记住
+2. 默认使用 `row[col.key]` 的值渲染单元格的内容，可使用 `default` 插槽替换为自定义内容
 
 <preview path="./demos/cols.vue"></preview>
 
-## 行多选
+## 行的用法
+
+1. 使用 `rowHeight`、`currentRowId`、`customRow` 等属性定义行的多种用法
+2. 右键点击行时触发 `row-contextmenu` 事件
+
+<preview path="./demos/rows.vue"></preview>
+
+## 可选择的行
 
 1. 使用 `selectable` 属性开启行多选的功能，使用 `v-model:selectedRowIds` 属性绑定选中值
-2. 使用 `dragSelectable`、`dragSelectAreaWidth`、`ctrlASelectable` 等属性定义多种选择方式
+2. 默认点击选择框触发选择，可使用 `dragSelectable`、`dragSelectAreaWidth`、`ctrlASelectable` 等属性定义多种选择方式
 3. 切换选中项时触发 `selection-change` 事件
 
 <preview path="./demos/selection.vue"></preview>
 
-## 行拖拽排序
+## 可拖拽的行
 
-1. 使用 `dragSortable` 属性开启行拖拽排序的功能，可以拖拽多项，还可以使用 `canDropInto` 属性将拖拽项移入目标项
-2. 拖拽结束后触发`drag-sort-end` 事件
+1. 使用 `dragSortable` 属性开启拖拽排序的功能，使用 `dragSortGroup` 属性定义两个组件之间的拖拽
+2. 使用 `canDropInto` 属性可以将拖拽项移入目标项
+3. 拖拽结束后触发`drag-sort-end` 事件
+
+### 单个列表
 
 <preview path="./demos/drag-sort.vue"></preview>
 
-## 表格相关 API
+### 树和列表
+
+<preview path="./demos/drag-sort-multi.vue"></preview>
+
+## 表格 API
 
 ### 属性
 
@@ -65,12 +70,12 @@
 
 #### colItems
 
-| 名称        | 说明                                           | 类型             | 默认值         |
-| ----------- | ---------------------------------------------- | ---------------- | -------------- |
-| `key`       | 列唯一标识，单元格默认显示 `row[col.key]` 的值 | `string\|number` | 必填           |
-| `title`     | 列标题                                         | `string`         |                |
-| `width`     | 列宽                                           | `number`         | 根据列数量平分 |
-| `cellClass` | 单元格类名                                     | `string`         |                |
+| 名称        | 说明                                                   | 类型             | 默认值         |
+| ----------- | ------------------------------------------------------ | ---------------- | -------------- |
+| `key`       | 列唯一标识，默认使用 `row[col.key]` 的值渲染单元格内容 | `string\|number` | 必填           |
+| `title`     | 列标题                                                 | `string`         |                |
+| `width`     | 列宽                                                   | `number`         | 根据列数量平分 |
+| `cellClass` | 单元格类名                                             | `string`         |                |
 
 ### 插槽
 
@@ -84,7 +89,7 @@
 | ----------------- | ---------------- | --------------------------------------- |
 | `row-contextmenu` | 右键点击行时触发 | `{ event: '事件对象', row: '当前行'  }` |
 
-## 行多选相关 API
+## 行多选 API
 
 ### 属性
 
@@ -92,7 +97,7 @@
 | ------------------------ | ------------------------------------------------------------------------------------ | ----------------------- | ------- |
 | `selectable`             | 是否可以选择行，这是多选的总开关                                                     | `boolean`               | `false` |
 | `v-model:selectedRowIds` | 选中值，即选中项的 `id`                                                              | `Array[string\|number]` |         |
-| `dragSelectable`         | 是否可以拖拽框选                                                                     | `boolean`               | `true`  |
+| `dragSelectable`         | 是否可以拖拽鼠标框选                                                                 | `boolean`               | `true`  |
 | `dragSelectAreaWidth`    | 左侧框选触发区域宽度 <br> 默认只能从底部空白区域开始框选，设置后也可以从左侧开始框选 | `number`                | `0`     |
 | `ctrlASelectable`        | 是否可以 `ctrl + a` 全选                                                             | `boolean`               | `true`  |
 
@@ -102,17 +107,18 @@
 | ------------------ | ---------------- | --------------------------------------------------------- |
 | `selection-change` | 切换选中项时触发 | `{ selectedItems: '选中项', selectedIds: '选中项的 id' }` |
 
-## 拖拽排序 API
+## 行拖拽 API
 
 ### 属性
 
-| 名称           | 说明                                                             | 类型                            | 默认值  |
-| -------------- | ---------------------------------------------------------------- | ------------------------------- | ------- |
-| `dragSortable` | 是否可以拖拽排序，支持拖拽多项                                   | `boolean`                       | `false` |
-| `canDropInto`  | 校验是否可以移入目标项 <br> 参数为目标项，返回 `true` 时可以移入 | `function`(`target => Boolean`) |         |
+| 名称            | 说明                                                                                                                                                                                     | 类型                            | 默认值  |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------- | ------- |
+| `dragSortable`  | 是否可以拖拽排序，支持拖拽多项                                                                                                                                                           | `boolean`                       | `false` |
+| `dragSortGroup` | 多组件之间拖拽的分组标识 <br> 默认在单个树或列表内部拖拽，设置分组标识并提供一个全局状态(见示例)，就可以在树和列表之间拖拽 <br> 如果树节点包含列表，可能还需要在拖拽结束后手动更新源数据 | `string`                        |         |
+| `canDropInto`   | 校验是否可以移入目标 <br> 参数为目标项，返回 `true` 表示可以移入                                                                                                                         | `function`(`target => Boolean`) |         |
 
 ### 事件
 
-| 名称            | 说明           | 参数                               |
-| --------------- | -------------- | ---------------------------------- |
-| `drag-sort-end` | 拖拽结束时触发 | `{ newItems: '重新排序后的数据' }` |
+| 名称            | 说明                                         | 参数                                         |
+| --------------- | -------------------------------------------- | -------------------------------------------- |
+| `drag-sort-end` | 拖拽结束时触发，只有拖拽开始的那个组件会触发 | `{ newSourceItems: '更新后的来源列表数据' }` |

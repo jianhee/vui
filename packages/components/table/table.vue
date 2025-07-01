@@ -2,7 +2,7 @@
 <template>
   <div
     ref="tableElRef"
-    :class="rootClasses"
+    :class="['vui-table', selectionRootClasses, dragSortRootClasses]"
     :style="{ ...rootStyles, ...selectionRootStyles }"
   >
     <!-- 表头 -->
@@ -18,7 +18,7 @@
       v-bind="tbodyProps"
       :style="selectionInnerStyles"
     >
-      <!-- 拖拽框选 -->
+      <!-- 拖拽鼠标框选 -->
       <DragSelect v-if="selectable && dragSelectable" />
       <!-- 虚拟列表 -->
       <div
@@ -78,16 +78,16 @@ const {
 });
 
 // 使用表格
-const { rootClasses, rootStyles, headerStyles, colMinWidth, colWidthsRef } = useTable({
+const { rootStyles, headerStyles, colMinWidth, colWidthsRef } = useTable({
   tableElRef,
   tbodyElRef: tbodyProps.ref,
-  props,
-  dragFlagRef
+  props
 });
 
 // 使用多选
-const { selectionRootStyles, selectionInnerStyles } = useSelection({
+const { selectionRootClasses, selectionRootStyles, selectionInnerStyles } = useSelection({
   selectable: props.selectable,
+  dragFlagRef,
   dragSelectAreaWidth: props.dragSelectAreaWidth,
   modelSelectedRowIds,
   rowItemsRef,
@@ -95,7 +95,10 @@ const { selectionRootStyles, selectionInnerStyles } = useSelection({
 });
 
 // 使用排序
-useDragSort();
+const { dragSortRootClasses } = useDragSort({
+  dragFlagRef,
+  dragSortGroup: props.dragSortGroup
+});
 
 // 子组件使用
 provide('tableRoot', {

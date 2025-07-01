@@ -15,7 +15,7 @@ export const selectionModel = {
 export const selectionProps = {
   // 是否可以选择行：这是多选的总开关
   selectable: { type: Boolean, default: false },
-  // 是否可以拖拽框选
+  // 是否可以拖拽鼠标框选
   dragSelectable: { type: Boolean, default: true },
   // 左侧框选触发区域宽度
   // 默认只能从底部空白区域开始框选，设置后也可以从左侧开始框选
@@ -25,7 +25,7 @@ export const selectionProps = {
 };
 
 // 使用多选
-export const useSelection = ({ selectable, dragSelectAreaWidth, modelSelectedRowIds, rowItemsRef, emits }) => {
+export const useSelection = ({ selectable, dragFlagRef, dragSelectAreaWidth, modelSelectedRowIds, rowItemsRef, emits }) => {
   // 切换事件
   function onSelectionChange(selectedItems = [], selectedIds = []) {
     if (!selectable) return;
@@ -49,11 +49,23 @@ export const useSelection = ({ selectable, dragSelectAreaWidth, modelSelectedRow
   // 子组件使用
   provide('onSelectionChange', onSelectionChange);
 
-  // 鼠标框选的样式
-  const selectionRootStyles = computed(() => ({ marginLeft: `-${dragSelectAreaWidth}px` }));
-  const selectionInnerStyles = computed(() => ({ paddingLeft: `${dragSelectAreaWidth}px` }));
+  // 根元素类名
+  const selectionRootClasses = computed(() => ({
+    'is-dragging': dragFlagRef.value === 'select'
+  }));
+
+  // 根元素样式
+  const selectionRootStyles = computed(() => ({
+    marginLeft: `-${dragSelectAreaWidth}px`
+  }));
+
+  // 子元素样式
+  const selectionInnerStyles = computed(() => ({
+    paddingLeft: `${dragSelectAreaWidth}px`
+  }));
 
   return {
+    selectionRootClasses,
     selectionRootStyles,
     selectionInnerStyles
   };

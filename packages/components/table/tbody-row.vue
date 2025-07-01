@@ -4,10 +4,11 @@
     :class="['vui-table-row', rowClasses, rowSelectionClasses, dragClasses]"
     v-bind="customRowAttrs"
     :draggable="tableRoot.props.dragSortable"
-    @dragstart="onDragStart"
-    @dragenter.prevent="onDragEnter"
-    @dragover.prevent="onDragOver"
-    @dragend="onDragEnd"
+    @dragstart.stop="onDragStart"
+    @dragend.stop="onDragEnd"
+    @dragenter.stop="onDragEnter"
+    @dragover.stop.prevent="onDragOver"
+    @drop.stop="onDrop"
     @contextmenu.prevent="onRowContextmenu"
   >
     <!-- 排序 -->
@@ -81,12 +82,12 @@ const selectedItemsRef = computed(() => {
 });
 
 // 处理数据
-const { dragClasses, onDragStart, onDragEnter, onDragOver, onDragEnd } = useDragSortItem({
+const { dragClasses, onDragStart, onDragEnter, onDragOver, onDrop, onDragEnd } = useDragSortItem({
   dragFlagRef: tableRoot.dragFlagRef,
   dragSortable: tableRoot.props.dragSortable,
   canDropInto: tableRoot.props.canDropInto,
-  itemsDataRef: tableRoot.rowItemsRef,
-  itemData: props.rowData,
+  rawItem: props.rowData,
+  rawItemsRef: tableRoot.rowItemsRef,
   selectedItemsRef,
   emits: tableRoot.emits
 });

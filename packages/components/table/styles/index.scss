@@ -59,9 +59,11 @@
     gap: 4px;
     align-items: center;
     padding: 0 16px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    &-inner {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   }
 
   // 表头拖拽手柄

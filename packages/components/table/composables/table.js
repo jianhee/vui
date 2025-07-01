@@ -23,7 +23,7 @@ export const tableProps = {
   //  2. 参数为当前行，返回一个对象，使用 `v-bind` 绑定到行元素
   customRow: { type: Function, default: null },
   // 列数据 `Array[Object]`
-  //  1. `key` 列唯一标识，单元格默认显示 `row[col.key]` 的值
+  //  1. `key` 列唯一标识，默认使用 `row[col.key]` 的值渲染单元格内容
   //  2. `title` 列标题
   //  3. `width` 列宽，默认根据列数量平分
   //  4. `cellClass` 单元格类名
@@ -35,12 +35,7 @@ export const tableProps = {
 };
 
 // 使用表格
-export const useTable = ({ tableElRef, tbodyElRef, props, dragFlagRef }) => {
-  // 根元素类名
-  const rootClasses = computed(() => {
-    return ['vui-table', { 'is-dragging': !!dragFlagRef.value }];
-  });
-
+export const useTable = ({ tableElRef, tbodyElRef, props }) => {
   // 根元素样式
   const rootStyles = computed(() => {
     return {
@@ -77,7 +72,6 @@ export const useTable = ({ tableElRef, tbodyElRef, props, dragFlagRef }) => {
   });
 
   return {
-    rootClasses,
     rootStyles,
     headerStyles,
     colMinWidth,
