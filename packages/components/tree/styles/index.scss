@@ -1,18 +1,25 @@
-// 颜色
+// 公共样式
+@use "../../table/styles/base";
+@include base.vui-selection-drag-root("vui-tree");
+@include base.vui-selection-drag-item("vui-tree-node");
+
+// vars
 :root {
   --vui-tree-font-size: 14px;
   --vui-tree-text-color: var(--vui-text-color-regular);
-  --vui-tree-icon-color: var(--vui-text-color-placeholder);
   --vui-tree-node-active-bg-color: var(--vui-fill-color-light);
 }
 
-// 样式
+// 树
 .vui-tree {
   flex: auto;
   overflow: hidden;
   font-size: var(--vui-tree-font-size);
   color: var(--vui-tree-text-color);
+
+  // 节点
   &-node {
+    position: relative;
     display: flex;
     gap: 4px;
     align-items: center;
@@ -24,10 +31,16 @@
       background-color: var(--vui-tree-node-active-bg-color);
     }
   }
-  &-hidden {
-    visibility: hidden;
+
+  // 操作按钮
+  &-node--action {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
   }
-  .vui-icon {
-    color: var(--vui-tree-icon-color);
-  }
+
+  // 图标
+  --vui-icon-color: var(--vui-text-color-placeholder);
+  --vui-icon-size: 16px;
 }

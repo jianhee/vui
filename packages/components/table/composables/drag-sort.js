@@ -10,8 +10,7 @@ export const dragSortProps = {
   // 是否可以拖拽排序：支持拖拽多项
   dragSortable: { type: Boolean, default: false },
   // 多组件之间拖拽的分组标识
-  // 默认在单个树或列表内部拖拽，设置分组标识并提供一个全局状态(见示例)，就可以在树和列表之间拖拽
-  // 如果树节点包含列表，可能还需要在拖拽结束后手动更新源数据
+  // 默认在单个树或列表内部拖拽，设置分组标识并提供一个全局状态(见示例)，就可以在多组件之间拖拽
   dragSortGroup: { type: String, default: null },
   // 校验是否可以移入目标
   // 1. 示例 target => Boolean
@@ -89,6 +88,7 @@ export const useDragSortItem = ({ dragFlagRef, dragSortable, canDropInto, rawIte
   // 被拖拽元素的事件
   // dragstart 开始拖拽时触发：只触发一次
   function onDragStart() {
+    // 不能拖拽的情况
     if (!dragSortable || dragFlagRef.value) return;
 
     // 记录初始数据
@@ -97,8 +97,8 @@ export const useDragSortItem = ({ dragFlagRef, dragSortable, canDropInto, rawIte
     updateSourceData({
       dragGroupId: groupId,
       dragComponetId: componetId,
-      rawSourceItems: [...rawItemsRef.value],
-      newSourceItems: null,
+      // rawSourceItems: [...rawItemsRef.value],
+      // newSourceItems: null,
       dragItemIds: dragItems.map(n => n.id),
       dragItems
     });
@@ -110,28 +110,28 @@ export const useDragSortItem = ({ dragFlagRef, dragSortable, canDropInto, rawIte
   // drag     拖拽过程中持续触发（每几百毫秒）
   // dragend  拖拽结束时触发：只有 start 的那个元素响应
   function onDragEnd() {
-    // 处理拖拽到组件外部的情况
-    window.removeEventListener('dragenter', clearTargetData);
+    const { dragItemIds } = dragSort.sourceRef.value;
+    const { targetItemId, dropPos } = dragSort.targetRef.value;
 
-    // 处理来源列表
-    dragFlagRef.value = null;
-    const { newSourceItems } = dragSort.sourceRef.value;
-    const { targetItemId } = dragSort.targetRef.value;
+    // 拖拽成功
+    if (targetItemId) {
+      // 更新数据
+      // rawItemsRef.value = newSourceItems;
 
-    // 拖拽失败
-    if (!targetItemId) {
-      clearAllData();
-      return;
+      // 参数为 更新后的来源列表数据
+      emits('drag-sort-end', {
+        dragItemIds,
+        targetItemId,
+        dropPos
+      });
     }
 
-    // 更新数据
-    rawItemsRef.value = newSourceItems;
+    // 清空数据
+    dragFlagRef.value = null;
     clearAllData();
 
-    // 参数为 更新后的来源列表数据
-    emits('drag-sort-end', {
-      newSourceItems
-    });
+    // 处理拖拽到组件外部的情况
+    window.removeEventListener('dragenter', clearTargetData);
   }
 
   // 目标元素的事件
@@ -149,7 +149,7 @@ export const useDragSortItem = ({ dragFlagRef, dragSortable, canDropInto, rawIte
     // 更新数据
     updateTargetData({
       targetComponetId: componetId,
-      rawTargetItems: [...rawItemsRef.value],
+      // rawTargetItems: [...rawItemsRef.value],
       targetItemId: rawItem.id,
       targetItem: rawItem,
       targetRect: event.target.getBoundingClientRect(),
@@ -180,38 +180,35 @@ export const useDragSortItem = ({ dragFlagRef, dragSortable, canDropInto, rawIte
   // dragleave  拖拽元素离开目标元素时触发
   // drop       拖拽元素在目标元素上释放时触发
   function onDrop() {
-    // 处理目标列表
-    const { rawSourceItems } = dragSort.sourceRef.value;
-    const { rawTargetItems, targetItemId } = dragSort.targetRef.value;
+    const { targetItemId } = dragSort.targetRef.value;
 
-    // 拖拽失败
-    if (!targetItemId) return;
-
-    // 当前项不是目标项：不响应
-    if (!isTargetItem.value) return;
-
-    // 更新后的数据
-    let newTargetItems;
-    let newSourceItems;
-
-    // 目标项和拖拽项是否同一个列表
-    if (rawSourceItems.find(item => item.id === targetItemId)) {
-      // 是：重新排序后插入
-      const remainItems = getRemainItems(rawTargetItems);
-      newTargetItems = addDragItemsToTargetList(remainItems);
-      newSourceItems = [...newTargetItems];
-    } else {
-      // 否
-      // 目标列表：插入当前位置
-      newTargetItems = addDragItemsToTargetList(rawTargetItems);
-      // 来源列表：删除拖拽项
-      newSourceItems = getRemainItems(rawSourceItems);
+    // 当前项不能释放的情况
+    if (!isTargetItem.value || !isTargetValid.value || !targetItemId) {
+      clearAllData();
     }
 
-    // 更新目标列表
-    rawItemsRef.value = newTargetItems;
-    // 更新来源列表
-    dragSort.sourceRef.value.newSourceItems = newSourceItems;
+    // // 更新后的数据
+    // let newTargetItems;
+    // let newSourceItems;
+
+    // // 目标项和拖拽项是否同一个父级
+    // if (rawSourceItems.find(item => item.id === targetItemId)) {
+    //   // 是：重新排序后插入
+    //   const remainItems = getRemainItems(rawTargetItems);
+    //   newTargetItems = addDragItemsToTargetList(remainItems);
+    //   newSourceItems = [...newTargetItems];
+    // } else {
+    //   // 否
+    //   // 目标列表：插入当前位置
+    //   newTargetItems = addDragItemsToTargetList(rawTargetItems);
+    //   // 来源列表：删除拖拽项
+    //   newSourceItems = getRemainItems(rawSourceItems);
+    // }
+
+    // // 更新目标列表
+    // rawItemsRef.value = newTargetItems;
+    // // 更新来源列表
+    // dragSort.sourceRef.value.newSourceItems = newSourceItems;
   }
 
   // 更新拖拽项相对于目标的位置
@@ -240,27 +237,27 @@ export const useDragSortItem = ({ dragFlagRef, dragSortable, canDropInto, rawIte
   }
 
   // 获取拖拽剩余的项目
-  function getRemainItems(items) {
-    const { dragItemIds } = dragSort.sourceRef.value;
-    return items.filter(item => !dragItemIds.includes(item.id));
-  }
+  // function getRemainItems(items) {
+  //   const { dragItemIds } = dragSort.sourceRef.value;
+  //   return items.filter(item => !dragItemIds.includes(item.id));
+  // }
 
   // 将拖拽项插入目标列表
-  function addDragItemsToTargetList(targetList) {
-    const { dragItems } = dragSort.sourceRef.value;
-    const { targetItemId, dropPos } = dragSort.targetRef.value;
+  // function addDragItemsToTargetList(targetList) {
+  //   const { dragItems } = dragSort.sourceRef.value;
+  //   const { targetItemId, dropPos } = dragSort.targetRef.value;
 
-    if (dropPos === 'center') {
-      // 移入某项中：不处理
-    } else {
-      // 排序到某项：插入拖拽项
-      const targetIndex = targetList.findIndex(item => item.id === targetItemId);
-      const newIndex = dropPos === 'top' ? targetIndex : targetIndex + 1;
-      targetList.splice(newIndex, 0, ...dragItems);
-    }
+  //   if (dropPos === 'center') {
+  //     // 移入某项中：不处理
+  //   } else {
+  //     // 排序到某项：插入拖拽项
+  //     const targetIndex = targetList.findIndex(item => item.id === targetItemId);
+  //     const newIndex = dropPos === 'top' ? targetIndex : targetIndex + 1;
+  //     targetList.splice(newIndex, 0, ...dragItems);
+  //   }
 
-    return targetList;
-  }
+  //   return targetList;
+  // }
 
   // 当前项和拖拽相关的类名
   const dragClasses = computed(() => {

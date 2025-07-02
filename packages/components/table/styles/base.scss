@@ -20,15 +20,15 @@
 // 树   vui-tree-node
 @mixin vui-selection-drag-item($prefix) {
   .#{$prefix} {
-    // 最左侧操作按钮图标
-    .is-action {
+    // 操作按钮
+    &--action {
+      display: inline-flex;
       visibility: hidden;
-      padding-right: 0;
-      padding-left: 8px;
+      align-items: center;
       opacity: 0;
     }
-    &:hover .is-action,
-    &.is-selected .is-action {
+    &:hover &--action,
+    &.is-selected &--action {
       visibility: visible;
       opacity: 1;
     }

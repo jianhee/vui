@@ -4,13 +4,13 @@
     <!-- 排序占位 -->
     <div
       v-if="tableRoot.props.dragSortable"
-      class="vui-table-cell is-action"
+      class="vui-table-row--action"
       style="width: 24px"
     />
     <!-- 全选 -->
     <div
       v-if="tableRoot.props.selectable"
-      class="vui-table-cell is-action"
+      class="vui-table-row--action"
     >
       <VCheckbox
         :checked="isSelectedAll"

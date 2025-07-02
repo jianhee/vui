@@ -8,7 +8,7 @@
     col-widths-storage-key="demo-table-col-widths"
   >
     <VBtn
-      v-if="col.key === 'btn'"
+      v-if="col.key === 'action'"
       type="link"
       @click="writeLog(`点击第 ${row.id} 行`)"
     >
@@ -19,7 +19,7 @@
 
 <script setup>
 import { writeLog } from '@vp/utils';
-import { renderRows, colItems } from '../composables';
+import { renderData, colItems } from '../composables';
 
-const rowItems = renderRows();
+const rowItems = renderData(1000);
 </script>

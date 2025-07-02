@@ -1,28 +1,27 @@
 <!-- 树 -->
-<!-- 1.虚拟列表+扁平化数据 -->
-<!-- 2.刷新保持展开状态 -->
 <template>
   <div
-    v-bind="treeProps"
-    class="vui-tree"
-    :style="treeStyles"
+    :class="['vui-tree', dragSortRootClasses]"
+    :style="treeRootStyles"
+    v-bind="rootProps"
   >
     <!-- 虚拟列表 -->
     <div
-      v-bind="viewProps"
       class="vui-tree-view"
+      v-bind="viewProps"
     >
       <!-- 节点 -->
       <VTreeNode
         v-for="{ data: node } in virtualList"
         :key="node.id"
-        :node="node"
+        :node-data="node"
       >
-        <!-- 优先显示slot -->
+        <!-- 优先显示 slot -->
         <slot
           v-if="$slots.default"
           :node="node"
         />
+        <!-- 其次显示 title -->
         <span v-else>{{ node.title }}</span>
       </VTreeNode>
     </div>
@@ -30,69 +29,53 @@
 </template>
 
 <script setup>
-import { reactive, computed, provide } from 'vue';
+import { provide, ref, watch } from 'vue';
 import { useVirtualList } from '@vueuse/core';
+import { useTree, treeProps, treeEmits } from './composables/tree';
+import { useDragSort, dragSortProps, dragSortEmist } from '../table/composables/drag-sort';
 import VTreeNode from './tree-node.vue';
 
-const emits = defineEmits(['node-click', 'node-contextmenu']);
+// 树
+const props = defineProps({ ...treeProps, ...dragSortProps });
+const emits = defineEmits([...treeEmits, ...dragSortEmist]);
 
-// 参数
-const props = defineProps({
-  // 样式
-  treeHeight: { type: Number, default: null },
-  treeIndent: { type: Number, default: 10 },
-  nodeHeight: { type: Number, default: 30 },
-  nodeIndent: { type: Number, default: 15 },
-  // 树数据
-  data: { type: Array, default: () => [] },
-  // 当前 ID
-  currentNodeId: { type: [String, Number], default: null }
-});
+// 全局拖拽状态
+const dragFlagRef = ref(null);
 
-// 获取样式
-const treeStyles = computed(() => ({
-  'height': `${props.treeHeight}px`,
-  '--vui-tree-node-height': `${props.nodeHeight}px`
-}));
-
-// 展开状态
-const expandedMap = reactive(new Map());
-
-// 虚拟列表
-const {
-  list: virtualList,
-  containerProps: treeProps,
-  wrapperProps: viewProps
-} = useVirtualList(
-  computed(() => flattenTree(props.data)),
-  {
-    itemHeight: props.nodeHeight,
-    overscan: 20
-  }
+// 原始数据
+const treeDataRef = ref(props.data);
+watch(
+  () => props.data,
+  val => (treeDataRef.value = val)
 );
 
-// 扁平化方法
-function flattenTree(nodes, level = 0) {
-  const result = [];
-  nodes?.forEach(node => {
-    // 当前节点
-    const formatted = { ...node, level };
-    result.push(formatted);
-
-    // 子集
-    const isExpanded = expandedMap.get(node.id);
-    if (formatted.children && isExpanded) {
-      const children = flattenTree(formatted.children, level + 1, formatted);
-      result.push(...children);
-    }
-  });
-  return result;
-}
-
-// 共享数据
-provide('parentTree', {
-  emits,
+// 使用树
+const { expandIdMap, flattenedTree, treeRootStyles } = useTree({
   props,
-  expandedMap
+  treeDataRef
+});
+
+// 使用虚拟列表
+const {
+  list: virtualList,
+  containerProps: rootProps,
+  wrapperProps: viewProps
+} = useVirtualList(flattenedTree, {
+  itemHeight: props.nodeHeight,
+  overscan: 20
+});
+
+// 使用排序
+const { dragSortRootClasses } = useDragSort({
+  dragFlagRef,
+  dragSortGroup: props.dragSortGroup
+});
+
+// 子组件使用
+provide('treeRoot', {
+  props,
+  emits,
+  expandIdMap,
+  dragFlagRef
 });
 </script>

@@ -14,7 +14,7 @@
     <!-- 排序 -->
     <div
       v-if="tableRoot.props.dragSortable"
-      class="vui-table-cell is-action"
+      class="vui-table-row--action"
     >
       <VIcon
         :component="IconDrag"
@@ -24,7 +24,7 @@
     <!-- 多选 -->
     <div
       v-if="tableRoot.props.selectable"
-      class="vui-table-cell is-action"
+      class="vui-table-row--action"
     >
       <VCheckbox
         :checked="isSelectedRow"
@@ -71,7 +71,7 @@ const { isSelectedRow, toggleRowSelection, rowSelectionClasses } = useRowSelecti
   rowId: props.rowData?.id
 });
 
-// 使用行排序
+// 使用拖拽排序
 // 当前行被选中时拖拽所有选中的行
 const selectedItemsRef = computed(() => {
   if (isSelectedRow.value) {
@@ -87,7 +87,7 @@ const { dragClasses, onDragStart, onDragEnter, onDragOver, onDrop, onDragEnd } =
   dragSortable: tableRoot.props.dragSortable,
   canDropInto: tableRoot.props.canDropInto,
   rawItem: props.rowData,
-  rawItemsRef: tableRoot.rowItemsRef,
+  // rawItemsRef: tableRoot.rowItemsRef,
   selectedItemsRef,
   emits: tableRoot.emits
 });

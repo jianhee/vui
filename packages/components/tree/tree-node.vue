@@ -1,79 +1,68 @@
 <!-- 树-节点 -->
 <template>
   <div
-    :class="nodeClasses"
+    :class="['vui-tree-node', nodeClasses, dragClasses]"
     :style="nodeStyles"
+    :draggable="treeRoot.props.dragSortable"
+    @dragstart.stop="onDragStart"
+    @dragend.stop="onDragEnd"
+    @dragenter.stop="onDragEnter"
+    @dragover.stop.prevent="onDragOver"
+    @drop.stop="onDrop"
     @click="onNodeClick"
     @contextmenu.prevent="onNodeContextmenu"
   >
     <!-- 折叠图标 -->
     <VIcon
-      :component="IconArrow"
-      :size="16"
+      v-if="hasChildren"
+      :component="IconExpand"
       :rotate="expandIconRotate"
-      :class="expandIconClass"
-      @click.stop="toggleExpand"
+      @click.stop="toggleExpand(!nodeData.isExpanded)"
     />
+    <!-- 占位图标 -->
+    <VIcon v-else />
+    <!-- 节点内容 -->
     <slot />
+    <!-- 排序 -->
+    <div
+      v-if="treeRoot.props.dragSortable"
+      class="vui-tree-node--action"
+    >
+      <VIcon
+        :component="IconDrag"
+        class="vui-tree-drag-handle"
+      />
+    </div>
   </div>
 </template>
 
 <script setup>
 import { computed, inject } from 'vue';
-import IconArrow from '../../icons/tree-arrow.vue';
+import { useTreeNode, treeNodeProps } from './composables/tree-node';
+import { useDragSortItem } from '../table/composables/drag-sort';
+import IconExpand from '../../icons/tree-arrow.vue';
+import IconDrag from '../../icons/drag.vue';
 
-// 共享数据
-const parentTree = inject('parentTree', null);
+// 树
+const treeRoot = inject('treeRoot', null);
 
-// 参数
-const props = defineProps({
-  // 节点
-  node: { type: Object, required: true }
+// 树节点
+const props = defineProps(treeNodeProps);
+
+// 使用树节点
+const { hasChildren, expandIconRotate, toggleExpand, onNodeClick, onNodeContextmenu, nodeClasses, nodeStyles } = useTreeNode({
+  treeRoot,
+  treeNode: { props }
 });
 
-// 获取类名
-const nodeClasses = computed(() => {
-  return ['vui-tree-node', { 'is-current': props.node.id === parentTree.props.currentNodeId }];
-});
-
-// 获取样式
-const nodeStyles = computed(() => {
-  return {
-    paddingLeft: `${parentTree.props.treeIndent + parentTree.props.nodeIndent * props.node.level}px`
-  };
-});
-
-// 左键点击节点
-function onNodeClick(event) {
-  if (props.node.children?.length) {
-    toggleExpand(props.node);
-  }
-  if (props.node.id !== parentTree.props.currentNodeId) {
-    parentTree.emits('node-click', props.node, event);
-  }
-}
-
-// 右键点击节点
-function onNodeContextmenu(event) {
-  parentTree.emits('node-contextmenu', props.node, event);
-}
-
-// 是否展开节点
-const isExpand = computed(() => {
-  return parentTree.expandedMap.get(props.node.id);
-});
-
-// 切换展开状态
-const toggleExpand = () => {
-  const newState = !isExpand.value;
-  parentTree.expandedMap.set(props.node.id, newState);
-};
-
-// 展开图标
-const expandIconClass = computed(() => {
-  return { 'vui-tree-hidden': !props.node.children?.length };
-});
-const expandIconRotate = computed(() => {
-  return isExpand.value ? 0 : -90;
+// 使用拖拽排序
+const { dragClasses, onDragStart, onDragEnter, onDragOver, onDrop, onDragEnd } = useDragSortItem({
+  dragFlagRef: treeRoot.dragFlagRef,
+  dragSortable: treeRoot.props.dragSortable,
+  canDropInto: treeRoot.props.canDropInto,
+  rawItem: props.nodeData,
+  // rawItemsRef: treeRoot.treeDataRef,
+  selectedItemsRef: computed(() => null),
+  emits: treeRoot.emits
 });
 </script>

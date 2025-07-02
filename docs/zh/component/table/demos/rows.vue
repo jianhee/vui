@@ -4,18 +4,16 @@
     :col-items="colItems"
     :row-items="rowItems"
     :row-height="50"
-    :current-row-id="1"
+    :current-row-id="rowItems[1].id"
     :custom-row="setCustomRow"
-    @row-contextmenu="writeLog('row-contextmenu', $event)"
   />
 </template>
 
 <script setup>
-import { renderRows, colItems } from '../composables';
-import { writeLog } from '@vp/utils';
+import { renderData, colItems } from '../composables';
 
 // 自定义行属性
-const rowItems = renderRows();
+const rowItems = renderData(1000);
 function setCustomRow(row) {
   return {
     title: row.name,

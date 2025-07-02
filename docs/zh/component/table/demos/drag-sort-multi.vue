@@ -1,15 +1,25 @@
 <template>
   <DemoSpace flex>
+    <!-- 树 -->
+    <VTree
+      :tree-height="300"
+      :data="treeData"
+      :drag-sortable="true"
+      drag-sort-group="demo"
+      :can-drop-into="canDropInto"
+      @drag-sort-end="onEnd"
+    />
+
+    <!-- 列表 -->
     <VTable
-      v-for="n in 2"
-      :key="n"
       v-model:selected-row-ids="selectedRowIds"
-      :row-items="rowItems"
+      :table-height="300"
+      :row-items="tabelRowItems"
       :col-items="colItems"
       :selectable="true"
       :drag-sortable="true"
       drag-sort-group="demo"
-      :can-drop-into="row => row.canDropInto"
+      :can-drop-into="canDropInto"
       @drag-sort-end="onEnd"
     />
   </DemoSpace>
@@ -17,23 +27,23 @@
 
 <script setup>
 import { ref, provide } from 'vue';
-import { renderRows } from '../composables';
+import { renderData, colItems } from '../composables';
 import { writeLog } from '@vp/utils';
 
-// 行
-const rowItems = ref(renderRows({ length: 10 }));
-
-// 列
-const colItems = [
-  { key: 'id', title: 'ID', width: 100 },
-  { key: 'drop', title: '是否可以移入', width: 120 }
-];
+// 数据
+const treeData = ref(renderData(10, 2));
+const tabelRowItems = ref(renderData(10));
 
 // 已选中的行
 const selectedRowIds = ref(null);
 
+// 是否可以移入
+function canDropInto(target) {
+  return target.canDropInto;
+}
+
+// 拖拽结束时
 function onEnd(val) {
-  rowItems.value = val.newSourceItems;
   writeLog('drag-sort-end', val);
 }
 

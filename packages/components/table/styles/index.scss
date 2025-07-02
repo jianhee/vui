@@ -52,6 +52,11 @@
     }
   }
 
+  // 操作按钮
+  &-row--action {
+    padding-left: 8px;
+  }
+
   // 单元格
   &-cell {
     display: inline-flex;

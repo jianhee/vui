@@ -16,9 +16,9 @@
 
 <script setup>
 import { ref } from 'vue';
-import { renderRows, colItems } from '../composables';
+import { renderData, colItems } from '../composables';
 import { writeLog } from '@vp/utils';
 
-const rowItems = renderRows();
-const selectedRowIds = ref([1, 3, 4]);
+const rowItems = renderData(1000);
+const selectedRowIds = ref([rowItems[2].id]);
 </script>

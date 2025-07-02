@@ -2,8 +2,8 @@
 
 ## 基础用法
 
-1. 使用 `rowItems` 和 `colItems` 属性定义行列数据
-2. 使用 `tableHeight` 属性或者 CSS 限制表格高度
+1. 使用 `rowItems` 和 `colItems` 属性定义行列数据，数据量大时必须使用 `tableHeight` 属性或者 CSS 限制表格高度
+2. 右键点击行时触发 `row-contextmenu` 事件
 
 ::: details 示例中的行列数据
 <<< @/component/table/composables/index.js
@@ -13,15 +13,14 @@
 
 ## 列的用法
 
-1. 使用 `colResizable`、`colWidthsStorageKey` 等属性拖拽调整列宽并记住
+1. 使用 `colResizable`、`colWidthsStorageKey` 等属性拖拽调整列宽并存到本地
 2. 默认使用 `row[col.key]` 的值渲染单元格的内容，可使用 `default` 插槽替换为自定义内容
 
 <preview path="./demos/cols.vue"></preview>
 
 ## 行的用法
 
-1. 使用 `rowHeight`、`currentRowId`、`customRow` 等属性定义行的多种用法
-2. 右键点击行时触发 `row-contextmenu` 事件
+使用 `rowHeight`、`currentRowId`、`customRow` 等属性定义行的多种用法
 
 <preview path="./demos/rows.vue"></preview>
 
@@ -33,11 +32,7 @@
 
 <preview path="./demos/selection.vue"></preview>
 
-## 可拖拽的行
-
-1. 使用 `dragSortable` 属性开启拖拽排序的功能，使用 `dragSortGroup` 属性定义两个组件之间的拖拽
-2. 使用 `canDropInto` 属性可以将拖拽项移入目标项
-3. 拖拽结束后触发`drag-sort-end` 事件
+<!--@include: ./parts/drag-sort-guild.md-->
 
 ### 单个列表
 
@@ -107,18 +102,4 @@
 | ------------------ | ---------------- | --------------------------------------------------------- |
 | `selection-change` | 切换选中项时触发 | `{ selectedItems: '选中项', selectedIds: '选中项的 id' }` |
 
-## 行拖拽 API
-
-### 属性
-
-| 名称            | 说明                                                                                                                                                                                     | 类型                            | 默认值  |
-| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------- | ------- |
-| `dragSortable`  | 是否可以拖拽排序，支持拖拽多项                                                                                                                                                           | `boolean`                       | `false` |
-| `dragSortGroup` | 多组件之间拖拽的分组标识 <br> 默认在单个树或列表内部拖拽，设置分组标识并提供一个全局状态(见示例)，就可以在树和列表之间拖拽 <br> 如果树节点包含列表，可能还需要在拖拽结束后手动更新源数据 | `string`                        |         |
-| `canDropInto`   | 校验是否可以移入目标 <br> 参数为目标项，返回 `true` 表示可以移入                                                                                                                         | `function`(`target => Boolean`) |         |
-
-### 事件
-
-| 名称            | 说明                                         | 参数                                         |
-| --------------- | -------------------------------------------- | -------------------------------------------- |
-| `drag-sort-end` | 拖拽结束时触发，只有拖拽开始的那个组件会触发 | `{ newSourceItems: '更新后的来源列表数据' }` |
+<!--@include: ./parts/drag-sort-api.md-->
