@@ -2,13 +2,16 @@
   <DemoSpace flex>
     <!-- 树 -->
     <VTree
+      v-slot="{ node }"
       :tree-height="300"
       :data="treeData"
       :drag-sortable="true"
       drag-sort-group="demo"
       :can-drop-into="canDropInto"
       @drag-sort-end="onEnd"
-    />
+    >
+      {{ node.action }}
+    </VTree>
 
     <!-- 列表 -->
     <VTable
