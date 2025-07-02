@@ -59,8 +59,10 @@ const modelSelectedRowIds = defineModel('selectedRowIds', selectionModel.selecte
 const props = defineProps({ ...tableProps, ...selectionProps, ...dragSortProps });
 const emits = defineEmits([...tableEmits, ...selectionEmits, ...dragSortEmist]);
 
-// 全局数据
+// 全局拖拽状态
 const dragFlagRef = ref(null);
+
+// 原始数据
 const rowItemsRef = ref(props.rowItems);
 watch(
   () => props.rowItems,

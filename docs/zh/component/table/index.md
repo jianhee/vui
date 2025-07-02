@@ -51,16 +51,16 @@
 
 ### 属性
 
-| 名称                  | 说明                                                                           | 类型                                       | 默认值  |
-| --------------------- | ------------------------------------------------------------------------------ | ------------------------------------------ | ------- |
-| `tableHeight`         | 表格高度 <br> 必须使用表格属性或 CSS 限制高度，否则会渲染全部数据              | `string(带单位)\|number(px)`               |         |
-| `rowItems`            | 行数据                                                                         | `Array[Object]`                            |         |
-| `rowHeight`           | 行高，用于计算虚拟列表的显示内容                                               | `number`                                   | `35`    |
-| `currentRowId`        | 当前行 `id`，用于高亮当前行                                                    | `string\|number`                           |         |
-| `customRow`           | 自定义行属性的方法 <br> 参数为当前行，返回一个对象，使用 `v-bind` 绑定到行元素 | `function`(`row => ({ key: value, ... })`) |         |
-| `colItems`            | 列数据                                                                         | `Array[Object]`                            | 必填    |
-| `colResizable`        | 是否可以调整列宽                                                               | `boolean`                                  | `false` |
-| `colWidthsStorageKey` | 如果需要记住调整后的列宽，需要设置一个键名                                     | `string`                                   |         |
+| 名称                  | 说明                                                                           | 类型                                       | 默认值 |
+| --------------------- | ------------------------------------------------------------------------------ | ------------------------------------------ | ------ |
+| `tableHeight`         | 表格高度 <br> 必须使用此属性或 CSS 限制高度，否则会渲染全部数据                | `string(带单位)\|number(px)`               |        |
+| `rowItems`            | 行数据                                                                         | `Array[Object]`                            |        |
+| `rowHeight`           | 行高，用于计算虚拟列表的显示内容                                               | `number`                                   | `35`   |
+| `currentRowId`        | 当前行 `id`，用于高亮当前行                                                    | `string\|number`                           |        |
+| `customRow`           | 自定义行属性的方法 <br> 参数为当前行，返回一个对象，使用 `v-bind` 绑定到行元素 | `function`(`row => ({ key: value, ... })`) |        |
+| `colItems`            | 列数据                                                                         | `Array[Object]`                            | 必填   |
+| `colResizable`        | 是否可以调整列宽                                                               | `boolean`                                  | `true` |
+| `colWidthsStorageKey` | 如果需要记住调整后的列宽，需要设置一个键名                                     | `string`                                   |        |
 
 #### rowItems
 

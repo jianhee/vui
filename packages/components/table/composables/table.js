@@ -8,9 +8,11 @@ export const tableEmits = ['row-contextmenu'];
 
 // props
 export const tableProps = {
+  // ---------- 表格属性 ----------
   // 表格高度：不带单位时默认 `px`
-  // 必须使用表格属性或 CSS 限制高度，否则会渲染全部数据
+  // 必须使用此属性或 CSS 限制高度，否则会渲染全部数据
   tableHeight: { type: [String, Number], default: null },
+  // ---------- 行属性 ----------
   // 行数据 `Array[Object]`
   //  1. `id` 行唯一标识，必填
   rowItems: { type: Array, default: null },
@@ -22,6 +24,7 @@ export const tableProps = {
   //  1. 示例 `row => ({ key: value, ... })`
   //  2. 参数为当前行，返回一个对象，使用 `v-bind` 绑定到行元素
   customRow: { type: Function, default: null },
+  // ---------- 列属性 ----------
   // 列数据 `Array[Object]`
   //  1. `key` 列唯一标识，默认使用 `row[col.key]` 的值渲染单元格内容
   //  2. `title` 列标题
@@ -29,7 +32,7 @@ export const tableProps = {
   //  4. `cellClass` 单元格类名
   colItems: { type: Array, required: true },
   // 是否可以调整列宽
-  colResizable: { type: Boolean, default: false },
+  colResizable: { type: Boolean, default: true },
   // 如果需要记住调整后的列宽，需要设置一个键名
   colWidthsStorageKey: { type: String, default: null }
 };

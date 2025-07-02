@@ -4,7 +4,7 @@
     table-height="500"
     :row-items="rowItems"
     :col-items="colItems"
-    col-resizable
+    :col-resizable="true"
     col-widths-storage-key="demo-table-col-widths"
   >
     <VBtn
