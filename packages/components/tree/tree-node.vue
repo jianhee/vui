@@ -12,12 +12,17 @@
     @click="onNodeClick"
     @contextmenu.prevent="onNodeContextmenu"
   >
+    <!-- 加载状态 -->
+    <VIcon
+      v-if="nodeData.isLoading"
+      :component="IconLoading"
+    />
     <!-- 折叠图标 -->
     <VIcon
-      v-if="hasChildren"
+      v-else-if="isShowExpand"
       :component="IconExpand"
       :rotate="expandIconRotate"
-      @click.stop="toggleExpand(!nodeData.isExpanded)"
+      @click.stop="toggleChildren"
     />
     <!-- 占位图标 -->
     <VIcon v-else />
@@ -40,6 +45,7 @@
 import { computed, inject } from 'vue';
 import { useTreeNode, treeNodeProps } from './composables/tree-node';
 import { useDragSortItem } from '../table/composables/drag-sort';
+import IconLoading from '../../icons/loading-loop.vue';
 import IconExpand from '../../icons/tree-arrow.vue';
 import IconDrag from '../../icons/drag.vue';
 
@@ -50,7 +56,7 @@ const treeRoot = inject('treeRoot', null);
 const props = defineProps(treeNodeProps);
 
 // 使用树节点
-const { hasChildren, expandIconRotate, toggleExpand, onNodeClick, onNodeContextmenu, nodeClasses, nodeStyles } = useTreeNode({
+const { isShowExpand, expandIconRotate, toggleChildren, onNodeClick, onNodeContextmenu, nodeClasses, nodeStyles } = useTreeNode({
   treeRoot,
   treeNode: { props }
 });
@@ -60,7 +66,7 @@ const { dragClasses, onDragStart, onDragEnter, onDragOver, onDrop, onDragEnd } =
   dragFlagRef: treeRoot.dragFlagRef,
   dragSortable: treeRoot.props.dragSortable,
   canDropInto: treeRoot.props.canDropInto,
-  rawItem: props.nodeData,
+  rawItem: props.itemData,
   // rawItemsRef: treeRoot.treeDataRef,
   selectedItemsRef: computed(() => null),
   emits: treeRoot.emits

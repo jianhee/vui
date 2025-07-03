@@ -31,7 +31,7 @@
 | 名称                | 说明                   | 类型                         | 默认值                       |
 | ------------------- | ---------------------- | ---------------------------- | ---------------------------- |
 | `v-model:visible`   | 当前值，即是否显示     | `boolean`                    | `false`                      |
-| `placement`         | 抽屉出现的位置         | `string`(`left\|right`)      | `left`                       |
+| `placement`         | 抽屉出现的位置         | `string`: `left\|right`      | `left`                       |
 | `title`             | 标题，为空时不显示顶栏 | `string`                     |                              |
 | `showClose`         | 是否显示关闭按钮       | `boolean`                    | `true`                       |
 | `closeOnClickModal` | 是否在点击遮罩时关闭   | `boolean`                    | `true`                       |

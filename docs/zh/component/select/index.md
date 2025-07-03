@@ -25,7 +25,7 @@
 | --------------- | ---------------------------- | ------------------------------- | ------ |
 | `v-model:value` | 当前值，即选中项的 `value`   | `string\|number`                |        |
 | `options`       | 选项数组                     | `Array[object\|string\|number]` |        |
-| `size`          | 选择器尺寸                   | `string`(`medium\|small`)       |        |
+| `size`          | 选择器尺寸                   | `string`: `medium\|small`       |        |
 | `disabled` 等   | 支持原生 `select` 的所有属性 |                                 |        |
 
 #### options

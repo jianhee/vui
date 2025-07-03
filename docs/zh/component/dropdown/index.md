@@ -39,7 +39,7 @@
 
 | 名称      | 说明     | 类型                                  | 默认值  |
 | --------- | -------- | ------------------------------------- | ------- |
-| `trigger` | 触发方式 | `string`(`hover\|click\|contextmenu`) | `hover` |
+| `trigger` | 触发方式 | `string`: `hover\|click\|contextmenu` | `hover` |
 
 ### 插槽
 

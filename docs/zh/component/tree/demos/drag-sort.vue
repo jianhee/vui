@@ -1,13 +1,15 @@
 <template>
   <VTree
-    v-slot="{ node }"
+    v-slot="{ node, item }"
     :tree-height="300"
     :data="treeData"
     :drag-sortable="true"
-    :can-drop-into="target => target.canDropInto"
+    :can-drop-into="target => target.type === 'folder'"
+    v-bind="$attrs"
     @drag-sort-end="writeLog('drag-sort-end', $event)"
   >
-    {{ node.action }}
+    <VIcon :name="item.type === 'note' ? 'note' : node.isExpanded ? 'folder-open' : 'folder'" />
+    <span>{{ item.title }}</span>
   </VTree>
 </template>
 

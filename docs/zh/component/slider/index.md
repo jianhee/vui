@@ -28,4 +28,4 @@
 | `min`           | 最小值                                                                   | `number`                              | `0`    |
 | `max`           | 最大值                                                                   | `number`                              | `100`  |
 | `showTip`       | 是否显示提示框                                                           | `boolean`                             | `true` |
-| `tipFormatter`  | 提示框内容的格式化方法 <br> 参数为当前值，返回一个可以作为提示框内容的值 | `function`(`value => string\|number`) |        |
+| `tipFormatter`  | 提示框内容的格式化方法 <br> 参数为当前值，返回一个可以作为提示框内容的值 | `function`: `value => string\|number` |        |

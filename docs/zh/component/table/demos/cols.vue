@@ -7,18 +7,14 @@
     :col-resizable="true"
     col-widths-storage-key="demo-table-col-widths"
   >
-    <VBtn
-      v-if="col.key === 'action'"
-      type="link"
-      @click="writeLog(`点击第 ${row.id} 行`)"
-    >
-      自定义按钮
-    </VBtn>
+    <template v-if="col.key === 'desc'">
+      <VIcon :name="row.type" />
+      <span>{{ row.desc }}</span>
+    </template>
   </VTable>
 </template>
 
 <script setup>
-import { writeLog } from '@vp/utils';
 import { renderData, colItems } from '../composables';
 
 const rowItems = renderData(1000);

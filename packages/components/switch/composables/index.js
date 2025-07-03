@@ -17,7 +17,7 @@ export const switchProps = {
   inactiveText: { type: String, default: null },
   // 切换前执行的方法
   // 1. 示例 `async checked => Promise<boolean>`
-  // 2. 参数为当前值，返回 `true`允许切换，返回 `false`阻止切换
+  // 2. 参数为当前值，返回 `true`表示可以切换
   beforeChange: { type: Function, default: null }
 };
 

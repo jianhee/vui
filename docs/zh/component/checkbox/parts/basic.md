@@ -58,7 +58,7 @@
 | ----------------- | ------------------ | ------------------ | ------- |
 | `v-model:checked` | 当前值，即是否选中 | `boolean`          | `false` |
 | `label`           | 选项文本           | `string`           |         |
-| `type`            | 选项类型           | `string`(`button`) |         |
+| `type`            | 选项类型           | `string`: `button` |         |
 | `inline`          | 是否为行内模式     | `boolean`          | `true`  |
 | `block`           | 是否为块级模式     | `boolean`          | `false` |
 
@@ -82,7 +82,7 @@
 | --------------- | -------------------------- | ----------------------------------------------------------- | ------- |
 | `v-model:value` | 当前值，即选中项的 `value` | 多选框 `Array[string\|number]` <br> 单选框 `string\|number` |         |
 | `options`       | 选项数组                   | `Array[object\|string\|number]`                             |         |
-| `optionType`    | 选项类型                   | `string`(`button`)                                          |         |
+| `optionType`    | 选项类型                   | `string`: `button`                                          |         |
 | `optionInline`  | 选项是否为行内模式         | `boolean`                                                   | `false` |
 | `optionBlock`   | 选项是否为块级模式         | `boolean`                                                   | `true`  |
 

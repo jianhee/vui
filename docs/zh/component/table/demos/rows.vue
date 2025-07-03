@@ -12,14 +12,16 @@
 <script setup>
 import { renderData, colItems } from '../composables';
 
-// 自定义行属性
+// 行数据
 const rowItems = renderData(1000);
-function setCustomRow(row) {
+
+// 自定义行属性
+function setCustomRow({ row }) {
   return {
     title: row.name,
     style: {
-      color: row.id === 3 ? 'red' : null,
-      backgroundColor: row.id === 5 ? 'yellow' : null
+      color: row.id === '0-3' ? 'red' : null,
+      backgroundColor: row.id === '0-5' ? 'yellow' : null
     }
   };
 }

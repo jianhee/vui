@@ -27,7 +27,7 @@
 | --------------- | -------------------------------------- | ---------------------------- | -------------- |
 | `filedInline`   | 表单项是否为行内模式                   | `boolean`                    | `false`        |
 | `filedBlock`    | 表单项是否为块级模式                   | `boolean`                    | `true`         |
-| `labelPosition` | 标签位置                               | `string`(`left\|right\|top`) | `left`         |
+| `labelPosition` | 标签位置                               | `string`: `left\|right\|top` | `left`         |
 | `labelWidth`    | 标签宽度 <br> 行内模式和顶部标签不生效 | `string(带单位)\|number(px)` | 最长标签的宽度 |
 
 ### 插槽

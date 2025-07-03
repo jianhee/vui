@@ -2,6 +2,7 @@
   <VTree
     :tree-height="300"
     :data="treeData"
+    v-bind="$attrs"
     @node-click="writeLog('node-click', $event)"
     @node-contextmenu="writeLog('node-contextmenu', $event)"
   />

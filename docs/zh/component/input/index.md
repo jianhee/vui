@@ -31,7 +31,7 @@
 | --------------- | --------------------------- | --------------------------- | ------ |
 | `v-model:value` | 当前值，即输入框的值        | `string\|number`            |        |
 | `icon`          | 前置图标                    | `string\|component\|object` |        |
-| `size`          | 输入框尺寸                  | `string`(`medium\|small`)   |        |
+| `size`          | 输入框尺寸                  | `string`: `medium\|small`   |        |
 | `disabled` 等   | 支持原生 `input` 的所有属性 |                             |        |
 
 ### 事件

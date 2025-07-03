@@ -2,9 +2,12 @@
 // 在 main.js 中使用
 export default {
   install: vueApp => {
-    // 导入所有组件目录下的 index.js
-    // 返回值：{ './checkbox/index.js': module, ...  }
-    // module：{ VComponent1: {}, VComponent2: {}, ... }
+    // 导入所有组件目录下的 index.js, 返回值为一个对象
+    // {
+    //   './checkbox/index.js': module,
+    //   './radio/index.js': { VComponent1: {}, VComponent2: {}, ... },
+    //   ...
+    // }
     const componentModules = import.meta.glob('./**/index.js', { eager: true });
 
     // 获取每个 index.js 中导出的 module

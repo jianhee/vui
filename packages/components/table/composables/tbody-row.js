@@ -16,7 +16,9 @@ export const useTbodyRow = ({ tableRoot, tbodyRow }) => {
 
   // 行自定义属性
   const customRowAttrs = computed(() => {
-    return tableRoot.props.customRow?.(tbodyRow.props.rowData);
+    return tableRoot.props.customRow?.({
+      row: tbodyRow.props.rowData
+    });
   });
 
   // 右键点击行

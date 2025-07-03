@@ -8,7 +8,7 @@ import { defineAsyncComponent } from 'vue';
  * @param {Array} [options.include=[]]    - 组件名称白名单：空数组时注册全部组件
  * @param {Array} [options.exclude=[]]    - 组件名称黑名单
  */
-export function setupComponents(vueApp, options = {}) {
+export const setupComponents = (vueApp, options = {}) => {
   // 导入的组件集合：{ './components/my-btn.vue': importFn, ...}
   const { vueComponents, include = [], exclude = [] } = options;
 
@@ -41,4 +41,4 @@ export function setupComponents(vueApp, options = {}) {
       vueApp.component(componentName, defineAsyncComponent(importFn));
     }
   }
-}
+};

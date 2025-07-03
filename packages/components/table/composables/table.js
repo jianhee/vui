@@ -21,8 +21,8 @@ export const tableProps = {
   // 当前行 `id`，用于高亮当前行
   currentRowId: { type: [String, Number], default: null },
   // 自定义行属性的方法
-  //  1. 示例 `row => ({ key: value, ... })`
-  //  2. 参数为当前行，返回一个对象，使用 `v-bind` 绑定到行元素
+  //  1. 示例 `({ row }) => ({ key: value, ... })`
+  //  2. 参数为当前行，返回一个可以使用 `v-bind` 绑定到行元素的对象
   customRow: { type: Function, default: null },
   // ---------- 列属性 ----------
   // 列数据 `Array[Object]`

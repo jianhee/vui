@@ -13,16 +13,18 @@
       <!-- 节点 -->
       <VTreeNode
         v-for="{ data: node } in virtualList"
-        :key="node.id"
+        :key="node.data.id"
         :node-data="node"
+        :item-data="node.data"
       >
         <!-- 优先显示 slot -->
         <slot
           v-if="$slots.default"
           :node="node"
+          :item="node.data"
         />
         <!-- 其次显示 title -->
-        <span v-else>{{ node.title }}</span>
+        <span v-else>{{ node.data.title }}</span>
       </VTreeNode>
     </div>
   </div>
@@ -50,7 +52,7 @@ watch(
 );
 
 // 使用树
-const { expandIdMap, flattenedTree, treeRootStyles } = useTree({
+const { nodeMap, flattenedNodes, loadChildren, treeRootStyles } = useTree({
   props,
   treeDataRef
 });
@@ -60,7 +62,7 @@ const {
   list: virtualList,
   containerProps: rootProps,
   wrapperProps: viewProps
-} = useVirtualList(flattenedTree, {
+} = useVirtualList(flattenedNodes, {
   itemHeight: props.nodeHeight,
   overscan: 20
 });
@@ -75,7 +77,8 @@ const { dragSortRootClasses } = useDragSort({
 provide('treeRoot', {
   props,
   emits,
-  expandIdMap,
+  nodeMap,
+  loadChildren,
   dragFlagRef
 });
 </script>
