@@ -95,12 +95,13 @@ export const useDragSortItem = ({ dragFlagRef, dragSortable, canDropInto, rawIte
     dragFlagRef.value = 'dragSort';
     const dragItems = selectedItemsRef.value || [rawItem];
     updateSourceData({
-      dragGroupId: groupId,
-      dragComponetId: componetId,
       // rawSourceItems: [...rawItemsRef.value],
       // newSourceItems: null,
-      dragItemIds: dragItems.map(n => n.id),
-      dragItems
+      dragGroupId: groupId,
+      dragComponetId: componetId,
+      dragItem: rawItem,
+      dragItems,
+      dragItemIds: dragItems.map(n => n.id)
     });
 
     // 处理拖拽到组件外部的情况
@@ -110,8 +111,8 @@ export const useDragSortItem = ({ dragFlagRef, dragSortable, canDropInto, rawIte
   // drag     拖拽过程中持续触发（每几百毫秒）
   // dragend  拖拽结束时触发：只有 start 的那个元素响应
   function onDragEnd() {
-    const { dragItemIds } = dragSort.sourceRef.value;
-    const { targetItemId, dropPos } = dragSort.targetRef.value;
+    const { dragItem, dragItems, dragItemIds } = dragSort.sourceRef.value;
+    const { targetItem, targetItemId, dropPos } = dragSort.targetRef.value;
 
     // 拖拽成功
     if (targetItemId) {
@@ -120,7 +121,10 @@ export const useDragSortItem = ({ dragFlagRef, dragSortable, canDropInto, rawIte
 
       // 参数为 更新后的来源列表数据
       emits('drag-sort-end', {
+        dragItem,
+        dragItems,
         dragItemIds,
+        targetItem,
         targetItemId,
         dropPos
       });
@@ -148,10 +152,10 @@ export const useDragSortItem = ({ dragFlagRef, dragSortable, canDropInto, rawIte
 
     // 更新数据
     updateTargetData({
-      targetComponetId: componetId,
       // rawTargetItems: [...rawItemsRef.value],
-      targetItemId: rawItem.id,
+      targetComponetId: componetId,
       targetItem: rawItem,
+      targetItemId: rawItem.id,
       targetRect: event.target.getBoundingClientRect(),
       dropPos: null,
       canDropInto: canDropInto?.(rawItem)

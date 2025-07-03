@@ -73,7 +73,8 @@ export const useTreeNode = ({ treeRoot, treeNode }) => {
 
   // 节点样式
   const nodeStyles = computed(() => ({
-    paddingLeft: `${treeRoot.props.treeIndent + treeRoot.props.nodeIndent * nodeData.value.level}px`
+    paddingLeft: `${treeRoot.props.treeIndent + treeRoot.props.nodeIndent * nodeData.value.level}px`,
+    paddingRight: treeRoot.props.dragSortable ? '35px' : null
   }));
 
   return {

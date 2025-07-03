@@ -55,7 +55,8 @@ const { dropdownVisible, dropdownStyles, openDropdown, closeDropdown } = useDrop
 
 // 下拉框方法
 defineExpose({
-  open: openDropdown
+  open: openDropdown,
+  close: closeDropdown
 });
 
 // 菜单子组件使用

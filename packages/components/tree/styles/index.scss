@@ -35,9 +35,8 @@
   // 操作按钮
   &-node--action {
     position: absolute;
-    top: 50%;
     right: 10px;
-    transform: translateY(-50%);
+    height: 100%;
   }
 
   // 图标

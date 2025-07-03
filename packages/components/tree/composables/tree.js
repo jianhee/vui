@@ -48,7 +48,7 @@ export const useTree = ({ props, treeDataRef }) => {
     const result = [];
     traverseItems(treeDataRef.value);
     function traverseItems(rawItems, level = 0) {
-      rawItems.forEach(rawItem => {
+      rawItems?.forEach(rawItem => {
         // 处理当前节点
         const oldNode = nodeMap.get(rawItem.id);
         const newNode = {
