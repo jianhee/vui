@@ -24,12 +24,12 @@ export const treeProps = {
   // 当前节点 `id`，用于高亮当前节点
   currentNodeId: { type: [String, Number], default: null },
   // 默认展开的节点 `id`
-  expandNodeIds: { type: Array, default: null },
+  expandedNodeIds: { type: Array, default: null },
   // 校验是否是叶子节点
   // 1. 示例：item => boolean
   // 2. 参数为当前项，返回 `true` 表示是叶子节点
   isLeaf: { type: Function, default: null },
-  // 加载子节点
+  // 加载子节点的方法
   // 1. 示例：({ node, item }) => Promise<boolean>
   // 2. 参数为当前节点和当前项，返回 `true` 表示加载成功
   loadNode: { type: Function, default: null }
@@ -54,7 +54,7 @@ export const useTree = ({ props, treeDataRef }) => {
         const newNode = {
           data: rawItem,
           level,
-          isExpanded: oldNode ? oldNode.isExpanded : props.expandNodeIds?.includes(rawItem.id),
+          isExpanded: oldNode ? oldNode.isExpanded : props.expandedNodeIds?.includes(rawItem.id),
           isLeaf: props.isLeaf?.(rawItem) || false,
           isLoading: oldNode?.isLoading || false,
           isLoaded: oldNode?.isLoaded || false

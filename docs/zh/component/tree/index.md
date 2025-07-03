@@ -18,7 +18,7 @@
 
 <preview path="./demos/more.vue"></preview>
 
-## 懒加载
+## 懒加载节点
 
 使用 `isLeaf` 和 `loadNode` 属性定义懒加载节点的功能
 
@@ -26,7 +26,7 @@
 
 ## 默认展开节点
 
-使用 `expandNodeIds` 属性定义默认展开的节点，懒加载也会自动执行
+使用 `expandedNodeIds` 属性定义默认展开的节点，懒加载也会自动执行
 
 <preview path="./demos/expand.vue"></preview>
 
@@ -44,17 +44,17 @@
 
 ### 属性
 
-| 名称            | 说明                                                             | 类型                                               | 默认值 |
-| --------------- | ---------------------------------------------------------------- | -------------------------------------------------- | ------ |
-| `data`          | 树数据                                                           | `Array[Object]`                                    |        |
-| `treeHeight`    | 树高度 <br> 必须使用此属性或 CSS 限制高度，否则会渲染全部数据    | `string(带单位)\|number(px)`                       |        |
-| `treeIndent`    | 树整体缩进                                                       | `number`                                           | `0`    |
-| `nodeHeight`    | 节点高度，用于计算虚拟列表的显示内容                             | `number`                                           | `30`   |
-| `nodeIndent`    | 节点缩进                                                         | `number`                                           | `15`   |
-| `currentNodeId` | 当前节点 `id`，用于高亮当前节点                                  | `string\|number`                                   |        |
-| `expandNodeIds` | 默认展开的节点 `id`                                              | `Array[string\|number]`                            |        |
-| `isLeaf`        | 校验是否是叶子节点 <br> 参数为当前项，返回 `true` 表示是叶子节点 | `function`: `item => boolean`                      |        |
-| `loadNode`      | 加载子节点 <br> 参数为当前节点和当前项，返回 `true` 表示加载成功 | `function`: `({ node, item }) => Promise<boolean>` |        |
+| 名称              | 说明                                                                   | 类型                                               | 默认值 |
+| ----------------- | ---------------------------------------------------------------------- | -------------------------------------------------- | ------ |
+| `data`            | 树数据                                                                 | `Array[Object]`                                    |        |
+| `treeHeight`      | 树高度 <br> 必须使用此属性或 CSS 限制高度，否则会渲染全部数据          | `string(带单位)\|number(px)`                       |        |
+| `treeIndent`      | 树整体缩进                                                             | `number`                                           | `0`    |
+| `nodeHeight`      | 节点高度，用于计算虚拟列表的显示内容                                   | `number`                                           | `30`   |
+| `nodeIndent`      | 节点缩进                                                               | `number`                                           | `15`   |
+| `currentNodeId`   | 当前节点 `id`，用于高亮当前节点                                        | `string\|number`                                   |        |
+| `expandedNodeIds` | 默认展开的节点 `id`                                                    | `Array[string\|number]`                            |        |
+| `isLeaf`          | 校验是否是叶子节点 <br> 参数为当前项，返回 `true` 表示是叶子节点       | `function`: `item => boolean`                      |        |
+| `loadNode`        | 加载子节点的方法 <br> 参数为当前节点和当前项，返回 `true` 表示加载成功 | `function`: `({ node, item }) => Promise<boolean>` |        |
 
 #### data
 

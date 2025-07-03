@@ -1,7 +1,7 @@
 <template>
   <div class="demo-tree-expand">
-    <DemoBasicTree :expand-node-ids="['0-3']" />
-    <DemoLoadTree :expand-node-ids="['0-3']" />
+    <DemoBasicTree :expanded-node-ids="['0-3']" />
+    <DemoLoadTree :expanded-node-ids="['0-3']" />
   </div>
 </template>
 
