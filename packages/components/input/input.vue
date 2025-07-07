@@ -33,7 +33,7 @@
 </template>
 
 <script setup>
-import { useTemplateRef } from 'vue';
+import { computed, useTemplateRef } from 'vue';
 import { useInput, inputModel, inputProps, inputEmits } from './composables';
 import { useFormElementAttrs } from './composables/base';
 import { useIconProps } from '../icon/composables/base';
@@ -58,5 +58,7 @@ const { rootClasses, onRootClick, onInput, onChange, onEnter, isShowClearIcon, c
 });
 
 // 使用图标
-const { iconProps } = useIconProps(props.icon);
+const { iconProps } = useIconProps({
+  iconRef: computed(() => props.icon)
+});
 </script>

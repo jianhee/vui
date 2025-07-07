@@ -25,6 +25,7 @@ defineProps({
   }
   &-flex {
     display: flex;
+    gap: 10px;
   }
 }
 </style>

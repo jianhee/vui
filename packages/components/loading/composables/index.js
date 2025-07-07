@@ -26,7 +26,9 @@ export const useLoading = ({ props }) => {
     if (!props.icon) return defaultProps;
 
     // 自定义图标：添加 spin
-    const { iconProps } = useIconProps(props.icon);
+    const { iconProps } = useIconProps({
+      iconRef: computed(() => props.icon)
+    });
     const customIcon = iconProps.value.name || iconProps.value.component;
     return {
       ...defaultProps,

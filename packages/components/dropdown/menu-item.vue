@@ -26,7 +26,7 @@
 </template>
 
 <script setup>
-import { inject } from 'vue';
+import { computed, inject } from 'vue';
 import { useMenuItem, menuItemProps } from './composables/menu-item';
 import { useIconProps } from '../icon/composables/base';
 import IconSelected from '../../icons/selected.vue';
@@ -44,5 +44,7 @@ const { formattedMenuItem, isSelected, onMenuItemClick } = useMenuItem({
 });
 
 // 使用图标
-const { iconProps } = useIconProps(formattedMenuItem.value.icon);
+const { iconProps } = useIconProps({
+  iconRef: computed(() => formattedMenuItem.value.icon)
+});
 </script>

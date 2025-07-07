@@ -12,7 +12,7 @@
   }
   &.is-resizing {
     user-select: none;
-    transition: none;
+    transition: none !important;
   }
 
   // 移动
@@ -23,7 +23,7 @@
   &.is-moving {
     cursor: move;
     user-select: none;
-    transition: none;
+    transition: none !important;
   }
 
   // 手柄

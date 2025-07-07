@@ -2,24 +2,24 @@
 import { computed } from 'vue';
 
 // 使用图标属性
-export const useIconProps = rawIcon => {
+export const useIconProps = ({ iconRef }) => {
   // 格式化后的 `icon` 属性
   const iconProps = computed(() => {
     // 空值
-    if (!rawIcon) return null;
+    if (!iconRef.value) return null;
 
     // :icon="name"
-    if (typeof rawIcon === 'string') {
-      return { name: rawIcon };
+    if (typeof iconRef.value === 'string') {
+      return { name: iconRef.value };
     }
 
     // :icon="component"
-    if (rawIcon.render) {
-      return { component: rawIcon };
+    if (iconRef.value.render) {
+      return { component: iconRef.value };
     }
 
     // :icon="{ name: 'close', size: 20, ... }"
-    return rawIcon;
+    return iconRef.value;
   });
 
   return {
