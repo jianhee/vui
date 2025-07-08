@@ -6,7 +6,7 @@ import { addUnit } from '../../../utils/data-number';
 export const skeletonItemProps = {
   // 宽高
   width: { type: [String, Number], default: null },
-  height: { type: [String, Number], default: 20 },
+  height: { type: [String, Number], default: null },
   // 宽高比：设置后忽略高度
   aspectRatio: { type: String, default: null },
   // 是否水平居中
