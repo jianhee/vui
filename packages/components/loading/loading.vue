@@ -8,10 +8,10 @@
     />
     <!-- 文本 -->
     <div
-      v-if="showText"
-      class="vui-loading-text"
+      v-if="descText"
+      class="vui-loading-desc"
     >
-      {{ text }}
+      {{ descText }}
     </div>
   </div>
 </template>

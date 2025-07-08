@@ -1,6 +1,6 @@
 // vars
 :root {
-  --vui-loading-text-color: var(--vui-text-color-secondary);
+  --vui-loading-desc-text-color: var(--vui-text-color-secondary);
 }
 
 // 加载状态
@@ -12,9 +12,9 @@
     --vui-icon-color: var(--vui-color-brand-base);
     --vui-icon-size: 16px;
   }
-  &-text {
-    margin-top: 10px;
+  &-desc {
     font-size: 14px;
-    color: var(--vui-loading-text-color);
+    line-height: 24px;
+    color: var(--vui-loading-desc-text-color);
   }
 }

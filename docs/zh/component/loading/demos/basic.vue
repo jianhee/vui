@@ -1,6 +1,6 @@
 <template>
   <DemoSpace flex>
     <VLoading />
-    <VLoading animate="bubble" />
+    <VLoading animation="bubble" />
   </DemoSpace>
 </template>
