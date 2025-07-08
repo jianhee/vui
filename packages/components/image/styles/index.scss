@@ -5,6 +5,19 @@
   aspect-ratio: var(--vui-image-aspect-ratio);
   overflow: hidden;
   border-radius: var(--vui-image-radius);
+  > .vui-skeleton-item {
+    height: 100%;
+  }
+  &-error {
+    --vui-icon-size: 24px;
+    --vui-icon-color: var(--vui-text-color-secondary);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background-color: var(--vui-fill-color-base);
+  }
   &-inner {
     display: block;
     width: 100%;

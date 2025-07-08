@@ -2,20 +2,15 @@
 import { computed } from 'vue';
 import { useImage as vueuseImage } from '@vueuse/core';
 import { addUnit } from '../../../utils';
-import defaultErrorImg from '../images/error.png';
 
 // props
 export const imageProps = {
-  // 图片地址
-  src: { type: String, required: true },
-  // 加载中的图片地址：默认使用骨架屏
-  loadingImg: { type: String, default: null },
-  // 加载失败的图片地址
-  errorImg: { type: String, default: defaultErrorImg },
+  // 图片地址：加载中显示骨架屏，加载失败显示占位图
+  src: { type: String, default: null },
   // ---------- 样式属性 ----------
   // 宽度：不带单位时默认 `px`
   width: { type: [String, Number], default: null },
-  // 宽高比：设置后可能显示不全
+  // 宽高比：加载成功前默认 `16/9`，设置后可能显示不全
   aspectRatio: { type: String, default: null },
   // 圆角尺寸：不带单位时默认 `px`
   radius: { type: [String, Number], default: null }
@@ -23,41 +18,34 @@ export const imageProps = {
 
 // 使用图片
 export const useImage = ({ props }) => {
-  // 根元素样式
-  const rootStyles = computed(() => {
-    return {
-      '--vui-image-width': addUnit(props.width, 'px'),
-      '--vui-image-aspect-ratio': props.aspectRatio,
-      '--vui-image-radius': addUnit(props.radius, 'px')
-    };
-  });
-
   // 加载状态
   const { isLoading, error } = vueuseImage({ src: props.src });
 
-  // 是否显示骨架屏
-  const isShowSkeleton = computed(() => isLoading.value && !props.loadingImg);
-
-  // 骨架屏长宽比
-  const skeletonAspectRatio = computed(() => {
-    return props.aspectRatio || '16/9';
+  // 长宽比
+  const aspectRatio = computed(() => {
+    if (isLoading.value || error.value) {
+      // 加载成功前默认 `16/9`
+      return props.aspectRatio || '16/9';
+    } else {
+      return props.aspectRatio;
+    }
   });
 
-  // 图片显示地址
-  const imgSrc = computed(() => {
-    return isLoading.value ? props.loadingImg : error.value ? props.errorImg : props.src;
-  });
-
-  // 图片原始地址
-  const imgDataSrc = computed(() => {
-    return error.value ? props.src : null;
-  });
+  // 根元素属性
+  const rootProps = computed(() => ({
+    // 样式
+    'style': {
+      '--vui-image-width': addUnit(props.width, 'px'),
+      '--vui-image-aspect-ratio': aspectRatio.value,
+      '--vui-image-radius': addUnit(props.radius, 'px')
+    },
+    // 数据
+    'data-src': error.value ? props.src : null
+  }));
 
   return {
-    rootStyles,
-    isShowSkeleton,
-    skeletonAspectRatio,
-    imgSrc,
-    imgDataSrc
+    isLoading,
+    error,
+    rootProps
   };
 };

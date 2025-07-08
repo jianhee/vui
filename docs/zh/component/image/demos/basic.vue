@@ -1,36 +1,30 @@
 <template>
-  <DemoSpace>默认</DemoSpace>
-  <DemoSpace class="demo-images">
-    <VImage :src="url" />
-    <VImage :src="`123${url}`" />
-  </DemoSpace>
-  <DemoSpace>自定义图片</DemoSpace>
-  <DemoSpace class="demo-images">
-    <VImage
-      :src="url"
-      :loading-img="loadingImg"
-      :error-img="errorImg"
-    />
-    <VImage
-      :src="`123${url}`"
-      :loading-img="loadingImg"
-      :error-img="errorImg"
-    />
+  <DemoSpace
+    flex
+    class="demo-image-basic"
+  >
+    <div>
+      <div class="demo-image-text">加载成功</div>
+      <VImage :src="url" />
+    </div>
+    <div>
+      <div class="demo-image-text">加载失败</div>
+      <VImage :src="`123${url}`" />
+    </div>
   </DemoSpace>
 </template>
 
 <script setup>
-import loadingImg from '@vp/images/loading.png';
-import errorImg from '@vp/images/error.png';
-
-const url = 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg';
+const url = 'https://pc-newtab.maxthonimg.com/mxbg/horizontal/1039.jpg';
 </script>
 
 <style>
-.demo-images > .vui-image {
-  display: inline-block;
+.demo-image-basic .vui-image {
   width: 200px;
-  margin-right: 30px;
-  vertical-align: top;
+}
+.demo-image-text {
+  margin-bottom: 5px;
+  font-size: 12px;
+  text-align: center;
 }
 </style>

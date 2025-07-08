@@ -45,7 +45,9 @@ export const sidebarNavs = {
         { text: 'Image 图片', link: '/component/image/' },
         { text: 'Table 虚拟化表格', link: '/component/table/' },
         { text: 'Tree 虚拟化树', link: '/component/tree/' },
-        { text: 'Skeleton 骨架屏', link: '/component/skeleton/' }
+        { text: 'Skeleton 骨架屏', link: '/component/skeleton/' },
+        { text: 'Loading 加载状态', link: '/component/loading/' },
+        { text: 'Empty 空状态', link: '/component/empty/' }
       ]
     },
     {
@@ -56,8 +58,7 @@ export const sidebarNavs = {
       text: '反馈',
       items: [
         { text: 'Dialog 对话框', link: '/component/dialog/' },
-        { text: 'Drawer 抽屉', link: '/component/drawer/' },
-        { text: 'Loading 加载状态', link: '/component/loading/' }
+        { text: 'Drawer 抽屉', link: '/component/drawer/' }
       ]
     },
     {
