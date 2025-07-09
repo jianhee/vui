@@ -2,7 +2,7 @@
 export const renderData = (length = 1000, level = 0, _path = '0') => {
   return Array.from({ length }).map((_, index) => {
     const path = `${_path}-${index}`;
-    const type = index % 3 === 0 ? 'folder' : 'note';
+    const type = index % 2 === 0 ? 'folder' : 'note';
     return {
       id: path,
       title: path,

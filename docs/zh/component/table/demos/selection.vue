@@ -1,7 +1,6 @@
 <template>
   <VTable
     v-model:selected-row-ids="selectedRowIds"
-    table-height="500"
     :row-items="rowItems"
     :col-items="colItems"
     :selectable="true"
@@ -19,6 +18,6 @@ import { ref } from 'vue';
 import { renderData, colItems } from '../composables';
 import { writeLog } from '@vp/utils';
 
-const rowItems = renderData(1000);
+const rowItems = renderData(5);
 const selectedRowIds = ref([rowItems[2].id]);
 </script>

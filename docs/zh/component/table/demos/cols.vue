@@ -1,7 +1,6 @@
 <template>
   <VTable
     v-slot="{ row, col }"
-    table-height="500"
     :row-items="rowItems"
     :col-items="colItems"
     :col-resizable="true"
@@ -17,5 +16,5 @@
 <script setup>
 import { renderData, colItems } from '../composables';
 
-const rowItems = renderData(1000);
+const rowItems = renderData(5);
 </script>

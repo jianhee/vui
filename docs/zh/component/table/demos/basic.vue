@@ -1,8 +1,8 @@
 <template>
   <VTable
-    table-height="500"
     :row-items="rowItems"
     :col-items="colItems"
+    table-height="300"
     @row-contextmenu="writeLog('row-contextmenu', $event)"
   />
 </template>

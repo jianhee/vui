@@ -21,7 +21,12 @@ export const useTreeNode = ({ treeRoot, treeNode }) => {
 
   // 是否显示折叠按钮
   const isShowExpand = computed(() => {
-    return itemData.value.children?.length || (nodeData.value.isLeaf && !nodeData.value.isLoaded);
+    // 未加载的叶子节点
+    if (nodeData.value.isLeaf && !nodeData.value.isLoaded) return true;
+
+    // 是否有子集
+    const children = itemData.value.children?.filter(item => treeRoot.props.dataFilter?.(item) !== false);
+    return children?.length;
   });
 
   // 展开图标状态
@@ -77,6 +82,14 @@ export const useTreeNode = ({ treeRoot, treeNode }) => {
     paddingRight: treeRoot.props.dragSortable ? '35px' : null
   }));
 
+  // 行自定义属性
+  const customNodeAttrs = computed(() => {
+    return treeRoot.props.customNode?.({
+      node: nodeData.value,
+      item: itemData.value
+    });
+  });
+
   return {
     isShowExpand,
     expandIconRotate,
@@ -84,6 +97,7 @@ export const useTreeNode = ({ treeRoot, treeNode }) => {
     onNodeClick,
     onNodeContextmenu,
     nodeClasses,
-    nodeStyles
+    nodeStyles,
+    customNodeAttrs
   };
 };

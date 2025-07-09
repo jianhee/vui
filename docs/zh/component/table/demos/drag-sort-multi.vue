@@ -1,8 +1,11 @@
 <template>
-  <div class="demo-table-drag">
+  <DemoSpace
+    flex
+    class="demo-table-sort-multi"
+  >
     <DemoDragSortTree drag-sort-group="demo" />
     <DemoDragSortTable drag-sort-group="demo" />
-  </div>
+  </DemoSpace>
 </template>
 
 <script setup>
@@ -17,17 +20,15 @@ provide('vuiDragSortContext', {
 });
 </script>
 
-<style>
-.demo-table-drag {
-  display: flex;
-  gap: 50px;
-}
-.demo-table-drag .vui-tree {
-  flex: auto;
-  width: 30%;
-}
-.demo-table-drag .vui-table {
-  flex: auto;
-  width: 70%;
+<style lang="scss">
+.demo-table-sort-multi {
+  .vui-tree {
+    flex: none;
+    width: 200px;
+    border-right: 1px solid var(--vui-border-color-base);
+  }
+  .vui-table {
+    flex: auto;
+  }
 }
 </style>

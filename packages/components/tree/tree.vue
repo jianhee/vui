@@ -5,8 +5,23 @@
     :style="treeRootStyles"
     v-bind="rootProps"
   >
+    <!-- 加载状态 -->
+    <VLoading v-if="loading" />
+    <!-- 空状态 -->
+    <template v-else-if="!treeDataRef?.length">
+      <slot
+        v-if="$slots.empty"
+        name="empty"
+      />
+      <VEmpty
+        v-else
+        :icon="null"
+        :description="emptyText"
+      />
+    </template>
     <!-- 虚拟列表 -->
     <div
+      v-else
       class="vui-tree-view"
       v-bind="viewProps"
     >

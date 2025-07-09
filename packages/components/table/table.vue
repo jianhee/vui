@@ -12,34 +12,52 @@
     >
       <TheadRow />
     </div>
-    <!-- 表身 -->
-    <div
-      class="vui-table-body"
-      v-bind="tbodyProps"
-      :style="selectionInnerStyles"
-    >
-      <!-- 拖拽鼠标框选 -->
-      <DragSelect v-if="selectable && dragSelectable" />
-      <!-- 虚拟列表 -->
+    <!-- 加载状态 -->
+    <VLoading v-if="loading" />
+    <!-- 空状态 -->
+    <template v-else-if="!rowItemsRef?.length">
+      <!-- 优先插槽 -->
+      <slot
+        v-if="$slots.empty"
+        name="empty"
+      />
+      <!-- 其次文案 -->
+      <VEmpty
+        v-else
+        :icon="null"
+        :description="emptyText"
+      />
+    </template>
+    <template v-else>
+      <!-- 表身 -->
       <div
-        class="vui-table-view"
-        v-bind="viewProps"
+        class="vui-table-body"
+        v-bind="tbodyProps"
+        :style="selectionInnerStyles"
       >
-        <!-- 行 -->
-        <TbodyRow
-          v-for="{ data: row } in virtualList"
-          v-slot="{ col }"
-          :key="row.id"
-          :row-data="row"
+        <!-- 拖拽鼠标框选 -->
+        <DragSelect v-if="selectable && dragSelectable" />
+        <!-- 虚拟列表 -->
+        <div
+          class="vui-table-view"
+          v-bind="viewProps"
         >
-          <!-- 单元格内容 -->
-          <slot
-            :row="row"
-            :col="col"
-          />
-        </TbodyRow>
+          <!-- 行 -->
+          <TbodyRow
+            v-for="{ data: row } in virtualList"
+            v-slot="{ col }"
+            :key="row.id"
+            :row-data="row"
+          >
+            <!-- 单元格内容 -->
+            <slot
+              :row="row"
+              :col="col"
+            />
+          </TbodyRow>
+        </div>
       </div>
-    </div>
+    </template>
   </div>
 </template>
 

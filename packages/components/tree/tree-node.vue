@@ -4,6 +4,7 @@
     :class="['vui-tree-node', nodeClasses, dragClasses]"
     :style="nodeStyles"
     :draggable="treeRoot.props.dragSortable"
+    v-bind="customNodeAttrs"
     @dragstart.stop="onDragStart"
     @dragend.stop="onDragEnd"
     @dragenter.stop="onDragEnter"
@@ -56,7 +57,7 @@ const treeRoot = inject('treeRoot', null);
 const props = defineProps(treeNodeProps);
 
 // 使用树节点
-const { isShowExpand, expandIconRotate, toggleChildren, onNodeClick, onNodeContextmenu, nodeClasses, nodeStyles } = useTreeNode({
+const { isShowExpand, expandIconRotate, toggleChildren, onNodeClick, onNodeContextmenu, nodeClasses, nodeStyles, customNodeAttrs } = useTreeNode({
   treeRoot,
   treeNode: { props }
 });

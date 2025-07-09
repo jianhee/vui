@@ -25,6 +25,7 @@
     align-items: center;
     height: var(--vui-tree-node-height);
     padding-right: 10px;
+    overflow: hidden;
     cursor: pointer;
     &:hover,
     &.is-current {
@@ -35,8 +36,10 @@
   // 操作按钮
   &-node--action {
     position: absolute;
+    top: 50%;
     right: 10px;
-    height: 100%;
+    z-index: 999;
+    transform: translateY(-50%);
   }
 
   // 图标
