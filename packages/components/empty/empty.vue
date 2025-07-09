@@ -10,7 +10,7 @@
     />
     <!-- 其次使用图标 -->
     <VIcon
-      v-else
+      v-else-if="icon !== null"
       class="vui-empty-icon"
       v-bind="iconProps"
     />
