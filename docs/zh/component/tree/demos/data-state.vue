@@ -8,33 +8,26 @@
   </VBtn>
   <DemoSpace
     flex
-    class="demo-table-state"
+    class="demo-tree-state"
   >
     <div>
       <DemoSpace>默认状态</DemoSpace>
-      <VTable
-        :loading="loading"
-        :col-items="colItems"
-      />
+      <VTree :loading="loading" />
     </div>
     <div>
       <DemoSpace>自定义文本</DemoSpace>
-      <VTable
+      <VTree
         :loading="loading"
         empty-text="暂无数据"
-        :col-items="colItems"
       />
     </div>
     <div>
       <DemoSpace>自定义插槽</DemoSpace>
-      <VTable
-        :loading="loading"
-        :col-items="colItems"
-      >
+      <VTree :loading="loading">
         <template #empty>
           <VEmpty description="暂无数据" />
         </template>
-      </VTable>
+      </VTree>
     </div>
   </DemoSpace>
 </template>
@@ -44,11 +37,6 @@ import { ref } from 'vue';
 
 // 数据
 const loading = ref(false);
-const colItems = [
-  { key: 'id', title: 'ID', width: 80, cellClass: 'demo-table-cell' },
-  { key: 'desc', title: '说明', width: 80 },
-  { key: 'name', title: '姓名', width: 80 }
-];
 
 // 加载数据
 refreshData();
@@ -61,11 +49,11 @@ function refreshData() {
 </script>
 
 <style lang="scss">
-.demo-table-state {
+.demo-tree-state {
   > div {
     width: 33%;
   }
-  .vui-table {
+  .vui-tree {
     height: 200px;
     border: 1px solid var(--vui-border-color-base);
   }

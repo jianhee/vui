@@ -4,7 +4,7 @@
     :row-items="rowItems"
     :row-height="20"
     :current-row-id="rowItems[0].id"
-    :custom-row="setCustomRow"
+    :custom-row="customRow"
   />
 </template>
 
@@ -15,7 +15,7 @@ import { renderData, colItems } from '../composables';
 const rowItems = renderData(5);
 
 // 自定义行属性
-function setCustomRow({ row }) {
+function customRow({ row }) {
   return {
     title: row.name,
     style: {

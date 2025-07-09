@@ -6,11 +6,16 @@ export const treeEmits = ['node-click', 'node-contextmenu'];
 
 // props
 export const treeProps = {
-  // ---------- 树属性 ----------
+  // ---------- 数据展示 ----------
+  // 是否正在加载数据
+  loading: { type: Boolean, default: false },
+  // 空数据时显示的文本内容
+  emptyText: { type: String, default: 'No Data' },
   // 树数据 `Array[Object]`
   //  1. `id` 节点唯一标识，必填
   //  2. `title` 节点标题，默认使用 `title` 的值渲染单元格
   data: { type: Array, default: null },
+  // ---------- 树属性 ----------
   // 树高度：不带单位时默认 `px`
   // 必须使用此属性或 CSS 限制高度，否则会渲染全部数据
   treeHeight: { type: [String, Number], default: null },
@@ -25,14 +30,22 @@ export const treeProps = {
   currentNodeId: { type: [String, Number], default: null },
   // 默认展开的节点 `id`
   expandedNodeIds: { type: Array, default: null },
+  // 自定义节点属性的方法
+  //  1. 示例 `({ node, item }) => ({ key: value, ... })`
+  //  2. 参数为当前节点和当前项，返回一个可以使用 `v-bind` 绑定到节点元素的对象
+  customNode: { type: Function, default: null },
   // 校验是否是叶子节点
   // 1. 示例：item => boolean
   // 2. 参数为当前项，返回 `true` 表示是叶子节点
   isLeaf: { type: Function, default: null },
-  // 加载子节点的方法
+  // 加载数据的方法
   // 1. 示例：({ node, item }) => Promise<boolean>
   // 2. 参数为当前节点和当前项，返回 `true` 表示加载成功
-  loadNode: { type: Function, default: null }
+  loadData: { type: Function, default: null },
+  // 筛选数据的方法
+  //  1. 示例 `({ item }) => boolean`
+  //  2. 参数为当前项，返回 `false` 表示不包含当前项
+  filterMethod: { type: Function, default: () => true }
 };
 
 // 使用表格
@@ -49,6 +62,9 @@ export const useTree = ({ props, treeDataRef }) => {
     traverseItems(treeDataRef.value);
     function traverseItems(rawItems, level = 0) {
       rawItems?.forEach(rawItem => {
+        const isIncludes = props.filterMethod({ item: rawItem });
+        if (!isIncludes) return;
+
         // 处理当前节点
         const oldNode = nodeMap.get(rawItem.id);
         const newNode = {
@@ -85,7 +101,7 @@ export const useTree = ({ props, treeDataRef }) => {
     nodeMap.set(data.id, { ...node, isLoading: true });
 
     // 加载数据
-    const isSuccess = await props.loadNode?.({
+    const isSuccess = await props.loadData?.({
       node,
       item: node.data
     });

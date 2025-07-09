@@ -1,7 +1,7 @@
 <template>
   <VTree
     v-slot="{ node, item }"
-    :tree-height="300"
+    tree-height="200"
     :data="treeData"
     :drag-sortable="true"
     :can-drop-into="target => target.type === 'folder'"
@@ -17,5 +17,5 @@
 import { renderData } from '../../table/composables';
 import { writeLog } from '@vp/utils';
 
-const treeData = renderData(10, 2);
+const treeData = renderData(5, 2);
 </script>

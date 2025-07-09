@@ -1,10 +1,10 @@
 <template>
   <VTree
     v-slot="{ node, item }"
-    :tree-height="300"
+    :tree-height="200"
     :data="treeData"
     :is-leaf="n => n.type === 'folder'"
-    :load-node="loadNode"
+    :load-data="loadData"
     v-bind="$attrs"
   >
     <VIcon :name="item.type === 'note' ? 'note' : node.isExpanded ? 'folder-open' : 'folder'" />
@@ -17,7 +17,7 @@ import { ref } from 'vue';
 import { renderData } from '../../table/composables';
 
 // 初始数据
-const treeData = ref(renderData(10));
+const treeData = ref(renderData(5));
 
 // 查找节点
 const findNodeById = (nodeId, nodes = treeData.value) => {
@@ -32,11 +32,11 @@ const findNodeById = (nodeId, nodes = treeData.value) => {
 };
 
 // 加载数据：最多三级
-function loadNode({ node, item }) {
+function loadData({ node, item }) {
   return new Promise(resolve => {
     setTimeout(() => {
       if (node.level < 2) {
-        const children = renderData(10, 0, item.id);
+        const children = renderData(5, 0, item.id);
         const newNode = findNodeById(item.id);
         newNode.children = children;
       }

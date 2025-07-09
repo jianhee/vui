@@ -11,22 +11,23 @@
 
 <preview path="./demos/basic.vue"></preview>
 
-<!--@include: ./parts/data-state.md-->
+## 自定义行
 
-## 列的用法
+使用 `rowHeight`、`currentRowId`、`customRow` 等属性定义行的多种用法
+
+<preview path="./demos/rows.vue"></preview>
+
+## 自定义列
 
 1. 使用 `colResizable`、`colWidthsStorageKey` 等属性拖拽调整列宽并存到本地
 2. 使用 `row[col.key]` 的值或 `default` 插槽定义单元格内容
 
 <preview path="./demos/cols.vue"></preview>
 
-## 行的用法
+<!-- 数据状态 -->
+<!--@include: ./parts/data-state.md-->
 
-使用 `rowHeight`、`currentRowId`、`customRow` 等属性定义行的多种用法
-
-<preview path="./demos/rows.vue"></preview>
-
-## 可选择的行
+## 多选
 
 1. 使用 `selectable` 属性开启行多选的功能，使用 `v-model:selectedRowIds` 属性绑定选中值
 2. 默认点击选择框触发选择，可使用 `dragSelectable`、`dragSelectAreaWidth`、`ctrlASelectable` 等属性定义多种选择方式
@@ -34,6 +35,7 @@
 
 <preview path="./demos/selection.vue"></preview>
 
+<!-- 拖拽排序 -->
 <!--@include: ./parts/drag-sort-guild.md-->
 
 ### 单个列表
@@ -89,7 +91,7 @@
 | ----------------- | ---------------- | --------------------------------------- |
 | `row-contextmenu` | 右键点击行时触发 | `{ event: '事件对象', row: '当前行'  }` |
 
-## 行多选 API
+## 多选 API
 
 ### 属性
 

@@ -25,7 +25,7 @@ export const useTreeNode = ({ treeRoot, treeNode }) => {
     if (nodeData.value.isLeaf && !nodeData.value.isLoaded) return true;
 
     // 是否有子集
-    const children = itemData.value.children?.filter(item => treeRoot.props.dataFilter?.(item) !== false);
+    const children = itemData.value.children?.filter(item => treeRoot.props.filterMethod({ item }));
     return children?.length;
   });
 
