@@ -1,17 +1,17 @@
-<!-- loading -->
+<!-- 加载状态 -->
 <template>
   <div class="vui-loading">
     <!-- 图标 -->
     <VIcon
-      v-bind="iconProps"
       class="vui-loading-icon"
+      v-bind="iconProps"
     />
     <!-- 文本 -->
     <div
-      v-if="descText"
+      v-if="description"
       class="vui-loading-desc"
     >
-      {{ descText }}
+      {{ description }}
     </div>
   </div>
 </template>
@@ -19,9 +19,6 @@
 <script setup>
 import { useLoading, loadingProps } from './composables';
 
-// 加载
 const props = defineProps(loadingProps);
-
-// 使用加载
 const { iconProps } = useLoading({ props });
 </script>

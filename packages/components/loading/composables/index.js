@@ -1,4 +1,4 @@
-// loading
+// 加载状态
 import { computed } from 'vue';
 import { useIconProps } from '../../icon/composables/base';
 import IconLoadingLoop from '../../../icons/loading-loop.vue';
@@ -11,10 +11,10 @@ export const loadingProps = {
   // 自定义图标：会自动添加旋转动画，可选的值有 `<VIcon>` 组件的 `name` 属性值、`component` 属性值、完整的 `props` 对象
   icon: { type: [String, Object], default: null },
   // 自定义描述文本：空值表示不使用文本
-  descText: { type: String, default: 'Loading...' }
+  description: { type: String, default: 'Loading...' }
 };
 
-// 使用加载
+// 使用加载状态
 export const useLoading = ({ props }) => {
   // 自定义图标
   const iconRef = computed(() => props.icon);
