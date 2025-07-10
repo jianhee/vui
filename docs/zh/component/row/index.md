@@ -8,7 +8,7 @@
 
 ## 文本样式
 
-使用 `center`、`ellipsis` 属性定义文本样式
+使用 `center`、`ellipsis` 等属性定义文本样式
 
 <preview path="./demos/text-style.vue"></preview>
 
