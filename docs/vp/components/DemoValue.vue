@@ -34,7 +34,6 @@ const modelValue = defineModel('value', { type: Number, default: null });
   display: flex;
   gap: 15px;
   align-items: center;
-  max-width: 500px;
   color: var(--vui-text-color-regular);
   &-label {
     flex: none;

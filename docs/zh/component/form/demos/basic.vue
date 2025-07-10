@@ -1,12 +1,9 @@
 <template>
-  <VForm
-    v-bind="$attrs"
-    class="demo-form"
-  >
+  <VForm v-bind="$attrs">
+    <VFormItem label="文本"> 文本文本 </VFormItem>
     <VFormItem label="输入框">
       <VInput v-model:value="inputValue" />
     </VFormItem>
-    <VFormItem label="文本"> 文本文本 </VFormItem>
     <VFormItem label="选择器">
       <VSelect
         v-model:value="selectValue"
@@ -28,10 +25,7 @@
       />
     </VFormItem>
     <VFormItem label="开关">
-      <VSwitch
-        v-model:checked="switchVal"
-        active-text="开启状态"
-      />
+      <VSwitch v-model:checked="switchVal" />
     </VFormItem>
     <VFormItem label="滑块">
       <VSlider v-model:value="sliderVal" />
@@ -57,12 +51,3 @@ const options = [
   { label: '选项3', value: 3 }
 ];
 </script>
-
-<style>
-.demo-form {
-  max-width: 500px;
-}
-.demo-form.vui-form--filed-inline {
-  max-width: none;
-}
-</style>

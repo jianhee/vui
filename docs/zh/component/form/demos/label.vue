@@ -8,7 +8,10 @@
       />
     </VFormItem>
     <VFormItem label="标签宽度">
-      <DemoValue v-model:value="labelWidth" />
+      <DemoValue
+        v-model:value="labelWidth"
+        :min="50"
+      />
     </VFormItem>
   </VForm>
 

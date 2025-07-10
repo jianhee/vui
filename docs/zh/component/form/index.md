@@ -2,8 +2,9 @@
 
 ## 基础用法
 
-1. 表单内容由表单容器 `<VForm>` 和表单项 `<VFormItem>` 两部分组成，必须将两个组件放在一起使用
-2. 表单项内容由 `label` 属性（左侧文本）和 `default` 插槽（右侧内容）两部分组成
+1. 表单由 `<VForm>`（容器）和 `<VFormItem>`（项）两部分组成，必须将两个组件放在一起使用
+2. 表单项由 `label` 属性（左侧文本）和 `default` 插槽（右侧内容）两部分组成
+3. 示例中表单元素最大宽度为 `280px`
 
 <preview path="./demos/basic.vue"></preview>
 
@@ -13,7 +14,7 @@
 
 <preview path="./demos/filed-display.vue"></preview>
 
-## 定义标签
+## 标签的用法
 
 使用表单的 `labelPosition` 和 `labelWidth` 属性定义标签的位置和宽度
 
