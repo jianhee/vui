@@ -6,8 +6,6 @@ import { addUnit } from '../../../utils';
 export const btnProps = {
   // 按钮类型：primary, default, link
   type: { type: String, default: 'default' },
-  // 是否为禁用状态
-  disabled: { type: Boolean, default: false },
   // 是否为加载状态
   loading: { type: Boolean, default: false },
   // 前置图标：可选的值有 `<VIcon>` 组件的 `name` 属性值、`component` 属性值、完整的 `props` 对象
@@ -24,10 +22,7 @@ export const btnProps = {
 };
 
 // 使用按钮
-export const useBtn = ({ props }) => {
-  // 是否禁用
-  const isDisabled = computed(() => props.disabled || props.loading);
-
+export const useButton = ({ props }) => {
   // 根元素类名
   const rootClasses = computed(() => {
     return [
@@ -48,7 +43,6 @@ export const useBtn = ({ props }) => {
   });
 
   return {
-    isDisabled,
     rootClasses,
     rootStyles
   };

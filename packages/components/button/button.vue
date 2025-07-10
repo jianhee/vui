@@ -4,9 +4,10 @@
     type="button"
     :class="rootClasses"
     :style="rootStyles"
-    :disabled="isDisabled"
+    :disabled="loading"
+    v-bind="{ ...rootProps, ...nativeProps }"
   >
-    <!-- loading -->
+    <!-- 加载状态 -->
     <VIcon
       v-if="loading"
       :component="IconLoadingLoop"
@@ -23,17 +24,22 @@
 
 <script setup>
 import { computed } from 'vue';
-import { useBtn, btnProps } from './composables';
-import { useIconProps } from '../icon/composables/base';
+import { useButton, btnProps } from './composables';
+import { useFilterProps } from '../../composables/filter-props';
+import { useIconProps } from '../../composables/use-icon-props';
 import IconLoadingLoop from '../../icons/loading-loop.vue';
 
 // 按钮
+defineOptions({ inheritAttrs: false });
 const props = defineProps(btnProps);
 
 // 使用按钮
-const { isDisabled, rootClasses, rootStyles } = useBtn({ props });
+const { rootClasses, rootStyles } = useButton({ props });
 
-// 使用图标
+// 原生属性
+const { rootProps, nativeProps } = useFilterProps(['autofoucs', 'disabled']);
+
+// 图标属性
 const { iconProps } = useIconProps({
   iconRef: computed(() => props.icon)
 });

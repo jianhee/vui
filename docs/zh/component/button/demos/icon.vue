@@ -1,5 +1,5 @@
 <template>
-  <DemoBasic icon="close" />
+  <DemoBasic icon="face" />
 </template>
 
 <script setup>
