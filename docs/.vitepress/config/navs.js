@@ -23,7 +23,7 @@ export const sidebarNavs = {
       text: '基础组件',
       items: [
         { text: 'Icon 图标', link: '/component/icon/' },
-        { text: 'Btn 按钮', link: '/component/btn/' },
+        { text: 'Button 按钮', link: '/component/button/' },
         { text: 'Row 行', link: '/component/row/' }
       ]
     },
