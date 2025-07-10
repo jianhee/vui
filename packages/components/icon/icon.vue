@@ -4,15 +4,17 @@
     :class="rootClasses"
     :style="rootStyles"
   >
-    <!-- 使用 svg 名称：依赖 vite-plugin-svg-icons 插件 -->
-    <svg v-if="name">
-      <use :href="`#icon-${name}`" />
-    </svg>
-    <!-- 使用 svg 组件：需要将 `.svg` 文件改写成 `.vue` 组件 -->
+    <!-- 优先使用插槽 -->
+    <slot v-if="$slots.default" />
+    <!-- 其次使用组件：需要将 `.svg` 文件改写成 `.vue` 组件 -->
     <component
       :is="component"
-      v-else
+      v-else-if="component"
     />
+    <!-- 最后使用名称：依赖 vite-plugin-svg-icons 插件 -->
+    <svg v-else>
+      <use :href="`#icon-${name}`" />
+    </svg>
   </i>
 </template>
 
