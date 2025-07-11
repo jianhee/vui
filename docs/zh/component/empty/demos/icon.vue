@@ -1,52 +1,37 @@
 <template>
   <DemoSpace flex>
-    <div class="demo-state-item">
-      <div class="demo-state-title">修改图标</div>
+    <DemoCard label="修改图标">
       <component
         :is="StateComponent"
         :icon="IconFace"
       />
-    </div>
-    <div class="demo-state-item">
-      <div class="demo-state-title">修改颜色</div>
+    </DemoCard>
+    <DemoCard label="修改颜色">
       <component
         :is="StateComponent"
         :icon="{ color: 'pink' }"
       />
-    </div>
-    <div class="demo-state-item">
-      <div class="demo-state-title">修改尺寸</div>
+    </DemoCard>
+    <DemoCard label="修改尺寸">
       <component
         :is="StateComponent"
-        :icon="{ size: 50 }"
+        :icon="{ size: 100 }"
       />
-    </div>
-    <div class="demo-state-item">
-      <div class="demo-state-title">修改多项</div>
+    </DemoCard>
+    <DemoCard label="修改多项">
       <component
         :is="StateComponent"
-        :icon="{ component: IconFace, color: 'pink', size: 50 }"
+        :icon="{ component: IconFace, color: 'pink', size: 100 }"
       />
-    </div>
+    </DemoCard>
   </DemoSpace>
 </template>
 
 <script setup>
-import { useRoute } from 'vitepress';
+import { useRouteValid } from '@vp/composables';
 import IconFace from '@vp/icons/face.svg?component';
 
 // 区分类型
-const route = useRoute();
-const isEmpty = /empty/.test(route.path);
+const isEmpty = useRouteValid('empty');
 const StateComponent = isEmpty ? 'VEmpty' : 'VLoading';
 </script>
-
-<style>
-.demo-state-item {
-  flex: auto;
-}
-.demo-state-title {
-  margin-bottom: 10px;
-  text-align: center;
-}
-</style>

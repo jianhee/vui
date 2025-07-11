@@ -21,6 +21,8 @@
     >
       {{ description }}
     </div>
+    <!-- 自定义内容 -->
+    <slot />
   </div>
 </template>
 

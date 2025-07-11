@@ -1,23 +1,24 @@
 // vars
 :root {
   --vui-empty-text-color: var(--vui-text-color-secondary);
+  --vui-empty-icon-color: var(--vui-border-color-dark);
 }
 
 // 空状态
 .vui-empty {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 15px;
   align-items: center;
   width: 100%;
-  padding: 30px 0;
+  padding: 30px;
   text-align: center;
   &-icon {
-    --vui-icon-color: var(--vui-text-color-placeholder);
-    --vui-icon-size: min(80%, 40px);
+    --vui-icon-color: var(--vui-empty-icon-color);
+    --vui-icon-size: min(50%, 60px);
   }
   &-img {
-    width: min(80%, 200px);
+    width: min(50%, 200px);
   }
   &-desc {
     font-size: 14px;
