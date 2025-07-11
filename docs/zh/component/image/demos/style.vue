@@ -1,15 +1,18 @@
 <template>
-  <VForm>
+  <DemoDesc :items="['width', 'aspectRatio', 'radius']" />
+  <VForm class="demo-toolbar">
     <VFormItem label="宽度">
       <DemoValue
         v-model:value="widthRef"
-        :max="1000"
+        :min="100"
+        :max="500"
         unit="px"
       />
     </VFormItem>
     <VFormItem label="宽高比">
       <DemoValue
         v-model:value="aspectRatioRef"
+        :min="50"
         :max="200"
         unit="/100"
       />
@@ -22,14 +25,12 @@
     </VFormItem>
   </VForm>
 
-  <DemoSpace>
-    <VImage
-      :src="url"
-      :width="widthRef"
-      :aspect-ratio="`${aspectRatioRef}/100`"
-      :radius="radiusRef"
-    />
-  </DemoSpace>
+  <VImage
+    :src="url"
+    :width="widthRef"
+    :aspect-ratio="`${aspectRatioRef}/100`"
+    :radius="radiusRef"
+  />
 </template>
 
 <script setup>

@@ -1,30 +1,14 @@
 <template>
-  <DemoSpace
-    flex
-    class="demo-image-basic"
-  >
-    <div>
-      <div class="demo-image-text">加载成功</div>
+  <DemoSpace flex>
+    <DemoCard label="加载成功">
       <VImage :src="url" />
-    </div>
-    <div>
-      <div class="demo-image-text">加载失败</div>
+    </DemoCard>
+    <DemoCard label="加载失败">
       <VImage :src="`123${url}`" />
-    </div>
+    </DemoCard>
   </DemoSpace>
 </template>
 
 <script setup>
 const url = 'https://pc-newtab.maxthonimg.com/mxbg/horizontal/1039.jpg';
 </script>
-
-<style>
-.demo-image-basic .vui-image {
-  width: 200px;
-}
-.demo-image-text {
-  margin-bottom: 5px;
-  font-size: 12px;
-  text-align: center;
-}
-</style>

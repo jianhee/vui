@@ -10,7 +10,7 @@ export const imageProps = {
   // ---------- 样式属性 ----------
   // 宽度：不带单位时默认 `px`
   width: { type: [String, Number], default: null },
-  // 宽高比：加载成功前默认 `16/9`，设置后可能显示不全
+  // 宽高比：占位图默认 `16/9`，设置后可能显示不全
   aspectRatio: { type: String, default: null },
   // 圆角尺寸：不带单位时默认 `px`
   radius: { type: [String, Number], default: null }
@@ -21,10 +21,9 @@ export const useImage = ({ props }) => {
   // 加载状态
   const { isLoading, error } = vueuseImage({ src: props.src });
 
-  // 长宽比
+  // 长宽比：占位图默认 `16/9`
   const aspectRatio = computed(() => {
     if (isLoading.value || error.value) {
-      // 加载成功前默认 `16/9`
       return props.aspectRatio || '16/9';
     } else {
       return props.aspectRatio;
