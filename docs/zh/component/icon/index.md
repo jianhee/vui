@@ -2,7 +2,7 @@
 
 ## 导入 SVG 图标
 
-支持以下两种导入方式，两者的 API 和 UI 完全一致，二选一即可。
+支持以下两种导入方式
 
 ### 使用名称
 
@@ -80,6 +80,11 @@ import IconClose from './close.svg?component';
 
 <preview path="./demos/basic.vue"></preview>
 
+<!-- 样式属性 -->
+<!--@include: @/component/@parts/props-style.md-->
+
+<preview path="./demos/style.vue"></preview>
+
 ## 可点击状态
 
 使用 `clickable` 属性开启可点击状态
@@ -97,13 +102,6 @@ import IconClose from './close.svg?component';
 使用 `spin` 属性开启旋转状态
 
 <preview path="./demos/spin.vue"></preview>
-
-<!-- 样式属性 -->
-<!--@include: @/component/@parts/props-style.md-->
-
-使用 `color`、`twoOneColor`、`size`、`rotate` 等属性定义样式
-
-<preview path="./demos/style.vue"></preview>
 
 ## API
 

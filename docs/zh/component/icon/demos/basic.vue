@@ -1,5 +1,5 @@
 <template>
-  <div class="demo-icons-size">
+  <div class="demo-icons">
     <DemoSpace>使用名称</DemoSpace>
     <DemoSpace>
       <VIcon
@@ -45,11 +45,8 @@ const iconComponents = [IconFace, IconLike, IconSearch, IconSetting, IconClose, 
 </script>
 
 <style lang="scss">
-.demo-icons-size .vui-icon {
+.demo-icons .vui-icon {
   margin-right: 10px;
   font-size: 24px;
-}
-div + .demo-icons-size {
-  margin-top: 30px;
 }
 </style>

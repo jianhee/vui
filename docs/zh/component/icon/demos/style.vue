@@ -1,5 +1,6 @@
 <template>
-  <VForm>
+  <DemoDesc :items="['color', 'twoToneColor', 'size', 'rotate']" />
+  <VForm class="demo-toolbar">
     <VFormItem label="主要颜色">
       <VRadioGroup
         v-model:value="colorRef"
@@ -18,7 +19,7 @@
       <DemoValue
         v-model:value="sizeRef"
         unit="px"
-        :min="16"
+        :min="20"
         :max="50"
       />
     </VFormItem>
@@ -47,6 +48,6 @@ import DemoBasic from './basic.vue';
 const colorOptions = ['#333', 'rgb(126,211,33)', 'red'];
 const colorRef = ref(colorOptions[0]);
 const twoToneColorRef = ref(colorOptions[1]);
-const sizeRef = ref(30);
+const sizeRef = ref(40);
 const rotateRef = ref(45);
 </script>
