@@ -1,5 +1,5 @@
 <template>
-  <DemoSpace class="demo-dropdown-trigger">
+  <DemoSpace flex>
     <VDropdown
       v-for="trigger in triggers"
       :key="trigger"
@@ -8,7 +8,7 @@
       @open="writeLog('open')"
       @close="writeLog('close')"
     >
-      <VBtn>{{ trigger }} 触发</VBtn>
+      <VButton>{{ trigger }} 触发</VButton>
       <template #dropdown>下拉框</template>
     </VDropdown>
   </DemoSpace>
@@ -18,9 +18,3 @@
 import { writeLog } from '@vp/utils';
 const triggers = ['hover', 'click', 'contextmenu'];
 </script>
-
-<style>
-.demo-dropdown-trigger .vui-btn {
-  margin-right: 10px;
-}
-</style>

@@ -3,7 +3,7 @@
     :menus="menus"
     @select="writeLog('select', $event)"
   >
-    <VBtn>下拉菜单</VBtn>
+    <VButton>下拉菜单</VButton>
   </VDropdown>
 </template>
 

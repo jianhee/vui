@@ -4,7 +4,7 @@
     @open="writeLog('open')"
     @close="writeLog('close')"
   >
-    <VBtn>hover</VBtn>
+    <VButton>hover</VButton>
     <template #dropdown>下拉框</template>
   </VDropdown>
 </template>

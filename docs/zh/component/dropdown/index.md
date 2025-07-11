@@ -2,7 +2,7 @@
 
 ## 基础用法
 
-1. 组件内容由 `default` 插槽（触发器）和 `dropdown` 插槽（下拉框内容）两部分组成
+1. 下拉框由 `default` 插槽（触发器）和 `dropdown` 插槽（下拉内容）两部分组成
 2. 打开关闭时分别触发 `open` 和 `close` 事件
 
 <preview path="./demos/dropdown-basic.vue"></preview>
@@ -33,7 +33,7 @@
 
 <preview path="./demos/menu-selection.vue"></preview>
 
-## 下拉框 API
+## Dropdown API
 
 ### 属性
 
@@ -62,7 +62,7 @@
 | `open(event)` | 打开下拉框 | `{ event: '事件对象' }` |
 | `close()`     | 关闭下拉框 |                         |
 
-## 菜单 API
+## Menu API
 
 ### 属性
 
@@ -76,12 +76,12 @@
 
 `string|number` 类型的菜单项会格式化为 `{ label }`
 
-| 名称           | 说明                                                             | 类型                        | 默认值  |
-| -------------- | ---------------------------------------------------------------- | --------------------------- | ------- |
-| `key`          | 唯一标识                                                         | `string\|number`            |         |
-| `label\|title` | 文本                                                             | `string\|number`            |         |
-| `icon`         | 前置图标，参考 [Btn](/component/btn#前置图标) 组件的 `icon` 属性 | `string\|component\|object` |         |
-| `divider`      | 是否添加分隔符                                                   | `boolean`                   | `false` |
+| 名称           | 说明                                                                   | 类型                        | 默认值  |
+| -------------- | ---------------------------------------------------------------------- | --------------------------- | ------- |
+| `key`          | 唯一标识                                                               | `string\|number`            |         |
+| `label\|title` | 文本                                                                   | `string\|number`            |         |
+| `icon`         | 前置图标，参考 [Button](/component/button#前置图标) 组件的 `icon` 属性 | `string\|component\|object` |         |
+| `divider`      | 是否添加分隔符                                                         | `boolean`                   | `false` |
 
 ### 事件
 

@@ -1,14 +1,13 @@
 <template>
-  <DemoSpace>
-    <VDropdown
-      v-model:selected-key="seletedKey"
-      :menus="menus"
-      selectable
-      @selection-change="writeLog('selection-change', $event)"
-    >
-      <VBtn>下拉菜单</VBtn>
-    </VDropdown>
-  </DemoSpace>
+  <VDropdown
+    v-model:selected-key="seletedKey"
+    :menus="menus"
+    selectable
+    @selection-change="writeLog('selection-change', $event)"
+  >
+    <VButton>下拉菜单</VButton>
+  </VDropdown>
+
   <DemoSpace>
     当前值为 <code>{{ seletedKey }}</code>
   </DemoSpace>

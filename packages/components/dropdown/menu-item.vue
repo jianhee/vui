@@ -28,7 +28,7 @@
 <script setup>
 import { computed, inject } from 'vue';
 import { useMenuItem, menuItemProps } from './composables/menu-item';
-import { useIconProps } from '../icon/composables/base';
+import { useIconProps } from '../../composables/use-icon-props';
 import IconSelected from '../../icons/selected.vue';
 
 // 菜单
