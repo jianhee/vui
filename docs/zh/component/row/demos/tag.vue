@@ -1,13 +1,19 @@
 <template>
   <DemoSpace
     v-for="tag in tagTypes"
-    :key="tag"
+    :key="tag.value"
   >
-    <VRow :tag="tag">{{ tag || 'div（默认）' }}</VRow>
+    <VRow :tag="tag.value">这是一段文字这是一段文字这是一段文字这是一段文字这是一段文字这是一段文字</VRow>
   </DemoSpace>
 </template>
 
 <script setup>
-// 标签类型
-const tagTypes = [undefined, 'span', 'a', 'b', 'i'];
+const tagTypes = [
+  { value: 'div', label: 'div（默认）' },
+  { value: 'span', label: 'span' },
+  { value: 'a', label: 'a' },
+  { value: 'b', label: 'b' },
+  { value: 'i', label: 'i' },
+  { value: 'u', label: 'u' }
+];
 </script>

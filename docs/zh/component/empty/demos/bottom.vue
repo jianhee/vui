@@ -1,5 +1,5 @@
 <template>
   <VEmpty>
-    <VButton>按钮</VButton>
+    <VButton type="primary">按钮</VButton>
   </VEmpty>
 </template>

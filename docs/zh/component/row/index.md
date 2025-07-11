@@ -21,3 +21,9 @@
 | `tag`      | 标签类型         | `string`  | `div`   |
 | `center`   | 文字是否居中     | `boolean` | `false` |
 | `ellipsis` | 文字是否溢出隐藏 | `boolean` | `false` |
+
+### 插槽
+
+| 名称      | 说明     |
+| --------- | -------- |
+| `default` | 显示内容 |
