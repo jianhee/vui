@@ -1,9 +1,15 @@
 <!-- 表单-项 -->
 <template>
   <div class="vui-form-item">
-    <label class="vui-form-label">{{ label }}</label>
+    <!-- 左侧文本 -->
+    <label
+      v-if="label"
+      class="vui-form-label"
+    >
+      {{ label }}
+    </label>
+    <!-- 右侧内容 -->
     <div class="vui-form-control">
-      <!-- 右侧内容 -->
       <slot />
     </div>
   </div>

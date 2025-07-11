@@ -1,11 +1,10 @@
 <template>
-  <DemoSpace class="vui-mb-30">
-    <VSwitch
-      v-model:checked="inInline"
-      inactive-text="块级模式"
-      active-text="行内模式"
-    />
-  </DemoSpace>
+  <VSwitch
+    v-model:checked="inInline"
+    inactive-text="块级模式"
+    active-text="行内模式"
+    class="demo-toolbar"
+  />
 
   <DemoBasic :filed-inline="inInline" />
 </template>

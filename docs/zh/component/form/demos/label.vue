@@ -1,5 +1,5 @@
 <template>
-  <VForm class="vui-mb-30">
+  <VForm class="demo-toolbar">
     <VFormItem label="标签位置">
       <VRadioGroup
         v-model:value="labelPosition"
