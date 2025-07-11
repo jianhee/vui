@@ -1,6 +1,6 @@
 // 加载状态
 import { computed } from 'vue';
-import { useIconProps } from '../../icon/composables/base';
+import { useIconProps } from '../../../composables/use-icon-props';
 import IconLoadingLoop from '../../../icons/loading-loop.vue';
 import IconLoadingBubble from '../../../icons/loading-bubble.vue';
 
