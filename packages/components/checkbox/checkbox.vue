@@ -30,6 +30,10 @@ import { inject } from 'vue';
 import { useCheckbox, checkboxModel, checkboxProps, checkboxEmits } from './composables/checkbox';
 import { useFilterProps } from '../../composables/use-filter-props';
 
+// 筛选属性
+defineOptions({ inheritAttrs: false });
+const { rootProps, nativeProps } = useFilterProps(['disabled']);
+
 // 区分类型
 const checkboxType = inject('checkboxType', 'checkbox');
 
@@ -42,7 +46,6 @@ const props = defineProps(checkboxProps);
 const emits = defineEmits(checkboxEmits);
 
 // 原生属性
-const { rootProps, nativeProps } = useFilterProps(['disabled']);
 
 // 使用选项
 const { isBtn, isChecked, onCheckedChange, rootClasses, iconComponent, labelText } = useCheckbox({

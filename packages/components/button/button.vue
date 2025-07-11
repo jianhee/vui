@@ -29,15 +29,15 @@ import { useFilterProps } from '../../composables/use-filter-props';
 import { useIconProps } from '../../composables/use-icon-props';
 import IconLoadingLoop from '../../icons/loading-loop.vue';
 
-// 按钮
+// 筛选属性
 defineOptions({ inheritAttrs: false });
+const { rootProps, nativeProps } = useFilterProps(['disabled']);
+
+// 按钮
 const props = defineProps(btnProps);
 
 // 使用按钮
 const { rootClasses, rootStyles } = useButton({ props });
-
-// 原生属性
-const { rootProps, nativeProps } = useFilterProps(['autofoucs', 'disabled']);
 
 // 图标属性
 const { iconProps } = useIconProps({
