@@ -25,7 +25,7 @@
 <script setup>
 import { computed } from 'vue';
 import { useButton, btnProps } from './composables';
-import { useFilterProps } from '../../composables/filter-props';
+import { useFilterProps } from '../../composables/use-filter-props';
 import { useIconProps } from '../../composables/use-icon-props';
 import IconLoadingLoop from '../../icons/loading-loop.vue';
 

@@ -1,8 +1,10 @@
+<!-- 多选框/单选框 -->
+
 ::: tip
 多选框和单选框的 API 几乎完全一致，UI 略有差异，各自提供两个独立的组件：
 
 - `<VCheckbox>` 和 `<VRadio>` 用于单个选项
-- `<VGroup>` 和 `<VRadioGroup>` 用于选项组
+- `<VCheckboxGroup>` 和 `<VRadioGroup>` 用于选项组
 
 :::
 
@@ -15,6 +17,10 @@
 3. 切换选中状态时触发 `change` 事件
 
 <preview path="@docs/component/checkbox/demos/option.vue"></preview>
+
+### 原生属性
+
+<preview path="@docs/component/checkbox/demos/option-native.vue"></preview>
 
 ### 按钮类型
 
@@ -53,6 +59,8 @@
 ## 单个选项 API
 
 ### 属性
+
+<!--@include: @/component/@parts/props-native.md-->
 
 | 名称              | 说明               | 类型               | 默认值  |
 | ----------------- | ------------------ | ------------------ | ------- |

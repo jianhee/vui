@@ -13,14 +13,14 @@
     </component>
   </DemoSpace>
 
-  <DemoSpace>
+  <DemoSpace class="demo-checkboxs">
     当前值分别为
-    <template
+    <code
       v-for="option in options"
       :key="option.label"
     >
-      <code>{{ option.checked }}</code> {{ ` ` }}
-    </template>
+      {{ option.checked }}
+    </code>
   </DemoSpace>
 </template>
 
@@ -47,5 +47,8 @@ const options = ref([
 <style>
 .demo-checkboxs > label {
   margin-right: 10px;
+}
+.demo-checkboxs > code {
+  margin: 0 2px;
 }
 </style>
