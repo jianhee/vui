@@ -1,6 +1,7 @@
 <template>
+  <DemoDesc :items="['disabled', 'maxlength', 'placeholder']" />
   <VForm>
-    <VFormItem label="disabled">
+    <VFormItem label="禁用状态">
       <VInput
         v-model:value="inputValue"
         class="demo-input"
@@ -8,19 +9,19 @@
         disabled
       />
     </VFormItem>
-    <VFormItem label="placeholder">
-      <VInput
-        v-model:value="inputValue"
-        class="demo-input"
-        placeholder="占位文字"
-      />
-    </VFormItem>
-    <VFormItem label="maxlength">
+    <VFormItem label="最大长度">
       <VInput
         v-model:value="inputValue"
         class="demo-input"
         placeholder="最多输入5个字符"
         maxlength="5"
+      />
+    </VFormItem>
+    <VFormItem label="占位文字">
+      <VInput
+        v-model:value="inputValue"
+        class="demo-input"
+        placeholder="占位文字"
       />
     </VFormItem>
   </VForm>

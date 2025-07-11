@@ -10,5 +10,5 @@
 </template>
 
 <script setup>
-const url = 'https://pc-newtab.maxthonimg.com/mxbg/horizontal/1039.jpg';
+const url = 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg';
 </script>

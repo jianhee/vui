@@ -12,14 +12,13 @@
       v-model:value="inputValue"
       class="demo-input"
       placeholder="请输入内容"
-      :icon="IconClose"
+      icon="face"
     />
   </DemoSpace>
 </template>
 
 <script setup>
 import { ref } from 'vue';
-import IconClose from '@vp/icons/close.svg?component';
 
 const inputValue = ref(null);
 </script>

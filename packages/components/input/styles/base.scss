@@ -32,8 +32,7 @@
     &:not(.is-disabled).is-focus {
       border-color: var(--#{$prefix}-focus-border-color);
     }
-    &.is-disabled,
-    &-inner:disabled {
+    &.is-disabled {
       @include mixins.vui-disabled;
     }
 
@@ -42,8 +41,12 @@
       @include mixins.vui-ellipsis;
 
       flex: auto;
+      width: 0;
       height: 100%;
       color: var(--#{$prefix}-text-color);
+      &:disabled {
+        cursor: not-allowed;
+      }
     }
 
     // 尺寸

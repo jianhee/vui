@@ -16,9 +16,7 @@ export const inputProps = {
   // 前置图标：可选的值有 `<VIcon>` 组件的 `name` 属性值、`component` 属性值、完整的 `props` 对象
   icon: { type: [String, Object], default: null },
   // 输入框尺寸：medium, small
-  size: { type: String, default: 'medium' },
-  // 单独处理的原生属性
-  disabled: { type: Boolean, default: false }
+  size: { type: String, default: 'medium' }
 };
 
 // 使用输入框
@@ -29,10 +27,8 @@ export const useInput = ({ inputElRef, modelValue, props, emits }) => {
   // 根元素类名
   const rootClasses = computed(() => {
     return [
-      'vui-input',
       `vui-input--${props.size}`,
       {
-        'is-disabled': props.disabled,
         'is-focus': focused.value
       }
     ];
@@ -60,11 +56,6 @@ export const useInput = ({ inputElRef, modelValue, props, emits }) => {
     emits('enter', { event: e, value: modelValue.value });
   }
 
-  // 是否显示清空按钮
-  const isShowClearIcon = computed(() => {
-    return !!modelValue.value && !props.disabled;
-  });
-
   // 清空输入框
   function clearValue(e) {
     modelValue.value = '';
@@ -77,7 +68,6 @@ export const useInput = ({ inputElRef, modelValue, props, emits }) => {
     onInput,
     onChange,
     onEnter,
-    isShowClearIcon,
     clearValue
   };
 };

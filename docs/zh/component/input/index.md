@@ -7,7 +7,7 @@
 
 <preview path="./demos/basic.vue"></preview>
 
-<!--@include: @/component/@parts/props-native.md-->
+## 原生属性
 
 <preview path="./demos/native.vue"></preview>
 
@@ -27,12 +27,13 @@
 
 ### 属性
 
-| 名称            | 说明                        | 类型                        | 默认值 |
-| --------------- | --------------------------- | --------------------------- | ------ |
-| `v-model:value` | 当前值，即输入框的值        | `string\|number`            |        |
-| `icon`          | 前置图标                    | `string\|component\|object` |        |
-| `size`          | 输入框尺寸                  | `string`: `medium\|small`   |        |
-| `disabled` 等   | 支持原生 `input` 的所有属性 |                             |        |
+<!--@include: @/component/@parts/props-native.md-->
+
+| 名称            | 说明                 | 类型                        | 默认值 |
+| --------------- | -------------------- | --------------------------- | ------ |
+| `v-model:value` | 当前值，即输入框的值 | `string\|number`            |        |
+| `icon`          | 前置图标             | `string\|component\|object` |        |
+| `size`          | 输入框尺寸           | `string`: `medium\|small`   |        |
 
 ### 事件
 
