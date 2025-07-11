@@ -19,14 +19,13 @@
 
 <script setup>
 import { ref } from 'vue';
-import { useRoute } from 'vitepress';
 import { writeLog } from '@vp/utils';
+import { useRouteValid } from '@vp/composables';
 
 defineOptions({ inheritAttrs: false });
 
 // 区分类型
-const route = useRoute();
-const isCheckbox = /checkbox/.test(route.path);
+const isCheckbox = useRouteValid('checkbox');
 const GroupComponent = isCheckbox ? 'VCheckboxGroup' : 'VRadioGroup';
 const defaultVal = isCheckbox ? [1, 2] : 1;
 
