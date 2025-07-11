@@ -12,7 +12,7 @@
       />
     </VFormItem>
     <VFormItem label="操作">
-      <VBtn @click="openDialog">打开</VBtn>
+      <VButton @click="openDialog">打开</VButton>
     </VFormItem>
   </VForm>
 
@@ -26,7 +26,7 @@
   >
     内容
     <template #footer>
-      <VBtn @click="closeDialog">关闭</VBtn>
+      <VButton @click="closeDialog">关闭</VButton>
     </template>
   </component>
 </template>

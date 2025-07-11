@@ -27,7 +27,7 @@
       />
     </VFormItem>
     <VFormItem label="操作">
-      <VBtn @click="openDialog">打开</VBtn>
+      <VButton @click="openDialog">打开</VButton>
     </VFormItem>
   </VForm>
 
@@ -45,7 +45,7 @@
       v-if="isShowFooter"
       #footer
     >
-      <VBtn @click="closeDialog">关闭</VBtn>
+      <VButton @click="closeDialog">关闭</VButton>
     </template>
   </component>
 </template>

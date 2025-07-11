@@ -10,32 +10,30 @@
 
 <preview path="@docs/component/dialog/demos/basic.vue"></preview>
 
-## 关闭交互
+<!-- 样式属性 -->
+<!--@include: @/component/@parts/props-style.md-->
+
+<preview path="@docs/component/dialog/demos/style.vue"></preview>
+
+## 关闭弹窗
 
 使用 `showClose` 和 `closeOnClickModal` 属性定义关闭交互
 
 <preview path="@docs/component/dialog/demos/close.vue"></preview>
 
-<!--@include: @/component/@parts/props-style.md-->
-
-### 主体宽度
-
-使用 `width` 属性定义主体宽度
-
-<preview path="@docs/component/dialog/demos/width.vue"></preview>
-
 ## API
 
 ### 属性
 
-| 名称                | 说明                   | 类型                         | 默认值                       |
-| ------------------- | ---------------------- | ---------------------------- | ---------------------------- |
-| `v-model:visible`   | 当前值，即是否显示     | `boolean`                    | `false`                      |
-| `placement`         | 抽屉出现的位置         | `string`: `left\|right`      | `left`                       |
-| `title`             | 标题，为空时不显示顶栏 | `string`                     |                              |
-| `showClose`         | 是否显示关闭按钮       | `boolean`                    | `true`                       |
-| `closeOnClickModal` | 是否在点击遮罩时关闭   | `boolean`                    | `true`                       |
-| `width`             | 主体宽度               | `string(带单位)\|number(px)` | 对话框 `50%` <br> 抽屉 `30%` |
+| 名称                | 说明                                        | 类型                         | 默认值                       |
+| ------------------- | ------------------------------------------- | ---------------------------- | ---------------------------- |
+| `v-model:visible`   | 当前值，即是否显示                          | `boolean`                    | `false`                      |
+| `placement`         | 抽屉出现的位置 <br> 仅 `<VDrawer>` 组件有效 | `string`: `left\|right`      | `left`                       |
+| `title`             | 标题，为空时不显示顶栏                      | `string`                     |                              |
+| `showClose`         | 是否显示关闭按钮                            | `boolean`                    | `true`                       |
+| `closeOnClickModal` | 是否在点击遮罩时关闭                        | `boolean`                    | `true`                       |
+| ----------          | ---------- 以下是样式属性 ----------        | ----------                   | ----------                   |
+| `width`             | 主体宽度                                    | `string(带单位)\|number(px)` | 对话框 `50%` <br> 抽屉 `30%` |
 
 ### 插槽
 

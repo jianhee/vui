@@ -1,11 +1,10 @@
 import { ref } from 'vue';
-import { useRoute } from 'vitepress';
+import { useRouteValid } from '@vp/composables';
 
 // 使用弹窗
 export const useDialog = () => {
   // 区分类型
-  const route = useRoute();
-  const isDialog = /dialog/.test(route.path);
+  const isDialog = useRouteValid('dialog');
   const componentName = isDialog ? 'VDialog' : 'VDrawer';
 
   // 是否显示
