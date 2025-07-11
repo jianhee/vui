@@ -3,7 +3,7 @@
     v-for="btnSize in btnSizes"
     :key="btnSize.label"
   >
-    <label>{{ btnSize.label }}</label>
+    <div>{{ btnSize.label }}</div>
     <DemoBasic :size="btnSize.value" />
   </template>
 </template>

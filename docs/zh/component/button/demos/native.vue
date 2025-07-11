@@ -1,10 +1,14 @@
 <template>
-  <VSwitch
-    v-model:checked="isDisabled"
-    active-text="禁用状态"
-  />
-
-  <DemoBasic :disabled="isDisabled" />
+  <DemoDesc :items="['disabled']" />
+  <VForm>
+    <VFormItem label="是否禁用">
+      <VSwitch
+        v-model:checked="isDisabled"
+        active-text="禁用状态"
+      />
+      <DemoBasic :disabled="isDisabled" />
+    </VFormItem>
+  </VForm>
 </template>
 
 <script setup>

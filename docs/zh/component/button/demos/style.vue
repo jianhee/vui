@@ -1,10 +1,11 @@
 <template>
-  <VForm style="margin-top: 20px">
+  <DemoDesc :items="['radius']" />
+  <VForm>
     <VFormItem label="圆角尺寸">
       <DemoValue v-model:value="radiusRef" />
+      <DemoBasic :radius="radiusRef" />
     </VFormItem>
   </VForm>
-  <DemoBasic :radius="radiusRef" />
 </template>
 
 <script setup>

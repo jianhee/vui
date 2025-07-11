@@ -30,7 +30,4 @@ const btnTypes = [
   margin-right: 0;
   margin-bottom: 10px;
 }
-div + .demo-btns {
-  margin-top: 30px;
-}
 </style>

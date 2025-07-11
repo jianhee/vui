@@ -1,12 +1,6 @@
 <!-- 切换值 -->
 <template>
   <DemoSpace class="demo-value">
-    <span
-      v-if="label"
-      class="demo-value-label"
-    >
-      {{ label }}
-    </span>
     <VSlider
       v-model:value="modelValue"
       :min="min"
@@ -20,7 +14,6 @@
 
 <script setup>
 defineProps({
-  label: { type: String, default: null },
   min: { type: Number, default: undefined },
   max: { type: Number, default: undefined },
   unit: { type: String, default: 'px' }
@@ -32,19 +25,16 @@ const modelValue = defineModel('value', { type: Number, default: null });
 <style lang="scss">
 .demo-value {
   display: flex;
-  gap: 15px;
+  gap: 10px;
   align-items: center;
-  color: var(--vui-text-color-regular);
-  &-label {
-    flex: none;
-  }
   &-slider {
     flex: auto;
+    max-width: 240px;
   }
   &-text {
     flex: none;
-    width: 4em;
-    text-align: right;
+    margin-left: 10px;
+    color: var(--vui-text-color-regular);
   }
 }
 </style>

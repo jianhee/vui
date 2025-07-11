@@ -8,9 +8,12 @@
 
 ## 原生属性
 
-支持 `disabled` 等属性
-
 <preview path="./demos/native.vue"></preview>
+
+<!-- 样式属性 -->
+<!--@include: @/component/@parts/props-style.md-->
+
+<preview path="./demos/style.vue"></preview>
 
 ## 加载状态
 
@@ -36,15 +39,11 @@
 
 <preview path="./demos/display.vue"></preview>
 
-<!--@include: @/component/@parts/props-style.md-->
-
-使用 `radius` 等属性定义样式
-
-<preview path="./demos/style.vue"></preview>
-
 ## API
 
 ### 属性
+
+<!--@include: @/component/@parts/props-native.md-->
 
 | 名称       | 说明                                 | 类型                               | 默认值     |
 | ---------- | ------------------------------------ | ---------------------------------- | ---------- |
@@ -56,8 +55,6 @@
 | `block`    | 是否为块级模式                       | `boolean`                          | `false`    |
 | ---------- | ---------- 以下是样式属性 ---------- | ----------                         | ---------- |
 | `radius`   | 圆角尺寸                             | `string(带单位)\|number(px)`       | `4`        |
-| ---------- | ---------- 以下是原生属性 ---------- | ----------                         | ---------- |
-| `disabled` |                                      |                                    |            |
 
 ### 插槽
 
