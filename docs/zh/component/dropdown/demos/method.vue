@@ -15,7 +15,12 @@
     @open="writeLog('open')"
     @close="writeLog('close')"
   >
-    <template #dropdown>第 {{ nRef }} 个条目的右键菜单</template>
+    <template #dropdown>
+      <DemoSpace>第 {{ nRef }} 个条目的右键菜单</DemoSpace>
+      <DemoSpace>
+        <VButton @click="closeDropdown">关闭</VButton>
+      </DemoSpace>
+    </template>
   </VDropdown>
 </template>
 
@@ -23,14 +28,18 @@
 import { ref, useTemplateRef } from 'vue';
 import { writeLog } from '@vp/utils';
 
-// 当前点击的条目
 const nRef = ref(null);
+const dropdownElRef = useTemplateRef('dropdownElRef');
 
 // 打开菜单
-const dropdownElRef = useTemplateRef('dropdownElRef');
 function openDropdown(event, n) {
   nRef.value = n;
   dropdownElRef.value.open({ event });
+}
+
+// 关闭菜单
+function closeDropdown() {
+  dropdownElRef.value.close();
 }
 </script>
 

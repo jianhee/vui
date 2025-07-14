@@ -1,13 +1,15 @@
 <!-- 下拉框 -->
 <template>
-  <!-- 触发器：必须是有效的 html DOM 元素 -->
-  <slot />
-  <!-- 为了获取 slots.default 根元素 -->
-  <span
-    v-if="$slots.default"
-    ref="triggerNextElRef"
-    style="display: none"
-  />
+  <!-- 触发器 -->
+  <template v-if="$slots.default">
+    <!-- 必须是有效的 html DOM 元素 -->
+    <slot />
+    <!-- 为了获取 slots.default 根元素 -->
+    <span
+      ref="triggerNextElRef"
+      style="display: none"
+    />
+  </template>
 
   <!-- 下拉框 -->
   <Teleport to="body">
@@ -15,35 +17,26 @@
       <div
         v-show="dropdownVisible"
         ref="dropdownElRef"
-        v-bind="$attrs"
         class="vui-dropdown"
         :style="dropdownStyles"
+        v-bind="$attrs"
       >
-        <!-- 菜单内容 -->
-        <DropdownMenu v-if="menus" />
-        <!-- 下拉框内容 -->
-        <slot
-          v-else
-          name="dropdown"
-        />
+        <slot name="dropdown" />
       </div>
     </Transition>
   </Teleport>
 </template>
 
 <script setup>
-import { provide, useTemplateRef } from 'vue';
+import { useTemplateRef } from 'vue';
 import { useDropdown, dropdownProps, dropdownEmits } from './composables/dropdown';
-import { menuModel, menuProps, menuEmits } from './composables/menu';
-import DropdownMenu from './menu.vue';
 
 // 下拉框
 defineOptions({ inheritAttrs: false });
 const triggerNextElRef = useTemplateRef('triggerNextElRef');
 const dropdownElRef = useTemplateRef('dropdownElRef');
-const modelSelectedKey = defineModel('selectedKey', menuModel.selectedKey);
-const props = defineProps({ ...dropdownProps, ...menuProps });
-const emits = defineEmits([...dropdownEmits, ...menuEmits]);
+const props = defineProps(dropdownProps);
+const emits = defineEmits(dropdownEmits);
 
 // 使用下拉框
 const { dropdownVisible, dropdownStyles, openDropdown, closeDropdown } = useDropdown({
@@ -57,13 +50,5 @@ const { dropdownVisible, dropdownStyles, openDropdown, closeDropdown } = useDrop
 defineExpose({
   open: openDropdown,
   close: closeDropdown
-});
-
-// 菜单子组件使用
-provide('menuRoot', {
-  modelSelectedKey,
-  props,
-  emits,
-  closeDropdown
 });
 </script>
