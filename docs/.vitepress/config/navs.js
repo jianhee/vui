@@ -52,7 +52,10 @@ export const sidebarNavs = {
     },
     {
       text: '导航',
-      items: [{ text: 'Dropdown 下拉框', link: '/component/dropdown/' }]
+      items: [
+        { text: 'Dropdown 下拉框', link: '/component/dropdown/' },
+        { text: 'DropdownMenu 下拉菜单', link: '/component/dropdown-menu/' }
+      ]
     },
     {
       text: '反馈',

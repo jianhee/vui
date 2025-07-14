@@ -25,45 +25,41 @@ export const useMenuItem = ({ menuRoot, menuItem }) => {
     return formattedMenuItem.value.key === menuRoot.modelSelectedKey.value;
   });
 
+  // 根元素类名
+  const rootClasses = computed(() => ({
+    'is-active': isSelected.value
+  }));
+
   // 点击菜单项
   const onMenuItemClick = () => {
-    menuRoot.closeDropdown();
-    doSelect();
-    doSelectionChange();
-  };
+    // 关闭下拉框
+    menuRoot.dropdownRef.value.close();
 
-  // 点击事件
-  function doSelect() {
-    // 参数为 当前项、当前项的 key
-    menuRoot.emits('select', {
-      item: menuItem.props.item,
-      key: formattedMenuItem.value.key
-    });
-  }
-
-  // 切换事件
-  function doSelectionChange() {
-    // 是否可选
-    if (!menuRoot.props.selectable) return;
-
-    // 是否同一项
+    // 回调参数
     const newKey = formattedMenuItem.value.key;
+    const params = {
+      item: menuItem.props.item,
+      key: newKey
+    };
+
+    // 点击事件：参数为 当前项、当前项的 key
+    menuRoot.emits('click', params);
+
+    // 是否可以选中
+    if (!menuRoot.props.selectable) return;
     if (newKey === menuRoot.modelSelectedKey.value) return;
 
-    // 切换
+    // 更新值
     menuRoot.modelSelectedKey.value = newKey;
 
-    // 参数为 当前项、当前项的 key
-    menuRoot.emits('selection-change', {
-      item: menuItem.props.item,
-      key: newKey,
-      selectedKey: newKey
-    });
-  }
+    // 选中事件：参数为 当前项、当前项的 key、选中项的 key
+    menuRoot.emits('select', { ...params, selectedKey: newKey });
+  };
 
   return {
     formattedMenuItem,
     isSelected,
+    rootClasses,
     onMenuItemClick
   };
 };

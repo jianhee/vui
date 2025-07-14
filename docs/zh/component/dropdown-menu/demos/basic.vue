@@ -1,16 +1,16 @@
 <template>
-  <VDropdown
-    :menus="menus"
-    @select="writeLog('select', $event)"
+  <VDropdownMenu
+    :items="items"
+    @click="writeLog('click', $event)"
   >
-    <VButton>下拉菜单</VButton>
-  </VDropdown>
+    <VButton>hover</VButton>
+  </VDropdownMenu>
 </template>
 
 <script setup>
 import { writeLog } from '@vp/utils';
 
-const menus = [
+const items = [
   // Object
   { label: '文本1' },
   { title: '文本2', divider: true },

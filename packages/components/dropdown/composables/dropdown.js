@@ -8,67 +8,81 @@ export const dropdownEmits = ['open', 'close'];
 // props
 export const dropdownProps = {
   // 触发方式：hover, click, contextmenu
+  // 右键对齐鼠标，其它对齐元素
   trigger: { type: String, default: 'hover' }
 };
 
 // 使用下拉框
 export const useDropdown = ({ triggerNextElRef, dropdownElRef, props, emits }) => {
-  // 记录数据
-  const triggerElRef = ref(null);
-  const dropdownVisible = ref(false);
-  const dropdownStyles = ref(null);
-  const dropdownMargin = 5;
-  let hoverTimer = null;
+  // 目标元素：1.触发元素 2.下拉方法的事件元素
+  const targetElRef = ref(null);
 
-  // 触发器
+  // 触发元素
+  const triggerElRef = ref(null);
   onMounted(() => {
     triggerElRef.value = triggerNextElRef.value?.previousElementSibling;
   });
 
-  // 触发器事件
-  useEventListener(triggerElRef, 'mouseenter', () => onMouseToggle('enter'));
-  useEventListener(triggerElRef, 'mouseleave', () => onMouseToggle('leave'));
-  useEventListener(triggerElRef, 'click', onTriggerClick);
-  useEventListener(triggerElRef, 'contextmenu', e => {
-    e.preventDefault();
-    onTriggerContextmenu(e);
+  // 下拉元素
+  const dropdownVisible = ref(false);
+  const dropdownStyles = ref(null);
+  const dropdownMargin = 5;
+
+  // 通过触发元素自动打开
+  let hoverTimer = null;
+  useEventListener(triggerElRef, 'mouseenter', () => onMouseToggle(triggerElRef.value, 'enter'));
+  useEventListener(triggerElRef, 'mouseleave', () => onMouseToggle(triggerElRef.value, 'leave'));
+  useEventListener(dropdownElRef, 'mouseenter', () => onMouseToggle(triggerElRef.value, 'enter'));
+  useEventListener(dropdownElRef, 'mouseleave', () => onMouseToggle(triggerElRef.value, 'leave'));
+  useEventListener(triggerElRef, 'click', () => onClick(triggerElRef.value));
+  useEventListener(triggerElRef, 'contextmenu', event => {
+    event.preventDefault();
+    onContextmenu(event);
   });
 
-  // 下拉框事件
-  useEventListener(dropdownElRef, 'mouseenter', () => onMouseToggle('enter'));
-  useEventListener(dropdownElRef, 'mouseleave', () => onMouseToggle('leave'));
+  // 通过下拉方法手动打开
+  function openByMethod({ el, event }) {
+    const target = el || event.target;
+    if (props.trigger === 'hover') {
+      onMouseToggle(target, 'enter');
+    } else if (props.trigger === 'click') {
+      onClick(target);
+    } else {
+      onContextmenu(event);
+    }
+  }
 
-  // 鼠标进入/离开：对齐元素
-  function onMouseToggle(type) {
+  // 鼠标滑过：对齐元素
+  function onMouseToggle(el, type) {
     if (props.trigger !== 'hover') return;
     clearTimeout(hoverTimer);
     hoverTimer = setTimeout(() => {
       if (type === 'enter') {
-        openDropdown({ el: triggerElRef.value });
+        openWithTarget(el);
       } else {
         closeDropdown();
       }
     }, 150);
   }
 
-  // 点击 trigger：对齐元素
-  function onTriggerClick() {
+  // 点击左键：对齐元素
+  function onClick(el) {
     if (props.trigger !== 'click') return;
     if (dropdownVisible.value) {
       closeDropdown();
     } else {
-      openDropdown({ el: triggerElRef.value });
+      openWithTarget(el);
     }
   }
 
-  // 右键 trigger：对齐鼠标
-  function onTriggerContextmenu(event) {
+  // 点击右键：对齐鼠标
+  function onContextmenu(event) {
     if (props.trigger !== 'contextmenu') return;
-    openDropdown({ event });
+    openWithMouse(event);
   }
 
   // 点击 dropdown 外部
-  onClickOutside(dropdownElRef, closeDropdown, { ignore: [triggerElRef] });
+  onClickOutside(dropdownElRef, closeDropdown, { ignore: [targetElRef] });
 
   // 关闭下拉框
   function closeDropdown() {
@@ -77,44 +91,50 @@ export const useDropdown = ({ triggerNextElRef, dropdownElRef, props, emits }) =
     emits('close');
   }
 
-  // 打开下拉框
-  async function openDropdown(params) {
+  // 打开下拉框：对齐目标
+  function openWithTarget(el) {
+    if (!el) return;
+    targetElRef.value = el;
+    const rect = el.getBoundingClientRect();
+    updatePosition(rect);
+  }
+
+  // 打开下拉框：对齐鼠标
+  function openWithMouse(event) {
+    if (!event) return;
+    updatePosition({
+      left: event.clientX,
+      right: event.clientX,
+      top: event.clientY,
+      bottom: event.clientY
+    });
+  }
+
+  // 更新定位
+  async function updatePosition({ left, right, top, bottom }) {
     // 更新事件
     if (!dropdownVisible.value) {
       dropdownVisible.value = true;
       emits('open');
     }
-    // 更新定位
-    updatePosition(params);
-  }
-
-  // 更新定位
-  async function updatePosition({ event, el }) {
-    await nextTick();
-
-    // 参照物
-    const trigger = event || el.getBoundingClientRect();
-    const triggerLeft = trigger.clientX || trigger.left;
-    const triggerRight = trigger.clientX || trigger.right;
-    const triggerTop = trigger.clientY || trigger.top;
-    const triggerBottom = trigger.clientY || trigger.bottom;
-
-    // 下拉框
-    const { clientWidth: dropdownWidth, clientHeight: dropdownHeight } = dropdownElRef.value;
 
     // 窗口
     const { clientWidth: windowWidth, clientHeight: windowHeight } = document.documentElement;
 
+    // 下拉框
+    await nextTick();
+    const { clientWidth: dropdownWidth, clientHeight: dropdownHeight } = dropdownElRef.value;
+
     // 水平方向：默认对齐左边，超出屏幕则对齐右边
-    let dropdownLeft = triggerLeft;
+    let dropdownLeft = left;
     if (dropdownLeft + dropdownWidth > windowWidth) {
-      dropdownLeft = triggerRight - dropdownWidth;
+      dropdownLeft = right - dropdownWidth;
     }
 
     // 垂直方向：默认在下方，超出屏幕则在上方
-    let dropdownTop = triggerBottom + dropdownMargin;
+    let dropdownTop = bottom + dropdownMargin;
     if (dropdownTop + dropdownHeight > windowHeight) {
-      dropdownTop = triggerTop - dropdownMargin - dropdownHeight;
+      dropdownTop = top - dropdownMargin - dropdownHeight;
     }
 
     // 更新样式
@@ -127,7 +147,7 @@ export const useDropdown = ({ triggerNextElRef, dropdownElRef, props, emits }) =
   return {
     dropdownVisible,
     dropdownStyles,
-    openDropdown,
+    openByMethod,
     closeDropdown
   };
 };

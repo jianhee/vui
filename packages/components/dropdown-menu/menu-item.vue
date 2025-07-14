@@ -2,6 +2,7 @@
 <template>
   <div
     class="vui-menu-item"
+    :class="rootClasses"
     :title="formattedMenuItem.label"
     @click="onMenuItemClick"
   >
@@ -38,7 +39,7 @@ const menuRoot = inject('menuRoot', null);
 const props = defineProps(menuItemProps);
 
 // 使用菜单项
-const { formattedMenuItem, isSelected, onMenuItemClick } = useMenuItem({
+const { formattedMenuItem, isSelected, rootClasses, onMenuItemClick } = useMenuItem({
   menuRoot,
   menuItem: { props }
 });

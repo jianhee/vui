@@ -1,12 +1,12 @@
 <template>
-  <VDropdown
+  <VDropdownMenu
     v-model:selected-key="seletedKey"
-    :menus="menus"
+    :items="items"
     selectable
-    @selection-change="writeLog('selection-change', $event)"
+    @select="writeLog('select', $event)"
   >
-    <VButton>下拉菜单</VButton>
-  </VDropdown>
+    <VButton>hover</VButton>
+  </VDropdownMenu>
 
   <DemoSpace>
     当前值为 <code>{{ seletedKey }}</code>
@@ -18,8 +18,5 @@ import { ref } from 'vue';
 import { writeLog } from '@vp/utils';
 
 const seletedKey = ref(1);
-const menus = [1, 2, 3, 4].map(key => ({
-  key,
-  label: `选项${key}`
-}));
+const items = [1, 2, 3, 4].map(key => ({ key, label: `选项${key}` }));
 </script>

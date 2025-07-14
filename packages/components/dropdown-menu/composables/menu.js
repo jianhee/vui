@@ -1,7 +1,7 @@
 // 菜单
 
 // emits
-export const menuEmits = ['select', 'selection-change'];
+export const menuEmits = ['click', 'select'];
 
 // v-model
 export const menuModel = {
@@ -17,8 +17,8 @@ export const menuProps = {
   // 3. `icon` 前置图标
   // 4. `divider` 是否添加分隔符
   // 5. `string|number` 类型的菜单项会格式化为 `{ label }`
-  menus: { type: Array, default: null },
-  // 菜单是否可选择
+  items: { type: Array, default: null },
+  // 是否可选中
   // 可选时会记录选中值，所以菜单项的 `key` 必填
   selectable: { type: Boolean, default: false }
 };

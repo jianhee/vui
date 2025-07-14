@@ -39,7 +39,7 @@ const props = defineProps(dropdownProps);
 const emits = defineEmits(dropdownEmits);
 
 // 使用下拉框
-const { dropdownVisible, dropdownStyles, openDropdown, closeDropdown } = useDropdown({
+const { dropdownVisible, dropdownStyles, openByMethod, closeDropdown } = useDropdown({
   triggerNextElRef,
   dropdownElRef,
   props,
@@ -48,7 +48,7 @@ const { dropdownVisible, dropdownStyles, openDropdown, closeDropdown } = useDrop
 
 // 下拉框方法
 defineExpose({
-  open: openDropdown,
+  open: openByMethod,
   close: closeDropdown
 });
 </script>
