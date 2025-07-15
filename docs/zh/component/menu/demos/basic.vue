@@ -1,10 +1,8 @@
 <template>
-  <VDropdownMenu
+  <VMenu
     :items="items"
     @click="writeLog('click', $event)"
-  >
-    <VButton>hover</VButton>
-  </VDropdownMenu>
+  />
 </template>
 
 <script setup>
