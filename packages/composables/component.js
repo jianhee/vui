@@ -9,15 +9,15 @@ import { defineAsyncComponent } from 'vue';
  * @param {Array} [options.exclude=[]]    - 组件名称黑名单
  */
 export const setupComponents = (vueApp, options = {}) => {
-  // 导入的组件集合：{ './components/my-btn.vue': importFn, ...}
+  // 导入的组件集合：{ './components/my-button.vue': importFn, ...}
   const { vueComponents, include = [], exclude = [] } = options;
 
   // 遍历组件集合
   for (const path in vueComponents) {
-    // 格式化路径：返回 components/my-btn.vue
+    // 格式化路径：返回 components/my-button.vue
     const processedPath = path.replace(/^\.\//, '');
 
-    // 获取文件名：返回 my-btn
+    // 获取文件名：返回 my-button
     const fileName = processedPath
       .split('/')
       .pop()

@@ -25,13 +25,13 @@
 <script setup>
 import { computed } from 'vue';
 import { useButton, btnProps } from './composables';
-import { useFilterProps } from '../../composables/use-filter-props';
+import { useNativeProps } from '../../composables/use-native-props';
 import { useIconProps } from '../../composables/use-icon-props';
 import IconLoadingLoop from '../../icons/loading-loop.vue';
 
 // 筛选属性
 defineOptions({ inheritAttrs: false });
-const { rootProps, nativeProps } = useFilterProps(['disabled']);
+const { rootProps, nativeProps } = useNativeProps(['disabled']);
 
 // 按钮
 const props = defineProps(btnProps);

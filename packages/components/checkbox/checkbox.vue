@@ -28,11 +28,11 @@
 <script setup>
 import { inject } from 'vue';
 import { useCheckbox, checkboxModel, checkboxProps, checkboxEmits } from './composables/checkbox';
-import { useFilterProps } from '../../composables/use-filter-props';
+import { useNativeProps } from '../../composables/use-native-props';
 
 // 筛选属性
 defineOptions({ inheritAttrs: false });
-const { rootProps, nativeProps } = useFilterProps(['disabled']);
+const { rootProps, nativeProps } = useNativeProps(['disabled']);
 
 // 区分类型
 const checkboxType = inject('checkboxType', 'checkbox');
