@@ -2,12 +2,12 @@
 
 ## 基础用法
 
-1. 使用 `v-model:value` 属性绑定当前值，使用 `options` 属性构建选项
+1. 使用 `v-model:value` 属性绑定当前值，使用 `options` 属性定义选项数组
 2. 切换选项时触发 `change` 事件
 
 <preview path="./demos/basic.vue"></preview>
 
-<!--@include: @/component/@parts/props-native.md-->
+## 原生属性
 
 <preview path="./demos/native.vue"></preview>
 
@@ -21,12 +21,13 @@
 
 ### 属性
 
-| 名称            | 说明                         | 类型                            | 默认值 |
-| --------------- | ---------------------------- | ------------------------------- | ------ |
-| `v-model:value` | 当前值，即选中项的 `value`   | `string\|number`                |        |
-| `options`       | 选项数组                     | `Array[object\|string\|number]` |        |
-| `size`          | 选择器尺寸                   | `string`: `medium\|small`       |        |
-| `disabled` 等   | 支持原生 `select` 的所有属性 |                                 |        |
+<!--@include: @/component/@parts/props-native.md-->
+
+| 名称            | 说明                       | 类型                            | 默认值 |
+| --------------- | -------------------------- | ------------------------------- | ------ |
+| `v-model:value` | 当前值，即选中项的 `value` | `string\|number`                |        |
+| `options`       | 选项数组                   | `Array[object\|string\|number]` |        |
+| `size`          | 选择器尺寸                 | `string`: `medium\|small`       |        |
 
 #### options
 

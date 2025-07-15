@@ -34,13 +34,13 @@
 <script setup>
 import { computed, useTemplateRef } from 'vue';
 import { useInput, inputModel, inputProps, inputEmits } from './composables';
-import { useFilterProps } from '../../composables/use-filter-props';
+import { useNativeProps } from '../../composables/use-native-props';
 import { useIconProps } from '../../composables/use-icon-props';
 import IconClear from '../../icons/clear.vue';
 
 // 筛选属性
 defineOptions({ inheritAttrs: false });
-const { rootProps, nativeProps } = useFilterProps(['disabled', 'maxlength', 'placeholder']);
+const { rootProps, nativeProps } = useNativeProps(['disabled', 'maxlength', 'placeholder']);
 
 // 输入框
 const inputElRef = useTemplateRef('inputElRef');

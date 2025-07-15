@@ -20,6 +20,7 @@
     gap: 8px;
     align-items: center;
     width: var(--vui-input-width);
+    padding: 0 8px;
     background-color: var(--#{$prefix}-bg-color);
     border: 1px solid var(--#{$prefix}-border-color);
     border-radius: 4px;
@@ -76,40 +77,16 @@
   // 输入框
   @if $prefix == "vui-input" () {
     .vui-input {
-      padding: 0 8px;
       cursor: text;
     }
   }
 
   // 选择器
   @if $prefix == "vui-select" () {
-    :root {
-      --vui-option-bg-color: var(--vui-bg-color-overlay);
-    }
     .vui-select {
-      position: relative;
-      z-index: 1;
-
-      // 内容
-      &-inner {
-        padding-right: 22px;
-        padding-left: 8px;
-        cursor: pointer;
-      }
-
-      // 下拉图标
-      &-icon {
-        position: absolute;
-        top: 50%;
-        right: 8px;
-        z-index: -1;
-        transform: translateY(-7px);
-      }
-
-      // 下拉选项
-      &-option {
-        cursor: pointer;
-        background-color: var(--vui-option-bg-color);
+      cursor: pointer;
+      &-placeholder {
+        color: var(--vui-text-color-placeholder);
       }
     }
   }

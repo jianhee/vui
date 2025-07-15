@@ -1,62 +1,66 @@
 <!-- 选择器 -->
 <template>
+  <!-- 触发元素 -->
   <div
-    v-bind="rootAttrs"
-    :class="rootClasses"
+    ref="rootElRef"
+    :class="['vui-select', rootClasses]"
+    v-bind="$attrs"
+    @click="onRootClick"
   >
-    <!-- 显示选项 -->
-    <select
-      v-if="options"
-      ref="selectElRef"
-      v-model="modelValue"
+    <!-- 文本 -->
+    <span
+      v-if="modelValue"
       class="vui-select-inner"
-      v-bind="innerAttrs"
-      :disabled="disabled"
-      @change="onChange"
     >
-      <option
-        v-for="item in formattdOptions"
-        :key="item.value"
-        :value="item.value"
-        class="vui-select-option"
-      >
-        {{ item.label }}
-      </option>
-    </select>
-    <!-- 显示文本 -->
+      {{ selectedOption.label }}
+    </span>
+    <!-- 占位 -->
     <span
       v-else
-      class="vui-select-inner"
+      class="vui-select-inner vui-select-placeholder"
     >
-      {{ modelValue }}
+      {{ placeholder }}
     </span>
     <!-- 图标 -->
     <VIcon
       class="vui-select-icon"
       :component="IconArrow"
+      :rotate="iconRotate"
     />
   </div>
+
+  <!-- 下拉菜单 -->
+  <DropdownMenu
+    ref="dropdownElRef"
+    v-model:selected-key="modelValue"
+    trigger="click"
+    :items="formattedOptions"
+    :style="dropdownStyles"
+    selectable
+    @select="onSelectOption"
+    @open="onVisibleChange(true)"
+    @close="onVisibleChange(false)"
+  />
 </template>
 
 <script setup>
 import { useTemplateRef } from 'vue';
 import { useSelect, selectModel, selectProps, selectEmits } from './composables';
-import { useFormElementAttrs } from '../input/composables/base';
+import DropdownMenu from '../dropdown-menu/dropdown-menu.vue';
 import IconArrow from '../../icons/select-arrow.vue';
 
 // 选择器
 defineOptions({ inheritAttrs: false });
-const selectElRef = useTemplateRef('selectElRef');
+const rootElRef = useTemplateRef('rootElRef');
+const dropdownElRef = useTemplateRef('dropdownElRef');
 const modelValue = defineModel('value', selectModel.value);
 const props = defineProps(selectProps);
 const emits = defineEmits(selectEmits);
 
-// 筛选属性
-const { rootAttrs, innerAttrs } = useFormElementAttrs();
-
 // 使用选择器
-const { formattdOptions, onChange, rootClasses } = useSelect({
-  selectElRef,
+const { rootClasses, onRootClick, iconRotate, onVisibleChange, dropdownStyles, formattedOptions, selectedOption, onSelectOption } = useSelect({
+  rootElRef,
+  dropdownElRef,
   modelValue,
   props,
   emits

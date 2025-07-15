@@ -2,6 +2,7 @@
   <VSelect
     v-model:value="selectValue"
     class="demo-select"
+    placeholder="请选择"
     :options="selectOptions"
     @change="writeLog('change', $event)"
   />

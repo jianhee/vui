@@ -21,7 +21,7 @@
       <VInput
         v-model:value="inputValue"
         class="demo-input"
-        placeholder="占位文字"
+        placeholder="请输入内容"
       />
     </VFormItem>
   </VForm>

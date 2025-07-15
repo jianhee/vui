@@ -24,6 +24,11 @@ export const useInput = ({ inputElRef, modelValue, props, emits }) => {
   // 是否获取焦点
   const { focused } = useFocus(inputElRef);
 
+  // 点击根元素获取焦点
+  function onRootClick() {
+    focused.value = true;
+  }
+
   // 根元素类名
   const rootClasses = computed(() => {
     return [
@@ -33,11 +38,6 @@ export const useInput = ({ inputElRef, modelValue, props, emits }) => {
       }
     ];
   });
-
-  // 点击根元素获取焦点
-  function onRootClick() {
-    focused.value = true;
-  }
 
   // 输入值时
   function onInput(e) {
