@@ -1,13 +1,18 @@
 @use "./mixins";
 
 // 间距
-$positions: (mt, top), (mr, right), (mb, bottom), (ml, left);
+$positions: (mt, top), (mr, right), (mb, bottom), (ml, left), mx, my;
 $sizes: 5, 10, 15, 20, 25, 30;
 
 @each $p1, $p2 in $positions {
   @each $size in $sizes {
     .vui-#{$p1}-#{$size} {
-      margin-#{$p2}: #{$size}px !important;
+      @if $p2 {
+        margin-#{$p2}: #{$size}px !important;
+      } @else {
+        margin-top: #{$size}px !important;
+        margin-bottom: #{$size}px !important;
+      }
     }
   }
 }

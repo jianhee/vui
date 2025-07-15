@@ -8,15 +8,15 @@
 // 禁用
 @mixin vui-disabled {
   cursor: not-allowed !important;
-  opacity: 0.6;
+  opacity: 0.75;
 }
 
-// 居中
+// 文本居中
 @mixin vui-center {
   text-align: center;
 }
 
-// 溢出隐藏
+// 文本溢出隐藏
 @mixin vui-ellipsis {
   overflow: hidden;
   text-overflow: ellipsis;

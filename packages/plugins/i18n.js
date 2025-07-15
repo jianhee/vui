@@ -10,7 +10,7 @@ export let t = null;
  * @param {Object} vueApp       - Vue 应用实例
  * @param {Object} [options={}] - i18n 配置项，参考官方文档
  */
-export function setupI18n(vueApp, options = {}) {
+export const setupI18n = (vueApp, options = {}) => {
   // 创建i18n实例
   const i18n = createI18n({
     // 不使用 Vue 2 的兼容模式
@@ -30,4 +30,4 @@ export function setupI18n(vueApp, options = {}) {
 
   // 将 i18n 插件注册到 Vue 应用中
   vueApp.use(i18n);
-}
+};

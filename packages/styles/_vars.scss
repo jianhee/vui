@@ -54,6 +54,8 @@
   --vui-disabled-border-color: var(--vui-border-color-light);
 }
 
+// 黑暗模式
+// html.dark {
 @media (prefers-color-scheme: dark) {
   :root {
     // 品牌色
