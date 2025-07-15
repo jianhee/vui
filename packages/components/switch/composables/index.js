@@ -25,23 +25,20 @@ export const switchProps = {
 export const useSwitch = ({ modelChecked, props, emits }) => {
   // 根元素类名
   const rootClasses = computed(() => {
-    return [
-      'vui-switch',
-      {
-        'is-checked': modelChecked.value,
-        'is-loading': isLoading.value
-      }
-    ];
+    return {
+      'is-checked': modelChecked.value,
+      'is-loading': isLoading.value
+    };
   });
 
   // 打开状态文本类名
   const activeClasses = computed(() => {
-    return ['vui-switch-label', { 'is-active': modelChecked.value }];
+    return { 'is-active': modelChecked.value };
   });
 
   // 关闭状态文本类名
   const inactiveClasses = computed(() => {
-    return ['vui-switch-label', { 'is-active': !modelChecked.value }];
+    return { 'is-active': !modelChecked.value };
   });
 
   // 加载状态

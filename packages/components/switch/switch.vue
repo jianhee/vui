@@ -1,13 +1,13 @@
 <!-- 开关 -->
 <template>
   <div
-    :class="rootClasses"
+    :class="['vui-switch', rootClasses]"
     @click="onClick"
   >
     <!-- 未选中 -->
     <span
       v-if="inactiveText"
-      :class="inactiveClasses"
+      :class="['vui-switch-label', inactiveClasses]"
     >
       {{ inactiveText }}
     </span>
@@ -26,7 +26,7 @@
     <!-- 选中 -->
     <span
       v-if="activeText"
-      :class="activeClasses"
+      :class="['vui-switch-label', activeClasses]"
     >
       {{ activeText }}
     </span>
