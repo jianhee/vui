@@ -10,10 +10,10 @@ dayjs.extend(utc);
  * @param {string} format         格式：默认为空，参考 https://day.js.org/docs/zh-CN/display/format
  * @returns {string}              和格式匹配的时间：'2008-08-08' ...
  */
-export function getDateTime(_datetime, _format) {
+export const getDateTime = (_datetime, _format) => {
   const date = _datetime ? dayjs(_datetime) : dayjs();
   return date.format(_format);
-}
+};
 
 /**
  * 获取UTC时间
@@ -21,10 +21,10 @@ export function getDateTime(_datetime, _format) {
  * @param {string} format         格式：默认为空，参考 https://day.js.org/docs/zh-CN/display/format
  * @returns {string}              和格式匹配的时间：'2008-08-08' ...
  */
-export function getUTCDateTime(_datetime, _format) {
+export const getUTCDateTime = (_datetime, _format) => {
   const date = _datetime ? dayjs(_datetime) : dayjs();
   return date.utc().format(_format);
-}
+};
 
 /**
  * 获取语言环境的时间
@@ -33,18 +33,18 @@ export function getUTCDateTime(_datetime, _format) {
  * @param {string} local      语言：默认当前语言
  * @returns {string}          和格式匹配的时间：'2023年1月06日 星期五' ...
  */
-export function getLocalDateTime(_datetime, _format, _local) {
+export const getLocalDateTime = (_datetime, _format, _local) => {
   const date = _datetime ? new Date(_datetime) : new Date();
   const local = _local || window.navigator.language;
   return new Intl.DateTimeFormat(local, _format).format(date);
-}
+};
 
 /**
  * 获取相对时间（多久之前）
  * @param {string|Date} date  要比较的时间
  * @returns {string}          相对时间描述："5s ago" ...
  */
-export function getTimeAgo(_datetime) {
+export const getTimeAgo = _datetime => {
   if (!_datetime) return '';
 
   const date = dayjs(_datetime);
@@ -82,4 +82,4 @@ export function getTimeAgo(_datetime) {
 
   // 1年以上："Jan 2023"
   return date.format(message.yy);
-}
+};

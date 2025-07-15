@@ -5,7 +5,7 @@
  * @param {string} url  网址
  * @returns {boolean}   是否有效：true|false
  */
-export function isValidUrl(url) {
+export const isValidUrl = url => {
   try {
     // eslint-disable-next-line no-new
     new URL(url);
@@ -13,4 +13,4 @@ export function isValidUrl(url) {
   } catch (e) {
     return false;
   }
-}
+};

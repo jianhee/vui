@@ -4,20 +4,20 @@
  * 生成UUID
  * @returns {string} "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"
  */
-export function guid() {
+export const guid = () => {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
     const r = (Math.random() * 16) | 0;
     const v = c === 'x' ? r : (r & 0x3) | 0x8;
     return v.toString(16);
   });
-}
+};
 
 /**
  * 字数统计
  * @param {string} str  文本
  * @returns {object}    数量对象
  */
-export function countText(str) {
+export const countText = str => {
   // 1. 包含空格的字符数量
   const charCount = str.length;
 
@@ -37,4 +37,4 @@ export function countText(str) {
     charCountWithoutSpace,
     wordCount
   };
-}
+};
