@@ -1,6 +1,6 @@
 // 滑块
 import { ref, computed } from 'vue';
-import { useElementHover } from '@vueuse/core';
+import { useElementHover, useElementBounding } from '@vueuse/core';
 
 // v-model
 export const sliderModel = {
@@ -18,7 +18,7 @@ export const sliderProps = {
   // 提示框内容的格式化方法
   //  1. 示例 `value => value`
   //  2. 参数为当前值，返回一个可以作为提示框内容的值
-  tipFormatter: { type: Function, default: undefined }
+  tipFormatter: { type: Function, default: val => val }
 };
 
 // 使用滑块
@@ -26,17 +26,7 @@ export const useSlider = ({ railElRef, handleElRef, modelValue, props }) => {
   // 当前状态
   const isDragging = ref(false);
   const isHovered = useElementHover(handleElRef);
-
-  // 根元素类名
-  const rootClasses = computed(() => {
-    return [
-      'vui-slider',
-      {
-        'is-dragging': isDragging.value,
-        'is-hovered': isHovered.value
-      }
-    ];
-  });
+  const { x: handleX, y: handleY } = useElementBounding(handleElRef);
 
   // 点击轨道/填充
   function onRailClick(e) {
@@ -101,20 +91,27 @@ export const useSlider = ({ railElRef, handleElRef, modelValue, props }) => {
     width: percentValue.value
   }));
 
-  // 手柄样式
-  const handleStyles = computed(() => ({
-    left: percentValue.value
+  // 手柄属性
+  const handleProps = computed(() => ({
+    class: { 'is-dragging': isDragging.value },
+    style: { left: percentValue.value }
   }));
 
-  // 提示文字
-  const tipText = computed(() => props.tipFormatter?.(modelValue.value) ?? modelValue.value);
+  // 提示框
+  const isShowTip = computed(() => props.showTip && (isDragging.value || isHovered.value));
+  const tipText = computed(() => props.tipFormatter(modelValue.value));
+  const tipStyles = computed(() => ({
+    left: `${handleX.value}px`,
+    top: `${handleY.value}px`
+  }));
 
   return {
-    rootClasses,
     onRailClick,
     onSliderDragStart,
     trackStyles,
-    handleStyles,
+    handleProps,
+    isShowTip,
+    tipStyles,
     tipText
   };
 };

@@ -45,13 +45,19 @@
     border-radius: 50%;
     transform: translate(-50%, -50%);
     transition: transform 0.3s ease;
+    &:hover,
+    &.is-dragging {
+      transform: translate(-50%, -50%) scale(1.2);
+    }
+    &.is-dragging {
+      cursor: grabbing;
+    }
   }
 
   // 提示框
-  &-tooltip {
-    position: absolute;
-    bottom: 35px;
-    z-index: 2;
+  &-tip {
+    position: fixed;
+    z-index: 99;
     padding: 8px 10px;
     font-size: 12px;
     line-height: 1;
@@ -59,8 +65,7 @@
     white-space: nowrap;
     background-color: var(--vui-slider-tip-bg-color);
     border-radius: 4px;
-    opacity: 0;
-    transform: translateX(-50%);
+    transform: translate(calc(-50% + 9px), calc(-100% - 10px));
     transition: opacity 0.3s ease;
     &::before {
       position: absolute;
@@ -72,19 +77,9 @@
       background-color: var(--vui-slider-tip-bg-color);
       transform: translate(-50%, 50%) rotate(45deg);
     }
-  }
-
-  // 区分状态
-  &.is-hovered .vui-slider,
-  &.is-dragging .vui-slider {
-    &-handle {
-      transform: translate(-50%, -50%) scale(1.2);
+    &-enter-from,
+    &-leave-to {
+      opacity: 0;
     }
-    &-tooltip {
-      opacity: 1;
-    }
-  }
-  &.is-dragging &-handle {
-    cursor: grabbing;
   }
 }

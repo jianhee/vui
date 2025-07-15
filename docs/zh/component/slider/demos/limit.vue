@@ -1,7 +1,8 @@
 <template>
-  <DemoSpace class="demo-slider">
+  <DemoSpace>
     <VSlider
       v-model:value="valueRef"
+      class="demo-slider"
       :min="50"
       :max="200"
     />

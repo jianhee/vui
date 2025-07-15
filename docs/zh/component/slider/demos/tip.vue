@@ -1,18 +1,20 @@
 <template>
-  <DemoSpace class="demo-slider">
-    <VSlider
-      v-model:value="valueRef1"
-      :show-tip="false"
-    />
-  </DemoSpace>
-  <DemoSpace>不显示提示框</DemoSpace>
-  <DemoSpace class="demo-slider">
-    <VSlider
-      v-model:value="valueRef2"
-      :tip-formatter="val => `${val}%`"
-    />
-  </DemoSpace>
-  <DemoSpace>格式化提示框</DemoSpace>
+  <VForm>
+    <VFormItem label="不显示提示框">
+      <VSlider
+        v-model:value="valueRef1"
+        class="demo-slider"
+        :show-tip="false"
+      />
+    </VFormItem>
+    <VFormItem label="格式化提示框">
+      <VSlider
+        v-model:value="valueRef2"
+        class="demo-slider"
+        :tip-formatter="val => `${val}%`"
+      />
+    </VFormItem>
+  </VForm>
 </template>
 
 <script setup>

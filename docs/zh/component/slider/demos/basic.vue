@@ -1,6 +1,9 @@
 <template>
-  <DemoSpace class="demo-slider">
-    <VSlider v-model:value="valueRef" />
+  <DemoSpace>
+    <VSlider
+      v-model:value="valueRef"
+      class="demo-slider"
+    />
   </DemoSpace>
   <DemoSpace>
     当前值为 <code>{{ valueRef }}</code>
@@ -15,7 +18,6 @@ const valueRef = ref(50);
 
 <style>
 .demo-slider {
-  max-width: 500px;
-  padding-top: 20px;
+  max-width: 240px;
 }
 </style>
