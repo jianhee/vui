@@ -19,3 +19,18 @@
 ## 菜单项事件
 
 <preview path="./demos/select.vue"></preview>
+
+## Dropdown API
+
+::: warning 下拉菜单和下拉框的接口有以下两点不同
+
+1. `closeOnClickDropdown` 属性默认 `true`
+2. `dropdown` 插槽无效
+
+:::
+
+<!--@include: @/component/dropdown/parts/api.md-->
+
+## Menu API
+
+<!--@include: @/component/menu/parts/api.md-->
