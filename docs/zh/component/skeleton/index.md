@@ -2,7 +2,7 @@
 
 ## 基础用法
 
-组件内容由骨架屏容器 `<VSkeleton>` 和骨架屏项 `<VSkeletonItem>` 两部分组成，通常将两个组件放在一起使用
+骨架屏由 `<VSkeleton>`（容器）和 `<VSkeletonItem>`（项）两部分组成，通常将两个组件放在一起使用
 
 <preview path="./demos/basic.vue"></preview>
 
