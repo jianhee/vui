@@ -32,14 +32,15 @@
         :node-data="node"
         :item-data="node.data"
       >
-        <!-- 优先显示 slot -->
-        <slot
+        <template
           v-if="$slots.default"
-          :node="node"
-          :item="node.data"
-        />
-        <!-- 其次显示 title -->
-        <span v-else>{{ node.data.title }}</span>
+          #default
+        >
+          <slot
+            :node="node"
+            :item="node.data"
+          />
+        </template>
       </VTreeNode>
     </div>
   </div>

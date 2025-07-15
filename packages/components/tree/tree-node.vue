@@ -27,8 +27,10 @@
     />
     <!-- 占位图标 -->
     <VIcon v-else />
-    <!-- 节点内容 -->
-    <slot />
+    <!-- 优先显示 slot -->
+    <slot v-if="$slots.default" />
+    <!-- 其次显示 title -->
+    <span v-else>{{ nodeData.data.title }}</span>
     <!-- 排序 -->
     <div
       v-if="treeRoot.props.dragSortable"

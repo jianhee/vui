@@ -49,7 +49,6 @@
             :key="row.id"
             :row-data="row"
           >
-            <!-- 单元格内容 -->
             <slot
               :row="row"
               :col="col"
