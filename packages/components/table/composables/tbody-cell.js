@@ -11,12 +11,7 @@ export const tbodyCellProps = {
 
 // 使用单元格
 export const useTbodyCell = ({ tableRoot, tbodyCell }) => {
-  // 单元格类名
-  const cellClasses = computed(() => {
-    return ['vui-table-cell', tbodyCell.props.colData.cellClass];
-  });
-
-  // 单元格类名
+  // 单元格样式
   const cellStyles = computed(() => {
     return {
       width: `${tableRoot.colWidthsRef.value[tbodyCell.props.colData.key]}px`
@@ -24,7 +19,6 @@ export const useTbodyCell = ({ tableRoot, tbodyCell }) => {
   });
 
   return {
-    cellClasses,
     cellStyles
   };
 };

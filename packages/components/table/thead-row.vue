@@ -14,6 +14,7 @@
     >
       <VCheckbox
         :checked="isSelectedAll"
+        :disabled="!tableRoot.rowItemsRef.value?.length"
         @change="toggleAllSelection"
       />
     </div>

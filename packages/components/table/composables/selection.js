@@ -79,6 +79,7 @@ export const useAllSelection = ({ selectable, ctrlASelectable, modelSelectedRowI
   // 是否全选
   const isSelectedAll = computed(() => {
     if (!selectable) return false;
+    if (!rowItemsRef.value?.length) return false;
 
     return modelSelectedRowIds.value?.length === rowItemsRef.value?.length;
   });
@@ -86,6 +87,7 @@ export const useAllSelection = ({ selectable, ctrlASelectable, modelSelectedRowI
   // 切换全选
   const toggleAllSelection = () => {
     if (!selectable) return;
+    if (!rowItemsRef.value?.length) return;
 
     const newState = !isSelectedAll.value;
     if (newState) {
@@ -100,6 +102,7 @@ export const useAllSelection = ({ selectable, ctrlASelectable, modelSelectedRowI
   useEventListener(window, 'keydown', event => {
     if (!selectable) return;
     if (!ctrlASelectable) return;
+    if (!rowItemsRef.value?.length) return;
     if (event.key === 'a' && event.ctrlKey) {
       event.preventDefault();
       toggleAllSelection();

@@ -1,32 +1,29 @@
 <template>
-  <VBtn
+  <VButton
     type="primary"
     :disabled="loading"
     @click="refreshData"
   >
     重新加载
-  </VBtn>
+  </VButton>
   <DemoSpace
     flex
     class="demo-table-state"
   >
-    <div>
-      <DemoSpace>默认状态</DemoSpace>
+    <DemoCard label="默认状态">
       <VTable
         :loading="loading"
         :col-items="colItems"
       />
-    </div>
-    <div>
-      <DemoSpace>自定义文本</DemoSpace>
+    </DemoCard>
+    <DemoCard label="自定义文本">
       <VTable
         :loading="loading"
         empty-text="暂无数据"
         :col-items="colItems"
       />
-    </div>
-    <div>
-      <DemoSpace>自定义插槽</DemoSpace>
+    </DemoCard>
+    <DemoCard label="自定义插槽">
       <VTable
         :loading="loading"
         :col-items="colItems"
@@ -35,7 +32,7 @@
           <VEmpty description="暂无数据" />
         </template>
       </VTable>
-    </div>
+    </DemoCard>
   </DemoSpace>
 </template>
 
@@ -61,13 +58,8 @@ function refreshData() {
 </script>
 
 <style lang="scss">
-.demo-table-state {
-  > div {
-    width: 33%;
-  }
-  .vui-table {
-    height: 200px;
-    border: 1px solid var(--vui-border-color-base);
-  }
+.demo-table-state .vui-table {
+  height: 200px;
+  border: 1px solid var(--vui-border-color-base);
 }
 </style>

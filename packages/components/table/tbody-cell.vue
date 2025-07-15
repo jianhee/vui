@@ -1,7 +1,7 @@
 <!-- 表身-单元格 -->
 <template>
   <div
-    :class="cellClasses"
+    :class="['vui-table-cell', colData.cellClass]"
     :style="cellStyles"
   >
     <!-- 优先显示 slot -->
@@ -27,7 +27,7 @@ const tableRoot = inject('tableRoot', null);
 const props = defineProps(tbodyCellProps);
 
 // 使用单元格
-const { cellClasses, cellStyles } = useTbodyCell({
+const { cellStyles } = useTbodyCell({
   tableRoot,
   tbodyCell: { props }
 });
