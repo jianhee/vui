@@ -1,6 +1,5 @@
-// 分配继承的组件属性
+// 将继承的属性分配到对应的组件
 import { computed } from 'vue';
-
 export const useComponentsProps = ({ props, emits, components }) => {
   // props
   const componentsProps = computed(() => {
