@@ -12,19 +12,21 @@
   </template>
 
   <!-- 下拉框 -->
-  <Teleport to="body">
-    <Transition name="vui-dropdown">
-      <div
-        v-show="dropdownVisible"
-        ref="dropdownElRef"
-        class="vui-dropdown"
-        :style="dropdownStyles"
-        v-bind="$attrs"
-      >
-        <slot name="dropdown" />
-      </div>
-    </Transition>
-  </Teleport>
+  <template v-if="$slots.dropdown">
+    <Teleport to="body">
+      <Transition name="vui-dropdown">
+        <div
+          v-show="dropdownVisible"
+          ref="dropdownElRef"
+          class="vui-dropdown"
+          :style="dropdownStyles"
+          v-bind="$attrs"
+        >
+          <slot name="dropdown" />
+        </div>
+      </Transition>
+    </Teleport>
+  </template>
 </template>
 
 <script setup>
