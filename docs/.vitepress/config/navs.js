@@ -2,8 +2,16 @@
 export const headerNavs = [
   { text: '起步', link: '/start/install/', activeMatch: '/start/' },
   { text: '组件', link: '/component/icon/', activeMatch: '/component/' },
-  { text: '插件', link: '/plugin/i18n/', activeMatch: '/plugin/' },
-  { text: '工具', link: '/util/string/', activeMatch: '/util/' }
+  {
+    text: 'TUDO',
+    items: [
+      { text: '指南', link: '/guild/' },
+      { text: '图标', link: '/icon/' },
+      { text: '插件', link: '/plugin/' },
+      { text: '工具函数', link: '/util/' },
+      { text: '组合式函数', link: '/composable/' }
+    ]
+  }
 ];
 
 // 顶栏社交链接
