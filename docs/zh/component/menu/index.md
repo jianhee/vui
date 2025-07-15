@@ -28,12 +28,12 @@
 
 `string|number` 类型的菜单项会格式化为 `{ label }`
 
-| 名称           | 说明                                                                   | 类型                        | 默认值  |
-| -------------- | ---------------------------------------------------------------------- | --------------------------- | ------- |
-| `key`          | 唯一标识                                                               | `string\|number`            |         |
-| `label\|title` | 文本                                                                   | `string\|number`            |         |
-| `icon`         | 前置图标，参考 [Button](/component/button#前置图标) 组件的 `icon` 属性 | `string\|component\|object` |         |
-| `divider`      | 是否添加分隔符                                                         | `boolean`                   | `false` |
+| 名称           | 说明                                                                    | 类型                        | 默认值  |
+| -------------- | ----------------------------------------------------------------------- | --------------------------- | ------- |
+| `key`          | 唯一标识                                                                | `string\|number`            |         |
+| `label\|title` | 文本                                                                    | `string\|number`            |         |
+| `icon`         | 前置图标，参考 [Button](/component/button/#前置图标) 组件的 `icon` 属性 | `string\|component\|object` |         |
+| `divider`      | 是否添加分隔符                                                          | `boolean`                   | `false` |
 
 ### 事件
 

@@ -1,2 +1,1 @@
-import './styles/menu.scss';
-export { default as VDropdownMenu } from './menu.vue';
+export { default as VDropdownMenu } from './dropdown-menu.vue';

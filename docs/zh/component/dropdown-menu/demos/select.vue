@@ -1,22 +1,27 @@
 <template>
-  <VDropdownMenu
-    v-model:selected-key="seletedKey"
-    :items="items"
-    selectable
-    @select="writeLog('select', $event)"
-  >
-    <VButton>hover</VButton>
-  </VDropdownMenu>
+  <DemoSpace flex>
+    <VDropdownMenu
+      :items="items"
+      @click="writeLog('click', $event)"
+    >
+      <VButton>点击事件</VButton>
+    </VDropdownMenu>
 
-  <DemoSpace>
-    当前值为 <code>{{ seletedKey }}</code>
+    <VDropdownMenu
+      v-model:selected-key="seletedKey"
+      :items="items"
+      selectable
+      @select="writeLog('select', $event)"
+    >
+      <VButton>选中事件 值为 {{ seletedKey }}</VButton>
+    </VDropdownMenu>
   </DemoSpace>
 </template>
 
 <script setup>
 import { ref } from 'vue';
+import { items } from '../composables';
 import { writeLog } from '@vp/utils';
 
 const seletedKey = ref(1);
-const items = [1, 2, 3, 4].map(key => ({ key, label: `选项${key}` }));
 </script>
