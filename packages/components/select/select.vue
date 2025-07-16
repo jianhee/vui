@@ -1,65 +1,70 @@
 <!-- 选择器 -->
 <template>
-  <!-- 触发元素 -->
+  <!-- 触发器 -->
   <div
-    ref="rootElRef"
-    :class="['vui-select', rootClasses]"
+    ref="triggerElRef"
+    :class="['vui-select', triggerClasses]"
     v-bind="$attrs"
-    @click="onRootClick"
+    @click="onTriggerClick"
   >
     <!-- 文本 -->
-    <span
-      v-if="modelValue"
-      class="vui-select-inner"
-    >
-      {{ selectedOption.label }}
-    </span>
-    <!-- 占位 -->
-    <span
-      v-else
-      class="vui-select-inner vui-select-placeholder"
-    >
-      {{ placeholder }}
+    <span :class="['vui-select-inner', innerClasses]">
+      {{ innerText || placeholder }}
     </span>
     <!-- 图标 -->
     <VIcon
       class="vui-select-icon"
       :component="IconArrow"
-      :rotate="iconRotate"
+      v-bind="iconProps"
     />
   </div>
 
-  <!-- 下拉菜单 -->
-  <DropdownMenu
+  <!-- 下拉框 -->
+  <Dropdown
+    v-if="$slots.options || options?.length"
     ref="dropdownElRef"
-    v-model:selected-key="modelValue"
     trigger="click"
-    :items="formattedOptions"
+    close-on-click-dropdown
     :style="dropdownStyles"
-    selectable
-    @select="onSelectOption"
-    @open="onVisibleChange(true)"
-    @close="onVisibleChange(false)"
-  />
+    @open="onDropdownToggle(true)"
+    @close="onDropdownToggle(false)"
+  >
+    <template #dropdown>
+      <!-- 自定义选项 -->
+      <slot
+        v-if="$slots.options"
+        name="options"
+      />
+      <!-- 默认选项 -->
+      <Menu
+        v-else-if="options?.length"
+        v-model:selected-key="modelValue"
+        :items="formattedOptions"
+        selectable
+        @select="onSelectOption"
+      />
+    </template>
+  </Dropdown>
 </template>
 
 <script setup>
 import { useTemplateRef } from 'vue';
 import { useSelect, selectModel, selectProps, selectEmits } from './composables';
-import DropdownMenu from '../dropdown-menu/dropdown-menu.vue';
+import Dropdown from '../dropdown/dropdown.vue';
+import Menu from '../menu/menu.vue';
 import IconArrow from '../../icons/select-arrow.vue';
 
 // 选择器
 defineOptions({ inheritAttrs: false });
-const rootElRef = useTemplateRef('rootElRef');
+const triggerElRef = useTemplateRef('triggerElRef');
 const dropdownElRef = useTemplateRef('dropdownElRef');
 const modelValue = defineModel('value', selectModel.value);
 const props = defineProps(selectProps);
 const emits = defineEmits(selectEmits);
 
 // 使用选择器
-const { rootClasses, onRootClick, iconRotate, onVisibleChange, dropdownStyles, formattedOptions, selectedOption, onSelectOption } = useSelect({
-  rootElRef,
+const { triggerClasses, onTriggerClick, innerText, innerClasses, iconProps, onDropdownToggle, dropdownStyles, formattedOptions, onSelectOption } = useSelect({
+  triggerElRef,
   dropdownElRef,
   modelValue,
   props,

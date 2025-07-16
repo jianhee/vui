@@ -18,6 +18,9 @@ export const selectProps = {
   // 2. `label` 选项文本，为空时使用 `value` 的值
   // 3. `string|number` 类型的选项会格式化为 `{ value, label }`
   options: { type: Array, default: null },
+  // 选择器显示的文本：默认显示选中项的 `label`
+  // 自定义选项时组件内部无法获取选中项，必须指定一个文本
+  label: { type: String, default: null },
   // 选择器尺寸：medium, small
   size: { type: String, default: 'medium' },
   // ---------- 原生属性 ----------
@@ -26,44 +29,61 @@ export const selectProps = {
 };
 
 // 使用选择器
-export const useSelect = ({ rootElRef, dropdownElRef, modelValue, props, emits }) => {
-  // 是否获取焦点
-  const focused = ref(false);
+export const useSelect = ({ triggerElRef, dropdownElRef, modelValue, props, emits }) => {
+  // 触发器是否获取焦点
+  const triggerIsFocused = ref(false);
 
-  // 根元素类名
-  const rootClasses = computed(() => {
+  // 触发器类名
+  const triggerClasses = computed(() => {
     return [
       `vui-select--${props.size}`,
       {
-        'is-focus': focused.value,
+        'is-focus': triggerIsFocused.value,
         'is-disabled': props.disabled
       }
     ];
   });
 
-  // 点击根元素打开下拉框
-  function onRootClick() {
+  // 点击触发器
+  function onTriggerClick() {
     if (props.disabled) return;
-    dropdownElRef.value.open({ el: rootElRef.value });
+    dropdownElRef.value?.open({ el: triggerElRef.value });
   }
 
-  // 图标角度
-  const iconRotate = computed(() => (focused.value ? '180deg' : null));
+  // 显示内容
+  const innerText = computed(() => {
+    if (props.label) {
+      return props.label;
+    } else {
+      const selectedItem = formattedOptions.value?.find(item => item.value === modelValue.value);
+      return selectedItem?.label;
+    }
+  });
+
+  // 文本类名
+  const innerClasses = computed(() => ({
+    'vui-select-placeholder': !innerText.value
+  }));
+
+  // 图标属性
+  const iconProps = computed(() => ({
+    rotate: triggerIsFocused.value ? '180deg' : null
+  }));
 
   // 打开/关闭下拉框时切换焦点
-  function onVisibleChange(visible) {
-    focused.value = visible;
+  function onDropdownToggle(visible) {
+    triggerIsFocused.value = visible;
   }
 
   // 下拉框样式
-  const { width: dropdownWidth } = useElementBounding(rootElRef);
+  const { width: dropdownWidth } = useElementBounding(triggerElRef);
   const dropdownStyles = computed(() => ({
     width: `${dropdownWidth.value}px`
   }));
 
   // 格式化选项
   const formattedOptions = computed(() => {
-    return props.options.map(item => {
+    return props.options?.map(item => {
       // 对象格式
       if (typeof item === 'object') {
         return {
@@ -83,12 +103,7 @@ export const useSelect = ({ rootElRef, dropdownElRef, modelValue, props, emits }
     });
   });
 
-  // 选中项
-  const selectedOption = computed(() => {
-    return formattedOptions.value.find(item => item.value === modelValue.value);
-  });
-
-  // 点击选项
+  // 选中选项
   function onSelectOption({ item }) {
     const value = item.value;
 
@@ -104,13 +119,14 @@ export const useSelect = ({ rootElRef, dropdownElRef, modelValue, props, emits }
   }
 
   return {
-    rootClasses,
-    onRootClick,
-    iconRotate,
-    onVisibleChange,
+    triggerClasses,
+    onTriggerClick,
+    innerText,
+    innerClasses,
+    iconProps,
+    onDropdownToggle,
     dropdownStyles,
     formattedOptions,
-    selectedOption,
     onSelectOption
   };
 };
