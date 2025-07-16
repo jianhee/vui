@@ -1,5 +1,6 @@
 <template>
   <VMenu
+    class="demo-menu"
     :items="items"
     @click="writeLog('click', $event)"
   />
@@ -19,3 +20,9 @@ const items = [
   '字符串'
 ];
 </script>
+
+<style>
+.demo-menu {
+  width: 240px;
+}
+</style>

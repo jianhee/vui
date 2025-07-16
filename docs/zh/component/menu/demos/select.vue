@@ -1,6 +1,7 @@
 <template>
   <VMenu
     v-model:selected-key="seletedKey"
+    class="demo-menu"
     :items="items"
     selectable
     @select="writeLog('select', $event)"

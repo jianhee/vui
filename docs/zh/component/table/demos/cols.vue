@@ -6,9 +6,9 @@
     :col-resizable="true"
     col-widths-storage-key="demo-table-col-widths"
   >
-    <template v-if="col.key === 'desc'">
+    <template v-if="col.key === 'title'">
       <VIcon :name="row.type" />
-      <span>{{ row.desc }}</span>
+      <span>{{ row.title }}</span>
     </template>
   </VTable>
 </template>

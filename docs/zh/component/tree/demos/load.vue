@@ -7,14 +7,14 @@
     :load-data="loadData"
     v-bind="$attrs"
   >
-    <VIcon :name="item.type === 'note' ? 'note' : node.isExpanded ? 'folder-open' : 'folder'" />
-    <span>{{ item.desc }}</span>
+    <VIcon :name="renderIcon(node)" />
+    <span>{{ item.title }}</span>
   </VTree>
 </template>
 
 <script setup>
 import { ref } from 'vue';
-import { renderData } from '../../table/composables';
+import { renderData, renderIcon } from '../../table/composables';
 
 // 初始数据
 const treeData = ref(renderData(5));

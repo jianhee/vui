@@ -10,9 +10,9 @@
     v-bind="$attrs"
     @drag-sort-end="writeLog('drag-sort-end', $event)"
   >
-    <template v-if="col.key === 'desc'">
+    <template v-if="col.key === 'title'">
       <VIcon :name="row.type" />
-      <span>{{ row.desc }}</span>
+      <span>{{ row.title }}</span>
     </template>
   </VTable>
 </template>

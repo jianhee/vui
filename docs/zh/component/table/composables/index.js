@@ -5,9 +5,8 @@ export const renderData = (length = 1000, level = 0, _path = '0') => {
     const type = index % 2 === 0 ? 'folder' : 'note';
     return {
       id: path,
-      title: path,
       type,
-      desc: type === 'folder' ? `目录-${path}` : `文件-${path}`,
+      title: type === 'folder' ? `目录-${path}` : `文件-${path}`,
       name: `姓名-${path}`,
       age: `年纪-${path}`,
       phone: `手机号-${path}`,
@@ -20,9 +19,14 @@ export const renderData = (length = 1000, level = 0, _path = '0') => {
 // 列数据
 export const colItems = [
   { key: 'id', title: 'ID', width: 80, cellClass: 'demo-table-cell' },
-  { key: 'desc', title: '说明', width: 120 },
+  { key: 'title', title: '标题', width: 120 },
   { key: 'name', title: '姓名' },
   { key: 'age', title: '年纪' },
   { key: 'phone', title: '手机' },
   { key: 'address', title: '地址' }
 ];
+
+// 图标
+export const renderIcon = node => {
+  return node.data.type === 'note' ? 'note' : node.isExpanded ? 'folder-open' : 'folder';
+};

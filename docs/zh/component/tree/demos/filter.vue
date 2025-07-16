@@ -5,13 +5,13 @@
     :filter-method="filterMethod"
     :tree-height="200"
   >
-    <VIcon :name="item.type === 'note' ? 'note' : node.isExpanded ? 'folder-open' : 'folder'" />
-    <span>{{ item.desc }}</span>
+    <VIcon :name="renderIcon(node)" />
+    <span>{{ item.title }}</span>
   </VTree>
 </template>
 
 <script setup>
-import { renderData } from '../../table/composables';
+import { renderData, renderIcon } from '../../table/composables';
 
 const treeData = renderData(5, 2);
 function filterMethod({ item }) {
