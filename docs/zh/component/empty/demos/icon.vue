@@ -1,27 +1,27 @@
 <template>
   <DemoSpace flex>
-    <DemoCard label="修改图标">
+    <DemoCard label="只修改图标">
       <component
         :is="StateComponent"
-        :icon="IconFace"
+        icon="face"
       />
     </DemoCard>
-    <DemoCard label="修改颜色">
+    <DemoCard label="只修改样式">
       <component
         :is="StateComponent"
-        :icon="{ color: 'pink' }"
+        :icon="{ color: 'pink', size: 100 }"
       />
     </DemoCard>
-    <DemoCard label="修改尺寸">
+    <DemoCard label="修改图标和样式">
       <component
         :is="StateComponent"
-        :icon="{ size: 100 }"
+        :icon="{ name: 'face', color: 'pink', size: 100 }"
       />
     </DemoCard>
-    <DemoCard label="修改多项">
+    <DemoCard label="不使用图标">
       <component
         :is="StateComponent"
-        :icon="{ component: IconFace, color: 'pink', size: 100 }"
+        :icon="null"
       />
     </DemoCard>
   </DemoSpace>
@@ -29,7 +29,6 @@
 
 <script setup>
 import { useRouteValid } from '@vp/composables';
-import IconFace from '@vp/icons/face.svg?component';
 
 // 区分类型
 const isEmpty = useRouteValid('empty');

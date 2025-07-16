@@ -1,0 +1,57 @@
+// 空状态   vui-empty
+// 加载状态 vui-loading
+@mixin vui-empty($prefix) {
+  // vars
+  :root {
+    --#{$prefix}-text-color: var(--vui-text-color-secondary);
+  }
+
+  // 样式
+  .#{$prefix} {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    width: 100%;
+    padding: 30px;
+    text-align: center;
+    &-icon {
+      --vui-icon-color: var(--#{$prefix}-icon-color);
+    }
+    &-desc {
+      font-size: 14px;
+      line-height: 24px;
+      color: var(--#{$prefix}-text-color);
+    }
+  }
+
+  // 空状态
+  @if $prefix == "vui-empty" {
+    :root {
+      --vui-empty-icon-color: var(--vui-border-color-dark);
+    }
+    .vui-empty {
+      &-icon {
+        --vui-icon-size: 40px;
+      }
+      &-img {
+        width: min(50%, 200px);
+      }
+    }
+  }
+
+  // 加载状态
+  @if $prefix == "vui-loading" {
+    :root {
+      --vui-loading-icon-color: var(--vui-color-brand-base);
+    }
+    .vui-loading {
+      &-icon {
+        --vui-icon-size: 16px;
+      }
+      &-img {
+        width: 16px;
+      }
+    }
+  }
+}

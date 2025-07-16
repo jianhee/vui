@@ -1,5 +1,9 @@
 <template>
-  <VEmpty>
+  <DemoBase>
     <VButton type="primary">按钮</VButton>
-  </VEmpty>
+  </DemoBase>
 </template>
+
+<script setup>
+import DemoBase from './basic.vue';
+</script>

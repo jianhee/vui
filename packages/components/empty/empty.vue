@@ -1,25 +1,25 @@
 <!-- 空状态 -->
 <template>
-  <div class="vui-empty">
+  <div :class="`vui-${stateType}`">
     <!-- 优先使用图片 -->
     <img
       v-if="image"
-      class="vui-empty-img"
-      alt="empty"
+      :class="`vui-${stateType}-img`"
+      :alt="stateType"
       :src="image"
     />
     <!-- 其次使用图标 -->
     <VIcon
-      v-else-if="icon !== null"
-      class="vui-empty-icon"
-      v-bind="iconProps"
+      v-else-if="stateIconProps"
+      :class="`vui-${stateType}-icon`"
+      v-bind="stateIconProps"
     />
     <!-- 文本 -->
     <div
-      v-if="description"
-      class="vui-empty-desc"
+      v-if="descText"
+      :class="`vui-${stateType}-desc`"
     >
-      {{ description }}
+      {{ descText }}
     </div>
     <!-- 自定义内容 -->
     <slot />
@@ -27,8 +27,15 @@
 </template>
 
 <script setup>
+import { inject } from 'vue';
 import { useEmpty, emptyProps } from './composables';
 
+// 状态类型
+const stateType = inject('stateType', 'empty');
+
+// 状态属性
 const props = defineProps(emptyProps);
-const { iconProps } = useEmpty({ props });
+
+// 使用状态
+const { stateIconProps, descText } = useEmpty({ props, stateType });
 </script>
