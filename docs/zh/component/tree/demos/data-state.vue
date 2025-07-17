@@ -6,21 +6,25 @@
   >
     重新加载
   </VButton>
-  <DemoSpace
-    flex
-    class="demo-tree-state"
-  >
+  <DemoSpace flex>
     <DemoCard label="默认状态">
-      <VTree :loading="loading" />
+      <VTree
+        class="demo-tree"
+        :loading="loading"
+      />
     </DemoCard>
     <DemoCard label="自定义文本">
       <VTree
+        class="demo-tree"
         :loading="loading"
         empty-text="暂无数据"
       />
     </DemoCard>
     <DemoCard label="自定义插槽">
-      <VTree :loading="loading">
+      <VTree
+        class="demo-tree"
+        :loading="loading"
+      >
         <template #empty>
           <VEmpty description="暂无数据" />
         </template>
@@ -44,10 +48,3 @@ function refreshData() {
   }, 1000);
 }
 </script>
-
-<style lang="scss">
-.demo-tree-state .vui-tree {
-  height: 200px;
-  border: 1px solid var(--vui-border-color-base);
-}
-</style>

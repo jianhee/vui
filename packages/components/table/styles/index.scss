@@ -1,4 +1,5 @@
 // 公共样式
+@use "../../../styles/mixins";
 @use "./base";
 @include base.vui-selection-drag-root("vui-table");
 @include base.vui-selection-drag-item("vui-table-row");
@@ -64,14 +65,17 @@
     gap: 4px;
     align-items: center;
     padding: 0 16px;
+    white-space: nowrap;
     &-inner {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      @include mixins.vui-ellipsis;
     }
   }
 
   // 表头拖拽手柄
+  &-cell .vui-dragbox-handle {
+    top: 20%;
+    bottom: 20%;
+  }
   &-cell:hover .vui-dragbox-handle {
     --vui-dragbox-handle-color: var(--vui-table-dragbox-handle-color);
     --vui-dragbox-handle-hover-color: var(--vui-table-dragbox-handle-hover-color);

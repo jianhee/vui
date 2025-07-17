@@ -6,18 +6,17 @@
   >
     重新加载
   </VButton>
-  <DemoSpace
-    flex
-    class="demo-table-state"
-  >
+  <DemoSpace flex>
     <DemoCard label="默认状态">
       <VTable
+        class="demo-table"
         :loading="loading"
         :col-items="colItems"
       />
     </DemoCard>
     <DemoCard label="自定义文本">
       <VTable
+        class="demo-table"
         :loading="loading"
         empty-text="暂无数据"
         :col-items="colItems"
@@ -25,6 +24,7 @@
     </DemoCard>
     <DemoCard label="自定义插槽">
       <VTable
+        class="demo-table"
         :loading="loading"
         :col-items="colItems"
       >
@@ -56,10 +56,3 @@ function refreshData() {
   }, 1000);
 }
 </script>
-
-<style lang="scss">
-.demo-table-state .vui-table {
-  height: 200px;
-  border: 1px solid var(--vui-border-color-base);
-}
-</style>

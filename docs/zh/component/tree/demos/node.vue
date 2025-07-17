@@ -1,8 +1,8 @@
 <template>
   <VTree
     v-slot="{ node, item }"
+    class="demo-tree"
     :data="treeData"
-    :tree-height="200"
     :tree-indent="20"
     :node-height="20"
     :node-indent="20"

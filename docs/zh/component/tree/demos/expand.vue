@@ -16,6 +16,6 @@ import DemoLoadTree from './load.vue';
 <style>
 .demo-tree-expand .vui-tree {
   flex: auto;
-  border-right: 1px solid var(--vui-border-color-base);
+  width: 0;
 }
 </style>

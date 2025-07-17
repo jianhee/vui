@@ -1,6 +1,7 @@
 <template>
   <VTable
     v-model:selected-row-ids="selectedRowIds"
+    class="demo-table"
     :row-items="rowItems"
     :col-items="colItems"
     :selectable="true"

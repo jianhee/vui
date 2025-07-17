@@ -24,11 +24,14 @@ provide('vuiDragSortContext', {
 .demo-table-sort-multi {
   .vui-tree {
     flex: none;
-    width: 200px;
-    border-right: 1px solid var(--vui-border-color-base);
+    width: 300px;
+    height: 300px;
+    border: 1px solid var(--vui-border-color-base);
   }
   .vui-table {
     flex: auto;
+    height: 300px;
+    border: 1px solid var(--vui-border-color-base);
   }
 }
 </style>

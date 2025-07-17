@@ -29,10 +29,10 @@ export const useTreeNode = ({ treeRoot, treeNode }) => {
     return children?.length;
   });
 
-  // 展开图标状态
-  const expandIconRotate = computed(() => {
-    return nodeData.value.isExpanded ? 0 : -90;
-  });
+  // 展开图标属性
+  const expandIconProps = computed(() => ({
+    rotate: nodeData.value.isExpanded ? 90 : null
+  }));
 
   // 展开/关闭子节点
   async function toggleChildren() {
@@ -78,8 +78,7 @@ export const useTreeNode = ({ treeRoot, treeNode }) => {
 
   // 节点样式
   const nodeStyles = computed(() => ({
-    paddingLeft: `${treeRoot.props.treeIndent + treeRoot.props.nodeIndent * nodeData.value.level}px`,
-    paddingRight: treeRoot.props.dragSortable ? '35px' : null
+    paddingLeft: `${treeRoot.props.treeIndent + treeRoot.props.nodeIndent * nodeData.value.level + 4}px`
   }));
 
   // 行自定义属性
@@ -92,7 +91,7 @@ export const useTreeNode = ({ treeRoot, treeNode }) => {
 
   return {
     isShowExpand,
-    expandIconRotate,
+    expandIconProps,
     toggleChildren,
     onNodeClick,
     onNodeContextmenu,

@@ -1,6 +1,7 @@
 <template>
   <VTable
     v-slot="{ row, col }"
+    class="demo-table"
     :row-items="rowItems"
     :col-items="colItems"
     :col-resizable="true"

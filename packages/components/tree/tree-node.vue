@@ -22,15 +22,24 @@
     <VIcon
       v-else-if="isShowExpand"
       :component="IconExpand"
-      :rotate="expandIconRotate"
+      v-bind="expandIconProps"
       @click.stop="toggleChildren"
     />
-    <!-- 占位图标 -->
-    <VIcon v-else />
+    <!-- 占位符 -->
+    <div
+      v-else
+      class="vui-tree-node-placeholder"
+    />
     <!-- 优先显示 slot -->
     <slot v-if="$slots.default" />
     <!-- 其次显示 title -->
-    <span v-else>{{ nodeData.data.title }}</span>
+    <div
+      v-else
+      class="vui-tree-node-inner"
+      :title="nodeData.data.title"
+    >
+      {{ nodeData.data.title }}
+    </div>
     <!-- 排序 -->
     <div
       v-if="treeRoot.props.dragSortable"
@@ -59,7 +68,7 @@ const treeRoot = inject('treeRoot', null);
 const props = defineProps(treeNodeProps);
 
 // 使用树节点
-const { isShowExpand, expandIconRotate, toggleChildren, onNodeClick, onNodeContextmenu, nodeClasses, nodeStyles, customNodeAttrs } = useTreeNode({
+const { isShowExpand, expandIconProps, toggleChildren, onNodeClick, onNodeContextmenu, nodeClasses, nodeStyles, customNodeAttrs } = useTreeNode({
   treeRoot,
   treeNode: { props }
 });

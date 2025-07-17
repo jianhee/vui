@@ -1,6 +1,7 @@
 <template>
   <VTree
     v-slot="{ node, item }"
+    class="demo-tree"
     :data="treeData"
     :filter-method="filterMethod"
     :tree-height="200"
