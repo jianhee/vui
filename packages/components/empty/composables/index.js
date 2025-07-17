@@ -27,7 +27,7 @@ export const useEmpty = ({ props, stateType }) => {
 
     // 使用默认图标
     const defaultIcon = isLoading ? IconLoadingLoop : IconEmpty;
-    const defaultProps = { component: defaultIcon };
+    const defaultProps = { spin: isLoading, component: defaultIcon };
     if (typeof props.icon === 'undefined') return defaultProps;
 
     // 使用自定义图标

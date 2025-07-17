@@ -9,8 +9,8 @@
   height: var(--vui-icon-size, 1em);
   overflow: hidden;
   vertical-align: top; /* 消除父元素间距 */
-  color: var(--vui-icon-color);
-  transform: rotate(var(--vui-icon-rotate));
+  color: var(--vui-icon-color, currentColor);
+  transform: rotate(var(--vui-icon-rotate, 0));
   transition: all 0.3s ease;
   > svg {
     width: 100%;

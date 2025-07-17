@@ -17,6 +17,7 @@
     <VIcon
       v-if="nodeData.isLoading"
       :component="IconLoading"
+      :spin="true"
     />
     <!-- 折叠图标 -->
     <VIcon

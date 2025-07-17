@@ -19,7 +19,7 @@
         <VIcon
           v-if="isLoading"
           :component="IconLoadingLoop"
-          spin
+          :spin="true"
         />
       </span>
     </div>

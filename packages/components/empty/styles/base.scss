@@ -47,10 +47,10 @@
     }
     .vui-loading {
       &-icon {
-        --vui-icon-size: 16px;
+        --vui-icon-size: 18px;
       }
       &-img {
-        width: 16px;
+        width: min(50%, 60px);
       }
     }
   }

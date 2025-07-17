@@ -11,6 +11,7 @@
     <VIcon
       v-if="loading"
       :component="IconLoadingLoop"
+      :spin="true"
     />
     <!-- 图标 -->
     <VIcon
