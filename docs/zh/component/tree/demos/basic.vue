@@ -1,7 +1,7 @@
 <template>
   <VTree
     class="demo-tree"
-    :tree-height="200"
+    :tree-height="300"
     :data="treeData"
     v-bind="$attrs"
     @node-click="writeLog('node-click', $event)"
@@ -10,15 +10,15 @@
 </template>
 
 <script setup>
-import { renderData } from '../../table/composables';
+import { renderItems } from '../../table/composables';
 import { writeLog } from '@vp/utils';
 
-const treeData = renderData(10, 3);
+const treeData = renderItems({ length: 10, level: 3 });
 </script>
 
 <style>
 .demo-tree {
-  height: 200px;
+  height: 300px;
   border: 1px solid var(--vui-border-color-base);
 }
 </style>

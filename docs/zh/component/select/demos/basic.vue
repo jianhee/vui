@@ -28,6 +28,6 @@ const selectOptions = [
 
 <style>
 .demo-select {
-  max-width: 240px;
+  max-width: var(--demo-filed-width);
 }
 </style>

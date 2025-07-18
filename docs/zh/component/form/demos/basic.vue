@@ -60,7 +60,7 @@ const options = [
   &-input,
   &-select,
   &-slider {
-    max-width: 240px;
+    max-width: var(--demo-filed-width);
   }
 }
 </style>

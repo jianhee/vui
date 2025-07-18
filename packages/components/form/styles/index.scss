@@ -1,19 +1,23 @@
+// 表单
+// ----------------------------------------
+
 // vars
 :root {
   --vui-form-label-text-color: var(--vui-text-color-regular);
 }
 
-// 表单
+// 样式
 .vui-form {
+  // 容器
   display: flex;
   flex-direction: column;
   gap: 15px 30px;
 
   // 表单项的显示模式
   &--filed-inline {
-    --vui-input-width: 220px;
-    --vui-select-width: 220px;
-    --vui-slider-width: 220px;
+    --vui-input-width: 180px;
+    --vui-select-width: 180px;
+    --vui-slider-width: 180px;
 
     display: inline-flex;
     flex-flow: row wrap;

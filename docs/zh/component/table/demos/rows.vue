@@ -3,17 +3,18 @@
     class="demo-table"
     :col-items="colItems"
     :row-items="rowItems"
-    :row-height="20"
+    :row-height="25"
     :current-row-id="rowItems[0].id"
     :custom-row="customRow"
   />
 </template>
 
 <script setup>
-import { renderData, colItems } from '../composables';
+import { renderItems, renderCols } from '../composables';
 
-// 行数据
-const rowItems = renderData(5);
+// 数据
+const rowItems = renderItems({ length: 5 });
+const colItems = renderCols();
 
 // 自定义行属性
 function customRow({ row }) {

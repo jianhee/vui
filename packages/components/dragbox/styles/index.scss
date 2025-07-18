@@ -1,21 +1,15 @@
+// 拖拽盒子
+// ----------------------------------------
+
 // vars
 :root {
   --vui-dragbox-handle-color: transparent;
   --vui-dragbox-handle-hover-color: var(--vui-color-brand-base);
 }
 
-// 盒子
+// 样式
 .vui-dragbox {
-  // 拖拽
-  &.is-resizable {
-    position: relative;
-  }
-  &.is-resizing {
-    user-select: none;
-    transition: none !important;
-  }
-
-  // 移动
+  // 可移动
   &.is-movable {
     position: fixed;
     z-index: 999;
@@ -26,7 +20,16 @@
     transition: none !important;
   }
 
-  // 手柄
+  // 可拖拽
+  &.is-resizable {
+    position: relative;
+  }
+  &.is-resizing {
+    user-select: none;
+    transition: none !important;
+  }
+
+  // 拖拽手柄
   &.is-moving &-handle,
   &.is-resizing &-handle:not(.is-active) {
     display: none;

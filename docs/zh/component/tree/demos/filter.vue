@@ -12,9 +12,9 @@
 </template>
 
 <script setup>
-import { renderData, renderIcon } from '../../table/composables';
+import { renderItems, renderIcon } from '../../table/composables';
 
-const treeData = renderData(5, 2);
+const treeData = renderItems({ length: 5, level: 2 });
 function filterMethod({ item }) {
   return item.type === 'folder';
 }

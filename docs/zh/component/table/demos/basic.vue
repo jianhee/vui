@@ -9,10 +9,11 @@
 </template>
 
 <script setup>
-import { renderData, colItems } from '../composables';
+import { renderItems, renderCols } from '../composables';
 import { writeLog } from '@vp/utils';
 
-const rowItems = renderData(1000);
+const rowItems = renderItems({ length: 1000 });
+const colItems = renderCols();
 </script>
 
 <style>

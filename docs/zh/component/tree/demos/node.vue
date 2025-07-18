@@ -3,9 +3,9 @@
     v-slot="{ node, item }"
     class="demo-tree"
     :data="treeData"
-    :tree-indent="20"
-    :node-height="20"
-    :node-indent="20"
+    :tree-indent="25"
+    :node-height="25"
+    :node-indent="25"
     :current-node-id="treeData[0].id"
     :custom-node="customNode"
   >
@@ -15,10 +15,10 @@
 </template>
 
 <script setup>
-import { renderData, renderIcon } from '../../table/composables';
+import { renderItems, renderIcon } from '../../table/composables';
 
 // 数据
-const treeData = renderData(5, 2);
+const treeData = renderItems({ length: 5, level: 2 });
 
 // 自定义节点属性
 function customNode({ item }) {

@@ -21,10 +21,10 @@
 
 <script setup>
 import { ref } from 'vue';
-import { renderData, renderIcon } from '../../table/composables';
+import { renderItems, renderIcon } from '../../table/composables';
 
 // 树
-const treeData = renderData(5, 3);
+const treeData = renderItems({ length: 5, level: 3 });
 
 // 当前项
 const currentData = ref(null);

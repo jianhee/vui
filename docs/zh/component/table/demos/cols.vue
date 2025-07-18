@@ -15,7 +15,8 @@
 </template>
 
 <script setup>
-import { renderData, colItems } from '../composables';
+import { renderItems, renderCols } from '../composables';
 
-const rowItems = renderData(5);
+const rowItems = renderItems({ length: 5 });
+const colItems = renderCols();
 </script>

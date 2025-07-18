@@ -1,16 +1,15 @@
 <!-- 表头-行 -->
 <template>
   <div :class="['vui-table-row', allSelectionClasses]">
-    <!-- 排序占位 -->
+    <!-- 拖拽排序 -->
     <div
       v-if="tableRoot.props.dragSortable"
-      class="vui-table-row--action"
-      style="width: 24px"
+      class="vui-table-row-action"
     />
     <!-- 全选 -->
     <div
       v-if="tableRoot.props.selectable"
-      class="vui-table-row--action"
+      class="vui-table-row-action"
     >
       <VCheckbox
         :checked="isSelectedAll"
@@ -18,24 +17,19 @@
         @change="toggleAllSelection"
       />
     </div>
-    <!-- 单元格：拖拽调整宽度 -->
-    <VDragbox
+    <!-- 单元格 -->
+    <TheadCell
       v-for="col in tableRoot.props.colItems"
       :key="col.key"
-      v-model:width="tableRoot.colWidthsRef.value[col.key]"
-      class="vui-table-cell"
-      :resizable="tableRoot.props.colResizable"
-      :resize-handles="['right']"
-      :min-width="tableRoot.colMinWidth"
-    >
-      <span class="vui-table-cell-inner">{{ col.title }}</span>
-    </VDragbox>
+      :col-data="col"
+    />
   </div>
 </template>
 
 <script setup>
 import { inject } from 'vue';
 import { useAllSelection } from './composables/selection';
+import TheadCell from './thead-cell.vue';
 
 // 表格
 const tableRoot = inject('tableRoot', null);

@@ -1,5 +1,7 @@
 // 对话框 vui-dialog
 // 抽屉   vui-drawer
+// ----------------------------------------
+
 @mixin vui-dialog($prefix) {
   // vars
   :root {
@@ -11,7 +13,7 @@
     --#{$prefix}-close-icon-hover-color: var(--vui-color-brand-base);
   }
 
-  // 通用样式
+  // 样式
   .#{$prefix} {
     // 主体
     line-height: 24px;

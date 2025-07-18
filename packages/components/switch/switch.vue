@@ -18,6 +18,7 @@
         <!-- loading -->
         <VIcon
           v-if="isLoading"
+          class="vui-switch-loading"
           :component="IconLoading"
           :spin="true"
         />

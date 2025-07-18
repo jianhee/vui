@@ -23,6 +23,6 @@ const inputValue = ref(null);
 
 <style>
 .demo-input {
-  max-width: 240px;
+  max-width: var(--demo-filed-width);
 }
 </style>

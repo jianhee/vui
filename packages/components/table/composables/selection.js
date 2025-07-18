@@ -25,10 +25,10 @@ export const selectionProps = {
 };
 
 // 使用多选
-export const useSelection = ({ selectable, dragFlagRef, dragSelectAreaWidth, modelSelectedRowIds, rowItemsRef, emits }) => {
+export const useSelection = ({ props, dragFlagRef, modelSelectedRowIds, emits }) => {
   // 切换事件
   function onSelectionChange(selectedItems = [], selectedIds = []) {
-    if (!selectable) return;
+    if (!props.selectable) return;
 
     // 避免重复更新
     if (JSON.stringify(selectedIds) === JSON.stringify(modelSelectedRowIds.value || '[]')) return;
@@ -41,10 +41,13 @@ export const useSelection = ({ selectable, dragFlagRef, dragSelectAreaWidth, mod
   }
 
   // 更新数据时取消选中
-  watch(rowItemsRef, () => {
-    if (!selectable) return;
-    onSelectionChange();
-  });
+  watch(
+    () => props.rowItems,
+    () => {
+      if (!props.selectable) return;
+      onSelectionChange();
+    }
+  );
 
   // 子组件使用
   provide('onSelectionChange', onSelectionChange);
@@ -56,12 +59,12 @@ export const useSelection = ({ selectable, dragFlagRef, dragSelectAreaWidth, mod
 
   // 根元素样式
   const selectionRootStyles = computed(() => ({
-    marginLeft: `-${dragSelectAreaWidth}px`
+    marginLeft: `-${props.dragSelectAreaWidth}px`
   }));
 
   // 子元素样式
   const selectionInnerStyles = computed(() => ({
-    paddingLeft: `${dragSelectAreaWidth}px`
+    paddingLeft: `${props.dragSelectAreaWidth}px`
   }));
 
   return {

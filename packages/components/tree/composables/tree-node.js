@@ -78,7 +78,7 @@ export const useTreeNode = ({ treeRoot, treeNode }) => {
 
   // 节点样式
   const nodeStyles = computed(() => ({
-    paddingLeft: `${treeRoot.props.treeIndent + treeRoot.props.nodeIndent * nodeData.value.level + 4}px`
+    paddingLeft: `${treeRoot.props.treeIndent + treeRoot.props.nodeIndent * nodeData.value.level}px`
   }));
 
   // 行自定义属性

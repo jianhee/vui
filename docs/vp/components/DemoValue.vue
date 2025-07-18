@@ -29,7 +29,7 @@ const modelValue = defineModel('value', { type: Number, default: null });
   align-items: center;
   &-slider {
     flex: auto;
-    max-width: 240px;
+    max-width: var(--demo-filed-width);
   }
   &-text {
     flex: none;

@@ -14,10 +14,10 @@
 
 <script setup>
 import { ref } from 'vue';
-import { renderData, renderIcon } from '../../table/composables';
+import { renderItems, renderIcon } from '../../table/composables';
 
 // 初始数据
-const treeData = ref(renderData(5));
+const treeData = ref(renderItems({ length: 5 }));
 
 // 查找节点
 const findNodeById = (nodeId, nodes = treeData.value) => {
@@ -36,7 +36,7 @@ function loadData({ node, item }) {
   return new Promise(resolve => {
     setTimeout(() => {
       if (node.level < 2) {
-        const children = renderData(5, 0, item.id);
+        const children = renderItems({ length: 5, path: item.title.slice(3) });
         const newNode = findNodeById(item.id);
         newNode.children = children;
       }

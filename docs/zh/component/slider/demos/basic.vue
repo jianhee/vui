@@ -18,6 +18,6 @@ const valueRef = ref(50);
 
 <style>
 .demo-slider {
-  max-width: 240px;
+  max-width: var(--demo-filed-width);
 }
 </style>

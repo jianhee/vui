@@ -69,10 +69,10 @@ export const useCheckbox = ({ checkboxType, checkboxGroup, checkbox }) => {
   });
 
   // 切换选中状态
-  function onCheckedChange() {
+  function onCheckedChange(event) {
     // 单个选项
     if (!checkboxGroup) {
-      onCheckboxChange();
+      onCheckboxChange(event);
       return;
     }
     // 选项组
@@ -135,7 +135,7 @@ export const useCheckbox = ({ checkboxType, checkboxGroup, checkbox }) => {
   // 根元素类名
   const rootClasses = computed(() => {
     return [
-      isBtn.value ? `vui-${checkboxType}-btn` : `vui-${checkboxType}`,
+      isBtn.value ? `vui-${checkboxType}-btn` : `vui-${checkboxType}-default`,
       {
         [`vui-${checkboxType}--block`]: isUseBlock.value,
         'is-checked': isChecked.value

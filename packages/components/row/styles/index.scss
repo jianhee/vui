@@ -1,5 +1,9 @@
 // 行
+// ----------------------------------------
+
 @use "../../../styles/mixins";
+
+// 样式
 .vui-row {
   &.is-center {
     @include mixins.vui-center;

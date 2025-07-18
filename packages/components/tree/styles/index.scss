@@ -1,8 +1,9 @@
-// 公共样式
+// 树
+// ----------------------------------------
+
 @use "../../../styles/mixins";
-@use "../../table/styles/base";
-@include base.vui-selection-drag-root("vui-tree");
-@include base.vui-selection-drag-item("vui-tree-node");
+@use "../../table/styles/drag";
+@include drag.vui-drag("vui-tree", "node");
 
 // vars
 :root {
@@ -11,10 +12,9 @@
   --vui-tree-node-active-bg-color: var(--vui-fill-color-light);
 }
 
-// 树
+// 样式
 .vui-tree {
-  --vui-icon-color: var(--vui-text-color-placeholder);
-
+  // 容器
   flex: auto;
   overflow: hidden;
   font-size: var(--vui-tree-font-size);
@@ -34,13 +34,33 @@
     &.is-current {
       background-color: var(--vui-tree-node-active-bg-color);
     }
+
+    // 占位
     &-placeholder {
-      width: var(--vui-tree-font-size);
+      display: inline-flex;
+      flex: none;
+      align-items: center;
+      justify-content: center;
+      width: 12px;
+      margin-left: 4px;
     }
+
+    // 图标
+    &-expand,
+    &-loading {
+      --vui-icon-color: var(--vui-text-color-placeholder);
+    }
+    &-expand {
+      --vui-icon-size: 12px;
+    }
+
+    // 内容
     &-inner {
       @include mixins.vui-ellipsis;
     }
-    &--action {
+
+    // 操作按钮
+    &-action {
       margin-left: auto;
     }
   }

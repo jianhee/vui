@@ -61,8 +61,9 @@
 </template>
 
 <script setup>
-import { ref, watch, provide, useTemplateRef } from 'vue';
+import { ref, provide, useTemplateRef, watchEffect } from 'vue';
 import { useVirtualList } from '@vueuse/core';
+import { getSortResults } from '../../utils';
 import { useTable, tableProps, tableEmits } from './composables/table';
 import { useSelection, selectionModel, selectionProps, selectionEmits } from './composables/selection';
 import { useDragSort, dragSortProps, dragSortEmist } from './composables/drag-sort';
@@ -76,15 +77,11 @@ const modelSelectedRowIds = defineModel('selectedRowIds', selectionModel.selecte
 const props = defineProps({ ...tableProps, ...selectionProps, ...dragSortProps });
 const emits = defineEmits([...tableEmits, ...selectionEmits, ...dragSortEmist]);
 
-// 全局拖拽状态
+// 全局状态
+const rowItemsRef = ref(null);
 const dragFlagRef = ref(null);
-
-// 原始数据
-const rowItemsRef = ref(props.rowItems);
-watch(
-  () => props.rowItems,
-  val => (rowItemsRef.value = val)
-);
+const sortKeyRef = ref(null);
+const sortOrderRef = ref(null);
 
 // 使用虚拟列表
 const {
@@ -105,15 +102,13 @@ const { rootStyles, headerStyles, colMinWidth, colWidthsRef } = useTable({
 
 // 使用多选
 const { selectionRootClasses, selectionRootStyles, selectionInnerStyles } = useSelection({
-  selectable: props.selectable,
+  props,
   dragFlagRef,
-  dragSelectAreaWidth: props.dragSelectAreaWidth,
   modelSelectedRowIds,
-  rowItemsRef,
   emits
 });
 
-// 使用排序
+// 使用拖拽排序
 const { dragSortRootClasses } = useDragSort({
   dragFlagRef,
   dragSortGroup: props.dragSortGroup
@@ -125,9 +120,21 @@ provide('tableRoot', {
   modelSelectedRowIds,
   props,
   emits,
-  dragFlagRef,
   rowItemsRef,
+  dragFlagRef,
+  sortKeyRef,
+  sortOrderRef,
   colWidthsRef,
   colMinWidth
+});
+
+// 更新数据
+watchEffect(() => {
+  const items = props.rowItems || [];
+  rowItemsRef.value = getSortResults({
+    items: [...items],
+    filed: sortKeyRef.value,
+    order: sortOrderRef.value
+  });
 });
 </script>

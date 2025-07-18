@@ -13,24 +13,23 @@
     @click="onNodeClick"
     @contextmenu.prevent="onNodeContextmenu"
   >
-    <!-- 加载状态 -->
-    <VIcon
-      v-if="nodeData.isLoading"
-      :component="IconLoading"
-      :spin="true"
-    />
-    <!-- 折叠图标 -->
-    <VIcon
-      v-else-if="isShowExpand"
-      :component="IconExpand"
-      v-bind="expandIconProps"
-      @click.stop="toggleChildren"
-    />
-    <!-- 占位符 -->
-    <div
-      v-else
-      class="vui-tree-node-placeholder"
-    />
+    <div class="vui-tree-node-placeholder">
+      <!-- 加载状态 -->
+      <VIcon
+        v-if="nodeData.isLoading"
+        class="vui-tree-node-loading"
+        :component="IconLoading"
+        :spin="true"
+      />
+      <!-- 折叠图标 -->
+      <VIcon
+        v-else-if="isShowExpand"
+        class="vui-tree-node-expand"
+        :component="IconExpand"
+        v-bind="expandIconProps"
+        @click.stop="toggleChildren"
+      />
+    </div>
     <!-- 优先显示 slot -->
     <slot v-if="$slots.default" />
     <!-- 其次显示 title -->
@@ -44,11 +43,11 @@
     <!-- 排序 -->
     <div
       v-if="treeRoot.props.dragSortable"
-      class="vui-tree-node--action"
+      class="vui-tree-node-action"
     >
       <VIcon
         :component="IconDrag"
-        class="vui-tree-drag-handle"
+        class="vui-tree-node-drag-handle"
       />
     </div>
   </div>

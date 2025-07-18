@@ -1,3 +1,6 @@
+// 开关
+// ----------------------------------------
+
 @use "../../../styles/mixins";
 
 // vars
@@ -9,8 +12,9 @@
   --vui-switch-label-active-text-color: var(--vui-color-brand-base);
 }
 
-// 开关
+// 样式
 .vui-switch {
+  // 容器
   display: inline-flex;
   gap: 5px;
   align-items: center;
@@ -69,6 +73,8 @@
   }
 
   // 加载图标
-  --vui-icon-color: var(--vui-switch-on-bg-color);
-  --vui-icon-size: 12px;
+  &-loading {
+    --vui-icon-color: var(--vui-switch-on-bg-color);
+    --vui-icon-size: 12px;
+  }
 }

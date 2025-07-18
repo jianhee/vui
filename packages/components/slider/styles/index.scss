@@ -1,3 +1,6 @@
+// 滑块
+// ----------------------------------------
+
 // vars
 :root {
   --vui-slider-rail-bg-color: var(--vui-border-color-light);
@@ -7,8 +10,9 @@
   --vui-slider-tip-bg-color: var(--vui-text-color-primary);
 }
 
-// 滑块
+// 样式
 .vui-slider {
+  // 容器
   position: relative;
   width: var(--vui-slider-width);
   height: 32px;

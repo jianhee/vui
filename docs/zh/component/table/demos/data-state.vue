@@ -43,7 +43,7 @@ import { ref } from 'vue';
 const loading = ref(false);
 const colItems = [
   { key: 'id', title: 'ID', width: 80, cellClass: 'demo-table-cell' },
-  { key: 'desc', title: '说明', width: 80 },
+  { key: 'title', title: '标题', width: 80 },
   { key: 'name', title: '姓名', width: 80 }
 ];
 

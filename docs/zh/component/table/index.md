@@ -37,6 +37,12 @@
 
 <preview path="./demos/selection.vue"></preview>
 
+## 排序
+
+使用列数据中的 `sortable` 属性定义该列是否可以排序
+
+<preview path="./demos/sort.vue"></preview>
+
 <!-- 拖拽排序 -->
 <!--@include: ./parts/drag-sort-guild.md-->
 
@@ -78,6 +84,7 @@
 | `key`       | 列唯一标识，默认使用 `row[col.key]` 的值渲染单元格内容 | `string\|number` | 必填           |
 | `title`     | 列标题                                                 | `string`         |                |
 | `width`     | 列宽                                                   | `number`         | 根据列数量平分 |
+| `sortable`  | 列是否可以排序                                         | `boolean`        |                |
 | `cellClass` | 单元格类名                                             | `string`         |                |
 
 ### 插槽

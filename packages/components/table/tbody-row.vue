@@ -11,20 +11,20 @@
     @drop.stop="onDrop"
     @contextmenu.prevent="onRowContextmenu"
   >
-    <!-- 排序 -->
+    <!-- 拖拽排序 -->
     <div
       v-if="tableRoot.props.dragSortable"
-      class="vui-table-row--action"
+      class="vui-table-row-action"
     >
       <VIcon
         :component="IconDrag"
-        class="vui-table-drag-handle"
+        class="vui-table-row-drag-handle"
       />
     </div>
     <!-- 多选 -->
     <div
       v-if="tableRoot.props.selectable"
-      class="vui-table-row--action"
+      class="vui-table-row-action"
     >
       <VCheckbox
         :checked="isSelectedRow"

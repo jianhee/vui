@@ -23,6 +23,6 @@ const items = [
 
 <style>
 .demo-menu {
-  width: 240px;
+  width: var(--demo-filed-width);
 }
 </style>

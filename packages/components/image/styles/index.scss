@@ -1,13 +1,26 @@
 // 图片
+// ----------------------------------------
+
+// vars
+:root {
+  --vui-image-bg-color: var(--vui-fill-color-base);
+}
+
+// 样式
 .vui-image {
+  // 容器
   flex: none;
   width: var(--vui-image-width);
   aspect-ratio: var(--vui-image-aspect-ratio);
   overflow: hidden;
   border-radius: var(--vui-image-radius);
+
+  // 加载状态
   > .vui-skeleton-item {
     height: 100%;
   }
+
+  // 失败状态
   &-error {
     --vui-icon-size: 24px;
     --vui-icon-color: var(--vui-text-color-secondary);
@@ -16,8 +29,10 @@
     align-items: center;
     justify-content: center;
     height: 100%;
-    background-color: var(--vui-fill-color-base);
+    background-color: var(--vui-image-bg-color);
   }
+
+  // 内容
   &-inner {
     display: block;
     width: 100%;

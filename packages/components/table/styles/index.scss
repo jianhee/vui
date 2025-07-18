@@ -1,27 +1,23 @@
-// 公共样式
+// 表格
+// ----------------------------------------
+
 @use "../../../styles/mixins";
-@use "./base";
-@include base.vui-selection-drag-root("vui-table");
-@include base.vui-selection-drag-item("vui-table-row");
+@use "./drag";
+@include drag.vui-drag("vui-table", "row");
 
 // vars
 :root {
-  // 表格
   --vui-table-font-size: 14px;
   --vui-table-text-color: var(--vui-text-color-regular);
   --vui-table-row-active-bg-color: var(--vui-fill-color-light);
-
-  // 拖拽手柄
-  --vui-table-dragbox-handle-color: var(--vui-border-color-base);
-  --vui-table-dragbox-handle-hover-color: var(--vui-color-brand-base);
-
-  // 鼠标框选
+  --vui-table-sorter-color: var(--vui-text-color-placeholder);
   --vui-table-select-rect-bg-color: var(--vui-color-brand-a10);
   --vui-table-select-rect-border-color: var(--vui-color-brand-base);
 }
 
-// 表格
+// 样式
 .vui-table {
+  // 容器
   display: flex;
   flex: auto;
   flex-direction: column;
@@ -44,6 +40,7 @@
   &-row {
     position: relative;
     display: flex;
+    align-items: center;
     min-width: max-content;
     height: var(--vui-table-row-height);
     &:hover,
@@ -54,8 +51,9 @@
   }
 
   // 操作按钮
-  &-row--action {
-    padding-left: 8px;
+  &-row-action {
+    justify-content: flex-end;
+    width: 24px;
   }
 
   // 单元格
@@ -64,21 +62,49 @@
     flex: none;
     gap: 4px;
     align-items: center;
+    height: 100%;
     padding: 0 16px;
     white-space: nowrap;
     &-inner {
       @include mixins.vui-ellipsis;
     }
-  }
 
-  // 表头拖拽手柄
-  &-cell .vui-dragbox-handle {
-    top: 20%;
-    bottom: 20%;
-  }
-  &-cell:hover .vui-dragbox-handle {
-    --vui-dragbox-handle-color: var(--vui-table-dragbox-handle-color);
-    --vui-dragbox-handle-hover-color: var(--vui-table-dragbox-handle-hover-color);
+    // 拖拽缩放手柄
+    .vui-dragbox-handle {
+      top: 5px;
+      bottom: 5px;
+    }
+    &:hover .vui-dragbox-handle {
+      --vui-dragbox-handle-color: var(--vui-border-color-base);
+    }
+
+    // 排序
+    &.is-sortable {
+      cursor: pointer;
+    }
+    &-sort {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-left: auto;
+      cursor: pointer;
+    }
+    &-sorter {
+      width: 0;
+      height: 0;
+      border: solid transparent;
+      border-width: 6px 4px;
+      transition: all 0.3s;
+      &.is-asc {
+        border-bottom-color: var(--vui-table-sorter-color);
+      }
+      &.is-desc {
+        border-top-color: var(--vui-table-sorter-color);
+      }
+      &.is-active {
+        --vui-table-sorter-color: var(--vui-color-brand-base);
+      }
+    }
   }
 
   // 鼠标框选

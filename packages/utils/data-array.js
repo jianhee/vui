@@ -28,3 +28,34 @@ export const getCommonItems = (arr1, arr2, key) => {
 export const hasCommonItems = (...args) => {
   return getCommonItems(...args).length > 0;
 };
+
+/**
+ * 获取排序结果
+ * @param {array}  items  源数组
+ * @param {string} filed  排序字段
+ * @param {string} order  排序方式
+ * @returns {array}       排序后的数组
+ */
+export const getSortResults = (params = {}) => {
+  const { items, filed, order } = params;
+
+  // 无需排序
+  if (!items?.length) return [];
+  if (!filed || !order) return items;
+
+  // 需要排序
+  return items.sort((a, b) => {
+    const valA = a[filed];
+    const valB = b[filed];
+
+    // 数字比较大小
+    const isNum = typeof valA === 'number' && typeof valB === 'number';
+    if (isNum) {
+      return order === 'asc' ? valA - valB : valB - valA;
+    }
+
+    // 字符串比较编码
+    const strRes = String(valA).localeCompare(String(valB));
+    return order === 'asc' ? strRes : strRes * -1;
+  });
+};

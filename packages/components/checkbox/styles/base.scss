@@ -1,34 +1,17 @@
-@use "../../../styles/mixins";
-
-// 基础样式
-@mixin vui-base() {
-  position: relative;
-  display: inline-flex;
-  gap: 4px;
-  align-items: center;
-  width: fit-content;
-  height: 32px;
-  font-size: 14px;
-  vertical-align: top; /* 消除父元素间距 */
-  white-space: nowrap;
-  cursor: pointer;
-  user-select: none;
-  transition: all 0.3s ease;
-  &.is-disabled {
-    @include mixins.vui-disabled;
-  }
-}
-
 // 多选框 vui-checkbox
 // 单选框 vui-radio
+// ----------------------------------------
+
+@use "../../../styles/mixins";
+
 @mixin vui-checkbox($prefix) {
   // vars
   :root {
-    // 默认样式
-    --#{$prefix}-text-color: var(--vui-text-color-regular);
-    --#{$prefix}-checked-color: var(--vui-color-brand-base);
+    // 默认类型
+    --#{$prefix}-default-text-color: var(--vui-text-color-regular);
+    --#{$prefix}-default-checked-color: var(--vui-color-brand-base);
 
-    // 按钮样式
+    // 按钮类型
     --#{$prefix}-btn-text-color: var(--vui-text-color-primary);
     --#{$prefix}-btn-bg-color: var(--vui-fill-color-blank);
     --#{$prefix}-btn-border-color: var(--vui-border-color-base);
@@ -38,15 +21,25 @@
     --#{$prefix}-btn-checked-border-color: var(--vui-color-brand-base);
   }
 
-  // 默认类型的样式
+  // 样式
   .#{$prefix} {
-    // 基础样式
-    @include vui-base;
+    // 容器
+    position: relative;
+    display: inline-flex;
+    gap: 4px;
+    align-items: center;
+    width: fit-content;
+    height: 32px;
+    font-size: 14px;
+    vertical-align: top; /* 消除父元素间距 */
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.3s ease;
 
-    line-height: 32px;
-    color: var(--#{$prefix}-text-color);
-    &.is-checked {
-      color: var(--#{$prefix}-checked-color);
+    // 禁用状态
+    &.is-disabled {
+      @include mixins.vui-disabled;
     }
 
     // 隐藏的输入框
@@ -62,33 +55,30 @@
       --vui-icon-color: var(--vui-border-color-base);
     }
     &.is-checked &-icon {
-      --vui-icon-color: var(--#{$prefix}-checked-color);
+      --vui-icon-color: var(--vui-color-brand-base);
     }
 
-    // 显示模式
-    &--block {
-      display: flex;
-    }
-    &-group & {
-      margin-right: 10px;
-    }
-    &-group &--block {
-      margin-right: 0;
-    }
-  }
+    // 默认类型
+    &-default {
+      line-height: 32px;
+      color: var(--#{$prefix}-default-text-color);
 
-  // 按钮类型额外的样式
-  .#{$prefix} {
-    // 基础样式
+      // 选中状态
+      &.is-checked {
+        color: var(--#{$prefix}-default-checked-color);
+      }
+    }
+
+    // 按钮类型
     &-btn {
-      @include vui-base;
-
       padding: 0 18px;
       line-height: 30px;
       color: var(--#{$prefix}-btn-text-color);
       background-color: var(--#{$prefix}-btn-bg-color);
       border: 1px solid var(--#{$prefix}-btn-border-color);
       border-radius: 4px;
+
+      // 状态
       &:hover {
         color: var(--#{$prefix}-btn-hover-text-color);
       }
@@ -100,6 +90,9 @@
     }
 
     // 按钮组
+    &-group > &-default {
+      margin-right: 10px;
+    }
     &-group > &-btn {
       border-left-color: transparent;
       border-radius: 0;
@@ -117,6 +110,14 @@
         border-color: var(--#{$prefix}-btn-checked-border-color);
         box-shadow: none;
       }
+    }
+
+    // 显示模式
+    &--block {
+      display: flex;
+    }
+    &-group &--block {
+      margin-right: 0;
     }
   }
 }

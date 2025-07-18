@@ -1,5 +1,7 @@
 // 空状态   vui-empty
 // 加载状态 vui-loading
+// ----------------------------------------
+
 @mixin vui-empty($prefix) {
   // vars
   :root {
@@ -8,6 +10,7 @@
 
   // 样式
   .#{$prefix} {
+    // 容器
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -15,9 +18,8 @@
     width: 100%;
     padding: 30px;
     text-align: center;
-    &-icon {
-      --vui-icon-color: var(--#{$prefix}-icon-color);
-    }
+
+    // 描述文字
     &-desc {
       font-size: 14px;
       line-height: 24px;
@@ -27,12 +29,10 @@
 
   // 空状态
   @if $prefix == "vui-empty" {
-    :root {
-      --vui-empty-icon-color: var(--vui-border-color-dark);
-    }
     .vui-empty {
       &-icon {
         --vui-icon-size: 40px;
+        --vui-icon-color: var(--vui-border-color-dark);
       }
       &-img {
         width: min(50%, 200px);
@@ -42,12 +42,10 @@
 
   // 加载状态
   @if $prefix == "vui-loading" {
-    :root {
-      --vui-loading-icon-color: var(--vui-color-brand-base);
-    }
     .vui-loading {
       &-icon {
         --vui-icon-size: 18px;
+        --vui-icon-color: var(--vui-color-brand-base);
       }
       &-img {
         width: min(50%, 60px);

@@ -1,3 +1,6 @@
+// 菜单
+// ----------------------------------------
+
 @use "../../../styles/mixins";
 
 // vars
@@ -10,7 +13,7 @@
   --vui-menu-item-active-text-color: var(--vui-color-brand-base);
 }
 
-// 下拉菜单
+// 样式
 .vui-menu {
   &-item {
     display: flex;

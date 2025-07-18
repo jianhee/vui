@@ -1,7 +1,7 @@
 <!-- 多选框-单个选项 -->
 <template>
   <label
-    :class="rootClasses"
+    :class="[`vui-${checkboxType}`, rootClasses]"
     v-bind="rootProps"
   >
     <!-- 隐藏的 input -->

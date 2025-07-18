@@ -1,3 +1,6 @@
+// 下拉框
+// ----------------------------------------
+
 // vars
 :root {
   --vui-dropdown-bg-color: var(--vui-bg-color-overlay);
@@ -5,8 +8,9 @@
   --vui-dropdown-shadow: var(--vui-box-shadow-light);
 }
 
-// 下拉框
+// 样式
 .vui-dropdown {
+  // 容器
   position: fixed;
   z-index: 999;
   max-width: 95vw;

@@ -10,6 +10,7 @@
     <span
       v-else
       class="vui-table-cell-inner"
+      :title="rowData[colData.key]"
     >
       {{ rowData[colData.key] }}
     </span>

@@ -15,7 +15,7 @@ import { writeLog } from '@vp/utils';
 
 <style>
 .demo-dropdown {
-  width: 240px;
+  width: var(--demo-filed-width);
   height: 240px;
   padding: 10px;
 }
