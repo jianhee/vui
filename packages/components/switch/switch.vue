@@ -18,7 +18,7 @@
         <!-- loading -->
         <VIcon
           v-if="isLoading"
-          :component="IconLoadingLoop"
+          :component="IconLoading"
           :spin="true"
         />
       </span>
@@ -35,7 +35,7 @@
 
 <script setup>
 import { useSwitch, switchModel, switchProps, switchEmits } from './composables';
-import IconLoadingLoop from '../../icons/loading-loop.vue';
+import IconLoading from '../../icons/loading.vue';
 
 // 开关
 const modelChecked = defineModel('checked', switchModel.checked);

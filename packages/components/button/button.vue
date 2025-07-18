@@ -10,7 +10,7 @@
     <!-- 加载状态 -->
     <VIcon
       v-if="loading"
-      :component="IconLoadingLoop"
+      :component="IconLoading"
       :spin="true"
     />
     <!-- 图标 -->
@@ -28,7 +28,7 @@ import { computed } from 'vue';
 import { useButton, btnProps } from './composables';
 import { useNativeProps } from '../../composables/use-native-props';
 import { useIconProps } from '../../composables/use-icon-props';
-import IconLoadingLoop from '../../icons/loading-loop.vue';
+import IconLoading from '../../icons/loading.vue';
 
 // 筛选属性
 defineOptions({ inheritAttrs: false });

@@ -14,7 +14,7 @@
     <!-- 图标 -->
     <VIcon
       class="vui-select-icon"
-      :component="IconArrow"
+      :component="IconArrowDown"
       v-bind="iconProps"
     />
   </div>
@@ -52,7 +52,7 @@ import { useTemplateRef } from 'vue';
 import { useSelect, selectModel, selectProps, selectEmits } from './composables';
 import Dropdown from '../dropdown/dropdown.vue';
 import Menu from '../menu/menu.vue';
-import IconArrow from '../../icons/select-arrow.vue';
+import IconArrowDown from '../../icons/arrow-down.vue';
 
 // 选择器
 defineOptions({ inheritAttrs: false });

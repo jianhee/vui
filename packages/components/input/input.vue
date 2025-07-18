@@ -36,7 +36,7 @@ import { computed, useTemplateRef } from 'vue';
 import { useInput, inputModel, inputProps, inputEmits } from './composables';
 import { useNativeProps } from '../../composables/use-native-props';
 import { useIconProps } from '../../composables/use-icon-props';
-import IconClear from '../../icons/clear.vue';
+import IconClear from '../../icons/circle-close.vue';
 
 // 筛选属性
 defineOptions({ inheritAttrs: false });

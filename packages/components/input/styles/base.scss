@@ -15,6 +15,8 @@
 
   // 通用样式
   .#{$prefix} {
+    --vui-icon-color: var(--vui-text-color-placeholder);
+
     // 容器
     display: flex;
     gap: 8px;
@@ -61,23 +63,23 @@
       font-size: 12px;
       line-height: 22px;
     }
-
-    // 图标
-    & {
-      --vui-icon-color: var(--vui-text-color-placeholder);
-    }
-    &-clear {
-      cursor: pointer;
-    }
-    &-clear:hover {
-      --vui-icon-color: var(--vui-text-color-secondary);
-    }
   }
 
   // 输入框
   @if $prefix == "vui-input" () {
     .vui-input {
       cursor: text;
+      &-clear {
+        display: none;
+        cursor: pointer;
+      }
+      &-clear:hover {
+        --vui-icon-color: var(--vui-text-color-secondary);
+      }
+      &:hover &-clear,
+      &.is-focus &-clear {
+        display: inline-flex;
+      }
     }
   }
 

@@ -2,7 +2,7 @@
 import { computed } from 'vue';
 import { useIconProps } from '../../../composables/use-icon-props';
 import IconEmpty from '../../../icons/empty.vue';
-import IconLoadingLoop from '../../../icons/loading-loop.vue';
+import IconLoading from '../../../icons/loading.vue';
 
 // props
 export const emptyProps = {
@@ -26,7 +26,7 @@ export const useEmpty = ({ props, stateType }) => {
     if (props.icon === null) return null;
 
     // 使用默认图标
-    const defaultIcon = isLoading ? IconLoadingLoop : IconEmpty;
+    const defaultIcon = isLoading ? IconLoading : IconEmpty;
     const defaultProps = { spin: isLoading, component: defaultIcon };
     if (typeof props.icon === 'undefined') return defaultProps;
 

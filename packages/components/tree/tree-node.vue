@@ -58,8 +58,8 @@
 import { computed, inject } from 'vue';
 import { useTreeNode, treeNodeProps } from './composables/tree-node';
 import { useDragSortItem } from '../table/composables/drag-sort';
-import IconLoading from '../../icons/loading-loop.vue';
-import IconExpand from '../../icons/tree-arrow.vue';
+import IconLoading from '../../icons/loading.vue';
+import IconExpand from '../../icons/caret-right.vue';
 import IconDrag from '../../icons/drag.vue';
 
 // 树
