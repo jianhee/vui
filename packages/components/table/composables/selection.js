@@ -16,12 +16,12 @@ export const selectionProps = {
   // 是否可以选择行：这是多选的总开关
   selectable: { type: Boolean, default: false },
   // 是否可以拖拽鼠标框选
-  dragSelectable: { type: Boolean, default: true },
+  dragSelectable: { type: Boolean, default: false },
   // 左侧框选触发区域宽度
   // 默认只能从底部空白区域开始框选，设置后也可以从左侧开始框选
   dragSelectAreaWidth: { type: Number, default: 0 },
   // 是否可以 `ctrl + a` 全选
-  ctrlASelectable: { type: Boolean, default: true }
+  ctrlASelectable: { type: Boolean, default: false }
 };
 
 // 使用多选

@@ -10,23 +10,23 @@
     <DemoCard label="默认状态">
       <VTable
         class="demo-table"
-        :loading="loading"
         :col-items="colItems"
+        :loading="loading"
       />
     </DemoCard>
     <DemoCard label="自定义文本">
       <VTable
         class="demo-table"
+        :col-items="colItems"
         :loading="loading"
         empty-text="暂无数据"
-        :col-items="colItems"
       />
     </DemoCard>
     <DemoCard label="自定义插槽">
       <VTable
         class="demo-table"
-        :loading="loading"
         :col-items="colItems"
+        :loading="loading"
       >
         <template #empty>
           <VEmpty description="暂无数据" />

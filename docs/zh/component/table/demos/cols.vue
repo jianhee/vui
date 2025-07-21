@@ -4,8 +4,8 @@
     class="demo-table"
     :row-items="rowItems"
     :col-items="colItems"
-    :col-resizable="true"
-    col-widths-storage-key="demo-table-col-widths"
+    col-resizable
+    col-resize-storage-key="demo-table-col-widths"
   >
     <template v-if="col.key === 'title'">
       <VIcon :name="row.type" />

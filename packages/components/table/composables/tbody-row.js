@@ -4,7 +4,9 @@ import { computed } from 'vue';
 // props
 export const tbodyRowProps = {
   // 当前行
-  rowData: { type: Object, required: true }
+  rowData: { type: Object, required: true },
+  // 当前列
+  colData: { type: Object, default: null }
 };
 
 // 使用行
@@ -17,7 +19,8 @@ export const useTbodyRow = ({ tableRoot, tbodyRow }) => {
   // 行自定义属性
   const customRowAttrs = computed(() => {
     return tableRoot.props.customRow?.({
-      row: tbodyRow.props.rowData
+      row: tbodyRow.props.rowData,
+      col: tbodyRow.props.colData
     });
   });
 

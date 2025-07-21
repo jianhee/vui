@@ -64,6 +64,7 @@ export const useDragResize = ({ boxElRef, dragFlagRef, props, modelLeft, modelTo
       }
       return;
     }
+
     // 垂直方向
     const maxHeight = document.documentElement.clientHeight - handleBoderWidth;
     const mouseY = Math.max(0, Math.min(e.clientY, maxHeight));

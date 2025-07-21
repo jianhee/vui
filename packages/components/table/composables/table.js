@@ -37,9 +37,9 @@ export const tableProps = {
   customRow: { type: Function, default: null },
   // ---------- 列属性 ----------
   // 是否可以调整列宽
-  colResizable: { type: Boolean, default: true },
+  colResizable: { type: Boolean, default: false },
   // 如果需要记住调整后的列宽，需要设置一个键名
-  colWidthsStorageKey: { type: String, default: null }
+  colResizeStorageKey: { type: String, default: null }
 };
 
 // 使用表格
@@ -71,7 +71,7 @@ export const useTable = ({ tableElRef, tbodyElRef, props }) => {
   });
 
   // 计算当前列宽
-  const colWidthsRef = props.colWidthsStorageKey ? useStorage(props.colWidthsStorageKey, {}) : ref({});
+  const colWidthsRef = props.colResizeStorageKey ? useStorage(props.colResizeStorageKey, {}) : ref({});
   watchEffect(() => {
     colWidthsRef.value = props.colItems.reduce((acc, col) => {
       acc[col.key] = colWidthsRef.value[col.key] || col.width || colAutoWidth.value;

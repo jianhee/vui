@@ -4,7 +4,9 @@
     class="demo-table"
     :row-items="rowItems"
     :col-items="colItems"
-    :selectable="true"
+    selectable
+    drag-selectable
+    ctrl-a-selectable
     :drag-select-area-width="20"
     @selection-change="writeLog('selection-change', $event)"
   />

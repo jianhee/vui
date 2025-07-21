@@ -19,7 +19,7 @@
 
 ## 自定义列
 
-1. 使用 `colResizable`、`colWidthsStorageKey` 等属性拖拽调整列宽并存到本地
+1. 使用 `colResizable` 和 `colResizeStorageKey` 属性拖拽调整列宽并存到本地
 2. 使用 `row[col.key]` 的值或 `default` 插槽定义单元格内容
 
 <preview path="./demos/cols.vue"></preview>
@@ -58,18 +58,18 @@
 
 ### 属性
 
-| 名称                  | 说明                                                                               | 类型                                             | 默认值    |
-| --------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------ | --------- |
-| `loading`             | 是否正在加载数据                                                                   | `boolean`                                        | `false`   |
-| `emptyText`           | 空数据时显示的文本内容                                                             | `string`                                         | `No Data` |
-| `rowItems`            | 行数据                                                                             | `Array[Object]`                                  |           |
-| `colItems`            | 列数据                                                                             | `Array[Object]`                                  | 必填      |
-| `tableHeight`         | 表格高度 <br> 必须使用此属性或 CSS 限制高度，否则会渲染全部数据                    | `string(带单位)\|number(px)`                     |           |
-| `rowHeight`           | 行高，用于计算虚拟列表的显示内容                                                   | `number`                                         | `35`      |
-| `currentRowId`        | 当前行 `id`，用于高亮当前行                                                        | `string\|number`                                 |           |
-| `customRow`           | 自定义行属性的方法 <br> 参数为当前行，返回一个可以使用 `v-bind` 绑定到行元素的对象 | `function`: `({ row }) => ({ key: value, ... })` |           |
-| `colResizable`        | 是否可以调整列宽                                                                   | `boolean`                                        | `true`    |
-| `colWidthsStorageKey` | 如果需要记住调整后的列宽，需要设置一个键名                                         | `string`                                         |           |
+| 名称                  | 说明                                                                                       | 类型                                                  | 默认值    |
+| --------------------- | ------------------------------------------------------------------------------------------ | ----------------------------------------------------- | --------- |
+| `loading`             | 是否正在加载数据                                                                           | `boolean`                                             | `false`   |
+| `emptyText`           | 空数据时显示的文本内容                                                                     | `string`                                              | `No Data` |
+| `rowItems`            | 行数据                                                                                     | `Array[Object]`                                       |           |
+| `colItems`            | 列数据                                                                                     | `Array[Object]`                                       | 必填      |
+| `tableHeight`         | 表格高度 <br> 必须使用此属性或 CSS 限制高度，否则会渲染全部数据                            | `string(带单位)\|number(px)`                          |           |
+| `rowHeight`           | 行高，用于计算虚拟列表的显示内容                                                           | `number`                                              | `35`      |
+| `currentRowId`        | 当前行 `id`，用于高亮当前行                                                                | `string\|number`                                      |           |
+| `customRow`           | 自定义行属性的方法 <br> 参数为当前行和当前列，返回一个可以使用 `v-bind` 绑定到行元素的对象 | `function`: `({ row, col }) => ({ key: value, ... })` |           |
+| `colResizable`        | 是否可以调整列宽                                                                           | `boolean`                                             | `false`   |
+| `colResizeStorageKey` | 如果需要记住调整后的列宽，需要设置一个键名                                                 | `string`                                              |           |
 
 #### rowItems
 
@@ -108,9 +108,9 @@
 | ------------------------ | ------------------------------------------------------------------------------------ | ----------------------- | ------- |
 | `selectable`             | 是否可以选择行，这是多选的总开关                                                     | `boolean`               | `false` |
 | `v-model:selectedRowIds` | 选中值，即选中项的 `id`                                                              | `Array[string\|number]` |         |
-| `dragSelectable`         | 是否可以拖拽鼠标框选                                                                 | `boolean`               | `true`  |
+| `dragSelectable`         | 是否可以拖拽鼠标框选                                                                 | `boolean`               | `false` |
 | `dragSelectAreaWidth`    | 左侧框选触发区域宽度 <br> 默认只能从底部空白区域开始框选，设置后也可以从左侧开始框选 | `number`                | `0`     |
-| `ctrlASelectable`        | 是否可以 `ctrl + a` 全选                                                             | `boolean`               | `true`  |
+| `ctrlASelectable`        | 是否可以 `ctrl + a` 全选                                                             | `boolean`               | `false` |
 
 ### 事件
 

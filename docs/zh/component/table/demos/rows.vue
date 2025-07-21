@@ -21,8 +21,8 @@ function customRow({ row }) {
   return {
     title: row.name,
     style: {
-      color: row.id === '0-2' ? 'pink' : null,
-      backgroundColor: row.id === '0-4' ? 'pink' : null
+      color: row.id === rowItems[2].id ? 'pink' : null,
+      backgroundColor: row.id === rowItems[4].id ? 'pink' : null
     }
   };
 }

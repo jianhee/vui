@@ -2,8 +2,8 @@
 <template>
   <div
     :class="['vui-table-row', rowClasses, rowSelectionClasses, dragClasses]"
+    :draggable="tableRoot.props.dragSortable ? true : null"
     v-bind="customRowAttrs"
-    :draggable="tableRoot.props.dragSortable"
     @dragstart.stop="onDragStart"
     @dragend.stop="onDragEnd"
     @dragenter.stop="onDragEnter"
