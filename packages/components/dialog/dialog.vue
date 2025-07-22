@@ -4,7 +4,7 @@
     <Transition :name="`vui-${dialogType}`">
       <!-- 遮罩 -->
       <VOverlay
-        v-show="modelVisible"
+        v-if="modelVisible"
         @click.self="onOverlayClick"
       >
         <!-- 主体 -->

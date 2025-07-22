@@ -1,6 +1,6 @@
 <!-- 选择器 -->
 <template>
-  <!-- 触发器 -->
+  <!-- 触发器：必填 -->
   <div
     ref="triggerElRef"
     :class="['vui-select', triggerClasses]"
@@ -19,9 +19,8 @@
     />
   </div>
 
-  <!-- 下拉框 -->
+  <!-- 下拉框：必填 -->
   <Dropdown
-    v-if="$slots.options || options?.length"
     ref="dropdownElRef"
     trigger="click"
     close-on-click-dropdown
@@ -37,7 +36,7 @@
       />
       <!-- 默认选项 -->
       <Menu
-        v-else-if="options?.length"
+        v-else
         v-model:selected-key="modelValue"
         :items="formattedOptions"
         selectable

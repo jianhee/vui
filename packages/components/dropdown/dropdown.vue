@@ -1,6 +1,6 @@
 <!-- 下拉框 -->
 <template>
-  <!-- 触发器 -->
+  <!-- 触发器：可省略 -->
   <template v-if="$slots.default">
     <!-- 必须是有效的 html DOM 元素 -->
     <slot />
@@ -11,22 +11,20 @@
     />
   </template>
 
-  <!-- 下拉框 -->
-  <template v-if="$slots.dropdown">
-    <Teleport to="body">
-      <Transition name="vui-dropdown">
-        <div
-          v-show="dropdownVisible"
-          ref="dropdownElRef"
-          class="vui-dropdown"
-          :style="dropdownStyles"
-          v-bind="$attrs"
-        >
-          <slot name="dropdown" />
-        </div>
-      </Transition>
-    </Teleport>
-  </template>
+  <!-- 下拉框：必填 -->
+  <Teleport to="body">
+    <Transition name="vui-dropdown">
+      <div
+        v-if="dropdownVisible"
+        ref="dropdownElRef"
+        class="vui-dropdown"
+        :style="dropdownStyles"
+        v-bind="$attrs"
+      >
+        <slot name="dropdown" />
+      </div>
+    </Transition>
+  </Teleport>
 </template>
 
 <script setup>

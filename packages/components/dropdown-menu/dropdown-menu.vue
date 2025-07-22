@@ -5,7 +5,7 @@
     v-bind="componentsProps[0]"
     v-on="componentsEmits[0]"
   >
-    <!-- 触发器 -->
+    <!-- 触发器：可省略 -->
     <template
       v-if="$slots.default"
       #default
@@ -13,11 +13,8 @@
       <slot />
     </template>
 
-    <!-- 下拉框 -->
-    <template
-      v-if="items?.length"
-      #dropdown
-    >
+    <!-- 下拉框：必填 -->
+    <template #dropdown>
       <Menu
         v-bind="componentsProps[1]"
         v-on="componentsEmits[1]"

@@ -93,7 +93,7 @@ export const useDropdown = ({ triggerNextElRef, dropdownElRef, props, emits }) =
 
   // 打开下拉框：对齐目标
   function openWithTarget(el) {
-    if (!el || !dropdownElRef.value) return;
+    if (!el) return;
     targetElRef.value = el;
     const rect = el.getBoundingClientRect();
     updatePosition(rect);
@@ -101,7 +101,7 @@ export const useDropdown = ({ triggerNextElRef, dropdownElRef, props, emits }) =
 
   // 打开下拉框：对齐鼠标
   function openWithMouse(event) {
-    if (!event || !dropdownElRef.value) return;
+    if (!event) return;
     updatePosition({
       left: event.clientX,
       right: event.clientX,

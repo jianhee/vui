@@ -11,7 +11,7 @@
 .vui-dragbox {
   // 可移动
   &.is-movable {
-    position: fixed;
+    position: fixed !important;
     z-index: 999;
   }
   &.is-moving {
