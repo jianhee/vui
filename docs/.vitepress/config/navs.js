@@ -55,7 +55,8 @@ export const sidebarNavs = {
         { text: 'Tree 虚拟化树', link: '/component/tree/' },
         { text: 'Skeleton 骨架屏', link: '/component/skeleton/' },
         { text: 'Loading 加载状态', link: '/component/loading/' },
-        { text: 'Empty 空状态', link: '/component/empty/' }
+        { text: 'Empty 空状态', link: '/component/empty/' },
+        { text: 'Progress 进度条', link: '/component/progress/' }
       ]
     },
     {
