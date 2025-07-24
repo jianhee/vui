@@ -13,12 +13,10 @@ export const sliderProps = {
   // 最小值和最大值
   min: { type: Number, default: 0 },
   max: { type: Number, default: 100 },
-  // 是否显示提示框
-  showTip: { type: Boolean, default: true },
   // 提示框内容的格式化方法
-  //  1. 示例 `value => value`
-  //  2. 参数为当前值，返回一个可以作为提示框内容的值
-  tipFormatter: { type: Function, default: val => val }
+  // 1.函数：参数为当前值，返回一个可以作为提示框内容的值
+  // 2.空值：表示不显示提示框
+  tipFormatter: { type: Function, default: value => value }
 };
 
 // 使用滑块
@@ -98,7 +96,7 @@ export const useSlider = ({ railElRef, handleElRef, modelValue, props }) => {
   }));
 
   // 提示框
-  const isShowTip = computed(() => props.showTip && (isDragging.value || isHovered.value));
+  const isShowTip = computed(() => props.tipFormatter && (isDragging.value || isHovered.value));
   const tipText = computed(() => props.tipFormatter(modelValue.value));
   const tipStyles = computed(() => ({
     left: `${handleX.value}px`,

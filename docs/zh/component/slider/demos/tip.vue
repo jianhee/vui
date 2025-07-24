@@ -1,17 +1,17 @@
 <template>
   <VForm>
-    <VFormItem label="不显示提示框">
+    <VFormItem label="格式化提示框">
       <VSlider
         v-model:value="valueRef1"
         class="demo-slider"
-        :show-tip="false"
+        :tip-formatter="val => `${val}%`"
       />
     </VFormItem>
-    <VFormItem label="格式化提示框">
+    <VFormItem label="不显示提示框">
       <VSlider
         v-model:value="valueRef2"
         class="demo-slider"
-        :tip-formatter="val => `${val}%`"
+        :tip-formatter="null"
       />
     </VFormItem>
   </VForm>
