@@ -66,6 +66,7 @@ import { useVirtualList } from '@vueuse/core';
 import { getSortResults } from '../../utils';
 import { useTable, tableProps, tableEmits } from './composables/table';
 import { useSelection, selectionModel, selectionProps, selectionEmits } from './composables/selection';
+import { sortProps } from './composables/sort';
 import { useDragSort, dragSortProps, dragSortEmist } from './composables/drag-sort';
 import TheadRow from './thead-row.vue';
 import TbodyRow from './tbody-row.vue';
@@ -74,14 +75,14 @@ import DragSelect from './drag-select.vue';
 // 表格
 const tableElRef = useTemplateRef('tableElRef');
 const modelSelectedRowIds = defineModel('selectedRowIds', selectionModel.selectedRowIds);
-const props = defineProps({ ...tableProps, ...selectionProps, ...dragSortProps });
+const props = defineProps({ ...tableProps, ...selectionProps, ...sortProps, ...dragSortProps });
 const emits = defineEmits([...tableEmits, ...selectionEmits, ...dragSortEmist]);
 
 // 全局状态
 const rowItemsRef = ref(null);
 const dragFlagRef = ref(null);
-const sortKeyRef = ref(null);
-const sortOrderRef = ref(null);
+const sortKeyRef = ref(props.sortKey);
+const sortOrderRef = ref(props.sortOrder);
 
 // 使用虚拟列表
 const {

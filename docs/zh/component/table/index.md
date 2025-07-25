@@ -39,7 +39,8 @@
 
 ## 排序
 
-使用列数据中的 `sortable` 属性定义该列是否可以排序
+1. 使用列数据中的 `sortable` 属性定义该列是否可以排序
+2. 使用 `sortKey` 和 `sortOrder` 属性定义默认排序
 
 <preview path="./demos/sort.vue"></preview>
 
@@ -117,5 +118,14 @@
 | 名称               | 说明             | 参数                                                      |
 | ------------------ | ---------------- | --------------------------------------------------------- |
 | `selection-change` | 切换选中项时触发 | `{ selectedItems: '选中项', selectedIds: '选中项的 id' }` |
+
+## 排序 API
+
+### 属性
+
+| 名称        | 说明         | 类型     | 默认值 |
+| ----------- | ------------ | -------- | ------ |
+| `sortKey`   | 默认排序字段 | `String` |        |
+| `sortOrder` | 默认排序方式 | `String` |        |
 
 <!--@include: ./parts/drag-sort-api.md-->

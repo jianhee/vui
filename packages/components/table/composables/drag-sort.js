@@ -18,7 +18,7 @@ export const dragSortProps = {
   canDropInto: { type: Function, default: null }
 };
 
-// 使用排序
+// 使用拖拽排序
 export const useDragSort = ({ dragFlagRef, dragSortGroup }) => {
   // 树和列表之间拖拽时必需
   const dragSortRoot = inject('vuiDragSortContext', {

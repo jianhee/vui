@@ -3,6 +3,8 @@
     class="demo-table"
     :row-items="rowItems"
     :col-items="colItems"
+    sort-key="id"
+    sort-order="asc"
   />
 </template>
 

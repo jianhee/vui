@@ -1,6 +1,15 @@
 // 行-排序
 import { computed } from 'vue';
 
+// props
+export const sortProps = {
+  // 默认排序字段
+  sortKey: { type: String, default: null },
+  // 默认排序方式
+  sortOrder: { type: String, default: null }
+};
+
+// 使用排序
 export const useSortItem = ({ rowItemsRef, colData, sortKeyRef, sortOrderRef }) => {
   // 是否可以排序
   const isSortable = computed(() => rowItemsRef.value.length && colData.sortable);
