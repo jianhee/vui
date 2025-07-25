@@ -114,6 +114,16 @@ const { dragSortRootClasses } = useDragSort({
   dragSortGroup: props.dragSortGroup
 });
 
+// 更新数据
+watchEffect(() => {
+  const items = props.rowItems || [];
+  rowItemsRef.value = getSortResults({
+    items: [...items],
+    key: sortKeyRef.value,
+    order: sortOrderRef.value
+  });
+});
+
 // 子组件使用
 provide('tableRoot', {
   tbodyElRef: tbodyProps.ref,
@@ -126,15 +136,5 @@ provide('tableRoot', {
   sortOrderRef,
   colWidthsRef,
   colMinWidth
-});
-
-// 更新数据
-watchEffect(() => {
-  const items = props.rowItems || [];
-  rowItemsRef.value = getSortResults({
-    items: [...items],
-    filed: sortKeyRef.value,
-    order: sortOrderRef.value
-  });
 });
 </script>

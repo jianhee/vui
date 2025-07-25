@@ -32,21 +32,21 @@ export const hasCommonItems = (...args) => {
 /**
  * 获取排序结果
  * @param {array}  items  源数组
- * @param {string} filed  排序字段
+ * @param {string} key    排序字段
  * @param {string} order  排序方式
  * @returns {array}       排序后的数组
  */
 export const getSortResults = (params = {}) => {
-  const { items, filed, order } = params;
+  const { items, key, order } = params;
 
   // 无需排序
   if (!items?.length) return [];
-  if (!filed || !order) return items;
+  if (!key || !order) return items;
 
   // 需要排序
   return items.sort((a, b) => {
-    const valA = a[filed];
-    const valB = b[filed];
+    const valA = a[key];
+    const valB = b[key];
 
     // 数字比较大小
     const isNum = typeof valA === 'number' && typeof valB === 'number';

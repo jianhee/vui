@@ -2,11 +2,11 @@
 <template>
   <VDragbox
     v-model:width="tableRoot.colWidthsRef.value[colData.key]"
-    :class="['vui-table-cell', { 'is-sortable': colData.sortable }]"
+    :class="['vui-table-cell', { 'is-sortable': isSortable }]"
     :resizable="tableRoot.props.colResizable"
     :resize-handles="['right']"
     :min-width="tableRoot.colMinWidth"
-    @click="onSortFiledClick"
+    @click="onSortKeyClick"
   >
     <!-- 内容 -->
     <div
@@ -17,7 +17,7 @@
     </div>
     <!-- 排序 -->
     <div
-      v-if="colData.sortable"
+      v-if="isSortable"
       class="vui-table-cell-sort"
     >
       <span
@@ -45,9 +45,10 @@ const props = defineProps({
 });
 
 // 使用排序
-const { isAsc, isDesc, onSortFiledClick, onSortOrderClick } = useSortItem({
+const { isSortable, isAsc, isDesc, onSortKeyClick, onSortOrderClick } = useSortItem({
+  rowItemsRef: tableRoot.rowItemsRef,
+  colData: props.colData,
   sortKeyRef: tableRoot.sortKeyRef,
-  sortOrderRef: tableRoot.sortOrderRef,
-  colKey: props.colData.key
+  sortOrderRef: tableRoot.sortOrderRef
 });
 </script>
