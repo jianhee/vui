@@ -116,9 +116,8 @@ const { dragSortRootClasses } = useDragSort({
 
 // 更新数据
 watchEffect(() => {
-  const items = props.rowItems || [];
   rowItemsRef.value = getSortResults({
-    items: [...items],
+    items: props.rowItems || [],
     key: sortKeyRef.value,
     order: sortOrderRef.value
   });

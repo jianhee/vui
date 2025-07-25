@@ -44,7 +44,8 @@ export const getSortResults = (params = {}) => {
   if (!key || !order) return items;
 
   // 需要排序
-  return items.sort((a, b) => {
+  const _items = [...items];
+  _items.sort((a, b) => {
     const valA = a[key];
     const valB = b[key];
 
@@ -58,4 +59,6 @@ export const getSortResults = (params = {}) => {
     const strRes = String(valA).localeCompare(String(valB));
     return order === 'asc' ? strRes : strRes * -1;
   });
+
+  return _items;
 };
