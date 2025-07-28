@@ -25,7 +25,7 @@
 <preview path="./demos/cols.vue"></preview>
 
 <!-- 数据状态 -->
-<!--@include: ./parts/data-state.md-->
+<!--@include: ./parts/data-state-guild.md-->
 
 <preview path="./demos/data-state.vue"></preview>
 
@@ -59,18 +59,16 @@
 
 ### 属性
 
-| 名称                  | 说明                                                                                       | 类型                                                  | 默认值    |
-| --------------------- | ------------------------------------------------------------------------------------------ | ----------------------------------------------------- | --------- |
-| `loading`             | 是否正在加载数据                                                                           | `boolean`                                             | `false`   |
-| `emptyText`           | 空数据时显示的文本内容                                                                     | `string`                                              | `No Data` |
-| `rowItems`            | 行数据                                                                                     | `Array[Object]`                                       |           |
-| `colItems`            | 列数据                                                                                     | `Array[Object]`                                       | 必填      |
-| `tableHeight`         | 表格高度 <br> 必须使用此属性或 CSS 限制高度，否则会渲染全部数据                            | `string(带单位)\|number(px)`                          |           |
-| `rowHeight`           | 行高，用于计算虚拟列表的显示内容                                                           | `number`                                              | `35`      |
-| `currentRowId`        | 当前行 `id`，用于高亮当前行                                                                | `string\|number`                                      |           |
-| `customRow`           | 自定义行属性的方法 <br> 参数为当前行和当前列，返回一个可以使用 `v-bind` 绑定到行元素的对象 | `function`: `({ row, col }) => ({ key: value, ... })` |           |
-| `colResizable`        | 是否可以调整列宽                                                                           | `boolean`                                             | `false`   |
-| `colResizeStorageKey` | 如果需要记住调整后的列宽，需要设置一个键名                                                 | `string`                                              |           |
+| 名称                  | 说明                                                                                       | 类型                                                  | 默认值  |
+| --------------------- | ------------------------------------------------------------------------------------------ | ----------------------------------------------------- | ------- |
+| `rowItems`            | 行数据                                                                                     | `Array[Object]`                                       |         |
+| `colItems`            | 列数据                                                                                     | `Array[Object]`                                       | 必填    |
+| `tableHeight`         | 表格高度 <br> 必须使用此属性或 CSS 限制高度，否则会渲染全部数据                            | `string(带单位)\|number(px)`                          |         |
+| `rowHeight`           | 行高，用于计算虚拟列表的显示内容                                                           | `number`                                              | `35`    |
+| `currentRowId`        | 当前行 `id`，用于高亮当前行                                                                | `string\|number`                                      |         |
+| `customRow`           | 自定义行属性的方法 <br> 参数为当前行和当前列，返回一个可以使用 `v-bind` 绑定到行元素的对象 | `function`: `({ row, col }) => ({ key: value, ... })` |         |
+| `colResizable`        | 是否可以调整列宽                                                                           | `boolean`                                             | `false` |
+| `colResizeStorageKey` | 如果需要记住调整后的列宽，需要设置一个键名                                                 | `string`                                              |         |
 
 #### rowItems
 
@@ -88,18 +86,14 @@
 | `sortable`  | 列是否可以排序                                         | `boolean`        |                |
 | `cellClass` | 单元格类名                                             | `string`         |                |
 
-### 插槽
-
-| 名称      | 说明                                       | 参数                               |
-| --------- | ------------------------------------------ | ---------------------------------- |
-| `default` | 单元格的自定义内容，优先级高于属性值       | `{ row: '当前行', col: '当前列' }` |
-| `empty`   | 空数据时显示的自定义内容，优先级高于属性值 |                                    |
-
 ### 事件
 
 | 名称              | 说明             | 参数                                    |
 | ----------------- | ---------------- | --------------------------------------- |
 | `row-contextmenu` | 右键点击行时触发 | `{ event: '事件对象', row: '当前行'  }` |
+
+<!-- 数据状态 -->
+<!--@include: ./parts/data-state-api.md-->
 
 ## 多选 API
 
@@ -123,9 +117,10 @@
 
 ### 属性
 
-| 名称        | 说明         | 类型     | 默认值 |
-| ----------- | ------------ | -------- | ------ |
-| `sortKey`   | 默认排序字段 | `String` |        |
-| `sortOrder` | 默认排序方式 | `String` |        |
+| 名称        | 说明         | 类型     |
+| ----------- | ------------ | -------- |
+| `sortKey`   | 默认排序字段 | `String` |
+| `sortOrder` | 默认排序方式 | `String` |
 
+<!-- 拖拽排序 -->
 <!--@include: ./parts/drag-sort-api.md-->
