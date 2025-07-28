@@ -13,6 +13,11 @@
 body {
   color: var(--vui-text-color-regular);
 }
+code,
+td:first-child,
+td:last-child {
+  white-space: nowrap;
+}
 .content-container {
   max-width: 1200px !important;
 }

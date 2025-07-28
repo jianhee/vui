@@ -12,7 +12,7 @@ export const formProps = {
   // 标签位置：left, right, top
   labelPosition: { type: String, default: 'left' },
   // 标签宽度：不带单位时默认 `px`，默认取最长标签的宽度
-  // 行内模式和顶部标签不生效
+  // 仅块级模式的侧边标签生效
   labelWidth: { type: [String, Number], default: null }
 };
 

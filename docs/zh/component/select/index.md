@@ -13,7 +13,7 @@
 
 ## 自定义选项
 
-使用 `label` 属性和 `options` 插槽自定义选项
+使用 `options` 插槽和 `label` 属性自定义选项
 
 <preview path="./demos/options.vue"></preview>
 
@@ -29,12 +29,12 @@
 
 <!--@include: @/component/@parts/props-native.md-->
 
-| 名称            | 说明                                                                                                 | 类型                            | 默认值 |
-| --------------- | ---------------------------------------------------------------------------------------------------- | ------------------------------- | ------ |
-| `options`       | 选项数组                                                                                             | `Array[object\|string\|number]` |        |
-| `v-model:value` | 当前值，即选中项的 `value`                                                                           | `string\|number`                |        |
-| `label`         | 选择器显示的文本，默认显示选中项的 `label` <br> 自定义选项时组件内部无法获取选中项，必须指定一个文本 | `string\|number`                |        |
-| `size`          | 选择器尺寸                                                                                           | `string`: `medium\|small`       |        |
+| 名称            | 说明                                                                                             | 类型                            | 默认值 |
+| --------------- | ------------------------------------------------------------------------------------------------ | ------------------------------- | ------ |
+| `options`       | 选项数组                                                                                         | `Array[object\|string\|number]` |        |
+| `v-model:value` | 当前值，即选中项的 `value`                                                                       | `string\|number`                |        |
+| `label`         | 当前文本，优先级高于选中项的 `label` <br> 自定义选项时无法在组件内部获取选中项，必须指定一个文本 | `string\|number`                |        |
+| `size`          | 选择器尺寸                                                                                       | `string`: `medium\|small`       |        |
 
 #### options
 

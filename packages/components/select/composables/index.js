@@ -18,8 +18,8 @@ export const selectProps = {
   // 2. `label` 选项文本，为空时使用 `value` 的值
   // 3. `string|number` 类型的选项会格式化为 `{ value, label }`
   options: { type: Array, default: null },
-  // 选择器显示的文本：默认显示选中项的 `label`
-  // 自定义选项时组件内部无法获取选中项，必须指定一个文本
+  // 当前文本：优先级高于选中项的 `label`
+  // 自定义选项时无法在组件内部获取选中项，必须指定一个文本
   label: { type: String, default: null },
   // 选择器尺寸：medium, small
   size: { type: String, default: 'medium' },
