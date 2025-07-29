@@ -1,6 +1,6 @@
 # 使用
 
-## 导入组件
+## 组件
 
 ```js [main.js]
 import vui from 'vui/components';
@@ -9,7 +9,7 @@ import 'vui/styles/index.scss';
 app.use(vui);
 ```
 
-## 导入插件
+## 插件
 
 ```js [*.vue]
 import { xxx } from 'vui/plugins';
@@ -17,7 +17,7 @@ import { xxx } from 'vui/plugins';
 xxx();
 ```
 
-## 导入方法
+## 工具函数
 
 ```js [*.vue]
 import { xxx } from 'vui/utils';

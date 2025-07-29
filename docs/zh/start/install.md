@@ -1,8 +1,10 @@
 # 安装
 
-## 打包工具 vite
+目前仅支持本地安装，后续会考虑发布到线上。
 
-将 VUI 克隆到本地，然后在项目中通过本地路径直接引入
+## Vite
+
+通过本地路径别名直接使用
 
 ```js [vite.config.js]
 export default defineConfig({
@@ -14,31 +16,19 @@ export default defineConfig({
 });
 ```
 
-## 本地包管理器 yalc
+## Yalc
 
-将 VUI 克隆到本地，然后发布
+先发布
 
-```sh [vui 根目录]
-# 发布
-yalc publish
-
-# 推送更新
-yalc push
+```sh [vui 根目录下运行]
+yalc publish    # 发布
+yalc push       # 推送更新
 ```
 
-在项目中引入
+再安装
 
-```sh [项目根目录]
-# 添加
-yalc add vui
-
-# 删除
-yalc remove vui
-
-# 更新
-yalc update vui
+```sh [项目根目录运行]
+yalc add vui      # 添加
+yalc remove vui   # 删除
+yalc update vui   # 更新
 ```
-
-## 线上包管理器 npm 等
-
-TODU
