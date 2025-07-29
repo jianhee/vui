@@ -12,7 +12,7 @@ hero:
   actions:
     - theme: brand
       text: 起步
-      link: /start/install/
+      link: /start/install
     - theme: alt
       text: 组件
       link: /component/icon/

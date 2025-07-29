@@ -1,6 +1,6 @@
 // 顶栏导航
 export const headerNavs = [
-  { text: '起步', link: '/start/install/', activeMatch: '/start/' },
+  { text: '起步', link: '/start/install', activeMatch: '/start/' },
   { text: '组件', link: '/component/icon/', activeMatch: '/component/' },
   {
     text: 'TUDO',
@@ -23,8 +23,8 @@ export const socialLinks = [
 // 侧边栏导航
 export const sidebarNavs = {
   '/start/': [
-    { text: '安装', link: '/start/install/' },
-    { text: '使用', link: '/start/usage/' }
+    { text: '安装', link: '/start/install' },
+    { text: '使用', link: '/start/usage' }
   ],
   '/component/': [
     {
