@@ -1,20 +1,18 @@
 # Icon 图标
 
-## 导入 SVG 图标
+## 导入图标
 
-支持以下两种导入方式
+### 导入为雪碧图
 
-### 使用名称
-
-:::code-group
+1. 安装插件
 
 ```sh [npm]
-# 安装插件
 npm i -D vite-plugin-svg-icons
 ```
 
+2. 配置插件
+
 ```js [vite.config.js]
-// 配置插件
 import path from 'path';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 
@@ -30,31 +28,31 @@ export default defineConfig({
 });
 ```
 
+3. 注册插件，自动将所有 `.svg` 文件导入为 `SVG` 雪碧图
+
 ```js [main.js]
-// 注册插件：自动导入所有 `svg` 图标
 import 'virtual:svg-icons-register';
 ```
 
+4. 使用图标名称
+
 ```vue [*.vue]
-<!-- 使用图标 -->
 <template>
   <VIcon name="close" />
 </template>
 ```
 
-:::
+### 导入为组件
 
-### 使用组件
-
-:::code-group
+1. 安装插件
 
 ```sh [npm]
-# 安装插件
 npm i -D vite-svg-loader
 ```
 
+2. 配置插件
+
 ```js [vite.config.js]
-// 配置插件
 import svgLoader from 'vite-svg-loader';
 
 export default defineConfig({
@@ -62,19 +60,17 @@ export default defineConfig({
 });
 ```
 
+3. 使用 `.svg?component` 后缀将 `.svg` 文件导入为 `Vue` 组件，然后使用图标组件
+
 ```vue [*.vue]
-<!-- 使用图标 -->
 <template>
   <VIcon :component="IconClose" />
 </template>
 
 <script setup>
-// 使用 `.svg?component` 后缀将 `.svg` 文件导入为 `Vue` 组件
 import IconClose from './close.svg?component';
 </script>
 ```
-
-:::
 
 ## 基础用法
 
@@ -82,32 +78,19 @@ import IconClose from './close.svg?component';
 
 <preview path="./demos/basic.vue"></preview>
 
-<!-- 样式属性 -->
+## 控制样式
+
 <!--@include: @/component/@parts/props-style.md-->
 
 <preview path="./demos/style.vue"></preview>
 
-## 可点击状态
+## 控制状态
 
-使用 `clickable` 属性开启可点击状态
-
-<preview path="./demos/clickable.vue"></preview>
-
-## 禁用状态
-
-使用 `disabled` 属性开启禁用状态
-
-<preview path="./demos/disabled.vue"></preview>
-
-## 旋转状态
-
-使用 `spin` 属性开启旋转状态
-
-<preview path="./demos/spin.vue"></preview>
+<preview path="./demos/state.vue"></preview>
 
 ## API
 
-### 属性
+### 基础属性
 
 | 名称        | 说明                             | 类型        | 默认值  |
 | ----------- | -------------------------------- | ----------- | ------- |
@@ -119,12 +102,14 @@ import IconClose from './close.svg?component';
 
 ### 样式属性
 
-| 名称          | 说明                                                                                       | 类型                          | 默认值           |
-| ------------- | ------------------------------------------------------------------------------------------ | ----------------------------- | ---------------- |
-| `color`       | 主要颜色，需要将 `svg` 中对应的颜色改为 `currentColor`                                     | `string`                      | 继承 CSS `color` |
-| `twoOneColor` | 次要颜色（仅双色图标有效），需要将 `svg` 中对应的颜色改为 `var(--vui-icon-two-tone-color)` | `string`                      |                  |
-| `size`        | 图标尺寸                                                                                   | `string(带单位)\|number(px)`  | `1em`            |
-| `rotate`      | 旋转角度                                                                                   | `string(带单位)\|number(deg)` |                  |
+<!--@include: @/component/@parts/props-style.md-->
+
+| 名称          | 说明                                                                                       | 类型             | 默认值               | 默认单位 |
+| ------------- | ------------------------------------------------------------------------------------------ | ---------------- | -------------------- | -------- |
+| `color`       | 主要颜色，需要将 `svg` 中对应的颜色改为 `currentColor`                                     | `string`         | 继承 CSS `color`     |          |
+| `twoOneColor` | 次要颜色（仅双色图标有效），需要将 `svg` 中对应的颜色改为 `var(--vui-icon-two-tone-color)` | `string`         |                      |          |
+| `size`        | 图标尺寸                                                                                   | `string\|number` | 继承 CSS `font-size` | `px`     |
+| `rotate`      | 旋转角度                                                                                   | `string\|number` |                      | `deg`    |
 
 ### 插槽
 

@@ -1,44 +1,47 @@
 <template>
-  <DemoDesc :items="['color', 'twoToneColor', 'size', 'rotate']" />
-  <VForm class="demo-toolbar">
-    <VFormItem label="主要颜色">
-      <VRadioGroup
-        v-model:value="colorRef"
-        :options="colorOptions"
-        option-type="button"
+  <DemoProps>
+    <template #content>
+      <DemoBasic
+        :color="colorRef"
+        :two-tone-color="twoToneColorRef"
+        :size="sizeRef"
+        :rotate="rotateRef"
       />
-    </VFormItem>
-    <VFormItem label="次要颜色">
-      <VRadioGroup
-        v-model:value="twoToneColorRef"
-        :options="colorOptions"
-        option-type="button"
-      />
-    </VFormItem>
-    <VFormItem label="图标尺寸">
-      <DemoValue
-        v-model:value="sizeRef"
-        unit="px"
-        :min="20"
-        :max="50"
-      />
-    </VFormItem>
-    <VFormItem label="旋转角度">
-      <DemoValue
-        v-model:value="rotateRef"
-        unit="deg"
-        :min="-360"
-        :max="360"
-      />
-    </VFormItem>
-  </VForm>
+    </template>
 
-  <DemoBasic
-    :color="colorRef"
-    :two-tone-color="twoToneColorRef"
-    :size="sizeRef"
-    :rotate="rotateRef"
-  />
+    <template #toolbar>
+      <VFormItem label="color 主要颜色">
+        <VRadioGroup
+          v-model:value="colorRef"
+          :options="colorOptions"
+          option-type="button"
+        />
+      </VFormItem>
+      <VFormItem label="twoToneColor 次要颜色">
+        <VRadioGroup
+          v-model:value="twoToneColorRef"
+          :options="colorOptions"
+          option-type="button"
+        />
+      </VFormItem>
+      <VFormItem label="size 图标尺寸">
+        <DemoValue
+          v-model:value="sizeRef"
+          unit="px"
+          :min="20"
+          :max="50"
+        />
+      </VFormItem>
+      <VFormItem label="rotate 旋转角度">
+        <DemoValue
+          v-model:value="rotateRef"
+          unit="deg"
+          :min="-360"
+          :max="360"
+        />
+      </VFormItem>
+    </template>
+  </DemoProps>
 </template>
 
 <script setup>

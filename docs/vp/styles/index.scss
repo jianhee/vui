@@ -35,6 +35,8 @@ td:last-child {
 }
 .vp-doc tr {
   background-color: transparent !important;
+  border-top: 0;
+  border-bottom: 1px solid var(--vui-border-color-base);
 }
 .custom-block {
   border: 0;
