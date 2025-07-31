@@ -2,6 +2,8 @@
 
 ## 组件
 
+1. 全局引入并注册
+
 ```js [main.js]
 import vui from 'vui/components';
 import 'vui/styles/index.scss';
@@ -9,18 +11,26 @@ import 'vui/styles/index.scss';
 app.use(vui);
 ```
 
-## 插件
+2. 使用
 
-```js [*.vue]
-import { xxx } from 'vui/plugins';
-
-xxx();
+```vue [*.vue]
+<template>
+  <VButton>按钮</VButton>
+</template>
 ```
 
-## 工具函数
+## 插件和方法
 
-```js [*.vue]
-import { xxx } from 'vui/utils';
+按需引入后使用
 
-xxx();
+```vue [*.vue]
+<template>...</template>
+
+<script setup>
+import { xxx1 } from 'vui/plugins';
+import { xxx2 } from 'vui/utils';
+
+xxx1();
+xxx2();
+</script>
 ```
