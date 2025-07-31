@@ -15,7 +15,7 @@ import 'vui/styles/index.scss';
 
 // 自定义组件
 import DemoSpace from '@vp/components/DemoSpace.vue';
-import DemoDesc from '@vp/components/DemoDesc.vue';
+import DemoProps from '@vp/components/DemoProps.vue';
 import DemoCard from '@vp/components/DemoCard.vue';
 import DemoValue from '@vp/components/DemoValue.vue';
 import '@vp/styles/index.scss';
@@ -26,7 +26,7 @@ export default {
     app.use(vui);
     app.component('DemoPreview', AntDesignContainer);
     app.component('DemoSpace', DemoSpace);
-    app.component('DemoDesc', DemoDesc);
+    app.component('DemoProps', DemoProps);
     app.component('DemoCard', DemoCard);
     app.component('DemoValue', DemoValue);
   }

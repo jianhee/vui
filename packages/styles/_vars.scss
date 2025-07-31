@@ -1,10 +1,14 @@
 // vars
-:root {
+// 明亮模式
+@mixin vui-vars-light {
   // 品牌色
   --vui-color-white: #fff;
-  --vui-color-brand-base: #458ff3;
-  --vui-color-brand-a10: #458ff31a;
-  --vui-color-brand-a30: #458ff34d;
+  --vui-color-brand-rgb: 69, 143, 243; // #458ff3
+  --vui-color-brand-base: rgb(var(--vui-color-brand-rgb));
+  --vui-color-brand-a10: rgba(var(--vui-color-brand-rgb), 0.1);
+  --vui-color-brand-a30: rgba(var(--vui-color-brand-rgb), 0.3);
+  --vui-color-warning: #e6a23c;
+  --vui-color-success: #67c23a;
 
   // 文本色
   --vui-text-color-primary: #303133;
@@ -55,51 +59,62 @@
 }
 
 // 黑暗模式
-// html.dark {
+@mixin vui-vars-dark {
+  // 品牌色
+  --vui-color-brand-rgb: 111, 140, 180; // #6f8cb4
+
+  // 文本色
+  --vui-text-color-primary: #e5eaf3;
+  --vui-text-color-regular: #cfd3dc;
+  --vui-text-color-secondary: #a3a6ad;
+  --vui-text-color-placeholder: #8d9095;
+  --vui-text-color-disabled: #6c6e72;
+
+  // 背景色
+  --vui-bg-color-base: #141414;
+  --vui-bg-color-overlay: #1d1e1f;
+  --vui-bg-color-page: #0a0a0a;
+
+  // 填充色
+  --vui-fill-color-base: #303030;
+  --vui-fill-color-dark: #39393a;
+  --vui-fill-color-darker: #424243;
+  --vui-fill-color-light: #262727;
+  --vui-fill-color-lighter: #1d1d1d;
+  --vui-fill-color-extra-light: #191919;
+  --vui-fill-color-blank: transparent;
+
+  // 边框色
+  --vui-border-color-base: #4c4d4f;
+  --vui-border-color-dark: #58585b;
+  --vui-border-color-darker: #636466;
+  --vui-border-color-light: #414243;
+  --vui-border-color-lighter: #363637;
+  --vui-border-color-extra-light: #2b2b2c;
+
+  // 阴影色
+  --vui-box-shadow-base: 0px 12px 32px 4px rgb(0 0 0 / 36%), 0px 8px 20px rgb(0 0 0 / 72%);
+  --vui-box-shadow-dark: 0px 16px 48px 16px rgb(0 0 0 / 72%), 0px 12px 32px #000, 0px 8px 16px -8px #000;
+  --vui-box-shadow-light: 0px 0px 12px rgb(0 0 0 / 72%);
+  --vui-box-shadow-lighter: 0px 0px 6px rgb(0 0 0 / 72%);
+
+  // 遮罩色
+  --vui-mask-color-base: rgb(0 0 0 / 80%);
+  --vui-mask-color-extra-light: rgb(0 0 0 / 30%);
+}
+
+// 区分模式
 @media (prefers-color-scheme: dark) {
   :root {
-    // 品牌色
-    --vui-color-brand-base: #6f8cb4;
-    --vui-color-brand-a10: #6f8cb41a;
-    --vui-color-brand-a30: #6f8cb44d;
-
-    // 文本色
-    --vui-text-color-primary: #e5eaf3;
-    --vui-text-color-regular: #cfd3dc;
-    --vui-text-color-secondary: #a3a6ad;
-    --vui-text-color-placeholder: #8d9095;
-    --vui-text-color-disabled: #6c6e72;
-
-    // 背景色
-    --vui-bg-color-base: #141414;
-    --vui-bg-color-overlay: #1d1e1f;
-    --vui-bg-color-page: #0a0a0a;
-
-    // 填充色
-    --vui-fill-color-base: #303030;
-    --vui-fill-color-dark: #39393a;
-    --vui-fill-color-darker: #424243;
-    --vui-fill-color-light: #262727;
-    --vui-fill-color-lighter: #1d1d1d;
-    --vui-fill-color-extra-light: #191919;
-    --vui-fill-color-blank: transparent;
-
-    // 边框色
-    --vui-border-color-base: #4c4d4f;
-    --vui-border-color-dark: #58585b;
-    --vui-border-color-darker: #636466;
-    --vui-border-color-light: #414243;
-    --vui-border-color-lighter: #363637;
-    --vui-border-color-extra-light: #2b2b2c;
-
-    // 阴影色
-    --vui-box-shadow-base: 0px 12px 32px 4px rgb(0 0 0 / 36%), 0px 8px 20px rgb(0 0 0 / 72%);
-    --vui-box-shadow-dark: 0px 16px 48px 16px rgb(0 0 0 / 72%), 0px 12px 32px #000, 0px 8px 16px -8px #000;
-    --vui-box-shadow-light: 0px 0px 12px rgb(0 0 0 / 72%);
-    --vui-box-shadow-lighter: 0px 0px 6px rgb(0 0 0 / 72%);
-
-    // 遮罩色
-    --vui-mask-color-base: rgb(0 0 0 / 80%);
-    --vui-mask-color-extra-light: rgb(0 0 0 / 30%);
+    @include vui-vars-dark;
   }
+}
+:root {
+  @include vui-vars-light;
+}
+html.dark {
+  @include vui-vars-dark;
+}
+html.light {
+  @include vui-vars-light;
 }
