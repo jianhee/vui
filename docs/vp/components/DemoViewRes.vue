@@ -2,7 +2,7 @@
 <template>
   <div class="demo-view-res">
     <!-- label -->
-    <div :class="['demo-view-res-label', { 'is-center': center }]">{{ label }}</div>
+    <div :class="['demo-view-res-label', { 'is-center': lebelCenter }]">{{ label }}</div>
     <!-- content -->
     <div class="demo-view-res-content">
       <slot />
@@ -13,7 +13,7 @@
 <script setup>
 defineProps({
   label: { type: String, default: null },
-  center: { type: Boolean, default: false }
+  lebelCenter: { type: Boolean, default: false }
 });
 </script>
 

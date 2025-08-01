@@ -30,8 +30,7 @@ defineProps({
     flex: none;
     min-width: 30%;
     padding: 15px 20px;
-    background-color: var(--vui-fill-color-light);
-    border-right: 1px solid var(--vui-border-color-base);
+    background-color: var(--vui-bg-color-page);
   }
   &-content {
     flex: auto;

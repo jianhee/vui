@@ -1,8 +1,8 @@
 <!-- 演示：属性 -->
 <template>
   <VFormItem
-    class="demo-view-prop"
-    :label-position="left ? 'left' : 'top'"
+    :class="['demo-view-prop', { 'is-left': labelLeft }]"
+    :label-position="labelLeft ? 'left' : 'top'"
   >
     <!-- label -->
     <template #label>
@@ -18,13 +18,16 @@
 <script setup>
 defineProps({
   label: { type: String, default: null },
-  prop: { type: String, default: null },
-  left: { type: Boolean, default: false }
+  labelLeft: { type: Boolean, default: false },
+  prop: { type: String, default: null }
 });
 </script>
 
 <style>
 .demo-view-prop .vui-form-label {
   white-space: nowrap;
+}
+.demo-view-prop.is-left .vui-form-control {
+  text-align: right;
 }
 </style>
