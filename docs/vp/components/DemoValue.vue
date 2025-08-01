@@ -1,6 +1,6 @@
-<!-- 切换值 -->
+<!-- 使用滑块切换值 -->
 <template>
-  <DemoSpace class="demo-value">
+  <div class="demo-value">
     <VSlider
       v-model:value="modelValue"
       :min="min"
@@ -9,7 +9,7 @@
       class="demo-value-slider"
     />
     <span class="demo-value-text">{{ `${modelValue}${unit}` }}</span>
-  </DemoSpace>
+  </div>
 </template>
 
 <script setup>
@@ -25,15 +25,15 @@ const modelValue = defineModel('value', { type: Number, default: null });
 <style lang="scss">
 .demo-value {
   display: flex;
-  gap: 10px;
   align-items: center;
   &-slider {
     flex: auto;
-    max-width: var(--demo-filed-width);
   }
   &-text {
     flex: none;
+    width: 4em;
     color: var(--vui-text-color-regular);
+    text-align: right;
   }
 }
 </style>

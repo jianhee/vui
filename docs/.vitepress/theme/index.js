@@ -14,10 +14,11 @@ import vui from 'vui/components/index.js';
 import 'vui/styles/index.scss';
 
 // 自定义组件
-import DemoSpace from '@vp/components/DemoSpace.vue';
-import DemoProps from '@vp/components/DemoProps.vue';
-import DemoCard from '@vp/components/DemoCard.vue';
+import DemoView from '@vp/components/DemoView.vue';
+import DemoViewProp from '@vp/components/DemoViewProp.vue';
+import DemoViewRes from '@vp/components/DemoViewRes.vue';
 import DemoValue from '@vp/components/DemoValue.vue';
+import DemoSpace from '@vp/components/DemoSpace.vue';
 import '@vp/styles/index.scss';
 
 export default {
@@ -25,9 +26,10 @@ export default {
   enhanceApp({ app }) {
     app.use(vui);
     app.component('DemoPreview', AntDesignContainer);
-    app.component('DemoSpace', DemoSpace);
-    app.component('DemoProps', DemoProps);
-    app.component('DemoCard', DemoCard);
+    app.component('DemoView', DemoView);
+    app.component('DemoViewProp', DemoViewProp);
+    app.component('DemoViewRes', DemoViewRes);
     app.component('DemoValue', DemoValue);
+    app.component('DemoSpace', DemoSpace);
   }
 };

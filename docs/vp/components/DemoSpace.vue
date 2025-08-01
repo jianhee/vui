@@ -1,9 +1,6 @@
 <!-- 间距 -->
 <template>
-  <div
-    class="demo-space"
-    :class="{ 'demo-space-flex': flex }"
-  >
+  <div :class="['demo-space', { 'demo-space-flex': flex }]">
     <slot />
   </div>
 </template>
@@ -16,7 +13,7 @@ defineProps({
 
 <style lang="scss">
 .demo-space {
-  margin: 10px 0;
+  margin: 15px 0;
   &:first-child {
     margin-top: 0;
   }
@@ -25,7 +22,7 @@ defineProps({
   }
   &-flex {
     display: flex;
-    gap: 10px;
+    gap: 15px;
   }
 }
 </style>
