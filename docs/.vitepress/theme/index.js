@@ -15,8 +15,7 @@ import 'vui/styles/index.scss';
 
 // 自定义组件
 import DemoView from '@vp/components/DemoView.vue';
-import DemoViewProp from '@vp/components/DemoViewProp.vue';
-import DemoViewRes from '@vp/components/DemoViewRes.vue';
+import DemoViewItem from '@vp/components/DemoViewItem.vue';
 import DemoValue from '@vp/components/DemoValue.vue';
 import DemoSpace from '@vp/components/DemoSpace.vue';
 import '@vp/styles/index.scss';
@@ -27,8 +26,7 @@ export default {
     app.use(vui);
     app.component('DemoPreview', AntDesignContainer);
     app.component('DemoView', DemoView);
-    app.component('DemoViewProp', DemoViewProp);
-    app.component('DemoViewRes', DemoViewRes);
+    app.component('DemoViewItem', DemoViewItem);
     app.component('DemoValue', DemoValue);
     app.component('DemoSpace', DemoSpace);
   }

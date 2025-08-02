@@ -8,7 +8,9 @@
       :tip-formatter="val => `${val}${unit}`"
       class="demo-value-slider"
     />
-    <span class="demo-value-text">{{ `${modelValue}${unit}` }}</span>
+    <span class="demo-value-text">
+      {{ modelValue === null ? '' : `${modelValue}${unit}` }}
+    </span>
   </div>
 </template>
 

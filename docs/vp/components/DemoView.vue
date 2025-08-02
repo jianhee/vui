@@ -11,7 +11,9 @@
     <!-- 预览效果 -->
     <div class="demo-view-content">
       <div class="demo-view-title">预览效果</div>
-      <slot name="content" />
+      <VForm>
+        <slot name="content" />
+      </VForm>
     </div>
   </div>
 </template>

@@ -13,7 +13,7 @@ defineProps({
 
 <style lang="scss">
 .demo-space {
-  margin: 15px 0;
+  margin: 10px 0;
   &:first-child {
     margin-top: 0;
   }
@@ -22,7 +22,7 @@ defineProps({
   }
   &-flex {
     display: flex;
-    gap: 15px;
+    gap: 10px;
   }
 }
 </style>
