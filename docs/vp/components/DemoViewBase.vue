@@ -1,0 +1,34 @@
+<!-- 演示：项 -->
+<template>
+  <div class="demo-view-base">
+    <!-- label -->
+    <div class="demo-view-base-label">
+      <code v-if="code">{{ code }}</code>
+      <span v-if="label && code">&nbsp;/&nbsp;</span>
+      <span v-if="label">{{ label }}</span>
+    </div>
+    <!-- content -->
+    <div class="demo-view-base-content">
+      <slot />
+    </div>
+  </div>
+</template>
+
+<script setup>
+defineProps({
+  code: { type: String, default: null },
+  label: { type: String, default: null }
+});
+</script>
+
+<style lang="scss">
+.demo-view-base {
+  flex: auto;
+  width: 100%;
+  line-height: 32px;
+  &-label {
+    flex: none;
+    white-space: nowrap;
+  }
+}
+</style>

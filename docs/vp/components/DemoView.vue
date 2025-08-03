@@ -3,24 +3,21 @@
   <div class="demo-view">
     <!-- 配置属性 -->
     <div class="demo-view-props">
-      <div class="demo-view-title">{{ title }}</div>
-      <VForm>
-        <slot name="props" />
-      </VForm>
+      <div class="demo-view-title">{{ propsTitle }}</div>
+      <slot name="props" />
     </div>
     <!-- 预览效果 -->
     <div class="demo-view-content">
-      <div class="demo-view-title">预览效果</div>
-      <VForm>
-        <slot name="content" />
-      </VForm>
+      <div class="demo-view-title">{{ contentTitle }}</div>
+      <slot name="content" />
     </div>
   </div>
 </template>
 
 <script setup>
 defineProps({
-  title: { type: String, default: '配置属性' }
+  propsTitle: { type: String, default: '配置属性' },
+  contentTitle: { type: String, default: '预览效果' }
 });
 </script>
 
