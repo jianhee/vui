@@ -1,12 +1,14 @@
 # Row 行
 
-## 标签类型
+## 示例
+
+### 标签类型
 
 使用 `tag` 属性定义标签类型
 
 <preview path="./demos/tag.vue"></preview>
 
-## 文本样式
+### 文本样式
 
 使用 `center`、`ellipsis` 等属性定义文本样式
 

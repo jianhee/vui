@@ -114,12 +114,12 @@ import IconClose from './close.svg?component';
 
 <!--@include: @/component/@parts/api-style.md-->
 
-| 名称          | 说明                                                                                       | 类型             | 默认值               | 默认单位 |
-| ------------- | ------------------------------------------------------------------------------------------ | ---------------- | -------------------- | -------- |
-| `color`       | 主要颜色，需要将 `svg` 中对应的颜色改为 `currentColor`                                     | `string`         | 继承 CSS `color`     |          |
-| `twoOneColor` | 次要颜色（仅双色图标有效），需要将 `svg` 中对应的颜色改为 `var(--vui-icon-two-tone-color)` | `string`         |                      |          |
-| `size`        | 图标尺寸                                                                                   | `string\|number` | 继承 CSS `font-size` | `px`     |
-| `rotate`      | 旋转角度                                                                                   | `string\|number` |                      | `deg`    |
+| 名称          | 说明                                                                                       | 类型（默认单位）       | 默认值               |
+| ------------- | ------------------------------------------------------------------------------------------ | ---------------------- | -------------------- |
+| `color`       | 主要颜色，需要将 `svg` 中对应的颜色改为 `currentColor`                                     | `string`               | 继承 CSS `color`     |
+| `twoOneColor` | 次要颜色（仅双色图标有效），需要将 `svg` 中对应的颜色改为 `var(--vui-icon-two-tone-color)` | `string`               |                      |
+| `size`        | 图标尺寸                                                                                   | `string\|number(?px)`  | 继承 CSS `font-size` |
+| `rotate`      | 旋转角度                                                                                   | `string\|number(?deg)` |                      |
 
 ### 插槽
 
