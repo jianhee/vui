@@ -4,7 +4,7 @@ code / label content
 -->
 <template>
   <DemoViewBase
-    class="demo-view-left"
+    class="demo-view--left"
     :style="{ width: `${width}px` }"
   >
     <slot />
@@ -18,11 +18,12 @@ defineProps({
 </script>
 
 <style lang="scss">
-.demo-view-left {
+.demo-view--left {
   display: flex;
   gap: 10px;
 }
-.demo-view-left .demo-view-base-label {
+.demo-view--left .demo-view-base-label {
+  line-height: 32px;
   text-align: right;
 }
 </style>

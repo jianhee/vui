@@ -3,16 +3,19 @@
 code / label        switch
 -->
 <template>
-  <DemoViewBase class="demo-view-boolean">
+  <DemoViewBase class="demo-view--boolean">
     <slot />
   </DemoViewBase>
 </template>
 
 <style lang="scss">
-.demo-view-boolean {
+.demo-view--boolean {
   display: flex;
 }
-.demo-view-boolean .demo-view-base-content {
+.demo-view--boolean .demo-view-base-label {
+  line-height: 32px;
+}
+.demo-view--boolean .demo-view-base-content {
   text-align: right;
 }
 </style>

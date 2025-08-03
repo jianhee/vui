@@ -4,13 +4,13 @@
 content content content content content
 -->
 <template>
-  <DemoViewBase class="demo-view-top-center">
+  <DemoViewBase class="demo-view-top--center">
     <slot />
   </DemoViewBase>
 </template>
 
 <style lang="scss">
-.demo-view-top-center .demo-view-base-label {
+.demo-view-top--center .demo-view-base-label {
   margin-bottom: 5px;
   text-align: center;
 }

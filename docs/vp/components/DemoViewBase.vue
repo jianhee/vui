@@ -25,10 +25,16 @@ defineProps({
 .demo-view-base {
   flex: auto;
   width: 100%;
-  line-height: 32px;
+  margin-bottom: 15px;
+  &:last-child {
+    margin-bottom: 0;
+  }
   &-label {
     flex: none;
     white-space: nowrap;
+  }
+  &-content {
+    flex: auto;
   }
 }
 </style>

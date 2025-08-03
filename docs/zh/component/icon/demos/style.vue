@@ -1,5 +1,5 @@
 <template>
-  <DemoProps>
+  <DemoView>
     <template #content>
       <DemoBasic
         :color="colorRef"
@@ -9,39 +9,51 @@
       />
     </template>
 
-    <template #toolbar>
-      <VFormItem label="color 主要颜色">
+    <template #props>
+      <DemoViewTop
+        label="主要颜色"
+        code="color"
+      >
         <VRadioGroup
           v-model:value="colorRef"
           :options="colorOptions"
           option-type="button"
         />
-      </VFormItem>
-      <VFormItem label="twoToneColor 次要颜色">
+      </DemoViewTop>
+      <DemoViewTop
+        label="次要颜色"
+        code="twoToneColor"
+      >
         <VRadioGroup
           v-model:value="twoToneColorRef"
           :options="colorOptions"
           option-type="button"
         />
-      </VFormItem>
-      <VFormItem label="size 图标尺寸">
+      </DemoViewTop>
+      <DemoViewTop
+        label="图标尺寸"
+        code="size"
+      >
         <DemoValue
           v-model:value="sizeRef"
           unit="px"
           :min="20"
           :max="50"
         />
-      </VFormItem>
-      <VFormItem label="rotate 旋转角度">
+      </DemoViewTop>
+      <DemoViewTop
+        label="旋转角度"
+        code="rotate"
+      >
         <DemoValue
           v-model:value="rotateRef"
           unit="deg"
           :min="-360"
           :max="360"
         />
-      </VFormItem>
+      </DemoViewTop>
     </template>
-  </DemoProps>
+  </DemoView>
 </template>
 
 <script setup>

@@ -1,25 +1,22 @@
 <template>
   <div class="demo-icons">
-    <DemoSpace>使用名称</DemoSpace>
-    <DemoSpace>
+    <DemoViewTop label="使用名称">
       <VIcon
         v-for="iconName in iconNames"
         :key="iconName"
         :name="iconName"
         v-bind="$attrs"
       />
-    </DemoSpace>
-    <DemoSpace>使用组件</DemoSpace>
-    <DemoSpace>
+    </DemoViewTop>
+    <DemoViewTop label="使用组件">
       <VIcon
         v-for="iconComponent in iconComponents"
         :key="iconComponent"
         :component="iconComponent"
         v-bind="$attrs"
       />
-    </DemoSpace>
-    <DemoSpace>使用插槽</DemoSpace>
-    <DemoSpace>
+    </DemoViewTop>
+    <DemoViewTop label="使用插槽">
       <VIcon
         v-for="iconComponent in iconComponents"
         :key="iconComponent"
@@ -27,7 +24,7 @@
       >
         <component :is="iconComponent" />
       </VIcon>
-    </DemoSpace>
+    </DemoViewTop>
   </div>
 </template>
 

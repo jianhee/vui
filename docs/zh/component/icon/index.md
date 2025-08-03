@@ -72,21 +72,31 @@ import IconClose from './close.svg?component';
 </script>
 ```
 
-## 基础用法
+## 示例
+
+### 基础用法
 
 使用 `name` 属性、`component` 属性或 `default` 插槽插入图标
 
 <preview path="./demos/basic.vue"></preview>
 
-## 控制样式
+### 可点击状态
 
-<!--@include: @/component/@parts/props-style.md-->
+<preview path="./demos/clickable.vue"></preview>
+
+### 禁用状态
+
+<preview path="./demos/disabled.vue"></preview>
+
+### 旋转状态
+
+<preview path="./demos/spin.vue"></preview>
+
+### 控制样式
+
+<!--@include: @/component/@parts/api-style.md-->
 
 <preview path="./demos/style.vue"></preview>
-
-## 控制状态
-
-<preview path="./demos/state.vue"></preview>
 
 ## API
 
@@ -102,7 +112,7 @@ import IconClose from './close.svg?component';
 
 ### 样式属性
 
-<!--@include: @/component/@parts/props-style.md-->
+<!--@include: @/component/@parts/api-style.md-->
 
 | 名称          | 说明                                                                                       | 类型             | 默认值               | 默认单位 |
 | ------------- | ------------------------------------------------------------------------------------------ | ---------------- | -------------------- | -------- |
