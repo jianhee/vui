@@ -1,17 +1,26 @@
 <template>
-  <VSwitch
-    v-model:checked="inInline"
-    inactive-text="块级模式"
-    active-text="行内模式"
-    class="demo-toolbar"
-  />
+  <DemoView>
+    <template #content>
+      <DemoBasic :form-props="formProps" />
+    </template>
 
-  <DemoBasic :filed-inline="inInline" />
+    <template #props>
+      <DemoViewBoolean code="filedInline|filedBlock">
+        <VSwitch
+          v-model:checked="formProps.filedInline"
+          inactive-text="块级模式"
+          active-text="行内模式"
+        />
+      </DemoViewBoolean>
+    </template>
+  </DemoView>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import DemoBasic from './basic.vue';
 
-const inInline = ref(true);
+const formProps = ref({
+  filedInline: true
+});
 </script>

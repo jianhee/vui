@@ -1,36 +1,63 @@
 <template>
   <VForm
-    v-bind="$attrs"
     class="demo-form"
+    v-bind="formProps"
   >
-    <VFormItem label="文本"> 文本文本 </VFormItem>
-    <VFormItem label="输入框">
+    <VFormItem
+      label="文本"
+      v-bind="formItemProps"
+    >
+      使用 <code>label</code> 属性
+    </VFormItem>
+    <VFormItem v-bind="formItemProps">
+      <template #label> <code>label</code> </template>
+      使用 <code>label</code> 插槽
+    </VFormItem>
+    <VFormItem
+      label="输入框"
+      v-bind="formItemProps"
+    >
       <VInput v-model:value="inputValue" />
     </VFormItem>
-    <VFormItem label="选择器">
+    <VFormItem
+      label="选择器"
+      v-bind="formItemProps"
+    >
       <VSelect
         v-model:value="selectValue"
         :options="options"
       />
     </VFormItem>
-    <VFormItem label="多选框组">
+    <VFormItem
+      label="多选框组"
+      v-bind="formItemProps"
+    >
       <VCheckboxGroup
         v-model:value="checkboxGroupValue"
         :options="options"
         option-inline
       />
     </VFormItem>
-    <VFormItem label="单选框组">
+    <VFormItem
+      label="单选框组"
+      v-bind="formItemProps"
+    >
       <VRadioGroup
         v-model:value="radioGroupValue"
         :options="options"
         option-inline
       />
     </VFormItem>
-    <VFormItem label="开关">
+    <VFormItem
+      label="开关"
+      v-bind="formItemProps"
+    >
       <VSwitch v-model:checked="switchVal" />
     </VFormItem>
-    <VFormItem label="滑块">
+    <VFormItem
+      label="滑块"
+      v-bind="formItemProps"
+    >
       <VSlider v-model:value="sliderVal" />
     </VFormItem>
   </VForm>
@@ -38,6 +65,11 @@
 
 <script setup>
 import { ref } from 'vue';
+
+defineProps({
+  formProps: { type: Object, default: null },
+  formItemProps: { type: Object, default: null }
+});
 
 // 绑定值
 const inputValue = ref('123');

@@ -13,16 +13,6 @@
   flex-direction: column;
   gap: 15px 30px;
 
-  // 表单项的显示模式
-  &--filed-inline {
-    --vui-input-width: 180px;
-    --vui-select-width: 180px;
-    --vui-slider-width: 180px;
-
-    display: inline-flex;
-    flex-flow: row wrap;
-  }
-
   // 表单项
   &-item {
     display: flex;
@@ -43,11 +33,47 @@
     flex: auto;
   }
 
-  // 表单项的标签位置
-  &--label-top &-item {
-    display: block;
+  // 行内模式
+  &--filed-inline {
+    --vui-input-width: 180px;
+    --vui-select-width: 180px;
+    --vui-slider-width: 180px;
+
+    display: inline-flex;
+    flex-flow: row wrap;
   }
-  &--label-right &-label {
-    text-align: right;
+
+  // 标签位置
+  &--label-position {
+    &-right {
+      flex-direction: row-reverse;
+    }
+    &-top {
+      flex-direction: column;
+      gap: 0;
+    }
+    &-bottom {
+      flex-direction: column-reverse;
+      gap: 0;
+    }
+  }
+
+  // 标签对齐
+  &--label-align {
+    &-center .vui-form-label {
+      text-align: center;
+    }
+    &-right .vui-form-label {
+      text-align: right;
+    }
+  }
+
+  // 标签宽度
+  &--filed-inline .vui-form-label {
+    width: auto;
+  }
+  &--label-position-top .vui-form-label,
+  &--label-position-bottom .vui-form-label {
+    width: 100%;
   }
 }

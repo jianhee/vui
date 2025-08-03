@@ -3,16 +3,22 @@ import { computed, ref } from 'vue';
 import { useIntersectionObserver } from '@vueuse/core';
 import { addUnit } from '../../../utils';
 
-// props
+// 表单的 props
 export const formProps = {
   // 表单项是否为行内模式
   filedInline: { type: Boolean, default: false },
   // 表单项是否为块级模式
-  filedBlock: { type: Boolean, default: true },
-  // 标签位置：left, right, top
-  labelPosition: { type: String, default: 'left' },
+  filedBlock: { type: Boolean, default: true }
+};
+
+// 表单和表单项都有的 props
+// formItem 优先级高于 form
+export const commonProps = {
+  // 标签位置：left, right, top, bottom
+  labelPosition: { type: String, default: null },
+  // 标签对齐：left, right, center
+  labelAlign: { type: String, default: null },
   // 标签宽度：不带单位时默认 `px`，默认取最长标签的宽度
-  // 仅块级模式的侧边标签生效
   labelWidth: { type: [String, Number], default: null }
 };
 
@@ -32,33 +38,19 @@ export const useForm = ({ formElRef, props }) => {
     }
   });
 
-  // 使用标签宽度
-  const labelWidth = computed(() => {
-    // 行内模式不使用宽度
-    if (isInline.value) return null;
-
-    // 标签位置在顶部时不使用宽度
-    if (props.labelPosition === 'top') return null;
-
-    // 设置的值或计算的值
-    return props.labelWidth || labelAutoWidth.value;
-  });
-
   // 根元素类名
   const rootClasses = computed(() => {
-    return [
-      'vui-form',
-      {
-        'vui-form--filed-inline': isInline.value,
-        [`vui-form--label-${props.labelPosition}`]: props.labelPosition !== 'left'
-      }
-    ];
+    return {
+      'vui-form--filed-inline': isInline.value
+    };
   });
 
   // 根元素样式
   const rootStyles = computed(() => {
+    const labelWidth = props.labelWidth || labelAutoWidth.value;
+
     return {
-      '--vui-form-label-width': addUnit(labelWidth.value, 'px')
+      '--vui-form-label-width': addUnit(labelWidth, 'px')
     };
   });
 

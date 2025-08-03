@@ -2,7 +2,7 @@
 <template>
   <div
     ref="formElRef"
-    :class="rootClasses"
+    :class="['vui-form', rootClasses]"
     :style="rootStyles"
   >
     <!-- 显示内容，只能是 `<VFormItem>` 组件 -->
@@ -11,16 +11,21 @@
 </template>
 
 <script setup>
-import { useTemplateRef } from 'vue';
-import { useForm, formProps } from './composables/form';
+import { provide, useTemplateRef } from 'vue';
+import { useForm, formProps, commonProps } from './composables/form';
 
 // 表单
 const formElRef = useTemplateRef('formElRef');
-const props = defineProps(formProps);
+const props = defineProps({ ...formProps, ...commonProps });
 
 // 使用表单
 const { rootClasses, rootStyles } = useForm({
   formElRef,
+  props
+});
+
+// 子组件使用
+provide('formRoot', {
   props
 });
 </script>

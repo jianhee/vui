@@ -11,6 +11,7 @@ code / label        switch
 <style lang="scss">
 .demo-view--boolean {
   display: flex;
+  gap: 10px;
 }
 .demo-view--boolean .demo-view-base-label {
   line-height: 32px;
