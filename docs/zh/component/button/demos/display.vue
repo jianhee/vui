@@ -1,11 +1,19 @@
 <template>
-  <VSwitch
-    v-model:checked="isBlock"
-    inactive-text="行内模式"
-    active-text="块级模式"
-  />
+  <DemoView>
+    <template #content>
+      <DemoBasic :block="isBlock" />
+    </template>
 
-  <DemoBasic :block="isBlock" />
+    <template #props>
+      <DemoViewBoolean code="inline|block">
+        <VSwitch
+          v-model:checked="isBlock"
+          inactive-text="行内模式"
+          active-text="块级模式"
+        />
+      </DemoViewBoolean>
+    </template>
+  </DemoView>
 </template>
 
 <script setup>

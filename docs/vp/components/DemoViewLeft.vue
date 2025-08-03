@@ -3,19 +3,10 @@
 code / label content
 -->
 <template>
-  <DemoViewBase
-    class="demo-view--left"
-    :style="{ width: `${width}px` }"
-  >
+  <DemoViewBase class="demo-view--left">
     <slot />
   </DemoViewBase>
 </template>
-
-<script setup>
-defineProps({
-  width: { type: String, default: null }
-});
-</script>
 
 <style lang="scss">
 .demo-view--left {
@@ -24,6 +15,5 @@ defineProps({
 }
 .demo-view--left .demo-view-base-label {
   line-height: 32px;
-  text-align: right;
 }
 </style>

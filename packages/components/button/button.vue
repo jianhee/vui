@@ -4,8 +4,7 @@
     type="button"
     :class="rootClasses"
     :style="rootStyles"
-    :disabled="loading"
-    v-bind="{ ...rootProps, ...nativeProps }"
+    :disabled="disabled || loading"
   >
     <!-- 加载状态 -->
     <VIcon
@@ -26,13 +25,8 @@
 <script setup>
 import { computed } from 'vue';
 import { useButton, btnProps } from './composables';
-import { useNativeProps } from '../../composables/use-native-props';
 import { useIconProps } from '../../composables/use-icon-props';
 import IconLoading from '../../icons/loading.vue';
-
-// 筛选属性
-defineOptions({ inheritAttrs: false });
-const { rootProps, nativeProps } = useNativeProps(['disabled']);
 
 // 按钮
 const props = defineProps(btnProps);

@@ -1,10 +1,18 @@
 <template>
-  <VSwitch
-    v-model:checked="isLoading"
-    active-text="加载状态"
-  />
+  <DemoView>
+    <template #content>
+      <DemoBasic :loading="isLoading" />
+    </template>
 
-  <DemoBasic :loading="isLoading" />
+    <template #props>
+      <DemoViewBoolean
+        code="loading"
+        label="加载状态"
+      >
+        <VSwitch v-model:checked="isLoading" />
+      </DemoViewBoolean>
+    </template>
+  </DemoView>
 </template>
 
 <script setup>

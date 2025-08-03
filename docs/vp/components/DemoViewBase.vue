@@ -2,7 +2,10 @@
 <template>
   <div class="demo-view-base">
     <!-- label -->
-    <div class="demo-view-base-label">
+    <div
+      class="demo-view-base-label"
+      :style="{ width: `${labelWidth}px` }"
+    >
       <code v-if="code">{{ code }}</code>
       <span v-if="label && code">&nbsp;/&nbsp;</span>
       <span v-if="label">{{ label }}</span>
@@ -17,7 +20,8 @@
 <script setup>
 defineProps({
   code: { type: String, default: null },
-  label: { type: String, default: null }
+  label: { type: String, default: null },
+  labelWidth: { type: String, default: null }
 });
 </script>
 

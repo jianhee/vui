@@ -1,16 +1,16 @@
 <template>
   <DemoView>
     <template #content>
-      <DemoBasic :radius="radiusRef" />
+      <DemoBasic :disabled="isDisabled" />
     </template>
 
     <template #props>
-      <DemoViewTop
-        label="圆角尺寸"
-        code="radius"
+      <DemoViewBoolean
+        code="disabled"
+        label="禁用状态"
       >
-        <DemoValue v-model:value="radiusRef" />
-      </DemoViewTop>
+        <VSwitch v-model:checked="isDisabled" />
+      </DemoViewBoolean>
     </template>
   </DemoView>
 </template>
@@ -19,5 +19,5 @@
 import { ref } from 'vue';
 import DemoBasic from './basic.vue';
 
-const radiusRef = ref(4);
+const isDisabled = ref(true);
 </script>

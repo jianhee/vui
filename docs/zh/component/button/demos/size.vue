@@ -1,11 +1,12 @@
 <template>
-  <template
+  <DemoViewTop
     v-for="btnSize in btnSizes"
     :key="btnSize.label"
+    :code="btnSize.value"
+    :label="btnSize.label"
   >
-    <div>{{ btnSize.label }}</div>
     <DemoBasic :size="btnSize.value" />
-  </template>
+  </DemoViewTop>
 </template>
 
 <script setup>
@@ -13,8 +14,8 @@ import DemoBasic from './basic.vue';
 
 // 按钮尺寸
 const btnSizes = [
-  { label: 'Large', value: 'large' },
-  { label: 'Medium（默认）', value: undefined },
-  { label: 'Small', value: 'small' }
+  { label: '大号', value: 'large' },
+  { label: '中号（默认）', value: 'medium' },
+  { label: '小号', value: 'small' }
 ];
 </script>

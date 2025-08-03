@@ -1,5 +1,5 @@
 <template>
-  <DemoSpace class="demo-btns">
+  <div class="demo-btns">
     <VButton
       v-for="btnType in btnTypes"
       :key="btnType.label"
@@ -8,7 +8,7 @@
     >
       {{ btnType.label }}
     </VButton>
-  </DemoSpace>
+  </div>
 </template>
 
 <script setup>
