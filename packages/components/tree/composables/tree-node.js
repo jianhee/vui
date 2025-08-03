@@ -21,12 +21,20 @@ export const useTreeNode = ({ treeRoot, treeNode }) => {
 
   // 是否显示折叠按钮
   const isShowExpand = computed(() => {
-    // 未加载的叶子节点
-    if (nodeData.value.isLeaf && !nodeData.value.isLoaded) return true;
-
-    // 是否有子集
     const children = itemData.value.children?.filter(item => treeRoot.props.filterMethod({ item }));
-    return children?.length;
+    const hasChildren = !!children?.length;
+
+    // 使用方法判断
+    if (treeRoot.props.isLeaf) {
+      if (nodeData.value.isLeaf) {
+        return nodeData.value.isLoaded ? hasChildren : true;
+      } else {
+        return false;
+      }
+    }
+
+    // 使用子集判断
+    return hasChildren;
   });
 
   // 展开图标属性
@@ -36,7 +44,7 @@ export const useTreeNode = ({ treeRoot, treeNode }) => {
 
   // 展开/关闭子节点
   async function toggleChildren() {
-    const { isLeaf, isExpanded, isLoaded } = nodeData.value;
+    const { isExpanded, isLeaf, isLoaded } = nodeData.value;
 
     if (!isExpanded && isLeaf && !isLoaded) {
       // 异步打开

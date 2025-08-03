@@ -1,17 +1,22 @@
 <template>
-  <DemoDesc :items="['width']" />
-  <VForm>
-    <VFormItem label="主体宽度">
-      <DemoValue
-        v-model:value="widthRef"
-        unit="%"
-        :min="15"
-      />
-    </VFormItem>
-    <VFormItem label="操作">
-      <VButton @click="openDialog">打开</VButton>
-    </VFormItem>
-  </VForm>
+  <DemoView>
+    <template #content>
+      <VButton @click="openDialog">打开弹窗</VButton>
+    </template>
+
+    <template #props>
+      <DemoViewTop
+        label="主体宽度"
+        code="width"
+      >
+        <DemoValue
+          v-model:value="widthRef"
+          unit="%"
+          :min="15"
+        />
+      </DemoViewTop>
+    </template>
+  </DemoView>
 
   <!-- 弹窗 -->
   <component

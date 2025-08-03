@@ -1,19 +1,21 @@
 # Switch 开关
 
-## 基础用法
+## 示例
 
-1. 使用 `v-model:checked` 属性绑定当前值
-2. 切换选中状态时触发 `change` 事件
+### 基础用法
+
+- 使用 `v-model:checked` 属性绑定当前值
+- 切换选中状态时触发 `change` 事件
 
 <preview path="./demos/basic.vue"></preview>
 
-## 文字描述
+### 文字描述
 
 使用 `activeText` 和 `inactiveText` 属性定义文字描述
 
 <preview path="./demos/text.vue"></preview>
 
-## 阻止切换
+### 阻止切换
 
 使用 `beforeChange` 属性定义切换前执行的方法
 

@@ -1,24 +1,27 @@
 <template>
-  <DemoDesc :items="['disabled', 'placeholder']" />
-  <VForm>
-    <VFormItem label="禁用状态">
-      <VSelect
-        v-model:value="selectValue"
-        class="demo-select"
-        placeholder="禁用状态"
-        :options="selectOptions"
-        disabled
-      />
-    </VFormItem>
-    <VFormItem label="占位文字">
-      <VSelect
-        v-model:value="selectValue"
-        class="demo-select"
-        placeholder="请选择"
-        :options="selectOptions"
-      />
-    </VFormItem>
-  </VForm>
+  <DemoViewTop
+    label="禁用状态"
+    code="disabled"
+  >
+    <VSelect
+      v-model:value="selectValue"
+      class="demo-select"
+      placeholder="禁用状态"
+      :options="selectOptions"
+      disabled
+    />
+  </DemoViewTop>
+  <DemoViewTop
+    label="占位文字"
+    code="placeholder"
+  >
+    <VSelect
+      v-model:value="selectValue"
+      class="demo-select"
+      placeholder="请选择"
+      :options="selectOptions"
+    />
+  </DemoViewTop>
 </template>
 
 <script setup>

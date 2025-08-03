@@ -9,12 +9,20 @@
     <!-- 显示内容 -->
     <slot />
     <!-- 手柄 -->
-    <div
-      v-for="handle in handleItems"
-      :key="handle"
-      :class="['vui-dragbox-handle', `vui-dragbox-handle-${handle}`, { 'is-active': handle === handleActiveName }]"
-      @mousedown.left="onResizeStart($event, handle)"
-    />
+    <template v-if="isResizable">
+      <div
+        v-for="handle in resizeHandles"
+        :key="handle"
+        :class="[
+          'vui-dragbox-handle',
+          `vui-dragbox-handle-${handle}`,
+          {
+            'is-active': handle === activeHandleName
+          }
+        ]"
+        @mousedown.left="onResizeStart($event, handle)"
+      />
+    </template>
   </div>
 </template>
 
@@ -45,7 +53,7 @@ const { moveClasses, moveStyles } = useDragMove({
 });
 
 // 使用缩放
-const { resizeClasses, resizeStyles, handleItems, handleActiveName, onResizeStart } = useDragResize({
+const { isResizable, resizeClasses, resizeStyles, activeHandleName, onResizeStart } = useDragResize({
   boxElRef,
   dragFlagRef,
   props,

@@ -6,7 +6,7 @@
 | `selectable`          | 是否可选中 <br> 可选时会记录选中值，所以菜单项的 `key` 必填 | `boolean`                       | `false` |
 | `v-model:selectedKey` | 选中值，即选中项的 `key`                                    | `string\|number`                |         |
 
-#### items
+### 属性.items
 
 `string|number` 类型的菜单项会格式化为 `{ label }`
 

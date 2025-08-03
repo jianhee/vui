@@ -4,29 +4,31 @@
 空状态和加载状态的 API 完全一致，UI 略有差异。
 :::
 
-## 基础用法
+## 示例
+
+### 基础用法
 
 <preview path="@docs/component/empty/demos/basic.vue"></preview>
 
-## 自定义图标
+### 自定义图标
 
-<!--@include: @/component/@parts/props-icon.md-->
+<!--@include: @/component/@parts/guild-icon.md-->
 
 <preview path="@docs/component/empty/demos/icon.vue"></preview>
 
-## 自定义图片
+### 自定义图片
 
 使用 `image` 属性定义图片
 
 <preview path="@docs/component/empty/demos/image.vue"></preview>
 
-## 自定义文本
+### 自定义文本
 
 使用 `description` 属性定义描述文本
 
 <preview path="@docs/component/empty/demos/desc.vue"></preview>
 
-## 自定义底栏
+### 自定义底栏
 
 使用 `default` 插槽自定义底部内容
 

@@ -10,10 +10,12 @@
 </template>
 
 <script setup>
+import { inject } from 'vue';
 import { renderItems } from '../../table/composables';
 import { writeLog } from '@vp/utils';
 
-const treeData = renderItems({ length: 10, level: 3 });
+const _treeData = renderItems({ length: 10, level: 3 });
+const treeData = inject('treeData', _treeData);
 </script>
 
 <style>

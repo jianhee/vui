@@ -1,26 +1,36 @@
 <template>
-  <DemoDesc :items="['height', 'radius']" />
-  <VForm class="demo-toolbar">
-    <VFormItem label="高度">
-      <DemoValue
-        v-model:value="heightRef"
-        :min="1"
-        unit="px"
+  <DemoView>
+    <template #content>
+      <VProgress
+        class="demo-progress"
+        :percent="valueRef"
+        :height="heightRef"
+        :radius="radiusRef"
       />
-    </VFormItem>
-    <VFormItem label="圆角尺寸">
-      <DemoValue
-        v-model:value="radiusRef"
-        unit="px"
-      />
-    </VFormItem>
-  </VForm>
-  <VProgress
-    class="demo-progress"
-    :percent="valueRef"
-    :height="heightRef"
-    :radius="radiusRef"
-  />
+    </template>
+
+    <template #props>
+      <DemoViewTop
+        label="高度"
+        code="height"
+      >
+        <DemoValue
+          v-model:value="heightRef"
+          :min="1"
+          unit="px"
+        />
+      </DemoViewTop>
+      <DemoViewTop
+        label="圆角尺寸"
+        code="radius"
+      >
+        <DemoValue
+          v-model:value="radiusRef"
+          unit="px"
+        />
+      </DemoViewTop>
+    </template>
+  </DemoView>
 </template>
 
 <script setup>

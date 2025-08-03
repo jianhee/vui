@@ -1,20 +1,24 @@
 <template>
-  <VForm>
-    <VFormItem label="切换状态">
-      <VSwitch
-        v-model:checked="isShowClose"
-        active-text="显示关闭按钮"
-      />
-      <br />
-      <VSwitch
-        v-model:checked="isCloseOnClickModal"
-        active-text="点击遮罩时关闭"
-      />
-    </VFormItem>
-    <VFormItem label="操作">
-      <VButton @click="openDialog">打开</VButton>
-    </VFormItem>
-  </VForm>
+  <DemoView>
+    <template #content>
+      <VButton @click="openDialog">打开弹窗</VButton>
+    </template>
+
+    <template #props>
+      <DemoViewBoolean
+        code="showClose"
+        label="是否显示关闭按钮"
+      >
+        <VSwitch v-model:checked="isShowClose" />
+      </DemoViewBoolean>
+      <DemoViewBoolean
+        code="closeOnClickModal"
+        label="是否在点击遮罩时关闭"
+      >
+        <VSwitch v-model:checked="isCloseOnClickModal" />
+      </DemoViewBoolean>
+    </template>
+  </DemoView>
 
   <!-- 弹窗 -->
   <component

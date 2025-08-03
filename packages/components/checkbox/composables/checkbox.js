@@ -16,8 +16,7 @@ export const checkboxModel = {
 export const checkboxProps = {
   // 选项文本
   label: { type: String, default: null },
-  // 选项值
-  // 仅选项组有效
+  // 选项值（仅选项组有效）
   option: { type: [Object, Number, String], default: null },
   // 选项类型：button 按钮
   type: { type: String, default: null },

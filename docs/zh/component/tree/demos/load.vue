@@ -13,11 +13,13 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, inject } from 'vue';
 import { renderItems, renderIcon } from '../../table/composables';
 
 // 初始数据
-const treeData = ref(renderItems({ length: 5 }));
+const treeData1 = renderItems({ length: 5 });
+const treeData2 = inject('treeData', treeData1);
+const treeData = ref(treeData2);
 
 // 查找节点
 const findNodeById = (nodeId, nodes = treeData.value) => {
@@ -44,4 +46,8 @@ function loadData({ node, item }) {
     }, 1000);
   });
 }
+
+defineExpose({
+  treeData
+});
 </script>

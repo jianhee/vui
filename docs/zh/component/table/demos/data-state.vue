@@ -7,22 +7,22 @@
     重新加载
   </VButton>
   <DemoSpace flex>
-    <DemoCard label="默认状态">
+    <DemoViewTopCenter label="默认状态">
       <VTable
         class="demo-table"
         :col-items="colItems"
         :loading="loading"
       />
-    </DemoCard>
-    <DemoCard label="自定义文本">
+    </DemoViewTopCenter>
+    <DemoViewTopCenter label="自定义文本">
       <VTable
         class="demo-table"
         :col-items="colItems"
         :loading="loading"
         empty-text="暂无数据"
       />
-    </DemoCard>
-    <DemoCard label="自定义插槽">
+    </DemoViewTopCenter>
+    <DemoViewTopCenter label="自定义插槽">
       <VTable
         class="demo-table"
         :col-items="colItems"
@@ -32,7 +32,7 @@
           <VEmpty description="暂无数据" />
         </template>
       </VTable>
-    </DemoCard>
+    </DemoViewTopCenter>
   </DemoSpace>
 </template>
 

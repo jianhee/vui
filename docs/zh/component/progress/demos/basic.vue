@@ -1,18 +1,16 @@
 <template>
-  <VForm class="demo-toolbar">
-    <VFormItem label="静态进度">
-      <VProgress
-        class="demo-progress"
-        :percent="50"
-      />
-    </VFormItem>
-    <VFormItem label="动态进度">
-      <VProgress
-        class="demo-progress"
-        :percent="valueRef"
-      />
-    </VFormItem>
-  </VForm>
+  <DemoViewLeft label="静态进度">
+    <VProgress
+      class="demo-progress"
+      :percent="50"
+    />
+  </DemoViewLeft>
+  <DemoViewLeft label="动态进度">
+    <VProgress
+      class="demo-progress"
+      :percent="valueRef"
+    />
+  </DemoViewLeft>
 </template>
 
 <script setup>

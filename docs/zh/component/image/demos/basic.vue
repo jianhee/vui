@@ -1,11 +1,11 @@
 <template>
   <DemoSpace flex>
-    <DemoCard label="加载成功">
+    <DemoViewTopCenter label="加载成功">
       <VImage :src="url" />
-    </DemoCard>
-    <DemoCard label="加载失败">
+    </DemoViewTopCenter>
+    <DemoViewTopCenter label="加载失败">
       <VImage :src="`123${url}`" />
-    </DemoCard>
+    </DemoViewTopCenter>
   </DemoSpace>
 </template>
 

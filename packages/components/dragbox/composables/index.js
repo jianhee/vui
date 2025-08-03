@@ -11,9 +11,7 @@ export const dragboxProps = {
   movable: { type: Boolean, default: false },
   // 是否可缩放
   resizable: { type: Boolean, default: false },
-  // 可缩放手柄：`[String]`
-  // 定位元素支持上下左右四个手柄
-  // 非定位元素只支持右下两个手柄
+  // 可缩放手柄
   resizeHandles: { type: Array, default: () => ['left', 'right', 'top', 'bottom'] },
   // 最小尺寸
   minWidth: { type: Number, default: 0 },

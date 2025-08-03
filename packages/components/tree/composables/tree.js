@@ -35,6 +35,7 @@ export const treeProps = {
   //  2. 参数为当前节点和当前项，返回一个可以使用 `v-bind` 绑定到节点元素的对象
   customNode: { type: Function, default: null },
   // 校验是否是叶子节点
+  // 默认通过 `children` 属性判断，设置后通过方法判断
   // 1. 示例：item => boolean
   // 2. 参数为当前项，返回 `true` 表示是叶子节点
   isLeaf: { type: Function, default: null },
@@ -80,9 +81,17 @@ export const useTree = ({ props, treeDataRef }) => {
 
         // 处理子节点
         if (newNode.isExpanded) {
-          if (newNode.isLeaf && !newNode.isLoaded) {
-            loadChildren(newNode);
+          if (props.isLeaf) {
+            // 使用方法判断
+            if (newNode.isLeaf) {
+              if (newNode.isLoaded) {
+                traverseItems(rawItem.children, level + 1);
+              } else {
+                loadChildren(newNode);
+              }
+            }
           } else if (rawItem.children) {
+            // 使用子节点判断
             traverseItems(rawItem.children, level + 1);
           }
         }

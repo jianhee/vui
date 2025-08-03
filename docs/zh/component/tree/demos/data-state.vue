@@ -7,20 +7,20 @@
     重新加载
   </VButton>
   <DemoSpace flex>
-    <DemoCard label="默认状态">
+    <DemoViewTopCenter label="默认状态">
       <VTree
         class="demo-tree"
         :loading="loading"
       />
-    </DemoCard>
-    <DemoCard label="自定义文本">
+    </DemoViewTopCenter>
+    <DemoViewTopCenter label="自定义文本">
       <VTree
         class="demo-tree"
         :loading="loading"
         empty-text="暂无数据"
       />
-    </DemoCard>
-    <DemoCard label="自定义插槽">
+    </DemoViewTopCenter>
+    <DemoViewTopCenter label="自定义插槽">
       <VTree
         class="demo-tree"
         :loading="loading"
@@ -29,7 +29,7 @@
           <VEmpty description="暂无数据" />
         </template>
       </VTree>
-    </DemoCard>
+    </DemoViewTopCenter>
   </DemoSpace>
 </template>
 

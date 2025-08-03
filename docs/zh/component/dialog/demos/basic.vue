@@ -1,35 +1,38 @@
 <template>
-  <VForm>
-    <VFormItem label="组成部分">
-      <VSwitch
-        v-model:checked="isShowTitle"
-        active-text="显示标题"
-      />
-      <br />
-      <VSwitch
-        v-model:checked="isShowContent"
-        active-text="显示内容"
-      />
-      <br />
-      <VSwitch
-        v-model:checked="isShowFooter"
-        active-text="显示底栏"
-      />
-    </VFormItem>
-    <VFormItem
-      v-if="!isDialog"
-      label="出现位置"
-    >
-      <VRadioGroup
-        v-model:value="placementRef"
-        :options="placementOptions"
-        option-type="button"
-      />
-    </VFormItem>
-    <VFormItem label="操作">
-      <VButton @click="openDialog">打开</VButton>
-    </VFormItem>
-  </VForm>
+  <DemoView>
+    <template #content>
+      <VButton @click="openDialog">打开弹窗</VButton>
+    </template>
+
+    <template #props>
+      <DemoViewBoolean label="组成部分">
+        <VSwitch
+          v-model:checked="isShowTitle"
+          active-text="显示标题"
+        />
+        <br />
+        <VSwitch
+          v-model:checked="isShowContent"
+          active-text="显示内容"
+        />
+        <br />
+        <VSwitch
+          v-model:checked="isShowFooter"
+          active-text="显示底栏"
+        />
+      </DemoViewBoolean>
+      <DemoViewBoolean
+        v-if="!isDialog"
+        label="出现位置"
+      >
+        <VRadioGroup
+          v-model:value="placementRef"
+          :options="placementOptions"
+          option-type="button"
+        />
+      </DemoViewBoolean>
+    </template>
+  </DemoView>
 
   <!-- 弹窗 -->
   <component

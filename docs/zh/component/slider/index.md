@@ -1,18 +1,20 @@
 # Slider 滑块
 
-## 基础用法
+## 示例
+
+### 基础用法
 
 使用 `v-model:value` 属性绑定当前值
 
 <preview path="./demos/basic.vue"></preview>
 
-## 限制范围
+### 限制范围
 
 使用 `min` 和 `max` 属性限制范围
 
 <preview path="./demos/limit.vue"></preview>
 
-## 提示框
+### 提示框
 
 使用 `tipFormatter` 属性定义提示框
 

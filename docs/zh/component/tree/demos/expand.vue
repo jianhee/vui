@@ -3,14 +3,19 @@
     flex
     class="demo-tree-expand"
   >
-    <DemoBasicTree :expanded-node-ids="['0-2']" />
-    <DemoLoadTree :expanded-node-ids="['0-2']" />
+    <DemoBasicTree :expanded-node-ids="[treeData[2].id]" />
+    <DemoLoadTree :expanded-node-ids="[treeData[2].id]" />
   </DemoSpace>
 </template>
 
 <script setup>
+import { provide } from 'vue';
+import { renderItems } from '../../table/composables';
 import DemoBasicTree from './basic.vue';
 import DemoLoadTree from './load.vue';
+
+const treeData = renderItems({ length: 10, level: 3 });
+provide('treeData', treeData);
 </script>
 
 <style>

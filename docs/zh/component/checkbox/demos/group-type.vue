@@ -1,16 +1,28 @@
 <template>
-  <VSwitch
-    v-model:checked="isBtn"
-    active-text="按钮类型"
-  />
+  <DemoView>
+    <template #content>
+      <DemoBasic :option-type="typeRef" />
+    </template>
 
-  <DemoGroup :option-type="type" />
+    <template #props>
+      <DemoViewBoolean
+        label="显示类型"
+        code="optionType"
+      >
+        <VRadioGroup
+          v-model:value="typeRef"
+          :options="types"
+          option-type="button"
+        />
+      </DemoViewBoolean>
+    </template>
+  </DemoView>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
-import DemoGroup from './group.vue';
+import { ref } from 'vue';
+import DemoBasic from './group.vue';
 
-const isBtn = ref(true);
-const type = computed(() => (isBtn.value ? 'button' : undefined));
+const types = ['default', 'button'];
+const typeRef = ref('button');
 </script>

@@ -1,29 +1,29 @@
 <template>
   <DemoSpace flex>
-    <DemoCard label="只修改图标">
+    <DemoViewTopCenter label="只修改图标">
       <component
         :is="StateComponent"
         icon="face"
       />
-    </DemoCard>
-    <DemoCard label="只修改样式">
+    </DemoViewTopCenter>
+    <DemoViewTopCenter label="只修改样式">
       <component
         :is="StateComponent"
         :icon="{ color: 'pink', size: 100 }"
       />
-    </DemoCard>
-    <DemoCard label="修改图标和样式">
+    </DemoViewTopCenter>
+    <DemoViewTopCenter label="修改图标和样式">
       <component
         :is="StateComponent"
         :icon="{ name: 'face', color: 'pink', size: 100 }"
       />
-    </DemoCard>
-    <DemoCard label="不使用图标">
+    </DemoViewTopCenter>
+    <DemoViewTopCenter label="不使用图标">
       <component
         :is="StateComponent"
         :icon="null"
       />
-    </DemoCard>
+    </DemoViewTopCenter>
   </DemoSpace>
 </template>
 

@@ -2,11 +2,11 @@
 
 <!--@include: ./parts/basic-1.md-->
 
-## Checkbox
+## Checkbox 示例
 
 <!--@include: ./parts/basic-2.md-->
 
-## CheckboxGroup
+## CheckboxGroup 示例
 
 <!--@include: ./parts/basic-3.md-->
 

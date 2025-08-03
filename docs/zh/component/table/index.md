@@ -1,9 +1,11 @@
 # Table 虚拟化表格
 
-## 基础用法
+## 示例
 
-1. 使用 `rowItems` 和 `colItems` 属性定义行列数据，数据量大时必须使用 `tableHeight` 属性或者 CSS 限制表格高度
-2. 右键点击行时触发 `row-contextmenu` 事件
+### 基础用法
+
+- 使用 `rowItems` 和 `colItems` 属性定义行列数据，数据量大时必须使用 `tableHeight` 属性或者 CSS 限制表格高度
+- 右键点击行时触发 `row-contextmenu` 事件
 
 ::: details 示例中的行列数据
 <<< @/component/table/composables/index.js
@@ -11,16 +13,16 @@
 
 <preview path="./demos/basic.vue"></preview>
 
-## 自定义行
+### 自定义行
 
 使用 `rowHeight`、`currentRowId`、`customRow` 等属性定义行的多种用法
 
 <preview path="./demos/rows.vue"></preview>
 
-## 自定义列
+### 自定义列
 
-1. 使用 `colResizable` 和 `colResizeStorageKey` 属性拖拽调整列宽并存到本地
-2. 使用 `row[col.key]` 的值或 `default` 插槽定义单元格内容
+- 使用 `colResizable` 和 `colResizeStorageKey` 属性拖拽调整列宽并存到本地
+- 使用 `row[col.key]` 的值或 `default` 插槽定义单元格内容
 
 <preview path="./demos/cols.vue"></preview>
 
@@ -29,29 +31,27 @@
 
 <preview path="./demos/data-state.vue"></preview>
 
-## 多选
+### 多选
 
-1. 使用 `selectable` 属性开启行多选的功能，使用 `v-model:selectedRowIds` 属性绑定选中值
-2. 默认点击选择框触发选择，可使用 `dragSelectable`、`dragSelectAreaWidth`、`ctrlASelectable` 等属性定义多种选择方式
-3. 切换选中项时触发 `selection-change` 事件
+- 使用 `selectable` 属性开启行多选的功能，使用 `v-model:selectedRowIds` 属性绑定选中值
+- 默认点击选择框触发选择，可使用 `dragSelectable`、`dragSelectAreaWidth`、`ctrlASelectable` 等属性定义多种选择方式
+- 切换选中项时触发 `selection-change` 事件
 
 <preview path="./demos/selection.vue"></preview>
 
-## 排序
+### 排序
 
-1. 使用列数据中的 `sortable` 属性定义该列是否可以排序
-2. 使用 `sortKey` 和 `sortOrder` 属性定义默认排序
+- 使用列数据中的 `sortable` 属性定义该列是否可以排序
+- 使用 `sortKey` 和 `sortOrder` 属性定义默认排序
 
 <preview path="./demos/sort.vue"></preview>
 
 <!-- 拖拽排序 -->
 <!--@include: ./parts/drag-sort-guild.md-->
 
-### 单个列表
-
 <preview path="./demos/drag-sort.vue"></preview>
 
-### 树和列表
+### 多列表拖拽
 
 <preview path="./demos/drag-sort-multi.vue"></preview>
 
@@ -70,13 +70,13 @@
 | `colResizable`        | 是否可以调整列宽                                                                           | `boolean`                                             | `false` |
 | `colResizeStorageKey` | 如果需要记住调整后的列宽，需要设置一个键名                                                 | `string`                                              |         |
 
-#### rowItems
+### 属性.rowItems
 
 | 名称 | 说明       | 类型             | 默认值 |
 | ---- | ---------- | ---------------- | ------ |
 | `id` | 行唯一标识 | `string\|number` | 必填   |
 
-#### colItems
+### 属性.colItems
 
 | 名称        | 说明                                                   | 类型             | 默认值         |
 | ----------- | ------------------------------------------------------ | ---------------- | -------------- |

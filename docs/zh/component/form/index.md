@@ -17,7 +17,7 @@
 
 <preview path="./demos/filed-display.vue"></preview>
 
-## API
+## Form API
 
 ### 通用属性
 
@@ -29,26 +29,28 @@
 | `labelAlign`    | 标签对齐方式 | `string`: `left\|center\|right`      | `left`         |
 | `labelWidth`    | 标签宽度     | `string\|number(?px)`                | 最长标签的宽度 |
 
-### Form 属性
+### 独有属性
 
 | 名称          | 说明                           | 类型（默认单位） | 默认值  |
 | ------------- | ------------------------------ | ---------------- | ------- |
 | `filedInline` | 表单项是否为行内模式（二选一） | `boolean`        | `false` |
 | `filedBlock`  | 表单项是否为块级模式（二选一） | `boolean`        | `true`  |
 
-### Form 插槽
+### 插槽
 
 | 名称      | 说明                                |
 | --------- | ----------------------------------- |
 | `default` | 显示内容，只能是 `<VFormItem>` 组件 |
 
-### FormItem 属性
+## FormItem API
+
+### 属性
 
 | 名称    | 说明     | 类型     |
 | ------- | -------- | -------- |
 | `label` | 左侧文本 | `string` |
 
-### FormItem 插槽
+### 插槽
 
 | 名称      | 说明                       |
 | --------- | -------------------------- |

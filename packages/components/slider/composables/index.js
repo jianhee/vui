@@ -96,7 +96,7 @@ export const useSlider = ({ railElRef, handleElRef, modelValue, props }) => {
   }));
 
   // 提示框
-  const isShowTip = computed(() => props.tipFormatter && (isDragging.value || isHovered.value));
+  const isShowTip = computed(() => modelValue.value !== null && props.tipFormatter && (isDragging.value || isHovered.value));
   const tipText = computed(() => props.tipFormatter(modelValue.value));
   const tipStyles = computed(() => ({
     left: `${handleX.value}px`,

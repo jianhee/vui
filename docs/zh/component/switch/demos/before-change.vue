@@ -1,18 +1,16 @@
 <template>
-  <VForm>
-    <VFormItem label="允许切换">
-      <VSwitch
-        v-model:checked="valueRef1"
-        :before-change="beforeChange1"
-      />
-    </VFormItem>
-    <VFormItem label="阻止切换">
-      <VSwitch
-        v-model:checked="valueRef2"
-        :before-change="beforeChange2"
-      />
-    </VFormItem>
-  </VForm>
+  <DemoViewLeft label="允许切换">
+    <VSwitch
+      v-model:checked="valueRef1"
+      :before-change="beforeChange1"
+    />
+  </DemoViewLeft>
+  <DemoViewLeft label="阻止切换">
+    <VSwitch
+      v-model:checked="valueRef2"
+      :before-change="beforeChange2"
+    />
+  </DemoViewLeft>
 </template>
 
 <script setup>

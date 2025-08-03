@@ -2,15 +2,15 @@
 
 ### 属性
 
-| 名称            | 说明                       | 类型                                                        | 默认值  |
-| --------------- | -------------------------- | ----------------------------------------------------------- | ------- |
-| `v-model:value` | 当前值，即选中项的 `value` | 多选框 `Array[string\|number]` <br> 单选框 `string\|number` |         |
-| `options`       | 选项数组                   | `Array[object\|string\|number]`                             |         |
-| `optionType`    | 选项类型                   | `string`: `button`                                          |         |
-| `optionInline`  | 选项是否为行内模式         | `boolean`                                                   | `false` |
-| `optionBlock`   | 选项是否为块级模式         | `boolean`                                                   | `true`  |
+| 名称            | 说明                         | 类型                                                        | 默认值    |
+| --------------- | ---------------------------- | ----------------------------------------------------------- | --------- |
+| `v-model:value` | 当前值，即选中项的 `value`   | 多选框 `Array[string\|number]` <br> 单选框 `string\|number` |           |
+| `options`       | 选项数组                     | `Array[object\|string\|number]`                             |           |
+| `optionType`    | 选项类型                     | `string`: `default\|button`                                 | `default` |
+| `optionInline`  | 选项是否为行内模式（二选一） | `boolean`                                                   | `false`   |
+| `optionBlock`   | 选项是否为块级模式（二选一） | `boolean`                                                   | `true`    |
 
-#### options
+### 属性.options
 
 `string|number` 类型的选项会格式化为 `{ value, label }`
 

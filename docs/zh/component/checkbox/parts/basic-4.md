@@ -1,16 +1,22 @@
 <!-- 多选框/单选框 -->
 
-### 属性
+### 基础属性
 
-<!--@include: @/component/@parts/props-native.md-->
+| 名称              | 说明                     | 类型                        | 默认值    |
+| ----------------- | ------------------------ | --------------------------- | --------- |
+| `v-model:checked` | 当前值，即是否选中       | `boolean`                   | `false`   |
+| `label`           | 选项文本                 | `string`                    |           |
+| `type`            | 选项类型                 | `string`: `default\|button` | `default` |
+| `inline`          | 是否为行内模式（二选一） | `boolean`                   | `true`    |
+| `block`           | 是否为块级模式（二选一） | `boolean`                   | `false`   |
 
-| 名称              | 说明               | 类型               | 默认值  |
-| ----------------- | ------------------ | ------------------ | ------- |
-| `v-model:checked` | 当前值，即是否选中 | `boolean`          | `false` |
-| `label`           | 选项文本           | `string`           |         |
-| `type`            | 选项类型           | `string`: `button` |         |
-| `inline`          | 是否为行内模式     | `boolean`          | `true`  |
-| `block`           | 是否为块级模式     | `boolean`          | `false` |
+### 原生属性
+
+<!--@include: @/component/@parts/api-native.md-->
+
+| 名称       | 说明     | 类型      | 默认值  |
+| ---------- | -------- | --------- | ------- |
+| `disabled` | 是否禁用 | `boolean` | `false` |
 
 ### 插槽
 

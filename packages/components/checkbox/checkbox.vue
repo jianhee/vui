@@ -45,8 +45,6 @@ const modelChecked = defineModel('checked', checkboxModel.checked);
 const props = defineProps(checkboxProps);
 const emits = defineEmits(checkboxEmits);
 
-// 原生属性
-
 // 使用选项
 const { isBtn, isChecked, onCheckedChange, rootClasses, iconComponent, labelText } = useCheckbox({
   checkboxType,

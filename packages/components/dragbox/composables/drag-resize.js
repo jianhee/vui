@@ -5,36 +5,27 @@ export const useDragResize = ({ boxElRef, dragFlagRef, props, modelLeft, modelTo
   // 是否可缩放
   const isResizable = computed(() => props.resizable && props.enabled);
 
-  // 可缩放手柄
-  const handleItems = computed(() => {
-    if (!isResizable.value) return null;
-    return props.resizeHandles;
-  });
-
   // 初始数据
-  const handleActiveName = ref(null);
+  const activeHandleName = ref(null);
   let mouseStartPos = { x: 0, y: 0 };
   let boxStartSize = { width: 0, height: 0 };
+  let boxIsFixed = false;
 
   // 开始缩放
   function onResizeStart(e, handleName) {
     if (!isResizable.value) return;
     if (dragFlagRef.value) return;
 
-    // 非定位元素只支持 `right, bottom`
-    const { position } = window.getComputedStyle(boxElRef.value);
-    const boxIsFixed = position === 'fixed';
-    const handleIsDragable = ['right', 'bottom'].includes(handleName);
-    if (!boxIsFixed && !handleIsDragable) return;
-
     // 记录状态
     dragFlagRef.value = 'resize';
-    handleActiveName.value = handleName;
+    activeHandleName.value = handleName;
 
     // 记录初始数据
     const { offsetWidth, offsetHeight } = boxElRef.value;
+    const { position } = window.getComputedStyle(boxElRef.value);
     mouseStartPos = { x: e.clientX, y: e.clientY };
     boxStartSize = { width: offsetWidth, height: offsetHeight };
+    boxIsFixed = position === 'fixed';
 
     window.addEventListener('mousemove', onResizing);
     window.addEventListener('mouseup', onResizeStop);
@@ -45,36 +36,46 @@ export const useDragResize = ({ boxElRef, dragFlagRef, props, modelLeft, modelTo
     if (dragFlagRef.value !== 'resize') return;
 
     // 需要扣除的边框宽度
-    const useBorder = ['right', 'bottom'].includes(handleActiveName.value);
+    const useBorder = ['right', 'bottom'].includes(activeHandleName.value);
     const handleBoderWidth = useBorder ? 2 : 0;
 
     // 水平方向
-    const isHorizontal = ['left', 'right'].includes(handleActiveName.value);
+    const isHorizontal = ['left', 'right'].includes(activeHandleName.value);
     if (isHorizontal) {
+      // 最大宽度
       const maxWidth = document.documentElement.clientWidth - handleBoderWidth;
+
+      // 移动的距离
       const mouseX = Math.max(0, Math.min(e.clientX, maxWidth));
-      // 盒子当前宽度
       const deltaX = mouseX - mouseStartPos.x;
-      const isLeft = handleActiveName.value === 'left';
-      const newWidth = isLeft ? boxStartSize.width - deltaX : boxStartSize.width + deltaX;
+
+      // 新的宽度
+      const isLeft = activeHandleName.value === 'left';
+      const newWidth = boxIsFixed && isLeft ? boxStartSize.width - deltaX : boxStartSize.width + deltaX;
       modelWidth.value = Math.max(newWidth, props.minWidth);
-      // 盒子当前位置
-      if (isLeft && newWidth >= props.minWidth) {
+
+      // 新的位置
+      if (boxIsFixed && isLeft && newWidth >= props.minWidth) {
         modelLeft.value = mouseX;
       }
       return;
     }
 
     // 垂直方向
+    // 最大宽度
     const maxHeight = document.documentElement.clientHeight - handleBoderWidth;
+
+    // 移动的距离
     const mouseY = Math.max(0, Math.min(e.clientY, maxHeight));
-    // 盒子当前宽度
     const deltaY = mouseY - mouseStartPos.y;
-    const isTop = handleActiveName.value === 'top';
-    const newHeight = isTop ? boxStartSize.height - deltaY : boxStartSize.height + deltaY;
+
+    // 新的高度
+    const isTop = activeHandleName.value === 'top';
+    const newHeight = boxIsFixed && isTop ? boxStartSize.height - deltaY : boxStartSize.height + deltaY;
     modelHeight.value = Math.max(newHeight, props.minHeight);
-    // 盒子当前位置
-    if (isTop && newHeight >= props.minHeight) {
+
+    // 新的位置
+    if (boxIsFixed && isTop && newHeight >= props.minHeight) {
       modelTop.value = mouseY;
     }
   }
@@ -84,7 +85,7 @@ export const useDragResize = ({ boxElRef, dragFlagRef, props, modelLeft, modelTo
     if (dragFlagRef.value !== 'resize') return;
 
     dragFlagRef.value = null;
-    handleActiveName.value = null;
+    activeHandleName.value = null;
     window.removeEventListener('mousemove', onResizing);
     window.removeEventListener('mouseup', onResizeStop);
   }
@@ -109,10 +110,10 @@ export const useDragResize = ({ boxElRef, dragFlagRef, props, modelLeft, modelTo
   });
 
   return {
+    isResizable,
     resizeClasses,
     resizeStyles,
-    handleItems,
-    handleActiveName,
+    activeHandleName,
     onResizeStart
   };
 };
