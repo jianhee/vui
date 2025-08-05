@@ -4,18 +4,15 @@
 
 ### 移动
 
-- 使用 `movable` 属性开启移动功能
-- 使用 `v-model:left` 和 `v-model:top` 属性绑定当前位置
-
 <preview path="./demos/move.vue"></preview>
 
-### 缩放
+### 缩放（定位元素）
 
-- 使用 `resizable` 属性开启缩放功能，使用 `resizeHandles` 属性定义可缩放手柄
-- 使用 `v-model:width` 和 `v-model:height` 绑定当前尺寸，位置同上
-- 使用 `min-width` 和 `min-height` 属性设置最小尺寸
+<preview path="./demos/resize-fixed.vue"></preview>
 
-<preview path="./demos/resize.vue"></preview>
+### 缩放（非定位元素）
+
+<preview path="./demos/resize-normal.vue"></preview>
 
 ### 移动+缩放
 

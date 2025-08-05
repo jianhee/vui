@@ -1,15 +1,13 @@
 <template>
   <VDragbox
-    v-model:left="leftRef"
-    v-model:top="topRef"
     v-model:width="widthRef"
     v-model:height="heightRef"
     :enabled="isEnabled"
-    :movable="isMovable"
     :resizable="isResizable"
     :min-width="100"
     :min-height="100"
     class="demo-dragbox"
+    :class="{ 'is-fixed': isEnabled }"
   >
     <DemoViewLeft
       label="是否启用"
@@ -17,13 +15,6 @@
       label-width="200"
     >
       <VSwitch v-model:checked="isEnabled" />
-    </DemoViewLeft>
-    <DemoViewLeft
-      label="是否可移动"
-      code="movable"
-      label-width="200"
-    >
-      <VSwitch v-model:checked="isMovable" />
     </DemoViewLeft>
     <DemoViewLeft
       label="是否可缩放"
@@ -47,10 +38,6 @@
       label="绑定值"
       label-width="200"
     >
-      <code>v-model:left="{{ leftRef }}"</code>
-      <br />
-      <code>v-model:top="{{ topRef }}"</code>
-      <br />
       <code>v-model:width="{{ widthRef }}"</code>
       <br />
       <code>v-model:height="{{ heightRef }}"</code>
@@ -70,12 +57,18 @@
 import { ref } from 'vue';
 
 const isEnabled = ref(false);
-const isMovable = ref(false);
 const isResizable = ref(false);
 const handlesOptions = ['left', 'right', 'top', 'bottom'];
 const handlesRef = ref(['left', 'right', 'top', 'bottom']);
-const leftRef = ref(400);
-const topRef = ref(200);
 const widthRef = ref(null);
 const heightRef = ref(null);
 </script>
+
+<style lang="scss">
+.is-fixed:not(.is-normal) {
+  position: fixed !important;
+  top: 200px;
+  left: 400px;
+  z-index: 999;
+}
+</style>

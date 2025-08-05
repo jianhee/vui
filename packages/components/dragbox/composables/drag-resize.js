@@ -51,7 +51,7 @@ export const useDragResize = ({ boxElRef, dragFlagRef, props, modelLeft, modelTo
 
       // 新的宽度
       const isLeft = activeHandleName.value === 'left';
-      const newWidth = boxIsFixed && isLeft ? boxStartSize.width - deltaX : boxStartSize.width + deltaX;
+      const newWidth = isLeft ? boxStartSize.width - deltaX : boxStartSize.width + deltaX;
       modelWidth.value = Math.max(newWidth, props.minWidth);
 
       // 新的位置
@@ -71,7 +71,7 @@ export const useDragResize = ({ boxElRef, dragFlagRef, props, modelLeft, modelTo
 
     // 新的高度
     const isTop = activeHandleName.value === 'top';
-    const newHeight = boxIsFixed && isTop ? boxStartSize.height - deltaY : boxStartSize.height + deltaY;
+    const newHeight = isTop ? boxStartSize.height - deltaY : boxStartSize.height + deltaY;
     modelHeight.value = Math.max(newHeight, props.minHeight);
 
     // 新的位置

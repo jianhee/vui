@@ -3,36 +3,31 @@
     v-model:left="leftRef"
     v-model:top="topRef"
     :enabled="isEnabled"
-    movable
+    :movable="isMovable"
     class="demo-dragbox"
   >
-    <DemoView>
-      <template #content>
-        <DemoViewLeft
-          label="操作"
-          label-width="100"
-        >
-          移动
-        </DemoViewLeft>
-        <DemoViewLeft
-          label="绑定值"
-          label-width="100"
-        >
-          <code>v-model:left="{{ leftRef }}"</code>
-          <br />
-          <code>v-model:top="{{ topRef }}"</code>
-        </DemoViewLeft>
-      </template>
-
-      <template #props>
-        <DemoViewBoolean
-          label="是否启用"
-          code="enabled"
-        >
-          <VSwitch v-model:checked="isEnabled" />
-        </DemoViewBoolean>
-      </template>
-    </DemoView>
+    <DemoViewLeft
+      label="是否启用"
+      code="enabled"
+      label-width="200"
+    >
+      <VSwitch v-model:checked="isEnabled" />
+    </DemoViewLeft>
+    <DemoViewLeft
+      label="是否可移动"
+      code="movable"
+      label-width="200"
+    >
+      <VSwitch v-model:checked="isMovable" />
+    </DemoViewLeft>
+    <DemoViewLeft
+      label="绑定值"
+      label-width="200"
+    >
+      <code>v-model:left="{{ leftRef }}"</code>
+      <br />
+      <code>v-model:top="{{ topRef }}"</code>
+    </DemoViewLeft>
   </VDragbox>
 </template>
 
@@ -40,11 +35,12 @@
 import { ref } from 'vue';
 
 const isEnabled = ref(false);
-const leftRef = ref(500);
-const topRef = ref(100);
+const isMovable = ref(false);
+const leftRef = ref(400);
+const topRef = ref(200);
 </script>
 
-<style>
+<style lang="scss">
 .demo-dragbox {
   padding: 20px;
   overflow: hidden;
