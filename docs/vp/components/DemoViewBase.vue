@@ -29,7 +29,7 @@ defineProps({
 .demo-view-base {
   flex: auto;
   width: 100%;
-  margin-bottom: 15px;
+  margin-bottom: 18px;
   &:last-child {
     margin-bottom: 0;
   }

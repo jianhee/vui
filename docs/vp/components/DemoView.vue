@@ -37,7 +37,7 @@ defineProps({
   }
   &-title {
     padding-bottom: 8px;
-    margin-bottom: 15px;
+    margin-bottom: 18px;
     color: var(--vui-text-color-primary);
     border-bottom: 1px solid var(--vui-border-color-base);
   }

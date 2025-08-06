@@ -11,7 +11,7 @@ code / label content
 <style lang="scss">
 .demo-view--left {
   display: flex;
-  gap: 10px;
+  gap: 12px;
 }
 .demo-view--left .demo-view-base-label {
   line-height: 32px;

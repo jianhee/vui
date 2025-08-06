@@ -11,7 +11,7 @@
   // 容器
   display: flex;
   flex-direction: column;
-  gap: 15px 30px;
+  gap: 18px 32px;
 
   // 表单项
   &-item {
@@ -50,11 +50,15 @@
     }
     &-top {
       flex-direction: column;
-      gap: 0;
+      gap: 8px;
     }
     &-bottom {
       flex-direction: column-reverse;
-      gap: 0;
+      gap: 8px;
+    }
+    &-top .vui-form-label,
+    &-bottom .vui-form-label {
+      line-height: 22px;
     }
   }
 
@@ -70,7 +74,7 @@
 
   // 标签宽度
   &--filed-inline .vui-form-label {
-    width: auto;
+    width: fit-content;
   }
   &--label-position-top .vui-form-label,
   &--label-position-bottom .vui-form-label {

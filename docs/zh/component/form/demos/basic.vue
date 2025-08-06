@@ -10,7 +10,7 @@
       使用 <code>label</code> 属性
     </VFormItem>
     <VFormItem v-bind="formItemProps">
-      <template #label> <code>label</code> </template>
+      <template #label><b>文本</b></template>
       使用 <code>label</code> 插槽
     </VFormItem>
     <VFormItem
