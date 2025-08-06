@@ -9,13 +9,13 @@
 
 <preview path="./demos/basic.vue"></preview>
 
-### 标签用法
-
-<preview path="./demos/label.vue"></preview>
-
 ### 行内模式
 
 <preview path="./demos/filed-display.vue"></preview>
+
+### 标签用法
+
+<preview path="./demos/label.vue"></preview>
 
 ## Form API
 
@@ -23,11 +23,11 @@
 
 这类属性可以同时用于 `FormItem` 和 `Form` 组件，两者的用法完全一样，但是 `FormItem` 组件的优先级高于 `Form` 组件。
 
-| 名称            | 说明         | 类型（默认单位）                     | 默认值         |
-| --------------- | ------------ | ------------------------------------ | -------------- |
-| `labelPosition` | 标签位置     | `string`: `left\|right\|top\|bottom` | `left`         |
-| `labelAlign`    | 标签对齐方式 | `string`: `left\|center\|right`      | `left`         |
-| `labelWidth`    | 标签宽度     | `string\|number(?px)`                | 最长标签的宽度 |
+| 名称            | 说明         | 类型（默认单位）                     | 默认值                                |
+| --------------- | ------------ | ------------------------------------ | ------------------------------------- |
+| `labelPosition` | 标签位置     | `string`: `left\|right\|top\|bottom` | `left`                                |
+| `labelAlign`    | 标签对齐方式 | `string`: `left\|center\|right`      | 左侧位置 `right` <br> 其它位置 `left` |
+| `labelWidth`    | 标签宽度     | `string\|number(?px)`                | 最长标签的宽度                        |
 
 ### 独有属性
 

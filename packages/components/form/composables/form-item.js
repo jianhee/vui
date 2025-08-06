@@ -12,8 +12,10 @@ export const formItemProps = {
 export function useFormItem({ formRoot, formItem }) {
   // 表单项类名
   const itemClasses = computed(() => {
-    const labelPosition = formItem.props.labelPosition || formRoot.props.labelPosition;
-    const labelAlign = formItem.props.labelAlign || formRoot.props.labelAlign;
+    // 位置：默认 left
+    const labelPosition = formItem.props.labelPosition || formRoot.props.labelPosition || 'left';
+    // 对齐：左侧位置默认 right，其它位置默认 left
+    const labelAlign = formItem.props.labelAlign || formRoot.props.labelAlign || (labelPosition === 'left' ? 'right' : 'left');
 
     return {
       [`vui-form--label-position-${labelPosition}`]: labelPosition !== 'left',
