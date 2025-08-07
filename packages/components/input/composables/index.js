@@ -52,13 +52,14 @@ export const useInput = ({ inputElRef, modelValue, props, emits }) => {
 
   // 按下回车键时
   function onEnter(e) {
-    focused.value = false;
+    focused.value = true;
     emits('enter', { event: e, value: modelValue.value });
   }
 
   // 清空输入框
   function clearValue(e) {
     modelValue.value = '';
+    focused.value = true;
     emits('clear', { event: e, value: '' });
   }
 

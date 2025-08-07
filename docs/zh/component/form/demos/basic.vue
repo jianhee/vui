@@ -17,14 +17,14 @@
       label="输入框"
       v-bind="formItemProps"
     >
-      <VInput v-model:value="inputValue" />
+      <VInput v-model:value="formData.inputValue" />
     </VFormItem>
     <VFormItem
       label="选择器"
       v-bind="formItemProps"
     >
       <VSelect
-        v-model:value="selectValue"
+        v-model:value="formData.selectValue"
         :options="options"
       />
     </VFormItem>
@@ -33,7 +33,7 @@
       v-bind="formItemProps"
     >
       <VCheckboxGroup
-        v-model:value="checkboxGroupValue"
+        v-model:value="formData.checkboxGroupValue"
         :options="options"
         option-inline
       />
@@ -43,7 +43,7 @@
       v-bind="formItemProps"
     >
       <VRadioGroup
-        v-model:value="radioGroupValue"
+        v-model:value="formData.radioGroupValue"
         :options="options"
         option-inline
       />
@@ -52,13 +52,13 @@
       label="开关"
       v-bind="formItemProps"
     >
-      <VSwitch v-model:checked="switchVal" />
+      <VSwitch v-model:checked="formData.switchVal" />
     </VFormItem>
     <VFormItem
       label="滑块"
       v-bind="formItemProps"
     >
-      <VSlider v-model:value="sliderVal" />
+      <VSlider v-model:value="formData.sliderVal" />
     </VFormItem>
   </VForm>
 </template>
@@ -72,12 +72,14 @@ defineProps({
 });
 
 // 绑定值
-const inputValue = ref('123');
-const selectValue = ref(1);
-const checkboxGroupValue = ref([1]);
-const radioGroupValue = ref(1);
-const switchVal = ref(true);
-const sliderVal = ref(50);
+const formData = ref({
+  inputValue: '123',
+  selectValue: 1,
+  checkboxGroupValue: [1],
+  radioGroupValue: 1,
+  switchVal: true,
+  sliderVal: 50
+});
 
 // 选项
 const options = [

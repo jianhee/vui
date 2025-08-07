@@ -1,22 +1,23 @@
 <!-- 表单 -->
 <template>
-  <div
+  <form
     ref="formElRef"
     :class="['vui-form', rootClasses]"
     :style="rootStyles"
   >
     <!-- 显示内容，只能是 `<VFormItem>` 组件 -->
     <slot />
-  </div>
+  </form>
 </template>
 
 <script setup>
 import { provide, useTemplateRef } from 'vue';
 import { useForm, formProps, commonProps } from './composables/form';
+import { useFormValidate, formValidateProps } from './composables/validate';
 
 // 表单
 const formElRef = useTemplateRef('formElRef');
-const props = defineProps({ ...formProps, ...commonProps });
+const props = defineProps({ ...formProps, ...commonProps, ...formValidateProps });
 
 // 使用表单
 const { rootClasses, rootStyles } = useForm({
@@ -24,8 +25,16 @@ const { rootClasses, rootStyles } = useForm({
   props
 });
 
+// 校验表单
+const { validate } = useFormValidate({ props });
+
 // 子组件使用
 provide('formRoot', {
   props
+});
+
+// 外部使用
+defineExpose({
+  validate
 });
 </script>
