@@ -81,46 +81,57 @@ export const useFormItemValidate = ({ formRoot, formItem }) => {
   };
 };
 
-// 校验方法：通过返回 true，不通过返回 false
-const validateMap = {
+// 校验方法
+const validateMethods = {
   // 必填
   required: (value, required) => {
-    // 无需校验
-    if (required !== true) return true;
-    // 区分类型
+    let isError = false;
     const dataType = typeof value;
-    if (dataType === 'undefined' || value === null) {
-      return false;
+    if (required !== true) {
+      // 无需校验
+      isError = false;
+    } else if (dataType === 'undefined' || value === null) {
+      // 空值
+      isError = true;
     } else if (dataType === 'string') {
-      return !!value.trim();
+      // 字符串
+      isError = !value.trim();
     } else if (Array.isArray(value)) {
-      return !!value.length;
+      // 数组
+      isError = !value.length;
     } else {
-      return true;
+      // 其它
+      isError = false;
     }
+    return { isError };
   },
   // 正则
   pattern: (value, pattern) => {
-    return pattern.test(value);
+    return { isError: !pattern.test(value) };
+  },
+  // 自定义规则
+  validator: (value, validator) => {
+    const res = validator?.(value);
+    return { isError: res !== true, errorMsg: res };
   }
 };
 
 // 校验表单项的值
-function validateValue(value, rules) {
-  const errorRule = rules.find(item => {
-    const hasError = Object.keys(item).some(key => {
-      let isSuccess = true;
-      if (validateMap[key]) {
-        isSuccess = validateMap[key](value, item[key]);
+function validateValue(itemValue, itemRules) {
+  let errorData = {};
+  itemRules.some(ruleObj => {
+    return Object.keys(ruleObj).some(key => {
+      const method = validateMethods[key];
+      if (method) {
+        const res = method(itemValue, ruleObj[key]);
+        errorData = {
+          isError: res.isError || false,
+          errorMsg: res.isError ? res.errorMsg || ruleObj.message : ''
+        };
       }
-      return !isSuccess;
+      return errorData.isError;
     });
-
-    return hasError;
   });
 
-  return {
-    isError: !!errorRule,
-    errorMsg: errorRule?.message
-  };
+  return errorData;
 }
