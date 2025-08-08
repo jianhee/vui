@@ -7,77 +7,66 @@
   >
     <VFormItem
       label="无需校验"
-      prop="value11"
+      prop="strValue"
     >
-      <VInput v-model:value="formData.value11" />
+      <VInput v-model:value="formData.strValue" />
     </VFormItem>
     <VFormItem
-      label="校验必填"
-      prop="value12"
+      label="字符串必填"
+      prop="requiredStr"
     >
-      <VInput v-model:value="formData.value12" />
+      <VInput v-model:value="formData.requiredStr" />
     </VFormItem>
     <VFormItem
-      label="校验数字"
-      prop="value13"
-    >
-      <VInput v-model:value="formData.value13" />
-    </VFormItem>
-    <VFormItem
-      label="校验必填和手机号"
-      prop="value14"
-    >
-      <VInput v-model:value="formData.value14" />
-    </VFormItem>
-    <VFormItem
-      label="校验密码"
-      prop="value15"
-    >
-      <VInput v-model:value="formData.value15" />
-    </VFormItem>
-    <VFormItem
-      label="选择器示例"
-      prop="value2"
+      label="数字必填"
+      prop="requiredNum"
     >
       <VSelect
-        v-model:value="formData.value2"
+        v-model:value="formData.requiredNum"
         :options="options"
       />
     </VFormItem>
     <VFormItem
-      label="多选框示例"
-      prop="value3"
+      label="布尔值必填"
+      prop="requiredBoolean"
+    >
+      <VSwitch v-model:checked="formData.requiredBoolean" />
+    </VFormItem>
+    <VFormItem
+      label="数组必填"
+      prop="requiredArray"
     >
       <VCheckboxGroup
-        v-model:value="formData.value3"
+        v-model:value="formData.requiredArray"
         :options="options"
         option-inline
       />
     </VFormItem>
     <VFormItem
-      label="单选框示例"
-      prop="value4"
+      label="正则"
+      prop="patternStr"
     >
-      <VRadioGroup
-        v-model:value="formData.value4"
-        :options="options"
-        option-inline
-      />
+      <VInput v-model:value="formData.patternStr" />
     </VFormItem>
     <VFormItem
-      label="开关示例"
-      prop="value5"
+      label="自定义规则"
+      prop="validatorStr"
     >
-      <VSwitch v-model:checked="formData.value5" />
+      <VInput v-model:value="formData.validatorStr" />
     </VFormItem>
     <VFormItem
-      label="滑动条示例"
-      prop="value6"
+      label="多个规则"
+      prop="muiltStr"
     >
-      <VSlider v-model:value="formData.value6" />
+      <VInput v-model:value="formData.muiltStr" />
     </VFormItem>
     <VFormItem>
-      <VButton @click="onSubmit">提交</VButton>
+      <VButton
+        type="primary"
+        @click="onSubmit"
+      >
+        提交
+      </VButton>
     </VFormItem>
   </VForm>
 </template>
@@ -87,36 +76,41 @@ import { ref } from 'vue';
 import { toast } from 'vui/plugins';
 
 // 选项
-const options = ['选项1', '选项2', '选项3'];
+const options = [
+  { label: '选项0', value: 0 },
+  { label: '选项1', value: 1 },
+  { label: '选项2', value: 2 }
+];
 
 // 绑定值
 const formData = ref({
-  value11: null,
-  value12: null,
-  value13: null,
-  value14: null,
-  value15: null,
-  value2: null,
-  value3: [],
-  value4: null,
-  value5: null,
-  value6: null
+  strValue: null,
+  // 必填
+  requiredStr: null,
+  requiredNum: null,
+  requiredBoolean: null,
+  requiredArray: [],
+  // 正则
+  patternStr: null,
+  // 自定义
+  validatorStr: null,
+  // 多个
+  muiltStr: null
 });
 
 // 规则
 const formRules = {
-  value12: [{ required: true, message: '不能为空' }],
-  value13: [{ pattern: /^[1-9]\d*$/, message: '数字格式错误' }],
-  value14: [
-    { required: true, message: '不能为空' },
-    { pattern: /^1[3456789]\d{9}$/, message: '手机号格式错误' }
-  ],
-  value15: [{ validator: checkPassword }],
-  value2: [{ required: true, message: '不能为空' }],
-  value3: [{ required: true, message: '不能为空' }],
-  value4: [{ required: true, message: '不能为空' }],
-  value5: [{ required: true, message: '不能为空' }],
-  value6: [{ required: true, message: '不能为空' }]
+  // 必填
+  requiredStr: [{ required: true, message: '字符串不能为空' }],
+  requiredNum: [{ required: true, message: '数字不能为空' }],
+  requiredBoolean: [{ required: true, message: '布尔值不能为空' }],
+  requiredArray: [{ required: true, message: '数组不能为空' }],
+  // 正则
+  patternStr: [{ pattern: /^[1-9]\d*$/, message: '数字格式错误' }],
+  // 自定义
+  validatorStr: [{ validator: checkPassword }],
+  // 多个
+  muiltStr: [{ required: true, message: '不能为空' }, { pattern: /^[1-9]\d*$/, message: '数字格式错误' }, { validator: checkPassword }]
 };
 
 // 自定义规则

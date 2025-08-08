@@ -100,7 +100,7 @@ const validateMethods = {
       // 数组
       isError = !value.length;
     } else {
-      // 其它
+      // 其它：数字、布尔值
       isError = false;
     }
     return { isError };
