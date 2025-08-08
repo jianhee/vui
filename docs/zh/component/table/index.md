@@ -55,7 +55,7 @@
 
 <preview path="./demos/drag-sort-multi.vue"></preview>
 
-## 表格 API
+## 基础 API
 
 ### 属性
 

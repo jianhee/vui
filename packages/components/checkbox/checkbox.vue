@@ -1,15 +1,12 @@
 <!-- 多选框-单个选项 -->
 <template>
-  <label
-    :class="[`vui-${checkboxType}`, rootClasses]"
-    v-bind="rootProps"
-  >
+  <label :class="[`vui-${checkboxType}`, rootClasses]">
     <!-- 隐藏的 input -->
     <input
       :class="`vui-${checkboxType}-input`"
       :type="checkboxType"
       :checked="isChecked"
-      v-bind="nativeProps"
+      :disabled="disabled"
       @change="onCheckedChange"
     />
     <!-- 图标 -->
@@ -28,11 +25,6 @@
 <script setup>
 import { inject } from 'vue';
 import { useCheckbox, checkboxModel, checkboxProps, checkboxEmits } from './composables/checkbox';
-import { useNativeProps } from '../../composables/use-native-props';
-
-// 筛选属性
-defineOptions({ inheritAttrs: false });
-const { rootProps, nativeProps } = useNativeProps(['disabled']);
 
 // 区分类型
 const checkboxType = inject('checkboxType', 'checkbox');

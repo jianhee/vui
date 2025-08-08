@@ -24,7 +24,7 @@
     display: flex;
     gap: 8px;
     align-items: center;
-    width: var(--vui-input-width);
+    width: var(--#{$prefix}-width);
     padding: 0 8px;
     background-color: var(--#{$prefix}-bg-color);
     border: 1px solid var(--#{$prefix}-border-color);
@@ -74,17 +74,12 @@
       // 点击状态
       cursor: text;
 
-      // 清除按钮
-      &-clear {
-        display: none;
+      // 后置图标
+      &-icon {
         cursor: pointer;
       }
-      &-clear:hover {
+      &-icon:hover {
         --vui-icon-color: var(--vui-text-color-secondary);
-      }
-      &:hover &-clear,
-      &.is-focus &-clear {
-        display: inline-flex;
       }
     }
   }

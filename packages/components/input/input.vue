@@ -1,8 +1,8 @@
 <!-- 输入框 -->
 <template>
   <div
+    ref="rootElRef"
     :class="['vui-input', rootClasses]"
-    v-bind="rootProps"
     @click="onRootClick"
   >
     <!-- 前置图标 -->
@@ -14,42 +14,54 @@
     <input
       ref="inputElRef"
       v-model="modelValue"
-      type="text"
+      :type="inputType"
+      :disabled="disabled"
+      :autofocus="autofocus"
+      :placeholder="placeholder"
+      :maxlength="maxlength"
       class="vui-input-inner"
-      v-bind="nativeProps"
       @input="onInput"
       @change="onChange"
       @keyup.enter="onEnter"
     />
-    <!-- 清空图标 -->
-    <VIcon
-      v-if="modelValue && !nativeProps.disabled"
-      class="vui-input-clear"
-      :component="IconClear"
-      @click.stop="clearValue"
-    />
+    <!-- 后置图标 -->
+    <template v-if="modelValue && !disabled">
+      <!-- 清除 -->
+      <VIcon
+        v-if="isShowClear"
+        class="vui-input-icon"
+        :component="IconClear"
+        @click.stop="onClickClearIcon"
+      />
+      <!-- 密码 -->
+      <VIcon
+        v-if="isShowPassword"
+        class="vui-input-icon"
+        :component="inputType === 'password' ? IconEyeClose : IconEyeOpen"
+        @click.stop="onClickToggleIcon"
+      />
+    </template>
   </div>
 </template>
 
 <script setup>
 import { computed, useTemplateRef } from 'vue';
 import { useInput, inputModel, inputProps, inputEmits } from './composables';
-import { useNativeProps } from '../../composables/use-native-props';
 import { useIconProps } from '../../composables/use-icon-props';
 import IconClear from '../../icons/circle-close.vue';
-
-// 筛选属性
-defineOptions({ inheritAttrs: false });
-const { rootProps, nativeProps } = useNativeProps(['disabled', 'maxlength', 'placeholder']);
+import IconEyeOpen from '../../icons/eye-open.vue';
+import IconEyeClose from '../../icons/eye-close.vue';
 
 // 输入框
+const rootElRef = useTemplateRef('rootElRef');
 const inputElRef = useTemplateRef('inputElRef');
 const modelValue = defineModel('value', inputModel.value);
 const props = defineProps(inputProps);
 const emits = defineEmits(inputEmits);
 
 // 使用输入框
-const { rootClasses, onRootClick, onInput, onChange, onEnter, clearValue } = useInput({
+const { rootClasses, onRootClick, inputType, isShowPassword, onClickToggleIcon, isShowClear, onClickClearIcon, onInput, onChange, onEnter } = useInput({
+  rootElRef,
   inputElRef,
   modelValue,
   props,

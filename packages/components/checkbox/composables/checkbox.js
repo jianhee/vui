@@ -23,7 +23,9 @@ export const checkboxProps = {
   // 是否为行内模式
   inline: { type: Boolean, default: true },
   // 是否为块级模式
-  block: { type: Boolean, default: false }
+  block: { type: Boolean, default: false },
+  // ---------- 原生属性 ----------
+  disabled: { type: Boolean, default: false }
 };
 
 // 使用选项
@@ -137,7 +139,8 @@ export const useCheckbox = ({ checkboxType, checkboxGroup, checkbox }) => {
       isBtn.value ? `vui-${checkboxType}-btn` : `vui-${checkboxType}-default`,
       {
         [`vui-${checkboxType}--block`]: isUseBlock.value,
-        'is-checked': isChecked.value
+        'is-checked': isChecked.value,
+        'is-disabled': checkbox.props.disabled
       }
     ];
   });

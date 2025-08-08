@@ -1,7 +1,8 @@
 <template>
-  <DemoViewTop
+  <DemoViewLeft
     label="禁用状态"
     code="disabled"
+    label-width="160"
   >
     <VSelect
       v-model:value="selectValue"
@@ -10,10 +11,11 @@
       :options="selectOptions"
       disabled
     />
-  </DemoViewTop>
-  <DemoViewTop
+  </DemoViewLeft>
+  <DemoViewLeft
     label="占位文字"
     code="placeholder"
+    label-width="160"
   >
     <VSelect
       v-model:value="selectValue"
@@ -21,7 +23,7 @@
       placeholder="请选择"
       :options="selectOptions"
     />
-  </DemoViewTop>
+  </DemoViewLeft>
 </template>
 
 <script setup>

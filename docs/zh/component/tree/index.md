@@ -52,7 +52,7 @@
 
 <preview path="../table/demos/drag-sort-multi.vue"></preview>
 
-## 树 API
+## 基础 API
 
 ### 属性
 

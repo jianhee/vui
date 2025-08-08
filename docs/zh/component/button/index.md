@@ -8,11 +8,11 @@
 
 <preview path="./demos/basic.vue"></preview>
 
-### 禁用状态
+### 原生属性
 
 <!--@include: @/component/@parts/api-native.md-->
 
-<preview path="./demos/disabled.vue"></preview>
+<preview path="./demos/native.vue"></preview>
 
 ### 加载状态
 
