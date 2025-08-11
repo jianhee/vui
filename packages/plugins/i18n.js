@@ -2,6 +2,26 @@
 // 依赖 vue-i18n
 import { createI18n } from 'vue-i18n';
 
+// 指定项目的默认配置
+const defaultOptions = {
+  mx: {
+    messages: {
+      en: {
+        actionSuccess: 'Success !',
+        actionFail: 'Fail !',
+        // eslint-disable-next-line no-undef
+        ...templateData
+      },
+      zh: {
+        actionSuccess: '操作成功！',
+        actionFail: '操作失败！',
+        // eslint-disable-next-line no-undef
+        ...templateData
+      }
+    }
+  }
+};
+
 // 在 js 中调用
 export let t = null;
 
@@ -10,7 +30,9 @@ export let t = null;
  * @param {Object} vueApp       - Vue 应用实例
  * @param {Object} [options={}] - i18n 配置项，参考官方文档
  */
-export const setupI18n = (vueApp, options = {}) => {
+export const setupI18n = (vueApp, _options = {}, type) => {
+  const options = defaultOptions[type] || _options;
+
   // 创建i18n实例
   const i18n = createI18n({
     // 不使用 Vue 2 的兼容模式
@@ -19,8 +41,6 @@ export const setupI18n = (vueApp, options = {}) => {
     locale: navigator.language.split('-')[0] || 'en',
     // 备用语言：当前语言不存在对应的 messages 时使用
     fallbackLocale: 'en',
-    // 消息内容：必填
-    messages: options.messages,
     // 其他配置项
     ...options
   });
