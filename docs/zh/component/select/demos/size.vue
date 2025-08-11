@@ -19,6 +19,7 @@
 import { ref } from 'vue';
 
 const selectSizes = [
+  { label: '大号', value: 'large' },
   { label: '中号（默认）', value: 'medium' },
   { label: '小号', value: 'small' }
 ];

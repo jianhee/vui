@@ -44,6 +44,8 @@ export const useTreeNode = ({ treeRoot, treeNode }) => {
 
   // 展开/关闭子节点
   async function toggleChildren() {
+    if (!isShowExpand.value) return;
+
     const { isExpanded, isLeaf, isLoaded } = nodeData.value;
 
     if (!isExpanded && isLeaf && !isLoaded) {
@@ -64,10 +66,8 @@ export const useTreeNode = ({ treeRoot, treeNode }) => {
       item: itemData.value
     });
 
-    // 展开节点
-    if (isShowExpand.value && !nodeData.value.isExpanded) {
-      toggleChildren(nodeData.value);
-    }
+    // 展开/关闭节点
+    toggleChildren();
   }
 
   // 右键点击节点

@@ -25,7 +25,6 @@
     gap: 8px;
     align-items: center;
     width: var(--#{$prefix}-width);
-    padding: 0 8px;
     background-color: var(--#{$prefix}-bg-color);
     border: 1px solid var(--#{$prefix}-border-color);
     border-radius: 4px;
@@ -56,13 +55,21 @@
     }
 
     // 尺寸
+    &--large {
+      height: 40px;
+      padding: 0 15px;
+      font-size: 14px;
+      line-height: 38px;
+    }
     &--medium {
       height: 32px;
+      padding: 0 11px;
       font-size: 14px;
       line-height: 30px;
     }
     &--small {
       height: 24px;
+      padding: 0 7px;
       font-size: 12px;
       line-height: 22px;
     }

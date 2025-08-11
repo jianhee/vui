@@ -21,7 +21,7 @@ export const selectProps = {
   // 当前文本：优先级高于选中项的 `label`
   // 自定义选项时无法在组件内部获取选中项，必须指定一个文本
   label: { type: String, default: null },
-  // 选择器尺寸：medium, small
+  // 选择器尺寸：large, medium, small
   size: { type: String, default: 'medium' },
   // ---------- 原生属性 ----------
   disabled: { type: Boolean, default: false },

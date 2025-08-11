@@ -19,7 +19,7 @@ export const inputProps = {
   showPassword: { type: Boolean, default: false },
   // 前置图标：可选的值有 `<VIcon>` 组件的 `name` 属性值、`component` 属性值、完整的 `props` 对象
   icon: { type: [String, Object], default: null },
-  // 输入框尺寸：medium, small
+  // 输入框尺寸：large, medium, small
   size: { type: String, default: 'medium' },
   // ---------- 原生属性 ----------
   autofocus: { type: Boolean, default: false },
