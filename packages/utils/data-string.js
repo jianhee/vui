@@ -13,6 +13,27 @@ export const guid = () => {
 };
 
 /**
+ * 生成验证码
+ * @param {string} length 长度
+ * @returns {string}      验证码（数字+字母，比如 "a1b2"）
+ */
+export const randomVcode = (length = 4) => {
+  // 字符集
+  const chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+  // 生成随机字符
+  let code = '';
+  for (let i = 0; i < length; i++) {
+    // 随机索引
+    const randomIndex = Math.floor(Math.random() * chars.length);
+    // 从字符集中获取随机字符并添加到验证码
+    code += chars[randomIndex];
+  }
+
+  return code;
+};
+
+/**
  * 字数统计
  * @param {string} str  文本
  * @returns {object}    数量对象
