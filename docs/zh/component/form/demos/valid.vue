@@ -50,21 +50,21 @@
     </VFormItem>
     <VFormItem
       label="自定义规则"
-      prop="validatorStr1"
+      prop="validatorStr"
     >
-      <VInput v-model:value="formData.validatorStr1" />
-    </VFormItem>
-    <VFormItem
-      label="自定义规则（提交时校验）"
-      prop="validatorStr2"
-    >
-      <VInput v-model:value="formData.validatorStr2" />
+      <VInput v-model:value="formData.validatorStr" />
     </VFormItem>
     <VFormItem
       label="多个规则"
       prop="muiltStr"
     >
       <VInput v-model:value="formData.muiltStr" />
+    </VFormItem>
+    <VFormItem
+      label="提交时校验"
+      prop="submitStr"
+    >
+      <VInput v-model:value="formData.submitStr" />
     </VFormItem>
     <VFormItem>
       <VButton
@@ -99,10 +99,11 @@ const formData = ref({
   // 正则
   patternStr: null,
   // 自定义
-  validatorStr1: null,
-  validatorStr2: null,
+  validatorStr: null,
   // 多个
-  muiltStr: null
+  muiltStr: null,
+  // 提交时
+  submitStr: null
 });
 
 // 规则
@@ -115,10 +116,15 @@ const formRules = {
   // 正则
   patternStr: [{ pattern: /^[1-9]\d*$/, message: '数字格式错误' }],
   // 自定义
-  validatorStr1: [{ validator: checkPassword }],
-  validatorStr2: [{ validator: checkPassword, trigger: 'submit' }],
+  validatorStr: [{ validator: checkPassword }],
   // 多个
-  muiltStr: [{ required: true, message: '不能为空' }, { pattern: /^[1-9]\d*$/, message: '数字格式错误' }, { validator: checkPassword }]
+  muiltStr: [{ required: true, message: '不能为空' }, { pattern: /^[1-9]\d*$/, message: '数字格式错误' }, { validator: checkPassword }],
+  // 提交时
+  submitStr: [
+    { required: true, message: '不能为空', trigger: 'submit' },
+    { pattern: /^[1-9]\d*$/, message: '数字格式错误', trigger: 'submit' },
+    { validator: checkPassword, trigger: 'submit' }
+  ]
 };
 
 // 自定义规则
