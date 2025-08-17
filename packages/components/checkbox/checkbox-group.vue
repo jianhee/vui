@@ -2,19 +2,20 @@
 <template>
   <div :class="`vui-${checkboxType}-group`">
     <VCheckbox
-      v-for="(option, index) in options"
+      v-for="(formattedOption, index) in formattedOptions"
       :key="index"
-      :option="option"
+      :label="formattedOption.label"
+      :value="formattedOption.value"
+      :option="options[index]"
     >
-      <!-- 文本后的内容 -->
-      <slot :option="option" />
+      <slot :option="options[index]" />
     </VCheckbox>
   </div>
 </template>
 
 <script setup>
 import { provide, inject } from 'vue';
-import { checkboxGroupModel, checkboxGroupProps, checkboxGroupEmits } from './composables/checkbox-group';
+import { useCheckboxGroup, checkboxGroupModel, checkboxGroupProps, checkboxGroupEmits } from './composables/checkbox-group';
 
 // 区分类型
 const checkboxType = inject('checkboxType', 'checkbox');
@@ -23,6 +24,7 @@ const checkboxType = inject('checkboxType', 'checkbox');
 const modelValue = defineModel('value', checkboxGroupModel.value);
 const props = defineProps(checkboxGroupProps);
 const emits = defineEmits(checkboxGroupEmits);
+const { formattedOptions } = useCheckboxGroup({ props });
 
 // 子组件使用
 provide('checkboxGroup', {

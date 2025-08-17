@@ -1,4 +1,5 @@
 // 多选框-选项组
+import { computed } from 'vue';
 
 // emits
 export const checkboxGroupEmits = ['change'];
@@ -22,4 +23,20 @@ export const checkboxGroupProps = {
   optionInline: { type: Boolean, default: false },
   // 选项是否为块级模式
   optionBlock: { type: Boolean, default: true }
+};
+
+// 使用选项组
+export const useCheckboxGroup = ({ props }) => {
+  // 格式化选项
+  const formattedOptions = computed(() => {
+    return props.options.map(option => {
+      if (typeof option === 'object') {
+        return { ...option, label: option.label || option.value };
+      } else {
+        return { label: option, value: option };
+      }
+    });
+  });
+
+  return { formattedOptions };
 };

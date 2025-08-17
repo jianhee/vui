@@ -15,9 +15,7 @@ export const checkboxModel = {
 // props
 export const checkboxProps = {
   // 选项文本
-  label: { type: String, default: null },
-  // 选项值（仅选项组有效）
-  option: { type: [Object, Number, String], default: null },
+  label: { type: [Number, String], default: null },
   // 选项类型：button 按钮
   type: { type: String, default: null },
   // 是否为行内模式
@@ -25,32 +23,21 @@ export const checkboxProps = {
   // 是否为块级模式
   block: { type: Boolean, default: false },
   // ---------- 原生属性 ----------
-  disabled: { type: Boolean, default: false }
+  disabled: { type: Boolean, default: false },
+  // ---------- 选项组内部使用 ----------
+  value: { type: [Number, String], default: null },
+  option: { type: [Object, Number, String], default: null }
 };
 
 // 使用选项
 export const useCheckbox = ({ checkboxType, checkboxGroup, checkbox }) => {
   // 区分类型
   const isCheckbox = checkboxType === 'checkbox';
+  const optionValue = computed(() => checkbox.props.value);
 
   // 是否按钮
   const isBtn = computed(() => {
     return checkbox.props.type === 'button' || checkboxGroup?.props.optionType === 'button';
-  });
-
-  // 格式化选项
-  const formattedOption = computed(() => {
-    // 单个选项
-    if (!checkboxGroup) {
-      return { label: checkbox.props.label };
-    }
-    // 选项组
-    const option = checkbox.props.option;
-    if (typeof option === 'object') {
-      return { ...option, label: option.label || option.value };
-    } else {
-      return { label: option, value: option };
-    }
   });
 
   // 是否选中
@@ -61,11 +48,10 @@ export const useCheckbox = ({ checkboxType, checkboxGroup, checkbox }) => {
     }
     // 选项组
     const checkedValue = checkboxGroup.modelValue.value;
-    const optionValue = formattedOption.value.value;
     if (isCheckbox) {
-      return checkedValue?.includes(optionValue);
+      return checkedValue?.includes(optionValue.value);
     } else {
-      return checkedValue === optionValue;
+      return checkedValue === optionValue.value;
     }
   });
 
@@ -73,7 +59,7 @@ export const useCheckbox = ({ checkboxType, checkboxGroup, checkbox }) => {
   function onCheckedChange(event) {
     // 单个选项
     if (!checkboxGroup) {
-      onCheckboxChange(event);
+      onSingleChange(event);
       return;
     }
     // 选项组
@@ -85,7 +71,7 @@ export const useCheckbox = ({ checkboxType, checkboxGroup, checkbox }) => {
   }
 
   // 切换单个选项
-  function onCheckboxChange(event) {
+  function onSingleChange(event) {
     // 新值
     const newChecked = !isChecked.value;
     // 更新值
@@ -97,10 +83,9 @@ export const useCheckbox = ({ checkboxType, checkboxGroup, checkbox }) => {
   // 切换多选框组
   function onCheckboxGroupChange() {
     const checkedValues = checkboxGroup.modelValue.value || [];
-    const optionValue = formattedOption.value.value;
-    const index = checkedValues.findIndex(value => value === optionValue);
+    const index = checkedValues.findIndex(value => value === optionValue.value);
     if (index === -1) {
-      checkedValues.push(optionValue);
+      checkedValues.push(optionValue.value);
     } else {
       checkedValues.splice(index, 1);
     }
@@ -109,8 +94,8 @@ export const useCheckbox = ({ checkboxType, checkboxGroup, checkbox }) => {
 
   // 切换单选框组
   function onRadioGroupChange() {
-    const checkedValue = formattedOption.value.value;
-    onGroupChange(checkedValue);
+    const newValue = optionValue.value;
+    onGroupChange(newValue);
   }
 
   // 切换选项组
@@ -119,7 +104,7 @@ export const useCheckbox = ({ checkboxType, checkboxGroup, checkbox }) => {
     // 参数为 当前项、当前项的 value、选中项的 value
     checkboxGroup.emits('change', {
       option: checkbox.props.option,
-      value: formattedOption.value.value,
+      value: optionValue.value,
       checkedValue: newValue
     });
   }
@@ -148,15 +133,11 @@ export const useCheckbox = ({ checkboxType, checkboxGroup, checkbox }) => {
   // 图标属性
   const iconComponent = isCheckbox ? IconCheckbox : IconRadio;
 
-  // 显示文本
-  const labelText = computed(() => formattedOption.value.label);
-
   return {
     isBtn,
     isChecked,
     onCheckedChange,
     rootClasses,
-    iconComponent,
-    labelText
+    iconComponent
   };
 };

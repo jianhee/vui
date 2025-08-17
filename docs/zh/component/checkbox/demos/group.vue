@@ -8,7 +8,7 @@
       v-bind="$attrs"
       @change="writeLog('change', $event)"
     >
-      <template v-if="option === 3"> + 自定义内容</template>
+      <template v-if="option?.value === 1">选项1</template>
     </component>
   </DemoSpace>
 
@@ -35,9 +35,10 @@ const checkedVal = ref(defaultVal);
 // 选项
 const options = [
   // Object
-  { label: '选项1', value: 1 },
-  { label: '选项2', value: 2 },
+  { value: 1, label: '使用插槽' },
+  { value: 2, label: '选项2' },
+  { value: 3 },
   // string|number
-  3
+  4
 ];
 </script>

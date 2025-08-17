@@ -2,25 +2,25 @@
   <DemoSpace class="demo-checkboxs">
     <component
       :is="OptionComponent"
-      v-for="option in options"
-      :key="option.label"
-      v-model:checked="option.checked"
-      :label="option.label"
+      v-model:checked="checked1"
       v-bind="$attrs"
       @change="writeLog('change', $event)"
     >
-      <template v-if="option.label === '选项3'">+ 自定义内容</template>
+      选项1
     </component>
+    <component
+      :is="OptionComponent"
+      v-model:checked="checked2"
+      label="选项2"
+      v-bind="$attrs"
+      @change="writeLog('change', $event)"
+    />
   </DemoSpace>
-
   <DemoSpace class="demo-checkboxs">
-    当前值分别为
-    <code
-      v-for="option in options"
-      :key="option.label"
-    >
-      {{ option.checked }}
-    </code>
+    当前值：
+    <code>{{ checked1 }}</code>
+    、
+    <code>{{ checked2 }}</code>
   </DemoSpace>
 </template>
 
@@ -36,18 +36,12 @@ const isCheckbox = useRouteValid('checkbox');
 const OptionComponent = isCheckbox ? 'VCheckbox' : 'VRadio';
 
 // 选项
-const options = ref([
-  { label: '选项1', checked: true },
-  { label: '选项2', checked: true },
-  { label: '选项3', checked: false }
-]);
+const checked1 = ref(true);
+const checked2 = ref(false);
 </script>
 
 <style>
-.demo-checkboxs > label {
+.demo-checkboxs label {
   margin-right: 10px;
-}
-.demo-checkboxs > code {
-  margin: 0 2px;
 }
 </style>

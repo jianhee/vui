@@ -15,10 +15,10 @@
       :class="`vui-${checkboxType}-icon`"
       :component="iconComponent"
     />
-    <!-- 文本 -->
-    <span v-if="labelText">{{ labelText }}</span>
-    <!-- 文本后的内容 -->
-    <slot />
+    <!-- 优先使用插槽 -->
+    <slot v-if="$slots?.default?.()[0].children.length" />
+    <!-- 其次使用属性值 -->
+    <template v-else-if="label">{{ label }}</template>
   </label>
 </template>
 
@@ -38,7 +38,7 @@ const props = defineProps(checkboxProps);
 const emits = defineEmits(checkboxEmits);
 
 // 使用选项
-const { isBtn, isChecked, onCheckedChange, rootClasses, iconComponent, labelText } = useCheckbox({
+const { isBtn, isChecked, onCheckedChange, rootClasses, iconComponent } = useCheckbox({
   checkboxType,
   checkboxGroup,
   checkbox: {
