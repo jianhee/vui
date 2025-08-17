@@ -13,11 +13,11 @@
 <script setup>
 import { provide, useTemplateRef } from 'vue';
 import { useForm, formProps, commonProps } from './composables/form';
-import { useFormValidate, formValidateProps } from './composables/validate';
+import { useFormValid, formValidProps } from './composables/valid';
 
 // 表单
 const formElRef = useTemplateRef('formElRef');
-const props = defineProps({ ...formProps, ...commonProps, ...formValidateProps });
+const props = defineProps({ ...formProps, ...commonProps, ...formValidProps });
 
 // 使用表单
 const { rootClasses, rootStyles } = useForm({
@@ -26,7 +26,7 @@ const { rootClasses, rootStyles } = useForm({
 });
 
 // 校验表单
-const { validate } = useFormValidate({ props });
+const { validate } = useFormValid({ props });
 
 // 子组件使用
 provide('formRoot', {

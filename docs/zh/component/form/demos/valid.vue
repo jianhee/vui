@@ -50,9 +50,15 @@
     </VFormItem>
     <VFormItem
       label="自定义规则"
-      prop="validatorStr"
+      prop="validatorStr1"
     >
-      <VInput v-model:value="formData.validatorStr" />
+      <VInput v-model:value="formData.validatorStr1" />
+    </VFormItem>
+    <VFormItem
+      label="自定义规则（提交时校验）"
+      prop="validatorStr2"
+    >
+      <VInput v-model:value="formData.validatorStr2" />
     </VFormItem>
     <VFormItem
       label="多个规则"
@@ -93,7 +99,8 @@ const formData = ref({
   // 正则
   patternStr: null,
   // 自定义
-  validatorStr: null,
+  validatorStr1: null,
+  validatorStr2: null,
   // 多个
   muiltStr: null
 });
@@ -108,24 +115,25 @@ const formRules = {
   // 正则
   patternStr: [{ pattern: /^[1-9]\d*$/, message: '数字格式错误' }],
   // 自定义
-  validatorStr: [{ validator: checkPassword }],
+  validatorStr1: [{ validator: checkPassword }],
+  validatorStr2: [{ validator: checkPassword, trigger: 'submit' }],
   // 多个
   muiltStr: [{ required: true, message: '不能为空' }, { pattern: /^[1-9]\d*$/, message: '数字格式错误' }, { validator: checkPassword }]
 };
 
 // 自定义规则
-function checkPassword(val) {
-  if (val !== '123') {
-    return '密码错误';
-  } else {
+async function checkPassword(val) {
+  if (val === '111') {
     return true;
+  } else {
+    return '密码错误';
   }
 }
 
 // 提交
 const formRef = ref(null);
 async function onSubmit() {
-  const valid = await formRef.value.validate();
+  const { valid } = await formRef.value.validate();
   if (valid) {
     toast.success('校验通过');
   } else {

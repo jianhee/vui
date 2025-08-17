@@ -1,7 +1,7 @@
 <!-- 表单-项 -->
 <template>
   <div
-    :class="['vui-form-item', itemClasses, validateClasses]"
+    :class="['vui-form-item', itemClasses, validClasses]"
     :style="itemStyles"
   >
     <!-- 左侧文本 -->
@@ -24,10 +24,10 @@
       <!-- 错误信息 -->
       <Transition name="vui-form-error">
         <div
-          v-if="errorMsg"
+          v-if="errorMessage"
           class="vui-form-error"
         >
-          {{ errorMsg }}
+          {{ errorMessage }}
         </div>
       </Transition>
     </div>
@@ -38,13 +38,13 @@
 import { inject } from 'vue';
 import { commonProps } from './composables/form';
 import { useFormItem, formItemProps } from './composables/form-item';
-import { useFormItemValidate, formItemValidateProps } from './composables/validate';
+import { useFormItemValid, formItemValidProps } from './composables/valid';
 
 // 表单
 const formRoot = inject('formRoot', {});
 
 // 表单项
-const props = defineProps({ ...formItemProps, ...commonProps, ...formItemValidateProps });
+const props = defineProps({ ...formItemProps, ...commonProps, ...formItemValidProps });
 
 // 使用表单
 const { itemClasses, itemStyles } = useFormItem({
@@ -53,7 +53,7 @@ const { itemClasses, itemStyles } = useFormItem({
 });
 
 // 校验表单项
-const { validateClasses, errorMsg } = useFormItemValidate({
+const { validClasses, errorMessage } = useFormItemValid({
   formRoot,
   formItem: { props }
 });
