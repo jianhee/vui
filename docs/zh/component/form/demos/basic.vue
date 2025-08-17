@@ -11,7 +11,7 @@
     </VFormItem>
     <VFormItem v-bind="formItemProps">
       <template #label><b>文本</b></template>
-      使用 <code>label</code> 插槽
+      <template #default>使用 <code>label</code> 插槽</template>
     </VFormItem>
     <VFormItem
       label="输入框"

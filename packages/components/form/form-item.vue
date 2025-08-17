@@ -15,7 +15,7 @@
         name="label"
       />
       <!-- 其次使用属性值 -->
-      <template v-else>{{ label }} </template>
+      <template v-else>{{ label }}</template>
     </label>
     <!-- 右侧内容 -->
     <div class="vui-form-control">
