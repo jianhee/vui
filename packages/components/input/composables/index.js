@@ -1,6 +1,6 @@
 // 输入框
 import { ref, computed } from 'vue';
-import { useElementHover, useFocus } from '@vueuse/core';
+import { useElementHover, useFocus, useEventListener } from '@vueuse/core';
 
 // emits
 export const inputEmits = ['input', 'change', 'enter', 'clear'];
@@ -17,8 +17,15 @@ export const inputProps = {
   clearable: { type: Boolean, default: false },
   // 是否显示切换密码按钮（仅密码类型有效）
   showPassword: { type: Boolean, default: false },
-  // 前置图标：可选的值有 `<VIcon>` 组件的 `name` 属性值、`component` 属性值、完整的 `props` 对象
-  icon: { type: [String, Object], default: null },
+  // 前置/后置图标：可选的值有 `<VIcon>` 组件的 `name` 属性值、`component` 属性值、完整的 `props` 对象
+  prefixIcon: { type: [String, Object], default: null },
+  suffixIcon: { type: [String, Object], default: null },
+  // 前置/后置内容
+  prefix: { type: [String, Number], default: null },
+  suffix: { type: [String, Number], default: null },
+  // 前置/后置标签
+  prepend: { type: [String, Number], default: null },
+  append: { type: [String, Number], default: null },
   // 输入框尺寸：large, medium, small
   size: { type: String, default: 'medium' },
   // ---------- 原生属性 ----------
@@ -30,26 +37,30 @@ export const inputProps = {
 };
 
 // 使用输入框
-export const useInput = ({ rootElRef, inputElRef, modelValue, props, emits }) => {
-  // 状态
-  const isHovered = useElementHover(rootElRef);
-  const { focused } = useFocus(inputElRef);
-
+export const useInput = ({ wraperElRef, inputElRef, modelValue, props, emits }) => {
   // 根元素类名
   const rootClasses = computed(() => {
     return [
       `vui-input--${props.size}`,
       {
-        'is-focus': focused.value,
         'is-disabled': props.disabled
       }
     ];
   });
 
-  // 点击根元素
-  function onRootClick() {
+  // 中间元素状态
+  const isHovered = useElementHover(wraperElRef);
+  const { focused } = useFocus(inputElRef);
+  useEventListener(wraperElRef, 'click', () => {
     focused.value = true;
-  }
+  });
+
+  // 中间元素类名
+  const wraperClasses = computed(() => {
+    return {
+      'is-focus': focused.value
+    };
+  });
 
   // 是否显示切换密码按钮
   const isShowPassword = computed(() => {
@@ -97,7 +108,7 @@ export const useInput = ({ rootElRef, inputElRef, modelValue, props, emits }) =>
 
   return {
     rootClasses,
-    onRootClick,
+    wraperClasses,
     inputType,
     isShowPassword,
     onClickToggleIcon,

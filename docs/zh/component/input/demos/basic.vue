@@ -24,4 +24,7 @@ const inputValue = ref(null);
 .demo-input {
   max-width: var(--demo-filed-width);
 }
+.demo-input + .demo-input {
+  margin-top: 10px;
+}
 </style>

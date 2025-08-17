@@ -1,20 +1,23 @@
 <template>
-  <DemoSpace>
-    <VInput
-      v-model:value="inputValue"
-      class="demo-input"
-      placeholder="请输入内容"
-      icon="search"
-    />
-  </DemoSpace>
-  <DemoSpace>
-    <VInput
-      v-model:value="inputValue"
-      class="demo-input"
-      placeholder="请输入内容"
-      icon="face"
-    />
-  </DemoSpace>
+  <VInput
+    v-model:value="inputValue"
+    class="demo-input"
+    placeholder="请输入内容"
+    prefix-icon="face"
+  />
+  <VInput
+    v-model:value="inputValue"
+    class="demo-input"
+    placeholder="请输入内容"
+    suffix-icon="search"
+  />
+  <VInput
+    v-model:value="inputValue"
+    class="demo-input"
+    placeholder="请输入内容"
+    prefix-icon="face"
+    suffix-icon="search"
+  />
 </template>
 
 <script setup>
