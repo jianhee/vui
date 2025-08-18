@@ -1,5 +1,129 @@
 // 输入框
 // ----------------------------------------
 
-@use "./base";
-@include base.vui-input("vui-input");
+@use "../../../styles/mixins";
+
+// vars
+:root {
+  --vui-input-text-color: var(--vui-text-color-regular);
+  --vui-input-bg-color: var(--vui-fill-color-blank);
+  --vui-input-border-color: var(--vui-border-color-base);
+  --vui-input-hover-border-color: var(--vui-text-color-disabled);
+  --vui-input-focus-border-color: var(--vui-color-brand-base);
+  --vui-input-prepend-text-color: var(--vui-text-color-info);
+  --vui-input-prepend-bg-color: var(--vui-fill-color-light);
+}
+
+// 样式
+.vui-input {
+  // 内部的所有图标
+  --vui-icon-color: var(--vui-text-color-placeholder);
+
+  // 容器
+  display: flex;
+  width: var(--vui-input-width);
+  &.is-disabled {
+    @include mixins.vui-disabled;
+  }
+
+  // 标签
+  &-prepend,
+  &-append {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    height: 100%;
+    padding: 0 16px;
+    color: var(--vui-input-prepend-text-color);
+    background-color: var(--vui-input-prepend-bg-color);
+    border: 1px solid var(--vui-input-border-color);
+  }
+  &-prepend {
+    border-right: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  &-append {
+    border-left: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  // 中间内容
+  &-wrapper {
+    display: flex;
+    flex: auto;
+    gap: 6px;
+    align-items: center;
+    height: 100%;
+    color: var(--vui-input-text-color);
+    cursor: text;
+    background-color: var(--vui-input-bg-color);
+    border: 1px solid var(--vui-input-border-color);
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+    &:hover {
+      border-color: var(--vui-input-hover-border-color);
+    }
+    &.is-focus {
+      border-color: var(--vui-input-focus-border-color);
+    }
+  }
+  &.is-disabled &-wrapper {
+    cursor: not-allowed;
+    border-color: var(--vui-input-border-color) !important;
+  }
+  &--prepend &-wrapper {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  &--append &-wrapper {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  // 输入框
+  &-inner {
+    @include mixins.vui-ellipsis;
+
+    flex: auto;
+    height: 100%;
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+
+  // 内置图标
+  &-icon {
+    cursor: pointer;
+  }
+  &-icon:hover {
+    --vui-icon-color: var(--vui-text-color-secondary);
+  }
+
+  // 尺寸
+  &--large {
+    height: 40px;
+    font-size: 14px;
+    line-height: 38px;
+  }
+  &--medium {
+    height: 32px;
+    font-size: 14px;
+    line-height: 30px;
+  }
+  &--small {
+    height: 24px;
+    font-size: 12px;
+    line-height: 22px;
+  }
+  &--large &-wrapper {
+    padding: 0 15px;
+  }
+  &--medium &-wrapper {
+    padding: 0 11px;
+  }
+  &--small &-wrapper {
+    padding: 0 7px;
+  }
+}
