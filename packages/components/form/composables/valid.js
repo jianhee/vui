@@ -6,7 +6,7 @@ export const formValidProps = {
   // 表单的数据对象
   model: { type: Object, default: null },
   // 表单的校验规则
-  // - `trigger`    校验触发时机 `input|submit
+  // - `trigger`    校验触发时机 `input|submit'
   // - `message`    校验不通过时的提示信息
   // - `required`   是否必填，必填项会在标签前面添加 `*` 号
   // - `pattern`    是否符合正则

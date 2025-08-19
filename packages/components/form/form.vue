@@ -4,6 +4,7 @@
     ref="formElRef"
     :class="['vui-form', rootClasses]"
     :style="rootStyles"
+    @submit.prevent
   >
     <!-- 显示内容，只能是 `<VFormItem>` 组件 -->
     <slot />
