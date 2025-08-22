@@ -34,6 +34,7 @@
         ref="inputElRef"
         v-model="modelValue"
         :type="inputType"
+        :readonly="readonly"
         :disabled="disabled"
         :autofocus="autofocus"
         :placeholder="placeholder"
@@ -43,23 +44,20 @@
         @change="onChange"
         @keyup.enter="onEnter"
       />
-      <!-- 内置图标 -->
-      <template v-if="modelValue && !disabled">
-        <!-- 清除 -->
-        <VIcon
-          v-if="isShowClear"
-          class="vui-input-icon"
-          :component="IconClear"
-          @click.stop="onClickClearIcon"
-        />
-        <!-- 密码 -->
-        <VIcon
-          v-if="isShowPassword"
-          class="vui-input-icon"
-          :component="inputType === 'password' ? IconEyeClose : IconEyeOpen"
-          @click.stop="onClickToggleIcon"
-        />
-      </template>
+      <!-- 清除图标 -->
+      <VIcon
+        v-if="isShowClear"
+        class="vui-input-icon"
+        :component="IconClear"
+        @click.stop="onClickClearIcon"
+      />
+      <!-- 密码图标 -->
+      <VIcon
+        v-if="isShowPassword"
+        class="vui-input-icon"
+        :component="inputType === 'password' ? IconEyeClose : IconEyeOpen"
+        @click.stop="onClickToggleIcon"
+      />
       <!-- 后置内容 -->
       <VIcon
         v-if="suffixIcon"

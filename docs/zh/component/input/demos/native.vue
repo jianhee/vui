@@ -24,6 +24,18 @@
     />
   </DemoViewLeft>
   <DemoViewLeft
+    label="是否只读"
+    code="readonly"
+    label-width="180"
+  >
+    <VInput
+      v-model:value="inputValue"
+      class="demo-input"
+      placeholder="只读状态"
+      readonly
+    />
+  </DemoViewLeft>
+  <DemoViewLeft
     label="最大长度"
     code="maxlength"
     label-width="180"

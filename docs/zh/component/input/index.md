@@ -71,6 +71,7 @@
 | ------------- | ------------ | --------- | ------- |
 | `autofocus`   | 是否自动聚焦 | `boolean` | `false` |
 | `disabled`    | 是否禁用     | `boolean` | `false` |
+| `readonly`    | 是否只读     | `boolean` | `false` |
 | `maxLength`   | 最大长度     | `number`  |         |
 | `placeholder` | 占位文字     | `string`  |         |
 | `type`        | 输入框类型   | `string`  | `text`  |

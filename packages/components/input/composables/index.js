@@ -31,6 +31,7 @@ export const inputProps = {
   // ---------- 原生属性 ----------
   autofocus: { type: Boolean, default: false },
   disabled: { type: Boolean, default: false },
+  readonly: { type: Boolean, default: false },
   maxlength: { type: String, default: null },
   placeholder: { type: String, default: null },
   type: { type: String, default: 'text' }
@@ -64,7 +65,7 @@ export const useInput = ({ wraperElRef, inputElRef, modelValue, props, emits }) 
 
   // 是否显示切换密码按钮
   const isShowPassword = computed(() => {
-    return props.showPassword && props.type === 'password';
+    return props.type === 'password' && props.showPassword && !props.disabled && modelValue.value;
   });
 
   // 点击切换密码按钮
@@ -80,7 +81,7 @@ export const useInput = ({ wraperElRef, inputElRef, modelValue, props, emits }) 
 
   // 是否显示清除按钮
   const isShowClear = computed(() => {
-    return props.clearable && (isHovered.value || focused.value);
+    return props.clearable && !props.disabled && !props.readonly && modelValue.value && (isHovered.value || focused.value);
   });
 
   // 点击清除按钮
