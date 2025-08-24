@@ -4,8 +4,7 @@
 
 ### 基础用法
 
-- 使用 `rowItems` 和 `colItems` 属性定义行列数据，数据量大时必须使用 `tableHeight` 属性或者 CSS 限制表格高度
-- 右键点击行时触发 `row-contextmenu` 事件
+使用 `rowItems` 和 `colItems` 属性定义行列数据，数据量大时必须使用 `tableHeight` 属性或者 CSS 限制表格高度
 
 ::: details 示例中的行列数据
 <<< @/component/table/composables/index.js
@@ -15,7 +14,8 @@
 
 ### 自定义行
 
-使用 `rowHeight`、`currentRowId`、`customRow` 等属性定义行的多种用法
+- 使用 `rowHeight`、`currentRowId`、`customRow` 等属性定义行的多种用法
+- 支持 `row-click` 和 `row-contextmenu` 事件
 
 <preview path="./demos/rows.vue"></preview>
 
@@ -90,6 +90,7 @@
 
 | 名称              | 说明             | 参数                                    |
 | ----------------- | ---------------- | --------------------------------------- |
+| `row-click`       | 左键点击行时触发 | `{ event: '事件对象', row: '当前行'  }` |
 | `row-contextmenu` | 右键点击行时触发 | `{ event: '事件对象', row: '当前行'  }` |
 
 <!-- 数据状态 -->

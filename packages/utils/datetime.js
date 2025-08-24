@@ -5,25 +5,25 @@ import message from '../locals/datetime.js';
 dayjs.extend(utc);
 
 /**
- * 获取时间
+ * 格式化本地时间
  * @param {string|Date} datetime  本地时间：默认当前时间
  * @param {string} format         格式：默认为空，参考 https://day.js.org/docs/zh-CN/display/format
  * @returns {string}              和格式匹配的时间：'2008-08-08' ...
  */
-export const getDateTime = (_datetime, _format) => {
-  const date = _datetime ? dayjs(_datetime) : dayjs();
-  return date.format(_format);
+export const formatDateTime = (datetime, formator) => {
+  const date = datetime ? dayjs(datetime) : dayjs();
+  return date.format(formator);
 };
 
 /**
- * 获取UTC时间
+ * 格式化UTC时间
  * @param {string|Date} datetime  本地时间：默认当前时间
  * @param {string} format         格式：默认为空，参考 https://day.js.org/docs/zh-CN/display/format
  * @returns {string}              和格式匹配的时间：'2008-08-08' ...
  */
-export const getUTCDateTime = (_datetime, _format) => {
-  const date = _datetime ? dayjs(_datetime) : dayjs();
-  return date.utc().format(_format);
+export const formatUtcDateTime = (datetime, formator) => {
+  const date = datetime ? dayjs(datetime) : dayjs();
+  return date.utc().format(formator);
 };
 
 /**
@@ -33,10 +33,10 @@ export const getUTCDateTime = (_datetime, _format) => {
  * @param {string} local      语言：默认当前语言
  * @returns {string}          和格式匹配的时间：'2023年1月06日 星期五' ...
  */
-export const getLocalDateTime = (_datetime, _format, _local) => {
-  const date = _datetime ? new Date(_datetime) : new Date();
+export const formatLocalDateTime = (datetime, formator, _local) => {
+  const date = datetime ? new Date(datetime) : new Date();
   const local = _local || window.navigator.language;
-  return new Intl.DateTimeFormat(local, _format).format(date);
+  return new Intl.DateTimeFormat(local, formator).format(date);
 };
 
 /**
@@ -44,10 +44,10 @@ export const getLocalDateTime = (_datetime, _format, _local) => {
  * @param {string|Date} date  要比较的时间
  * @returns {string}          相对时间描述："5s ago" ...
  */
-export const getTimeAgo = _datetime => {
-  if (!_datetime) return '';
+export const getTimeAgo = datetime => {
+  if (!datetime) return '';
 
-  const date = dayjs(_datetime);
+  const date = dayjs(datetime);
   const now = dayjs();
 
   // 1分钟内："5s ago"

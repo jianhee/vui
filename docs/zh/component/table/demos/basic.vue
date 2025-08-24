@@ -4,13 +4,11 @@
     :row-items="rowItems"
     :col-items="colItems"
     table-height="300"
-    @row-contextmenu="writeLog('row-contextmenu', $event)"
   />
 </template>
 
 <script setup>
 import { renderItems, renderCols } from '../composables';
-import { writeLog } from '@vp/utils';
 
 const rowItems = renderItems({ length: 1000 });
 const colItems = renderCols();

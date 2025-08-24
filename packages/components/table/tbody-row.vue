@@ -9,6 +9,7 @@
     @dragenter.stop="onDragEnter"
     @dragover.stop.prevent="onDragOver"
     @drop.stop="onDrop"
+    @click="onRowClick"
     @contextmenu.prevent="onRowContextmenu"
   >
     <!-- 拖拽排序 -->
@@ -58,7 +59,7 @@ const tableRoot = inject('tableRoot', null);
 const props = defineProps(tbodyRowProps);
 
 // 使用行
-const { rowClasses, customRowAttrs, onRowContextmenu } = useTbodyRow({
+const { rowClasses, customRowAttrs, onRowClick, onRowContextmenu } = useTbodyRow({
   tableRoot,
   tbodyRow: { props }
 });

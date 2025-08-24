@@ -24,6 +24,15 @@ export const useTbodyRow = ({ tableRoot, tbodyRow }) => {
     });
   });
 
+  // 左键点击行
+  function onRowClick(event) {
+    // 参数为 事件对象、当前行
+    tableRoot.emits('row-click', {
+      event,
+      row: tbodyRow.props.rowData
+    });
+  }
+
   // 右键点击行
   function onRowContextmenu(event) {
     // 参数为 事件对象、当前行
@@ -36,6 +45,7 @@ export const useTbodyRow = ({ tableRoot, tbodyRow }) => {
   return {
     rowClasses,
     customRowAttrs,
+    onRowClick,
     onRowContextmenu
   };
 };

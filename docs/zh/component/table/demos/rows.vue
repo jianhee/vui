@@ -6,11 +6,14 @@
     :row-height="25"
     :current-row-id="rowItems[0].id"
     :custom-row="customRow"
+    @row-click="writeLog('row-click', $event)"
+    @row-contextmenu="writeLog('row-contextmenu', $event)"
   />
 </template>
 
 <script setup>
 import { renderItems, renderCols } from '../composables';
+import { writeLog } from '@vp/utils';
 
 // 数据
 const rowItems = renderItems({ length: 5 });

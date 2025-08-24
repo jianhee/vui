@@ -4,7 +4,7 @@ import { useStorage, useEventListener, useIntersectionObserver } from '@vueuse/c
 import { addUnit } from '../../../utils';
 
 // emits
-export const tableEmits = ['row-contextmenu'];
+export const tableEmits = ['row-click', 'row-contextmenu'];
 
 // props
 export const tableProps = {

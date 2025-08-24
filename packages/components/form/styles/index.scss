@@ -32,6 +32,7 @@
   &-control {
     position: relative;
     flex: auto;
+    width: 100%;
   }
 
   // 行内模式
@@ -50,15 +51,16 @@
     }
     &-top {
       flex-direction: column;
-      gap: 8px;
     }
     &-bottom {
       flex-direction: column-reverse;
-      gap: 8px;
     }
-    &-top .vui-form-label,
-    &-bottom .vui-form-label {
-      line-height: 22px;
+    &-top,
+    &-bottom {
+      gap: 8px;
+      .vui-form-label {
+        line-height: 22px;
+      }
     }
   }
 
@@ -88,10 +90,8 @@
     content: "*";
   }
   &-item.is-error {
-    .vui-input,
-    .vui-select {
-      border-color: var(--vui-form-error-color) !important;
-    }
+    --vui-input-error-border-color: var(--vui-form-error-color);
+    --vui-select-error-border-color: var(--vui-form-error-color);
   }
   &-error {
     position: absolute;

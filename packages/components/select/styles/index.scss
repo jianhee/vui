@@ -26,16 +26,16 @@
   color: var(--vui-select-text-color);
   cursor: pointer;
   background-color: var(--vui-select-bg-color);
-  border: 1px solid var(--vui-select-border-color);
+  border: 1px solid var(--vui-select-error-border-color, var(--vui-select-border-color));
   border-radius: 4px;
   transition: border-color 0.3s ease;
 
   // 状态
   &:hover {
-    border-color: var(--vui-select-hover-border-color);
+    border-color: var(--vui-select-error-border-color, var(--vui-select-hover-border-color));
   }
   &.is-focus {
-    border-color: var(--vui-select-focus-border-color);
+    border-color: var(--vui-select-error-border-color, var(--vui-select-focus-border-color));
   }
   &.is-disabled {
     @include mixins.vui-disabled;
