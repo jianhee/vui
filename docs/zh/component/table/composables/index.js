@@ -23,7 +23,7 @@ export const renderCols = (params = {}) => {
   return [
     { key: 'id', title: 'ID', width: 80, cellClass: 'demo-table-cell', sortable },
     { key: 'title', title: '标题', width: 120, sortable },
-    { key: 'name', title: '姓名', sortable },
+    { key: 'name', title: '姓名', minWidth: 120, sortable },
     { key: 'age', title: '年纪' },
     { key: 'phone', title: '手机' },
     { key: 'address', title: '地址' }

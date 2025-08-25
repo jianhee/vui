@@ -74,15 +74,6 @@
     }
   }
 
-  // 标签宽度
-  &--filed-inline .vui-form-label {
-    width: fit-content;
-  }
-  &--label-position-top .vui-form-label,
-  &--label-position-bottom .vui-form-label {
-    width: 100%;
-  }
-
   // 表单校验
   &-item.is-required .vui-form-label::before {
     margin-right: 4px;

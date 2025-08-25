@@ -20,7 +20,8 @@ export const tableProps = {
   //  1. `key` 列唯一标识，默认使用 `row[col.key]` 的值渲染单元格内容
   //  2. `title` 列标题
   //  3. `width` 列宽，默认根据列数量平分
-  //  4. `cellClass` 单元格类名
+  //  4. `minWidth` 最小列宽，默认 `50`
+  //  5. `cellClass` 单元格类名
   colItems: { type: Array, required: true },
   // ---------- 表格属性 ----------
   // 表格高度：不带单位时默认 `px`
@@ -44,6 +45,15 @@ export const tableProps = {
 
 // 使用表格
 export const useTable = ({ tableElRef, tbodyElRef, props }) => {
+  // 元素是否显示
+  const isShow = ref(false);
+  const { stop } = useIntersectionObserver(tableElRef, ([entry]) => {
+    if (entry?.isIntersecting) {
+      isShow.value = true;
+      stop();
+    }
+  });
+
   // 根元素样式
   const rootStyles = computed(() => {
     return {
@@ -59,22 +69,38 @@ export const useTable = ({ tableElRef, tbodyElRef, props }) => {
     headerStyles.value.transform = `translateX(-${scrollLeft}px)`;
   });
 
-  // 计算平均列宽
-  const colMinWidth = 50;
-  const colAutoWidth = ref(0);
-  const { stop } = useIntersectionObserver(tableElRef, ([entry]) => {
-    if (entry?.isIntersecting) {
-      const colMaxWidth = Math.floor((tableElRef.value.offsetWidth - 100) / props.colItems.length);
-      colAutoWidth.value = Math.max(colMinWidth, colMaxWidth);
-      stop();
-    }
-  });
-
-  // 计算当前列宽
+  // 计算列宽
   const colWidthsRef = props.colResizeStorageKey ? useStorage(props.colResizeStorageKey, {}) : ref({});
   watchEffect(() => {
+    // 未显示时不计算
+    if (!isShow.value) return;
+
+    // 可用的宽度和列数
+    let totalWidth = tableElRef.value.offsetWidth;
+    let totalLength = props.colItems?.length || 0;
+
+    // 排除已设置宽度的列
+    props.colItems.forEach(col => {
+      if (col.width) {
+        totalWidth -= col.width;
+        totalLength -= 1;
+      }
+    });
+
+    // 排除内置的操作列
+    const actionCols = tableElRef.value?.querySelectorAll('.vui-table-header .vui-table-row-action');
+    actionCols.forEach(el => {
+      totalWidth -= el.offsetWidth;
+    });
+
+    // 计算剩余的平均列宽
+    const autoWidth = Math.floor(totalWidth / totalLength);
+
+    // 分配列宽
     colWidthsRef.value = props.colItems.reduce((acc, col) => {
-      acc[col.key] = colWidthsRef.value[col.key] || col.width || colAutoWidth.value;
+      const selfWidth = colWidthsRef.value[col.key] || col.width || autoWidth;
+      const minWidth = col.minWidth || 50;
+      acc[col.key] = Math.max(selfWidth, minWidth);
       return acc;
     }, {});
   });
@@ -82,7 +108,6 @@ export const useTable = ({ tableElRef, tbodyElRef, props }) => {
   return {
     rootStyles,
     headerStyles,
-    colMinWidth,
     colWidthsRef
   };
 };

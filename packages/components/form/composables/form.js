@@ -1,5 +1,5 @@
 // 表单
-import { computed, ref } from 'vue';
+import { computed, ref, watchEffect } from 'vue';
 import { useIntersectionObserver } from '@vueuse/core';
 import { addUnit } from '../../../utils';
 
@@ -24,18 +24,45 @@ export const commonProps = {
 
 // 使用表单
 export const useForm = ({ formElRef, props }) => {
+  // 元素是否显示
+  const isShow = ref(false);
+  const { stop } = useIntersectionObserver(formElRef, async ([entry]) => {
+    if (entry?.isIntersecting) {
+      isShow.value = true;
+      stop();
+    }
+  });
+
   // 是否行内
   const isInline = computed(() => props.filedInline || !props.filedBlock);
 
   // 计算标签宽度
-  const labelAutoWidth = ref(null);
-  const { stop } = useIntersectionObserver(formElRef, async ([entry]) => {
-    if (entry?.isIntersecting) {
-      const labels = formElRef.value.querySelectorAll('.vui-form-label');
-      const labelWidths = Array.from(labels).map(label => label.offsetWidth);
-      labelAutoWidth.value = Math.max(...labelWidths);
-      stop();
+  const labelWidthRef = ref(null);
+  watchEffect(() => {
+    // 行内：内容撑开
+    if (isInline.value) {
+      labelWidthRef.value = 'fit-content';
+      return;
     }
+
+    // 上下：100%
+    if (props.labelPosition === 'top' || props.labelPosition === 'bottom') {
+      labelWidthRef.value = '100%';
+      return;
+    }
+
+    // 其它
+    // 有值：使用设置值
+    if (props.labelWidth) {
+      labelWidthRef.value = props.labelWidth;
+      return;
+    }
+
+    // 没有值：使用最大的标签宽度
+    if (!isShow.value) return;
+    const labels = formElRef.value.querySelectorAll('.vui-form-label');
+    const labelWidths = Array.from(labels).map(label => label.offsetWidth);
+    labelWidthRef.value = Math.max(...labelWidths);
   });
 
   // 根元素类名
@@ -47,10 +74,8 @@ export const useForm = ({ formElRef, props }) => {
 
   // 根元素样式
   const rootStyles = computed(() => {
-    const labelWidth = props.labelWidth || labelAutoWidth.value;
-
     return {
-      '--vui-form-label-width': addUnit(labelWidth, 'px')
+      '--vui-form-label-width': addUnit(labelWidthRef.value, 'px')
     };
   });
 

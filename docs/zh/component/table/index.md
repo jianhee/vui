@@ -83,6 +83,7 @@
 | `key`       | 列唯一标识，默认使用 `row[col.key]` 的值渲染单元格内容 | `string\|number` | 必填           |
 | `title`     | 列标题                                                 | `string`         |                |
 | `width`     | 列宽                                                   | `number`         | 根据列数量平分 |
+| `minWidth`  | 列宽最小值                                             | `number`         | `50`           |
 | `sortable`  | 列是否可以排序                                         | `boolean`        |                |
 | `cellClass` | 单元格类名                                             | `string`         |                |
 

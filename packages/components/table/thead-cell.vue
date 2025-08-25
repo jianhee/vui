@@ -5,7 +5,7 @@
     :class="['vui-table-cell', { 'is-sortable': isSortable }]"
     :resizable="tableRoot.props.colResizable"
     :resize-handles="['right']"
-    :min-width="tableRoot.colMinWidth"
+    :min-width="colData.minWidth || 50"
     @click="onSortKeyClick"
   >
     <!-- 内容 -->

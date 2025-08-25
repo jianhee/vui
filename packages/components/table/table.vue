@@ -95,7 +95,7 @@ const {
 });
 
 // 使用表格
-const { rootStyles, headerStyles, colMinWidth, colWidthsRef } = useTable({
+const { rootStyles, headerStyles, colWidthsRef } = useTable({
   tableElRef,
   tbodyElRef: tbodyProps.ref,
   props
@@ -134,7 +134,6 @@ provide('tableRoot', {
   dragFlagRef,
   sortKeyRef,
   sortOrderRef,
-  colWidthsRef,
-  colMinWidth
+  colWidthsRef
 });
 </script>
