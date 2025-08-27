@@ -46,7 +46,7 @@
           <TbodyRow
             v-for="{ data: row } in virtualList"
             v-slot="{ col }"
-            :key="row.id"
+            :key="row[rowIdKey]"
             :row-data="row"
           >
             <slot

@@ -6,6 +6,7 @@ export const renderItems = (params = {}) => {
     const type = index % 2 === 0 ? 'folder' : 'note';
     return {
       id: parseInt(Math.random() * 100000),
+      path: _path,
       type,
       title: type === 'folder' ? `目录-${_path}` : `文件-${_path}`,
       name: `姓名-${_path}`,

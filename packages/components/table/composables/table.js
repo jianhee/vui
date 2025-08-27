@@ -14,7 +14,7 @@ export const tableProps = {
   // 空数据时显示的文本内容
   emptyText: { type: String, default: 'No Data' },
   // 行数据 `Array[Object]`
-  //  1. `id` 行唯一标识，必填
+  //  1. `id` 行唯一标识
   rowItems: { type: Array, default: null },
   // 列数据 `Array[Object]`
   //  1. `key` 列唯一标识，默认使用 `row[col.key]` 的值渲染单元格内容
@@ -30,6 +30,8 @@ export const tableProps = {
   // ---------- 行属性 ----------
   // 行高：用于计算虚拟列表的显示内容
   rowHeight: { type: Number, default: 35 },
+  // 行 `id` 键名
+  rowIdKey: { type: String, default: 'id' },
   // 当前行 `id`，用于高亮当前行
   currentRowId: { type: [String, Number], default: null },
   // 自定义行属性的方法

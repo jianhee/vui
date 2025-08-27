@@ -13,7 +13,7 @@ export const tbodyRowProps = {
 export const useTbodyRow = ({ tableRoot, tbodyRow }) => {
   // 行类名
   const rowClasses = computed(() => {
-    return { 'is-current': tbodyRow.props.rowData?.id === tableRoot.props.currentRowId };
+    return { 'is-current': tbodyRow.props.rowData?.[tableRoot.props.rowIdKey] === tableRoot.props.currentRowId };
   });
 
   // 行自定义属性

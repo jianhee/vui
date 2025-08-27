@@ -78,6 +78,7 @@ const { dragClasses, onDragStart, onDragEnter, onDragOver, onDrop, onDragEnd } =
   dragFlagRef: treeRoot.dragFlagRef,
   dragSortable: treeRoot.props.dragSortable,
   canDropInto: treeRoot.props.canDropInto,
+  idKey: 'id',
   rawItem: props.itemData,
   // rawItemsRef: treeRoot.treeDataRef,
   selectedItemsRef: computed(() => null),

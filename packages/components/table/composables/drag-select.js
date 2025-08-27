@@ -3,9 +3,12 @@ import { ref, computed, inject } from 'vue';
 import { useEventListener } from '@vueuse/core';
 
 // 使用框选
-export const useDragSelect = ({ dragFlagRef, dragSelectAreaWidth, parentElRef, rowItemsRef, rowHeight }) => {
+export const useDragSelect = ({ dragFlagRef, dragSelectAreaWidth, parentElRef, rowItemsRef, rowHeight, rowIdKey }) => {
   // 全局状态
   const onSelectionChange = inject('onSelectionChange', null);
+
+  // 是否显示
+  const isShowBox = computed(() => dragFlagRef.value === 'select');
 
   // 父元素在浏览器中的边界：拖拽开始时计算一次，避免浪费性能
   let parentRect = null;
@@ -94,14 +97,15 @@ export const useDragSelect = ({ dragFlagRef, dragSelectAreaWidth, parentElRef, r
       return isInX && isInY;
     });
 
-    // 选中项的 id
-    const selectedIds = selectedItems.map(item => item.id);
+    // 选中项的 ids
+    const selectedIds = selectedItems.map(item => item?.[rowIdKey]);
 
     // 触发事件
     onSelectionChange(selectedItems, selectedIds);
   }
 
   return {
+    isShowBox,
     boxStyles
   };
 };

@@ -39,6 +39,7 @@ const { isSelectedAll, toggleAllSelection, allSelectionClasses } = useAllSelecti
   selectable: tableRoot.props.selectable,
   ctrlASelectable: tableRoot.props.ctrlASelectable,
   modelSelectedRowIds: tableRoot.modelSelectedRowIds,
-  rowItemsRef: tableRoot.rowItemsRef
+  rowItemsRef: tableRoot.rowItemsRef,
+  rowIdKey: tableRoot.props.rowIdKey
 });
 </script>

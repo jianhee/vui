@@ -69,27 +69,27 @@ const { isSelectedRow, toggleRowSelection, rowSelectionClasses } = useRowSelecti
   selectable: tableRoot.props.selectable,
   modelSelectedRowIds: tableRoot.modelSelectedRowIds,
   rowItemsRef: tableRoot.rowItemsRef,
-  rowId: props.rowData?.id
+  rowItem: props.rowData,
+  rowIdKey: tableRoot.props.rowIdKey
 });
 
 // 使用拖拽排序
-// 当前行被选中时拖拽所有选中的行
-const selectedItemsRef = computed(() => {
-  if (isSelectedRow.value) {
-    return tableRoot.rowItemsRef.value.filter(item => tableRoot.modelSelectedRowIds.value?.includes(item.id));
-  } else {
-    return null;
-  }
-});
-
-// 处理数据
 const { dragClasses, onDragStart, onDragEnter, onDragOver, onDrop, onDragEnd } = useDragSortItem({
   dragFlagRef: tableRoot.dragFlagRef,
   dragSortable: tableRoot.props.dragSortable,
   canDropInto: tableRoot.props.canDropInto,
+  idKey: tableRoot.props.rowIdKey,
   rawItem: props.rowData,
   // rawItemsRef: tableRoot.rowItemsRef,
-  selectedItemsRef,
+  selectedItemsRef: computed(() => {
+    if (isSelectedRow.value) {
+      // 当前行是选中状态：拖拽所有选中的行
+      return tableRoot.rowItemsRef.value.filter(item => tableRoot.modelSelectedRowIds.value?.includes(item?.[tableRoot.props.rowIdKey]));
+    } else {
+      // 否则只拖追当前行
+      return null;
+    }
+  }),
   emits: tableRoot.emits
 });
 </script>

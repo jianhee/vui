@@ -7,7 +7,7 @@ export const selectionEmits = ['selection-change'];
 
 // v-model
 export const selectionModel = {
-  // 选中项的 `id`
+  // 选中项的 ids
   selectedRowIds: { type: Array, default: null }
 };
 
@@ -36,7 +36,7 @@ export const useSelection = ({ props, dragFlagRef, modelSelectedRowIds, emits })
     // 更新值
     modelSelectedRowIds.value = selectedIds;
 
-    // 参数为 选中项、选中项的 id
+    // 参数为 选中项、选中项的 ids
     emits('selection-change', { selectedItems, selectedIds });
   }
 
@@ -75,7 +75,7 @@ export const useSelection = ({ props, dragFlagRef, modelSelectedRowIds, emits })
 };
 
 // 使用全选
-export const useAllSelection = ({ selectable, ctrlASelectable, modelSelectedRowIds, rowItemsRef }) => {
+export const useAllSelection = ({ selectable, ctrlASelectable, modelSelectedRowIds, rowItemsRef, rowIdKey }) => {
   // 全局状态
   const onSelectionChange = inject('onSelectionChange', null);
 
@@ -94,7 +94,7 @@ export const useAllSelection = ({ selectable, ctrlASelectable, modelSelectedRowI
 
     const newState = !isSelectedAll.value;
     if (newState) {
-      const selectedIds = rowItemsRef.value?.map(item => item.id);
+      const selectedIds = rowItemsRef.value?.map(item => item?.[rowIdKey]);
       onSelectionChange(rowItemsRef.value, selectedIds);
     } else {
       onSelectionChange();
@@ -127,7 +127,7 @@ export const useAllSelection = ({ selectable, ctrlASelectable, modelSelectedRowI
 };
 
 // 使用行选中
-export const useRowSelection = ({ selectable, modelSelectedRowIds, rowItemsRef, rowId }) => {
+export const useRowSelection = ({ selectable, modelSelectedRowIds, rowItemsRef, rowItem, rowIdKey }) => {
   // 全局状态
   const onSelectionChange = inject('onSelectionChange', null);
 
@@ -135,7 +135,7 @@ export const useRowSelection = ({ selectable, modelSelectedRowIds, rowItemsRef, 
   const isSelectedRow = computed(() => {
     if (!selectable) return false;
 
-    return modelSelectedRowIds.value?.includes(rowId);
+    return modelSelectedRowIds.value?.includes(rowItem?.[rowIdKey]);
   });
 
   // 切换选中
@@ -145,11 +145,11 @@ export const useRowSelection = ({ selectable, modelSelectedRowIds, rowItemsRef, 
     const newState = !isSelectedRow.value;
     let selectedIds = [...(modelSelectedRowIds.value || [])];
     if (newState) {
-      selectedIds.push(rowId);
+      selectedIds.push(rowItem?.[rowIdKey]);
     } else {
-      selectedIds = selectedIds.filter(id => id !== rowId);
+      selectedIds = selectedIds.filter(id => id !== rowItem?.[rowIdKey]);
     }
-    const selectedItems = rowItemsRef.value.filter(item => selectedIds.includes(item.id));
+    const selectedItems = rowItemsRef.value.filter(item => selectedIds.includes(item?.[rowIdKey]));
     onSelectionChange(selectedItems, selectedIds);
   };
 
