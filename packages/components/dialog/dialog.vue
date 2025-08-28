@@ -25,7 +25,7 @@
             <VIcon
               v-if="showClose"
               :class="`vui-${dialogType}-close`"
-              :component="IconClose"
+              :icon="IconClose"
               @click="closeDialog"
             />
           </div>

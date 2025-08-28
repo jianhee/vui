@@ -13,7 +13,7 @@
     <VIcon
       v-if="!isBtn"
       :class="`vui-${checkboxType}-icon`"
-      :component="iconComponent"
+      :icon="iconComponent"
     />
     <!-- 优先使用插槽 -->
     <slot v-if="$slots?.default?.()[0].children.length" />
