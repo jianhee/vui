@@ -8,7 +8,7 @@
     v-bind="$attrs"
     @drag-sort-end="writeLog('drag-sort-end', $event)"
   >
-    <VIcon :name="renderIcon(node)" />
+    <VIcon :icon="renderIcon(node)" />
     <span>{{ item.title }}</span>
   </VTree>
 </template>

@@ -9,16 +9,16 @@
   gap: 5px;
   align-items: center;
   justify-content: center;
-  font-weight: normal !important;
-  color: var(--vui-btn-text-color) !important;
+  font-weight: normal;
+  color: var(--vui-btn-text-color);
   white-space: nowrap;
-  text-decoration: none !important;
+  text-decoration: none;
   cursor: pointer;
   user-select: none;
   background-color: var(--vui-btn-bg-color);
   border: 1px solid var(--vui-btn-border-color);
   border-radius: var(--vui-btn-radius, 4px);
-  transition: all 0.3s ease !important;
+  transition: all 0.3s ease;
 
   // 状态
   &:not(:disabled):hover {

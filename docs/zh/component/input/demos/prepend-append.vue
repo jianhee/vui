@@ -26,7 +26,7 @@
       prepend="https://"
     >
       <template #append>
-        <VIcon name="search" />
+        <VIcon icon="search" />
       </template>
     </VInput>
     <VInput
@@ -36,7 +36,7 @@
       append=".com"
     >
       <template #prepend>
-        <VIcon name="face" />
+        <VIcon icon="face" />
       </template>
     </VInput>
   </DemoViewLeft>

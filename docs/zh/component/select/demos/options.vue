@@ -12,7 +12,7 @@
         :current-node-id="currentData?.id"
         @node-click="onNodeClick"
       >
-        <VIcon :name="renderIcon(node)" />
+        <VIcon :icon="renderIcon(node)" />
         <span>{{ item.title }}</span>
       </VTree>
     </template>

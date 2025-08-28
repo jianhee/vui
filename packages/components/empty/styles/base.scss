@@ -35,7 +35,8 @@
         --vui-icon-color: var(--vui-border-color-dark);
       }
       &-img {
-        width: min(50%, 200px);
+        width: 200px;
+        max-width: 90%;
       }
     }
   }
@@ -48,7 +49,8 @@
         --vui-icon-color: var(--vui-color-brand-base);
       }
       &-img {
-        width: min(50%, 60px);
+        width: 60px;
+        max-width: 90%;
       }
     }
   }

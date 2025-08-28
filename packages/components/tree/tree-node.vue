@@ -18,14 +18,14 @@
       <VIcon
         v-if="nodeData.isLoading"
         class="vui-tree-node-loading"
-        :component="IconLoading"
+        :icon="IconLoading"
         :spin="true"
       />
       <!-- 折叠图标 -->
       <VIcon
         v-else-if="isShowExpand"
         class="vui-tree-node-expand"
-        :component="IconExpand"
+        :icon="IconExpand"
         v-bind="expandIconProps"
         @click.stop="toggleChildren"
       />
@@ -46,7 +46,7 @@
       class="vui-tree-node-action"
     >
       <VIcon
-        :component="IconDrag"
+        :icon="IconDrag"
         class="vui-tree-node-drag-handle"
       />
     </div>

@@ -28,6 +28,12 @@ td:first-child,
 td:last-child {
   white-space: nowrap;
 }
+.vp-doc a.vui-btn {
+  font-weight: normal;
+  color: var(--vui-btn-text-color);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
 .vp-doc th,
 .vp-doc td {
   background-color: transparent;

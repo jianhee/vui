@@ -18,7 +18,7 @@
       class="vui-table-row-action"
     >
       <VIcon
-        :component="IconDrag"
+        :icon="IconDrag"
         class="vui-table-row-drag-handle"
       />
     </div>

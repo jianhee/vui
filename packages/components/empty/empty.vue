@@ -7,6 +7,7 @@
       :class="`vui-${stateType}-img`"
       :alt="stateType"
       :src="image"
+      :style="imageStyles"
     />
     <!-- 其次使用图标 -->
     <VIcon
@@ -37,5 +38,8 @@ const stateType = inject('stateType', 'empty');
 const props = defineProps(emptyProps);
 
 // 使用状态
-const { stateIconProps, descText } = useEmpty({ props, stateType });
+const { stateIconProps, descText } = useEmpty({
+  props,
+  stateType
+});
 </script>

@@ -14,7 +14,7 @@
     <!-- 图标 -->
     <VIcon
       class="vui-select-icon"
-      :component="IconArrowDown"
+      :icon="IconArrowDown"
       v-bind="iconProps"
     />
   </div>

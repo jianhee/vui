@@ -8,7 +8,7 @@
     col-resize-storage-key="demo-table-col-widths"
   >
     <template v-if="col.key === 'title'">
-      <VIcon :name="row.type" />
+      <VIcon :icon="row.type" />
       <span>{{ row.title }}</span>
     </template>
   </VTable>

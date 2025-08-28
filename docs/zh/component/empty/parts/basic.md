@@ -12,7 +12,7 @@
 
 ### 自定义图标
 
-<!--@include: @/component/@parts/guild-icon.md-->
+使用 `icon` 和 `iconProps` 属性定义图标
 
 <preview path="@docs/component/empty/demos/icon.vue"></preview>
 
@@ -36,13 +36,15 @@
 
 ## API
 
-### 属性
+### 基础属性
 
-| 名称          | 说明                               | 类型                              | 默认值                                      |
-| ------------- | ---------------------------------- | --------------------------------- | ------------------------------------------- |
-| `icon`        | 自定义图标，空值表示不使用图标     | `string\|component\|object\|null` |                                             |
-| `image`       | 自定义图片，优先级高于 `icon` 属性 | `string`                          |                                             |
-| `description` | 自定义描述文本，空值表示不使用文本 | `string\|null`                    | 空状态 `No Data` <br> 加载状态 `Loading...` |
+| 名称          | 说明                               | 类型               | 默认值                                      |
+| ------------- | ---------------------------------- | ------------------ | ------------------------------------------- |
+| `icon`        | 自定义图标                         | `VIcon.props.icon` |                                             |
+| `iconProps`   | 自定义图标的属性                   | `VIcon.props`      |                                             |
+| `image`       | 自定义图片，优先级高于 `icon` 属性 | `string`           |                                             |
+| `imageStyles` | 自定义图片的样式                   | `object`           |                                             |
+| `description` | 自定义描述文本，空值表示不使用文本 | `string\|null`     | 空状态 `No Data` <br> 加载状态 `Loading...` |
 
 ### 插槽
 

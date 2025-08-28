@@ -9,10 +9,12 @@
     <VLoading v-if="loading" />
     <!-- 空状态 -->
     <template v-else-if="!treeDataRef?.length">
+      <!-- 优先插槽 -->
       <slot
         v-if="$slots.empty"
         name="empty"
       />
+      <!-- 其次文案 -->
       <VEmpty
         v-else
         :icon="null"

@@ -27,6 +27,7 @@
       {{ prefix }}
       <VIcon
         v-if="prefixIcon"
+        :icon="prefixIcon"
         v-bind="prefixIconProps"
       />
       <!-- 输入框 -->
@@ -48,19 +49,20 @@
       <VIcon
         v-if="isShowClear"
         class="vui-input-icon"
-        :component="IconClear"
+        :icon="IconClear"
         @click.stop="onClickClearIcon"
       />
       <!-- 密码图标 -->
       <VIcon
         v-if="isShowPassword"
         class="vui-input-icon"
-        :component="inputType === 'password' ? IconEyeClose : IconEyeOpen"
+        :icon="inputType === 'password' ? IconEyeClose : IconEyeOpen"
         @click.stop="onClickToggleIcon"
       />
       <!-- 后置内容 -->
       <VIcon
         v-if="suffixIcon"
+        :icon="suffixIcon"
         v-bind="suffixIconProps"
       />
       {{ suffix }}
@@ -78,9 +80,8 @@
 </template>
 
 <script setup>
-import { computed, useTemplateRef } from 'vue';
+import { useTemplateRef } from 'vue';
 import { useInput, inputModel, inputProps, inputEmits } from './composables';
-import { useIconProps } from '../../composables/use-icon-props';
 import IconClear from '../../icons/circle-close.vue';
 import IconEyeOpen from '../../icons/eye-open.vue';
 import IconEyeClose from '../../icons/eye-close.vue';
@@ -99,13 +100,5 @@ const { rootClasses, wraperClasses, inputType, isShowPassword, onClickToggleIcon
   modelValue,
   props,
   emits
-});
-
-// 使用图标
-const { iconProps: prefixIconProps } = useIconProps({
-  iconRef: computed(() => props.prefixIcon)
-});
-const { iconProps: suffixIconProps } = useIconProps({
-  iconRef: computed(() => props.suffixIcon)
 });
 </script>

@@ -7,24 +7,24 @@ import VIcon from '../../icon/icon.vue';
 export const btnProps = {
   // 按钮类型：primary, default, link
   type: { type: String, default: 'default' },
-  // 点击跳转的地址，有值时 `<button>` 转为 `<a>` 标签
-  href: { type: String, default: null },
   // 是否为加载状态
   loading: { type: Boolean, default: false },
+  // 前置图标
+  icon: VIcon.props.icon,
+  iconProps: VIcon.props,
   // 按钮尺寸：large, medium, small
   size: { type: String, default: 'medium' },
   // 是否为行内模式
   inline: { type: Boolean, default: true },
   // 是否为块级模式
   block: { type: Boolean, default: false },
+  // 点击跳转的地址，有值时 `<button>` 转为 `<a>` 标签
+  href: { type: String, default: null },
   // ---------- 原生属性 ----------
   disabled: { type: Boolean, default: false },
   // ---------- 样式属性 ----------
   // 圆角尺寸：不带单位时默认 `px`
-  radius: { type: [String, Number], default: null },
-  // ---------- 图标属性 ----------
-  icon: VIcon.props.icon,
-  iconProps: VIcon.props
+  radius: { type: [String, Number], default: null }
 };
 
 // 使用按钮

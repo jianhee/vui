@@ -1,15 +1,17 @@
 // 空状态
 import { computed } from 'vue';
-import { useIconProps } from '../../../composables/use-icon-props';
+import VIcon from '../../icon/icon.vue';
 import IconEmpty from '../../../icons/empty.vue';
 import IconLoading from '../../../icons/loading.vue';
 
 // props
 export const emptyProps = {
-  // 自定义图标：可选的值有 `<VIcon>` 组件的 `name` 属性值、`component` 属性值、完整的 `props` 对象
-  icon: { type: [String, Object], default: undefined },
+  // 自定义图标
+  icon: VIcon.props.icon,
+  iconProps: VIcon.props,
   // 自定义图片：优先级高于 `icon` 属性
   image: { type: String, default: undefined },
+  imageStyles: { type: Object, default: undefined },
   // 自定义描述文本：空值表示不使用文本
   description: { type: String, default: undefined }
 };
@@ -25,18 +27,13 @@ export const useEmpty = ({ props, stateType }) => {
     if (props.image) return null;
     if (props.icon === null) return null;
 
-    // 使用默认图标
+    // 使用图标
     const defaultIcon = isLoading ? IconLoading : IconEmpty;
-    const defaultProps = { spin: isLoading, component: defaultIcon };
-    if (typeof props.icon === 'undefined') return defaultProps;
-
-    // 使用自定义图标
-    const { iconProps } = useIconProps({ iconRef: computed(() => props.icon) });
-    if (iconProps.value.name || iconProps.value.component) {
-      return { spin: isLoading, ...iconProps.value };
-    } else {
-      return { ...defaultProps, ...iconProps.value };
-    }
+    return {
+      icon: props.icon || defaultIcon,
+      spin: isLoading,
+      ...props.iconProps
+    };
   });
 
   // 文本

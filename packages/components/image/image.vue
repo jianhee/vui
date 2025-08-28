@@ -11,7 +11,7 @@
       v-else-if="error"
       class="vui-image-error"
     >
-      <VIcon :component="IconImageError" />
+      <VIcon :icon="IconImageError" />
     </div>
     <!-- 加载成功 -->
     <img

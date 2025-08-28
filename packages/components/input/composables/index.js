@@ -1,6 +1,7 @@
 // 输入框
 import { ref, computed } from 'vue';
 import { useElementHover, useFocus, useEventListener } from '@vueuse/core';
+import VIcon from '../../icon/icon.vue';
 
 // emits
 export const inputEmits = ['input', 'change', 'enter', 'clear'];
@@ -17,9 +18,11 @@ export const inputProps = {
   clearable: { type: Boolean, default: false },
   // 是否显示切换密码按钮（仅密码类型有效）
   showPassword: { type: Boolean, default: false },
-  // 前置/后置图标：可选的值有 `<VIcon>` 组件的 `name` 属性值、`component` 属性值、完整的 `props` 对象
-  prefixIcon: { type: [String, Object], default: null },
-  suffixIcon: { type: [String, Object], default: null },
+  // 前置/后置图标
+  prefixIcon: VIcon.props.icon,
+  prefixIconProps: VIcon.props,
+  suffixIcon: VIcon.props.icon,
+  suffixIconProps: VIcon.props,
   // 前置/后置内容
   prefix: { type: [String, Number], default: null },
   suffix: { type: [String, Number], default: null },

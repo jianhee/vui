@@ -26,7 +26,7 @@
       prefix="￥"
     >
       <template #suffix>
-        <VIcon name="search" />
+        <VIcon icon="search" />
       </template>
     </VInput>
     <VInput
@@ -36,7 +36,7 @@
       suffix="RMB"
     >
       <template #prefix>
-        <VIcon name="face" />
+        <VIcon icon="face" />
       </template>
     </VInput>
   </DemoViewLeft>

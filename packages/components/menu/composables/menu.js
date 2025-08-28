@@ -12,11 +12,12 @@ export const menuModel = {
 // props
 export const menuProps = {
   // 菜单项 `Array[object|string|number]`
-  // 1. `key` 唯一标识
-  // 2. `label|title` 文本
-  // 3. `icon` 前置图标
-  // 4. `divider` 是否添加分隔符
-  // 5. `string|number` 类型的菜单项会格式化为 `{ label }`
+  // - `key` 唯一标识
+  // - `label|title` 文本
+  // - `icon` 前置图标 VIcon.props.icon
+  // - `iconProps` 前置图标的属性 VIcon.props
+  // - `divider` 是否添加分隔符
+  // - `string|number` 类型的菜单项会格式化为 `{ label }`
   items: { type: Array, default: null },
   // 是否可选中
   // 可选时会记录选中值，所以菜单项的 `key` 必填

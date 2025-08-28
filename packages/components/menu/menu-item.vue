@@ -9,14 +9,15 @@
     <!-- 前置图标 -->
     <VIcon
       v-if="formattedMenuItem.icon"
-      v-bind="iconProps"
+      :icon="formattedMenuItem.icon"
+      v-bind="formattedMenuItem.iconProps"
     />
     <!-- 文本 -->
     <span class="vui-menu-label">{{ formattedMenuItem.label }}</span>
     <!-- 选中图标 -->
     <VIcon
       v-if="isSelected"
-      :component="IconSelected"
+      :icon="IconSelected"
     />
   </div>
   <!-- 分隔符 -->
@@ -27,9 +28,8 @@
 </template>
 
 <script setup>
-import { computed, inject } from 'vue';
+import { inject } from 'vue';
 import { useMenuItem, menuItemProps } from '../menu/composables/menu-item';
-import { useIconProps } from '../../composables/use-icon-props';
 import IconSelected from '../../icons/selected.vue';
 
 // 菜单
@@ -42,10 +42,5 @@ const props = defineProps(menuItemProps);
 const { formattedMenuItem, isSelected, rootClasses, onMenuItemClick } = useMenuItem({
   menuRoot,
   menuItem: { props }
-});
-
-// 使用图标
-const { iconProps } = useIconProps({
-  iconRef: computed(() => formattedMenuItem.value.icon)
 });
 </script>

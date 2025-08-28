@@ -9,6 +9,7 @@
 :root {
   --vui-table-font-size: 14px;
   --vui-table-text-color: var(--vui-text-color-regular);
+  --vui-table-header-text-color: var(--vui-text-color-primary);
   --vui-table-row-active-bg-color: var(--vui-fill-color-light);
   --vui-table-sorter-color: var(--vui-text-color-placeholder);
   --vui-table-select-rect-bg-color: var(--vui-color-brand-a10);
@@ -29,6 +30,7 @@
   &-header {
     flex: none;
     font-weight: bold;
+    color: var(--vui-table-header-text-color);
   }
   &-body {
     position: relative;

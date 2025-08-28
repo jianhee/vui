@@ -9,7 +9,7 @@
     :current-node-id="treeData[0].id"
     :custom-node="customNode"
   >
-    <VIcon :name="renderIcon(node)" />
+    <VIcon :icon="renderIcon(node)" />
     <span>{{ item.title }}</span>
   </VTree>
 </template>

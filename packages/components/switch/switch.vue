@@ -19,7 +19,7 @@
         <VIcon
           v-if="isLoading"
           class="vui-switch-loading"
-          :component="IconLoading"
+          :icon="IconLoading"
           :spin="true"
         />
       </span>

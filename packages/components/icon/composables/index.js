@@ -5,7 +5,7 @@ import { addUnit } from '../../../utils';
 // props
 export const iconProps = {
   // 图标名称/组件
-  icon: { type: [String, Object], default: null },
+  icon: { type: [String, Object], default: undefined },
   // 是否为可点击状态
   clickable: { type: Boolean, default: false },
   // 是否为禁用状态
@@ -15,14 +15,14 @@ export const iconProps = {
   // ---------- 样式属性 ----------
   // 主要颜色
   // 需要将 `svg` 中对应的颜色改为 `currentColor`
-  color: { type: String, default: null },
+  color: { type: String, default: undefined },
   // 次要颜色（仅双色图标有效）
   // 需要将 `svg` 中对应的颜色改为 `var(--vui-icon-two-tone-color)`
-  twoToneColor: { type: String, default: null },
+  twoToneColor: { type: String, default: undefined },
   // 图标尺寸: 不带单位时默认 `px`
-  size: { type: [String, Number], default: null },
+  size: { type: [String, Number], default: undefined },
   // 旋转角度：不带单位时默认 `deg`
-  rotate: { type: [String, Number], default: null }
+  rotate: { type: [String, Number], default: undefined }
 };
 
 // 使用图标

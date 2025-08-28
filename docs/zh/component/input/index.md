@@ -28,9 +28,9 @@
 
 ### 自定义图标
 
-<!--@include: @/component/@parts/guild-icon.md-->
+- 使用 `prefixIcon` 和 `prefixIconProps` 属性定义前置图标
+- 使用 `suffixIcon` 和 `suffixIconProps` 属性定义后置图标
 
-使用 `prefix-icon` 和 `suffix-icon` 属性定义前置/后置图标
 <preview path="./demos/icon.vue"></preview>
 
 ### 自定义内容
@@ -53,15 +53,16 @@
 
 ### 基础属性
 
-| 名称                      | 说明                                   | 类型                             | 默认值   |
-| ------------------------- | -------------------------------------- | -------------------------------- | -------- |
-| `v-model:value`           | 当前值，即输入框的值                   | `string\|number`                 |          |
-| `clearable`               | 是否显示清除按钮                       | `boolean`                        | `false`  |
-| `showPassword`            | 是否显示切换密码按钮（仅密码类型有效） | `boolean`                        | `false`  |
-| `prefixIcon`/`suffixIcon` | 前置/后置图标                          | `string\|component\|object`      |          |
-| `prefix`/`suffix`         | 前置/后置内容                          | `string\|number`                 |          |
-| `prepend`/`append`        | 前置/后置标签                          | `string\|number`                 |          |
-| `size`                    | 输入框尺寸                             | `string`: `large\|medium\|small` | `medium` |
+| 名称                                | 说明                                   | 类型                             | 默认值   |
+| ----------------------------------- | -------------------------------------- | -------------------------------- | -------- |
+| `v-model:value`                     | 当前值，即输入框的值                   | `string\|number`                 |          |
+| `clearable`                         | 是否显示清除按钮                       | `boolean`                        | `false`  |
+| `showPassword`                      | 是否显示切换密码按钮（仅密码类型有效） | `boolean`                        | `false`  |
+| `prefixIcon`/`suffixIcon`           | 前置/后置图标                          | `VIcon.props.icon`               |          |
+| `prefixIconProps`/`suffixIconProps` | 前置/后置图标的属性                    | `VIcon.props`                    |          |
+| `prefix`/`suffix`                   | 前置/后置内容                          | `string\|number`                 |          |
+| `prepend`/`append`                  | 前置/后置标签                          | `string\|number`                 |          |
+| `size`                              | 输入框尺寸                             | `string`: `large\|medium\|small` | `medium` |
 
 ### 原生属性
 
