@@ -104,18 +104,20 @@
   --vui-mask-color-extra-light: rgb(0 0 0 / 30%);
 }
 
-// 区分模式
+// 明亮模式
+:root {
+  @include vui-vars-light;
+}
+html.light {
+  @include vui-vars-light;
+}
+
+// 黑暗模式
 @media (prefers-color-scheme: dark) {
   :root {
     @include vui-vars-dark;
   }
 }
-:root {
-  @include vui-vars-light;
-}
 html.dark {
   @include vui-vars-dark;
-}
-html.light {
-  @include vui-vars-light;
 }

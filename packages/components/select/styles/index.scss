@@ -75,4 +75,9 @@
     font-size: 12px;
     line-height: 22px;
   }
+
+  // 下拉框
+  &-dropdown {
+    max-height: 260px !important;
+  }
 }

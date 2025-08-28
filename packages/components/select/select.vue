@@ -24,6 +24,7 @@
     ref="dropdownElRef"
     trigger="click"
     close-on-click-dropdown
+    class="vui-select-dropdown"
     :style="dropdownStyles"
     @open="onDropdownToggle(true)"
     @close="onDropdownToggle(false)"
