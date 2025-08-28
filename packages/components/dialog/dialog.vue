@@ -5,6 +5,7 @@
       <!-- 遮罩 -->
       <VOverlay
         v-if="modelVisible"
+        :class="`vui-${dialogType}-overlay`"
         @click.self="onOverlayClick"
       >
         <!-- 主体 -->

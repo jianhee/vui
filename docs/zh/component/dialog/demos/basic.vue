@@ -21,6 +21,9 @@
           active-text="显示底栏"
         />
       </DemoViewBoolean>
+      <DemoViewBoolean label="内容溢出">
+        <VSwitch v-model:checked="isShowOverflow" />
+      </DemoViewBoolean>
       <DemoViewBoolean
         v-if="!isDialog"
         label="出现位置"
@@ -43,7 +46,14 @@
     @open="writeLog('open')"
     @close="writeLog('close')"
   >
-    <template v-if="isShowContent">内容</template>
+    <template v-if="isShowContent">
+      <div
+        v-for="i in contentLength"
+        :key="i"
+      >
+        内容
+      </div>
+    </template>
     <template
       v-if="isShowFooter"
       #footer
@@ -63,9 +73,11 @@ const { isDialog, isVisible, componentName, openDialog, closeDialog } = useDialo
 
 // 基础属性
 const isShowTitle = ref(true);
-const title = computed(() => (isShowTitle.value ? '标题' : undefined));
 const isShowContent = ref(true);
 const isShowFooter = ref(true);
+const isShowOverflow = ref(false);
 const placementRef = ref('left');
 const placementOptions = ['left', 'right'];
+const title = computed(() => (isShowTitle.value ? '标题' : undefined));
+const contentLength = computed(() => (isShowOverflow.value ? 100 : 1));
 </script>

@@ -34,8 +34,10 @@ export const useDialog = ({ dialogType, modelVisible, props, emits }) => {
   // 切换显示状态：外部关闭也能触发
   watch(modelVisible, val => {
     if (val) {
+      document.body.style.overflow = 'hidden';
       emits('open');
     } else {
+      document.body.style.overflow = '';
       emits('close');
     }
   });

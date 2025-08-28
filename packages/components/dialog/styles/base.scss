@@ -16,6 +16,11 @@
   // 样式
   .#{$prefix} {
     // 主体
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 98vw;
+    padding: 16px 0;
     line-height: 24px;
     background-color: var(--#{$prefix}-bg-color);
     box-shadow: var(--#{$prefix}-box-shadow);
@@ -24,24 +29,31 @@
     // 顶栏
     &-header {
       display: flex;
+      flex: none;
       gap: 10px;
       justify-content: space-between;
+      padding: 0 16px;
       font-size: 16px;
     }
     &-title {
       color: var(--#{$prefix}-title-text-color);
     }
     &-close {
-      align-self: flex-start;
-      color: var(--#{$prefix}-close-icon-color);
+      --vui-icon-color: var(--#{$prefix}-close-icon-color);
+      --vui-icon-size: 14px;
+
+      margin-top: -4px;
       cursor: pointer;
     }
     &-close:hover {
-      color: var(--#{$prefix}-close-icon-hover-color);
+      --vui-icon-color: var(--#{$prefix}-close-icon-hover-color);
     }
 
     // 内容
     &-body {
+      flex: auto;
+      padding: 0 16px;
+      overflow: auto;
       font-size: 14px;
       color: var(--#{$prefix}-content-text-color);
     }
@@ -49,9 +61,10 @@
     // 底栏
     &-footer {
       display: flex;
+      flex: none;
       gap: 10px;
       justify-content: flex-end;
-      padding-top: 16px;
+      padding: 0 16px;
     }
 
     // 动画
@@ -66,21 +79,18 @@
     .vui-dialog {
       // 主体
       width: var(--vui-dialog-width, 50vw);
-      max-width: 98vw;
-      padding: 16px;
-      margin: 15vh auto 50px;
-      overflow: auto;
+      margin: 15vh auto;
       border-radius: 4px;
-
-      // 顶栏
-      &-header {
-        padding-bottom: 16px;
-      }
 
       // 动画
       &-enter-from > &,
       &-leave-to > & {
         transform: translateY(-20px);
+      }
+
+      // 遮罩
+      &-overlay {
+        overflow: auto;
       }
     }
   }
@@ -90,36 +100,13 @@
     .vui-drawer {
       // 主体
       position: absolute;
-      display: flex;
-      flex-direction: column;
       width: var(--vui-drawer-width, 30vw);
-      max-width: 98vw;
       height: 100vh;
-      padding: 16px 0;
       &--left {
         left: 0;
       }
       &--right {
         right: 0;
-      }
-
-      // 顶栏
-      &-header {
-        flex: none;
-        padding: 0 16px 16px;
-      }
-
-      // 内容
-      &-body {
-        flex: auto;
-        padding: 0 16px;
-        overflow: auto;
-      }
-
-      // 底栏
-      &-footer {
-        flex: none;
-        padding: 16px 16px 0;
       }
 
       // 动画
