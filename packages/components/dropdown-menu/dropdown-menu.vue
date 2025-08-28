@@ -1,6 +1,6 @@
 <!-- 下拉菜单 -->
 <template>
-  <Dropdown
+  <VDropdown
     ref="dropdownRef"
     v-bind="componentsProps[0]"
     v-on="componentsEmits[0]"
@@ -15,26 +15,36 @@
 
     <!-- 下拉框：必填 -->
     <template #dropdown>
-      <Menu
+      <VMenu
         v-bind="componentsProps[1]"
         v-on="componentsEmits[1]"
       />
     </template>
-  </Dropdown>
+  </VDropdown>
 </template>
 
 <script setup>
 import { useTemplateRef } from 'vue';
 import { useComponentsProps } from '../../composables/use-components-props';
-import Dropdown from '../dropdown/dropdown.vue';
-import Menu from '../menu/menu.vue';
+import VDropdown from '../dropdown/dropdown.vue';
+import VMenu from '../menu/menu.vue';
 
 // 继承属性
-const props = defineProps({ ...Dropdown.props, ...Menu.props, closeOnClickDropdown: { type: Boolean, default: true } });
-const emits = defineEmits([...Dropdown.emits, ...Menu.emits]);
+const props = defineProps({
+  ...VDropdown.props,
+  ...VMenu.props,
+  closeOnClickDropdown: { type: Boolean, default: true }
+});
 
-// 组件属性
-const { componentsProps, componentsEmits } = useComponentsProps({ props, emits, components: [Dropdown, Menu] });
+// 继承事件
+const emits = defineEmits([...VDropdown.emits, ...VMenu.emits]);
+
+// 分配属性
+const { componentsProps, componentsEmits } = useComponentsProps({
+  props,
+  emits,
+  components: [VDropdown, VMenu]
+});
 
 // 下拉框方法
 const dropdownRef = useTemplateRef('dropdownRef');
