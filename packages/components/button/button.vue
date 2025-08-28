@@ -1,10 +1,9 @@
 <!-- 按钮 -->
 <template>
-  <button
-    type="button"
-    :class="rootClasses"
-    :style="rootStyles"
-    :disabled="disabled || loading"
+  <component
+    :is="rootTag"
+    class="vui-btn"
+    v-bind="rootAttrs"
   >
     <!-- 加载状态 -->
     <VIcon
@@ -19,7 +18,7 @@
     />
     <!-- 显示内容 -->
     <slot />
-  </button>
+  </component>
 </template>
 
 <script setup>
@@ -32,7 +31,7 @@ import IconLoading from '../../icons/loading.vue';
 const props = defineProps(btnProps);
 
 // 使用按钮
-const { rootClasses, rootStyles } = useButton({ props });
+const { rootTag, rootAttrs } = useButton({ props });
 
 // 图标属性
 const { iconProps } = useIconProps({

@@ -6,6 +6,8 @@ import { addUnit } from '../../../utils';
 export const btnProps = {
   // 按钮类型：primary, default, link
   type: { type: String, default: 'default' },
+  // 点击跳转的地址，有值时 `<button>` 转为 `<a>` 标签
+  href: { type: String, default: null },
   // 是否为加载状态
   loading: { type: Boolean, default: false },
   // 前置图标：可选的值有 `<VIcon>` 组件的 `name` 属性值、`component` 属性值、完整的 `props` 对象
@@ -16,7 +18,7 @@ export const btnProps = {
   inline: { type: Boolean, default: true },
   // 是否为块级模式
   block: { type: Boolean, default: false },
-  // 原生属性
+  // ---------- 原生属性 ----------
   disabled: { type: Boolean, default: false },
   // ---------- 样式属性 ----------
   // 圆角尺寸：不带单位时默认 `px`
@@ -25,27 +27,32 @@ export const btnProps = {
 
 // 使用按钮
 export const useButton = ({ props }) => {
-  // 根元素类名
-  const rootClasses = computed(() => {
-    return [
-      'vui-btn',
-      `vui-btn--${props.type}`,
-      {
-        [`vui-btn--${props.size}`]: props.type !== 'link',
-        'vui-btn--block': props.block || !props.inline
-      }
-    ];
+  // 根元素标签
+  const rootTag = computed(() => {
+    return props.href ? 'a' : 'button';
   });
 
-  // 根元素样式
-  const rootStyles = computed(() => {
+  // 根元素属性
+  const rootAttrs = computed(() => {
     return {
-      '--vui-btn-radius': addUnit(props.radius, 'px')
+      type: props.href ? null : 'button',
+      disabled: props.disabled || props.loading ? true : null,
+      href: props.href,
+      class: [
+        `vui-btn--${props.type}`,
+        {
+          [`vui-btn--${props.size}`]: props.type !== 'link',
+          'vui-btn--block': props.block || !props.inline
+        }
+      ],
+      style: {
+        '--vui-btn-radius': addUnit(props.radius, 'px')
+      }
     };
   });
 
   return {
-    rootClasses,
-    rootStyles
+    rootTag,
+    rootAttrs
   };
 };

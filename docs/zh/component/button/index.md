@@ -14,6 +14,12 @@
 
 <preview path="./demos/native.vue"></preview>
 
+### 打开链接
+
+使用 `href` 属性定义点击跳转的地址
+
+<preview path="./demos/href.vue"></preview>
+
 ### 加载状态
 
 <preview path="./demos/loading.vue"></preview>
@@ -44,14 +50,15 @@
 
 ### 基础属性
 
-| 名称      | 说明                     | 类型                               | 默认值    |
-| --------- | ------------------------ | ---------------------------------- | --------- |
-| `type`    | 按钮类型                 | `string`: `primary\|default\|link` | `default` |
-| `loading` | 是否为加载状态           | `boolean`                          | `false`   |
-| `icon`    | 前置图标                 | `string\|component\|object`        |           |
-| `size`    | 按钮尺寸                 | `string`: `large\|medium\|small`   | `medium`  |
-| `inline`  | 是否为行内模式（二选一） | `boolean`                          | `true`    |
-| `block`   | 是否为块级模式（二选一） | `boolean`                          | `false`   |
+| 名称      | 说明                                              | 类型                               | 默认值    |
+| --------- | ------------------------------------------------- | ---------------------------------- | --------- |
+| `type`    | 按钮类型                                          | `string`: `primary\|default\|link` | `default` |
+| `href`    | 点击跳转的地址，有值时 `<button>` 转为 `<a>` 标签 | `string`                           |           |
+| `loading` | 是否为加载状态                                    | `boolean`                          | `false`   |
+| `icon`    | 前置图标                                          | `string\|component\|object`        |           |
+| `size`    | 按钮尺寸                                          | `string`: `large\|medium\|small`   | `medium`  |
+| `inline`  | 是否为行内模式（二选一）                          | `boolean`                          | `true`    |
+| `block`   | 是否为块级模式（二选一）                          | `boolean`                          | `false`   |
 
 ### 原生属性
 
