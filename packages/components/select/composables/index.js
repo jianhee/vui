@@ -24,6 +24,7 @@ export const selectProps = {
   // 选择器尺寸：large, medium, small
   size: { type: String, default: 'medium' },
   // ---------- 原生属性 ----------
+  readonly: { type: Boolean, default: false },
   disabled: { type: Boolean, default: false },
   placeholder: { type: String, default: null }
 };
@@ -39,6 +40,7 @@ export const useSelect = ({ triggerElRef, dropdownElRef, modelValue, props, emit
       `vui-select--${props.size}`,
       {
         'is-focus': triggerIsFocused.value,
+        'is-readonly': props.readonly,
         'is-disabled': props.disabled
       }
     ];
@@ -46,7 +48,7 @@ export const useSelect = ({ triggerElRef, dropdownElRef, modelValue, props, emit
 
   // 点击触发器
   function onTriggerClick() {
-    if (props.disabled) return;
+    if (props.disabled || props.readonly) return;
     dropdownElRef.value?.open({ el: triggerElRef.value });
   }
 

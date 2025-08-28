@@ -53,6 +53,7 @@
 
 | 名称          | 说明     | 类型      | 默认值  |
 | ------------- | -------- | --------- | ------- |
+| `readonly`    | 是否只读 | `boolean` | `false` |
 | `disabled`    | 是否禁用 | `boolean` | `false` |
 | `placeholder` | 占位符   | `string`  |         |
 

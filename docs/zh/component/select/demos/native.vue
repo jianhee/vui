@@ -1,5 +1,18 @@
 <template>
   <DemoViewLeft
+    label="只读状态"
+    code="readonly"
+    label-width="160"
+  >
+    <VSelect
+      v-model:value="selectValue"
+      class="demo-select"
+      placeholder="只读状态"
+      :options="selectOptions"
+      readonly
+    />
+  </DemoViewLeft>
+  <DemoViewLeft
     label="禁用状态"
     code="disabled"
     label-width="160"

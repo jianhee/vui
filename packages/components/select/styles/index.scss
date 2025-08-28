@@ -37,6 +37,9 @@
   &.is-focus {
     border-color: var(--vui-select-error-border-color, var(--vui-select-focus-border-color));
   }
+  &.is-readonly {
+    cursor: text;
+  }
   &.is-disabled {
     @include mixins.vui-disabled;
 
