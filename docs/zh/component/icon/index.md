@@ -38,7 +38,7 @@ import 'virtual:svg-icons-register';
 
 ```vue [*.vue]
 <template>
-  <VIcon name="close" />
+  <VIcon icon="close" />
 </template>
 ```
 
@@ -64,7 +64,7 @@ export default defineConfig({
 
 ```vue [*.vue]
 <template>
-  <VIcon :component="IconClose" />
+  <VIcon :icon="IconClose" />
 </template>
 
 <script setup>
@@ -76,7 +76,7 @@ import IconClose from './close.svg?component';
 
 ### 基础用法
 
-使用 `name` 属性、`component` 属性或 `default` 插槽插入图标
+使用 `icon` 属性或 `default` 插槽插入图标
 
 <preview path="./demos/basic.vue"></preview>
 
@@ -102,13 +102,12 @@ import IconClose from './close.svg?component';
 
 ### 基础属性
 
-| 名称        | 说明                             | 类型        | 默认值  |
-| ----------- | -------------------------------- | ----------- | ------- |
-| `name`      | 图标名称                         | `string`    |         |
-| `component` | 图标组件，优先级高于 `name` 属性 | `component` |         |
-| `clickable` | 是否为可点击状态                 | `boolean`   | `false` |
-| `disabled`  | 是否为禁用状态                   | `boolean`   | `false` |
-| `spin`      | 是否为旋转状态                   | `boolean`   | `false` |
+| 名称        | 说明             | 类型                | 默认值  |
+| ----------- | ---------------- | ------------------- | ------- |
+| `icon`      | 图标名称/组件    | `string\|component` |         |
+| `clickable` | 是否为可点击状态 | `boolean`           | `false` |
+| `disabled`  | 是否为禁用状态   | `boolean`           | `false` |
+| `spin`      | 是否为旋转状态   | `boolean`           | `false` |
 
 ### 样式属性
 

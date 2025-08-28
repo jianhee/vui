@@ -4,7 +4,7 @@
       <VIcon
         v-for="iconName in iconNames"
         :key="iconName"
-        :name="iconName"
+        :icon="iconName"
         v-bind="$attrs"
       />
     </DemoViewTop>
@@ -12,7 +12,7 @@
       <VIcon
         v-for="iconComponent in iconComponents"
         :key="iconComponent"
-        :component="iconComponent"
+        :icon="iconComponent"
         v-bind="$attrs"
       />
     </DemoViewTop>

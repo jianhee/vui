@@ -4,10 +4,8 @@ import { addUnit } from '../../../utils';
 
 // props
 export const iconProps = {
-  // 图标名称
-  name: { type: String, default: null },
-  // 图标组件
-  component: { type: Object, default: null },
+  // 图标名称/组件
+  icon: { type: [String, Object], default: null },
   // 是否为可点击状态
   clickable: { type: Boolean, default: false },
   // 是否为禁用状态
@@ -30,14 +28,11 @@ export const iconProps = {
 // 使用图标
 export const useIcon = ({ props }) => {
   // 根元素类名
-  const rootClasses = computed(() => [
-    'vui-icon',
-    {
-      'is-clickable': props.clickable,
-      'is-disabled': props.disabled,
-      'is-spin': props.spin
-    }
-  ]);
+  const rootClasses = computed(() => ({
+    'is-clickable': props.clickable,
+    'is-disabled': props.disabled,
+    'is-spin': props.spin
+  }));
 
   // 根元素样式
   const rootStyles = computed(() => ({
@@ -47,8 +42,18 @@ export const useIcon = ({ props }) => {
     '--vui-icon-rotate': addUnit(props.rotate, 'deg')
   }));
 
+  // 区分图标类型
+  const iconType = computed(() => {
+    // 空
+    if (!props.icon) return null;
+
+    // 有值
+    return typeof props.icon;
+  });
+
   return {
     rootClasses,
-    rootStyles
+    rootStyles,
+    iconType
   };
 };
