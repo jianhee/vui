@@ -3,22 +3,13 @@
     class="demo-table"
     :row-items="rowItems"
     :col-items="colItems"
-    table-height="300"
+    stripe
   />
 </template>
 
 <script setup>
 import { renderItems, renderCols } from '../composables';
 
-const rowItems = renderItems({ length: 1000 });
+const rowItems = renderItems({ length: 10 });
 const colItems = renderCols();
 </script>
-
-<style>
-.demo-table {
-  max-height: 300px;
-}
-.demo-table-cell {
-  font-weight: bold;
-}
-</style>

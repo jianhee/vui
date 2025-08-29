@@ -10,6 +10,7 @@
   --vui-table-font-size: 14px;
   --vui-table-text-color: var(--vui-text-color-regular);
   --vui-table-header-text-color: var(--vui-text-color-primary);
+  --vui-table-row-striped-bg-color: var(--vui-fill-color-lighter);
   --vui-table-row-active-bg-color: var(--vui-fill-color-light);
   --vui-table-sorter-color: var(--vui-text-color-placeholder);
   --vui-table-select-rect-bg-color: var(--vui-color-brand-a10);
@@ -48,8 +49,13 @@
     &:hover,
     &.is-current,
     &.is-selected {
-      background-color: var(--vui-table-row-active-bg-color);
+      background-color: var(--vui-table-row-active-bg-color) !important;
     }
+  }
+
+  // 斑马纹
+  &--striped &-body &-row:nth-child(2n + 1) {
+    background-color: var(--vui-table-row-striped-bg-color);
   }
 
   // 操作按钮

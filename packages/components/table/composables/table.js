@@ -27,6 +27,8 @@ export const tableProps = {
   // 表格高度：不带单位时默认 `px`
   // 必须使用此属性或 CSS 限制高度，否则会渲染全部数据
   tableHeight: { type: [String, Number], default: null },
+  // 是否使用斑马纹
+  stripe: { type: Boolean, default: false },
   // ---------- 行属性 ----------
   // 行高：用于计算虚拟列表的显示内容
   rowHeight: { type: Number, default: 35 },
@@ -57,6 +59,13 @@ export const useTable = ({ tableElRef, tbodyElRef, props }) => {
   });
 
   // 根元素样式
+  const rootClasses = computed(() => {
+    return {
+      'vui-table--striped': props.stripe
+    };
+  });
+
+  // 根元素样式
   const rootStyles = computed(() => {
     return {
       'height': addUnit(props.tableHeight, 'px'),
@@ -77,8 +86,9 @@ export const useTable = ({ tableElRef, tbodyElRef, props }) => {
     // 未显示时不计算
     if (!isShow.value) return;
 
-    // 可用的宽度和列数
-    let totalWidth = tableElRef.value.offsetWidth;
+    // 可用的宽度（减去滚动条宽度）
+    let totalWidth = tableElRef.value.offsetWidth - 20;
+    // 可用的列数
     let totalLength = props.colItems?.length || 0;
 
     // 排除已设置宽度的列
@@ -108,6 +118,7 @@ export const useTable = ({ tableElRef, tbodyElRef, props }) => {
   });
 
   return {
+    rootClasses,
     rootStyles,
     headerStyles,
     colWidthsRef

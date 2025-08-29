@@ -2,7 +2,7 @@
 <template>
   <div
     ref="tableElRef"
-    :class="['vui-table', selectionRootClasses, dragSortRootClasses]"
+    :class="['vui-table', rootClasses, selectionRootClasses, dragSortRootClasses]"
     :style="{ ...rootStyles, ...selectionRootStyles }"
   >
     <!-- 表头 -->
@@ -95,7 +95,7 @@ const {
 });
 
 // 使用表格
-const { rootStyles, headerStyles, colWidthsRef } = useTable({
+const { rootClasses, rootStyles, headerStyles, colWidthsRef } = useTable({
   tableElRef,
   tbodyElRef: tbodyProps.ref,
   props

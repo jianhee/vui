@@ -12,6 +12,12 @@
 
 <preview path="./demos/basic.vue"></preview>
 
+### 斑马纹
+
+使用 `stripe` 属性启用斑马纹
+
+<preview path="./demos/stripe.vue"></preview>
+
 ### 自定义行
 
 - 使用 `rowHeight`、`currentRowId`、`rowIdKey`、`customRow` 等属性定义行的多种用法
@@ -63,6 +69,7 @@
 | --------------------- | ------------------------------------------------------------------------------------------ | ----------------------------------------------------- | ------- |
 | `rowItems`            | 行数据                                                                                     | `Array[Object]`                                       |         |
 | `colItems`            | 列数据                                                                                     | `Array[Object]`                                       | 必填    |
+| `stripe`              | 是否使用斑马纹                                                                             | `boolean`                                             | `false` |
 | `tableHeight`         | 表格高度 <br> 必须使用此属性或 CSS 限制高度，否则会渲染全部数据                            | `string(带单位)\|number(px)`                          |         |
 | `rowHeight`           | 行高，用于计算虚拟列表的显示内容                                                           | `number`                                              | `35`    |
 | `rowIdKey`            | 行 `id` 键名                                                                               | `strings`                                             | `id`    |
