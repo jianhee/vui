@@ -1,6 +1,8 @@
 // 滑块
 // ----------------------------------------
 
+@use "../../../styles/mixins";
+
 // vars
 :root {
   --vui-slider-rail-bg-color: var(--vui-border-color-light);
@@ -55,6 +57,15 @@
     }
     &.is-dragging {
       cursor: grabbing;
+    }
+  }
+
+  // 禁用状态
+  &.is-disabled .vui-slider {
+    &-rail,
+    &-track,
+    &-handle {
+      @include mixins.vui-disabled;
     }
   }
 

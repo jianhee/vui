@@ -1,5 +1,5 @@
 // 滑块
-import { ref, computed } from 'vue';
+import { ref, computed, inject } from 'vue';
 import { useElementHover, useElementBounding } from '@vueuse/core';
 
 // v-model
@@ -16,48 +16,61 @@ export const sliderProps = {
   // 提示框内容的格式化方法
   // 1.函数：参数为当前值，返回一个可以作为提示框内容的值
   // 2.空值：表示不显示提示框
-  tipFormatter: { type: Function, default: value => value }
+  tipFormatter: { type: Function, default: value => value },
+  // ---------- 原生属性 ----------
+  disabled: { type: Boolean, default: false },
+  readonly: { type: Boolean, default: false }
 };
 
 // 使用滑块
 export const useSlider = ({ railElRef, handleElRef, modelValue, props }) => {
-  // 当前状态
-  const isDragging = ref(false);
-  const isHovered = useElementHover(handleElRef);
-  const { x: handleX, y: handleY } = useElementBounding(handleElRef);
+  // 继承
+  const formRoot = inject('formRoot', null);
 
-  // 点击轨道/填充
-  function onRailClick(e) {
-    if (isDragging.value) return;
-
-    updateValue(e);
-  }
+  // 根元素
+  const isDisabled = computed(() => props.disabled || formRoot?.props?.disabled);
+  const isReadonly = computed(() => props.readonly || formRoot?.props?.readonly);
+  const rootClasses = computed(() => ({
+    'is-disabled': isDisabled.value
+  }));
 
   // 开始拖动
-  function onSliderDragStart(e) {
+  const isDragging = ref(false);
+  function onDragStart(e) {
+    if (isDisabled.value || isReadonly.value) return;
     if (isDragging.value) return;
 
     isDragging.value = true;
 
-    document.addEventListener('mousemove', onSliderDragging);
-    document.addEventListener('mouseup', onSliderDragStop);
+    document.addEventListener('mousemove', onDragging);
+    document.addEventListener('mouseup', onDragStop);
   }
 
   // 拖动中
-  function onSliderDragging(e) {
+  function onDragging(e) {
+    if (isDisabled.value || isReadonly.value) return;
     if (!isDragging.value) return;
 
     updateValue(e);
   }
 
   // 停止拖动
-  function onSliderDragStop(e) {
+  function onDragStop(e) {
+    if (isDisabled.value || isReadonly.value) return;
     if (!isDragging.value) return;
 
     isDragging.value = false;
 
-    document.removeEventListener('mousemove', onSliderDragging);
-    document.removeEventListener('mouseup', onSliderDragStop);
+    document.removeEventListener('mousemove', onDragging);
+    document.removeEventListener('mouseup', onDragStop);
+  }
+
+  // 点击轨道/填充
+  function onRailClick(e) {
+    if (isDisabled.value || isReadonly.value) return;
+    if (isDragging.value) return;
+
+    updateValue(e);
   }
 
   // 更新值
@@ -84,19 +97,21 @@ export const useSlider = ({ railElRef, handleElRef, modelValue, props }) => {
     return `${Math.round(limitPercent)}%`;
   });
 
-  // 填充样式
-  const trackStyles = computed(() => ({
-    width: percentValue.value
-  }));
-
-  // 手柄属性
+  // 手柄
+  const { x: handleX, y: handleY } = useElementBounding(handleElRef);
+  const handleIsHovered = useElementHover(handleElRef);
   const handleProps = computed(() => ({
     class: { 'is-dragging': isDragging.value },
     style: { left: percentValue.value }
   }));
 
+  // 填充
+  const trackStyles = computed(() => ({
+    width: percentValue.value
+  }));
+
   // 提示框
-  const isShowTip = computed(() => modelValue.value !== null && props.tipFormatter && (isDragging.value || isHovered.value));
+  const isShowTip = computed(() => modelValue.value !== null && props.tipFormatter && (isDragging.value || handleIsHovered.value));
   const tipText = computed(() => props.tipFormatter(modelValue.value));
   const tipStyles = computed(() => ({
     left: `${handleX.value}px`,
@@ -104,12 +119,13 @@ export const useSlider = ({ railElRef, handleElRef, modelValue, props }) => {
   }));
 
   return {
-    onRailClick,
-    onSliderDragStart,
+    rootClasses,
     trackStyles,
     handleProps,
-    isShowTip,
     tipStyles,
-    tipText
+    tipText,
+    isShowTip,
+    onRailClick,
+    onDragStart
   };
 };

@@ -1,6 +1,6 @@
 <!-- 滑块 -->
 <template>
-  <div class="vui-slider">
+  <div :class="['vui-slider', rootClasses]">
     <!-- 轨道 -->
     <div
       ref="railElRef"
@@ -18,7 +18,7 @@
       ref="handleElRef"
       class="vui-slider-handle"
       v-bind="handleProps"
-      @mousedown.left.stop="onSliderDragStart"
+      @mousedown.left.stop="onDragStart"
     />
     <!-- 提示框 -->
     <transition name="vui-slider-tip">
@@ -44,7 +44,7 @@ const modelValue = defineModel('value', sliderModel.value);
 const props = defineProps(sliderProps);
 
 // 使用滑块
-const { onRailClick, onSliderDragStart, trackStyles, handleProps, isShowTip, tipStyles, tipText } = useSlider({
+const { rootClasses, trackStyles, handleProps, tipStyles, tipText, isShowTip, onRailClick, onDragStart } = useSlider({
   railElRef,
   handleElRef,
   modelValue,

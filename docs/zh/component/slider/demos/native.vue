@@ -1,18 +1,24 @@
 <template>
-  <DemoViewLeft label="格式化提示框">
+  <DemoViewBoolean
+    label="禁用状态"
+    code="disabled"
+  >
     <VSlider
       v-model:value="valueRef"
+      disabled
       class="demo-slider"
-      :tip-formatter="val => `${val}%`"
     />
-  </DemoViewLeft>
-  <DemoViewLeft label="不显示提示框">
+  </DemoViewBoolean>
+  <DemoViewBoolean
+    label="只读状态"
+    code="readonly"
+  >
     <VSlider
       v-model:value="valueRef"
+      readonly
       class="demo-slider"
-      :tip-formatter="null"
     />
-  </DemoViewLeft>
+  </DemoViewBoolean>
 </template>
 
 <script setup>
