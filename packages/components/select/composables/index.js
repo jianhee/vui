@@ -47,7 +47,6 @@ export const useSelect = ({ triggerElRef, dropdownElRef, modelValue, props, emit
       `vui-select--${props.size}`,
       {
         'is-focus': triggerIsFocused.value,
-        'is-readonly': isReadonly.value,
         'is-disabled': isDisabled.value
       }
     ];

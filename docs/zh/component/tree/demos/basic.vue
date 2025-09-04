@@ -19,7 +19,8 @@ const treeData = inject('treeData', _treeData);
 </script>
 
 <style>
-.demo-tree {
+.demo-tree,
+.demo-trees .vui-tree {
   height: 300px;
   border: 1px solid var(--vui-border-color-base);
 }

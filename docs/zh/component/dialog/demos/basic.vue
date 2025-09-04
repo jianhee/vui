@@ -8,20 +8,20 @@
       <DemoViewBoolean label="组成部分">
         <VSwitch
           v-model:checked="isShowTitle"
-          active-text="显示标题"
+          active-text="是否显示标题"
         />
         <br />
         <VSwitch
           v-model:checked="isShowContent"
-          active-text="显示内容"
+          active-text="是否显示内容"
         />
         <br />
         <VSwitch
           v-model:checked="isShowFooter"
-          active-text="显示底栏"
+          active-text="是否显示底栏"
         />
       </DemoViewBoolean>
-      <DemoViewBoolean label="内容溢出">
+      <DemoViewBoolean label="是否内容溢出">
         <VSwitch v-model:checked="isShowOverflow" />
       </DemoViewBoolean>
       <DemoViewBoolean

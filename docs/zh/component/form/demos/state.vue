@@ -6,7 +6,7 @@
 
     <template #props>
       <DemoViewBoolean
-        label="是否禁用"
+        label="是否禁用状态"
         code="disabled"
       >
         <VSwitch
@@ -15,7 +15,7 @@
         />
       </DemoViewBoolean>
       <DemoViewBoolean
-        label="是否只读"
+        label="是否只读状态"
         code="readonly"
       >
         <VSwitch

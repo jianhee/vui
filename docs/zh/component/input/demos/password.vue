@@ -1,9 +1,8 @@
 <template>
-  <DemoView>
+  <DemoView class="demo-inputs">
     <template #content>
       <VInput
         v-model:value="inputValue"
-        class="demo-input"
         placeholder="请输入密码"
         :type="typeRef"
         :show-password="isShowPassword"
@@ -34,7 +33,7 @@
 <script setup>
 import { ref } from 'vue';
 
+const inputValue = ref('123456789');
 const typeRef = ref('password');
 const isShowPassword = ref(true);
-const inputValue = ref('123456789');
 </script>

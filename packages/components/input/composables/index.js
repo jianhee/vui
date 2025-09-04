@@ -18,6 +18,8 @@ export const inputProps = {
   clearable: { type: Boolean, default: false },
   // 是否显示切换密码按钮（仅密码类型有效）
   showPassword: { type: Boolean, default: false },
+  // 是否显示统计字数（仅限制输入长度时有效）
+  showWordLimit: { type: Boolean, default: false },
   // 前置/后置图标
   prefixIcon: VIcon.props.icon,
   prefixIconProps: VIcon.props,
@@ -35,7 +37,7 @@ export const inputProps = {
   autofocus: { type: Boolean, default: false },
   disabled: { type: Boolean, default: false },
   readonly: { type: Boolean, default: false },
-  maxlength: { type: String, default: null },
+  maxlength: { type: [String, Number], default: null },
   placeholder: { type: String, default: null },
   type: { type: String, default: 'text' }
 };
@@ -64,7 +66,7 @@ export const useInput = ({ wraperElRef, inputElRef, modelValue, props, emits }) 
   // 中间元素类名
   const wraperClasses = computed(() => {
     return {
-      'is-focus': focused.value
+      'is-focus': isDisabled.value || isReadonly.value ? false : focused.value
     };
   });
 

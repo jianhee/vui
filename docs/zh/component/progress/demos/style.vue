@@ -1,8 +1,7 @@
 <template>
-  <DemoView>
+  <DemoView class="demo-progresses">
     <template #content>
       <VProgress
-        class="demo-progress"
         :percent="valueRef"
         :height="heightRef"
         :radius="radiusRef"

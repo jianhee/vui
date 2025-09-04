@@ -14,6 +14,7 @@ code / label content
   gap: 12px;
 }
 .demo-view--left .demo-view-base-label {
+  height: 32px;
   line-height: 32px;
 }
 </style>

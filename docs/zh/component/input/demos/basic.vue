@@ -21,10 +21,11 @@ const inputValue = ref(null);
 </script>
 
 <style>
-.demo-input {
+.demo-input,
+.demo-inputs .vui-input {
   max-width: var(--demo-filed-width);
 }
-.demo-input + .demo-input {
-  margin-top: 10px;
+.vui-input + .vui-input {
+  margin-top: var(--demo-filed-gap);
 }
 </style>

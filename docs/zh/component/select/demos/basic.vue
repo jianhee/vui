@@ -27,7 +27,8 @@ const selectOptions = [
 </script>
 
 <style>
-.demo-select {
+.demo-select,
+.demo-selects .vui-select {
   max-width: var(--demo-filed-width);
 }
 </style>

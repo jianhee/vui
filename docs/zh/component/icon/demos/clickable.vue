@@ -6,7 +6,7 @@
 
     <template #props>
       <DemoViewBoolean
-        label="可点击状态"
+        label="是否可点击状态"
         code="clickable"
       >
         <VSwitch v-model:checked="isClickable" />

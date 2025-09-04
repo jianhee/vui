@@ -1,9 +1,6 @@
 <!-- 开关 -->
 <template>
-  <div
-    :class="['vui-switch', rootClasses]"
-    @click="onClick"
-  >
+  <div :class="['vui-switch', rootClasses]">
     <!-- 未选中 -->
     <span
       v-if="inactiveText"
@@ -12,7 +9,10 @@
       {{ inactiveText }}
     </span>
     <!-- 轨道 -->
-    <div class="vui-switch-inner">
+    <div
+      class="vui-switch-inner"
+      @click="onClick"
+    >
       <!-- 滑块 -->
       <span class="vui-switch-action">
         <!-- loading -->

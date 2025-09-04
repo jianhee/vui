@@ -6,10 +6,6 @@
     clearable
     @clear="writeLog('clear', $event)"
   />
-
-  <DemoSpace>
-    当前值为 <code>{{ inputValue }}</code>
-  </DemoSpace>
 </template>
 
 <script setup>

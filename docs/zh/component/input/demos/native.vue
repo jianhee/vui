@@ -2,72 +2,12 @@
   <DemoViewLeft
     label="是否自动聚焦"
     code="autofocus"
-    label-width="180"
   >
     <VInput
       v-model:value="inputValue"
-      class="demo-input"
       placeholder="自动聚焦"
       autofocus
-    />
-  </DemoViewLeft>
-  <DemoViewLeft
-    label="是否禁用"
-    code="disabled"
-    label-width="180"
-  >
-    <VInput
-      v-model:value="inputValue"
       class="demo-input"
-      placeholder="禁用状态"
-      disabled
-    />
-  </DemoViewLeft>
-  <DemoViewLeft
-    label="是否只读"
-    code="readonly"
-    label-width="180"
-  >
-    <VInput
-      v-model:value="inputValue"
-      class="demo-input"
-      placeholder="只读状态"
-      readonly
-    />
-  </DemoViewLeft>
-  <DemoViewLeft
-    label="最大长度"
-    code="maxlength"
-    label-width="180"
-  >
-    <VInput
-      v-model:value="inputValue"
-      class="demo-input"
-      placeholder="最多输入5个字符"
-      maxlength="5"
-    />
-  </DemoViewLeft>
-  <DemoViewLeft
-    label="占位文字"
-    code="placeholder"
-    label-width="180"
-  >
-    <VInput
-      v-model:value="inputValue"
-      class="demo-input"
-      placeholder="请输入内容"
-    />
-  </DemoViewLeft>
-  <DemoViewLeft
-    label="类型"
-    code="type"
-    label-width="180"
-  >
-    <VInput
-      v-model:value="inputValue"
-      class="demo-input"
-      placeholder="请输入密码"
-      type="password"
     />
   </DemoViewLeft>
 </template>

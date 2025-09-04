@@ -8,16 +8,14 @@
 
 <preview path="@docs/component/checkbox/demos/group.vue"></preview>
 
-### 原生属性
+### 行内模式
 
-<!--@include: @/component/@parts/api-native.md-->
+<preview path="@docs/component/checkbox/demos/group-display.vue"></preview>
 
-<preview path="@docs/component/checkbox/demos/group-native.vue"></preview>
+### 选项组状态
+
+<preview path="@docs/component/checkbox/demos/group-state.vue"></preview>
 
 ### 按钮类型
 
 <preview path="@docs/component/checkbox/demos/group-type.vue"></preview>
-
-### 行内模式
-
-<preview path="@docs/component/checkbox/demos/group-display.vue"></preview>

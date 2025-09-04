@@ -6,25 +6,21 @@
   >
     重新加载
   </VButton>
-  <DemoSpace flex>
+  <DemoSpace
+    flex
+    class="demo-trees"
+  >
     <DemoViewTopCenter label="默认状态">
-      <VTree
-        class="demo-tree"
-        :loading="loading"
-      />
+      <VTree :loading="loading" />
     </DemoViewTopCenter>
     <DemoViewTopCenter label="自定义文本">
       <VTree
-        class="demo-tree"
         :loading="loading"
         empty-text="暂无数据"
       />
     </DemoViewTopCenter>
     <DemoViewTopCenter label="自定义插槽">
-      <VTree
-        class="demo-tree"
-        :loading="loading"
-      >
+      <VTree :loading="loading">
         <template #empty>
           <VEmpty description="暂无数据" />
         </template>

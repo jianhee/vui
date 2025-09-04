@@ -14,6 +14,7 @@ code / label        switch
   gap: 12px;
 }
 .demo-view--boolean .demo-view-base-label {
+  height: 32px;
   line-height: 32px;
 }
 .demo-view--boolean .demo-view-base-content {

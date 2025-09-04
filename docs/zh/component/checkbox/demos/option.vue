@@ -1,5 +1,5 @@
 <template>
-  <DemoSpace class="demo-checkboxs">
+  <div class="demo-checkboxs">
     <component
       :is="OptionComponent"
       v-model:checked="checked1"
@@ -15,8 +15,9 @@
       v-bind="$attrs"
       @change="writeLog('change', $event)"
     />
-  </DemoSpace>
-  <DemoSpace class="demo-checkboxs">
+  </div>
+
+  <DemoSpace v-if="isShowValue">
     当前值：
     <code>{{ checked1 }}</code>
     、
@@ -25,11 +26,15 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, useAttrs } from 'vue';
 import { writeLog } from '@vp/utils';
 import { useRouteValid } from '@vp/composables';
 
 defineOptions({ inheritAttrs: false });
+
+// 是否显示值
+const attrs = useAttrs();
+const isShowValue = Object.keys(attrs).length === 0;
 
 // 区分类型
 const isCheckbox = useRouteValid('checkbox');

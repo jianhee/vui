@@ -1,16 +1,13 @@
 <template>
-  <DemoViewLeft label="静态进度">
-    <VProgress
-      class="demo-progress"
-      :percent="50"
-    />
-  </DemoViewLeft>
-  <DemoViewLeft label="动态进度">
-    <VProgress
-      class="demo-progress"
-      :percent="valueRef"
-    />
-  </DemoViewLeft>
+  <div class="demo-progresses">
+    <DemoViewLeft label="静态进度">
+      <VProgress :percent="50" />
+    </DemoViewLeft>
+
+    <DemoViewLeft label="动态进度">
+      <VProgress :percent="valueRef" />
+    </DemoViewLeft>
+  </div>
 </template>
 
 <script setup>
@@ -29,10 +26,10 @@ setInterval(() => {
 </script>
 
 <style>
-.demo-progress {
+.demo-progresses .vui-progress {
   min-height: 32px;
 }
-.demo-progress .vui-progress-rail {
+.demo-progresses .vui-progress-rail {
   max-width: var(--demo-filed-width);
 }
 </style>

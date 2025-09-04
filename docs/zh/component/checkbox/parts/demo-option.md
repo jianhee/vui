@@ -8,16 +8,14 @@
 
 <preview path="@docs/component/checkbox/demos/option.vue"></preview>
 
-### 原生属性
+### 块级模式
 
-<!--@include: @/component/@parts/api-native.md-->
+<preview path="@docs/component/checkbox/demos/option-display.vue"></preview>
 
-<preview path="@docs/component/checkbox/demos/option-native.vue"></preview>
+### 选项状态
+
+<preview path="@docs/component/checkbox/demos/option-state.vue"></preview>
 
 ### 按钮类型
 
 <preview path="@docs/component/checkbox/demos/option-type.vue"></preview>
-
-### 块级模式
-
-<preview path="@docs/component/checkbox/demos/option-display.vue"></preview>

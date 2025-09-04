@@ -5,15 +5,14 @@
 ### 基础用法
 
 - 使用 `options` 属性定义选项数组，使用 `v-model:value` 属性绑定当前值
+- 使用 `placeholder` 属性定义占位文字
 - 切换选项时触发 `change` 事件
 
 <preview path="./demos/basic.vue"></preview>
 
-### 原生属性
+### 选择器状态
 
-<!--@include: @/component/@parts/api-native.md-->
-
-<preview path="./demos/native.vue"></preview>
+<preview path="./demos/state.vue"></preview>
 
 ### 自定义选项
 

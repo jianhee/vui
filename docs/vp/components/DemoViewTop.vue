@@ -11,6 +11,7 @@ content content content content content
 
 <style lang="scss">
 .demo-view--top .demo-view-base-label {
-  margin-bottom: 8px;
+  line-height: 22px;
+  margin-bottom: 4px;
 }
 </style>

@@ -92,6 +92,12 @@
     }
   }
 
+  // 统计字数
+  &-count {
+    color: var(--vui-text-color-secondary);
+    white-space: nowrap;
+  }
+
   // 内置图标
   &-icon {
     cursor: pointer;

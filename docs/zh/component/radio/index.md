@@ -4,20 +4,20 @@
 
 ## Radio 示例
 
-<!--@include: ./parts/demo-option.md-->
+<!--@include: ../checkbox/parts/demo-option.md-->
 
 ## RadioGroup 示例
 
-<!--@include: ./parts/demo-group.md-->
+<!--@include: ../checkbox/parts/demo-group.md-->
 
 ## Radio/Group API
 
-<!--@include: ./parts/api-common.md-->
+<!--@include: ../checkbox/parts/api-common.md-->
 
 ## Radio API
 
-<!--@include: ./parts/api-option.md-->
+<!--@include: ../checkbox/parts/api-option.md-->
 
 ## RadioGroup API
 
-<!--@include: ./parts/api-group.md-->
+<!--@include: ../checkbox/parts/api-group.md-->

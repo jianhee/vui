@@ -8,15 +8,9 @@
 
 <preview path="./demos/basic.vue"></preview>
 
-### 原生属性
+### 按钮状态
 
-<!--@include: @/component/@parts/api-native.md-->
-
-<preview path="./demos/native.vue"></preview>
-
-### 加载状态
-
-<preview path="./demos/loading.vue"></preview>
+<preview path="./demos/state.vue"></preview>
 
 ### 前置图标
 
@@ -65,9 +59,9 @@
 
 <!--@include: @/component/@parts/api-native.md-->
 
-| 名称       | 说明     | 类型      | 默认值  |
-| ---------- | -------- | --------- | ------- |
-| `disabled` | 是否禁用 | `boolean` | `false` |
+| 名称       | 说明           | 类型      | 默认值  |
+| ---------- | -------------- | --------- | ------- |
+| `disabled` | 是否为禁用状态 | `boolean` | `false` |
 
 ### 样式属性
 

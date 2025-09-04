@@ -6,7 +6,7 @@
 
     <template #props>
       <DemoViewBoolean
-        label="旋转状态"
+        label="是否旋转状态"
         code="spin"
       >
         <VSwitch v-model:checked="isSpin" />

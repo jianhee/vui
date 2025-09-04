@@ -15,7 +15,8 @@ const colItems = renderCols();
 </script>
 
 <style>
-.demo-table {
+.demo-table,
+.demo-tables .vui-table {
   max-height: 300px;
 }
 .demo-table-cell {

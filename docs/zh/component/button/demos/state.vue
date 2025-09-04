@@ -1,13 +1,20 @@
 <template>
-  <DemoView>
+  <DemoView content-gap>
     <template #content>
+      <DemoBasic :disabled="isDisabled" />
       <DemoBasic :loading="isLoading" />
     </template>
 
     <template #props>
       <DemoViewBoolean
+        code="disabled"
+        label="是否禁用状态"
+      >
+        <VSwitch v-model:checked="isDisabled" />
+      </DemoViewBoolean>
+      <DemoViewBoolean
         code="loading"
-        label="加载状态"
+        label="是否加载状态"
       >
         <VSwitch v-model:checked="isLoading" />
       </DemoViewBoolean>
@@ -19,5 +26,6 @@
 import { ref } from 'vue';
 import DemoBasic from './basic.vue';
 
+const isDisabled = ref(true);
 const isLoading = ref(true);
 </script>

@@ -6,7 +6,7 @@
 
     <template #props>
       <DemoViewBoolean
-        label="禁用状态"
+        label="是否禁用状态"
         code="disabled"
       >
         <VSwitch v-model:checked="isDisabled" />

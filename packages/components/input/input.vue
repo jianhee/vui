@@ -45,6 +45,13 @@
         @change="onChange"
         @keyup.enter="onEnter"
       />
+      <!-- 统计字数 -->
+      <div
+        v-if="maxlength && showWordLimit"
+        class="vui-input-count"
+      >
+        {{ modelValue?.length || 0 }}/{{ maxlength }}
+      </div>
       <!-- 清除图标 -->
       <VIcon
         v-if="isShowClear"

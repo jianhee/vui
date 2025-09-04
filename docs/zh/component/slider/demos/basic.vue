@@ -1,10 +1,9 @@
 <template>
-  <DemoSpace>
-    <VSlider
-      v-model:value="valueRef"
-      class="demo-slider"
-    />
-  </DemoSpace>
+  <VSlider
+    v-model:value="valueRef"
+    class="demo-slider"
+  />
+
   <DemoSpace>
     当前值为 <code>{{ valueRef }}</code>
   </DemoSpace>
@@ -17,7 +16,8 @@ const valueRef = ref(50);
 </script>
 
 <style>
-.demo-slider {
+.demo-slider,
+.demo-sliders .vui-slider {
   max-width: var(--demo-filed-width);
 }
 </style>

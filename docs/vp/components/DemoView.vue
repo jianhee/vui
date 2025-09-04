@@ -4,12 +4,16 @@
     <!-- 配置属性 -->
     <div class="demo-view-props">
       <div class="demo-view-title">{{ propsTitle }}</div>
-      <slot name="props" />
+      <div class="demo-view-container">
+        <slot name="props" />
+      </div>
     </div>
     <!-- 预览效果 -->
     <div class="demo-view-content">
       <div class="demo-view-title">{{ contentTitle }}</div>
-      <slot name="content" />
+      <div :class="['demo-view-container', { 'demo-view-gap': contentGap }]">
+        <slot name="content" />
+      </div>
     </div>
   </div>
 </template>
@@ -17,7 +21,8 @@
 <script setup>
 defineProps({
   propsTitle: { type: String, default: '配置属性' },
-  contentTitle: { type: String, default: '预览效果' }
+  contentTitle: { type: String, default: '预览效果' },
+  contentGap: { type: Boolean, default: false }
 });
 </script>
 
@@ -37,9 +42,14 @@ defineProps({
   }
   &-title {
     padding-bottom: 8px;
-    margin-bottom: 18px;
+    margin-bottom: var(--demo-filed-gap);
     color: var(--vui-text-color-primary);
     border-bottom: 1px solid var(--vui-border-color-base);
+  }
+  &-gap {
+    display: flex;
+    flex-direction: column;
+    gap: var(--demo-filed-gap);
   }
 }
 </style>

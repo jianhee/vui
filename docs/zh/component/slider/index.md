@@ -10,9 +10,7 @@
 
 ### 原生属性
 
-<!--@include: @/component/@parts/api-native.md-->
-
-<preview path="./demos/native.vue"></preview>
+<preview path="./demos/state.vue"></preview>
 
 ### 限制范围
 
@@ -40,7 +38,7 @@
 
 <!--@include: @/component/@parts/api-native.md-->
 
-| 名称       | 说明     | 类型      | 默认值  |
-| ---------- | -------- | --------- | ------- |
-| `disabled` | 是否禁用 | `boolean` | `false` |
-| `readonly` | 是否只读 | `boolean` | `false` |
+| 名称       | 说明           | 类型      | 默认值  |
+| ---------- | -------------- | --------- | ------- |
+| `disabled` | 是否为禁用状态 | `boolean` | `false` |
+| `readonly` | 是否为只读状态 | `boolean` | `false` |
