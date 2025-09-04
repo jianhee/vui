@@ -19,7 +19,10 @@ export const commonProps = {
   // 标签对齐：left, right, center
   labelAlign: { type: String, default: null },
   // 标签宽度：不带单位时默认 `px`，默认取最长标签的宽度
-  labelWidth: { type: [String, Number], default: null }
+  labelWidth: { type: [String, Number], default: null },
+  // ---------- 原生属性 ----------
+  disabled: { type: Boolean, default: false },
+  readonly: { type: Boolean, default: false }
 };
 
 // 使用表单

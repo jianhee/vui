@@ -9,6 +9,12 @@
 
 <preview path="./demos/basic.vue"></preview>
 
+### 原生属性
+
+<!--@include: @/component/@parts/api-native.md-->
+
+<preview path="./demos/native.vue"></preview>
+
 ### 行内模式
 
 <preview path="./demos/filed-display.vue"></preview>
@@ -38,7 +44,7 @@
 
 ## Form API
 
-### 属性
+### 基础属性
 
 | 名称          | 说明                           | 类型（默认单位） | 默认值  |
 | ------------- | ------------------------------ | ---------------- | ------- |
@@ -46,6 +52,15 @@
 | `filedBlock`  | 表单项是否为块级模式（二选一） | `boolean`        | `true`  |
 | `model`       | 表单的数据对象                 | `Object`         |         |
 | `rules`       | 表单的校验规则                 | `Object`         |         |
+
+### 原生属性
+
+<!--@include: @/component/@parts/api-native.md-->
+
+| 名称       | 说明     | 类型      | 默认值  |
+| ---------- | -------- | --------- | ------- |
+| `disabled` | 是否禁用 | `boolean` | `false` |
+| `readonly` | 是否只读 | `boolean` | `false` |
 
 ### 属性.rules
 

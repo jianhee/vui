@@ -108,7 +108,11 @@ export const useFormValid = ({ props }) => {
 };
 
 // 校验表单项
-export const useFormItemValid = ({ formRoot, formItem }) => {
+export const useFormItemValid = formItem => {
+  // 继承
+  const formRoot = inject('formRoot', {});
+
+  // 需要的属性
   const itemName = computed(() => formItem.props.prop);
   const itemValue = computed(() => formRoot.props.model?.[itemName.value]);
   const itemRules = computed(() => formRoot.props.rules?.[itemName.value]);

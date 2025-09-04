@@ -1,5 +1,5 @@
 // 表单项
-import { computed } from 'vue';
+import { inject, computed } from 'vue';
 import { addUnit } from '../../../utils';
 
 // props
@@ -9,7 +9,10 @@ export const formItemProps = {
 };
 
 // 使用表单项
-export function useFormItem({ formRoot, formItem }) {
+export function useFormItem(formItem) {
+  // 继承
+  const formRoot = inject('formRoot', {});
+
   // 表单项类名
   const itemClasses = computed(() => {
     // 位置：默认 left

@@ -35,26 +35,20 @@
 </template>
 
 <script setup>
-import { inject } from 'vue';
 import { commonProps } from './composables/form';
 import { useFormItem, formItemProps } from './composables/form-item';
 import { useFormItemValid, formItemValidProps } from './composables/valid';
 
-// 表单
-const formRoot = inject('formRoot', {});
-
 // 表单项
 const props = defineProps({ ...formItemProps, ...commonProps, ...formItemValidProps });
 
-// 使用表单
+// 使用表单项
 const { itemClasses, itemStyles } = useFormItem({
-  formRoot,
-  formItem: { props }
+  props
 });
 
 // 校验表单项
 const { validClasses, errorMessage } = useFormItemValid({
-  formRoot,
-  formItem: { props }
+  props
 });
 </script>
