@@ -22,9 +22,6 @@
   // 容器
   display: flex;
   width: var(--vui-input-width);
-  &.is-disabled {
-    @include mixins.vui-disabled;
-  }
 
   // 标签
   &-prepend,
@@ -70,7 +67,8 @@
     }
   }
   &.is-disabled &-wrapper {
-    cursor: not-allowed;
+    @include mixins.vui-disabled;
+
     border-color: var(--vui-input-error-border-color, var(--vui-input-border-color)) !important;
   }
   &--prepend &-wrapper {
