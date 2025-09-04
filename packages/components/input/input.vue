@@ -35,8 +35,8 @@
         ref="inputElRef"
         v-model="modelValue"
         :type="inputType"
-        :readonly="readonly"
-        :disabled="disabled"
+        :readonly="isReadonly"
+        :disabled="isDisabled"
         :autofocus="autofocus"
         :placeholder="placeholder"
         :maxlength="maxlength"
@@ -94,7 +94,7 @@ const props = defineProps(inputProps);
 const emits = defineEmits(inputEmits);
 
 // 使用输入框
-const { rootClasses, wraperClasses, inputType, isShowPassword, onClickToggleIcon, isShowClear, onClickClearIcon, onInput, onChange, onEnter } = useInput({
+const { isDisabled, isReadonly, rootClasses, wraperClasses, inputType, isShowPassword, onClickToggleIcon, isShowClear, onClickClearIcon, onInput, onChange, onEnter } = useInput({
   wraperElRef,
   inputElRef,
   modelValue,

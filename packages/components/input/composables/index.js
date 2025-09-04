@@ -1,5 +1,5 @@
 // 输入框
-import { ref, computed } from 'vue';
+import { ref, computed, inject } from 'vue';
 import { useElementHover, useFocus, useEventListener } from '@vueuse/core';
 import VIcon from '../../icon/icon.vue';
 
@@ -42,14 +42,16 @@ export const inputProps = {
 
 // 使用输入框
 export const useInput = ({ wraperElRef, inputElRef, modelValue, props, emits }) => {
+  // 继承
+  const formRoot = inject('formRoot', null);
+
+  // 状态
+  const isDisabled = computed(() => props.disabled || formRoot?.props?.disabled);
+  const isReadonly = computed(() => props.readonly || formRoot?.props?.readonly);
+
   // 根元素类名
   const rootClasses = computed(() => {
-    return [
-      `vui-input--${props.size}`,
-      {
-        'is-disabled': props.disabled
-      }
-    ];
+    return [`vui-input--${props.size}`, { 'is-disabled': isDisabled.value }];
   });
 
   // 中间元素状态
@@ -68,7 +70,7 @@ export const useInput = ({ wraperElRef, inputElRef, modelValue, props, emits }) 
 
   // 是否显示切换密码按钮
   const isShowPassword = computed(() => {
-    return props.type === 'password' && props.showPassword && !props.disabled && modelValue.value;
+    return props.type === 'password' && props.showPassword && modelValue.value && !isDisabled.value;
   });
 
   // 点击切换密码按钮
@@ -84,7 +86,7 @@ export const useInput = ({ wraperElRef, inputElRef, modelValue, props, emits }) 
 
   // 是否显示清除按钮
   const isShowClear = computed(() => {
-    return props.clearable && !props.disabled && !props.readonly && modelValue.value && (isHovered.value || focused.value);
+    return props.clearable && modelValue.value && !isDisabled.value && !isReadonly.value && (isHovered.value || focused.value);
   });
 
   // 点击清除按钮
@@ -111,6 +113,8 @@ export const useInput = ({ wraperElRef, inputElRef, modelValue, props, emits }) 
   }
 
   return {
+    isDisabled,
+    isReadonly,
     rootClasses,
     wraperClasses,
     inputType,
