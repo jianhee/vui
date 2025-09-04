@@ -6,7 +6,7 @@
       :class="`vui-${checkboxType}-input`"
       :type="checkboxType"
       :checked="isChecked"
-      :disabled="disabled"
+      :disabled="isDisabled || isReadonly"
       @change="onCheckedChange"
     />
     <!-- 图标 -->
@@ -24,27 +24,20 @@
 
 <script setup>
 import { inject } from 'vue';
-import { useCheckbox, checkboxModel, checkboxProps, checkboxEmits } from './composables/checkbox';
+import { useCheckbox, checkboxModel, checkboxProps, commonProps, checkboxEmits } from './composables/checkbox';
 
 // 区分类型
 const checkboxType = inject('checkboxType', 'checkbox');
 
-// 选项组
-const checkboxGroup = inject('checkboxGroup', null);
-
 // 选项
 const modelChecked = defineModel('checked', checkboxModel.checked);
-const props = defineProps(checkboxProps);
+const props = defineProps({ ...checkboxProps, ...commonProps });
 const emits = defineEmits(checkboxEmits);
 
 // 使用选项
-const { isBtn, isChecked, onCheckedChange, rootClasses, iconComponent } = useCheckbox({
-  checkboxType,
-  checkboxGroup,
-  checkbox: {
-    modelChecked,
-    props,
-    emits
-  }
+const { isBtn, isDisabled, isReadonly, isChecked, onCheckedChange, rootClasses, iconComponent } = useCheckbox({
+  modelChecked,
+  props,
+  emits
 });
 </script>

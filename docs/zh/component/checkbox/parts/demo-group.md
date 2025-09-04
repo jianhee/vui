@@ -8,6 +8,12 @@
 
 <preview path="@docs/component/checkbox/demos/group.vue"></preview>
 
+### 原生属性
+
+<!--@include: @/component/@parts/api-native.md-->
+
+<preview path="@docs/component/checkbox/demos/group-native.vue"></preview>
+
 ### 按钮类型
 
 <preview path="@docs/component/checkbox/demos/group-type.vue"></preview>

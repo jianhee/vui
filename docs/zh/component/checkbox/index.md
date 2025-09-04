@@ -1,19 +1,23 @@
 # Checkbox 多选框
 
-<!--@include: ./parts/basic-1.md-->
+<!--@include: ./parts/common.md-->
 
 ## Checkbox 示例
 
-<!--@include: ./parts/basic-2.md-->
+<!--@include: ./parts/demo-option.md-->
 
 ## CheckboxGroup 示例
 
-<!--@include: ./parts/basic-3.md-->
+<!--@include: ./parts/demo-group.md-->
+
+## Checkbox/Group API
+
+<!--@include: ./parts/api-common.md-->
 
 ## Checkbox API
 
-<!--@include: ./parts/basic-4.md-->
+<!--@include: ./parts/api-option.md-->
 
 ## CheckboxGroup API
 
-<!--@include: ./parts/basic-5.md-->
+<!--@include: ./parts/api-group.md-->

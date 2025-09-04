@@ -16,13 +16,14 @@
 <script setup>
 import { provide, inject } from 'vue';
 import { useCheckboxGroup, checkboxGroupModel, checkboxGroupProps, checkboxGroupEmits } from './composables/checkbox-group';
+import { commonProps } from './composables/checkbox';
 
 // 区分类型
 const checkboxType = inject('checkboxType', 'checkbox');
 
 // 选项组
 const modelValue = defineModel('value', checkboxGroupModel.value);
-const props = defineProps(checkboxGroupProps);
+const props = defineProps({ ...checkboxGroupProps, ...commonProps });
 const emits = defineEmits(checkboxGroupEmits);
 const { formattedOptions } = useCheckboxGroup({ props });
 

@@ -1,5 +1,5 @@
 // 多选框-单个选项
-import { computed } from 'vue';
+import { inject, computed } from 'vue';
 import IconCheckbox from '../../../icons/checkbox.vue';
 import IconRadio from '../../../icons/radio.vue';
 
@@ -12,7 +12,7 @@ export const checkboxModel = {
   checked: { type: Boolean, default: false }
 };
 
-// props
+// 选项的 props
 export const checkboxProps = {
   // 选项文本
   label: { type: [Number, String], default: null },
@@ -22,23 +22,33 @@ export const checkboxProps = {
   inline: { type: Boolean, default: true },
   // 是否为块级模式
   block: { type: Boolean, default: false },
-  // ---------- 原生属性 ----------
-  disabled: { type: Boolean, default: false },
   // ---------- 选项组内部使用 ----------
   value: { type: [Number, String], default: null },
   option: { type: [Object, Number, String], default: null }
 };
 
+// 选项和选项组都有的 props
+export const commonProps = {
+  // ---------- 原生属性 ----------
+  disabled: { type: Boolean, default: false },
+  readonly: { type: Boolean, default: false }
+};
+
 // 使用选项
-export const useCheckbox = ({ checkboxType, checkboxGroup, checkbox }) => {
+export const useCheckbox = checkbox => {
+  // 继承
+  const formRoot = inject('formRoot', null);
+  const checkboxType = inject('checkboxType', 'checkbox');
+  const checkboxGroup = inject('checkboxGroup', null);
+
+  // 继承状态
+  const isBtn = computed(() => checkbox.props.type === 'button' || checkboxGroup?.props.optionType === 'button');
+  const isDisabled = computed(() => checkbox.props.disabled || checkboxGroup?.props?.disabled || formRoot?.props?.disabled);
+  const isReadonly = computed(() => checkbox.props.readonly || checkboxGroup?.props?.readonly || formRoot?.props?.readonly);
+
   // 区分类型
   const isCheckbox = checkboxType === 'checkbox';
   const optionValue = computed(() => checkbox.props.value);
-
-  // 是否按钮
-  const isBtn = computed(() => {
-    return checkbox.props.type === 'button' || checkboxGroup?.props.optionType === 'button';
-  });
 
   // 是否选中
   const isChecked = computed(() => {
@@ -125,7 +135,7 @@ export const useCheckbox = ({ checkboxType, checkboxGroup, checkbox }) => {
       {
         [`vui-${checkboxType}--block`]: isUseBlock.value,
         'is-checked': isChecked.value,
-        'is-disabled': checkbox.props.disabled
+        'is-disabled': isDisabled.value
       }
     ];
   });
@@ -135,6 +145,8 @@ export const useCheckbox = ({ checkboxType, checkboxGroup, checkbox }) => {
 
   return {
     isBtn,
+    isDisabled,
+    isReadonly,
     isChecked,
     onCheckedChange,
     rootClasses,

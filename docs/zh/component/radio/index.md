@@ -1,19 +1,23 @@
 # Radio 单选框
 
-<!--@include: ../checkbox/parts/basic-1.md-->
+<!--@include: ../checkbox/parts/common.md-->
 
 ## Radio 示例
 
-<!--@include: ../checkbox/parts/basic-2.md-->
+<!--@include: ./parts/demo-option.md-->
 
 ## RadioGroup 示例
 
-<!--@include: ../checkbox/parts/basic-3.md-->
+<!--@include: ./parts/demo-group.md-->
+
+## Radio/Group API
+
+<!--@include: ./parts/api-common.md-->
 
 ## Radio API
 
-<!--@include: ../checkbox/parts/basic-4.md-->
+<!--@include: ./parts/api-option.md-->
 
 ## RadioGroup API
 
-<!--@include: ../checkbox/parts/basic-5.md-->
+<!--@include: ./parts/api-group.md-->
