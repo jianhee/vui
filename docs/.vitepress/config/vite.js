@@ -24,5 +24,13 @@ export const vite = defineConfig({
       symbolId: 'icon-[dir]-[name]'
     }),
     svgLoader()
-  ]
+  ],
+  css: {
+    preprocessorOptions: {
+      scss: {
+        silenceDeprecations: ['legacy-js-api']
+        // api: 'modern-compiler'
+      }
+    }
+  }
 });
