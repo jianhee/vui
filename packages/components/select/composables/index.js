@@ -1,5 +1,5 @@
 // 选择器
-import { ref, computed } from 'vue';
+import { ref, computed, inject } from 'vue';
 import { useElementBounding } from '@vueuse/core';
 
 // emits
@@ -24,13 +24,20 @@ export const selectProps = {
   // 选择器尺寸：large, medium, small
   size: { type: String, default: 'medium' },
   // ---------- 原生属性 ----------
-  readonly: { type: Boolean, default: false },
   disabled: { type: Boolean, default: false },
+  readonly: { type: Boolean, default: false },
   placeholder: { type: String, default: null }
 };
 
 // 使用选择器
 export const useSelect = ({ triggerElRef, dropdownElRef, modelValue, props, emits }) => {
+  // 继承
+  const formRoot = inject('formRoot', null);
+
+  // 状态
+  const isDisabled = computed(() => props.disabled || formRoot?.props?.disabled);
+  const isReadonly = computed(() => props.readonly || formRoot?.props?.readonly);
+
   // 触发器是否获取焦点
   const triggerIsFocused = ref(false);
 
@@ -40,15 +47,15 @@ export const useSelect = ({ triggerElRef, dropdownElRef, modelValue, props, emit
       `vui-select--${props.size}`,
       {
         'is-focus': triggerIsFocused.value,
-        'is-readonly': props.readonly,
-        'is-disabled': props.disabled
+        'is-readonly': isReadonly.value,
+        'is-disabled': isDisabled.value
       }
     ];
   });
 
   // 点击触发器
   function onTriggerClick() {
-    if (props.disabled || props.readonly) return;
+    if (isDisabled.value || isReadonly.value) return;
     dropdownElRef.value?.open({ el: triggerElRef.value });
   }
 
