@@ -10,6 +10,8 @@
 
 ### 原生属性
 
+<!--@include: @/component/@parts/api-native.md-->
+
 <preview path="./demos/native.vue"></preview>
 
 ### 限制范围

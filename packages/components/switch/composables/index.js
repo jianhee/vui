@@ -1,5 +1,5 @@
 // 开关
-import { ref, computed } from 'vue';
+import { ref, computed, inject } from 'vue';
 
 // emits
 export const switchEmits = ['change'];
@@ -18,14 +18,23 @@ export const switchProps = {
   // 切换前执行的方法
   // 1. 示例 `async checked => Promise<boolean>`
   // 2. 参数为当前值，返回 `true`表示可以切换
-  beforeChange: { type: Function, default: null }
+  beforeChange: { type: Function, default: null },
+  // ---------- 原生属性 ----------
+  disabled: { type: Boolean, default: false },
+  readonly: { type: Boolean, default: false }
 };
 
 // 使用开关
 export const useSwitch = ({ modelChecked, props, emits }) => {
-  // 根元素类名
+  // 继承
+  const formRoot = inject('formRoot', null);
+
+  // 根元素
+  const isDisabled = computed(() => props.disabled || formRoot?.props?.disabled);
+  const isReadonly = computed(() => props.readonly || formRoot?.props?.readonly);
   const rootClasses = computed(() => {
     return {
+      'is-disabled': isDisabled.value,
       'is-checked': modelChecked.value,
       'is-loading': isLoading.value
     };
@@ -46,6 +55,7 @@ export const useSwitch = ({ modelChecked, props, emits }) => {
 
   // 点击开关
   async function onClick() {
+    if (isDisabled.value || isReadonly.value) return;
     if (isLoading.value) return;
 
     // 直接切换

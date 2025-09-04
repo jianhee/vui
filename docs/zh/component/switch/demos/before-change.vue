@@ -1,13 +1,13 @@
 <template>
   <DemoViewLeft label="允许切换">
     <VSwitch
-      v-model:checked="valueRef1"
+      v-model:checked="checkedRef1"
       :before-change="beforeChange1"
     />
   </DemoViewLeft>
   <DemoViewLeft label="阻止切换">
     <VSwitch
-      v-model:checked="valueRef2"
+      v-model:checked="checkedRef2"
       :before-change="beforeChange2"
     />
   </DemoViewLeft>
@@ -18,8 +18,8 @@ import { ref } from 'vue';
 import { toast } from 'vui/plugins';
 
 // 开关值
-const valueRef1 = ref(false);
-const valueRef2 = ref(false);
+const checkedRef1 = ref(false);
+const checkedRef2 = ref(false);
 
 // 切换前
 let timer = null;

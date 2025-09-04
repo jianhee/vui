@@ -1,13 +1,13 @@
 <template>
   <DemoSpace>
     <VSwitch
-      v-model:checked="valueRef"
+      v-model:checked="checkedRef"
       @change="writeLog('change', $event)"
     />
   </DemoSpace>
 
   <DemoSpace>
-    当前值为 <code>{{ valueRef }}</code>
+    当前值为 <code>{{ checkedRef }}</code>
   </DemoSpace>
 </template>
 
@@ -15,5 +15,5 @@
 import { ref } from 'vue';
 import { writeLog } from '@vp/utils';
 
-const valueRef = ref(false);
+const checkedRef = ref(false);
 </script>

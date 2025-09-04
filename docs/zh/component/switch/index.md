@@ -9,6 +9,12 @@
 
 <preview path="./demos/basic.vue"></preview>
 
+### 原生属性
+
+<!--@include: @/component/@parts/api-native.md-->
+
+<preview path="./demos/native.vue"></preview>
+
 ### 文字描述
 
 使用 `activeText` 和 `inactiveText` 属性定义文字描述
@@ -31,6 +37,15 @@
 | `activeText`      | 选中状态的文字描述                                           | `string`                                        |         |
 | `inactiveText`    | 未选中状态的文字描述                                         | `string`                                        |         |
 | `beforeChange`    | 切换前执行的方法 <br> 参数为当前值，返回 `true` 表示可以切换 | `async function`: `checked => Promise<boolean>` |         |
+
+### 原生属性
+
+<!--@include: @/component/@parts/api-native.md-->
+
+| 名称       | 说明     | 类型      | 默认值  |
+| ---------- | -------- | --------- | ------- |
+| `disabled` | 是否禁用 | `boolean` | `false` |
+| `readonly` | 是否只读 | `boolean` | `false` |
 
 ### 事件
 

@@ -1,6 +1,6 @@
 <template>
   <VSwitch
-    v-model:checked="valueRef"
+    v-model:checked="checkedRef"
     active-text="打开"
     inactive-text="关闭"
   />
@@ -9,5 +9,5 @@
 <script setup>
 import { ref } from 'vue';
 
-const valueRef = ref(false);
+const checkedRef = ref(false);
 </script>
