@@ -1,7 +1,11 @@
 <!-- 对话框 -->
 <template>
   <Teleport to="body">
-    <Transition :name="`vui-${dialogType}`">
+    <Transition
+      :name="`vui-${dialogType}`"
+      @after-enter="onTransitionEnd('enter')"
+      @after-leave="onTransitionEnd('leave')"
+    >
       <!-- 遮罩 -->
       <VOverlay
         v-if="modelVisible"
@@ -58,7 +62,7 @@ const props = defineProps(dialogProps);
 const emits = defineEmits(dialogEmits);
 
 // 使用弹窗
-const { onOverlayClick, innerClasses, innerStyles, closeDialog } = useDialog({
+const { onTransitionEnd, onOverlayClick, innerClasses, innerStyles, closeDialog } = useDialog({
   dialogType,
   modelVisible,
   props,

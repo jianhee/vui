@@ -5,21 +5,14 @@
     </template>
 
     <template #props>
-      <DemoViewBoolean label="组成部分">
-        <VSwitch
-          v-model:checked="isShowTitle"
-          active-text="是否显示标题"
-        />
-        <br />
-        <VSwitch
-          v-model:checked="isShowContent"
-          active-text="是否显示内容"
-        />
-        <br />
-        <VSwitch
-          v-model:checked="isShowFooter"
-          active-text="是否显示底栏"
-        />
+      <DemoViewBoolean label="是否显示顶栏标题">
+        <VSwitch v-model:checked="isShowTitle" />
+      </DemoViewBoolean>
+      <DemoViewBoolean label="是否显示中间内容">
+        <VSwitch v-model:checked="isShowContent" />
+      </DemoViewBoolean>
+      <DemoViewBoolean label="是否显示底栏内容">
+        <VSwitch v-model:checked="isShowFooter" />
       </DemoViewBoolean>
       <DemoViewBoolean label="是否内容溢出">
         <VSwitch v-model:checked="isShowOverflow" />
@@ -43,8 +36,6 @@
     v-model:visible="isVisible"
     :title="title"
     :placement="placementRef"
-    @open="writeLog('open')"
-    @close="writeLog('close')"
   >
     <template v-if="isShowContent">
       <div
@@ -66,7 +57,6 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { useDialog } from '../composables';
-import { writeLog } from '@vp/utils';
 
 // 区分类型
 const { isDialog, isVisible, componentName, openDialog, closeDialog } = useDialog();

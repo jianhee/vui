@@ -55,14 +55,14 @@
       <!-- 清除图标 -->
       <VIcon
         v-if="isShowClear"
-        class="vui-input-icon"
+        class="vui-input-icon--clear"
         :icon="IconClear"
         @click.stop="onClickClearIcon"
       />
       <!-- 密码图标 -->
       <VIcon
         v-if="isShowPassword"
-        class="vui-input-icon"
+        class="vui-input-icon--password"
         :icon="inputType === 'password' ? IconEyeClose : IconEyeOpen"
         @click.stop="onClickToggleIcon"
       />

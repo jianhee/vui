@@ -13,7 +13,7 @@
     </span>
     <!-- 图标 -->
     <VIcon
-      class="vui-select-icon"
+      class="vui-select-icon--arrow"
       :icon="IconArrowDown"
       v-bind="iconProps"
     />

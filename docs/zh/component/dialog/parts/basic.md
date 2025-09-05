@@ -6,11 +6,16 @@
 
 ### 基础用法
 
-- 组件内容由 `title` 属性（顶栏）、`default` 插槽（中间内容）、`footer` 插槽（底栏内容）三部分组成
+- 组件内容由 `title` 属性（顶栏标题）、`default` 插槽（中间内容）、`footer` 插槽（底栏内容）三部分组成
 - 使用 `v-model:visible` 属性绑定当前值，使用 `placement` 属性设置抽屉出现的位置
-- 打开关闭时分别触发 `open` 和 `close` 事件
 
 <preview path="@docs/component/dialog/demos/basic.vue"></preview>
+
+### 触发事件
+
+从打开到关闭依次触发 `open`、`opened` 、`close` 、`closed` 四个事件
+
+<preview path="@docs/component/dialog/demos/event.vue"></preview>
 
 ### 关闭弹窗
 
@@ -51,7 +56,9 @@
 
 ### 事件
 
-| 名称    | 说明       | 参数 |
-| ------- | ---------- | ---- |
-| `open`  | 打开时触发 |      |
-| `close` | 关闭时触发 |      |
+| 名称     | 说明               | 参数 |
+| -------- | ------------------ | ---- |
+| `open`   | 打开时触发         |      |
+| `opened` | 打开动画结束时触发 |      |
+| `close`  | 关闭时触发         |      |
+| `closed` | 关闭动画结束时触发 |      |

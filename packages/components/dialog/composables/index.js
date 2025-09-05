@@ -3,7 +3,7 @@ import { computed, watch } from 'vue';
 import { addUnit } from '../../../utils';
 
 // emits
-export const dialogEmits = ['open', 'close'];
+export const dialogEmits = ['open', 'opened', 'close', 'closed'];
 
 // v-model
 export const dialogModel = {
@@ -31,23 +31,6 @@ export const useDialog = ({ dialogType, modelVisible, props, emits }) => {
   // 区分类型
   const isDialog = dialogType === 'dialog';
 
-  // 切换显示状态：外部关闭也能触发
-  watch(modelVisible, val => {
-    if (val) {
-      document.body.style.overflow = 'hidden';
-      emits('open');
-    } else {
-      document.body.style.overflow = '';
-      emits('close');
-    }
-  });
-
-  // 点击遮罩层
-  function onOverlayClick() {
-    if (!props.closeOnClickModal) return;
-    closeDialog();
-  }
-
   // 主体类名
   const innerClasses = computed(() => {
     return [
@@ -72,7 +55,31 @@ export const useDialog = ({ dialogType, modelVisible, props, emits }) => {
     modelVisible.value = false;
   }
 
+  // 点击遮罩层
+  function onOverlayClick() {
+    if (!props.closeOnClickModal) return;
+    closeDialog();
+  }
+
+  // 切换显示状态时
+  watch(modelVisible, val => {
+    if (val) {
+      // document.body.style.overflow = 'hidden';
+      emits('open');
+    } else {
+      // document.body.style.overflow = '';
+      emits('close');
+    }
+  });
+
+  // 动画完成时
+  const onTransitionEnd = type => {
+    const eventName = type === 'enter' ? 'opened' : 'closed';
+    emits(eventName);
+  };
+
   return {
+    onTransitionEnd,
     onOverlayClick,
     innerClasses,
     innerStyles,

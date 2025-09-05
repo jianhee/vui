@@ -16,7 +16,7 @@
 
 // 样式
 .vui-input {
-  // 内部的所有图标
+  // 图标颜色
   --vui-icon-color: var(--vui-text-color-placeholder);
 
   // 容器
@@ -99,11 +99,12 @@
   }
 
   // 内置图标
-  &-icon {
+  &-icon--clear,
+  &-icon--password {
     cursor: pointer;
-  }
-  &-icon:hover {
-    --vui-icon-color: var(--vui-text-color-secondary);
+    &:hover {
+      --vui-icon-color: var(--vui-text-color-secondary);
+    }
   }
 
   // 尺寸
