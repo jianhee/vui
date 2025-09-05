@@ -92,7 +92,7 @@ const { dragSortRootClasses } = useDragSort({
 });
 
 // 子组件使用
-provide('treeRoot', {
+provide('vuiTreeRoot', {
   props,
   emits,
   nodeMap,

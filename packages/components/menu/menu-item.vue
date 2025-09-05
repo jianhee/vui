@@ -33,7 +33,7 @@ import { useMenuItem, menuItemProps } from '../menu/composables/menu-item';
 import IconSelected from '../../icons/selected.vue';
 
 // 菜单
-const menuRoot = inject('menuRoot', null);
+const menuRoot = inject('vuiMenuRoot', null);
 
 // 菜单项
 const props = defineProps(menuItemProps);

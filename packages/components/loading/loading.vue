@@ -5,7 +5,7 @@ import BaseEmpty from '../empty/empty.vue';
 
 export default {
   setup(props, { slots }) {
-    provide('stateType', 'loading');
+    provide('vuiStateType', 'loading');
     return () => h(BaseEmpty, null, slots);
   }
 };

@@ -53,7 +53,7 @@ import TbodyCell from './tbody-cell.vue';
 import IconDrag from '../../icons/drag.vue';
 
 // 表格
-const tableRoot = inject('tableRoot', null);
+const tableRoot = inject('vuiTableRoot', null);
 
 // 表身行
 const props = defineProps(tbodyRowProps);

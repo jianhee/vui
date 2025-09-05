@@ -53,7 +53,7 @@ import { useDialog, dialogModel, dialogProps, dialogEmits } from './composables'
 import IconClose from '../../icons/close.vue';
 
 // 区分类型
-const dialogType = inject('dialogType', 'dialog');
+const dialogType = inject('vuiDialogType', 'dialog');
 
 // 弹窗
 defineOptions({ inheritAttrs: false });

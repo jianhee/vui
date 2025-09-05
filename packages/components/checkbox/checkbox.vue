@@ -27,7 +27,7 @@ import { inject } from 'vue';
 import { useCheckbox, checkboxModel, checkboxProps, commonProps, checkboxEmits } from './composables/checkbox';
 
 // 区分类型
-const checkboxType = inject('checkboxType', 'checkbox');
+const checkboxType = inject('vuiCheckboxType', 'checkbox');
 
 // 选项
 const modelChecked = defineModel('checked', checkboxModel.checked);

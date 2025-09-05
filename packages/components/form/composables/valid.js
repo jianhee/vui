@@ -103,14 +103,14 @@ export const useFormValid = ({ props }) => {
     };
   }
 
-  provide('VFormValidateRes', formValidResults);
+  provide('vuiFormValidateRes', formValidResults);
   return { validate };
 };
 
 // 校验表单项
 export const useFormItemValid = formItem => {
   // 继承
-  const formRoot = inject('formRoot', {});
+  const formRoot = inject('vuiFormRoot', {});
 
   // 需要的属性
   const itemName = computed(() => formItem.props.prop);
@@ -119,7 +119,7 @@ export const useFormItemValid = formItem => {
   const isRequired = computed(() => itemRules.value?.some(item => item.required));
 
   // 校验结果
-  const formValidResults = inject('VFormValidateRes', {});
+  const formValidResults = inject('vuiFormValidateRes', {});
   const itemValidResult = computed(() => formValidResults.value[itemName.value]);
   const itemValidMessage = computed(() => itemValidResult.value?.message);
 

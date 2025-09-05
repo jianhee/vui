@@ -45,7 +45,7 @@ export const inputProps = {
 // 使用输入框
 export const useInput = ({ wraperElRef, inputElRef, modelValue, props, emits }) => {
   // 继承
-  const formRoot = inject('formRoot', null);
+  const formRoot = inject('vuiFormRoot', null);
 
   // 状态
   const isDisabled = computed(() => props.disabled || formRoot?.props?.disabled);

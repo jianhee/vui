@@ -11,7 +11,7 @@ export const formItemProps = {
 // 使用表单项
 export function useFormItem(formItem) {
   // 继承
-  const formRoot = inject('formRoot', {});
+  const formRoot = inject('vuiFormRoot', {});
 
   // 表单项类名
   const itemClasses = computed(() => {

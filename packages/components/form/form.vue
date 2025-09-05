@@ -30,7 +30,7 @@ const { rootClasses, rootStyles } = useForm({
 const { validate } = useFormValid({ props });
 
 // 子组件使用
-provide('formRoot', {
+provide('vuiFormRoot', {
   props
 });
 

@@ -5,7 +5,7 @@ import BaseCheckbox from '../checkbox/checkbox.vue';
 
 export default {
   setup(props, { slots }) {
-    provide('checkboxType', 'radio');
+    provide('vuiCheckboxType', 'radio');
     return () => h(BaseCheckbox, null, slots);
   }
 };

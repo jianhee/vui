@@ -20,7 +20,7 @@ const props = defineProps(menuProps);
 const emits = defineEmits(menuEmits);
 
 // 子组件使用
-provide('menuRoot', {
+provide('vuiMenuRoot', {
   modelSelectedKey,
   props,
   emits

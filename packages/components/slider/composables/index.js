@@ -25,7 +25,7 @@ export const sliderProps = {
 // 使用滑块
 export const useSlider = ({ railElRef, handleElRef, modelValue, props }) => {
   // 继承
-  const formRoot = inject('formRoot', null);
+  const formRoot = inject('vuiFormRoot', null);
 
   // 根元素
   const isDisabled = computed(() => props.disabled || formRoot?.props?.disabled);

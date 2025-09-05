@@ -19,7 +19,7 @@ import { useCheckboxGroup, checkboxGroupModel, checkboxGroupProps, checkboxGroup
 import { commonProps } from './composables/checkbox';
 
 // 区分类型
-const checkboxType = inject('checkboxType', 'checkbox');
+const checkboxType = inject('vuiCheckboxType', 'checkbox');
 
 // 选项组
 const modelValue = defineModel('value', checkboxGroupModel.value);
@@ -28,7 +28,7 @@ const emits = defineEmits(checkboxGroupEmits);
 const { formattedOptions } = useCheckboxGroup({ props });
 
 // 子组件使用
-provide('checkboxGroup', {
+provide('vuiCheckboxGroup', {
   modelValue,
   props,
   emits

@@ -17,16 +17,6 @@
       <DemoViewBoolean label="是否内容溢出">
         <VSwitch v-model:checked="isShowOverflow" />
       </DemoViewBoolean>
-      <DemoViewBoolean
-        v-if="!isDialog"
-        label="出现位置"
-      >
-        <VRadioGroup
-          v-model:value="placementRef"
-          :options="placementOptions"
-          option-type="button"
-        />
-      </DemoViewBoolean>
     </template>
   </DemoView>
 
@@ -35,7 +25,6 @@
     :is="componentName"
     v-model:visible="isVisible"
     :title="title"
-    :placement="placementRef"
   >
     <template v-if="isShowContent">
       <div
@@ -59,15 +48,13 @@ import { ref, computed } from 'vue';
 import { useDialog } from '../composables';
 
 // 区分类型
-const { isDialog, isVisible, componentName, openDialog, closeDialog } = useDialog();
+const { isVisible, componentName, openDialog, closeDialog } = useDialog();
 
 // 基础属性
 const isShowTitle = ref(true);
 const isShowContent = ref(true);
 const isShowFooter = ref(true);
 const isShowOverflow = ref(false);
-const placementRef = ref('left');
-const placementOptions = ['left', 'right'];
 const title = computed(() => (isShowTitle.value ? '标题' : undefined));
 const contentLength = computed(() => (isShowOverflow.value ? 100 : 1));
 </script>

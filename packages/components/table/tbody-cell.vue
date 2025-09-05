@@ -22,7 +22,7 @@ import { inject } from 'vue';
 import { useTbodyCell, tbodyCellProps } from './composables/tbody-cell';
 
 // 表格
-const tableRoot = inject('tableRoot', null);
+const tableRoot = inject('vuiTableRoot', null);
 
 // 单元格
 const props = defineProps(tbodyCellProps);

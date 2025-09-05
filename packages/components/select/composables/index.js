@@ -32,7 +32,7 @@ export const selectProps = {
 // 使用选择器
 export const useSelect = ({ triggerElRef, dropdownElRef, modelValue, props, emits }) => {
   // 继承
-  const formRoot = inject('formRoot', null);
+  const formRoot = inject('vuiFormRoot', null);
 
   // 状态
   const isDisabled = computed(() => props.disabled || formRoot?.props?.disabled);

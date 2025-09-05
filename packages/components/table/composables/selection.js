@@ -50,7 +50,7 @@ export const useSelection = ({ props, dragFlagRef, modelSelectedRowIds, emits })
   );
 
   // 子组件使用
-  provide('onSelectionChange', onSelectionChange);
+  provide('vuiOnSelectionChange', onSelectionChange);
 
   // 根元素类名
   const selectionRootClasses = computed(() => ({
@@ -77,7 +77,7 @@ export const useSelection = ({ props, dragFlagRef, modelSelectedRowIds, emits })
 // 使用全选
 export const useAllSelection = ({ selectable, ctrlASelectable, modelSelectedRowIds, rowItemsRef, rowIdKey }) => {
   // 全局状态
-  const onSelectionChange = inject('onSelectionChange', null);
+  const onSelectionChange = inject('vuiOnSelectionChange', null);
 
   // 是否全选
   const isSelectedAll = computed(() => {
@@ -129,7 +129,7 @@ export const useAllSelection = ({ selectable, ctrlASelectable, modelSelectedRowI
 // 使用行选中
 export const useRowSelection = ({ selectable, modelSelectedRowIds, rowItemsRef, rowItem, rowIdKey }) => {
   // 全局状态
-  const onSelectionChange = inject('onSelectionChange', null);
+  const onSelectionChange = inject('vuiOnSelectionChange', null);
 
   // 是否选中
   const isSelectedRow = computed(() => {

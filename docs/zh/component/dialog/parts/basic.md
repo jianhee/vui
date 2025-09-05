@@ -6,10 +6,14 @@
 
 ### 基础用法
 
+- 使用 `v-model:visible` 属性绑定当前值
 - 组件内容由 `title` 属性（顶栏标题）、`default` 插槽（中间内容）、`footer` 插槽（底栏内容）三部分组成
-- 使用 `v-model:visible` 属性绑定当前值，使用 `placement` 属性设置抽屉出现的位置
 
 <preview path="@docs/component/dialog/demos/basic.vue"></preview>
+
+### 抽屉出现位置
+
+<preview path="@docs/component/dialog/demos/placement.vue"></preview>
 
 ### 触发事件
 

@@ -5,7 +5,7 @@ import BaseDialog from '../dialog/dialog.vue';
 
 export default {
   setup(props, { slots }) {
-    provide('dialogType', 'drawer');
+    provide('vuiDialogType', 'drawer');
     return () => h(BaseDialog, null, slots);
   }
 };

@@ -12,7 +12,7 @@ import { inject } from 'vue';
 import { useDragSelect } from './composables/drag-select.js';
 
 // 表格
-const tableRoot = inject('tableRoot', null);
+const tableRoot = inject('vuiTableRoot', null);
 
 // 使用框选
 const { isShowBox, boxStyles } = useDragSelect({

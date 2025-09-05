@@ -37,9 +37,9 @@ export const commonProps = {
 // 使用选项
 export const useCheckbox = checkbox => {
   // 继承
-  const formRoot = inject('formRoot', null);
-  const checkboxType = inject('checkboxType', 'checkbox');
-  const checkboxGroup = inject('checkboxGroup', null);
+  const formRoot = inject('vuiFormRoot', null);
+  const checkboxType = inject('vuiCheckboxType', 'checkbox');
+  const checkboxGroup = inject('vuiCheckboxGroup', null);
 
   // 继承状态
   const isBtn = computed(() => checkbox.props.type === 'button' || checkboxGroup?.props.optionType === 'button');

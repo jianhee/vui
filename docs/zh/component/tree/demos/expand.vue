@@ -15,7 +15,7 @@ import DemoBasicTree from './basic.vue';
 import DemoLoadTree from './load.vue';
 
 const treeData = renderItems({ length: 10, level: 3 });
-provide('treeData', treeData);
+provide('demoTreeData', treeData);
 </script>
 
 <style>

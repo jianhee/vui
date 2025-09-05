@@ -125,7 +125,7 @@ watchEffect(() => {
 });
 
 // 子组件使用
-provide('tableRoot', {
+provide('vuiTableRoot', {
   tbodyElRef: tbodyProps.ref,
   modelSelectedRowIds,
   props,

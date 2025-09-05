@@ -5,7 +5,7 @@ import BaseCheckboxGroup from '../checkbox/checkbox-group.vue';
 
 export default {
   setup(props, { slots }) {
-    provide('checkboxType', 'radio');
+    provide('vuiCheckboxType', 'radio');
     return () => h(BaseCheckboxGroup, null, slots);
   }
 };

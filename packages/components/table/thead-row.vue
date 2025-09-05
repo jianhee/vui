@@ -32,7 +32,7 @@ import { useAllSelection } from './composables/selection';
 import TheadCell from './thead-cell.vue';
 
 // 表格
-const tableRoot = inject('tableRoot', null);
+const tableRoot = inject('vuiTableRoot', null);
 
 // 使用全选
 const { isSelectedAll, toggleAllSelection, allSelectionClasses } = useAllSelection({

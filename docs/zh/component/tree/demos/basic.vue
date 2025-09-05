@@ -15,7 +15,7 @@ import { renderItems } from '../../table/composables';
 import { writeLog } from '@vp/utils';
 
 const _treeData = renderItems({ length: 10, level: 3 });
-const treeData = inject('treeData', _treeData);
+const treeData = inject('demoTreeData', _treeData);
 </script>
 
 <style>

@@ -62,7 +62,7 @@ import IconExpand from '../../icons/caret-right.vue';
 import IconDrag from '../../icons/drag.vue';
 
 // 树
-const treeRoot = inject('treeRoot', null);
+const treeRoot = inject('vuiTreeRoot', null);
 
 // 树节点
 const props = defineProps(treeNodeProps);

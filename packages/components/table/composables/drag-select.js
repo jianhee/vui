@@ -5,7 +5,7 @@ import { useEventListener } from '@vueuse/core';
 // 使用框选
 export const useDragSelect = ({ dragFlagRef, dragSelectAreaWidth, parentElRef, rowItemsRef, rowHeight, rowIdKey }) => {
   // 全局状态
-  const onSelectionChange = inject('onSelectionChange', null);
+  const onSelectionChange = inject('vuiOnSelectionChange', null);
 
   // 是否显示
   const isShowBox = computed(() => dragFlagRef.value === 'select');

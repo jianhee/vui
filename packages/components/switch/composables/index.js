@@ -27,7 +27,7 @@ export const switchProps = {
 // 使用开关
 export const useSwitch = ({ modelChecked, props, emits }) => {
   // 继承
-  const formRoot = inject('formRoot', null);
+  const formRoot = inject('vuiFormRoot', null);
 
   // 根元素
   const isDisabled = computed(() => props.disabled || formRoot?.props?.disabled);

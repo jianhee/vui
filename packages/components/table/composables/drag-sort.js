@@ -29,7 +29,7 @@ export const useDragSort = ({ dragFlagRef, dragSortGroup }) => {
   });
 
   // 提供给子组件使用
-  provide('dragSort', {
+  provide('vuiDragSort', {
     // 第一层：分组标识，一个分组可以包含多个组件，只能在同一个分组内拖拽
     groupId: dragSortGroup || guid(),
     // 第二层：组件标识，树组件内有多个列表，表格组件内只有一个列表
@@ -50,7 +50,7 @@ export const useDragSort = ({ dragFlagRef, dragSortGroup }) => {
 // 使用排序项
 export const useDragSortItem = ({ dragFlagRef, dragSortable, canDropInto, rawItem, rawItemsRef, idKey, selectedItemsRef, emits }) => {
   // 全局状态
-  const dragSort = inject('dragSort', null);
+  const dragSort = inject('vuiDragSort', null);
   const groupId = dragSort.groupId;
   const componetId = dragSort.componetId;
 

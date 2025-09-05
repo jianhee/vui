@@ -18,7 +18,7 @@ import { renderItems, renderIcon } from '../../table/composables';
 
 // 初始数据
 const treeData1 = renderItems({ length: 5 });
-const treeData2 = inject('treeData', treeData1);
+const treeData2 = inject('demoTreeData', treeData1);
 const treeData = ref(treeData2);
 
 // 查找节点

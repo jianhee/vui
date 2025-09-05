@@ -32,7 +32,7 @@ import { inject } from 'vue';
 import { useEmpty, emptyProps } from './composables';
 
 // 状态类型
-const stateType = inject('stateType', 'empty');
+const stateType = inject('vuiStateType', 'empty');
 
 // 状态属性
 const props = defineProps(emptyProps);
