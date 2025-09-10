@@ -1,6 +1,6 @@
 // 拖拽移动
 import { computed } from 'vue';
-import { onLongPress } from '@vueuse/core';
+import { useEventListener } from '@vueuse/core';
 
 export const useDragMove = ({ boxElRef, dragFlagRef, props, modelLeft, modelTop }) => {
   // 是否可移动
@@ -9,9 +9,12 @@ export const useDragMove = ({ boxElRef, dragFlagRef, props, modelLeft, modelTop 
   // 初始数据
   let mouseStartPos = { x: 0, y: 0 };
   let boxStartPos = { x: 0, y: 0 };
+  let clearEvent1 = null;
+  let clearEvent2 = null;
 
-  // 长按开始移动
-  onLongPress(boxElRef, e => {
+  // 开始移动
+  const handleEl = computed(() => props.moveHandle || boxElRef.value);
+  useEventListener(handleEl, 'mousedown', e => {
     if (!isMovable.value) return;
     if (dragFlagRef.value) return;
 
@@ -22,8 +25,8 @@ export const useDragMove = ({ boxElRef, dragFlagRef, props, modelLeft, modelTop 
     mouseStartPos = { x: e.clientX, y: e.clientY };
     boxStartPos = { x: boxRect.left, y: boxRect.top };
 
-    window.addEventListener('mousemove', onMoving);
-    window.addEventListener('mouseup', onMoveStop);
+    clearEvent1 = useEventListener(window, 'mousemove', onMoving);
+    clearEvent2 = useEventListener(window, 'mouseup', onMoveStop);
   });
 
   // 移动中
@@ -50,22 +53,25 @@ export const useDragMove = ({ boxElRef, dragFlagRef, props, modelLeft, modelTop 
     if (dragFlagRef.value !== 'move') return;
 
     dragFlagRef.value = null;
-    window.removeEventListener('mousemove', onMoving);
-    window.removeEventListener('mouseup', onMoveStop);
+    clearEvent1();
+    clearEvent2();
   }
 
   // 移动的类名
   const moveClasses = computed(() => {
     return {
       'is-movable': isMovable.value,
-      'is-moving': dragFlagRef.value === 'move'
+      'is-dragging': dragFlagRef.value === 'move'
     };
   });
 
   // 移动的样式
   const moveStyles = computed(() => {
+    // 未启用时禁用样式
     if (!props.enabled) return null;
+    // 只要启用了，不论是否可移动都保留样式
     return {
+      cursor: props.movable && !props.moveHandle ? 'move' : null,
       left: `${modelLeft.value}px`,
       top: `${modelTop.value}px`
     };

@@ -9,6 +9,8 @@ export const dragboxProps = {
   enabled: { type: Boolean, default: true },
   // 是否可移动：可移动盒子会自动转成定位元素
   movable: { type: Boolean, default: false },
+  // 可移动手柄：传入一个元素，默认是整个盒子
+  moveHandle: { type: Object, default: null },
   // 是否可缩放
   resizable: { type: Boolean, default: false },
   // 可缩放手柄

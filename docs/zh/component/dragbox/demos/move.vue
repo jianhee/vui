@@ -20,6 +20,7 @@
     >
       <VSwitch v-model:checked="isMovable" />
     </DemoViewLeft>
+    <slot />
     <DemoViewLeft
       label="绑定值"
       label-width="200"

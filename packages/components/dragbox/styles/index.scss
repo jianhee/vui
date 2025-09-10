@@ -9,31 +9,23 @@
 
 // 样式
 .vui-dragbox {
-  // 可移动
+  // 状态
   &.is-movable {
     position: fixed !important;
     z-index: 999;
   }
-  &.is-moving {
-    cursor: move;
-    user-select: none;
-    transition: none !important;
-  }
-
-  // 可拖拽
   &.is-resizable {
     position: relative;
   }
-  &.is-resizing {
+  &.is-dragging {
     user-select: none;
     transition: none !important;
   }
-
-  // 拖拽手柄
-  &.is-moving &-handle,
-  &.is-resizing &-handle:not(.is-active) {
+  &.is-dragging &-handle:not(.is-active) {
     display: none;
   }
+
+  // 拖拽手柄
   &-handle {
     position: absolute;
     z-index: 999;

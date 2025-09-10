@@ -94,13 +94,15 @@ export const useDragResize = ({ boxElRef, dragFlagRef, props, modelLeft, modelTo
   const resizeClasses = computed(() => {
     return {
       'is-resizable': isResizable.value,
-      'is-resizing': dragFlagRef.value === 'resize'
+      'is-dragging': dragFlagRef.value === 'resize'
     };
   });
 
   // 缩放的样式
   const resizeStyles = computed(() => {
+    // 未启用时禁用样式
     if (!props.enabled) return null;
+    // 只要启用了，不论是否可缩放都保留样式
     return {
       left: `${modelLeft.value}px`,
       top: `${modelTop.value}px`,

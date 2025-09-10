@@ -6,6 +6,10 @@
 
 <preview path="./demos/move.vue"></preview>
 
+### 移动手柄
+
+<preview path="./demos/move-handle.vue"></preview>
+
 ### 缩放（定位元素）
 
 <preview path="./demos/resize-fixed.vue"></preview>
@@ -26,6 +30,7 @@
 | -------------------------------- | ------------------------------------------------------------------------------------------------ | --------------- | ------------------------------------ |
 | `enabled`                        | 是否启用组件 <br> 未启用时不允许拖拽，并且会清空绑定的样式，但不会清除已记录的数据，启用后可恢复 | `boolean`       | `true`                               |
 | `movable`                        | 是否可移动，可移动盒子会自动转成定位元素                                                         | `boolean`       | `false`                              |
+| `moveHandle`                     | 可移动手柄                                                                                       | `Element`       | 整个盒子                             |
 | `resizable`                      | 是否可缩放                                                                                       | `boolean`       | `false`                              |
 | `resizeHandles`                  | 可缩放手柄                                                                                       | `Array[string]` | `['left', 'right', 'top', 'bottom']` |
 | `v-model:left`/`v-model:top`     | 当前位置                                                                                         | `number`        |                                      |
