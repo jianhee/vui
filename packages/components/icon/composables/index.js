@@ -8,13 +8,13 @@ export const iconProps = {
   icon: { type: [String, Object], default: undefined },
   name: { type: String, default: undefined },
   component: { type: Object, default: undefined },
-  // 是否为可点击状态
-  clickable: { type: Boolean, default: false },
   // 是否为禁用状态
   disabled: { type: Boolean, default: false },
   // 是否为旋转状态
   spin: { type: Boolean, default: false },
   // ---------- 样式属性 ----------
+  // 鼠标样式
+  cursor: { type: String, default: undefined },
   // 主要颜色
   // 需要将 `svg` 中对应的颜色改为 `currentColor`
   color: { type: String, default: undefined },
@@ -31,13 +31,13 @@ export const iconProps = {
 export const useIcon = ({ props }) => {
   // 根元素类名
   const rootClasses = computed(() => ({
-    'is-clickable': props.clickable,
     'is-disabled': props.disabled,
     'is-spin': props.spin
   }));
 
   // 根元素样式
   const rootStyles = computed(() => ({
+    '--vui-icon-cursor': props.cursor,
     '--vui-icon-color': props.color,
     '--vui-icon-two-tone-color': props.twoToneColor,
     '--vui-icon-size': addUnit(props.size, 'px'),

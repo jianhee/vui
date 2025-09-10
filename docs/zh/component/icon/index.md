@@ -83,10 +83,6 @@ import IconClose from './close.svg?component';
 
 <preview path="./demos/basic.vue"></preview>
 
-### 可点击状态
-
-<preview path="./demos/clickable.vue"></preview>
-
 ### 禁用状态
 
 <preview path="./demos/disabled.vue"></preview>
@@ -110,7 +106,6 @@ import IconClose from './close.svg?component';
 | `icon`      | 图标名称/组件（三选一） | `string\|component` |         |
 | `name`      | 图标名称（三选一）      | `string`            |         |
 | `component` | 图标组件（三选一）      | `component`         |         |
-| `clickable` | 是否为可点击状态        | `boolean`           | `false` |
 | `disabled`  | 是否为禁用状态          | `boolean`           | `false` |
 | `spin`      | 是否为旋转状态          | `boolean`           | `false` |
 
@@ -120,6 +115,7 @@ import IconClose from './close.svg?component';
 
 | 名称          | 说明                                                                                       | 类型（默认单位）       | 默认值               |
 | ------------- | ------------------------------------------------------------------------------------------ | ---------------------- | -------------------- |
+| `cursor`      | 鼠标样式                                                                                   | `string`               |                      |
 | `color`       | 主要颜色，需要将 `svg` 中对应的颜色改为 `currentColor`                                     | `string`               | 继承 CSS `color`     |
 | `twoOneColor` | 次要颜色（仅双色图标有效），需要将 `svg` 中对应的颜色改为 `var(--vui-icon-two-tone-color)` | `string`               |                      |
 | `size`        | 图标尺寸                                                                                   | `string\|number(?px)`  | 继承 CSS `font-size` |

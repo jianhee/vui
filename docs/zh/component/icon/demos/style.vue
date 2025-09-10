@@ -2,6 +2,7 @@
   <DemoView>
     <template #content>
       <DemoBasic
+        :cursor="cursorRef"
         :color="colorRef"
         :two-tone-color="twoToneColorRef"
         :size="sizeRef"
@@ -10,6 +11,16 @@
     </template>
 
     <template #props>
+      <DemoViewTop
+        label="鼠标样式"
+        code="cursor"
+      >
+        <VRadioGroup
+          v-model:value="cursorRef"
+          :options="cursorOptions"
+          option-type="button"
+        />
+      </DemoViewTop>
       <DemoViewTop
         label="主要颜色"
         code="color"
@@ -60,6 +71,8 @@
 import { ref } from 'vue';
 import DemoBasic from './basic.vue';
 
+const cursorOptions = ['default', 'pointer', 'move'];
+const cursorRef = ref(cursorOptions[0]);
 const colorOptions = ['#333', 'rgb(126,211,33)', 'red'];
 const colorRef = ref(colorOptions[0]);
 const twoToneColorRef = ref(colorOptions[1]);
