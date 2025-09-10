@@ -4,8 +4,10 @@ import { addUnit } from '../../../utils';
 
 // props
 export const iconProps = {
-  // 图标名称/组件
+  // 图标名称/组件：三选一
   icon: { type: [String, Object], default: undefined },
+  name: { type: String, default: undefined },
+  component: { type: Object, default: undefined },
   // 是否为可点击状态
   clickable: { type: Boolean, default: false },
   // 是否为禁用状态
@@ -43,17 +45,17 @@ export const useIcon = ({ props }) => {
   }));
 
   // 区分图标类型
-  const iconType = computed(() => {
-    // 空
-    if (!props.icon) return null;
-
-    // 有值
-    return typeof props.icon;
+  const iconRef = computed(() => {
+    const isName = typeof props.icon === 'string';
+    return {
+      name: props.name || (isName ? props.icon : null),
+      component: props.component || (isName ? null : props.icon)
+    };
   });
 
   return {
     rootClasses,
     rootStyles,
-    iconType
+    iconRef
   };
 };
