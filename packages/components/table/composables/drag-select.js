@@ -34,6 +34,8 @@ export const useDragSelect = ({ dragFlagRef, dragSelectAreaWidth, parentElRef, r
   }));
 
   // 开始框选
+  let clearEvent1 = null;
+  let clearEvent2 = null;
   useEventListener(parentElRef, 'mousedown', e => {
     if (dragFlagRef.value) return;
     if (e.button !== 0) return;
@@ -48,8 +50,8 @@ export const useDragSelect = ({ dragFlagRef, dragSelectAreaWidth, parentElRef, r
     };
     mouseCurrentPos.value = { ...mouseStartPos.value };
 
-    window.addEventListener('mousemove', onSelecting);
-    window.addEventListener('mouseup', onSelectStop);
+    clearEvent1 = useEventListener(window, 'mousemove', onSelecting);
+    clearEvent2 = useEventListener(window, 'mouseup', onSelectStop);
   });
 
   // 框选中
@@ -72,8 +74,8 @@ export const useDragSelect = ({ dragFlagRef, dragSelectAreaWidth, parentElRef, r
     if (dragFlagRef.value !== 'select') return;
 
     dragFlagRef.value = null;
-    window.removeEventListener('mousemove', onSelecting);
-    window.removeEventListener('mouseup', onSelectStop);
+    clearEvent1();
+    clearEvent2();
   }
 
   // 更新选中项

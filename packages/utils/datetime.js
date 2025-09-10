@@ -35,7 +35,7 @@ export const formatUtcDateTime = (datetime, formator) => {
  */
 export const formatLocalDateTime = (datetime, formator, _local) => {
   const date = datetime ? new Date(datetime) : new Date();
-  const local = _local || window.navigator.language;
+  const local = _local || window?.navigator?.language;
   return new Intl.DateTimeFormat(local, formator).format(date);
 };
 

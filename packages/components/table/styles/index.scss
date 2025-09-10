@@ -112,6 +112,9 @@
       &.is-active {
         --vui-table-sorter-color: var(--vui-color-brand-base);
       }
+      &:hover {
+        transform: scale(1.2);
+      }
     }
   }
 

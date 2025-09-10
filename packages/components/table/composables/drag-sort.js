@@ -1,5 +1,6 @@
 // 拖拽排序
 import { ref, computed, provide, inject } from 'vue';
+import { useEventListener } from '@vueuse/core';
 import { guid } from '../../../utils';
 
 // emits
@@ -87,6 +88,7 @@ export const useDragSortItem = ({ dragFlagRef, dragSortable, canDropInto, rawIte
 
   // 被拖拽元素的事件
   // dragstart 开始拖拽时触发：只触发一次
+  let clearEvent = null;
   function onDragStart() {
     // 不能拖拽的情况
     if (!dragSortable || dragFlagRef.value) return;
@@ -105,7 +107,7 @@ export const useDragSortItem = ({ dragFlagRef, dragSortable, canDropInto, rawIte
     });
 
     // 处理拖拽到组件外部的情况
-    window.addEventListener('dragenter', clearTargetData);
+    clearEvent = useEventListener(window, 'dragenter', clearTargetData);
   }
 
   // drag     拖拽过程中持续触发（每几百毫秒）
@@ -133,9 +135,7 @@ export const useDragSortItem = ({ dragFlagRef, dragSortable, canDropInto, rawIte
     // 清空数据
     dragFlagRef.value = null;
     clearAllData();
-
-    // 处理拖拽到组件外部的情况
-    window.removeEventListener('dragenter', clearTargetData);
+    clearEvent();
   }
 
   // 目标元素的事件

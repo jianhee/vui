@@ -5,7 +5,7 @@
  * @returns {string} 'android'|'ios'|'pc'
  */
 export const getDeviceType = () => {
-  const userAgent = window.navigator.userAgent.toLowerCase();
+  const userAgent = window?.navigator?.userAgent?.toLowerCase();
   if (/android/.test(userAgent)) {
     return 'android';
   }
@@ -21,7 +21,7 @@ export const getDeviceType = () => {
  * @returns {string|null} 参数值：不存在时返回null
  */
 export const getUrlParams = name => {
-  const queryString = window.location.href.split('?')[1];
+  const queryString = window?.location?.href?.split('?')[1];
   if (!queryString) return null;
   const urlParams = new URLSearchParams(queryString);
   return urlParams.get(name);
@@ -35,8 +35,8 @@ export const getUrlParams = name => {
 export const copyText = async text => {
   try {
     return new Promise(resolve => {
-      window.navigator.clipboard
-        .writeText(text)
+      window?.navigator?.clipboard
+        ?.writeText(text)
         .then(() => resolve(true))
         .catch(() => resolve(false));
     });

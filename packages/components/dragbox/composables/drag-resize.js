@@ -1,5 +1,6 @@
 // 拖拽缩放
 import { ref, computed } from 'vue';
+import { useEventListener } from '@vueuse/core';
 
 export const useDragResize = ({ boxElRef, dragFlagRef, props, modelLeft, modelTop, modelWidth, modelHeight }) => {
   // 是否可缩放
@@ -12,6 +13,8 @@ export const useDragResize = ({ boxElRef, dragFlagRef, props, modelLeft, modelTo
   let boxIsFixed = false;
 
   // 开始缩放
+  let clearEvent1 = null;
+  let clearEvent2 = null;
   function onResizeStart(e, handleName) {
     if (!isResizable.value) return;
     if (dragFlagRef.value) return;
@@ -27,8 +30,8 @@ export const useDragResize = ({ boxElRef, dragFlagRef, props, modelLeft, modelTo
     boxStartSize = { width: offsetWidth, height: offsetHeight };
     boxIsFixed = position === 'fixed';
 
-    window.addEventListener('mousemove', onResizing);
-    window.addEventListener('mouseup', onResizeStop);
+    clearEvent1 = useEventListener(window, 'mousemove', onResizing);
+    clearEvent2 = useEventListener(window, 'mouseup', onResizeStop);
   }
 
   // 缩放中
@@ -86,8 +89,8 @@ export const useDragResize = ({ boxElRef, dragFlagRef, props, modelLeft, modelTo
 
     dragFlagRef.value = null;
     activeHandleName.value = null;
-    window.removeEventListener('mousemove', onResizing);
-    window.removeEventListener('mouseup', onResizeStop);
+    clearEvent1();
+    clearEvent2();
   }
 
   // 缩放的类名

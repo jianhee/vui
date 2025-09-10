@@ -1,5 +1,5 @@
 // 日期时间相关的文案
-const lang = window.navigator.language.startsWith('zh') ? 'zh' : 'en';
+const lang = window?.navigator?.language?.startsWith('zh') ? 'zh' : 'en';
 const messages = {
   en: {
     s: 's ago',
