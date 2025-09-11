@@ -60,8 +60,7 @@ export const useDragMove = ({ boxElRef, dragFlagRef, props, modelLeft, modelTop 
   // 移动的类名
   const moveClasses = computed(() => {
     return {
-      'is-movable': isMovable.value,
-      'is-dragging': dragFlagRef.value === 'move'
+      'is-movable': isMovable.value
     };
   });
 

@@ -3,7 +3,7 @@
   <div
     ref="boxElRef"
     class="vui-dragbox"
-    :class="{ ...moveClasses, ...resizeClasses }"
+    :class="{ ...moveClasses, ...resizeClasses, 'is-dragging': !!dragFlagRef }"
     :style="{ ...moveStyles, ...resizeStyles }"
   >
     <!-- 显示内容 -->

@@ -96,8 +96,7 @@ export const useDragResize = ({ boxElRef, dragFlagRef, props, modelLeft, modelTo
   // 缩放的类名
   const resizeClasses = computed(() => {
     return {
-      'is-resizable': isResizable.value,
-      'is-dragging': dragFlagRef.value === 'resize'
+      'is-resizable': isResizable.value
     };
   });
 
