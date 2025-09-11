@@ -11,11 +11,11 @@
     <span :class="['vui-select-inner', innerClasses]">
       {{ innerText || placeholder }}
     </span>
-    <!-- 图标 -->
+    <!-- 展开图标 -->
     <VIcon
       class="vui-select-icon--arrow"
       :icon="IconArrowDown"
-      v-bind="iconProps"
+      :rotate="expandIconRotate"
     />
   </div>
 
@@ -63,7 +63,7 @@ const props = defineProps(selectProps);
 const emits = defineEmits(selectEmits);
 
 // 使用选择器
-const { triggerClasses, onTriggerClick, innerText, innerClasses, iconProps, onDropdownToggle, dropdownStyles, formattedOptions, onSelectOption } = useSelect({
+const { triggerClasses, onTriggerClick, innerText, innerClasses, expandIconRotate, onDropdownToggle, dropdownStyles, formattedOptions, onSelectOption } = useSelect({
   triggerElRef,
   dropdownElRef,
   modelValue,

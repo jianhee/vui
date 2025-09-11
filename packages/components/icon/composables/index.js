@@ -44,8 +44,8 @@ export const useIcon = ({ props }) => {
     '--vui-icon-rotate': addUnit(props.rotate, 'deg')
   }));
 
-  // 区分图标类型
-  const iconRef = computed(() => {
+  // 图标属性
+  const _iconProps = computed(() => {
     const isName = typeof props.icon === 'string';
     return {
       name: props.name || (isName ? props.icon : null),
@@ -56,6 +56,17 @@ export const useIcon = ({ props }) => {
   return {
     rootClasses,
     rootStyles,
-    iconRef
+    _iconProps
+  };
+};
+
+// 格式化图标属性：在其它组件中使用时
+export const useIconProps = (icon, iconProps = {}) => {
+  const _icon = icon || iconProps.icon || iconProps?.name || iconProps?.component;
+  if (!_icon) return null;
+
+  return {
+    icon: _icon,
+    ...iconProps
   };
 };

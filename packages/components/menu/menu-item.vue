@@ -8,9 +8,8 @@
   >
     <!-- 前置图标 -->
     <VIcon
-      v-if="formattedMenuItem.icon"
-      :icon="formattedMenuItem.icon"
-      v-bind="formattedMenuItem.iconProps"
+      v-if="_iconProps"
+      v-bind="_iconProps"
     />
     <!-- 文本 -->
     <span class="vui-menu-label">{{ formattedMenuItem.label }}</span>
@@ -30,6 +29,7 @@
 <script setup>
 import { inject } from 'vue';
 import { useMenuItem, menuItemProps } from '../menu/composables/menu-item';
+import { useIconProps } from '../icon/composables';
 import IconSelected from '../../icons/selected.vue';
 
 // 菜单
@@ -43,4 +43,7 @@ const { formattedMenuItem, isSelected, rootClasses, onMenuItemClick } = useMenuI
   menuRoot,
   menuItem: { props }
 });
+
+// 使用图标
+const _iconProps = useIconProps(formattedMenuItem.value.icon, formattedMenuItem.value.iconProps);
 </script>

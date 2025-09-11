@@ -8,12 +8,12 @@
     <slot v-if="$slots.default" />
     <!-- 其次使用组件：需要将 `.svg` 文件改写成 `.vue` 组件 -->
     <component
-      :is="iconRef.component"
-      v-else-if="iconRef.component"
+      :is="_iconProps.component"
+      v-else-if="_iconProps.component"
     />
     <!-- 最后使用名称：依赖 vite-plugin-svg-icons 插件 -->
-    <svg v-else-if="iconRef.name">
-      <use :href="`#icon-${iconRef.name}`" />
+    <svg v-else-if="_iconProps.name">
+      <use :href="`#icon-${_iconProps.name}`" />
     </svg>
   </i>
 </template>
@@ -25,7 +25,7 @@ import { useIcon, iconProps } from './composables';
 const props = defineProps(iconProps);
 
 // 使用图标
-const { rootClasses, rootStyles, iconRef } = useIcon({
+const { rootClasses, rootStyles, _iconProps } = useIcon({
   props
 });
 </script>

@@ -1,5 +1,6 @@
 // 空状态
 import { computed } from 'vue';
+import { useIconProps } from '../../icon/composables';
 import VIcon from '../../icon/icon.vue';
 import IconEmpty from '../../../icons/empty.vue';
 import IconLoading from '../../../icons/loading.vue';
@@ -22,18 +23,23 @@ export const useEmpty = ({ props, stateType }) => {
   const isLoading = stateType === 'loading';
 
   // 当前图标
-  const stateIconProps = computed(() => {
+  const _iconProps = computed(() => {
     // 不使用图标
     if (props.image) return null;
     if (props.icon === null) return null;
 
     // 使用图标
-    const defaultIcon = isLoading ? IconLoading : IconEmpty;
-    return {
-      icon: props.icon || defaultIcon,
-      spin: isLoading,
-      ...props.iconProps
+    const iconProps = useIconProps(props.icon, props.iconProps);
+    const defaultProps = {
+      icon: isLoading ? IconLoading : IconEmpty,
+      spin: isLoading
     };
+
+    if (iconProps) {
+      return { ...defaultProps, ...iconProps };
+    } else {
+      return defaultProps;
+    }
   });
 
   // 文本
@@ -51,7 +57,7 @@ export const useEmpty = ({ props, stateType }) => {
   });
 
   return {
-    stateIconProps,
+    _iconProps,
     descText
   };
 };

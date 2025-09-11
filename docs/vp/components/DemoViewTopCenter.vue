@@ -11,8 +11,8 @@ content content content content content
 
 <style lang="scss">
 .demo-view-top--center .demo-view-base-label {
-  line-height: 22px;
+  justify-content: center;
   margin-bottom: 4px;
-  text-align: center;
+  line-height: 22px;
 }
 </style>

@@ -73,10 +73,8 @@ export const useSelect = ({ triggerElRef, dropdownElRef, modelValue, props, emit
     'vui-select-placeholder': !innerText.value
   }));
 
-  // 图标属性
-  const iconProps = computed(() => ({
-    rotate: triggerIsFocused.value ? '180deg' : null
-  }));
+  // 展开图标
+  const expandIconRotate = computed(() => (triggerIsFocused.value ? '180deg' : null));
 
   // 打开/关闭下拉框时切换焦点
   function onDropdownToggle(visible) {
@@ -131,7 +129,7 @@ export const useSelect = ({ triggerElRef, dropdownElRef, modelValue, props, emit
     onTriggerClick,
     innerText,
     innerClasses,
-    iconProps,
+    expandIconRotate,
     onDropdownToggle,
     dropdownStyles,
     formattedOptions,

@@ -13,9 +13,8 @@
     />
     <!-- 前置图标 -->
     <VIcon
-      v-if="icon"
-      :icon="icon"
-      v-bind="iconProps"
+      v-if="_iconProps"
+      v-bind="_iconProps"
     />
     <!-- 显示内容 -->
     <slot />
@@ -25,10 +24,14 @@
 <script setup>
 import { useButton, btnProps } from './composables';
 import IconLoading from '../../icons/loading.vue';
+import { useIconProps } from '../icon/composables';
 
 // 按钮
 const props = defineProps(btnProps);
 
 // 使用按钮
 const { rootTag, rootAttrs } = useButton({ props });
+
+// 使用图标
+const _iconProps = useIconProps(props.icon, props.iconProps);
 </script>

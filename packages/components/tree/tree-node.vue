@@ -21,12 +21,12 @@
         :icon="IconLoading"
         :spin="true"
       />
-      <!-- 折叠图标 -->
+      <!-- 展开图标 -->
       <VIcon
         v-else-if="isShowExpand"
         class="vui-tree-node-expand"
         :icon="IconExpand"
-        v-bind="expandIconProps"
+        :rotate="expandIconRotate"
         @click.stop="toggleChildren"
       />
     </div>
@@ -68,7 +68,7 @@ const treeRoot = inject('vuiTreeRoot', null);
 const props = defineProps(treeNodeProps);
 
 // 使用树节点
-const { isShowExpand, expandIconProps, toggleChildren, onNodeClick, onNodeContextmenu, nodeClasses, nodeStyles, customNodeAttrs } = useTreeNode({
+const { isShowExpand, expandIconRotate, toggleChildren, onNodeClick, onNodeContextmenu, nodeClasses, nodeStyles, customNodeAttrs } = useTreeNode({
   treeRoot,
   treeNode: { props }
 });

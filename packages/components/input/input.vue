@@ -26,9 +26,8 @@
       <slot name="prefix" />
       {{ prefix }}
       <VIcon
-        v-if="prefixIcon"
-        :icon="prefixIcon"
-        v-bind="prefixIconProps"
+        v-if="_prefixIconProps"
+        v-bind="_prefixIconProps"
       />
       <!-- 输入框 -->
       <input
@@ -68,9 +67,8 @@
       />
       <!-- 后置内容 -->
       <VIcon
-        v-if="suffixIcon"
-        :icon="suffixIcon"
-        v-bind="suffixIconProps"
+        v-if="_suffixIconProps"
+        v-bind="_suffixIconProps"
       />
       {{ suffix }}
       <slot name="suffix" />
@@ -89,6 +87,7 @@
 <script setup>
 import { useTemplateRef } from 'vue';
 import { useInput, inputModel, inputProps, inputEmits } from './composables';
+import { useIconProps } from '../icon/composables';
 import IconClear from '../../icons/circle-close.vue';
 import IconEyeOpen from '../../icons/eye-open.vue';
 import IconEyeClose from '../../icons/eye-close.vue';
@@ -108,4 +107,8 @@ const { isDisabled, isReadonly, rootClasses, wraperClasses, inputType, isShowPas
   props,
   emits
 });
+
+// 使用图标
+const _prefixIconProps = useIconProps(props.prefixIcon, props.prefixIconProps);
+const _suffixIconProps = useIconProps(props.suffixIcon, props.suffixIconProps);
 </script>

@@ -11,9 +11,9 @@
     />
     <!-- 其次使用图标 -->
     <VIcon
-      v-else-if="stateIconProps"
+      v-else-if="_iconProps"
       :class="`vui-${stateType}-icon`"
-      v-bind="stateIconProps"
+      v-bind="_iconProps"
     />
     <!-- 文本 -->
     <div
@@ -38,7 +38,7 @@ const stateType = inject('vuiStateType', 'empty');
 const props = defineProps(emptyProps);
 
 // 使用状态
-const { stateIconProps, descText } = useEmpty({
+const { _iconProps, descText } = useEmpty({
   props,
   stateType
 });

@@ -37,10 +37,8 @@ export const useTreeNode = ({ treeRoot, treeNode }) => {
     return hasChildren;
   });
 
-  // 展开图标属性
-  const expandIconProps = computed(() => ({
-    rotate: nodeData.value.isExpanded ? 90 : null
-  }));
+  // 展开图标
+  const expandIconRotate = computed(() => (nodeData.value.isExpanded ? 90 : null));
 
   // 展开/关闭子节点
   async function toggleChildren() {
@@ -99,7 +97,7 @@ export const useTreeNode = ({ treeRoot, treeNode }) => {
 
   return {
     isShowExpand,
-    expandIconProps,
+    expandIconRotate,
     toggleChildren,
     onNodeClick,
     onNodeContextmenu,
