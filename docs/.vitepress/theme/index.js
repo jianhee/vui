@@ -5,7 +5,7 @@ import defaultTheme from 'vitepress/theme';
 import 'virtual:group-icons.css';
 import 'virtual:svg-icons-register';
 
-// 预览插件 ElementPlusContainer, NaiveUIContainer
+// 预览插件 AntDesignContainer, ElementPlusContainer, NaiveUIContainer
 import { AntDesignContainer } from '@vitepress-demo-preview/component';
 import '@vitepress-demo-preview/component/dist/style.css';
 
