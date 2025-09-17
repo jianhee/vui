@@ -41,9 +41,9 @@
     &-close {
       --vui-icon-color: var(--#{$prefix}-close-icon-color);
       --vui-icon-size: 14px;
+      --vui-icon-cursor: pointer;
 
       margin-top: -4px;
-      cursor: pointer;
     }
     &-close:hover {
       --vui-icon-color: var(--#{$prefix}-close-icon-hover-color);

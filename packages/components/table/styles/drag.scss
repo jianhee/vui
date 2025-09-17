@@ -36,8 +36,7 @@
       &-drag-handle {
         --vui-icon-size: 16px;
         --vui-icon-color: var(--vui-text-color-placeholder);
-
-        cursor: grab;
+        --vui-icon-cursor: grab;
       }
 
       // 拖拽项

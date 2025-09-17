@@ -22,5 +22,5 @@
   "targetItem": {},
   "targetItemId": "",
   "dropPos": "释放位置"
-};
+}
 ```

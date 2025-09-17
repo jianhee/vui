@@ -1,7 +1,5 @@
 // 多选框-单个选项
 import { inject, computed } from 'vue';
-import IconCheckbox from '../../../icons/checkbox.vue';
-import IconRadio from '../../../icons/radio.vue';
 
 // emits
 export const checkboxEmits = ['change'];
@@ -140,16 +138,12 @@ export const useCheckbox = checkbox => {
     ];
   });
 
-  // 图标属性
-  const iconComponent = isCheckbox ? IconCheckbox : IconRadio;
-
   return {
     isBtn,
     isDisabled,
     isReadonly,
     isChecked,
     onCheckedChange,
-    rootClasses,
-    iconComponent
+    rootClasses
   };
 };

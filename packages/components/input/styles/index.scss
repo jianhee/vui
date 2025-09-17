@@ -101,7 +101,7 @@
   // 内置图标
   &-icon--clear,
   &-icon--password {
-    cursor: pointer;
+    --vui-icon-cursor: pointer;
     &:hover {
       --vui-icon-color: var(--vui-text-color-secondary);
     }

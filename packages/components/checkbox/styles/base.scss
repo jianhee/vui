@@ -7,18 +7,13 @@
 @mixin vui-checkbox($prefix) {
   // vars
   :root {
-    // 默认类型
     --#{$prefix}-default-text-color: var(--vui-text-color-regular);
-    --#{$prefix}-default-checked-color: var(--vui-color-brand-base);
-
-    // 按钮类型
     --#{$prefix}-btn-text-color: var(--vui-text-color-primary);
-    --#{$prefix}-btn-bg-color: var(--vui-fill-color-blank);
-    --#{$prefix}-btn-border-color: var(--vui-border-color-base);
-    --#{$prefix}-btn-hover-text-color: var(--vui-color-brand-base);
     --#{$prefix}-btn-checked-text-color: var(--vui-color-white);
-    --#{$prefix}-btn-checked-bg-color: var(--vui-color-brand-base);
-    --#{$prefix}-btn-checked-border-color: var(--vui-color-brand-base);
+    --#{$prefix}-icon-inner-color: var(--vui-color-white);
+    --#{$prefix}-fill-color: var(--vui-fill-color-blank);
+    --#{$prefix}-border-color: var(--vui-border-color-base);
+    --#{$prefix}-active-color: var(--vui-color-brand-base);
   }
 
   // 样式
@@ -50,14 +45,6 @@
       opacity: 0;
     }
 
-    // 图标
-    &-icon {
-      --vui-icon-color: var(--vui-border-color-base);
-    }
-    &.is-checked &-icon {
-      --vui-icon-color: var(--vui-color-brand-base);
-    }
-
     // 默认类型
     &-default {
       line-height: 32px;
@@ -65,7 +52,7 @@
 
       // 选中状态
       &.is-checked {
-        color: var(--#{$prefix}-default-checked-color);
+        color: var(--#{$prefix}-active-color);
       }
     }
 
@@ -74,18 +61,18 @@
       padding: 0 18px;
       line-height: 30px;
       color: var(--#{$prefix}-btn-text-color);
-      background-color: var(--#{$prefix}-btn-bg-color);
-      border: 1px solid var(--#{$prefix}-btn-border-color);
+      background-color: var(--#{$prefix}-fill-color);
+      border: 1px solid var(--#{$prefix}-border-color);
       border-radius: 4px;
 
       // 状态
       &:hover {
-        color: var(--#{$prefix}-btn-hover-text-color);
+        color: var(--#{$prefix}-active-color);
       }
       &.is-checked {
         color: var(--#{$prefix}-btn-checked-text-color);
-        background-color: var(--#{$prefix}-btn-checked-bg-color);
-        border-color: var(--#{$prefix}-btn-checked-border-color);
+        background-color: var(--#{$prefix}-active-color);
+        border-color: var(--#{$prefix}-active-color);
       }
     }
 
@@ -97,17 +84,17 @@
       border-left-color: transparent;
       border-radius: 0;
       &:first-child {
-        border-left-color: var(--#{$prefix}-btn-border-color);
+        border-left-color: var(--#{$prefix}-border-color);
         border-radius: 4px 0 0 4px;
       }
       &:last-child {
         border-radius: 0 4px 4px 0;
       }
       &.is-checked {
-        box-shadow: -1px 0 0 0 var(--#{$prefix}-btn-border-color);
+        box-shadow: -1px 0 0 0 var(--#{$prefix}-border-color);
       }
       &.is-checked:first-child {
-        border-color: var(--#{$prefix}-btn-checked-border-color);
+        border-color: var(--#{$prefix}-active-color);
         box-shadow: none;
       }
     }
@@ -118,6 +105,67 @@
     }
     &-group &--block {
       margin-right: 0;
+    }
+
+    // 图标
+    &-icon {
+      position: relative;
+      width: 14px;
+      height: 14px;
+      background-color: var(--#{$prefix}-fill-color);
+      border: 1px solid var(--#{$prefix}-border-color);
+      transition: all 0.3s ease;
+      &:hover {
+        border-color: var(--#{$prefix}-active-color);
+      }
+      &::after {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        content: "";
+        transition: transform 0.15s ease-in;
+      }
+    }
+    &.is-checked &-icon {
+      background-color: var(--#{$prefix}-active-color);
+      border-color: var(--#{$prefix}-active-color);
+    }
+
+    // 多选框
+    @if $prefix == "vui-checkbox" {
+      &-icon {
+        border-radius: 2px;
+        &::after {
+          width: 4px;
+          height: 8px;
+          border: 1px solid transparent;
+          border-top: 0;
+          border-left: 0;
+          transform: translate(-45%, -60%) rotate(45deg) scaleY(0);
+          transform-origin: center;
+        }
+      }
+      &.is-checked &-icon::after {
+        border-color: var(--#{$prefix}-icon-inner-color);
+        transform: translate(-45%, -60%) rotate(45deg) scaleY(1);
+      }
+    }
+
+    // 单选框
+    @if $prefix == "vui-radio" {
+      &-icon {
+        border-radius: 50%;
+        &::after {
+          width: 4px;
+          height: 4px;
+          border-radius: 50%;
+          transform: translate(-50%, -50%) scale(0);
+        }
+      }
+      &.is-checked &-icon::after {
+        background-color: var(--#{$prefix}-icon-inner-color);
+        transform: translate(-50%, -50%) scale(1);
+      }
     }
   }
 }

@@ -10,10 +10,9 @@
       @change="onCheckedChange"
     />
     <!-- 图标 -->
-    <VIcon
+    <span
       v-if="!isBtn"
       :class="`vui-${checkboxType}-icon`"
-      :icon="iconComponent"
     />
     <!-- 优先使用插槽 -->
     <slot v-if="$slots?.default?.()[0].children.length" />
@@ -35,7 +34,7 @@ const props = defineProps({ ...checkboxProps, ...commonProps });
 const emits = defineEmits(checkboxEmits);
 
 // 使用选项
-const { isBtn, isDisabled, isReadonly, isChecked, onCheckedChange, rootClasses, iconComponent } = useCheckbox({
+const { isBtn, isDisabled, isReadonly, isChecked, onCheckedChange, rootClasses } = useCheckbox({
   modelChecked,
   props,
   emits
