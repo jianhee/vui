@@ -11,15 +11,15 @@
 
 <preview path="@docs/component/dialog/demos/basic.vue"></preview>
 
-### 抽屉出现位置
-
-<preview path="@docs/component/dialog/demos/placement.vue"></preview>
-
 ### 触发事件
 
 从打开到关闭依次触发 `open`、`opened` 、`close` 、`closed` 四个事件
 
 <preview path="@docs/component/dialog/demos/event.vue"></preview>
+
+### 抽屉出现位置
+
+<preview path="@docs/component/dialog/demos/placement.vue"></preview>
 
 ### 关闭弹窗
 

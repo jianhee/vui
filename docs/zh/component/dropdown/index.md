@@ -4,10 +4,15 @@
 
 ### 基础用法
 
-- 下拉框由 `default` 插槽（触发器）和 `dropdown` 插槽（下拉内容）两部分组成
-- 打开关闭时分别触发 `open` 和 `close` 事件
+下拉框由 `default` 插槽（触发器）和 `dropdown` 插槽（下拉内容）两部分组成
 
 <preview path="./demos/basic.vue"></preview>
+
+### 触发事件
+
+从打开到关闭依次触发 `open`、`opened` 、`close` 、`closed` 四个事件
+
+<preview path="./demos/event.vue"></preview>
 
 ### 触发方式
 

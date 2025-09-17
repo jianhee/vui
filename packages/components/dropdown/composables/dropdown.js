@@ -1,9 +1,9 @@
 // 下拉框
-import { ref, nextTick, computed } from 'vue';
+import { ref, watch, nextTick, computed } from 'vue';
 import { useEventListener, onClickOutside } from '@vueuse/core';
 
 // emits
-export const dropdownEmits = ['open', 'close'];
+export const dropdownEmits = ['open', 'opened', 'close', 'closed'];
 
 // props
 export const dropdownProps = {
@@ -108,9 +108,6 @@ export const useDropdown = ({ triggerNextElRef, dropdownElRef, props, emits }) =
     if (dropdownVisible.value) return;
     dropdownVisible.value = true;
 
-    // 触发事件
-    emits('open');
-
     // 监听滚动事件
     const scrollableParents = getScrollableParents();
     scrollableParents.forEach(parent => {
@@ -123,9 +120,6 @@ export const useDropdown = ({ triggerNextElRef, dropdownElRef, props, emits }) =
     // 显示状态
     if (!dropdownVisible.value) return;
     dropdownVisible.value = false;
-
-    // 触发事件
-    emits('close');
 
     // 移出滚动事件
     const scrollableParents = getScrollableParents();
@@ -184,10 +178,29 @@ export const useDropdown = ({ triggerNextElRef, dropdownElRef, props, emits }) =
     return parents;
   };
 
+  // 切换显示状态时
+  watch(dropdownVisible, val => {
+    if (val) {
+      emits('open');
+    } else {
+      emits('close');
+    }
+  });
+
+  // 动画完成时
+  const onTransitionEnd = type => {
+    if (type === 'enter') {
+      emits('opened');
+    } else {
+      emits('closed');
+    }
+  };
+
   return {
     dropdownVisible,
     dropdownStyles,
     openByMethod,
-    closeDropdown
+    closeDropdown,
+    onTransitionEnd
   };
 };

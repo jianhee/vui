@@ -74,8 +74,11 @@ export const useDialog = ({ dialogType, modelVisible, props, emits }) => {
 
   // 动画完成时
   const onTransitionEnd = type => {
-    const eventName = type === 'enter' ? 'opened' : 'closed';
-    emits(eventName);
+    if (type === 'enter') {
+      emits('opened');
+    } else {
+      emits('closed');
+    }
   };
 
   return {

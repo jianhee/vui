@@ -13,7 +13,11 @@
 
   <!-- 下拉框：必填 -->
   <Teleport to="body">
-    <Transition name="vui-dropdown">
+    <Transition
+      name="vui-dropdown"
+      @after-enter="onTransitionEnd('enter')"
+      @after-leave="onTransitionEnd('leave')"
+    >
       <div
         v-if="dropdownVisible"
         ref="dropdownElRef"
@@ -39,7 +43,7 @@ const props = defineProps(dropdownProps);
 const emits = defineEmits(dropdownEmits);
 
 // 使用下拉框
-const { dropdownVisible, dropdownStyles, openByMethod, closeDropdown } = useDropdown({
+const { dropdownVisible, dropdownStyles, openByMethod, closeDropdown, onTransitionEnd } = useDropdown({
   triggerNextElRef,
   dropdownElRef,
   props,
