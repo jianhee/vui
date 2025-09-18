@@ -8,6 +8,7 @@
   :root {
     --#{$prefix1}-#{$prefix2}-drop-bg-color: var(--vui-color-brand-a10);
     --#{$prefix1}-#{$prefix2}-drop-border-color: var(--vui-color-brand-base);
+    --#{$prefix1}-#{$prefix2}-drag-icon-color: var(--vui-text-color-placeholder);
   }
 
   // 样式
@@ -35,7 +36,7 @@
       // 拖拽手柄
       &-drag-handle {
         --vui-icon-size: 16px;
-        --vui-icon-color: var(--vui-text-color-placeholder);
+        --vui-icon-color: var(--#{$prefix1}-#{$prefix2}-drag-icon-color);
         --vui-icon-cursor: grab;
       }
 

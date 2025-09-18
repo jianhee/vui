@@ -33,20 +33,18 @@ export const useDialog = ({ dialogType, modelVisible, props, emits }) => {
 
   // 主体类名
   const innerClasses = computed(() => {
-    return [
-      `vui-${dialogType}`,
-      {
-        [`vui-drawer--${props.placement}`]: !isDialog
-      }
-    ];
+    return {
+      [`vui-${dialogType}`]: true,
+      [`vui-drawer--${props.placement}`]: !isDialog
+    };
   });
 
   // 主体样式
   const innerStyles = computed(() => {
-    const key = isDialog ? '--vui-dialog-width' : '--vui-drawer-width';
     const value = addUnit(props.width, 'px');
     return {
-      [key]: value
+      '--vui-dialog-width': isDialog ? value : null,
+      '--vui-drawer-width': isDialog ? null : value
     };
   });
 

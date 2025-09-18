@@ -9,6 +9,9 @@
   gap: 5px;
   align-items: center;
   justify-content: center;
+  height: var(--vui-btn-height);
+  padding: var(--vui-btn-padding);
+  font-size: var(--vui-btn-font-size);
   font-weight: normal;
   color: var(--vui-btn-text-color);
   white-space: nowrap;
@@ -21,13 +24,13 @@
   transition: all 0.3s ease;
 
   // 状态
-  &:not(:disabled):hover {
+  &:not(.is-disabled):hover {
     color: var(--vui-btn-hover-text-color, var(--vui-btn-text-color));
     background-color: var(--vui-btn-hover-bg-color, var(--vui-btn-bg-color));
     border-color: var(--vui-btn-hover-border-color, var(--vui-btn-border-color));
     opacity: 0.8;
   }
-  &:disabled {
+  &.is-disabled {
     @include mixins.vui-disabled;
   }
 
@@ -53,19 +56,19 @@
 
   // 尺寸
   &--large {
-    height: 40px;
-    padding: 0 19px;
-    font-size: 14px;
+    --vui-btn-height: 40px;
+    --vui-btn-padding: 0 19px;
+    --vui-btn-font-size: 14px;
   }
   &--medium {
-    height: 32px;
-    padding: 0 15px;
-    font-size: 14px;
+    --vui-btn-height: 32px;
+    --vui-btn-padding: 0 15px;
+    --vui-btn-font-size: 14px;
   }
   &--small {
-    height: 24px;
-    padding: 0 11px;
-    font-size: 12px;
+    --vui-btn-height: 24px;
+    --vui-btn-padding: 0 11px;
+    --vui-btn-font-size: 12px;
   }
 
   // 显示模式

@@ -34,7 +34,7 @@ const modelValue = defineModel('value', { type: Number, default: null });
   &-text {
     flex: none;
     width: 4em;
-    color: var(--vui-text-color-regular);
+    color: var(--demo-text-color-regular);
     text-align: right;
   }
 }

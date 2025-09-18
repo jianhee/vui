@@ -5,7 +5,15 @@
 @mixin vui-empty($prefix) {
   // vars
   :root {
-    --#{$prefix}-text-color: var(--vui-text-color-secondary);
+    --#{$prefix}-desc-color: var(--vui-text-color-secondary);
+
+    @if $prefix == "vui-empty" {
+      --vui-empty-icon-color: var(--vui-border-color-dark);
+    }
+
+    @if $prefix == "vui-loading" {
+      --vui-loading-icon-color: var(--vui-color-brand-base);
+    }
   }
 
   // 样式
@@ -19,11 +27,16 @@
     padding: 30px;
     text-align: center;
 
+    // 图标
+    &-icon {
+      --vui-icon-color: var(--#{$prefix}-icon-color);
+    }
+
     // 描述文字
     &-desc {
       font-size: 14px;
       line-height: 24px;
-      color: var(--#{$prefix}-text-color);
+      color: var(--#{$prefix}-desc-color);
     }
   }
 
@@ -32,7 +45,6 @@
     .vui-empty {
       &-icon {
         --vui-icon-size: 40px;
-        --vui-icon-color: var(--vui-border-color-dark);
       }
       &-img {
         width: 200px;
@@ -46,7 +58,6 @@
     .vui-loading {
       &-icon {
         --vui-icon-size: 18px;
-        --vui-icon-color: var(--vui-color-brand-base);
       }
       &-img {
         width: 60px;

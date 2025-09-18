@@ -26,12 +26,12 @@ provide('vuiDragSortContext', {
     flex: none;
     width: 300px;
     height: 300px;
-    border: 1px solid var(--vui-border-color-base);
+    border: 1px solid var(--demo-border-color-base);
   }
   .vui-table {
     flex: auto;
     height: 300px;
-    border: 1px solid var(--vui-border-color-base);
+    border: 1px solid var(--demo-border-color-base);
   }
 }
 </style>

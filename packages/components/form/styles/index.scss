@@ -80,10 +80,6 @@
     color: var(--vui-form-error-color);
     content: "*";
   }
-  &-item.is-error {
-    --vui-input-error-border-color: var(--vui-form-error-color);
-    --vui-select-error-border-color: var(--vui-form-error-color);
-  }
   &-error {
     position: absolute;
     top: 100%;

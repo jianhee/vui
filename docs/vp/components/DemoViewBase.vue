@@ -4,12 +4,11 @@
     <!-- label -->
     <div
       class="demo-view-base-label"
-      :class="{ 'is-reverse': start === 'label' }"
       :style="{ width: `${labelWidth}px` }"
     >
-      <code v-if="code">{{ code }}</code>
-      <span v-if="label && code">&nbsp;/&nbsp;</span>
       <span v-if="label">{{ label }}</span>
+      <span v-if="label && code">&nbsp;/&nbsp;</span>
+      <code v-if="code">{{ code }}</code>
     </div>
     <!-- content -->
     <div class="demo-view-base-content">
@@ -22,8 +21,7 @@
 defineProps({
   code: { type: String, default: null },
   label: { type: String, default: null },
-  labelWidth: { type: String, default: null },
-  start: { type: String, default: 'code' }
+  labelWidth: { type: String, default: null }
 });
 </script>
 
@@ -42,10 +40,6 @@ defineProps({
     white-space: nowrap;
     code {
       line-height: 1.4;
-    }
-    &.is-reverse {
-      flex-direction: row-reverse;
-      justify-content: flex-end;
     }
   }
   &-content {

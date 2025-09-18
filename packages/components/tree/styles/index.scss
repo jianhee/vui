@@ -10,6 +10,7 @@
   --vui-tree-font-size: 14px;
   --vui-tree-text-color: var(--vui-text-color-regular);
   --vui-tree-node-active-bg-color: var(--vui-fill-color-light);
+  --vui-tree-inner-icon-color: var(--vui-text-color-placeholder);
 }
 
 // 样式
@@ -48,7 +49,7 @@
     // 图标
     &-expand,
     &-loading {
-      --vui-icon-color: var(--vui-text-color-placeholder);
+      --vui-icon-color: var(--vui-tree-inner-icon-color);
     }
     &-expand {
       --vui-icon-size: 12px;

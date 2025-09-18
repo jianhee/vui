@@ -15,9 +15,12 @@ const colItems = renderCols();
 </script>
 
 <style>
-.demo-table,
-.demo-tables .vui-table {
+.demo-table {
   max-height: 300px;
+}
+.demo-tables .vui-table {
+  height: 300px;
+  border: 1px solid var(--demo-border-color-base);
 }
 .demo-table-cell {
   font-weight: bold;

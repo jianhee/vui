@@ -6,7 +6,7 @@
   // vars
   :root {
     --#{$prefix}-bg-color: var(--vui-bg-color-base);
-    --#{$prefix}-box-shadow: var(--vui-box-shadow-base);
+    --#{$prefix}-shadow: var(--vui-box-shadow-base);
     --#{$prefix}-title-text-color: var(--vui-text-color-primary);
     --#{$prefix}-content-text-color: var(--vui-text-color-regular);
     --#{$prefix}-close-icon-color: var(--vui-text-color-secondary);
@@ -23,7 +23,7 @@
     padding: 16px 0;
     line-height: 24px;
     background-color: var(--#{$prefix}-bg-color);
-    box-shadow: var(--#{$prefix}-box-shadow);
+    box-shadow: var(--#{$prefix}-shadow);
     transition: transform 0.3s ease;
 
     // 顶栏

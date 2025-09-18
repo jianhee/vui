@@ -7,17 +7,22 @@
 :root {
   --vui-select-text-color: var(--vui-text-color-regular);
   --vui-select-placeholder-color: var(--vui-text-color-placeholder);
+  --vui-select-icon-color: var(--vui-text-color-placeholder);
   --vui-select-bg-color: var(--vui-fill-color-blank);
   --vui-select-border-color: var(--vui-border-color-base);
   --vui-select-hover-border-color: var(--vui-text-color-disabled);
   --vui-select-focus-border-color: var(--vui-color-brand-base);
 }
 
+// error
+.vui-form-item.is-error .vui-select {
+  --vui-select-border-color: var(--vui-form-error-color);
+  --vui-select-hover-border-color: var(--vui-form-error-color);
+  --vui-select-focus-border-color: var(--vui-form-error-color);
+}
+
 // 样式
 .vui-select {
-  // 图标颜色
-  --vui-icon-color: var(--vui-text-color-placeholder);
-
   // 容器
   display: flex;
   gap: 6px;
@@ -26,21 +31,21 @@
   color: var(--vui-select-text-color);
   cursor: pointer;
   background-color: var(--vui-select-bg-color);
-  border: 1px solid var(--vui-select-error-border-color, var(--vui-select-border-color));
+  border: 1px solid var(--vui-select-border-color);
   border-radius: 4px;
   transition: border-color 0.3s ease;
 
   // 状态
-  &:hover {
-    border-color: var(--vui-select-error-border-color, var(--vui-select-hover-border-color));
-  }
-  &.is-focus {
-    border-color: var(--vui-select-error-border-color, var(--vui-select-focus-border-color));
+  &:not(.is-disabled) {
+    &:hover {
+      border-color: var(--vui-select-hover-border-color);
+    }
+    &.is-focus {
+      border-color: var(--vui-select-focus-border-color);
+    }
   }
   &.is-disabled {
     @include mixins.vui-disabled;
-
-    border-color: var(--vui-select-border-color) !important;
   }
 
   // 占位文字
@@ -54,6 +59,11 @@
 
     flex: auto;
     height: 100%;
+  }
+
+  // 图标
+  &-icon--arrow {
+    --vui-icon-color: var(--vui-select-icon-color);
   }
 
   // 尺寸

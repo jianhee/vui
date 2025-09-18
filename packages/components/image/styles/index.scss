@@ -3,7 +3,8 @@
 
 // vars
 :root {
-  --vui-image-bg-color: var(--vui-fill-color-base);
+  --vui-image-error-bg-color: var(--vui-fill-color-base);
+  --vui-image-error-icon-color: var(--vui-text-color-secondary);
 }
 
 // 样式
@@ -23,13 +24,13 @@
   // 失败状态
   &-error {
     --vui-icon-size: 24px;
-    --vui-icon-color: var(--vui-text-color-secondary);
+    --vui-icon-color: var(--vui-image-error-icon-color);
 
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100%;
-    background-color: var(--vui-image-bg-color);
+    background-color: var(--vui-image-error-bg-color);
   }
 
   // 内容

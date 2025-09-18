@@ -41,7 +41,7 @@ export const useIcon = ({ props }) => {
     '--vui-icon-color': props.color,
     '--vui-icon-two-tone-color': props.twoToneColor,
     '--vui-icon-size': addUnit(props.size, 'px'),
-    '--vui-icon-rotate': addUnit(props.rotate, 'deg')
+    '--vui-icon-transform': props.rotate ? `rotate(${addUnit(props.rotate, 'deg')})` : null
   }));
 
   // 图标属性

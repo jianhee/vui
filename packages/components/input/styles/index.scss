@@ -5,19 +5,35 @@
 
 // vars
 :root {
+  // wrapper
   --vui-input-text-color: var(--vui-text-color-regular);
   --vui-input-bg-color: var(--vui-fill-color-blank);
   --vui-input-border-color: var(--vui-border-color-base);
   --vui-input-hover-border-color: var(--vui-text-color-disabled);
   --vui-input-focus-border-color: var(--vui-color-brand-base);
+  --vui-input-count-text-color: var(--vui-text-color-secondary);
+
+  // prepend
   --vui-input-prepend-text-color: var(--vui-text-color-info);
   --vui-input-prepend-bg-color: var(--vui-fill-color-light);
+  --vui-input-prepend-border-color: var(--vui-border-color-base);
+
+  // icon
+  --vui-input-custom-icon-color: var(--vui-text-color-placeholder);
+  --vui-input-inner-icon-color: var(--vui-text-color-secondary);
+}
+
+// error
+.vui-form-item.is-error .vui-input {
+  --vui-input-border-color: var(--vui-form-error-color);
+  --vui-input-hover-border-color: var(--vui-form-error-color);
+  --vui-input-focus-border-color: var(--vui-form-error-color);
 }
 
 // 样式
 .vui-input {
   // 图标颜色
-  --vui-icon-color: var(--vui-text-color-placeholder);
+  --vui-icon-color: var(--vui-input-custom-icon-color);
 
   // 容器
   display: flex;
@@ -33,7 +49,7 @@
     padding: 0 16px;
     color: var(--vui-input-prepend-text-color);
     background-color: var(--vui-input-prepend-bg-color);
-    border: 1px solid var(--vui-input-border-color);
+    border: 1px solid var(--vui-input-prepend-border-color);
   }
   &-prepend {
     border-right: 0;
@@ -56,20 +72,20 @@
     color: var(--vui-input-text-color);
     cursor: text;
     background-color: var(--vui-input-bg-color);
-    border: 1px solid var(--vui-input-error-border-color, var(--vui-input-border-color));
+    border: 1px solid var(--vui-input-border-color);
     border-radius: 4px;
     transition: border-color 0.3s ease;
+  }
+  &:not(.is-disabled) &-wrapper {
     &:hover {
-      border-color: var(--vui-input-error-border-color, var(--vui-input-hover-border-color));
+      border-color: var(--vui-input-hover-border-color);
     }
     &.is-focus {
-      border-color: var(--vui-input-error-border-color, var(--vui-input-focus-border-color));
+      border-color: var(--vui-input-focus-border-color);
     }
   }
   &.is-disabled &-wrapper {
     @include mixins.vui-disabled;
-
-    border-color: var(--vui-input-error-border-color, var(--vui-input-border-color)) !important;
   }
   &--prepend &-wrapper {
     border-top-left-radius: 0;
@@ -94,7 +110,8 @@
 
   // 统计字数
   &-count {
-    color: var(--vui-text-color-secondary);
+    font-size: 12px;
+    color: var(--vui-input-count-text-color);
     white-space: nowrap;
   }
 
@@ -103,7 +120,7 @@
   &-icon--password {
     --vui-icon-cursor: pointer;
     &:hover {
-      --vui-icon-color: var(--vui-text-color-secondary);
+      --vui-icon-color: var(--vui-input-inner-icon-color);
     }
   }
 

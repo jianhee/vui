@@ -8,9 +8,8 @@
   --vui-menu-font-size: 14px;
   --vui-menu-text-color: var(--vui-text-color-regular);
   --vui-menu-divider-color: var(--vui-border-color-lighter);
-  --vui-menu-item-hover-text-color: var(--vui-color-brand-base);
-  --vui-menu-item-hover-bg-color: var(--vui-color-brand-a10);
-  --vui-menu-item-active-text-color: var(--vui-color-brand-base);
+  --vui-menu-hover-bg-color: var(--vui-color-brand-a10);
+  --vui-menu-active-text-color: var(--vui-color-brand-base);
 }
 
 // 样式
@@ -25,11 +24,11 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
     &:hover {
-      color: var(--vui-menu-item-hover-text-color);
-      background-color: var(--vui-menu-item-hover-bg-color);
+      background-color: var(--vui-menu-hover-bg-color);
     }
+    &:hover,
     &.is-active {
-      color: var(--vui-menu-item-active-text-color);
+      color: var(--vui-menu-active-text-color);
     }
   }
   &-label {

@@ -1,9 +1,17 @@
+/* stylelint-disable no-duplicate-selectors */
 // 自定义样式
-// https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/vars.css
-
-// vars
 :root {
-  // vitepress
+  --demo-filed-width: 240px;
+  --demo-filed-gap: 18px;
+  --demo-text-color-primary: var(--vui-text-color-primary);
+  --demo-text-color-regular: var(--vui-text-color-regular);
+  --demo-border-color-base: var(--vui-border-color-base);
+  --demo-view-bg-color: var(--vui-bg-color-page);
+}
+
+// 覆盖 vitepress 样式
+// https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/vars.css
+:root {
   --vp-layout-max-width: 100vw;
   --vp-home-hero-name-color: transparent;
   --vp-home-hero-name-background: linear-gradient(120deg, #bd34fe 30%, #41d1ff);
@@ -13,27 +21,15 @@
   --vp-custom-block-tip-border: var(--vui-color-brand-base);
   --vp-custom-block-info-border: var(--vui-border-color-base);
   --vp-custom-block-warning-border: var(--vui-color-warning);
-
-  // demo
-  --demo-filed-width: 240px;
-  --demo-filed-gap: 18px;
 }
-
-// vitepress
 body {
-  color: var(--vui-text-color-regular);
+  color: var(--demo-text-color-regular);
 }
 code,
 th,
 td:first-child,
 td:last-child {
   white-space: nowrap;
-}
-.vp-doc a.vui-btn {
-  font-weight: normal;
-  color: var(--vui-btn-text-color);
-  text-decoration: none;
-  transition: all 0.3s ease;
 }
 .vp-doc th,
 .vp-doc td {
@@ -43,7 +39,7 @@ td:last-child {
 .vp-doc tr {
   background-color: transparent !important;
   border-top: 0;
-  border-bottom: 1px solid var(--vui-border-color-base);
+  border-bottom: 1px solid var(--vp-c-divider);
 }
 .custom-block {
   border: 0;
@@ -53,11 +49,19 @@ td:last-child {
   max-width: 1200px !important;
 }
 
-// demo
+// 覆盖 demo-preview 插件样式
 .vitepress-demo-preview-preview,
 .vitepress-demo-plugin-preview {
   padding-bottom: 20px !important;
 }
 .vitepress-demo-preview-source > div {
   border-top: 1px dashed var(--component-preview-border);
+}
+
+// 覆盖冲突样式
+.vp-doc a.vui-btn {
+  font-weight: normal;
+  color: var(--vui-btn-text-color);
+  text-decoration: none;
+  transition: all 0.3s ease;
 }

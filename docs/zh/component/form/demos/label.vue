@@ -61,7 +61,7 @@
       </DemoViewTop>
       <DemoViewTop
         label="标签宽度"
-        code="form.labelWidth"
+        code="formItem.labelWidth"
       >
         <DemoValue
           v-model:value="formItemProps.labelWidth"

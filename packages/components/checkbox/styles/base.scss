@@ -8,9 +8,9 @@
   // vars
   :root {
     --#{$prefix}-default-text-color: var(--vui-text-color-regular);
+    --#{$prefix}-default-icon-inner-color: var(--vui-color-white);
     --#{$prefix}-btn-text-color: var(--vui-text-color-primary);
     --#{$prefix}-btn-checked-text-color: var(--vui-color-white);
-    --#{$prefix}-icon-inner-color: var(--vui-color-white);
     --#{$prefix}-fill-color: var(--vui-fill-color-blank);
     --#{$prefix}-border-color: var(--vui-border-color-base);
     --#{$prefix}-active-color: var(--vui-color-brand-base);
@@ -146,7 +146,7 @@
         }
       }
       &.is-checked &-icon::after {
-        border-color: var(--#{$prefix}-icon-inner-color);
+        border-color: var(--#{$prefix}-default-icon-inner-color);
         transform: translate(-45%, -60%) rotate(45deg) scaleY(1);
       }
     }
@@ -163,7 +163,7 @@
         }
       }
       &.is-checked &-icon::after {
-        background-color: var(--#{$prefix}-icon-inner-color);
+        background-color: var(--#{$prefix}-default-icon-inner-color);
         transform: translate(-50%, -50%) scale(1);
       }
     }

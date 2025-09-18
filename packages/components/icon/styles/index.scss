@@ -13,7 +13,7 @@
   vertical-align: top; /* 消除父元素间距 */
   color: var(--vui-icon-color, currentColor);
   cursor: var(--vui-icon-cursor);
-  transform: rotate(var(--vui-icon-rotate, 0));
+  transform: var(--vui-icon-transform);
   transition: all 0.3s ease;
   > svg {
     width: 100%;

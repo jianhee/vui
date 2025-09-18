@@ -22,6 +22,6 @@ const treeData = inject('demoTreeData', _treeData);
 .demo-tree,
 .demo-trees .vui-tree {
   height: 300px;
-  border: 1px solid var(--vui-border-color-base);
+  border: 1px solid var(--demo-border-color-base);
 }
 </style>

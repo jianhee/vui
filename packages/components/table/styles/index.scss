@@ -12,7 +12,9 @@
   --vui-table-header-text-color: var(--vui-text-color-primary);
   --vui-table-row-striped-bg-color: var(--vui-fill-color-lighter);
   --vui-table-row-active-bg-color: var(--vui-fill-color-light);
+  --vui-table-dragbox-handle-color: var(--vui-border-color-base);
   --vui-table-sorter-color: var(--vui-text-color-placeholder);
+  --vui-table-sorter-active-color: var(--vui-color-brand-base);
   --vui-table-select-rect-bg-color: var(--vui-color-brand-a10);
   --vui-table-select-rect-border-color: var(--vui-color-brand-base);
 }
@@ -83,7 +85,7 @@
       bottom: 5px;
     }
     &:hover .vui-dragbox-handle {
-      --vui-dragbox-handle-color: var(--vui-border-color-base);
+      --vui-dragbox-handle-color: var(--vui-table-dragbox-handle-color);
     }
 
     // 排序
@@ -110,7 +112,7 @@
         border-top-color: var(--vui-table-sorter-color);
       }
       &.is-active {
-        --vui-table-sorter-color: var(--vui-color-brand-base);
+        --vui-table-sorter-color: var(--vui-table-sorter-active-color);
       }
       &:hover {
         transform: scale(1.2);

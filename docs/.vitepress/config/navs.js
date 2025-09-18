@@ -2,6 +2,7 @@
 export const headerNavs = [
   { text: '起步', link: '/start/install', activeMatch: '/start/' },
   { text: '组件', link: '/component/icon/', activeMatch: '/component/' },
+  { text: '图标', link: '/icon/', activeMatch: '/icon/' },
   {
     text: 'TUDO',
     items: [
@@ -79,6 +80,7 @@ export const sidebarNavs = {
       items: [{ text: 'Dragbox 拖拽框', link: '/component/dragbox/' }]
     }
   ],
+  '/icon/': [{ text: '图标', link: '/icon/' }],
   '/plugin/': [
     { text: '国际化', link: '/plugin/i18n/' },
     { text: '消息提示', link: '/plugin/toast/' }

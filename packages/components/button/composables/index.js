@@ -36,17 +36,17 @@ export const useButton = ({ props }) => {
 
   // 根元素属性
   const rootAttrs = computed(() => {
+    const isLink = props.type === 'link';
     return {
       type: props.href ? null : 'button',
-      disabled: props.disabled || props.loading ? true : null,
+      disabled: isLink ? null : props.disabled || props.loading,
       href: props.href,
-      class: [
-        `vui-btn--${props.type}`,
-        {
-          [`vui-btn--${props.size}`]: props.type !== 'link',
-          'vui-btn--block': props.block || !props.inline
-        }
-      ],
+      class: {
+        [`vui-btn--${props.type}`]: !!props.type,
+        [`vui-btn--${props.size}`]: !isLink,
+        'vui-btn--block': props.block || !props.inline,
+        'is-disabled': props.disabled || props.loading
+      },
       style: {
         '--vui-btn-radius': addUnit(props.radius, 'px')
       }

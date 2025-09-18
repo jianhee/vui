@@ -2,30 +2,29 @@
   <div class="demo-icons">
     <DemoViewTop
       label="使用图标属性"
-      code="props.icon=name|component"
-      start="label"
+      code="props.icon=name"
     >
-      <DemoSpace>
-        <VIcon
-          v-for="iconName in iconNames"
-          :key="iconName"
-          :icon="iconName"
-          v-bind="$attrs"
-        />
-      </DemoSpace>
-      <DemoSpace>
-        <VIcon
-          v-for="iconComponent in iconComponents"
-          :key="iconComponent"
-          :icon="iconComponent"
-          v-bind="$attrs"
-        />
-      </DemoSpace>
+      <VIcon
+        v-for="iconName in iconNames"
+        :key="iconName"
+        :icon="iconName"
+        v-bind="$attrs"
+      />
     </DemoViewTop>
     <DemoViewTop
-      label="使用图标名称"
+      label="使用图标属性"
+      code="props.icon=component"
+    >
+      <VIcon
+        v-for="iconComponent in iconComponents"
+        :key="iconComponent"
+        :icon="iconComponent"
+        v-bind="$attrs"
+      />
+    </DemoViewTop>
+    <DemoViewTop
+      label="使用名称属性"
       code="props.name=xxx"
-      start="label"
     >
       <VIcon
         v-for="iconName in iconNames"
@@ -35,9 +34,8 @@
       />
     </DemoViewTop>
     <DemoViewTop
-      label="使用图标组件"
+      label="使用组件属性"
       code="props.component=xxx"
-      start="label"
     >
       <VIcon
         v-for="iconComponent in iconComponents"
@@ -49,7 +47,6 @@
     <DemoViewTop
       label="使用默认插槽"
       code="slots.default"
-      start="label"
     >
       <VIcon
         v-for="iconComponent in iconComponents"
