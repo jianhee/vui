@@ -1,5 +1,6 @@
 // 国际化语言：依赖 vue-i18n
 import { createI18n } from 'vue-i18n';
+import { ssrBrowser } from '../utils/browser';
 
 // 实例
 let i18n = null;
@@ -14,8 +15,8 @@ export const setupI18n = (vueApp, options = {}) => {
   i18n = createI18n({
     // 不使用 Vue 2 的兼容模式
     legacy: false,
-    // 当前语言：匹配浏览器主语言 'zh-CN' -> 'zh'，默认 en
-    locale: navigator.language.split('-')[0] || 'en',
+    // 当前语言：比如 'en'、'zh'
+    locale: ssrBrowser.langShort,
     // 备用语言：当前语言不存在对应的 messages 时使用
     fallbackLocale: 'en',
     // 其他配置项
