@@ -102,7 +102,7 @@ export const useAllSelection = ({ selectable, ctrlASelectable, modelSelectedRowI
   };
 
   // ctrl+a 切换全选
-  useEventListener(window, 'keydown', event => {
+  useEventListener('keydown', event => {
     if (!selectable) return;
     if (!ctrlASelectable) return;
     if (!rowItemsRef.value?.length) return;

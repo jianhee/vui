@@ -107,7 +107,7 @@ export const useDragSortItem = ({ dragFlagRef, dragSortable, canDropInto, rawIte
     });
 
     // 处理拖拽到组件外部的情况
-    clearEvent = useEventListener(window, 'dragenter', clearTargetData);
+    clearEvent = useEventListener('dragenter', clearTargetData);
   }
 
   // drag     拖拽过程中持续触发（每几百毫秒）

@@ -50,8 +50,8 @@ export const useDragSelect = ({ dragFlagRef, dragSelectAreaWidth, parentElRef, r
     };
     mouseCurrentPos.value = { ...mouseStartPos.value };
 
-    clearEvent1 = useEventListener(window, 'mousemove', onSelecting);
-    clearEvent2 = useEventListener(window, 'mouseup', onSelectStop);
+    clearEvent1 = useEventListener('mousemove', onSelecting);
+    clearEvent2 = useEventListener('mouseup', onSelectStop);
   });
 
   // 框选中

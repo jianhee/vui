@@ -14,6 +14,7 @@ npm i -D vite-plugin-svg-icons
 
 ```js [vite.config.js]
 import path from 'path';
+import { defineConfig } from 'vite';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 
 export default defineConfig({
@@ -54,6 +55,7 @@ npm i -D vite-svg-loader
 2. 配置插件
 
 ```js [vite.config.js]
+import { defineConfig } from 'vite';
 import svgLoader from 'vite-svg-loader';
 
 export default defineConfig({

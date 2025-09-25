@@ -7,6 +7,9 @@
 给本地路径设置一个别名，然后在项目中使用别名即可
 
 ```js [vite.config.js]
+import { fileURLToPath, URL } from 'node:url';
+import { defineConfig } from 'vite';
+
 export default defineConfig({
   resolve: {
     alias: {

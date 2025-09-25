@@ -30,8 +30,8 @@ export const useDragResize = ({ boxElRef, dragFlagRef, props, modelLeft, modelTo
     boxStartSize = { width: offsetWidth, height: offsetHeight };
     boxIsFixed = position === 'fixed';
 
-    clearEvent1 = useEventListener(window, 'mousemove', onResizing);
-    clearEvent2 = useEventListener(window, 'mouseup', onResizeStop);
+    clearEvent1 = useEventListener('mousemove', onResizing);
+    clearEvent2 = useEventListener('mouseup', onResizeStop);
   }
 
   // 缩放中

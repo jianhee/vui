@@ -25,8 +25,8 @@ export const useDragMove = ({ boxElRef, dragFlagRef, props, modelLeft, modelTop 
     mouseStartPos = { x: e.clientX, y: e.clientY };
     boxStartPos = { x: boxRect.left, y: boxRect.top };
 
-    clearEvent1 = useEventListener(window, 'mousemove', onMoving);
-    clearEvent2 = useEventListener(window, 'mouseup', onMoveStop);
+    clearEvent1 = useEventListener('mousemove', onMoving);
+    clearEvent2 = useEventListener('mouseup', onMoveStop);
   });
 
   // 移动中

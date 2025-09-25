@@ -7,7 +7,6 @@ export const headerNavs = [
     text: 'TUDO',
     items: [
       { text: '指南', link: '/guild/' },
-      { text: '图标', link: '/icon/' },
       { text: '插件', link: '/plugin/' },
       { text: '工具函数', link: '/util/' },
       { text: '组合式函数', link: '/composable/' }
@@ -23,10 +22,12 @@ export const socialLinks = [
 
 // 侧边栏导航
 export const sidebarNavs = {
+  // 起步
   '/start/': [
     { text: '安装', link: '/start/install' },
     { text: '使用', link: '/start/usage' }
   ],
+  // 组件
   '/component/': [
     {
       text: '基础组件',
@@ -80,13 +81,6 @@ export const sidebarNavs = {
       items: [{ text: 'Dragbox 拖拽框', link: '/component/dragbox/' }]
     }
   ],
-  '/icon/': [{ text: '图标', link: '/icon/' }],
-  '/plugin/': [
-    { text: '国际化', link: '/plugin/i18n/' },
-    { text: '消息提示', link: '/plugin/toast/' }
-  ],
-  '/util/': [
-    { text: '字符串', link: '/utils/string/' },
-    { text: '数组', link: '/utils/array/' }
-  ]
+  // 图标
+  '/icon/': [{ text: '图标', link: '/icon/' }]
 };
