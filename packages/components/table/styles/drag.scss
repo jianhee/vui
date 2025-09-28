@@ -6,7 +6,7 @@
 @mixin vui-drag($prefix1, $prefix2) {
   // vars
   :root {
-    --#{$prefix1}-#{$prefix2}-drop-bg-color: var(--vui-color-brand-a10);
+    --#{$prefix1}-#{$prefix2}-drop-bg-color: var(--vui-color-brand-a1);
     --#{$prefix1}-#{$prefix2}-drop-border-color: var(--vui-color-brand-base);
     --#{$prefix1}-#{$prefix2}-drag-icon-color: var(--vui-text-color-placeholder);
   }

@@ -1,0 +1,101 @@
+// vars 工具
+@use "sass:map";
+@use "sass:string";
+@use "sass:math";
+@use "sass:color";
+
+// 命名空间
+$namespace: "vui" !default;
+
+// 生成变量的键值对
+@mixin set-var-key-value(
+  // 变量名的组成部分：("color","brand","base")
+  $name-items,
+  // 变量值：#458ff3
+  $value
+) {
+  $name: $namespace;
+
+  @each $name-item in $name-items {
+    @if $name-item != "" {
+      $name: #{$name}-#{$name-item};
+    }
+  }
+
+  // --vui-color-brand-base: #458ff3;
+  --#{$name}: #{$value};
+}
+
+// 生成主色/辅助色的梯度颜色变量
+@mixin set-main-color-var(
+  // 规则名："color"
+  $rule-name,
+  // 基础颜色映射：(brand: #458ff3, success: #67c23a, ...)
+  $base-colors,
+  // 和基础颜色混合的颜色：#fff
+  $mix-color
+) {
+  @each $key, $base-color in $base-colors {
+    // 基础色
+    // --vui-color-brand-base: #458ff3;
+    @include set-var-key-value(($rule-name, $key, "base"), $base-color);
+
+    // 混合色
+    @for $number from 1 through 9 {
+      // 数字1计算的比例为 1 / 10 * 100% = 10%
+      // 表示10%基础色+90%其它颜色
+      $percentage: math.percentage(math.div($number, 10));
+      $mixed-color: color.mix($base-color, $mix-color, $percentage);
+
+      // --vui-color-brand-a1: rgb(236.4, 243.8, 253.8);
+      @include set-var-key-value(($rule-name, $key, "a#{$number}"), $mixed-color);
+    }
+  }
+}
+
+// 生成中性色的梯度颜色变量
+@mixin set-middle-color-var(
+  // 规则名："text-color"、"border-color"
+  $rule-name,
+  // 基础颜色：#f0f5ff
+  $base-color,
+  // 透明度映射：(primary: 0.95, regular: 0.85)
+  $base-opacitys,
+  // 和基础颜色混合的颜色：#141414
+  $mix-color
+) {
+  @each $key, $opacity in $base-opacitys {
+    @if $opacity == transparent {
+      @include set-var-key-value(($rule-name, $key), transparent);
+    } @else {
+      // 基础色=>rgba
+      $rgba-color: rgba($base-color, $opacity);
+
+      // rgba=>rgb
+      $red: color.channel($rgba-color, "red") * $opacity + color.channel($mix-color, "red") * (1 - $opacity);
+      $green: color.channel($rgba-color, "green") * $opacity + color.channel($mix-color, "green") * (1 - $opacity);
+      $blue: color.channel($rgba-color, "blue") * $opacity + color.channel($mix-color, "blue") * (1 - $opacity);
+      $mix-rgb: rgb($red, $green, $blue);
+
+      // rgb=>hex
+      $mix-hex: string.unquote("#" + #{string.slice(color.ie-hex-str($mix-rgb), 4)});
+
+      // --vui-text-color-primary: #E5EAF3;
+      @include set-var-key-value(($rule-name, $key), $mix-hex);
+    }
+  }
+}
+
+// 生成其它无需特殊处理的变量
+// set-base-var("text-color", (primary: #303133, regular: #606266, ...))
+@mixin set-base-var(
+  // 规则名："font-family"、"text-color"、"border-color"
+  $rule-name,
+  // 值映射：(primary: #303133, regular: #606266, ...)
+  $values
+) {
+  @each $key, $value in $values {
+    // --vui-text-color-primary: #303133;
+    @include set-var-key-value(($rule-name, $key), $value);
+  }
+}

@@ -1,0 +1,79 @@
+// vars 暗色部分
+@use "sass:map";
+@use "./vars-utils" as mixin;
+
+$type-colors: (
+  brand: #6f8cb4,
+  primary: #6f8cb4
+);
+$text-color-base: #f0f5ff;
+$text-colors: (
+  primary: 0.95,
+  regular: 0.85,
+  secondary: 0.65,
+  placeholder: 0.55,
+  disabled: 0.4
+);
+$bg-color-base: #141414;
+$bg-colors: (
+  page: #0a0a0a,
+  base: $bg-color-base,
+  overlay: #1d1e1f
+);
+$fill-color-base: #fafcff;
+$fill-colors: (
+  darker: 0.2,
+  dark: 0.16,
+  base: 0.12,
+  light: 0.08,
+  lighter: 0.04,
+  extra-light: 0.02,
+  blank: transparent
+);
+$border-color-base: #f5f8ff;
+$border-colors: (
+  darker: 0.35,
+  dark: 0.3,
+  base: 0.25,
+  light: 0.2,
+  lighter: 0.15,
+  extra-light: 0.1
+);
+$box-shadows: (
+  dark: (
+    0px 16px 48px 16px rgb(0 0 0 / 72%),
+    0px 12px 32px #000,
+    0px 8px 16px -8px #000
+  ),
+  base: (
+    0px 12px 32px 4px rgb(0 0 0 / 36%),
+    0px 8px 20px rgb(0 0 0 / 72%)
+  ),
+  light: (
+    0px 0px 12px rgb(0 0 0 / 72%)
+  ),
+  lighter: (
+    0px 0px 6px rgb(0 0 0 / 72%)
+  )
+);
+
+// 生成变量
+@mixin vui-vars-dark {
+  color-scheme: dark;
+
+  @include mixin.set-main-color-var("color", $type-colors, $bg-color-base);
+  @include mixin.set-middle-color-var("text-color", $text-color-base, $text-colors, $bg-color-base);
+  @include mixin.set-base-var("bg-color", $bg-colors);
+  @include mixin.set-middle-color-var("fill-color", $fill-color-base, $fill-colors, $bg-color-base);
+  @include mixin.set-middle-color-var("border-color", $border-color-base, $border-colors, $bg-color-base);
+  @include mixin.set-base-var("box-shadow", $box-shadows);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    @include vui-vars-dark;
+  }
+}
+html.dark {
+  @include vui-vars-dark;
+}

@@ -30,6 +30,10 @@ export const sidebarNavs = {
   // 组件
   '/component/': [
     {
+      text: '全局配置',
+      items: [{ text: 'Color 颜色', link: '/component/color/' }]
+    },
+    {
       text: '基础组件',
       items: [
         { text: 'Icon 图标', link: '/component/icon/' },

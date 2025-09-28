@@ -1,0 +1,110 @@
+// vars 亮色+通用部分
+@use "sass:map";
+@use "./vars-utils" as mixin;
+
+$font-family: (
+  "": "Inter,Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,微软雅黑,Arial,sans-serif"
+);
+$basic-colors: (
+  white: #fff,
+  black: #000
+);
+$type-colors: (
+  brand: #458ff3,
+  primary: #458ff3,
+  success: #67c23a,
+  warning: #e6a23c,
+  error: #f56c6c,
+  danger: #f56c6c,
+  info: #909399
+);
+$text-colors: (
+  primary: #303133,
+  regular: #606266,
+  secondary: #909399,
+  placeholder: #a8abb2,
+  disabled: #c0c4cc
+);
+$bg-colors: (
+  page: #f2f3f5,
+  base: #fff,
+  overlay: #fff
+);
+$fill-colors: (
+  darker: #e6e8eb,
+  dark: #ebedf0,
+  base: #f0f2f5,
+  light: #f5f7fa,
+  lighter: #fafafa,
+  extra-light: #fafcff,
+  blank: #fff
+);
+$border-colors: (
+  dark: #d4d7de,
+  darker: #cdd0d6,
+  base: #dcdfe6,
+  light: #e4e7ed,
+  lighter: #ebeef5,
+  extra-light: #f2f6fc
+);
+$box-shadows: (
+  dark: (
+    0px 16px 48px 16px rgb(0 0 0 / 8%),
+    0px 12px 32px rgb(0 0 0 / 12%),
+    0px 8px 16px -8px rgb(0 0 0 / 16%)
+  ),
+  base: (
+    0px 12px 32px 4px rgb(0 0 0 / 4%),
+    0px 8px 20px rgb(0 0 0 / 8%)
+  ),
+  light: (
+    0px 0px 12px rgb(0 0 0 / 12%)
+  ),
+  lighter: (
+    0px 0px 6px rgb(0 0 0 / 12%)
+  )
+);
+$mask-colors: (
+  base: rgb(0 0 0 / 80%),
+  light: rgb(0 0 0 / 70%),
+  lighter: rgb(0 0 0 / 50%)
+);
+
+// 生成变量
+@mixin vui-vars-light {
+  color-scheme: light;
+
+  // --vui-font-family: "Segoe UI", tahoma, geneva, verdana, "Microsoft YaHei", sans-serif;
+  @include mixin.set-base-var("font-family", $font-family);
+
+  // --vui-color-white: #fff;
+  @include mixin.set-base-var("color", $basic-colors);
+
+  // --vui-color-brand-base: #458ff3;
+  // --vui-color-brand-a1: rgb(236.4, 243.8, 253.8);
+  @include mixin.set-main-color-var("color", $type-colors, map.get($bg-colors, "base"));
+
+  // --vui-text-color-primary: #303133;
+  @include mixin.set-base-var("text-color", $text-colors);
+
+  // --vui-bg-color-base: #fff;
+  @include mixin.set-base-var("bg-color", $bg-colors);
+
+  // --vui-fill-color-darker: #e6e8eb;
+  @include mixin.set-base-var("fill-color", $fill-colors);
+
+  // --vui-border-color-dark: #d4d7de;
+  @include mixin.set-base-var("border-color", $border-colors);
+
+  // --vui-box-shadow-light: 0px 0px 12px rgba(0, 0, 0, 0.12);
+  @include mixin.set-base-var("box-shadow", $box-shadows);
+
+  // --vui-mask-color-base: rgba(0, 0, 0, 0.8);
+  @include mixin.set-base-var("mask-color", $mask-colors);
+}
+:root {
+  @include vui-vars-light;
+}
+html.light {
+  @include vui-vars-light;
+}
