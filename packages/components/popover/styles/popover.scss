@@ -1,0 +1,80 @@
+// 弹出框
+// ----------------------------------------
+
+// vars
+:root {
+  --vui-popover-padding: 8px 12px;
+  --vui-popover-text-color: var(--vui-text-color-regular);
+  --vui-popover-bg-color: var(--vui-bg-color-overlay);
+  --vui-popover-border-color: var(--vui-border-color-light);
+  --vui-popover-shadow: var(--vui-box-shadow-light);
+}
+
+// 样式
+.vui-popover {
+  // 容器
+  position: fixed;
+  z-index: 999;
+  transition: opacity 0.15s ease;
+  &-enter-from,
+  &-leave-to {
+    opacity: 0;
+  }
+
+  // 内容
+  &-content {
+    padding: var(--vui-popover-padding);
+    overflow: auto;
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--vui-popover-text-color);
+    background-color: var(--vui-popover-bg-color);
+    border: 1px solid var(--vui-popover-border-color);
+    border-radius: 4px;
+    box-shadow: var(--vui-popover-shadow);
+  }
+
+  // 三角形
+  &-arrow,
+  &-arrow::before {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+  }
+  &-arrow::before {
+    content: "";
+    background-color: var(--vui-popover-bg-color);
+    border: 1px solid var(--vui-popover-border-color);
+    transform: rotate(45deg);
+  }
+
+  // 位置
+  &[data-popper-placement^="top"] > &-arrow {
+    bottom: -4px;
+    &::before {
+      border-top-color: transparent;
+      border-left-color: transparent;
+    }
+  }
+  &[data-popper-placement^="bottom"] > &-arrow {
+    top: -4px;
+    &::before {
+      border-right-color: transparent;
+      border-bottom-color: transparent;
+    }
+  }
+  &[data-popper-placement^="left"] > &-arrow {
+    right: -4px;
+    &::before {
+      border-bottom-color: transparent;
+      border-left-color: transparent;
+    }
+  }
+  &[data-popper-placement^="right"] > &-arrow {
+    left: -4px;
+    &::before {
+      border-top-color: transparent;
+      border-right-color: transparent;
+    }
+  }
+}
