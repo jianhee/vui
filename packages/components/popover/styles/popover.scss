@@ -13,7 +13,6 @@
 // 样式
 .vui-popover {
   // 容器
-  position: fixed;
   z-index: 999;
   transition: opacity 0.15s ease;
   &-enter-from,
@@ -34,10 +33,11 @@
     box-shadow: var(--vui-popover-shadow);
   }
 
-  // 三角形
+  // 箭头
   &-arrow,
   &-arrow::before {
     position: absolute;
+    z-index: 1;
     width: 8px;
     height: 8px;
   }

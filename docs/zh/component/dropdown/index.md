@@ -1,38 +1,71 @@
-# Dropdown 下拉框
+# Dropdown 下拉菜单
 
 ## 示例
 
 ### 基础用法
 
-下拉框由 `default` 插槽（触发器）和 `dropdown` 插槽（下拉内容）两部分组成
+- 使用 `items` 属性定义菜单项数组
+- 点击菜单项时触发 `click` 事件
 
 <preview path="./demos/basic.vue"></preview>
 
-### 触发事件
+### 可选中菜单
 
-从打开到关闭依次触发 `open`、`opened` 、`close` 、`closed` 四个事件
+- 使用 `selectable` 属性开启选中功能，使用 `v-model:selectedKey` 属性绑定选中值
+- 选中菜单项时触发 `select` 事件
 
-<preview path="./demos/event.vue"></preview>
-
-### 触发方式
-
-使用 `trigger` 属性定义触发方式
-
-<preview path="./demos/trigger.vue"></preview>
+<preview path="./demos/selectable.vue"></preview>
 
 ### 隐藏方式
 
-使用 `closeOnClickDropdown` 属性定义隐藏方式
-
 <preview path="./demos/close.vue"></preview>
 
-### 下拉方法
+### 控制样式
 
-- 使用 `open()` 方法手动打开下拉框，此时可以省略 `default` 插槽，通常用于多个元素打开同一个下拉框的情况，比如列表项中的右键菜单
-- 使用 `close()` 方法手动关闭下拉框
+<preview path="./demos/style.vue"></preview>
 
-<preview path="./demos/method.vue"></preview>
+### 继承 Popover
+
+<preview path="./demos/popover.vue"></preview>
 
 ## API
 
-<!--@include: ./parts/api.md -->
+下拉菜单依赖 `Popover` 组件，继承 `Popover` 组件的接口和用法
+
+### 属性
+
+| 名称                  | 说明                                                        | 类型                            | 默认值  |
+| --------------------- | ----------------------------------------------------------- | ------------------------------- | ------- |
+| `items\|options`      | 菜单项                                                      | `Array[object\|string\|number]` |         |
+| `selectable`          | 是否可选中 <br> 可选时会记录选中值，所以菜单项的 `key` 必填 | `boolean`                       | `false` |
+| `v-model:selectedKey` | 选中值，即选中项的 `key`                                    | `string\|number`                |         |
+| `closeOnClickItem`    | 是否在点击菜单项时关闭下拉菜单                              | `boolean`                       | `true`  |
+
+### 属性.items
+
+`string|number` 类型的菜单项会格式化为 `{ label }`
+
+| 名称           | 说明           | 类型               | 默认值  |
+| -------------- | -------------- | ------------------ | ------- |
+| `key`          | 唯一标识       | `string\|number`   |         |
+| `label\|title` | 文本           | `string\|number`   |         |
+| `icon`         | 前置图标       | `VIcon.props.icon` |         |
+| `iconProps`    | 前置图标的属性 | `VIcon.props`      |         |
+| `divider`      | 是否添加分隔符 | `boolean`          | `false` |
+
+### 样式属性
+
+<!--@include: @/component/@parts/api-style.md-->
+
+| 名称        | 说明     | 类型（默认单位）      | 默认值 |
+| ----------- | -------- | --------------------- | ------ |
+| `maxWidth`  | 最大宽度 | `string\|number(?px)` |        |
+| `minWidth`  | 最小宽度 | `string\|number(?px)` |        |
+| `maxHeight` | 最大高度 | `string\|number(?px)` |        |
+
+### 事件
+
+| 名称     | 说明                                     | 参数                                                                   |
+| -------- | ---------------------------------------- | ---------------------------------------------------------------------- |
+| `click`  | 点击菜单项时触发                         | `{ item: '当前项', key: '当前项的 key' }`                              |
+| `select` | 选中菜单项时触发，已选中的项不会重复触发 | `{ item: '当前项', key: '当前项的 key', selectedKey: '选中项的 key' }` |

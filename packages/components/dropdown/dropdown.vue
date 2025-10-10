@@ -1,58 +1,58 @@
-<!-- 下拉框 -->
+<!-- 下拉菜单 -->
 <template>
-  <!-- 触发器：可省略 -->
-  <template v-if="$slots.default">
-    <!-- 必须是有效的 html DOM 元素 -->
-    <slot />
-    <!-- 为了获取 slots.default 根元素 -->
-    <span
-      ref="triggerNextElRef"
-      style="display: none"
-    />
-  </template>
-
-  <!-- 下拉框：必填 -->
-  <Teleport to="body">
-    <Transition
-      name="vui-dropdown"
-      @after-enter="onTransitionEnd('enter')"
-      @after-leave="onTransitionEnd('leave')"
+  <VPopover
+    ref="popoverRef"
+    class="vui-dropdown"
+    :style="rootStyles"
+    :placement="placement"
+  >
+    <!-- 触发器：可省略 -->
+    <template
+      v-if="$slots.default"
+      #default
     >
-      <div
-        v-if="dropdownVisible"
-        ref="dropdownElRef"
-        class="vui-dropdown"
-        :style="dropdownStyles"
-        v-bind="$attrs"
-      >
-        <slot name="dropdown" />
-      </div>
-    </Transition>
-  </Teleport>
+      <slot />
+    </template>
+
+    <!-- 下拉框：必填 -->
+    <template #content>
+      <VDropdownItem
+        v-for="(item, index) in dropdownItems"
+        :key="index"
+        :item="item"
+      />
+    </template>
+  </VPopover>
 </template>
 
 <script setup>
-import { useTemplateRef } from 'vue';
-import { useDropdown, dropdownProps, dropdownEmits } from './composables/dropdown';
+import { ref, provide } from 'vue';
+import { useDropdown, dropdownModel, dropdownProps, dropdownEmits } from '../dropdown/composables/dropdown';
+import VPopover from '../popover/popover.vue';
+import VDropdownItem from '../dropdown/dropdown-item.vue';
 
-// 下拉框
-defineOptions({ inheritAttrs: false });
-const triggerNextElRef = useTemplateRef('triggerNextElRef');
-const dropdownElRef = useTemplateRef('dropdownElRef');
+// 下拉菜单
+const popoverRef = ref(null);
+const modelSelectedKey = defineModel('selectedKey', dropdownModel.selectedKey);
 const props = defineProps(dropdownProps);
 const emits = defineEmits(dropdownEmits);
 
-// 使用下拉框
-const { dropdownVisible, dropdownStyles, openByMethod, closeDropdown, onTransitionEnd } = useDropdown({
-  triggerNextElRef,
-  dropdownElRef,
+// 使用下拉菜单
+const { rootStyles, dropdownItems } = useDropdown({ props });
+
+// 打开/关闭下拉菜单
+const open = params => popoverRef.value.open(params);
+const close = params => popoverRef.value.close(params);
+
+// 子组件使用
+provide('vuiDropdownRoot', {
+  modelSelectedKey,
   props,
-  emits
+  emits,
+  open,
+  close
 });
 
-// 下拉框方法
-defineExpose({
-  open: openByMethod,
-  close: closeDropdown
-});
+// 下拉菜单方法
+defineExpose({ open, close });
 </script>

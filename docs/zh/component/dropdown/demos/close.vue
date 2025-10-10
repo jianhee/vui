@@ -1,16 +1,29 @@
 <template>
-  <DemoSpace flex>
-    <VDropdown class="demo-dropdown">
-      <VButton>点击内部不会关闭（默认）</VButton>
-      <template #dropdown>点击内部不会关闭</template>
-    </VDropdown>
+  <DemoView>
+    <template #content>
+      <VDropdown
+        :items="items"
+        :close-on-click-item="closeOnClickItem"
+      >
+        <VButton>hover 触发元素</VButton>
+      </VDropdown>
+    </template>
 
-    <VDropdown
-      close-on-click-dropdown
-      class="demo-dropdown"
-    >
-      <VButton>点击内部可以关闭</VButton>
-      <template #dropdown>点击内部可以关闭</template>
-    </VDropdown>
-  </DemoSpace>
+    <template #props>
+      <DemoViewBoolean
+        label="是否在点击菜单项时关闭下拉菜单"
+        code="closeOnClickItem"
+      >
+        <VSwitch v-model:checked="closeOnClickItem" />
+      </DemoViewBoolean>
+    </template>
+  </DemoView>
 </template>
+
+<script setup>
+import { ref } from 'vue';
+import { renderItems } from '../composables';
+
+const items = renderItems();
+const closeOnClickItem = ref(false);
+</script>

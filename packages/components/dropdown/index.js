@@ -1,2 +1,2 @@
-import './styles/dropdown.scss';
+import './styles/index.scss';
 export { default as VDropdown } from './dropdown.vue';

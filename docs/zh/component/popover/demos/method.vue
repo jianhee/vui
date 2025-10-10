@@ -1,5 +1,5 @@
 <template>
-  <DemoViewTop label="默认调用">
+  <DemoViewTop label="默认通过元素自动触发">
     <VPopover
       ref="popoverRef"
       trigger="contextmenu"
@@ -8,7 +8,7 @@
       <VButton>contextmenu 触发元素</VButton>
     </VPopover>
   </DemoViewTop>
-  <DemoViewTop label="方法调用">
+  <DemoViewTop label="通过方法手动触发">
     <DemoSpace flex>
       <VButton @contextmenu.prevent="openDropdown()">contextmenu 对齐元素</VButton>
       <VButton @contextmenu.prevent="openDropdown">contextmenu 对齐鼠标</VButton>

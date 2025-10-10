@@ -21,11 +21,7 @@ export const popoverProps = {
   // 触发元素：默认使用 default 插槽，可以是 DOM 元素或包含 DOM 元素的组件对象
   triggerElement: { type: [HTMLElement, Object], default: null },
   // 是否禁用
-  disabled: { type: Boolean, default: false },
-
-  /* 以下是其它组件使用的属性，不对外使用 */
-  // 过渡动画名称
-  transitionName: { type: String, default: 'vui-popover' }
+  disabled: { type: Boolean, default: false }
 };
 
 // 使用弹出框

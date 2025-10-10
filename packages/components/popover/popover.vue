@@ -11,7 +11,7 @@
   <!-- 弹出框 -->
   <Teleport to="body">
     <Transition
-      :name="transitionName"
+      name="vui-popover"
       @after-enter="emits('opened')"
       @after-leave="emits('closed')"
     >

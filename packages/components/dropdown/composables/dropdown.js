@@ -1,206 +1,114 @@
-// 下拉框
-import { ref, watch, nextTick, computed } from 'vue';
-import { useEventListener, onClickOutside } from '@vueuse/core';
+// 下拉菜单
+import { computed, inject } from 'vue';
+import { addUnit } from '../../../utils';
 
 // emits
-export const dropdownEmits = ['open', 'opened', 'close', 'closed'];
+export const dropdownEmits = ['click', 'select'];
+
+// v-model
+export const dropdownModel = {
+  // 选中项的 `key`
+  selectedKey: { type: [String, Number], default: null }
+};
 
 // props
 export const dropdownProps = {
-  // 触发方式：hover, click, contextmenu
-  trigger: { type: String, default: 'hover' },
-  // 是否在点击下拉框时关闭
-  closeOnClickDropdown: { type: Boolean, default: false }
+  // 菜单项 `Array[object|string|number]`
+  // - `string|number` 类型的菜单项会格式化为 `{ label }`
+  // - `key` 唯一标识
+  // - `label|title` 文本
+  // - `icon` 前置图标 VIcon.props.icon
+  // - `iconProps` 前置图标的属性 VIcon.props
+  // - `divider` 是否添加分隔符
+  items: { type: Array, default: null },
+  options: { type: Array, default: null },
+  // 是否可选中
+  // 可选时会记录选中值，所以菜单项的 `key` 必填
+  selectable: { type: Boolean, default: false },
+  // 是否在点击菜单项时关闭下拉菜单
+  closeOnClickItem: { type: Boolean, default: true },
+  // ---------- 样式属性 ----------
+  maxWidth: { type: [String, Number], default: null },
+  minWidth: { type: [String, Number], default: null },
+  maxHeight: { type: [String, Number], default: null },
+  // ---------- 继承  VPopover 属性 ----------,
+  placement: { type: String, default: 'bottom' }
 };
 
-// 使用下拉框
-export const useDropdown = ({ triggerNextElRef, dropdownElRef, props, emits }) => {
-  // 参考元素：可以是 1.触发元素 2.下拉方法传入的元素 3.下拉方法传入的事件中的元素
-  const targetElRef = ref(null);
+// 使用下拉菜单
+export const useDropdown = ({ props }) => {
+  // 菜单项
+  const dropdownItems = computed(() => props.options || props.items || []);
 
-  // 通过触发元素打开
-  const triggerElRef = computed(() => triggerNextElRef.value?.previousElementSibling);
-  useEventListener(triggerElRef, 'mouseenter', () => onMouseToggle(triggerElRef.value, 'enter'));
-  useEventListener(triggerElRef, 'mouseleave', () => onMouseToggle(triggerElRef.value, 'leave'));
-  useEventListener(triggerElRef, 'click', () => onClick(triggerElRef.value));
-  useEventListener(triggerElRef, 'contextmenu', event => {
-    event.preventDefault();
-    openByContextmenu(event);
-  });
+  // 根元素样式
+  const rootStyles = computed(() => ({
+    '--vui-dropdown-max-width': addUnit(props.maxWidth, 'px'),
+    '--vui-dropdown-min-width': addUnit(props.minWidth, 'px'),
+    '--vui-dropdown-max-height': addUnit(props.maxHeight, 'px')
+  }));
 
-  // 通过下拉方法打开：传入元素或事件
-  function openByMethod({ el, event }) {
-    const target = el || event.target;
-    if (props.trigger === 'hover') {
-      onMouseToggle(target, 'enter');
-    } else if (props.trigger === 'click') {
-      onClick(target);
-    } else {
-      openByContextmenu(event);
-    }
-  }
-
-  // 下拉元素
-  const dropdownVisible = ref(false);
-  const dropdownStyles = ref(null);
-  const dropdownMargin = 5;
-  useEventListener(dropdownElRef, 'mouseenter', () => onMouseToggle(triggerElRef.value, 'enter'));
-  useEventListener(dropdownElRef, 'mouseleave', () => onMouseToggle(triggerElRef.value, 'leave'));
-  useEventListener(dropdownElRef, 'click', () => {
-    if (props.closeOnClickDropdown) {
-      closeDropdown();
-    }
-  });
-
-  // 点击外部关闭
-  onClickOutside(dropdownElRef, closeDropdown, { ignore: [targetElRef] });
-
-  // hover 打开过关闭
-  let hoverTimer = null;
-  function onMouseToggle(el, type) {
-    if (props.trigger !== 'hover') return;
-    clearTimeout(hoverTimer);
-    hoverTimer = setTimeout(() => {
-      if (type === 'enter') {
-        openByHoverOrClick(el);
-      } else {
-        closeDropdown();
-      }
-    }, 150);
-  }
-
-  // click 打开或关闭
-  function onClick(el) {
-    if (props.trigger !== 'click') return;
-    if (dropdownVisible.value) {
-      closeDropdown();
-    } else {
-      openByHoverOrClick(el);
-    }
-  }
-
-  // hover 和 click 打开：对齐元素
-  function openByHoverOrClick(el) {
-    if (!el) return;
-    targetElRef.value = el;
-    const rect = el.getBoundingClientRect();
-    openDropdown();
-    updatePosition(rect);
-  }
-
-  // contextmenu 只能打开不能关闭：对齐鼠标
-  function openByContextmenu(event) {
-    if (props.trigger !== 'contextmenu') return;
-    if (!event) return;
-    targetElRef.value = event.target;
-    openDropdown();
-    updatePosition({
-      left: event.clientX,
-      right: event.clientX,
-      top: event.clientY,
-      bottom: event.clientY
-    });
-  }
-
-  // 打开下拉框
-  function openDropdown() {
-    // 显示状态
-    if (dropdownVisible.value) return;
-    dropdownVisible.value = true;
-
-    // 监听滚动事件
-    const scrollableParents = getScrollableParents();
-    scrollableParents.forEach(parent => {
-      parent.addEventListener('scroll', closeDropdown, { passive: true });
-    });
-  }
-
-  // 关闭下拉框
-  function closeDropdown() {
-    // 显示状态
-    if (!dropdownVisible.value) return;
-    dropdownVisible.value = false;
-
-    // 移出滚动事件
-    const scrollableParents = getScrollableParents();
-    scrollableParents.forEach(parent => {
-      parent.removeEventListener('scroll', closeDropdown);
-    });
-  }
-
-  // 更新定位
-  async function updatePosition({ left, right, top, bottom }) {
-    // 窗口
-    const { clientWidth: windowWidth, clientHeight: windowHeight } = document.documentElement;
-
-    // 下拉框
-    await nextTick();
-    const { clientWidth: dropdownWidth, clientHeight: dropdownHeight } = dropdownElRef.value;
-
-    // 水平方向：默认对齐左边，超出屏幕则对齐右边
-    let dropdownLeft = left;
-    if (dropdownLeft + dropdownWidth > windowWidth) {
-      dropdownLeft = right - dropdownWidth;
-    }
-
-    // 垂直方向：默认在下方，超出屏幕则在上方
-    let dropdownTop = bottom + dropdownMargin;
-    if (dropdownTop + dropdownHeight > windowHeight) {
-      dropdownTop = top - dropdownMargin - dropdownHeight;
-    }
-
-    // 更新样式
-    dropdownStyles.value = {
-      left: `${Math.max(0, dropdownLeft)}px`,
-      top: `${Math.max(0, dropdownTop)}px`
-    };
-  }
-
-  // 获取所有可滚动的父元素
-  const getScrollableParents = () => {
-    const element = targetElRef.value;
-    const parents = [];
-    let parent = element?.parentElement;
-
-    while (parent) {
-      const style = window.getComputedStyle(parent);
-      const isScrollable = style.overflow === 'auto' || style.overflow === 'scroll' || style.overflowX === 'auto' || style.overflowX === 'scroll' || style.overflowY === 'auto' || style.overflowY === 'scroll';
-
-      if (isScrollable) {
-        parents.push(parent);
-      }
-
-      parent = parent.parentElement;
-    }
-
-    // 始终添加window作为可能的滚动源
-    parents.push(window);
-    return parents;
+  return {
+    rootStyles,
+    dropdownItems
   };
+};
 
-  // 切换显示状态时
-  watch(dropdownVisible, val => {
-    if (val) {
-      emits('open');
+// 使用菜单项
+export const useDropdownItem = ({ item: rawItem }) => {
+  // 父组件
+  const dropdownRoot = inject('vuiDropdownRoot', null);
+
+  // 格式化当前项
+  const formattedItem = computed(() => {
+    if (typeof rawItem === 'object') {
+      return { ...rawItem, label: rawItem.label || rawItem.title };
     } else {
-      emits('close');
+      return { label: rawItem };
     }
   });
 
-  // 动画完成时
-  const onTransitionEnd = type => {
-    if (type === 'enter') {
-      emits('opened');
+  // 当前项是否选中
+  const isSelected = computed(() => {
+    if (dropdownRoot.props.selectable) {
+      return formattedItem.value.key === dropdownRoot.modelSelectedKey.value;
     } else {
-      emits('closed');
+      return false;
     }
+  });
+
+  // 当前项类名
+  const itemClasses = computed(() => ({
+    'is-active': isSelected.value
+  }));
+
+  // 点击当前项
+  const onItemClick = () => {
+    // 是否需要关闭
+    if (dropdownRoot.props.closeOnClickItem) {
+      dropdownRoot.close();
+    }
+
+    // 回调参数
+    const newKey = formattedItem.value.key;
+    const params = {
+      item: rawItem,
+      key: newKey
+    };
+
+    // 点击事件：参数为 当前项、当前项的 key
+    dropdownRoot.emits('click', params);
+
+    // 选中事件：参数为 当前项、当前项的 key、选中项的 key
+    if (!dropdownRoot.props.selectable) return;
+    if (newKey === dropdownRoot.modelSelectedKey.value) return;
+    dropdownRoot.modelSelectedKey.value = newKey;
+    dropdownRoot.emits('select', { ...params, selectedKey: newKey });
   };
 
   return {
-    dropdownVisible,
-    dropdownStyles,
-    openByMethod,
-    closeDropdown,
-    onTransitionEnd
+    formattedItem,
+    isSelected,
+    itemClasses,
+    onItemClick
   };
 };
