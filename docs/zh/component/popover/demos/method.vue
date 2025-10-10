@@ -10,9 +10,9 @@
   </DemoViewTop>
   <DemoViewTop label="通过方法手动触发">
     <DemoSpace flex>
-      <VButton @contextmenu.prevent="openDropdown()">contextmenu 对齐元素</VButton>
-      <VButton @contextmenu.prevent="openDropdown">contextmenu 对齐鼠标</VButton>
-      <VButton @contextmenu.prevent="closeDropdown">contextmenu 关闭</VButton>
+      <VButton @contextmenu.prevent="openPopover()">contextmenu 对齐元素</VButton>
+      <VButton @contextmenu.prevent="openPopover">contextmenu 对齐鼠标</VButton>
+      <VButton @contextmenu.prevent="closePopover">contextmenu 关闭</VButton>
     </DemoSpace>
   </DemoViewTop>
 </template>
@@ -21,6 +21,6 @@
 import { ref } from 'vue';
 
 const popoverRef = ref(null);
-const openDropdown = event => popoverRef.value.open(event);
-const closeDropdown = () => popoverRef.value.close();
+const openPopover = event => popoverRef.value.open(event);
+const closePopover = () => popoverRef.value.close();
 </script>

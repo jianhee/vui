@@ -1,5 +1,5 @@
 <template>
-  <DemoView>
+  <DemoView class="demo-dropdown">
     <template #content>
       <DemoSpace>通过元素自动触发</DemoSpace>
       <DemoSpace>
@@ -90,5 +90,12 @@ const isDisabled = ref(false);
 const trigger = ref('click');
 const triggerOptions = ['hover', 'click', 'contextmenu'];
 const placement = ref('top');
-const placementOptions = ['top', 'top-start', 'top-end', 'right-start', 'right-end', 'bottom-start', 'bottom', 'bottom-end', 'left-start', 'left-end'];
+const placementOptions = ['top-start', 'top', 'top-end', 'right-start', 'right', 'right-end', 'bottom-start', 'bottom', 'bottom-end', 'left-start', 'left', 'left-end'];
 </script>
+
+<style>
+.demo-dropdown .vui-select {
+  display: inline-flex;
+  width: 100px;
+}
+</style>
