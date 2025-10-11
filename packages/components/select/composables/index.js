@@ -18,9 +18,6 @@ export const selectProps = {
   // 2. `label` 选项文本，为空时使用 `value` 的值
   // 3. `string|number` 类型的选项会格式化为 `{ value, label }`
   options: { type: Array, default: null },
-  // 当前文本：优先级高于选中项的 `label`
-  // 自定义选项时无法在组件内部获取选中项，必须指定一个文本
-  label: { type: String, default: null },
   // 选择器尺寸：large, medium, small
   size: { type: String, default: 'medium' },
   // ---------- 原生属性 ----------
@@ -30,83 +27,57 @@ export const selectProps = {
 };
 
 // 使用选择器
-export const useSelect = ({ triggerElRef, dropdownElRef, modelValue, props, emits }) => {
+export const useSelect = ({ triggerElRef, modelValue, props, emits }) => {
   // 继承
   const formRoot = inject('vuiFormRoot', null);
 
-  // 状态
+  // 是否禁用
   const isDisabled = computed(() => props.disabled || formRoot?.props?.disabled);
   const isReadonly = computed(() => props.readonly || formRoot?.props?.readonly);
+  const isPopoverDisabled = computed(() => isDisabled.value || isReadonly.value);
 
-  // 触发器是否获取焦点
-  const triggerIsFocused = ref(false);
+  // 是否显示
+  const isVisible = ref(false);
+  function onVisibleChange(visible) {
+    isVisible.value = visible;
+  }
 
   // 触发器类名
-  const triggerClasses = computed(() => {
-    return [
-      `vui-select--${props.size}`,
-      {
-        'is-focus': triggerIsFocused.value,
-        'is-disabled': isDisabled.value
-      }
-    ];
-  });
-
-  // 点击触发器
-  function onTriggerClick() {
-    if (isDisabled.value || isReadonly.value) return;
-    dropdownElRef.value?.open({ el: triggerElRef.value });
-  }
-
-  // 显示内容
-  const innerText = computed(() => {
-    if (props.label) {
-      return props.label;
-    } else {
-      const selectedItem = formattedOptions.value?.find(item => item.value === modelValue.value);
-      return selectedItem?.label;
-    }
-  });
-
-  // 文本类名
-  const innerClasses = computed(() => ({
-    'vui-select-placeholder': !innerText.value
+  const triggerClasses = computed(() => ({
+    [`vui-select--${props.size}`]: true,
+    'is-focus': isVisible.value,
+    'is-disabled': isDisabled.value
   }));
 
-  // 展开图标
-  const expandIconRotate = computed(() => (triggerIsFocused.value ? '180deg' : null));
+  // 中间文本类名
+  const innerClasses = computed(() => ({
+    'vui-select-placeholder': !selectedOptionLabel.value
+  }));
 
-  // 打开/关闭下拉框时切换焦点
-  function onDropdownToggle(visible) {
-    triggerIsFocused.value = visible;
-  }
+  // 展开图标旋转角度
+  const expandIconRotate = computed(() => (isVisible.value ? '180deg' : null));
 
-  // 下拉框样式
-  const { width: dropdownWidth } = useElementBounding(triggerElRef);
+  // 下拉菜单宽度
+  const { width: triggerWidth } = useElementBounding(triggerElRef);
   const dropdownStyles = computed(() => ({
-    width: `${dropdownWidth.value}px`
+    width: `${triggerWidth.value}px`
   }));
 
   // 格式化选项
   const formattedOptions = computed(() => {
     return props.options?.map(item => {
-      // 对象格式
       if (typeof item === 'object') {
-        return {
-          ...item,
-          label: item.label || item.value,
-          key: item.key || item.value,
-          rawItem: item
-        };
+        return { __vuiSelectOptionRawData__: item, ...item, label: item.label || item.value, key: item.key || item.value };
+      } else {
+        return { __vuiSelectOptionRawData__: item, label: item, value: item, key: item };
       }
-      // 其它格式
-      return {
-        label: item,
-        value: item,
-        key: item,
-        rawItem: item
-      };
     });
+  });
+
+  // 选中项文本
+  const selectedOptionLabel = computed(() => {
+    const selectedItem = formattedOptions.value?.find(item => item.value === modelValue.value);
+    return selectedItem?.label;
   });
 
   // 选中选项
@@ -118,21 +89,21 @@ export const useSelect = ({ triggerElRef, dropdownElRef, modelValue, props, emit
 
     // 参数为 当前项、当前项的 value、选中项的 value
     emits('change', {
-      option: item.rawItem,
+      option: item.__vuiSelectOptionRawData__,
       value,
       selectedValue: value
     });
   }
 
   return {
+    formattedOptions,
+    selectedOptionLabel,
+    isPopoverDisabled,
     triggerClasses,
-    onTriggerClick,
-    innerText,
     innerClasses,
     expandIconRotate,
-    onDropdownToggle,
     dropdownStyles,
-    formattedOptions,
+    onVisibleChange,
     onSelectOption
   };
 };

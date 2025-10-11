@@ -19,16 +19,16 @@ import { writeLog } from '@vp/utils';
 const selectValue = ref(null);
 const selectOptions = [
   // Object
-  { value: 1, label: '选项1' },
-  { value: 2, label: '选项2' },
+  { value: '选项1的value', label: '选项1的label' },
+  { value: '选项2的value' },
   // string|number
-  3
+  ...Array.from({ length: 10 }, (_, i) => `选项${i + 3}`)
 ];
 </script>
 
 <style>
 .demo-select,
 .demo-selects .vui-select {
-  max-width: var(--demo-filed-width);
+  max-width: var(--vp-demo-filed-width);
 }
 </style>
