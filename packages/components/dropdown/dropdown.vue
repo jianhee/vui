@@ -17,9 +17,9 @@
     <!-- 下拉框：必填 -->
     <template #content>
       <VDropdownItem
-        v-for="(item, index) in dropdownItems"
+        v-for="(formattedItem, index) in formattedItems"
         :key="index"
-        :item="item"
+        :formatted-item="formattedItem"
       />
     </template>
   </VPopover>
@@ -38,7 +38,7 @@ const props = defineProps(dropdownProps);
 const emits = defineEmits(dropdownEmits);
 
 // 使用下拉菜单
-const { rootStyles, dropdownItems } = useDropdown({ props });
+const { formattedItems, rootStyles } = useDropdown({ props });
 
 // 打开/关闭下拉菜单
 const open = event => popoverRef.value.open(event);

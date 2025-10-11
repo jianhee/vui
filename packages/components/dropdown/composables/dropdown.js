@@ -37,8 +37,17 @@ export const dropdownProps = {
 
 // 使用下拉菜单
 export const useDropdown = ({ props }) => {
-  // 菜单项
-  const dropdownItems = computed(() => props.options || props.items || []);
+  // 格式化菜单项
+  const formattedItems = computed(() => {
+    const items = props.options || props.items || [];
+    return items.map(item => {
+      if (typeof item === 'object') {
+        return { __rawData__: item, ...item, label: item.label || item.title };
+      } else {
+        return { __rawData__: item, label: item };
+      }
+    });
+  });
 
   // 根元素样式
   const rootStyles = computed(() => ({
@@ -48,29 +57,20 @@ export const useDropdown = ({ props }) => {
   }));
 
   return {
-    rootStyles,
-    dropdownItems
+    formattedItems,
+    rootStyles
   };
 };
 
 // 使用菜单项
-export const useDropdownItem = ({ item: rawItem }) => {
+export const useDropdownItem = ({ formattedItem }) => {
   // 父组件
   const dropdownRoot = inject('vuiDropdownRoot', null);
-
-  // 格式化当前项
-  const formattedItem = computed(() => {
-    if (typeof rawItem === 'object') {
-      return { ...rawItem, label: rawItem.label || rawItem.title };
-    } else {
-      return { label: rawItem };
-    }
-  });
 
   // 当前项是否选中
   const isSelected = computed(() => {
     if (dropdownRoot.props.selectable) {
-      return formattedItem.value.key === dropdownRoot.modelSelectedKey.value;
+      return formattedItem.key === dropdownRoot.modelSelectedKey.value;
     } else {
       return false;
     }
@@ -89,9 +89,9 @@ export const useDropdownItem = ({ item: rawItem }) => {
     }
 
     // 回调参数
-    const newKey = formattedItem.value.key;
+    const newKey = formattedItem.key;
     const params = {
-      item: rawItem,
+      item: formattedItem.__rawData__,
       key: newKey
     };
 

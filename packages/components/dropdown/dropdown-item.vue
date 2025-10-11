@@ -33,14 +33,14 @@ import IconSelected from '../../icons/selected.vue';
 
 // 菜单项
 const props = defineProps({
-  item: { type: [Object, Number, String], required: true }
+  formattedItem: { type: Object, required: true }
 });
 
 // 使用菜单项
-const { formattedItem, isSelected, itemClasses, onItemClick } = useDropdownItem({
-  item: props.item
+const { isSelected, itemClasses, onItemClick } = useDropdownItem({
+  formattedItem: props.formattedItem
 });
 
 // 使用图标
-const _iconProps = useIconProps(formattedItem.value.icon, formattedItem.value.iconProps);
+const _iconProps = useIconProps(props.formattedItem.icon, props.formattedItem.iconProps);
 </script>
