@@ -114,7 +114,7 @@ export const useCheckbox = checkbox => {
     checkboxGroup.modelValue.value = newValue;
     // 参数为 当前项、当前项的 value、选中项的 value
     checkboxGroup.emits('change', {
-      option: checkbox.props.formattedOption.__rawData__,
+      option: checkbox.props.formattedOption.__vuiCheckboxOptionRawData__,
       value: optionValue.value,
       checkedValue: newValue
     });

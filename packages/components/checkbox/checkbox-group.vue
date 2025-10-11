@@ -6,7 +6,7 @@
       :key="index"
       :formatted-option="formattedOption"
     >
-      <slot :option="formattedOption.__rawData__" />
+      <slot :option="formattedOption.__vuiCheckboxOptionRawData__" />
     </VCheckbox>
   </div>
 </template>

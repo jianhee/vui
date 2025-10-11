@@ -42,9 +42,9 @@ export const useDropdown = ({ props }) => {
     const items = props.options || props.items || [];
     return items.map(item => {
       if (typeof item === 'object') {
-        return { __rawData__: item, ...item, label: item.label || item.title };
+        return { __vuiDropdownItemRawData__: item, ...item, label: item.label || item.title };
       } else {
-        return { __rawData__: item, label: item };
+        return { __vuiDropdownItemRawData__: item, label: item };
       }
     });
   });
@@ -91,7 +91,7 @@ export const useDropdownItem = ({ formattedItem }) => {
     // 回调参数
     const newKey = formattedItem.key;
     const params = {
-      item: formattedItem.__rawData__,
+      item: formattedItem.__vuiDropdownItemRawData__,
       key: newKey
     };
 
