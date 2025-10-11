@@ -4,14 +4,15 @@
       :is="OptionComponent"
       v-model:checked="checked1"
       v-bind="$attrs"
+      label="选项1的label"
       @change="writeLog('change', $event)"
     >
-      选项1
+      选项1的插槽
     </component>
     <component
       :is="OptionComponent"
       v-model:checked="checked2"
-      label="选项2"
+      label="选项2的label"
       v-bind="$attrs"
       @change="writeLog('change', $event)"
     />

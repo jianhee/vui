@@ -4,11 +4,9 @@
     <VCheckbox
       v-for="(formattedOption, index) in formattedOptions"
       :key="index"
-      :label="formattedOption.label"
-      :value="formattedOption.value"
-      :option="options[index]"
+      :formatted-option="formattedOption"
     >
-      <slot :option="options[index]" />
+      <slot :option="formattedOption.__rawData__" />
     </VCheckbox>
   </div>
 </template>

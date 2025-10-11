@@ -7,7 +7,7 @@
     v-bind="$attrs"
     @change="writeLog('change', $event)"
   >
-    <template v-if="option?.value === 1">选项1</template>
+    <template v-if="option?.value === options[0].value">选项1的插槽</template>
   </component>
 
   <DemoSpace v-if="isShowValue">
@@ -29,18 +29,18 @@ const isShowValue = Object.keys(attrs).length === 0;
 // 区分类型
 const isCheckbox = useRouteValid('checkbox');
 const GroupComponent = isCheckbox ? 'VCheckboxGroup' : 'VRadioGroup';
-const defaultVal = isCheckbox ? [1, 2] : 1;
-
-// 选中值
-const checkedVal = ref(defaultVal);
 
 // 选项
 const options = [
   // Object
-  { value: 1, label: '使用插槽' },
-  { value: 2, label: '选项2' },
-  { value: 3 },
+  { value: '选项1的value', label: '选项1的label' },
+  { value: '选项2的value', label: '选项2的label' },
+  { value: '选项3的value' },
   // string|number
-  4
+  '选项4'
 ];
+
+// 选中值
+const defaultVal = isCheckbox ? [options[0].value, options[1].value] : options[0].value;
+const checkedVal = ref(defaultVal);
 </script>

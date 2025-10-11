@@ -31,9 +31,9 @@ export const useCheckboxGroup = ({ props }) => {
   const formattedOptions = computed(() => {
     return props.options.map(option => {
       if (typeof option === 'object') {
-        return { ...option, label: option.label || option.value };
+        return { __rawData__: option, ...option, label: option.label || option.value };
       } else {
-        return { label: option, value: option };
+        return { __rawData__: option, label: option, value: option };
       }
     });
   });

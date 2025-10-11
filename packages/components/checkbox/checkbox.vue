@@ -17,7 +17,7 @@
     <!-- 优先使用插槽 -->
     <slot v-if="$slots?.default?.()[0].children.length" />
     <!-- 其次使用属性值 -->
-    <template v-else-if="label">{{ label }}</template>
+    <template v-else-if="optionLabel">{{ optionLabel }}</template>
   </label>
 </template>
 
@@ -34,7 +34,7 @@ const props = defineProps({ ...checkboxProps, ...commonProps });
 const emits = defineEmits(checkboxEmits);
 
 // 使用选项
-const { isBtn, isDisabled, isReadonly, isChecked, onCheckedChange, rootClasses } = useCheckbox({
+const { isBtn, isDisabled, isReadonly, isChecked, optionLabel, rootClasses, onCheckedChange } = useCheckbox({
   modelChecked,
   props,
   emits
