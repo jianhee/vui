@@ -36,5 +36,5 @@ import { useDemoDialog } from '../composables';
 
 const { isVisible, openDialog, closeDialog } = useDemoDialog();
 const placementOptions = ['left', 'right'];
-const placementRef = ref('left');
+const placementRef = ref('right');
 </script>

@@ -1,3 +1,5 @@
-# Drawer 抽屉
+---
+title: Drawer 抽屉
+---
 
-<!--@include: ../dialog/parts/basic.md-->
+<!--@include: ../dialog/index.md-->
