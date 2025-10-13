@@ -6,50 +6,50 @@
     :resizable="isResizable"
     :min-width="100"
     :min-height="100"
-    class="demo-dragbox"
+    class="c-demo-dragbox"
     :class="{ 'is-fixed': isEnabled }"
   >
-    <DemoViewLeft
+    <DemoConfig
       label="是否启用"
       code="enabled"
-      label-width="200"
+      label-width="180px"
     >
       <VSwitch v-model:checked="isEnabled" />
-    </DemoViewLeft>
-    <DemoViewLeft
+    </DemoConfig>
+    <DemoConfig
       label="是否可缩放"
       code="resizable"
-      label-width="200"
+      label-width="180px"
     >
       <VSwitch v-model:checked="isResizable" />
-    </DemoViewLeft>
-    <DemoViewLeft
+    </DemoConfig>
+    <DemoConfig
       label="可缩放手柄"
       code="resizeHandles"
-      label-width="200"
+      label-width="180px"
     >
       <VCheckboxGroup
         v-model:value="handlesRef"
         :options="handlesOptions"
         option-type="button"
       />
-    </DemoViewLeft>
-    <DemoViewLeft
+    </DemoConfig>
+    <DemoConfig
       label="绑定值"
-      label-width="200"
+      label-width="180px"
     >
       <code>v-model:width="{{ widthRef }}"</code>
       <br />
       <code>v-model:height="{{ heightRef }}"</code>
-    </DemoViewLeft>
-    <DemoViewLeft
+    </DemoConfig>
+    <DemoConfig
       label="最小值"
-      label-width="200"
+      label-width="180px"
     >
       <code>minWidth="100"</code>
       <br />
       <code>minHeight="100"</code>
-    </DemoViewLeft>
+    </DemoConfig>
   </VDragbox>
 </template>
 
@@ -65,7 +65,7 @@ const heightRef = ref(null);
 </script>
 
 <style lang="scss">
-.is-fixed:not(.is-normal) {
+.c-demo-dragbox.is-fixed:not(.is-normal) {
   position: fixed !important;
   top: 200px;
   left: 400px;

@@ -1,9 +1,9 @@
 <template>
   <DemoMove :move-handle="handleRef">
-    <DemoViewLeft
+    <DemoConfig
       label="移动手柄"
       code="moveHandle"
-      label-width="200"
+      label-width="180px"
     >
       <VButton
         ref="handleRef"
@@ -11,7 +11,7 @@
       >
         手柄
       </VButton>
-    </DemoViewLeft>
+    </DemoConfig>
   </DemoMove>
 </template>
 

@@ -9,43 +9,43 @@
     :resizable="isResizable"
     :min-width="100"
     :min-height="100"
-    class="demo-dragbox"
+    class="c-demo-dragbox"
   >
-    <DemoViewLeft
+    <DemoConfig
       label="是否启用"
       code="enabled"
-      label-width="200"
+      label-width="180px"
     >
       <VSwitch v-model:checked="isEnabled" />
-    </DemoViewLeft>
-    <DemoViewLeft
+    </DemoConfig>
+    <DemoConfig
       label="是否可移动"
       code="movable"
-      label-width="200"
+      label-width="180px"
     >
       <VSwitch v-model:checked="isMovable" />
-    </DemoViewLeft>
-    <DemoViewLeft
+    </DemoConfig>
+    <DemoConfig
       label="是否可缩放"
       code="resizable"
-      label-width="200"
+      label-width="180px"
     >
       <VSwitch v-model:checked="isResizable" />
-    </DemoViewLeft>
-    <DemoViewLeft
+    </DemoConfig>
+    <DemoConfig
       label="可缩放手柄"
       code="resizeHandles"
-      label-width="200"
+      label-width="180px"
     >
       <VCheckboxGroup
         v-model:value="handlesRef"
         :options="handlesOptions"
         option-type="button"
       />
-    </DemoViewLeft>
-    <DemoViewLeft
+    </DemoConfig>
+    <DemoConfig
       label="绑定值"
-      label-width="200"
+      label-width="180px"
     >
       <code>v-model:left="{{ leftRef }}"</code>
       <br />
@@ -54,15 +54,15 @@
       <code>v-model:width="{{ widthRef }}"</code>
       <br />
       <code>v-model:height="{{ heightRef }}"</code>
-    </DemoViewLeft>
-    <DemoViewLeft
+    </DemoConfig>
+    <DemoConfig
       label="最小值"
-      label-width="200"
+      label-width="180px"
     >
       <code>minWidth="100"</code>
       <br />
       <code>minHeight="100"</code>
-    </DemoViewLeft>
+    </DemoConfig>
   </VDragbox>
 </template>
 
@@ -79,3 +79,14 @@ const topRef = ref(200);
 const widthRef = ref(null);
 const heightRef = ref(null);
 </script>
+
+<style lang="scss">
+.c-demo-dragbox {
+  padding: 20px;
+  overflow: hidden;
+  background-color: var(--demo-bg-color-base);
+  border: 1px solid var(--demo-border-color-lighter);
+  border-radius: 4px;
+  box-shadow: var(--demo-box-shadow);
+}
+</style>

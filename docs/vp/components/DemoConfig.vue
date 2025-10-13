@@ -1,8 +1,16 @@
 <!-- 配置项 -->
 <template>
-  <div :class="['g-demo-config', `g-demo-config-label--${labelPosition}`]">
+  <div
+    :class="{
+      'g-demo-config': true,
+      [`g-demo-config-label--${labelPosition}`]: !labelWidth
+    }"
+  >
     <!-- label -->
-    <div class="g-demo-config-label">
+    <div
+      class="g-demo-config-label"
+      :style="{ width: labelWidth }"
+    >
       <span v-if="label">{{ label }}</span>
       <span v-if="label && code">&nbsp;/&nbsp;</span>
       <code v-if="code">{{ code }}</code>
@@ -18,6 +26,7 @@
 defineProps({
   code: { type: String, default: null },
   label: { type: String, default: null },
+  labelWidth: { type: String, default: null },
   // left, top, top-center
   labelPosition: { type: String, default: 'left' }
 });
