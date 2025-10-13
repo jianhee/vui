@@ -10,7 +10,7 @@ import { AntDesignContainer } from '@vitepress-demo-preview/component';
 import '@vitepress-demo-preview/component/dist/style.css';
 
 // vui 组件
-import vui from 'vui/components/index.js';
+import vui from 'vui/components';
 import 'vui/styles/index.scss';
 
 // 自定义组件

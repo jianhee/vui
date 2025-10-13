@@ -25,6 +25,13 @@
 body {
   color: var(--demo-text-color-regular);
 }
+.content-container {
+  max-width: 1200px !important;
+}
+.custom-block {
+  border: 0;
+  border-left: 5px solid;
+}
 code,
 th,
 td:first-child,
@@ -40,13 +47,6 @@ td:last-child {
   background-color: transparent !important;
   border-top: 0;
   border-bottom: 1px solid var(--vp-c-divider);
-}
-.custom-block {
-  border: 0;
-  border-left: 5px solid;
-}
-.content-container {
-  max-width: 1200px !important;
 }
 
 // 覆盖 demo-preview 插件样式
