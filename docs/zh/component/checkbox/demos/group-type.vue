@@ -1,22 +1,21 @@
 <template>
-  <DemoView>
-    <template #content>
+  <DemoUsage>
+    <template #render>
       <DemoBasic :option-type="typeRef" />
     </template>
 
-    <template #props>
-      <DemoViewBoolean
+    <template #config>
+      <DemoConfig
         label="显示类型"
         code="optionType"
       >
-        <VRadioGroup
+        <DemoOptions
           v-model:value="typeRef"
           :options="types"
-          option-type="button"
         />
-      </DemoViewBoolean>
+      </DemoConfig>
     </template>
-  </DemoView>
+  </DemoUsage>
 </template>
 
 <script setup>

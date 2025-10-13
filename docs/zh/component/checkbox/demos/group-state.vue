@@ -1,6 +1,6 @@
 <template>
-  <DemoView content-gap>
-    <template #content>
+  <DemoUsage render-gap>
+    <template #render>
       <DemoBasic
         :disabled="isDisabled"
         option-inline
@@ -11,21 +11,21 @@
       />
     </template>
 
-    <template #props>
-      <DemoViewBoolean
+    <template #config>
+      <DemoConfig
         label="是否禁用状态"
         code="disabled"
       >
         <VSwitch v-model:checked="isDisabled" />
-      </DemoViewBoolean>
-      <DemoViewBoolean
+      </DemoConfig>
+      <DemoConfig
         label="是否只读状态"
         code="readonly"
       >
         <VSwitch v-model:checked="isReadonly" />
-      </DemoViewBoolean>
+      </DemoConfig>
     </template>
-  </DemoView>
+  </DemoUsage>
 </template>
 
 <script setup>

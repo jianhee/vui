@@ -1,24 +1,22 @@
 <template>
-  <div class="demo-checkboxs">
-    <component
-      :is="OptionComponent"
+  <div class="c-demo-checkboxs">
+    <VComponentMatchRoute
       v-model:checked="checked1"
       v-bind="$attrs"
       label="选项1的label"
-      @change="writeLog('change', $event)"
+      @change="onChange"
     >
       选项1的插槽
-    </component>
-    <component
-      :is="OptionComponent"
+    </VComponentMatchRoute>
+    <VComponentMatchRoute
       v-model:checked="checked2"
       label="选项2的label"
       v-bind="$attrs"
-      @change="writeLog('change', $event)"
+      @change="onChange"
     />
   </div>
 
-  <DemoSpace v-if="isShowValue">
+  <DemoSpace v-if="isBasic">
     当前值：
     <code>{{ checked1 }}</code>
     、
@@ -27,27 +25,19 @@
 </template>
 
 <script setup>
-import { ref, useAttrs } from 'vue';
-import { writeLog } from '@vp/utils';
-import { useRouteValid } from '@vp/composables';
+import { ref } from 'vue';
+import { useDemo } from '../composables/index.js';
 
 defineOptions({ inheritAttrs: false });
+const { isBasic, onChange } = useDemo();
 
-// 是否显示值
-const attrs = useAttrs();
-const isShowValue = Object.keys(attrs).length === 0;
-
-// 区分类型
-const isCheckbox = useRouteValid('checkbox');
-const OptionComponent = isCheckbox ? 'VCheckbox' : 'VRadio';
-
-// 选项
+// 当前值
 const checked1 = ref(true);
 const checked2 = ref(false);
 </script>
 
 <style>
-.demo-checkboxs label {
+.c-demo-checkboxs > label {
   margin-right: 10px;
 }
 </style>

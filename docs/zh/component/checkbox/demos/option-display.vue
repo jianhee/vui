@@ -1,19 +1,19 @@
 <template>
-  <DemoView>
-    <template #content>
+  <DemoUsage>
+    <template #render>
       <DemoBasic :block="isBlock" />
     </template>
 
-    <template #props>
-      <DemoViewBoolean code="inline|block">
+    <template #config>
+      <DemoConfig code="inline|block">
         <VSwitch
           v-model:checked="isBlock"
           inactive-text="行内模式"
           active-text="块级模式"
         />
-      </DemoViewBoolean>
+      </DemoConfig>
     </template>
-  </DemoView>
+  </DemoUsage>
 </template>
 
 <script setup>

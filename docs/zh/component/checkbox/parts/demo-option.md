@@ -1,5 +1,7 @@
 <!-- 多选框/单选框 -->
 
+<!--@include: @/component/@parts/demo-component.md-->
+
 ### 基础用法
 
 - 使用 `v-model:checked` 属性绑定当前值

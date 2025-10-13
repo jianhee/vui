@@ -1,19 +1,19 @@
 <template>
-  <DemoView>
-    <template #content>
+  <DemoUsage>
+    <template #render>
       <DemoBasic :option-inline="isInline" />
     </template>
 
-    <template #props>
-      <DemoViewBoolean code="optionInline|optionBlock">
+    <template #config>
+      <DemoConfig code="optionInline|optionBlock">
         <VSwitch
           v-model:checked="isInline"
           inactive-text="块级模式"
           active-text="行内模式"
         />
-      </DemoViewBoolean>
+      </DemoConfig>
     </template>
-  </DemoView>
+  </DemoUsage>
 </template>
 
 <script setup>

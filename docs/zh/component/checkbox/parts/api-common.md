@@ -1,7 +1,5 @@
 <!-- 多选框/单选框 -->
 
-两个组件都有的接口
-
 ### 原生属性
 
 <!--@include: @/component/@parts/api-native.md-->

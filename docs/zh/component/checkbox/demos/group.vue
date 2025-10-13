@@ -1,34 +1,27 @@
 <template>
-  <component
-    :is="GroupComponent"
+  <VComponentMatchRoute
     v-slot="{ option }"
     v-model:value="checkedVal"
+    route-suffix="Group"
     :options="options"
     v-bind="$attrs"
-    @change="writeLog('change', $event)"
+    @change="onChange"
   >
     <template v-if="option?.value === options[0].value">选项1的插槽</template>
-  </component>
+  </VComponentMatchRoute>
 
-  <DemoSpace v-if="isShowValue">
+  <DemoSpace v-if="isBasic">
     当前值为 <code>{{ checkedVal }}</code>
   </DemoSpace>
 </template>
 
 <script setup>
-import { ref, useAttrs } from 'vue';
-import { writeLog } from '@vp/utils';
-import { useRouteValid } from '@vp/composables';
+import { ref } from 'vue';
+import { validateRoutePath } from '@vp/composables';
+import { useDemo } from '../composables/index.js';
 
 defineOptions({ inheritAttrs: false });
-
-// 是否显示值
-const attrs = useAttrs();
-const isShowValue = Object.keys(attrs).length === 0;
-
-// 区分类型
-const isCheckbox = useRouteValid('checkbox');
-const GroupComponent = isCheckbox ? 'VCheckboxGroup' : 'VRadioGroup';
+const { isBasic, onChange } = useDemo();
 
 // 选项
 const options = [
@@ -40,7 +33,12 @@ const options = [
   '选项4'
 ];
 
-// 选中值
-const defaultVal = isCheckbox ? [options[0].value, options[1].value] : options[0].value;
+// 默认值
+const checkedDefaultVal = [options[0].value, options[1].value];
+const radioDefaultVal = options[0].value;
+const isCheckbox = validateRoutePath('checkbox');
+const defaultVal = isCheckbox ? checkedDefaultVal : radioDefaultVal;
+
+// 当前值
 const checkedVal = ref(defaultVal);
 </script>
