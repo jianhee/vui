@@ -1,11 +1,10 @@
 import { ref } from 'vue';
-import { useRouteValid } from '@vp/composables';
+import { validateRoutePath } from '@vp/composables';
 
 // 使用弹窗
-export const useDialog = () => {
+export const useDemoDialog = () => {
   // 区分类型
-  const isDialog = useRouteValid('dialog');
-  const componentName = isDialog ? 'VDialog' : 'VDrawer';
+  const isDialog = validateRoutePath('dialog');
 
   // 是否显示
   const isVisible = ref(false);
@@ -13,7 +12,6 @@ export const useDialog = () => {
   return {
     isDialog,
     isVisible,
-    componentName,
     openDialog: () => (isVisible.value = true),
     closeDialog: () => (isVisible.value = false)
   };

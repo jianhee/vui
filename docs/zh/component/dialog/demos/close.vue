@@ -1,28 +1,27 @@
 <template>
-  <DemoView>
-    <template #content>
+  <DemoUsage>
+    <template #render>
       <VButton @click="openDialog">打开弹窗</VButton>
     </template>
 
-    <template #props>
-      <DemoViewBoolean
+    <template #config>
+      <DemoConfig
         code="showClose"
         label="是否显示关闭按钮"
       >
         <VSwitch v-model:checked="isShowClose" />
-      </DemoViewBoolean>
-      <DemoViewBoolean
+      </DemoConfig>
+      <DemoConfig
         code="closeOnClickModal"
         label="是否在点击遮罩时关闭"
       >
         <VSwitch v-model:checked="isCloseOnClickModal" />
-      </DemoViewBoolean>
+      </DemoConfig>
     </template>
-  </DemoView>
+  </DemoUsage>
 
   <!-- 弹窗 -->
-  <component
-    :is="componentName"
+  <VComponentMatchRoute
     v-model:visible="isVisible"
     title="标题"
     :show-close="isShowClose"
@@ -32,17 +31,17 @@
     <template #footer>
       <VButton @click="closeDialog">关闭</VButton>
     </template>
-  </component>
+  </VComponentMatchRoute>
 </template>
 
 <script setup>
 import { ref } from 'vue';
-import { useDialog } from '../composables';
+import { useDemoDialog } from '../composables';
 
 // 区分类型
-const { isVisible, componentName, openDialog, closeDialog } = useDialog();
+const { isVisible, openDialog, closeDialog } = useDemoDialog();
 
 // 基础属性
-const isShowClose = ref(true);
-const isCloseOnClickModal = ref(true);
+const isShowClose = ref(false);
+const isCloseOnClickModal = ref(false);
 </script>

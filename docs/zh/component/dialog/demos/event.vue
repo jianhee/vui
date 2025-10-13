@@ -1,8 +1,7 @@
 <template>
   <VButton @click="openDialog">打开弹窗</VButton>
 
-  <component
-    :is="componentName"
+  <VComponentMatchRoute
     v-model:visible="isVisible"
     title="标题"
     @open="writeLog('open')"
@@ -14,12 +13,12 @@
     <template #footer>
       <VButton @click="closeDialog">关闭</VButton>
     </template>
-  </component>
+  </VComponentMatchRoute>
 </template>
 
 <script setup>
 import { writeLog } from '@vp/utils';
-import { useDialog } from '../composables';
+import { useDemoDialog } from '../composables';
 
-const { isVisible, componentName, openDialog, closeDialog } = useDialog();
+const { isVisible, openDialog, closeDialog } = useDemoDialog();
 </script>

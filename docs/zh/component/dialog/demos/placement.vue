@@ -1,26 +1,24 @@
 <template>
-  <DemoView>
-    <template #content>
+  <DemoUsage>
+    <template #render>
       <VButton @click="openDialog">打开弹窗</VButton>
     </template>
 
-    <template #props>
-      <DemoViewTop
+    <template #config>
+      <DemoConfig
         code="placement"
         label="出现位置"
       >
-        <VRadioGroup
+        <DemoOptions
           v-model:value="placementRef"
           :options="placementOptions"
-          option-type="button"
         />
-      </DemoViewTop>
+      </DemoConfig>
     </template>
-  </DemoView>
+  </DemoUsage>
 
   <!-- 弹窗 -->
-  <component
-    :is="componentName"
+  <VComponentMatchRoute
     v-model:visible="isVisible"
     title="标题"
     :placement="placementRef"
@@ -29,14 +27,14 @@
     <template #footer>
       <VButton @click="closeDialog">关闭</VButton>
     </template>
-  </component>
+  </VComponentMatchRoute>
 </template>
 
 <script setup>
 import { ref } from 'vue';
-import { useDialog } from '../composables';
+import { useDemoDialog } from '../composables';
 
-const { isVisible, componentName, openDialog, closeDialog } = useDialog();
+const { isVisible, openDialog, closeDialog } = useDemoDialog();
 const placementOptions = ['left', 'right'];
 const placementRef = ref('left');
 </script>

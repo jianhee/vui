@@ -3,8 +3,8 @@
   <Teleport to="body">
     <Transition
       :name="`vui-${dialogType}`"
-      @after-enter="onTransitionEnd('enter')"
-      @after-leave="onTransitionEnd('leave')"
+      @after-enter="emits('opened')"
+      @after-leave="emits('closed')"
     >
       <!-- 遮罩 -->
       <VOverlay
@@ -62,7 +62,7 @@ const props = defineProps(dialogProps);
 const emits = defineEmits(dialogEmits);
 
 // 使用弹窗
-const { onTransitionEnd, onOverlayClick, innerClasses, innerStyles, closeDialog } = useDialog({
+const { innerClasses, innerStyles, onOverlayClick, closeDialog } = useDialog({
   dialogType,
   modelVisible,
   props,

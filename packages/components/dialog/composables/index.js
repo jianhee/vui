@@ -70,20 +70,10 @@ export const useDialog = ({ dialogType, modelVisible, props, emits }) => {
     }
   });
 
-  // 动画完成时
-  const onTransitionEnd = type => {
-    if (type === 'enter') {
-      emits('opened');
-    } else {
-      emits('closed');
-    }
-  };
-
   return {
-    onTransitionEnd,
-    onOverlayClick,
     innerClasses,
     innerStyles,
+    onOverlayClick,
     closeDialog
   };
 };

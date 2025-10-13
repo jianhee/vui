@@ -1,26 +1,25 @@
 <template>
-  <DemoView>
-    <template #content>
+  <DemoUsage>
+    <template #render>
       <VButton @click="openDialog">打开弹窗</VButton>
     </template>
 
-    <template #props>
-      <DemoViewTop
+    <template #config>
+      <DemoConfig
         label="主体宽度"
         code="width"
       >
-        <DemoValue
+        <DemoSlider
           v-model:value="widthRef"
           unit="%"
           :min="15"
         />
-      </DemoViewTop>
+      </DemoConfig>
     </template>
-  </DemoView>
+  </DemoUsage>
 
   <!-- 弹窗 -->
-  <component
-    :is="componentName"
+  <VComponentMatchRoute
     v-model:visible="isVisible"
     title="标题"
     :width="`${widthRef}%`"
@@ -29,15 +28,15 @@
     <template #footer>
       <VButton @click="closeDialog">关闭</VButton>
     </template>
-  </component>
+  </VComponentMatchRoute>
 </template>
 
 <script setup>
 import { ref } from 'vue';
-import { useDialog } from '../composables';
+import { useDemoDialog } from '../composables';
 
 // 区分类型
-const { isDialog, isVisible, componentName, openDialog, closeDialog } = useDialog();
+const { isDialog, isVisible, openDialog, closeDialog } = useDemoDialog();
 const defaultWidth = isDialog ? 50 : 30;
 
 // 基础属性

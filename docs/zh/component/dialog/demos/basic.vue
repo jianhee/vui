@@ -1,28 +1,27 @@
 <template>
-  <DemoView>
-    <template #content>
+  <DemoUsage>
+    <template #render>
       <VButton @click="openDialog">打开弹窗</VButton>
     </template>
 
-    <template #props>
-      <DemoViewBoolean label="是否显示顶栏标题">
+    <template #config>
+      <DemoConfig label="是否显示顶栏标题">
         <VSwitch v-model:checked="isShowTitle" />
-      </DemoViewBoolean>
-      <DemoViewBoolean label="是否显示中间内容">
+      </DemoConfig>
+      <DemoConfig label="是否显示中间内容">
         <VSwitch v-model:checked="isShowContent" />
-      </DemoViewBoolean>
-      <DemoViewBoolean label="是否显示底栏内容">
+      </DemoConfig>
+      <DemoConfig label="是否显示底栏内容">
         <VSwitch v-model:checked="isShowFooter" />
-      </DemoViewBoolean>
-      <DemoViewBoolean label="是否内容溢出">
+      </DemoConfig>
+      <DemoConfig label="是否内容溢出">
         <VSwitch v-model:checked="isShowOverflow" />
-      </DemoViewBoolean>
+      </DemoConfig>
     </template>
-  </DemoView>
+  </DemoUsage>
 
   <!-- 弹窗 -->
-  <component
-    :is="componentName"
+  <VComponentMatchRoute
     v-model:visible="isVisible"
     :title="title"
   >
@@ -40,15 +39,15 @@
     >
       <VButton @click="closeDialog">关闭</VButton>
     </template>
-  </component>
+  </VComponentMatchRoute>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue';
-import { useDialog } from '../composables';
+import { useDemoDialog } from '../composables';
 
 // 区分类型
-const { isVisible, componentName, openDialog, closeDialog } = useDialog();
+const { isVisible, openDialog, closeDialog } = useDemoDialog();
 
 // 基础属性
 const isShowTitle = ref(true);
