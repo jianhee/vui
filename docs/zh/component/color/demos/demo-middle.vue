@@ -1,18 +1,19 @@
+<!-- 中性色 -->
 <template>
-  <div class="demo-color-group">
+  <div class="c-demo-color-group">
     <div
       v-for="item1 in colorItems"
       :key="item1.name"
-      class="demo-color-box"
+      class="c-demo-color-box"
     >
       <div
         v-for="item2 in item1.items"
         :key="item2.name"
-        class="demo-color-item"
+        class="c-demo-color-item"
         :style="item2.styles"
       >
-        <div class="demo-color-name">{{ item2.name }}</div>
-        <div class="demo-color-value">{{ item2.value }}</div>
+        <div class="c-demo-color-name">{{ item2.name }}</div>
+        <div class="c-demo-color-value">{{ item2.value }}</div>
       </div>
     </div>
   </div>
@@ -58,12 +59,17 @@ const nameItems = [
 const getItems = () => {
   colorItems.value = nameItems.map(item1 => {
     return {
+      // Text-Color
       name: item1.name,
       items: item1.items.map(item2 => {
+        // text-color-primary
         const key = `${item1.name}-${item2}`.toLowerCase();
+        // #333
         const value = getComputedStyle(document.documentElement).getPropertyValue(`--vui-${key}`);
         return {
-          name: `${item1.name} ${item2}`.replace('base', '').replace('Color', '').replace(/-/g, ' '),
+          // Text Primary
+          name: `${item1.name.replace('-Color', '')} ${item2.replace('-base', '')}`,
+          // #333
           value,
           styles: { backgroundColor: value, color: item1.color }
         };

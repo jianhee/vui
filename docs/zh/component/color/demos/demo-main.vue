@@ -1,17 +1,18 @@
+<!-- 主色 -->
 <template>
-  <div class="demo-color-box">
+  <div class="c-demo-color-box">
     <div
-      class="demo-color-base"
+      class="c-demo-color-base"
       :style="baseColor.styles"
     >
-      <div class="demo-color-name">{{ baseColor.name }}</div>
-      <div class="demo-color-value">{{ baseColor.value }}</div>
+      <div class="c-demo-color-name">{{ baseColor.name }}</div>
+      <div class="c-demo-color-value">{{ baseColor.value }}</div>
     </div>
-    <div class="demo-color-items">
+    <div class="c-demo-color-items">
       <div
         v-for="(item, index) in opcityColors"
         :key="item.name"
-        class="demo-color-item"
+        class="c-demo-color-item"
         :style="item.styles"
       >
         {{ `${10 - index - 1}0%` }}
@@ -26,7 +27,7 @@ import { useDark } from '@vueuse/core';
 
 // 类型：brand, primary ...
 const props = defineProps({
-  type: { type: String, default: 'Primary' }
+  type: { type: String, default: 'Brand' }
 });
 
 // 颜色
@@ -35,16 +36,22 @@ const opcityColors = ref([]);
 
 // 获取颜色
 const getItems = () => {
+  // Brand-base
   baseColor.value = getItem(`${props.type}-base`);
+  // Brand-a1 ~ Brand-a9
   opcityColors.value = Array.from({ length: 9 })
     .map((_, i) => getItem(`${props.type}-a${i + 1}`))
     .reverse();
 
   function getItem(name) {
+    // brand-base
     const key = name.toLowerCase();
+    // #333
     const value = getComputedStyle(document.documentElement).getPropertyValue(`--vui-color-${key}`);
     return {
+      // Brand
       name: name.replace('-base', ''),
+      // #333
       value,
       styles: { backgroundColor: value }
     };
@@ -62,11 +69,11 @@ useDark({
 </script>
 
 <style lang="scss">
-.demo-color {
+.c-demo-color {
   &-group {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: var(--demo-filed-gap);
   }
   &-box {
     flex: auto;

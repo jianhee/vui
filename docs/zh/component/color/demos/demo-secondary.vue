@@ -1,9 +1,10 @@
 <template>
-  <div class="demo-color-group">
-    <ColorBox type="Success" />
-    <ColorBox type="Warning" />
-    <ColorBox type="Error" />
-    <ColorBox type="Info" />
+  <div class="c-demo-color-group">
+    <ColorBox
+      v-for="type in ['Success', 'Warning', 'Error', 'Info']"
+      :key="type"
+      :type="type"
+    />
   </div>
 </template>
 
