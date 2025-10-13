@@ -27,6 +27,7 @@ defineProps({
 .g-demo-config {
   display: flex;
   flex: auto;
+  gap: 5px var(--demo-filed-gap);
   width: 100%;
   margin-bottom: var(--demo-filed-gap);
   &:last-child {
@@ -46,8 +47,12 @@ defineProps({
 
   // label位置
   &-label--left {
-    gap: 0 12px;
+    flex-wrap: wrap;
     justify-content: space-between;
+  }
+  &-label--top,
+  &-label--top-center {
+    flex-direction: column;
   }
   &-label--top-center > .g-demo-config-label {
     justify-content: center;

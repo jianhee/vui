@@ -1,12 +1,13 @@
 <template>
-  <DemoViewTop
+  <DemoConfig
     v-for="btnSize in btnSizes"
     :key="btnSize.label"
     :code="btnSize.value"
     :label="btnSize.label"
+    label-position="top"
   >
     <DemoBasic :size="btnSize.value" />
-  </DemoViewTop>
+  </DemoConfig>
 </template>
 
 <script setup>

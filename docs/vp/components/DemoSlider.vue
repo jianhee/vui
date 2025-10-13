@@ -18,11 +18,9 @@ defineProps({
 
 <style lang="scss">
 .g-demo-slider {
-  min-width: var(--demo-filed-width);
+  min-width: 120px;
   &-suffix {
     flex: none;
-    width: 60px;
-    text-align: right;
   }
 }
 </style>

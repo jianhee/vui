@@ -1,5 +1,5 @@
 <template>
-  <div class="demo-btns">
+  <div class="c-demo-btns">
     <VButton
       v-for="btnType in btnTypes"
       :key="btnType.label"
@@ -23,11 +23,12 @@ const btnTypes = [
 </script>
 
 <style>
-.demo-btns > .vui-btn {
-  margin-right: 10px;
+.c-demo-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
-.demo-btns > .vui-btn--block {
-  margin-right: 0;
-  margin-bottom: 10px;
+.c-demo-btns > .vui-btn {
+  flex: none;
 }
 </style>

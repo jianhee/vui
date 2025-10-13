@@ -1,13 +1,19 @@
 <template>
-  <DemoViewTop label="添加图标">
+  <DemoConfig
+    label="添加图标"
+    label-position="top"
+  >
     <DemoBasic icon="face" />
-  </DemoViewTop>
-  <DemoViewTop label="添加图标和样式">
+  </DemoConfig>
+  <DemoConfig
+    label="添加图标和样式"
+    label-position="top"
+  >
     <DemoBasic
       icon="face"
       :icon-props="{ color: 'pink' }"
     />
-  </DemoViewTop>
+  </DemoConfig>
 </template>
 
 <script setup>

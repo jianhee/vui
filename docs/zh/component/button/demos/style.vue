@@ -1,18 +1,18 @@
 <template>
-  <DemoView>
-    <template #content>
+  <DemoUsage>
+    <template #render>
       <DemoBasic :radius="radiusRef" />
     </template>
 
-    <template #props>
-      <DemoViewTop
+    <template #config>
+      <DemoConfig
         label="圆角尺寸"
         code="radius"
       >
-        <DemoValue v-model:value="radiusRef" />
-      </DemoViewTop>
+        <DemoSlider v-model:value="radiusRef" />
+      </DemoConfig>
     </template>
-  </DemoView>
+  </DemoUsage>
 </template>
 
 <script setup>
