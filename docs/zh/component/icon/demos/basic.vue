@@ -1,8 +1,9 @@
 <template>
-  <div class="demo-icons">
-    <DemoViewTop
+  <div class="c-demo-icons">
+    <DemoConfig
       label="使用图标属性"
       code="props.icon=name"
+      label-position="top"
     >
       <VIcon
         v-for="iconName in iconNames"
@@ -10,10 +11,11 @@
         :icon="iconName"
         v-bind="$attrs"
       />
-    </DemoViewTop>
-    <DemoViewTop
+    </DemoConfig>
+    <DemoConfig
       label="使用图标属性"
       code="props.icon=component"
+      label-position="top"
     >
       <VIcon
         v-for="iconComponent in iconComponents"
@@ -21,10 +23,11 @@
         :icon="iconComponent"
         v-bind="$attrs"
       />
-    </DemoViewTop>
-    <DemoViewTop
+    </DemoConfig>
+    <DemoConfig
       label="使用名称属性"
       code="props.name=xxx"
+      label-position="top"
     >
       <VIcon
         v-for="iconName in iconNames"
@@ -32,10 +35,11 @@
         :name="iconName"
         v-bind="$attrs"
       />
-    </DemoViewTop>
-    <DemoViewTop
+    </DemoConfig>
+    <DemoConfig
       label="使用组件属性"
       code="props.component=xxx"
+      label-position="top"
     >
       <VIcon
         v-for="iconComponent in iconComponents"
@@ -43,10 +47,11 @@
         :component="iconComponent"
         v-bind="$attrs"
       />
-    </DemoViewTop>
-    <DemoViewTop
+    </DemoConfig>
+    <DemoConfig
       label="使用默认插槽"
       code="slots.default"
+      label-position="top"
     >
       <VIcon
         v-for="iconComponent in iconComponents"
@@ -55,7 +60,7 @@
       >
         <component :is="iconComponent" />
       </VIcon>
-    </DemoViewTop>
+    </DemoConfig>
   </div>
 </template>
 
@@ -73,7 +78,7 @@ const iconComponents = [IconFace, IconLike, IconSearch, IconSetting, IconClose, 
 </script>
 
 <style lang="scss">
-.demo-icons .vui-icon {
+.c-demo-icons .vui-icon {
   margin-right: 10px;
   font-size: 24px;
 }

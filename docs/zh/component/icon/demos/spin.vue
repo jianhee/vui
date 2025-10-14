@@ -1,18 +1,18 @@
 <template>
-  <DemoView>
-    <template #content>
+  <DemoUsage>
+    <template #render>
       <DemoBasic :spin="isSpin" />
     </template>
 
-    <template #props>
-      <DemoViewBoolean
+    <template #config>
+      <DemoConfig
         label="是否旋转状态"
         code="spin"
       >
         <VSwitch v-model:checked="isSpin" />
-      </DemoViewBoolean>
+      </DemoConfig>
     </template>
-  </DemoView>
+  </DemoUsage>
 </template>
 
 <script setup>

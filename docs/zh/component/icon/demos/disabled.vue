@@ -1,18 +1,18 @@
 <template>
-  <DemoView>
-    <template #content>
+  <DemoUsage>
+    <template #render>
       <DemoBasic :disabled="isDisabled" />
     </template>
 
-    <template #props>
-      <DemoViewBoolean
+    <template #config>
+      <DemoConfig
         label="是否禁用状态"
         code="disabled"
       >
         <VSwitch v-model:checked="isDisabled" />
-      </DemoViewBoolean>
+      </DemoConfig>
     </template>
-  </DemoView>
+  </DemoUsage>
 </template>
 
 <script setup>
