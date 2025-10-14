@@ -17,11 +17,10 @@
 
 <script setup>
 import { ref } from 'vue';
-import { validateRoutePath } from '@vp/composables';
 import { useDemo } from '../composables/index.js';
 
 defineOptions({ inheritAttrs: false });
-const { isBasic, onChange } = useDemo();
+const { isBasic, isCheckbox, onChange } = useDemo();
 
 // 选项
 const options = [
@@ -36,7 +35,6 @@ const options = [
 // 默认值
 const checkedDefaultVal = [options[0].value, options[1].value];
 const radioDefaultVal = options[0].value;
-const isCheckbox = validateRoutePath('checkbox');
 const defaultVal = isCheckbox ? checkedDefaultVal : radioDefaultVal;
 
 // 当前值

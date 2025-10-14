@@ -1,6 +1,6 @@
 <template>
-  <DemoView>
-    <template #content>
+  <DemoUsage>
+    <template #render>
       <VDropdown
         :items="items"
         :max-width="maxWidthRef"
@@ -11,8 +11,8 @@
       </VDropdown>
     </template>
 
-    <template #props>
-      <DemoViewTop
+    <template #config>
+      <DemoConfig
         label="最大宽度"
         code="maxWidth"
       >
@@ -21,8 +21,8 @@
           :min="20"
           :max="200"
         />
-      </DemoViewTop>
-      <DemoViewTop
+      </DemoConfig>
+      <DemoConfig
         label="最小宽度"
         code="minWidth"
       >
@@ -31,8 +31,8 @@
           :min="20"
           :max="200"
         />
-      </DemoViewTop>
-      <DemoViewTop
+      </DemoConfig>
+      <DemoConfig
         label="最大高度"
         code="maxHeight"
       >
@@ -41,9 +41,9 @@
           :min="200"
           :max="500"
         />
-      </DemoViewTop>
+      </DemoConfig>
     </template>
-  </DemoView>
+  </DemoUsage>
 </template>
 
 <script setup>

@@ -41,8 +41,8 @@ const emits = defineEmits(dropdownEmits);
 const { formattedItems, rootStyles } = useDropdown({ props });
 
 // 打开/关闭下拉菜单
-const open = event => popoverRef.value.open(event);
-const close = () => popoverRef.value.close();
+const open = arg => popoverRef.value.open(arg);
+const close = arg => popoverRef.value.close(arg);
 
 // 子组件使用
 provide('vuiDropdownRoot', {

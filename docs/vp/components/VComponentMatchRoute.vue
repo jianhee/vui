@@ -12,6 +12,7 @@ import VEmpty from 'vui/components/empty/empty.vue';
 import VLoading from 'vui/components/loading/loading.vue';
 import VPopover from 'vui/components/popover/popover.vue';
 import VTooltip from 'vui/components/tooltip/tooltip.vue';
+import VDropdown from 'vui/components/dropdown/dropdown.vue';
 
 const componentMap = {
   checkbox: VCheckbox,
@@ -23,7 +24,8 @@ const componentMap = {
   empty: VEmpty,
   loading: VLoading,
   popover: VPopover,
-  tooltip: VTooltip
+  tooltip: VTooltip,
+  dropdown: VDropdown
 };
 
 export default {

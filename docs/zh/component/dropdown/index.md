@@ -1,5 +1,10 @@
 # Dropdown 下拉菜单
 
+<script setup>
+import { useRoute } from 'vitepress';
+const isShowContent = useRoute().path.includes('dropdown') === false
+</script>
+
 ## 示例
 
 ### 基础用法
@@ -16,21 +21,23 @@
 
 <preview path="./demos/selectable.vue"></preview>
 
-### 隐藏方式
+### 关闭方式
 
 <preview path="./demos/close.vue"></preview>
 
 ### 控制样式
 
+<!--@include: @/component/@parts/api-style.md-->
+
 <preview path="./demos/style.vue"></preview>
 
-### 继承 Popover
+## 继承 Popover
 
-<preview path="./demos/popover.vue"></preview>
+<!--@include: @/component/popover/parts/demo.md-->
 
 ## API
 
-下拉菜单依赖 `Popover` 组件，继承 `Popover` 组件的接口和用法
+下拉菜单依赖 `Popover` 组件，继承 `Popover` 组件的接口，同时新增了以下自定义接口
 
 ### 属性
 

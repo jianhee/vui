@@ -1,6 +1,6 @@
 <template>
-  <DemoView>
-    <template #content>
+  <DemoUsage>
+    <template #render>
       <VDropdown
         :items="items"
         :close-on-click-item="closeOnClickItem"
@@ -9,15 +9,15 @@
       </VDropdown>
     </template>
 
-    <template #props>
-      <DemoViewBoolean
+    <template #config>
+      <DemoConfig
         label="是否在点击菜单项时关闭下拉菜单"
         code="closeOnClickItem"
       >
         <VSwitch v-model:checked="closeOnClickItem" />
-      </DemoViewBoolean>
+      </DemoConfig>
     </template>
-  </DemoView>
+  </DemoUsage>
 </template>
 
 <script setup>

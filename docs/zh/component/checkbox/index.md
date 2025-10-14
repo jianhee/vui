@@ -1,8 +1,9 @@
 ---
-title: Checkbox
+title: Checkbox 多选框
+customName: Checkbox
 ---
 
-# {{ $frontmatter.title }} 多选框
+# {{ $frontmatter.customName }} 多选框
 
 ::: tip
 多选框和单选框的 API 几乎完全一致，UI 略有差异，各自提供两个独立的组件
@@ -12,7 +13,7 @@ title: Checkbox
 
 :::
 
-## {{ $frontmatter.title }} 示例
+## {{ $frontmatter.customName }} 示例
 
 <!--@include: @/component/@parts/demo-component.md-->
 
@@ -36,7 +37,7 @@ title: Checkbox
 
 <preview path="@docs/component/checkbox/demos/option-type.vue"></preview>
 
-## {{ $frontmatter.title }}Group 示例
+## {{ $frontmatter.customName }}Group 示例
 
 ### 基础用法
 
@@ -58,7 +59,7 @@ title: Checkbox
 
 <preview path="@docs/component/checkbox/demos/group-type.vue"></preview>
 
-## {{ $frontmatter.title }}/Group API
+## {{ $frontmatter.customName }}/Group API
 
 ### 原生属性
 
@@ -69,7 +70,7 @@ title: Checkbox
 | `disabled` | 是否为禁用状态 | `boolean` | `false` |
 | `readonly` | 是否为只读状态 | `boolean` | `false` |
 
-## {{ $frontmatter.title }} API
+## {{ $frontmatter.customName }} API
 
 ### 属性
 

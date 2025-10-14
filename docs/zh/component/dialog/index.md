@@ -4,7 +4,7 @@ title: Dialog 对话框
 
 <script setup>
 import { useRoute } from 'vitepress';
-const isDrawer = useRoute().path.includes('drawer')
+const isShowPlacement = useRoute().path.includes('drawer')
 </script>
 
 # {{ $frontmatter.title }}
@@ -25,8 +25,7 @@ const isDrawer = useRoute().path.includes('drawer')
 <preview path="@docs/component/dialog/demos/basic.vue"></preview>
 
 <!-- 抽屉出现位置 -->
-
-<template v-if="isDrawer">
+<template v-if="isShowPlacement">
 
 ### 出现位置
 
