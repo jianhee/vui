@@ -1,16 +1,19 @@
 <template>
   <DemoSpace flex>
-    <VPopover
+    <VComponentMatchRoute
       v-for="trigger in triggers"
       :key="trigger.value"
+      v-bind="props"
       :trigger="trigger.value"
-      content="弹出框内容"
     >
       <VButton>{{ trigger.value }}{{ trigger.label }}</VButton>
-    </VPopover>
+    </VComponentMatchRoute>
   </DemoSpace>
 </template>
 
 <script setup>
+import { useDemo } from '../composables';
+
+const { props } = useDemo();
 const triggers = [{ value: 'hover', label: '（默认）' }, { value: 'click' }, { value: 'contextmenu' }];
 </script>

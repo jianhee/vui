@@ -1,22 +1,25 @@
 // 弹出框定位（已废弃）
-export const popoverPosition = {
+export const usePosition = () => {
   // 打开弹框时
-  onOpen(params) {
-    this.setPlacementAttrs(params);
-    this.setPositionStyles(params);
-    this.getScrollableParents(params);
-    this.toggleScrollListeners(true);
-  },
+  function onOpen(params) {
+    setPlacementAttrs(params);
+    setPositionStyles(params);
+    getScrollableParents(params);
+    toggleScrollListeners(true);
+  }
+
   // 关闭弹框时
-  onClose() {
-    this.toggleScrollListeners(false);
-  },
+  function onClose() {
+    toggleScrollListeners(false);
+  }
+
   // 设置位置属性
-  setPlacementAttrs(params) {
-    params.popperElement.setAttribute('data-placement', params.placement);
-  },
+  function setPlacementAttrs(params) {
+    params.contentElement.setAttribute('data-placement', params.placement);
+  }
+
   // 设置定位样式
-  setPositionStyles(params) {
+  function setPositionStyles(params) {
     // 窗口坐标
     const { clientWidth: windowWidth, clientHeight: windowHeight } = document.documentElement;
 
@@ -25,7 +28,7 @@ export const popoverPosition = {
     const { left, right, top, bottom } = refRect;
 
     // 弹框元素坐标
-    const { clientWidth: contentWidth, clientHeight: contentHeight } = params.popperElement;
+    const { clientWidth: contentWidth, clientHeight: contentHeight } = params.contentElement;
     const offsetSize = 8;
 
     // 水平方向坐标：默认对齐左边，超出屏幕则对齐右边
@@ -44,14 +47,15 @@ export const popoverPosition = {
     }
 
     // 设置样式
-    params.popperElement.style.left = `${Math.max(0, contentLeft)}px`;
-    params.popperElement.style.top = `${Math.max(0, contentTop)}px`;
-  },
+    params.contentElement.style.left = `${Math.max(0, contentLeft)}px`;
+    params.contentElement.style.top = `${Math.max(0, contentTop)}px`;
+  }
+
   // 获取所有可滚动的父元素
-  scrollableParents: null,
-  getScrollableParents(params) {
+  let scrollableParents = null;
+  function getScrollableParents(params) {
     const parents = [];
-    let parent = params.popperElement?.parentElement;
+    let parent = params.contentElement?.parentElement;
 
     while (parent) {
       const style = window.getComputedStyle(parent);
@@ -66,16 +70,19 @@ export const popoverPosition = {
 
     // 始终添加window作为可能的滚动源
     parents.push(window);
-    this.scrollableParents = parents;
-  },
+    scrollableParents = parents;
+  }
+
   // 启用/禁用滚动事件
-  toggleScrollListeners(enabled) {
-    this.scrollableParents.forEach(parent => {
+  function toggleScrollListeners(enabled) {
+    scrollableParents?.forEach(parent => {
       if (enabled) {
-        parent.addEventListener('scroll', this.setPositionStyles, { passive: true });
+        parent.addEventListener('scroll', setPositionStyles, { passive: true });
       } else {
-        parent.removeEventListener('scroll', this.setPositionStyles);
+        parent.removeEventListener('scroll', setPositionStyles);
       }
     });
   }
+
+  return { onOpen, onClose };
 };

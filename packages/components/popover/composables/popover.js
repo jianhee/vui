@@ -1,7 +1,7 @@
 // 弹出框
 import { ref, computed, onUnmounted, nextTick } from 'vue';
 import { onClickOutside, useEventListener } from '@vueuse/core';
-import { popoverPosition } from './popover-position.v2.js';
+import { usePosition } from './popover-position.v2.js';
 
 // emits
 export const popoverEmits = ['open', 'opened', 'close', 'closed'];
@@ -9,7 +9,7 @@ export const popoverEmits = ['open', 'opened', 'close', 'closed'];
 // props
 export const popoverProps = {
   // 弹框内容
-  content: { type: String, default: '' },
+  content: { type: [String, Number], default: null },
   // 弹框位置
   // 'top', 'top-start', 'top-end'
   // 'bottom', 'bottom-start', 'bottom-end'
@@ -26,12 +26,16 @@ export const popoverProps = {
 
 // 使用弹出框
 export const usePopover = ({ triggerRef, contentElRef, arrowElRef, props, emits }) => {
+  // 定位实例
+  const positionInitance = usePosition();
+
   // 触发元素
   const triggerElRef = computed(() => {
     const element = props.triggerElement || triggerRef.value;
     return element?.$el || element;
   });
-  // 是否显示内容元素
+
+  // 内容元素
   const contentVisible = ref(false);
 
   // 触发元素/内容元素 hover
@@ -78,7 +82,14 @@ export const usePopover = ({ triggerRef, contentElRef, arrowElRef, props, emits 
   });
 
   // 外部元素 click
-  onClickOutside(contentElRef, closePopover, { ignore: [triggerElRef] });
+  onClickOutside(
+    contentElRef,
+    () => {
+      if (!props.trigger) return;
+      closePopover();
+    },
+    { ignore: [triggerElRef] }
+  );
 
   // 通过触发元素自动打开：参照 HTMLElement
   function openByTriggerElement() {
@@ -93,7 +104,7 @@ export const usePopover = ({ triggerRef, contentElRef, arrowElRef, props, emits 
 
   // 通过方法手动打开：参照 MouseEvent 或 HTMLElement
   // 即使当前是打开状态，也可以重复调用
-  function openByMethod(event) {
+  function openByMethod(event, forceCreate = true) {
     if (props.disabled) return;
 
     // 更新状态
@@ -102,14 +113,16 @@ export const usePopover = ({ triggerRef, contentElRef, arrowElRef, props, emits 
       emits('open');
     }
 
-    // 更新定位
+    // 获取参考元素
     let element = triggerElRef.value;
     if (event) {
       element = {
         getBoundingClientRect: () => ({ width: 0, height: 0, top: event.clientY, right: event.clientX, bottom: event.clientY, left: event.clientX })
       };
     }
-    updatePosition(element, true);
+
+    // 更新定位
+    updatePosition(element, forceCreate);
   }
 
   // 更新定位
@@ -117,10 +130,10 @@ export const usePopover = ({ triggerRef, contentElRef, arrowElRef, props, emits 
   // 2.只有第一次需要初始化实例的情况：v-show
   async function updatePosition(referenceElement, isForceCreate) {
     await nextTick();
-    popoverPosition.onOpen(
+    positionInitance.onOpen(
       {
         referenceElement,
-        popperElement: contentElRef.value,
+        contentElement: contentElRef.value,
         arrowElement: arrowElRef.value,
         placement: props.placement
       },
@@ -139,11 +152,11 @@ export const usePopover = ({ triggerRef, contentElRef, arrowElRef, props, emits 
     emits('close');
 
     // 更新定位
-    popoverPosition.onClose(true);
+    positionInitance.onClose(true);
   }
 
   // 销毁实例
-  onUnmounted(() => popoverPosition.onClose(true));
+  onUnmounted(() => positionInitance.onClose(true));
 
   return {
     contentVisible,

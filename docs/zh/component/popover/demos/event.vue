@@ -1,15 +1,18 @@
 <template>
-  <VPopover
-    content="弹出框内容"
+  <VComponentMatchRoute
+    v-bind="props"
     @open="writeLog('open')"
     @opened="writeLog('opened')"
     @close="writeLog('close')"
     @closed="writeLog('closed')"
   >
     <VButton>hover 触发元素</VButton>
-  </VPopover>
+  </VComponentMatchRoute>
 </template>
 
 <script setup>
 import { writeLog } from '@vp/utils';
+import { useDemo } from '../composables';
+
+const { props } = useDemo();
 </script>

@@ -67,6 +67,7 @@ const { contentVisible, openByMethod, closePopover } = usePopover({
 // 弹出框方法
 defineExpose({
   open: openByMethod,
-  close: closePopover
+  close: closePopover,
+  update: () => openByMethod(undefined, false)
 });
 </script>

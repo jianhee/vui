@@ -1,27 +1,29 @@
 <template>
-  <DemoView>
-    <template #content>
-      <VPopover
-        content="弹出框内容"
+  <DemoUsage>
+    <template #render>
+      <VComponentMatchRoute
+        v-bind="props"
         :disabled="isDisabled"
       >
         <VButton :disabled="isDisabled">hover 触发元素</VButton>
-      </VPopover>
+      </VComponentMatchRoute>
     </template>
 
-    <template #props>
-      <DemoViewBoolean
+    <template #config>
+      <DemoConfig
         label="是否禁用状态"
         code="disabled"
       >
         <VSwitch v-model:checked="isDisabled" />
-      </DemoViewBoolean>
+      </DemoConfig>
     </template>
-  </DemoView>
+  </DemoUsage>
 </template>
 
 <script setup>
 import { ref } from 'vue';
+import { useDemo } from '../composables';
 
+const { props } = useDemo();
 const isDisabled = ref(true);
 </script>

@@ -1,12 +1,12 @@
 <template>
   <DemoSpace flex>
-    <VPopover content="弹出框内容">
+    <VComponentMatchRoute v-bind="props">
       <VButton>hover 使用插槽定义触发元素（默认）</VButton>
-    </VPopover>
+    </VComponentMatchRoute>
 
     <VButton ref="triggerElement">hover 使用属性定义触发元素</VButton>
-    <VPopover
-      content="弹出框内容"
+    <VComponentMatchRoute
+      v-bind="props"
       :trigger-element="triggerElement"
     />
   </DemoSpace>
@@ -14,5 +14,8 @@
 
 <script setup>
 import { useTemplateRef } from 'vue';
+import { useDemo } from '../composables';
+
+const { props } = useDemo();
 const triggerElement = useTemplateRef('triggerElement');
 </script>

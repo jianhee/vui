@@ -1,24 +1,27 @@
 <template>
-  <div class="demo-popover-placement-group">
+  <div class="c-demo-popover-placement-group">
     <div
       v-for="group in placementGroup"
       :key="group.name"
-      class="demo-popover-placement-items"
+      class="c-demo-popover-placement-items"
       :style="{ [group.name]: 0 }"
     >
-      <VPopover
+      <VComponentMatchRoute
         v-for="item in group.items"
         :key="item.value"
         :placement="item.value"
-        content="弹出框内容弹出框内容弹出框内容弹出框内容"
+        v-bind="props"
       >
         <VButton>{{ item.value }}{{ item.label || '' }} </VButton>
-      </VPopover>
+      </VComponentMatchRoute>
     </div>
   </div>
 </template>
 
 <script setup>
+import { useDemo } from '../composables';
+
+const { props } = useDemo();
 const placementGroup = [
   {
     name: 'top',
@@ -40,7 +43,7 @@ const placementGroup = [
 </script>
 
 <style lang="scss">
-.demo-popover-placement {
+.c-demo-popover-placement {
   &-group {
     position: relative;
     width: 500px;
