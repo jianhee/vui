@@ -30,8 +30,6 @@
 
 ## Form/FormItem API
 
-两个组件都有的接口
-
 ### 属性
 
 `FormItem` 组件的优先级高于 `Form` 组件

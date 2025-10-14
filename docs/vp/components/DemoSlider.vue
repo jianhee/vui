@@ -5,7 +5,12 @@
     :tooltip-formatter="val => `${val}${unit}`"
   >
     <template #suffix="{ value }">
-      <div class="g-demo-slider-suffix">{{ `${value}${unit}` }}</div>
+      <div
+        v-if="value || value === 0"
+        class="g-demo-slider-suffix"
+      >
+        {{ `${value}${unit}` }}
+      </div>
     </template>
   </VSlider>
 </template>

@@ -1,30 +1,24 @@
 <template>
-  <DemoView>
-    <template #content>
+  <DemoUsage>
+    <template #render>
       <DemoBasic :form-props="formProps" />
     </template>
 
-    <template #props>
-      <DemoViewBoolean
+    <template #config>
+      <DemoConfig
         label="是否禁用状态"
         code="disabled"
       >
-        <VSwitch
-          v-model:checked="formProps.disabled"
-          @change="onChange1"
-        />
-      </DemoViewBoolean>
-      <DemoViewBoolean
+        <VSwitch v-model:checked="formProps.disabled" />
+      </DemoConfig>
+      <DemoConfig
         label="是否只读状态"
         code="readonly"
       >
-        <VSwitch
-          v-model:checked="formProps.readonly"
-          @change="onChange2"
-        />
-      </DemoViewBoolean>
+        <VSwitch v-model:checked="formProps.readonly" />
+      </DemoConfig>
     </template>
-  </DemoView>
+  </DemoUsage>
 </template>
 
 <script setup>
@@ -35,7 +29,4 @@ const formProps = ref({
   disabled: true,
   readonly: false
 });
-
-const onChange1 = ({ checked }) => (checked ? (formProps.value.readonly = false) : null);
-const onChange2 = ({ checked }) => (checked ? (formProps.value.disabled = false) : null);
 </script>

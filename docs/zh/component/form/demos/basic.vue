@@ -1,6 +1,6 @@
 <template>
   <VForm
-    class="demo-form"
+    class="c-demo-form"
     v-bind="formProps"
   >
     <VFormItem
@@ -90,7 +90,7 @@ const options = [
 </script>
 
 <style lang="scss">
-.demo-form .vui {
+.c-demo-form .vui {
   &-input,
   &-select,
   &-slider {

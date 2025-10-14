@@ -1,7 +1,7 @@
 <template>
   <VForm
     ref="formRef"
-    class="demo-form"
+    class="c-demo-form"
     :model="formData"
     :rules="formRules"
   >

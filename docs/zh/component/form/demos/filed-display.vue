@@ -1,19 +1,19 @@
 <template>
-  <DemoView>
-    <template #content>
+  <DemoUsage>
+    <template #render>
       <DemoBasic :form-props="formProps" />
     </template>
 
-    <template #props>
-      <DemoViewBoolean code="filedInline|filedBlock">
+    <template #config>
+      <DemoConfig code="filedInline|filedBlock">
         <VSwitch
           v-model:checked="formProps.filedInline"
           inactive-text="块级模式"
           active-text="行内模式"
         />
-      </DemoViewBoolean>
+      </DemoConfig>
     </template>
-  </DemoView>
+  </DemoUsage>
 </template>
 
 <script setup>

@@ -2,6 +2,7 @@
 <template>
   <VSelect
     class="g-demo-select"
+    placeholder="请选择"
     clearable
   />
 </template>

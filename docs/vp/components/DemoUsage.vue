@@ -39,13 +39,17 @@ defineProps({
 .g-demo-usage {
   display: flex;
   margin: -20px;
+  overflow: auto;
   &-render {
     flex: auto;
     padding: 15px 20px;
+    overflow: auto;
   }
   &-config {
+    flex: none;
     min-width: 300px;
     padding: 15px 20px;
+    overflow: hidden;
     background-color: var(--demo-view-bg-color);
   }
   &-render-title,
