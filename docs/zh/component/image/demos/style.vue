@@ -1,6 +1,6 @@
 <template>
-  <DemoView>
-    <template #content>
+  <DemoUsage>
+    <template #render>
       <VImage
         :src="url"
         :width="widthRef"
@@ -9,40 +9,40 @@
       />
     </template>
 
-    <template #props>
-      <DemoViewTop
+    <template #config>
+      <DemoConfig
         label="宽度"
         code="width"
       >
-        <DemoValue
+        <DemoSlider
           v-model:value="widthRef"
           :min="100"
           :max="500"
           unit="px"
         />
-      </DemoViewTop>
-      <DemoViewTop
+      </DemoConfig>
+      <DemoConfig
         label="宽高比"
         code="aspectRatio"
       >
-        <DemoValue
+        <DemoSlider
           v-model:value="aspectRatioRef"
           :min="50"
           :max="200"
           unit="/100"
         />
-      </DemoViewTop>
-      <DemoViewTop
+      </DemoConfig>
+      <DemoConfig
         label="圆角尺寸"
         code="radius"
       >
-        <DemoValue
+        <DemoSlider
           v-model:value="radiusRef"
           unit="px"
         />
-      </DemoViewTop>
+      </DemoConfig>
     </template>
-  </DemoView>
+  </DemoUsage>
 </template>
 
 <script setup>

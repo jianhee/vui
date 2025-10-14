@@ -1,11 +1,17 @@
 <template>
   <DemoSpace flex>
-    <DemoViewTopCenter label="加载成功">
+    <DemoConfig
+      label="加载成功"
+      label-position="top-center"
+    >
       <VImage :src="url" />
-    </DemoViewTopCenter>
-    <DemoViewTopCenter label="加载失败">
+    </DemoConfig>
+    <DemoConfig
+      label="加载失败"
+      label-position="top-center"
+    >
       <VImage :src="`123${url}`" />
-    </DemoViewTopCenter>
+    </DemoConfig>
   </DemoSpace>
 </template>
 
