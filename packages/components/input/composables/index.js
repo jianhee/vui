@@ -52,7 +52,7 @@ export const useInput = ({ wraperElRef, inputElRef, modelValue, props, emits }) 
   const isReadonly = computed(() => props.readonly || formRoot?.props?.readonly);
   const isEnabled = computed(() => !isDisabled.value && !isReadonly.value);
 
-  // 元素状态
+  // 元素
   const { focused: isInputFocused } = useFocus(inputElRef);
   const isHovered = useElementHover(wraperElRef);
   const wraperClasses = computed(() => ({

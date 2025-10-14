@@ -1,18 +1,19 @@
 <template>
-  <DemoViewTop
+  <DemoConfig
     v-for="selectSize in selectSizes"
     :key="selectSize.label"
     :label="selectSize.label"
     :code="selectSize.value"
+    label-position="top"
   >
     <VSelect
       v-model:value="selectValue"
-      class="demo-select"
+      class="c-demo-select"
       placeholder="请选择"
       :options="selectOptions"
       :size="selectSize.value"
     />
-  </DemoViewTop>
+  </DemoConfig>
 </template>
 
 <script setup>

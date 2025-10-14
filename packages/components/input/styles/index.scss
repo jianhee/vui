@@ -19,8 +19,8 @@
   --vui-input-prepend-border-color: var(--vui-border-color-base);
 
   // icon
-  --vui-input-custom-icon-color: var(--vui-text-color-placeholder);
-  --vui-input-inner-icon-color: var(--vui-text-color-secondary);
+  --vui-input-icon-default-color: var(--vui-text-color-placeholder);
+  --vui-input-icon-active-color: var(--vui-text-color-secondary);
 }
 
 // error
@@ -32,9 +32,6 @@
 
 // 样式
 .vui-input {
-  // 图标颜色
-  --vui-icon-color: var(--vui-input-custom-icon-color);
-
   // 容器
   display: flex;
   width: var(--vui-input-width);
@@ -124,12 +121,16 @@
     white-space: nowrap;
   }
 
-  // 内置图标
+  // 图标
+  .vui-icon {
+    --vui-icon-color: var(--vui-input-icon-default-color);
+  }
   &-icon--clear,
   &-icon--password {
+    --vui-icon-size: 12px;
     --vui-icon-cursor: pointer;
     &:hover {
-      --vui-icon-color: var(--vui-input-inner-icon-color);
+      --vui-icon-color: var(--vui-input-icon-active-color);
     }
   }
 

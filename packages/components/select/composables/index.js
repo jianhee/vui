@@ -1,9 +1,9 @@
 // 选择器
 import { ref, computed, inject } from 'vue';
-import { useElementBounding } from '@vueuse/core';
+import { useFocus, useElementBounding, useElementHover } from '@vueuse/core';
 
 // emits
-export const selectEmits = ['change'];
+export const selectEmits = ['change', 'clear'];
 
 // v-model
 export const selectModel = {
@@ -18,6 +18,8 @@ export const selectProps = {
   // 2. `label` 选项文本，为空时使用 `value` 的值
   // 3. `string|number` 类型的选项会格式化为 `{ value, label }`
   options: { type: Array, default: null },
+  // 是否显示清除按钮
+  clearable: { type: Boolean, default: false },
   // 选择器尺寸：large, medium, small
   size: { type: String, default: 'medium' },
   // ---------- 原生属性 ----------
@@ -31,31 +33,37 @@ export const useSelect = ({ triggerElRef, modelValue, props, emits }) => {
   // 继承
   const formRoot = inject('vuiFormRoot', null);
 
-  // 是否禁用
+  // 组件状态
   const isDisabled = computed(() => props.disabled || formRoot?.props?.disabled);
   const isReadonly = computed(() => props.readonly || formRoot?.props?.readonly);
-  const isPopoverDisabled = computed(() => isDisabled.value || isReadonly.value);
+  const isEnabled = computed(() => !isDisabled.value && !isReadonly.value);
 
-  // 是否显示
-  const isVisible = ref(false);
-  function onVisibleChange(visible) {
-    isVisible.value = visible;
+  // 触发元素
+  const { focused: isFocused } = useFocus(triggerElRef);
+  const isHovered = useElementHover(triggerElRef);
+  const triggerClasses = computed(() => [
+    `vui-select--${props.size}`,
+    {
+      'vui-select--placeholder': !selectedOptionLabel.value,
+      'is-disabled': isDisabled.value,
+      'is-focus': isFocused.value && isEnabled.value
+    }
+  ]);
+
+  // 箭头图标
+  const expandIconRotate = computed(() => (isDropdownVisible.value ? '180deg' : null));
+
+  // 清除按钮
+  const isShowClearIcon = computed(() => props.clearable && modelValue.value && isEnabled.value && (isFocused.value || isHovered.value));
+  function onClickClearIcon(e) {
+    modelValue.value = null;
+    isFocused.value = true;
+    emits('clear', { event: e, value: null });
   }
 
-  // 触发器类名
-  const triggerClasses = computed(() => ({
-    [`vui-select--${props.size}`]: true,
-    'is-focus': isVisible.value,
-    'is-disabled': isDisabled.value
-  }));
-
-  // 中间文本类名
-  const innerClasses = computed(() => ({
-    'vui-select-placeholder': !selectedOptionLabel.value
-  }));
-
-  // 展开图标旋转角度
-  const expandIconRotate = computed(() => (isVisible.value ? '180deg' : null));
+  // 打开/关闭下拉菜单
+  const isDropdownVisible = ref(false);
+  const onVisibleChange = visible => (isDropdownVisible.value = visible);
 
   // 下拉菜单宽度
   const { width: triggerWidth } = useElementBounding(triggerElRef);
@@ -83,9 +91,8 @@ export const useSelect = ({ triggerElRef, modelValue, props, emits }) => {
   // 选中选项
   function onSelectOption({ item }) {
     const value = item.value;
-
-    // 更新值
     modelValue.value = value;
+    isFocused.value = true;
 
     // 参数为 当前项、当前项的 value、选中项的 value
     emits('change', {
@@ -96,13 +103,14 @@ export const useSelect = ({ triggerElRef, modelValue, props, emits }) => {
   }
 
   return {
+    triggerClasses,
+    isEnabled,
+    expandIconRotate,
+    isShowClearIcon,
+    dropdownStyles,
     formattedOptions,
     selectedOptionLabel,
-    isPopoverDisabled,
-    triggerClasses,
-    innerClasses,
-    expandIconRotate,
-    dropdownStyles,
+    onClickClearIcon,
     onVisibleChange,
     onSelectOption
   };

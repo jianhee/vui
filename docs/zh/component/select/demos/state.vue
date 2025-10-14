@@ -1,9 +1,9 @@
 <template>
-  <DemoView
-    class="demo-selects"
-    content-gap
+  <DemoUsage
+    class="c-demo-selects"
+    render-gap
   >
-    <template #content>
+    <template #render>
       <VSelect
         v-model:value="selectValue"
         placeholder="禁用状态"
@@ -18,21 +18,21 @@
       />
     </template>
 
-    <template #props>
-      <DemoViewLeft
+    <template #config>
+      <DemoConfig
         label="是否禁用状态"
         code="disabled"
       >
         <VSwitch v-model:checked="isDisabled" />
-      </DemoViewLeft>
-      <DemoViewLeft
+      </DemoConfig>
+      <DemoConfig
         label="是否只读状态"
         code="readonly"
       >
         <VSwitch v-model:checked="isReadonly" />
-      </DemoViewLeft>
+      </DemoConfig>
     </template>
-  </DemoView>
+  </DemoUsage>
 </template>
 
 <script setup>

@@ -15,6 +15,13 @@
 
 <preview path="./demos/state.vue"></preview>
 
+### 清除按钮
+
+- 使用 `clearable` 属性启用清除按钮
+- 点击清除按钮时触发 `clear` 事件
+
+<preview path="./demos/clearable.vue"></preview>
+
 ### 选择器尺寸
 
 使用 `size` 属性定义选择器尺寸
@@ -29,6 +36,7 @@
 | --------------- | -------------------------- | -------------------------------- | -------- |
 | `options`       | 选项数组                   | `Array[object\|string\|number]`  |          |
 | `v-model:value` | 当前值，即选中项的 `value` | `string\|number`                 |          |
+| `clearable`     | 是否显示清除按钮           | `boolean`                        | `false`  |
 | `size`          | 选择器尺寸                 | `string`: `large\|medium\|small` | `medium` |
 
 ### 基础属性.options
@@ -52,6 +60,7 @@
 
 ### 事件
 
-| 名称     | 说明           | 参数                                                                             |
-| -------- | -------------- | -------------------------------------------------------------------------------- |
-| `change` | 切换选项时触发 | `{ option: '当前项', value: '当前项的 value', selectedValue: '选中项的 value' }` |
+| 名称     | 说明               | 参数                                                                             |
+| -------- | ------------------ | -------------------------------------------------------------------------------- |
+| `change` | 切换选项时触发     | `{ option: '当前项', value: '当前项的 value', selectedValue: '选中项的 value' }` |
+| `clear`  | 点击清空按钮时触发 | `{ event: '事件对象', value: '当前值' }`                                         |

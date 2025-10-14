@@ -1,7 +1,7 @@
 <template>
   <VSelect
     v-model:value="selectValue"
-    class="demo-select"
+    class="c-demo-select"
     placeholder="请选择"
     :options="selectOptions"
     @change="writeLog('change', $event)"
@@ -27,8 +27,8 @@ const selectOptions = [
 </script>
 
 <style>
-.demo-select,
-.demo-selects .vui-select {
-  max-width: var(--vp-demo-filed-width);
+.c-demo-select,
+.c-demo-selects .vui-select {
+  max-width: var(--demo-filed-width);
 }
 </style>

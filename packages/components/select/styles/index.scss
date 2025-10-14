@@ -5,13 +5,17 @@
 
 // vars
 :root {
+  // wrapper
   --vui-select-text-color: var(--vui-text-color-regular);
   --vui-select-placeholder-color: var(--vui-text-color-placeholder);
-  --vui-select-icon-color: var(--vui-text-color-placeholder);
   --vui-select-bg-color: var(--vui-fill-color-blank);
   --vui-select-border-color: var(--vui-border-color-base);
   --vui-select-hover-border-color: var(--vui-text-color-disabled);
   --vui-select-focus-border-color: var(--vui-color-brand-base);
+
+  // icon
+  --vui-select-icon-default-color: var(--vui-text-color-placeholder);
+  --vui-select-icon-active-color: var(--vui-text-color-secondary);
 }
 
 // error
@@ -34,8 +38,12 @@
   border: 1px solid var(--vui-select-border-color);
   border-radius: 4px;
   transition: border-color 0.3s ease;
-
-  // 状态
+  &--placeholder {
+    color: var(--vui-select-placeholder-color);
+  }
+  &.is-disabled {
+    @include mixins.vui-disabled;
+  }
   &:not(.is-disabled) {
     &:hover {
       border-color: var(--vui-select-hover-border-color);
@@ -44,27 +52,27 @@
       border-color: var(--vui-select-focus-border-color);
     }
   }
-  &.is-disabled {
-    @include mixins.vui-disabled;
-  }
-
-  // 占位文字
-  &-placeholder {
-    color: var(--vui-select-placeholder-color);
-  }
 
   // 输入框
   &-inner {
     @include mixins.vui-ellipsis;
 
     flex: auto;
+    width: 100%;
     height: 100%;
     text-align: left;
   }
 
   // 图标
-  &-icon--arrow {
-    --vui-icon-color: var(--vui-select-icon-color);
+  .vui-icon {
+    --vui-icon-color: var(--vui-select-icon-default-color);
+  }
+  &-icon--clear {
+    --vui-icon-size: 12px;
+    --vui-icon-cursor: pointer;
+    &:hover {
+      --vui-icon-color: var(--vui-select-icon-active-color);
+    }
   }
 
   // 尺寸
