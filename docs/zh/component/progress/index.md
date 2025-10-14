@@ -8,7 +8,7 @@
 
 <preview path="./demos/basic.vue"></preview>
 
-### 文本
+### 自定义文本
 
 使用 `textFormatter` 属性定义文本
 

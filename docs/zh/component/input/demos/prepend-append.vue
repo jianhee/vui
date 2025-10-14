@@ -2,7 +2,7 @@
   <div class="c-demo-inputs">
     <DemoConfig
       label="使用属性"
-      label-position="top"
+      label-width="60px"
     >
       <VInput
         v-model:value="inputValue"
@@ -23,7 +23,7 @@
     </DemoConfig>
     <DemoConfig
       label="使用插槽"
-      label-position="top"
+      label-width="60px"
     >
       <VInput
         v-model:value="inputValue"
@@ -47,7 +47,7 @@
     </DemoConfig>
     <DemoConfig
       label="混合使用"
-      label-position="top"
+      label-width="60px"
     >
       <VInput
         v-model:value="inputValue"
@@ -76,9 +76,3 @@ import { ref } from 'vue';
 
 const inputValue = ref(null);
 </script>
-
-<style scoped>
-.c-demo-inputs .vui-input {
-  max-width: 400px;
-}
-</style>

@@ -1,18 +1,24 @@
 <template>
-  <div class="demo-progresses">
-    <DemoViewLeft label="格式化文本">
+  <div class="c-demo-progresses">
+    <DemoConfig
+      label="格式化文本"
+      label-width="5em"
+    >
       <VProgress
         :percent="valueRef1"
         :text-formatter="percent => `当前进度${percent}%`"
       />
-    </DemoViewLeft>
+    </DemoConfig>
 
-    <DemoViewLeft label="不显示文本">
+    <DemoConfig
+      label="不显示文本"
+      label-width="5em"
+    >
       <VProgress
         :percent="valueRef2"
         :text-formatter="null"
       />
-    </DemoViewLeft>
+    </DemoConfig>
   </div>
 </template>
 

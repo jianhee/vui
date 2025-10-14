@@ -1,6 +1,6 @@
 <template>
   <DemoConfig
-    label="默认通过元素自动触发"
+    label="通过元素自动触发(默认)"
     label-position="top"
   >
     <VComponentMatchRoute

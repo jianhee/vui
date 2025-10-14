@@ -49,9 +49,12 @@ defineProps({
     height: 32px;
     line-height: 32px;
     white-space: nowrap;
-    code {
+    > code {
       line-height: 1.4;
     }
+  }
+  &-content {
+    flex: auto;
   }
 
   // label位置
@@ -59,11 +62,14 @@ defineProps({
     flex-wrap: wrap;
     justify-content: space-between;
   }
+  &-label--left > &-content {
+    flex: none;
+  }
   &-label--top,
   &-label--top-center {
     flex-direction: column;
   }
-  &-label--top-center > .g-demo-config-label {
+  &-label--top-center > &-label {
     justify-content: center;
   }
 }

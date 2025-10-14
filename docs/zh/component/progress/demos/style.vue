@@ -1,6 +1,6 @@
 <template>
-  <DemoView class="demo-progresses">
-    <template #content>
+  <DemoUsage class="c-demo-progresses">
+    <template #render>
       <VProgress
         :percent="valueRef"
         :height="heightRef"
@@ -8,28 +8,28 @@
       />
     </template>
 
-    <template #props>
-      <DemoViewTop
+    <template #config>
+      <DemoConfig
         label="高度"
         code="height"
       >
-        <DemoValue
+        <DemoSlider
           v-model:value="heightRef"
           :min="1"
           unit="px"
         />
-      </DemoViewTop>
-      <DemoViewTop
+      </DemoConfig>
+      <DemoConfig
         label="圆角尺寸"
         code="radius"
       >
-        <DemoValue
+        <DemoSlider
           v-model:value="radiusRef"
           unit="px"
         />
-      </DemoViewTop>
+      </DemoConfig>
     </template>
-  </DemoView>
+  </DemoUsage>
 </template>
 
 <script setup>

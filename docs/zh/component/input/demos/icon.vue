@@ -2,7 +2,7 @@
   <div class="c-demo-inputs">
     <DemoConfig
       label="单独使用图标"
-      label-position="top"
+      label-width="120px"
     >
       <VInput
         v-model:value="inputValue"
@@ -23,7 +23,7 @@
     </DemoConfig>
     <DemoConfig
       label="同时使用图标和属性"
-      label-position="top"
+      label-width="120px"
     >
       <VInput
         v-model:value="inputValue"
