@@ -1,6 +1,6 @@
 <template>
-  <DemoView class="demo-inputs">
-    <template #content>
+  <DemoUsage class="c-demo-inputs">
+    <template #render>
       <VInput
         v-model:value="inputValue"
         placeholder="请输入文字"
@@ -9,24 +9,24 @@
       />
     </template>
 
-    <template #props>
-      <DemoViewTop
+    <template #config>
+      <DemoConfig
         label="最大长度"
         code="maxlength"
       >
-        <DemoValue
+        <DemoSlider
           v-model:value="maxlength"
           unit="位"
         />
-      </DemoViewTop>
-      <DemoViewBoolean
+      </DemoConfig>
+      <DemoConfig
         label="是否显示统计字数"
         code="showWordLimit"
       >
         <VSwitch v-model:checked="showWordLimit" />
-      </DemoViewBoolean>
+      </DemoConfig>
     </template>
-  </DemoView>
+  </DemoUsage>
 </template>
 
 <script setup>

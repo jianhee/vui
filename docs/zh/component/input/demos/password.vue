@@ -1,33 +1,32 @@
 <template>
-  <DemoView class="demo-inputs">
-    <template #content>
+  <DemoUsage class="c-demo-inputs">
+    <template #render>
       <VInput
         v-model:value="inputValue"
         placeholder="请输入密码"
         :type="typeRef"
-        :show-password="isShowPassword"
+        :show-password-toggle="isShowPassword"
       />
     </template>
 
-    <template #props>
-      <DemoViewBoolean
+    <template #config>
+      <DemoConfig
         label="输入框类型"
         code="type"
       >
-        <VRadioGroup
+        <DemoOptions
           v-model:value="typeRef"
           :options="['text', 'password']"
-          option-type="button"
         />
-      </DemoViewBoolean>
-      <DemoViewBoolean
+      </DemoConfig>
+      <DemoConfig
         label="是否显示切换按钮"
-        code="showPassword"
+        code="showPasswordToggle"
       >
         <VSwitch v-model:checked="isShowPassword" />
-      </DemoViewBoolean>
+      </DemoConfig>
     </template>
-  </DemoView>
+  </DemoUsage>
 </template>
 
 <script setup>

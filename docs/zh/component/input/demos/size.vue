@@ -1,17 +1,18 @@
 <template>
-  <DemoViewTop
+  <DemoConfig
     v-for="inputSize in inputSizes"
     :key="inputSize.label"
     :label="inputSize.label"
     :code="inputSize.value"
+    label-position="top"
   >
     <VInput
       v-model:value="inputValue"
-      class="demo-input"
+      class="c-demo-input"
       placeholder="请输入内容"
       :size="inputSize.value"
     />
-  </DemoViewTop>
+  </DemoConfig>
 </template>
 
 <script setup>

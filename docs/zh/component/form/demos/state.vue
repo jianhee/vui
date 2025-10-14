@@ -27,6 +27,6 @@ import DemoBasic from './basic.vue';
 
 const formProps = ref({
   disabled: true,
-  readonly: false
+  readonly: true
 });
 </script>

@@ -1,7 +1,7 @@
 <template>
   <VInput
     v-model:value="inputValue"
-    class="demo-input"
+    class="c-demo-input"
     placeholder="请输入内容"
     @input="writeLog('input', $event)"
     @change="writeLog('change', $event)"
@@ -21,8 +21,8 @@ const inputValue = ref(null);
 </script>
 
 <style>
-.demo-input,
-.demo-inputs .vui-input {
+.c-demo-input,
+.c-demo-inputs .vui-input {
   max-width: var(--demo-filed-width);
 }
 .vui-input + .vui-input {

@@ -1,5 +1,5 @@
 <template>
-  <DemoViewLeft
+  <DemoConfig
     label="是否自动聚焦"
     code="autofocus"
   >
@@ -7,9 +7,9 @@
       v-model:value="inputValue"
       placeholder="自动聚焦"
       autofocus
-      class="demo-input"
+      class="c-demo-input"
     />
-  </DemoViewLeft>
+  </DemoConfig>
 </template>
 
 <script setup>

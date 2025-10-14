@@ -10,7 +10,7 @@
       }
     ]"
   >
-    <!-- 前置标签 -->
+    <!-- 前置装饰 -->
     <div
       v-if="$slots.prepend || prepend"
       class="vui-input-prepend"
@@ -23,12 +23,19 @@
       ref="wraperElRef"
       :class="['vui-input-wrapper', wraperClasses]"
     >
-      <slot name="prefix" />
-      {{ prefix }}
+      <!-- 前置图标 -->
       <VIcon
         v-if="_prefixIconProps"
         v-bind="_prefixIconProps"
       />
+      <!-- 前置内容 -->
+      <div
+        v-if="$slots.prefix || prefix"
+        class="vui-input-prefix"
+      >
+        <slot name="prefix" />
+        {{ prefix }}
+      </div>
       <!-- 输入框 -->
       <input
         ref="inputElRef"
@@ -53,27 +60,33 @@
       </div>
       <!-- 清除图标 -->
       <VIcon
-        v-if="isShowClear"
+        v-if="isShowClearIcon"
         class="vui-input-icon--clear"
         :icon="IconClear"
         @click.stop="onClickClearIcon"
       />
       <!-- 密码图标 -->
       <VIcon
-        v-if="isShowPassword"
+        v-if="isShowPasswordToggle"
         class="vui-input-icon--password"
         :icon="inputType === 'password' ? IconEyeClose : IconEyeOpen"
-        @click.stop="onClickToggleIcon"
+        @click.stop="onClickPasswordIcon"
       />
       <!-- 后置内容 -->
+      <div
+        v-if="$slots.suffix || suffix"
+        class="vui-input-suffix"
+      >
+        {{ suffix }}
+        <slot name="suffix" />
+      </div>
+      <!-- 后置图标 -->
       <VIcon
         v-if="_suffixIconProps"
         v-bind="_suffixIconProps"
       />
-      {{ suffix }}
-      <slot name="suffix" />
     </div>
-    <!-- 后置标签 -->
+    <!-- 后置装饰 -->
     <div
       v-if="$slots.append || append"
       class="vui-input-append"
@@ -100,7 +113,7 @@ const props = defineProps(inputProps);
 const emits = defineEmits(inputEmits);
 
 // 使用输入框
-const { isDisabled, isReadonly, rootClasses, wraperClasses, inputType, isShowPassword, onClickToggleIcon, isShowClear, onClickClearIcon, onInput, onChange, onEnter } = useInput({
+const { inputType, wraperClasses, rootClasses, isDisabled, isReadonly, isShowPasswordToggle, isShowClearIcon, onClickPasswordIcon, onClickClearIcon, onInput, onChange, onEnter } = useInput({
   wraperElRef,
   inputElRef,
   modelValue,

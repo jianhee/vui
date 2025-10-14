@@ -17,20 +17,20 @@ export const inputProps = {
   // 是否显示清除按钮
   clearable: { type: Boolean, default: false },
   // 是否显示切换密码按钮（仅密码类型有效）
-  showPassword: { type: Boolean, default: false },
+  showPasswordToggle: { type: Boolean, default: false },
   // 是否显示统计字数（仅限制输入长度时有效）
   showWordLimit: { type: Boolean, default: false },
+  // 前置/后置装饰
+  prepend: { type: [String, Number], default: null },
+  append: { type: [String, Number], default: null },
+  // 前置/后置内容
+  prefix: { type: [String, Number], default: null },
+  suffix: { type: [String, Number], default: null },
   // 前置/后置图标
   prefixIcon: VIcon.props.icon,
   prefixIconProps: VIcon.props,
   suffixIcon: VIcon.props.icon,
   suffixIconProps: VIcon.props,
-  // 前置/后置内容
-  prefix: { type: [String, Number], default: null },
-  suffix: { type: [String, Number], default: null },
-  // 前置/后置标签
-  prepend: { type: [String, Number], default: null },
-  append: { type: [String, Number], default: null },
   // 输入框尺寸：large, medium, small
   size: { type: String, default: 'medium' },
   // ---------- 原生属性 ----------
@@ -47,59 +47,40 @@ export const useInput = ({ wraperElRef, inputElRef, modelValue, props, emits }) 
   // 继承
   const formRoot = inject('vuiFormRoot', null);
 
-  // 状态
+  // 组件状态
   const isDisabled = computed(() => props.disabled || formRoot?.props?.disabled);
   const isReadonly = computed(() => props.readonly || formRoot?.props?.readonly);
+  const isEnabled = computed(() => !isDisabled.value && !isReadonly.value);
 
-  // 根元素类名
-  const rootClasses = computed(() => {
-    return [`vui-input--${props.size}`, { 'is-disabled': isDisabled.value }];
-  });
-
-  // 中间元素状态
+  // 元素状态
+  const { focused: isInputFocused } = useFocus(inputElRef);
   const isHovered = useElementHover(wraperElRef);
-  const { focused } = useFocus(inputElRef);
-  useEventListener(wraperElRef, 'click', () => {
-    focused.value = true;
-  });
+  const wraperClasses = computed(() => ({
+    'is-disabled': isDisabled.value,
+    'is-focus': isInputFocused.value && isEnabled.value
+  }));
+  const rootClasses = computed(() => `vui-input--${props.size}`);
 
-  // 中间元素类名
-  const wraperClasses = computed(() => {
-    return {
-      'is-focus': isDisabled.value || isReadonly.value ? false : focused.value
-    };
-  });
+  // 点击中间元素时，聚焦输入框
+  useEventListener(wraperElRef, 'click', () => (isInputFocused.value = true));
+
+  // 是否显示密码明文内容
+  const isShowPasswordValue = ref(false);
+  const inputType = computed(() => (isShowPasswordValue.value ? 'text' : props.type));
 
   // 是否显示切换密码按钮
-  const isShowPassword = computed(() => {
-    return props.type === 'password' && props.showPassword && modelValue.value && !isDisabled.value;
-  });
-
-  // 点击切换密码按钮
-  const passwordVisible = ref(false);
-  function onClickToggleIcon() {
-    passwordVisible.value = !passwordVisible.value;
-  }
-
-  // 输入框类型
-  const inputType = computed(() => {
-    return passwordVisible.value ? 'text' : props.type;
-  });
+  const isShowPasswordToggle = computed(() => props.type === 'password' && props.showPasswordToggle && modelValue.value && isEnabled.value);
+  const onClickPasswordIcon = () => (isShowPasswordValue.value = !isShowPasswordValue.value);
 
   // 是否显示清除按钮
-  const isShowClear = computed(() => {
-    return props.clearable && modelValue.value && !isDisabled.value && !isReadonly.value && (isHovered.value || focused.value);
-  });
-
-  // 点击清除按钮
-  function onClickClearIcon(e) {
+  const isShowClearIcon = computed(() => props.clearable && modelValue.value && isEnabled.value && (isHovered.value || isInputFocused.value));
+  const onClickClearIcon = e => {
     modelValue.value = '';
-    focused.value = true;
+    isInputFocused.value = true;
     emits('clear', { event: e, value: '' });
-  }
+  };
 
-  // 输入值时
-  // 参数为 事件对象、当前值，下同
+  // 输入值时：参数为 事件对象、当前值，下同
   function onInput(e) {
     emits('input', { event: e, value: modelValue.value });
   }
@@ -115,14 +96,14 @@ export const useInput = ({ wraperElRef, inputElRef, modelValue, props, emits }) 
   }
 
   return {
+    inputType,
+    wraperClasses,
+    rootClasses,
     isDisabled,
     isReadonly,
-    rootClasses,
-    wraperClasses,
-    inputType,
-    isShowPassword,
-    onClickToggleIcon,
-    isShowClear,
+    isShowPasswordToggle,
+    isShowClearIcon,
+    onClickPasswordIcon,
     onClickClearIcon,
     onInput,
     onChange,

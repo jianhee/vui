@@ -1,26 +1,30 @@
 <template>
-  <div class="demo-inputs">
-    <DemoViewLeft label="使用前置">
+  <div class="c-demo-inputs">
+    <DemoConfig
+      label="单独使用图标"
+      label-position="top"
+    >
       <VInput
         v-model:value="inputValue"
         placeholder="请输入内容"
         prefix-icon="face"
       />
-    </DemoViewLeft>
-    <DemoViewLeft label="使用后置">
       <VInput
         v-model:value="inputValue"
         placeholder="请输入内容"
         suffix-icon="search"
       />
-    </DemoViewLeft>
-    <DemoViewLeft label="更多组合">
       <VInput
         v-model:value="inputValue"
         placeholder="请输入内容"
         prefix-icon="face"
         suffix-icon="search"
       />
+    </DemoConfig>
+    <DemoConfig
+      label="同时使用图标和属性"
+      label-position="top"
+    >
       <VInput
         v-model:value="inputValue"
         placeholder="请输入内容"
@@ -29,7 +33,7 @@
         suffix-icon="search"
         :suffix-icon-props="{ color: 'pink' }"
       />
-    </DemoViewLeft>
+    </DemoConfig>
   </div>
 </template>
 

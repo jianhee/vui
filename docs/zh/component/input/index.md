@@ -54,8 +54,6 @@
 
 ### 其它原生属性
 
-<!--@include: @/component/@parts/api-native.md-->
-
 <preview path="./demos/native.vue"></preview>
 
 ## API
@@ -66,7 +64,7 @@
 | ----------------------------------- | ---------------------------------------- | -------------------------------- | -------- |
 | `v-model:value`                     | 当前值，即输入框的值                     | `string\|number`                 |          |
 | `clearable`                         | 是否显示清除按钮                         | `boolean`                        | `false`  |
-| `showPassword`                      | 是否显示切换密码按钮（仅密码类型有效）   | `boolean`                        | `false`  |
+| `showPasswordToggle`                | 是否显示切换密码按钮（仅密码类型有效）   | `boolean`                        | `false`  |
 | `showWordLimit`                     | 是否显示统计字数（仅限制输入长度时有效） | `boolean`                        | `false`  |
 | `prefixIcon`/`suffixIcon`           | 前置/后置图标                            | `VIcon.props.icon`               |          |
 | `prefixIconProps`/`suffixIconProps` | 前置/后置图标的属性                      | `VIcon.props`                    |          |

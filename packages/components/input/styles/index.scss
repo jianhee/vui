@@ -39,7 +39,45 @@
   display: flex;
   width: var(--vui-input-width);
 
-  // 标签
+  // 中间内容
+  &-wrapper {
+    display: flex;
+    flex: auto;
+    gap: 6px;
+    align-items: center;
+    height: 100%;
+    color: var(--vui-input-text-color);
+    cursor: text;
+    background-color: var(--vui-input-bg-color);
+    border: 1px solid var(--vui-input-border-color);
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+    &.is-disabled {
+      @include mixins.vui-disabled;
+    }
+    &:not(.is-disabled) {
+      &:hover {
+        border-color: var(--vui-input-hover-border-color);
+      }
+      &.is-focus {
+        border-color: var(--vui-input-focus-border-color);
+      }
+    }
+  }
+
+  // 输入框
+  &-inner {
+    @include mixins.vui-ellipsis;
+
+    flex: auto;
+    width: 100%;
+    height: 100%;
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+
+  // 前置/后置装饰
   &-prepend,
   &-append {
     display: flex;
@@ -61,32 +99,6 @@
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
   }
-
-  // 中间内容
-  &-wrapper {
-    display: flex;
-    flex: auto;
-    gap: 6px;
-    align-items: center;
-    height: 100%;
-    color: var(--vui-input-text-color);
-    cursor: text;
-    background-color: var(--vui-input-bg-color);
-    border: 1px solid var(--vui-input-border-color);
-    border-radius: 4px;
-    transition: border-color 0.3s ease;
-  }
-  &:not(.is-disabled) &-wrapper {
-    &:hover {
-      border-color: var(--vui-input-hover-border-color);
-    }
-    &.is-focus {
-      border-color: var(--vui-input-focus-border-color);
-    }
-  }
-  &.is-disabled &-wrapper {
-    @include mixins.vui-disabled;
-  }
   &--prepend &-wrapper {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
@@ -96,16 +108,13 @@
     border-bottom-right-radius: 0;
   }
 
-  // 输入框
-  &-inner {
-    @include mixins.vui-ellipsis;
-
-    flex: auto;
-    width: 100%;
+  // 前置/后置内容
+  &-prefix,
+  &-suffix {
+    display: flex;
+    gap: 6px;
+    align-items: center;
     height: 100%;
-    &:disabled {
-      cursor: not-allowed;
-    }
   }
 
   // 统计字数
