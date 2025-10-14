@@ -18,7 +18,7 @@ export const popoverProps = {
   placement: { type: String, default: 'top' },
   // 触发方式：hover, click, contextmenu
   trigger: { type: String, default: 'hover' },
-  // 触发元素：默认使用 default 插槽，可以是 DOM 元素或包含 DOM 元素的组件对象
+  // 触发元素：一个 DOM 元素或组件对象，为空时使用 default 插槽
   triggerElement: { type: [HTMLElement, Object], default: null },
   // 是否禁用
   disabled: { type: Boolean, default: false }
@@ -30,10 +30,7 @@ export const usePopover = ({ triggerRef, contentElRef, arrowElRef, props, emits 
   const positionInitance = usePosition();
 
   // 触发元素
-  const triggerElRef = computed(() => {
-    const element = props.triggerElement || triggerRef.value;
-    return element?.$el || element;
-  });
+  const triggerElRef = computed(() => props.triggerElement || triggerRef.value);
 
   // 内容元素
   const contentVisible = ref(false);
@@ -113,26 +110,25 @@ export const usePopover = ({ triggerRef, contentElRef, arrowElRef, props, emits 
       emits('open');
     }
 
-    // 获取参考元素
-    let element = triggerElRef.value;
+    // 更新定位
     if (event) {
-      element = {
+      const virtualElement = {
         getBoundingClientRect: () => ({ width: 0, height: 0, top: event.clientY, right: event.clientX, bottom: event.clientY, left: event.clientX })
       };
+      updatePosition(virtualElement, forceCreate);
+    } else {
+      updatePosition(triggerElRef.value, forceCreate);
     }
-
-    // 更新定位
-    updatePosition(element, forceCreate);
   }
 
   // 更新定位
   // 1.每次都需要重新初始化实例的情况：v-if/调用方法
   // 2.只有第一次需要初始化实例的情况：v-show
-  async function updatePosition(referenceElement, isForceCreate) {
+  async function updatePosition(referenceEl, isForceCreate) {
     await nextTick();
     positionInitance.onOpen(
       {
-        referenceElement,
+        referenceElement: referenceEl.$el || referenceEl,
         contentElement: contentElRef.value,
         arrowElement: arrowElRef.value,
         placement: props.placement
