@@ -1,23 +1,31 @@
 <template>
   <DemoSpace flex>
-    <DemoViewTopCenter label="只修改图标">
-      <DemoBase icon="face" />
-    </DemoViewTopCenter>
-    <DemoViewTopCenter label="只修改样式">
-      <DemoBase :icon-props="{ color: 'pink', size: 100 }" />
-    </DemoViewTopCenter>
-    <DemoViewTopCenter label="修改图标和样式">
-      <DemoBase
+    <DemoConfig
+      label="只修改图标"
+      label-position="top-center"
+    >
+      <VComponentMatchRoute icon="face" />
+    </DemoConfig>
+    <DemoConfig
+      label="只修改样式"
+      label-position="top-center"
+    >
+      <VComponentMatchRoute :icon-props="{ color: 'pink', size: 100 }" />
+    </DemoConfig>
+    <DemoConfig
+      label="修改图标和样式"
+      label-position="top-center"
+    >
+      <VComponentMatchRoute
         icon="face"
         :icon-props="{ color: 'pink', size: 100 }"
       />
-    </DemoViewTopCenter>
-    <DemoViewTopCenter label="不使用图标">
-      <DemoBase :icon="null" />
-    </DemoViewTopCenter>
+    </DemoConfig>
+    <DemoConfig
+      label="不使用图标"
+      label-position="top-center"
+    >
+      <VComponentMatchRoute :icon="null" />
+    </DemoConfig>
   </DemoSpace>
 </template>
-
-<script setup>
-import DemoBase from './basic.vue';
-</script>

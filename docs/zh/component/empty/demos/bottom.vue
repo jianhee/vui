@@ -1,9 +1,5 @@
 <template>
-  <DemoBase>
+  <VComponentMatchRoute>
     <VButton type="primary">按钮</VButton>
-  </DemoBase>
+  </VComponentMatchRoute>
 </template>
-
-<script setup>
-import DemoBase from './basic.vue';
-</script>

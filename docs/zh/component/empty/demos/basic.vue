@@ -1,13 +1,5 @@
 <template>
-  <component :is="StateComponent">
+  <VComponentMatchRoute>
     <slot />
-  </component>
+  </VComponentMatchRoute>
 </template>
-
-<script setup>
-import { useRouteValid } from '@vp/composables';
-
-// 区分类型
-const isEmpty = useRouteValid('empty');
-const StateComponent = isEmpty ? 'VEmpty' : 'VLoading';
-</script>
