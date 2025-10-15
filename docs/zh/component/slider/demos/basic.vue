@@ -1,7 +1,7 @@
 <template>
   <VSlider
     v-model:value="valueRef"
-    class="demo-slider"
+    class="c-demo-slider"
   />
 
   <DemoSpace>
@@ -16,8 +16,8 @@ const valueRef = ref(50);
 </script>
 
 <style>
-.demo-slider,
-.demo-sliders .vui-slider {
+.c-demo-slider,
+.c-demo-sliders .vui-slider {
   max-width: var(--demo-filed-width);
 }
 </style>

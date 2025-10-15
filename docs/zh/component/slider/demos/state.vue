@@ -1,9 +1,9 @@
 <template>
-  <DemoView
-    class="demo-sliders"
-    content-gap
+  <DemoUsage
+    class="c-demo-sliders"
+    render-gap
   >
-    <template #content>
+    <template #render>
       <VSlider
         v-model:value="valueRef"
         :disabled="isDisabled"
@@ -14,21 +14,21 @@
       />
     </template>
 
-    <template #props>
-      <DemoViewLeft
+    <template #config>
+      <DemoConfig
         label="是否禁用状态"
         code="disabled"
       >
         <VSwitch v-model:checked="isDisabled" />
-      </DemoViewLeft>
-      <DemoViewLeft
+      </DemoConfig>
+      <DemoConfig
         label="是否只读状态"
         code="readonly"
       >
         <VSwitch v-model:checked="isReadonly" />
-      </DemoViewLeft>
+      </DemoConfig>
     </template>
-  </DemoView>
+  </DemoUsage>
 </template>
 
 <script setup>

@@ -4,14 +4,7 @@
     class="g-demo-slider"
     :tooltip-formatter="val => `${val}${unit}`"
   >
-    <template #suffix="{ value }">
-      <div
-        v-if="value || value === 0"
-        class="g-demo-slider-suffix"
-      >
-        {{ `${value}${unit}` }}
-      </div>
-    </template>
+    <template #suffix="{ value }">{{ `${value}${unit}` }} </template>
   </VSlider>
 </template>
 
@@ -24,8 +17,5 @@ defineProps({
 <style lang="scss">
 .g-demo-slider {
   min-width: 120px;
-  &-suffix {
-    flex: none;
-  }
 }
 </style>

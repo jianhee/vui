@@ -1,12 +1,13 @@
 // 拖拽移动
 import { computed } from 'vue';
-import { useEventListener } from '@vueuse/core';
+import { useEventListener, useWindowSize } from '@vueuse/core';
 
 export const useDragMove = ({ boxElRef, dragFlagRef, props, modelLeft, modelTop }) => {
   // 是否可移动
   const isMovable = computed(() => props.movable && props.enabled);
 
   // 初始数据
+  const { width: windowWidth, height: windowHeight } = useWindowSize();
   let mouseStartPos = { x: 0, y: 0 };
   let boxStartPos = { x: 0, y: 0 };
   let clearEvent1 = null;
@@ -35,8 +36,8 @@ export const useDragMove = ({ boxElRef, dragFlagRef, props, modelLeft, modelTop 
 
     // 鼠标当前位置：不能超出窗口
     const mouseCurrentPos = {
-      x: Math.max(0, Math.min(e.clientX, document.documentElement.clientWidth)),
-      y: Math.max(0, Math.min(e.clientY, document.documentElement.clientHeight))
+      x: Math.max(0, Math.min(e.clientX, windowWidth.value)),
+      y: Math.max(0, Math.min(e.clientY, windowHeight.value))
     };
 
     // 差值

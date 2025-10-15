@@ -5,38 +5,54 @@
 
 // vars
 :root {
+  --vui-slider-text-color: var(--vui-text-color-regular);
   --vui-slider-rail-bg-color: var(--vui-border-color-light);
   --vui-slider-track-bg-color: var(--vui-color-brand-base);
   --vui-slider-handle-bg-color: var(--vui-bg-color-base);
-  --vui-slider-tip-text-color: var(--vui-bg-color-base);
-  --vui-slider-tip-bg-color: var(--vui-text-color-primary);
 }
 
 // 样式
 .vui-slider {
   // 容器
-  position: relative;
+  display: flex;
+  gap: 10px;
+  align-items: center;
   width: var(--vui-slider-width);
-  height: 32px;
-  padding: 14px 0;
-  user-select: none;
+  color: var(--vui-slider-text-color);
+
+  // 中间内容
+  &-inner {
+    position: relative;
+    flex: auto;
+    height: 32px;
+    user-select: none;
+  }
+
+  // 右侧内容
+  &-suffix {
+    display: flex;
+    flex: none;
+    gap: 4px;
+    align-items: center;
+  }
 
   // 轨道和填充
   &-rail,
   &-track {
-    height: 4px;
-    cursor: pointer;
-    border-radius: 2px;
-  }
-  &-rail {
-    background-color: var(--vui-slider-rail-bg-color);
-  }
-  &-track {
     position: absolute;
     top: 50%;
     left: 0;
-    background-color: var(--vui-slider-track-bg-color);
+    height: 4px;
+    cursor: pointer;
+    border-radius: 2px;
     transform: translateY(-50%);
+  }
+  &-rail {
+    width: 100%;
+    background-color: var(--vui-slider-rail-bg-color);
+  }
+  &-track {
+    background-color: var(--vui-slider-track-bg-color);
   }
 
   // 手柄
@@ -66,35 +82,6 @@
     &-track,
     &-handle {
       @include mixins.vui-disabled;
-    }
-  }
-
-  // 提示框
-  &-tip {
-    position: fixed;
-    z-index: 99;
-    padding: 8px 10px;
-    font-size: 12px;
-    line-height: 1;
-    color: var(--vui-slider-tip-text-color);
-    white-space: nowrap;
-    background-color: var(--vui-slider-tip-bg-color);
-    border-radius: 4px;
-    transform: translate(calc(-50% + 9px), calc(-100% - 10px));
-    transition: opacity 0.3s ease;
-    &::before {
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      width: 8px;
-      height: 8px;
-      content: "";
-      background-color: var(--vui-slider-tip-bg-color);
-      transform: translate(-50%, 50%) rotate(45deg);
-    }
-    &-enter-from,
-    &-leave-to {
-      opacity: 0;
     }
   }
 }
