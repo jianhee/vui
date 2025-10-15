@@ -8,7 +8,7 @@ export const selectEmits = ['change', 'clear'];
 // v-model
 export const selectModel = {
   // 选中项的 `value`
-  value: { type: [String, Number], default: null }
+  value: { type: [String, Number], default: undefined }
 };
 
 // props
@@ -17,7 +17,7 @@ export const selectProps = {
   // 1. `value` 选项值
   // 2. `label` 选项文本，为空时使用 `value` 的值
   // 3. `string|number` 类型的选项会格式化为 `{ value, label }`
-  options: { type: Array, default: null },
+  options: { type: Array, default: undefined },
   // 是否显示清除按钮
   clearable: { type: Boolean, default: false },
   // 选择器尺寸：large, medium, small
@@ -25,7 +25,7 @@ export const selectProps = {
   // ---------- 原生属性 ----------
   disabled: { type: Boolean, default: false },
   readonly: { type: Boolean, default: false },
-  placeholder: { type: String, default: null }
+  placeholder: { type: String, default: undefined }
 };
 
 // 使用选择器

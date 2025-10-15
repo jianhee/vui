@@ -1,19 +1,19 @@
 // 图片
 import { computed } from 'vue';
 import { useImage as vueuseImage } from '@vueuse/core';
-import { addUnit } from '../../../utils';
+import { completeCSSUnit } from '../../@common';
 
 // props
 export const imageProps = {
   // 图片地址：加载中显示骨架屏，加载失败显示占位图
-  src: { type: String, default: null },
+  src: { type: String, default: undefined },
   // ---------- 样式属性 ----------
   // 宽度：不带单位时默认 `px`
-  width: { type: [String, Number], default: null },
+  width: { type: [String, Number], default: undefined },
   // 宽高比：占位图默认 `16/9`，设置后可能显示不全
-  aspectRatio: { type: String, default: null },
+  aspectRatio: { type: String, default: undefined },
   // 圆角尺寸：不带单位时默认 `px`
-  radius: { type: [String, Number], default: null }
+  radius: { type: [String, Number], default: undefined }
 };
 
 // 使用图片
@@ -34,9 +34,9 @@ export const useImage = ({ props }) => {
   const rootProps = computed(() => ({
     // 样式
     'style': {
-      '--vui-image-width': addUnit(props.width, 'px'),
+      '--vui-image-width': completeCSSUnit(props.width, 'px'),
       '--vui-image-aspect-ratio': aspectRatio.value,
-      '--vui-image-radius': addUnit(props.radius, 'px')
+      '--vui-image-radius': completeCSSUnit(props.radius, 'px')
     },
     // 数据
     'data-src': error.value ? props.src : null

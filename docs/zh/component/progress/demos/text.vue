@@ -1,22 +1,14 @@
 <template>
-  <div class="c-demo-progresses">
+  <div>
     <DemoConfig
-      label="格式化文本"
-      label-width="5em"
+      v-for="(suffixItem, index) in suffixItems"
+      :key="index"
+      :label="suffixItem.label"
+      label-position="top"
     >
       <VProgress
-        :percent="valueRef1"
-        :text-formatter="percent => `当前进度${percent}%`"
-      />
-    </DemoConfig>
-
-    <DemoConfig
-      label="不显示文本"
-      label-width="5em"
-    >
-      <VProgress
-        :percent="valueRef2"
-        :text-formatter="null"
+        :percentage="valueRef"
+        :suffix="suffixItem.value"
       />
     </DemoConfig>
   </div>
@@ -25,6 +17,19 @@
 <script setup>
 import { ref } from 'vue';
 
-const valueRef1 = ref(50);
-const valueRef2 = ref(50);
+const valueRef = ref(50);
+const suffixItems = [
+  {
+    label: '不显示内容',
+    value: null
+  },
+  {
+    label: '使用函数渲染',
+    value: percentage => `当前进度${percentage}%`
+  },
+  {
+    label: '使用字段值',
+    value: `当前进度${valueRef.value}%`
+  }
+];
 </script>

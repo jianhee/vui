@@ -32,14 +32,14 @@
     </div>
     <!-- 右侧内容 -->
     <div
-      v-if="$slots.suffix || suffix"
+      v-if="$slots.suffix || suffixText"
       class="vui-slider-suffix"
     >
-      {{ suffix }}
+      {{ suffixText }}
       <slot
         name="suffix"
         :value="modelValue"
-        :tooltip-text="tooltipText"
+        :tooltip="tooltipText"
       />
     </div>
   </div>
@@ -58,7 +58,7 @@ const modelValue = defineModel('value', sliderModel.value);
 const props = defineProps(sliderProps);
 
 // 使用滑块
-const { rootClasses, trackStyles, handleProps, tooltipText, onRailClick, onDragStart } = useSlider({
+const { rootClasses, trackStyles, handleProps, tooltipText, suffixText, onRailClick, onDragStart } = useSlider({
   railElRef,
   handleElRef,
   tooltipRef,

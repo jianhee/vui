@@ -1,7 +1,7 @@
 <template>
   <DemoSpace flex>
-    <VComponentMatchRoute :description="descText" />
     <VComponentMatchRoute :description="null" />
+    <VComponentMatchRoute :description="descText" />
   </DemoSpace>
 </template>
 

@@ -1,8 +1,8 @@
 <template>
-  <DemoUsage class="c-demo-progresses">
+  <DemoUsage>
     <template #render>
       <VProgress
-        :percent="valueRef"
+        :percentage="valueRef"
         :height="heightRef"
         :radius="radiusRef"
       />

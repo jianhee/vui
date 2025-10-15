@@ -4,20 +4,20 @@ import { provide, inject, ref, computed, watch } from 'vue';
 // 表单 props
 export const formValidProps = {
   // 表单的数据对象
-  model: { type: Object, default: null },
+  model: { type: Object, default: undefined },
   // 表单的校验规则
   // - `trigger`    校验触发时机 `input|submit'
   // - `message`    校验不通过时的提示信息
   // - `required`   是否必填，必填项会在标签前面添加 `*` 号
   // - `pattern`    是否符合正则
   // - `validator`  自定义校验规则 <br> 参数为当前值，返回 `true` 表示校验通过，返回其它值表示错误信息
-  rules: { type: Object, default: null }
+  rules: { type: Object, default: undefined }
 };
 
 // 表单项 props
 export const formItemValidProps = {
   // 表单项的字段名
-  prop: { type: String, default: null }
+  prop: { type: String, default: undefined }
 };
 
 // 校验表单项的值

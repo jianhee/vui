@@ -1,6 +1,6 @@
 // 拖拽框
 // v-model
-export const dragboxModel = { type: Number, default: null };
+export const dragboxModel = { type: Number, default: undefined };
 
 // props
 export const dragboxProps = {
@@ -10,7 +10,7 @@ export const dragboxProps = {
   // 是否可移动：可移动盒子会自动转成定位元素
   movable: { type: Boolean, default: false },
   // 可移动手柄：一个 DOM 元素或组件对象，为空时使用整个盒子
-  moveHandle: { type: [HTMLElement, Object], default: null },
+  moveHandle: { type: [HTMLElement, Object], default: undefined },
   // 是否可缩放
   resizable: { type: Boolean, default: false },
   // 可缩放手柄

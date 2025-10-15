@@ -1,6 +1,6 @@
 // 按钮
 import { computed } from 'vue';
-import { addUnit } from '../../../utils';
+import { completeCSSUnit } from '../../@common';
 import VIcon from '../../icon/icon.vue';
 
 // props
@@ -19,12 +19,12 @@ export const btnProps = {
   // 是否为块级模式
   block: { type: Boolean, default: false },
   // 点击跳转的地址，有值时 `<button>` 转为 `<a>` 标签
-  href: { type: String, default: null },
+  href: { type: String, default: undefined },
   // ---------- 原生属性 ----------
   disabled: { type: Boolean, default: false },
   // ---------- 样式属性 ----------
   // 圆角尺寸：不带单位时默认 `px`
-  radius: { type: [String, Number], default: null }
+  radius: { type: [String, Number], default: undefined }
 };
 
 // 使用按钮
@@ -48,7 +48,7 @@ export const useButton = ({ props }) => {
         'is-disabled': props.disabled || props.loading
       },
       style: {
-        '--vui-btn-radius': addUnit(props.radius, 'px')
+        '--vui-btn-radius': completeCSSUnit(props.radius, 'px')
       }
     };
   });

@@ -67,8 +67,8 @@
 import { ref } from 'vue';
 
 defineProps({
-  formProps: { type: Object, default: null },
-  formItemProps: { type: Object, default: null }
+  formProps: { type: Object, default: undefined },
+  formItemProps: { type: Object, default: undefined }
 });
 
 // 绑定值

@@ -1,6 +1,6 @@
 // 图标
 import { computed } from 'vue';
-import { addUnit } from '../../../utils';
+import { completeCSSUnit } from '../../@common';
 
 // props
 export const iconProps = {
@@ -40,8 +40,8 @@ export const useIcon = ({ props }) => {
     '--vui-icon-cursor': props.cursor,
     '--vui-icon-color': props.color,
     '--vui-icon-two-tone-color': props.twoToneColor,
-    '--vui-icon-size': addUnit(props.size, 'px'),
-    '--vui-icon-transform': props.rotate ? `rotate(${addUnit(props.rotate, 'deg')})` : null
+    '--vui-icon-size': completeCSSUnit(props.size, 'px'),
+    '--vui-icon-transform': props.rotate ? `rotate(${completeCSSUnit(props.rotate, 'deg')})` : null
   }));
 
   // 图标属性
@@ -57,16 +57,5 @@ export const useIcon = ({ props }) => {
     rootClasses,
     rootStyles,
     _iconProps
-  };
-};
-
-// 格式化图标属性：在其它组件中使用时
-export const useIconProps = (icon, iconProps = {}) => {
-  const _icon = icon || iconProps.icon || iconProps?.name || iconProps?.component;
-  if (!_icon) return null;
-
-  return {
-    icon: _icon,
-    ...iconProps
   };
 };

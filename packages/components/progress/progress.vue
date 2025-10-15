@@ -12,8 +12,13 @@
         :style="trackStyles"
       />
     </div>
-    <!-- 文字 -->
-    <span v-if="!!textFormatter">{{ textContent }}</span>
+    <!-- 右侧内容 -->
+    <div
+      v-if="suffixText"
+      class="vui-progress-suffix"
+    >
+      {{ suffixText }}
+    </div>
   </div>
 </template>
 
@@ -24,7 +29,7 @@ import { useProgress, progressProps } from './composables';
 const props = defineProps(progressProps);
 
 // 使用进度条
-const { railStyles, trackStyles, textContent } = useProgress({
+const { railStyles, trackStyles, suffixText } = useProgress({
   props
 });
 </script>

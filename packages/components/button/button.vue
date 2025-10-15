@@ -22,9 +22,10 @@
 </template>
 
 <script setup>
+import { computed } from 'vue';
 import { useButton, btnProps } from './composables';
 import IconLoading from '../../icons/loading.vue';
-import { useIconProps } from '../icon/composables';
+import { getFormattedIconProps } from '../@common';
 
 // 按钮
 const props = defineProps(btnProps);
@@ -33,5 +34,5 @@ const props = defineProps(btnProps);
 const { rootTag, rootAttrs } = useButton({ props });
 
 // 使用图标
-const _iconProps = useIconProps(props.icon, props.iconProps);
+const _iconProps = computed(() => getFormattedIconProps(props.icon, props.iconProps));
 </script>

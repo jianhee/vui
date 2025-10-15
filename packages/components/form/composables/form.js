@@ -1,7 +1,7 @@
 // 表单
 import { computed, ref, watchEffect } from 'vue';
 import { useIntersectionObserver } from '@vueuse/core';
-import { addUnit } from '../../../utils';
+import { completeCSSUnit } from '../../@common';
 
 // 表单的 props
 export const formProps = {
@@ -15,11 +15,11 @@ export const formProps = {
 // formItem 优先级高于 form
 export const commonProps = {
   // 标签位置：left, right, top, bottom
-  labelPosition: { type: String, default: null },
+  labelPosition: { type: String, default: undefined },
   // 标签对齐：left, right, center
-  labelAlign: { type: String, default: null },
+  labelAlign: { type: String, default: undefined },
   // 标签宽度：不带单位时默认 `px`，默认取最长标签的宽度
-  labelWidth: { type: [String, Number], default: null },
+  labelWidth: { type: [String, Number], default: undefined },
   // ---------- 原生属性 ----------
   disabled: { type: Boolean, default: false },
   readonly: { type: Boolean, default: false }
@@ -78,7 +78,7 @@ export const useForm = ({ formElRef, props }) => {
   // 根元素样式
   const rootStyles = computed(() => {
     return {
-      '--vui-form-label-width': addUnit(labelWidthRef.value, 'px')
+      '--vui-form-label-width': completeCSSUnit(labelWidthRef.value, 'px')
     };
   });
 

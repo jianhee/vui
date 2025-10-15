@@ -1,13 +1,13 @@
 <template>
   <DemoSpace flex>
     <DemoConfig
-      label="只修改图片"
+      label="自定义图片"
       label-position="top-center"
     >
       <VComponentMatchRoute :image="image" />
     </DemoConfig>
     <DemoConfig
-      label="修改图片和样式"
+      label="自定义图片和样式"
       label-position="top-center"
     >
       <VComponentMatchRoute

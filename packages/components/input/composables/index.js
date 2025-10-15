@@ -9,7 +9,7 @@ export const inputEmits = ['input', 'change', 'enter', 'clear'];
 // v-model
 export const inputModel = {
   // 输入框的值
-  value: { type: String, default: null }
+  value: { type: String, default: undefined }
 };
 
 // props
@@ -21,11 +21,11 @@ export const inputProps = {
   // 是否显示统计字数（仅限制输入长度时有效）
   showWordLimit: { type: Boolean, default: false },
   // 前置/后置装饰
-  prepend: { type: [String, Number], default: null },
-  append: { type: [String, Number], default: null },
+  prepend: { type: [String, Number], default: undefined },
+  append: { type: [String, Number], default: undefined },
   // 前置/后置内容
-  prefix: { type: [String, Number], default: null },
-  suffix: { type: [String, Number], default: null },
+  prefix: { type: [String, Number], default: undefined },
+  suffix: { type: [String, Number], default: undefined },
   // 前置/后置图标
   prefixIcon: VIcon.props.icon,
   prefixIconProps: VIcon.props,
@@ -37,8 +37,8 @@ export const inputProps = {
   autofocus: { type: Boolean, default: false },
   disabled: { type: Boolean, default: false },
   readonly: { type: Boolean, default: false },
-  maxlength: { type: [String, Number], default: null },
-  placeholder: { type: String, default: null },
+  maxlength: { type: [String, Number], default: undefined },
+  placeholder: { type: String, default: undefined },
   type: { type: String, default: 'text' }
 };
 

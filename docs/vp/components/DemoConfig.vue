@@ -24,9 +24,9 @@
 
 <script setup>
 defineProps({
-  code: { type: String, default: null },
-  label: { type: String, default: null },
-  labelWidth: { type: String, default: null },
+  code: { type: String, default: undefined },
+  label: { type: String, default: undefined },
+  labelWidth: { type: String, default: undefined },
   // left, top, top-center
   labelPosition: { type: String, default: 'left' }
 });

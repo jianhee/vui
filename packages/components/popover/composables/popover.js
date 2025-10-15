@@ -9,7 +9,7 @@ export const popoverEmits = ['open', 'opened', 'close', 'closed'];
 // props
 export const popoverProps = {
   // 弹框内容
-  content: { type: [String, Number], default: null },
+  content: { type: [String, Number], default: undefined },
   // 弹框位置
   // 'top', 'top-start', 'top-end'
   // 'bottom', 'bottom-start', 'bottom-end'
@@ -19,7 +19,7 @@ export const popoverProps = {
   // 触发方式：hover, click, contextmenu
   trigger: { type: String, default: 'hover' },
   // 触发元素：一个 DOM 元素或组件对象，为空时使用 default 插槽
-  triggerElement: { type: [HTMLElement, Object], default: null },
+  triggerElement: { type: [HTMLElement, Object], default: undefined },
   // 是否禁用
   disabled: { type: Boolean, default: false }
 };
@@ -36,7 +36,7 @@ export const usePopover = ({ triggerRef, contentElRef, arrowElRef, props, emits 
   const contentVisible = ref(false);
 
   // 触发元素/内容元素 hover
-  let hoverTimer = null;
+  let hoverTimer;
   useEventListener(triggerElRef, 'mouseenter', () => onMouseToggle('enter'));
   useEventListener(triggerElRef, 'mouseleave', () => onMouseToggle('leave'));
   useEventListener(contentElRef, 'mouseenter', () => onMouseToggle('enter'));

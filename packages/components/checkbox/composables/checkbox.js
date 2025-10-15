@@ -14,15 +14,15 @@ export const checkboxModel = {
 export const checkboxProps = {
   // ---------- 单个选项使用 ----------
   // 选项文本
-  label: { type: [Number, String], default: null },
+  label: { type: [Number, String], default: undefined },
   // 选项类型：button 按钮
-  type: { type: String, default: null },
+  type: { type: String, default: undefined },
   // 是否为行内模式
   inline: { type: Boolean, default: true },
   // 是否为块级模式
   block: { type: Boolean, default: false },
   // ---------- 选项组使用 ----------
-  formattedOption: { type: Object, default: null }
+  formattedOption: { type: Object, default: undefined }
 };
 
 // 选项和选项组都有的 props

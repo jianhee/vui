@@ -98,9 +98,9 @@
 </template>
 
 <script setup>
-import { useTemplateRef } from 'vue';
+import { computed, useTemplateRef } from 'vue';
 import { useInput, inputModel, inputProps, inputEmits } from './composables';
-import { useIconProps } from '../icon/composables';
+import { getFormattedIconProps } from '../@common';
 import IconClear from '../../icons/circle-close.vue';
 import IconEyeOpen from '../../icons/eye-open.vue';
 import IconEyeClose from '../../icons/eye-close.vue';
@@ -122,6 +122,6 @@ const { inputType, wraperClasses, rootClasses, isDisabled, isReadonly, isShowPas
 });
 
 // 使用图标
-const _prefixIconProps = useIconProps(props.prefixIcon, props.prefixIconProps);
-const _suffixIconProps = useIconProps(props.suffixIcon, props.suffixIconProps);
+const _prefixIconProps = computed(() => getFormattedIconProps(props.prefixIcon, props.prefixIconProps));
+const _suffixIconProps = computed(() => getFormattedIconProps(props.suffixIcon, props.suffixIconProps));
 </script>

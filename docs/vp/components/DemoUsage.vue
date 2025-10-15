@@ -31,7 +31,7 @@ defineProps({
   // 渲染结果中的各项之间是否有间距
   renderGap: { type: Boolean, default: false },
   // 配置项的宽度
-  configWidth: { type: String, default: null }
+  configWidth: { type: String, default: undefined }
 });
 </script>
 

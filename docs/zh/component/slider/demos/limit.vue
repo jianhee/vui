@@ -1,7 +1,6 @@
 <template>
   <VSlider
     v-model:value="valueRef"
-    class="c-demo-slider"
     :min="50"
     :max="200"
   />

@@ -27,8 +27,9 @@
 </template>
 
 <script setup>
+import { computed } from 'vue';
 import { useDropdownItem } from './composables/dropdown';
-import { useIconProps } from '../icon/composables';
+import { getFormattedIconProps } from '../@common';
 import IconSelected from '../../icons/selected.vue';
 
 // 菜单项
@@ -42,5 +43,5 @@ const { isSelected, itemClasses, onItemClick } = useDropdownItem({
 });
 
 // 使用图标
-const _iconProps = useIconProps(props.formattedItem.icon, props.formattedItem.iconProps);
+const _iconProps = computed(() => getFormattedIconProps(props.formattedItem.icon, props.formattedItem.iconProps));
 </script>

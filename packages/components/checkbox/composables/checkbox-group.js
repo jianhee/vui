@@ -7,7 +7,7 @@ export const checkboxGroupEmits = ['change'];
 // v-model
 export const checkboxGroupModel = {
   // 选中项的 `value`
-  value: { type: [Array, Number, String], default: null }
+  value: { type: [Array, Number, String], default: undefined }
 };
 
 // props
@@ -18,7 +18,7 @@ export const checkboxGroupProps = {
   // 3. `string|number` 类型的选项会格式化为 `{ value, label }`
   options: { type: Array, required: true },
   // 选项类型：button 按钮
-  optionType: { type: String, default: null },
+  optionType: { type: String, default: undefined },
   // 选项是否为行内模式
   optionInline: { type: Boolean, default: false },
   // 选项是否为块级模式

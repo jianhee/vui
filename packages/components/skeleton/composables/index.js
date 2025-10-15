@@ -1,14 +1,14 @@
 // 骨架屏-项
 import { computed } from 'vue';
-import { addUnit } from '../../../utils/data-number';
+import { completeCSSUnit } from '../../@common';
 
 // props
 export const skeletonItemProps = {
   // 宽高
-  width: { type: [String, Number], default: null },
+  width: { type: [String, Number], default: undefined },
   height: { type: [String, Number], default: 20 },
   // 宽高比：设置后忽略高度
-  aspectRatio: { type: String, default: null },
+  aspectRatio: { type: String, default: undefined },
   // 是否水平居中
   center: { type: Boolean, default: false },
   // 是否添加分割线
@@ -39,8 +39,8 @@ export const useSkeletonItem = ({ props }) => {
 
       // 获取样式
       const styles = {
-        width: addUnit(width, 'px'),
-        height: props.aspectRatio ? undefined : addUnit(props.height, 'px'),
+        width: completeCSSUnit(width, 'px'),
+        height: props.aspectRatio ? undefined : completeCSSUnit(props.height, 'px'),
         aspectRatio: props.aspectRatio
       };
       return {

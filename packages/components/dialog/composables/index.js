@@ -1,6 +1,6 @@
 // 对话框
 import { computed, watch } from 'vue';
-import { addUnit } from '../../../utils';
+import { completeCSSUnit } from '../../@common';
 
 // emits
 export const dialogEmits = ['open', 'opened', 'close', 'closed'];
@@ -16,14 +16,14 @@ export const dialogProps = {
   // 抽屉出现的位置：left, right
   placement: { type: String, default: 'left' },
   // 标题：为空时不显示顶栏
-  title: { type: String, default: null },
+  title: { type: String, default: undefined },
   // 是否显示关闭按钮
   showClose: { type: Boolean, default: true },
   // 是否在点击遮罩时关闭
   closeOnClickModal: { type: Boolean, default: true },
   // ---------- 样式属性 ----------
   // 内容宽度：不带单位时默认 `px`
-  width: { type: [String, Number], default: null }
+  width: { type: [String, Number], default: undefined }
 };
 
 // 使用弹窗
@@ -41,7 +41,7 @@ export const useDialog = ({ dialogType, modelVisible, props, emits }) => {
 
   // 主体样式
   const innerStyles = computed(() => {
-    const value = addUnit(props.width, 'px');
+    const value = completeCSSUnit(props.width, 'px');
     return {
       '--vui-dialog-width': isDialog ? value : null,
       '--vui-drawer-width': isDialog ? null : value

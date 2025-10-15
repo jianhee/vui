@@ -30,7 +30,7 @@ const componentMap = {
 
 export default {
   props: {
-    routeSuffix: { type: String, default: '' }
+    routeSuffix: { type: String, default: undefined }
   },
   setup(props, { slots, expose }) {
     // 组件

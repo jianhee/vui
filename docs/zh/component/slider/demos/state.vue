@@ -1,8 +1,5 @@
 <template>
-  <DemoUsage
-    class="c-demo-sliders"
-    render-gap
-  >
+  <DemoUsage render-gap>
     <template #render>
       <VSlider
         v-model:value="valueRef"

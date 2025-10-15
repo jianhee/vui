@@ -5,21 +5,23 @@
 :root {
   --vui-progress-rail-bg-color: var(--vui-border-color-light);
   --vui-progress-track-bg-color: var(--vui-color-brand-base);
-  --vui-progress-text-color: var(--vui-bg-color-base);
+  --vui-progress-text-color: var(--vui-text-color-regular);
 }
 
 // 样式
 .vui-progress {
+  // 容器
   display: flex;
-  gap: 4px;
+  gap: 5px;
   align-items: center;
-  user-select: none;
+  color: var(--vui-progress-text-color);
 
   // 轨道
   &-rail {
     flex: auto;
     height: var(--vui-progress-height, 6px);
     overflow: hidden;
+    user-select: none;
     background-color: var(--vui-progress-rail-bg-color);
     border-radius: var(--vui-progress-radius, 4px);
   }
@@ -28,15 +30,11 @@
   &-track {
     height: 100%;
     background-color: var(--vui-progress-track-bg-color);
-    transition: width 0.3s ease;
   }
 
-  // 文字
-  &-tip {
+  // 右侧内容
+  &-suffix {
     flex: none;
-    width: 2em;
-    font-size: 14px;
-    color: var(--vui-progress-text-color);
     white-space: nowrap;
   }
 }

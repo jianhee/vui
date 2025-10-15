@@ -1,6 +1,6 @@
 // 下拉菜单
 import { computed, inject } from 'vue';
-import { addUnit } from '../../../utils';
+import { completeCSSUnit } from '../../@common';
 
 // emits
 export const dropdownEmits = ['click', 'select'];
@@ -8,7 +8,7 @@ export const dropdownEmits = ['click', 'select'];
 // v-model
 export const dropdownModel = {
   // 选中项的 `key`
-  selectedKey: { type: [String, Number], default: null }
+  selectedKey: { type: [String, Number], default: undefined }
 };
 
 // props
@@ -20,17 +20,17 @@ export const dropdownProps = {
   // - `icon` 前置图标 VIcon.props.icon
   // - `iconProps` 前置图标的属性 VIcon.props
   // - `divider` 是否添加分隔符
-  items: { type: Array, default: null },
-  options: { type: Array, default: null },
+  items: { type: Array, default: undefined },
+  options: { type: Array, default: undefined },
   // 是否可选中
   // 可选时会记录选中值，所以菜单项的 `key` 必填
   selectable: { type: Boolean, default: false },
   // 是否在点击菜单项时关闭下拉菜单
   closeOnClickItem: { type: Boolean, default: true },
   // ---------- 样式属性 ----------
-  maxWidth: { type: [String, Number], default: null },
-  minWidth: { type: [String, Number], default: null },
-  maxHeight: { type: [String, Number], default: null },
+  maxWidth: { type: [String, Number], default: undefined },
+  minWidth: { type: [String, Number], default: undefined },
+  maxHeight: { type: [String, Number], default: undefined },
   // ---------- 继承  VPopover 属性 ----------,
   placement: { type: String, default: 'bottom' }
 };
@@ -51,9 +51,9 @@ export const useDropdown = ({ props }) => {
 
   // 根元素样式
   const rootStyles = computed(() => ({
-    '--vui-dropdown-max-width': addUnit(props.maxWidth, 'px'),
-    '--vui-dropdown-min-width': addUnit(props.minWidth, 'px'),
-    '--vui-dropdown-max-height': addUnit(props.maxHeight, 'px')
+    '--vui-dropdown-max-width': completeCSSUnit(props.maxWidth, 'px'),
+    '--vui-dropdown-min-width': completeCSSUnit(props.minWidth, 'px'),
+    '--vui-dropdown-max-height': completeCSSUnit(props.maxHeight, 'px')
   }));
 
   return {

@@ -2,9 +2,9 @@
 <template>
   <VSlider
     class="g-demo-slider"
-    :tooltip-formatter="val => `${val}${unit}`"
+    :tooltip="val => `${val}${unit}`"
   >
-    <template #suffix="{ value }">{{ `${value}${unit}` }} </template>
+    <template #suffix="{ tooltip }">{{ tooltip }} </template>
   </VSlider>
 </template>
 

@@ -1,11 +1,11 @@
 // 表单项
 import { inject, computed } from 'vue';
-import { addUnit } from '../../../utils';
+import { completeCSSUnit } from '../../@common';
 
 // props
 export const formItemProps = {
   // 左侧文本
-  label: { type: String, default: null }
+  label: { type: String, default: undefined }
 };
 
 // 使用表单项
@@ -29,7 +29,7 @@ export function useFormItem(formItem) {
   // 表单项样式
   const itemStyles = computed(() => {
     return {
-      '--vui-form-label-width': addUnit(formItem.props.labelWidth, 'px')
+      '--vui-form-label-width': completeCSSUnit(formItem.props.labelWidth, 'px')
     };
   });
 

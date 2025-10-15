@@ -1,41 +1,42 @@
 // 进度条
 import { computed } from 'vue';
-import { addUnit } from '../../../utils';
+import { completeCSSUnit, getFormattedText } from '../../@common';
 
 // props
 export const progressProps = {
   // 百分比
-  percent: { type: Number, default: 0 },
-  // 文字的格式化方法
-  // 1.函数：参数为百分比，返回一个可以作为文本的值
-  // 2.空值：表示不显示文本
-  textFormatter: { type: Function, default: percent => `${percent}%` },
+  percentage: { type: Number, default: 0 },
+  // 轨道右侧内容
+  // - `null` 不显示内容
+  // - `function` : `percentage => {}` 的返回值
+  // - `any` : 直接显示
+  suffix: { type: [Function, String, Number, Object], default: undefined },
   // ---------- 样式属性 ----------
   // 高度：不带单位时默认 `px`，默认 `6px`
-  height: { type: [Number, String], default: null },
+  height: { type: [Number, String], default: undefined },
   // 圆角尺寸：不带单位时默认 `px`，默认 `4px`
-  radius: { type: [Number, String], default: null }
+  radius: { type: [Number, String], default: undefined }
 };
 
 // 使用进度条
 export const useProgress = ({ props }) => {
   // 轨道样式
   const railStyles = computed(() => ({
-    '--vui-progress-height': addUnit(props.height, 'px'),
-    '--vui-progress-radius': addUnit(props.radius, 'px')
+    '--vui-progress-height': completeCSSUnit(props.height, 'px'),
+    '--vui-progress-radius': completeCSSUnit(props.radius, 'px')
   }));
 
   // 填充样式
   const trackStyles = computed(() => ({
-    width: `${props.percent}%`
+    width: `${props.percentage}%`
   }));
 
-  // 文字内容
-  const textContent = computed(() => props.textFormatter?.(props.percent));
+  // 右侧内容
+  const suffixText = computed(() => getFormattedText(props.suffix, props.percentage, '%'));
 
   return {
     railStyles,
     trackStyles,
-    textContent
+    suffixText
   };
 };

@@ -1,11 +1,12 @@
 // 滑块
 import { ref, computed, inject, watch } from 'vue';
 import { useElementHover, useEventListener } from '@vueuse/core';
+import { getFormattedText } from '../../@common';
 
 // v-model
 export const sliderModel = {
   // 滑块的值
-  value: { type: Number, default: null }
+  value: { type: Number, default: undefined }
 };
 
 // props
@@ -14,12 +15,12 @@ export const sliderProps = {
   min: { type: Number, default: 0 },
   max: { type: Number, default: 100 },
   // 提示框内容
-  // 1.字符串/数字：直接使用该值
-  // 2.函数：`value => {}` 的返回值
-  // 3.null：不显示提示框
-  tooltip: { type: [String, Number, Function], default: undefined },
-  // 轨道右侧内容
-  suffix: { type: [String, Number], default: null },
+  // - `null` 不显示提示框
+  // - `function` : `percentage => {}` 的返回值
+  // - `any` : 直接显示
+  tooltip: { type: [Function, String, Number, Object], default: undefined },
+  // 轨道右侧内容：同上
+  suffix: { type: [Function, String, Number, Object], default: null },
   // ---------- 原生属性 ----------
   disabled: { type: Boolean, default: false },
   readonly: { type: Boolean, default: false }
@@ -96,9 +97,9 @@ export const useSlider = ({ railElRef, handleElRef, tooltipRef, modelValue, prop
 
   // 计算百分比
   const percentValue = computed(() => {
-    const percent = ((modelValue.value - props.min) / (props.max - props.min)) * 100;
-    const limitPercent = Math.max(0, Math.min(100, percent));
-    return `${Math.round(limitPercent)}%`;
+    const percentage = ((modelValue.value - props.min) / (props.max - props.min)) * 100;
+    const limitPercentage = Math.max(0, Math.min(100, percentage));
+    return `${Math.round(limitPercentage)}%`;
   });
 
   // 拖拽手柄
@@ -109,18 +110,7 @@ export const useSlider = ({ railElRef, handleElRef, tooltipRef, modelValue, prop
   }));
 
   // 手柄上方的文字提示框
-  const tooltipText = computed(() => {
-    // 没有值
-    if (typeof modelValue.value === 'undefined' || modelValue.value === null) return null;
-    // 0.未设置
-    if (typeof props.tooltip === 'undefined') return modelValue.value;
-    // 1.不使用提示框
-    if (props.tooltip === null) return null;
-    // 2.使用字符串/数字
-    if (typeof props.tooltip === 'string' || typeof props.tooltip === 'number') return props.tooltip;
-    // 3.使用函数
-    return props.tooltip?.(modelValue.value);
-  });
+  const tooltipText = computed(() => getFormattedText(props.tooltip, modelValue.value));
   const isShowTooltip = computed(() => tooltipText.value && (isDragging.value || handleIsHovered.value));
   watch([isShowTooltip, modelValue], ([visible]) => {
     if (visible) {
@@ -129,6 +119,9 @@ export const useSlider = ({ railElRef, handleElRef, tooltipRef, modelValue, prop
       tooltipRef.value.close();
     }
   });
+
+  // 轨道右侧内容
+  const suffixText = computed(() => getFormattedText(props.suffix, modelValue.value));
 
   // 填充元素
   const trackStyles = computed(() => ({
@@ -145,6 +138,7 @@ export const useSlider = ({ railElRef, handleElRef, tooltipRef, modelValue, prop
     trackStyles,
     handleProps,
     tooltipText,
+    suffixText,
     onRailClick,
     onDragStart
   };
