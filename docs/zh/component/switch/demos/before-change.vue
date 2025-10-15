@@ -1,16 +1,22 @@
 <template>
-  <DemoViewLeft label="允许切换">
+  <DemoConfig
+    label="允许切换"
+    label-width="4em"
+  >
     <VSwitch
       v-model:checked="checkedRef1"
       :before-change="beforeChange1"
     />
-  </DemoViewLeft>
-  <DemoViewLeft label="阻止切换">
+  </DemoConfig>
+  <DemoConfig
+    label="阻止切换"
+    label-width="4em"
+  >
     <VSwitch
       v-model:checked="checkedRef2"
       :before-change="beforeChange2"
     />
-  </DemoViewLeft>
+  </DemoConfig>
 </template>
 
 <script setup>

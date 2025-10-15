@@ -1,31 +1,35 @@
 <template>
-  <DemoView content-gap>
-    <template #content>
-      <VSwitch
-        v-model:checked="checkedRef"
-        :disabled="isDisabled"
-      />
-      <VSwitch
-        v-model:checked="checkedRef"
-        :readonly="isReadonly"
-      />
+  <DemoUsage render-gap>
+    <template #render>
+      <div>
+        <VSwitch
+          v-model:checked="checkedRef"
+          :disabled="isDisabled"
+        />
+      </div>
+      <div>
+        <VSwitch
+          v-model:checked="checkedRef"
+          :readonly="isReadonly"
+        />
+      </div>
     </template>
 
-    <template #props>
-      <DemoViewLeft
+    <template #config>
+      <DemoConfig
         label="是否禁用状态"
         code="disabled"
       >
         <VSwitch v-model:checked="isDisabled" />
-      </DemoViewLeft>
-      <DemoViewLeft
+      </DemoConfig>
+      <DemoConfig
         label="是否只读状态"
         code="readonly"
       >
         <VSwitch v-model:checked="isReadonly" />
-      </DemoViewLeft>
+      </DemoConfig>
     </template>
-  </DemoView>
+  </DemoUsage>
 </template>
 
 <script setup>

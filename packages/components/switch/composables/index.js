@@ -13,12 +13,12 @@ export const switchModel = {
 // props
 export const switchProps = {
   // 文字描述
-  activeText: { type: String, default: null },
-  inactiveText: { type: String, default: null },
+  activeText: { type: String, default: undefined },
+  inactiveText: { type: String, default: undefined },
   // 切换前执行的方法
   // 1. 示例 `async checked => Promise<boolean>`
   // 2. 参数为当前值，返回 `true`表示可以切换
-  beforeChange: { type: Function, default: null },
+  beforeChange: { type: Function, default: undefined },
   // ---------- 原生属性 ----------
   disabled: { type: Boolean, default: false },
   readonly: { type: Boolean, default: false }
