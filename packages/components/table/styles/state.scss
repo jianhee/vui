@@ -1,0 +1,14 @@
+// 状态相关 loading/empty
+// ----------------------------------------
+
+// 表格 vui-table
+// 树   vui-tree
+@mixin vui-state($prefix, $type) {
+  .#{$prefix}-#{$type} {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 0;
+    color: var(--vui-#{$type}-text-color);
+  }
+}

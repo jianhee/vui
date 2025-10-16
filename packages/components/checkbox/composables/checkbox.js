@@ -48,7 +48,7 @@ export const useCheckbox = checkbox => {
   const isReadonly = computed(() => checkbox.props.readonly || checkboxGroup?.props?.readonly || formRoot?.props?.readonly);
 
   // 继承数据
-  const optionLabel = computed(() => checkbox.props.label || checkbox.props.formattedOption.label);
+  const optionLabel = computed(() => checkbox.props.label || checkbox.props.formattedOption?.label || '');
   const optionValue = computed(() => checkbox.props.formattedOption.value);
 
   // 是否选中

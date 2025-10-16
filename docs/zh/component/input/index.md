@@ -60,17 +60,17 @@
 
 ### 基础属性
 
-| 名称                                | 说明                                     | 类型                             | 默认值   |
-| ----------------------------------- | ---------------------------------------- | -------------------------------- | -------- |
-| `v-model:value`                     | 当前值，即输入框的值                     | `string\|number`                 |          |
-| `clearable`                         | 是否显示清除按钮                         | `boolean`                        | `false`  |
-| `showPasswordToggle`                | 是否显示切换密码按钮（仅密码类型有效）   | `boolean`                        | `false`  |
-| `showWordLimit`                     | 是否显示统计字数（仅限制输入长度时有效） | `boolean`                        | `false`  |
-| `prefixIcon`/`suffixIcon`           | 前置/后置图标                            | `VIcon.props.icon`               |          |
-| `prefixIconProps`/`suffixIconProps` | 前置/后置图标的属性                      | `VIcon.props`                    |          |
-| `prefix`/`suffix`                   | 前置/后置内容                            | `string\|number`                 |          |
-| `prepend`/`append`                  | 前置/后置标签                            | `string\|number`                 |          |
-| `size`                              | 输入框尺寸                               | `string`: `large\|medium\|small` | `medium` |
+| 名称                                     | 说明                                     | 类型                             | 默认值   |
+| ---------------------------------------- | ---------------------------------------- | -------------------------------- | -------- |
+| `v-model:value`                          | 当前值，即输入框的值                     | `string\|number`                 |          |
+| `clearable`                              | 是否显示清除按钮                         | `boolean`                        | `false`  |
+| `showPasswordToggle`                     | 是否显示切换密码按钮（仅密码类型有效）   | `boolean`                        | `false`  |
+| `showWordLimit`                          | 是否显示统计字数（仅限制输入长度时有效） | `boolean`                        | `false`  |
+| `prefixIcon` <br> `suffixIcon`           | 前置/后置图标                            | `VIcon.props.icon`               |          |
+| `prefixIconProps` <br> `suffixIconProps` | 前置/后置图标的属性                      | `VIcon.props`                    |          |
+| `prefix` <br> `suffix`                   | 前置/后置内容                            | `string\|number`                 |          |
+| `prepend` <br> `append`                  | 前置/后置装饰                            | `string\|number`                 |          |
+| `size`                                   | 输入框尺寸                               | `string`: `large\|medium\|small` | `medium` |
 
 ### 原生属性
 

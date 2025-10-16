@@ -2,7 +2,10 @@
 // ----------------------------------------
 
 @use "../../../styles/mixins";
+@use "./state";
 @use "./drag";
+@include state.vui-state("vui-table", "loading");
+@include state.vui-state("vui-table", "empty");
 @include drag.vui-drag("vui-table", "row");
 
 // vars

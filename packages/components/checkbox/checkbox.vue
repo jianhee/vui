@@ -10,14 +10,24 @@
       @change="onCheckedChange"
     />
     <!-- 图标 -->
-    <span
+    <div
       v-if="!isBtn"
       :class="`vui-${checkboxType}-icon`"
     />
-    <!-- 优先使用插槽 -->
-    <slot v-if="$slots?.default?.()[0].children.length" />
-    <!-- 其次使用属性值 -->
-    <template v-else-if="optionLabel">{{ optionLabel }}</template>
+    <!-- 优先使用插槽定义label -->
+    <div
+      v-if="$slots?.default?.()[0].children.length"
+      class="vui-checkbox-label"
+    >
+      <slot />
+    </div>
+    <!-- 其次使用属性值定义label -->
+    <div
+      v-else-if="optionLabel"
+      class="vui-checkbox-label"
+    >
+      {{ optionLabel }}
+    </div>
   </label>
 </template>
 

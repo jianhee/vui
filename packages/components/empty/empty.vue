@@ -1,6 +1,9 @@
 <!-- 空状态 -->
 <template>
-  <div :class="`vui-${stateType}`">
+  <div
+    :class="`vui-${stateType}`"
+    v-bind="rootProps"
+  >
     <!-- 优先使用图片 -->
     <img
       v-if="image"
@@ -38,7 +41,7 @@ const stateType = inject('vuiStateType', 'empty');
 const props = defineProps(emptyProps);
 
 // 使用状态
-const { _iconProps, descText } = useEmpty({
+const { rootProps, _iconProps, descText } = useEmpty({
   props,
   stateType
 });

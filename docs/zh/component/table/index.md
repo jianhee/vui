@@ -35,8 +35,6 @@
 <!-- 数据状态 -->
 <!--@include: ./parts/data-state-guild.md-->
 
-<preview path="./demos/data-state.vue"></preview>
-
 ### 多选
 
 - 使用 `selectable` 属性开启行多选的功能，使用 `v-model:selectedRowIds` 属性绑定选中值
@@ -94,6 +92,12 @@
 | `minWidth`  | 列宽最小值                                             | `number`         | `50`           |
 | `sortable`  | 列是否可以排序                                         | `boolean`        |                |
 | `cellClass` | 单元格类名                                             | `string`         |                |
+
+### 插槽
+
+| 名称      | 说明                                 | 参数                               |
+| --------- | ------------------------------------ | ---------------------------------- |
+| `default` | 单元格的自定义内容，优先级高于属性值 | `{ row: '当前行', col: '当前列' }` |
 
 ### 事件
 

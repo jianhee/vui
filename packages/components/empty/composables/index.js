@@ -1,6 +1,7 @@
 // 空状态
 import { computed } from 'vue';
-import { getFormattedIconProps } from '../../@common';
+import { ssrBrowser } from '../../../utils/browser';
+import { getFormattedIconProps, completeCSSUnit } from '../../@common';
 import VIcon from '../../icon/icon.vue';
 import IconEmpty from '../../../icons/empty.vue';
 import IconLoading from '../../../icons/loading.vue';
@@ -14,13 +15,28 @@ export const emptyProps = {
   image: { type: String, default: undefined },
   imageStyles: { type: Object, default: undefined },
   // 自定义描述文本：null 不使用文本
-  description: { type: String, default: undefined }
+  description: { type: String, default: undefined },
+  // 布局方向：vertical | horizontal
+  direction: { type: String, default: 'vertical' },
+  // ---------- 样式属性 ----------
+  // 间距
+  padding: { type: [String, Number], default: undefined }
 };
 
 // 使用空状态
 export const useEmpty = ({ props, stateType }) => {
   // 区分类型
   const isLoading = stateType === 'loading';
+
+  // 根元素
+  const rootProps = computed(() => ({
+    class: {
+      [`vui-${stateType}--${props.direction}`]: props.direction
+    },
+    style: {
+      [`--vui-${stateType}-padding`]: completeCSSUnit(props.padding, 'px')
+    }
+  }));
 
   // 图标
   const _iconProps = computed(() => {
@@ -42,7 +58,11 @@ export const useEmpty = ({ props, stateType }) => {
 
     // 使用默认文本
     if (typeof props.description === 'undefined') {
-      return isLoading ? 'Loading...' : 'No Data';
+      if (ssrBrowser.isZh) {
+        return isLoading ? '加载中...' : '暂无数据';
+      } else {
+        return isLoading ? 'Loading...' : 'No Data';
+      }
     }
 
     // 使用自定义文本
@@ -50,6 +70,7 @@ export const useEmpty = ({ props, stateType }) => {
   });
 
   return {
+    rootProps,
     _iconProps,
     descText
   };

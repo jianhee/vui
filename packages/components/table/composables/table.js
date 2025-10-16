@@ -9,10 +9,6 @@ export const tableEmits = ['row-click', 'row-contextmenu'];
 // props
 export const tableProps = {
   // ---------- 数据展示 ----------
-  // 是否正在加载数据
-  loading: { type: Boolean, default: false },
-  // 空数据时显示的文本内容
-  emptyText: { type: String, default: 'No Data' },
   // 行数据 `Array[Object]`
   //  1. `id` 行唯一标识
   rowItems: { type: Array, default: undefined },

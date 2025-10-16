@@ -12,22 +12,11 @@
     >
       <TheadRow />
     </div>
-    <!-- 加载状态 -->
-    <VLoading v-if="loading" />
-    <!-- 空状态 -->
-    <template v-else-if="!rowItemsRef?.length">
-      <!-- 优先插槽 -->
-      <slot
-        v-if="$slots.empty"
-        name="empty"
-      />
-      <!-- 其次文案 -->
-      <VEmpty
-        v-else
-        :icon="null"
-        :description="emptyText"
-      />
-    </template>
+    <!-- 加载/空状态 -->
+    <component
+      :is="renderState"
+      v-if="renderState"
+    />
     <template v-else>
       <!-- 表身 -->
       <div
@@ -65,6 +54,7 @@ import { ref, provide, useTemplateRef, watchEffect } from 'vue';
 import { useVirtualList } from '@vueuse/core';
 import { getSortResults } from '../../utils';
 import { useTable, tableProps, tableEmits } from './composables/table';
+import { useState, stateProps } from './composables/state';
 import { useSelection, selectionModel, selectionProps, selectionEmits } from './composables/selection';
 import { sortProps } from './composables/sort';
 import { useDragSort, dragSortProps, dragSortEmist } from './composables/drag-sort';
@@ -75,7 +65,7 @@ import DragSelect from './drag-select.vue';
 // 表格
 const tableElRef = useTemplateRef('tableElRef');
 const modelSelectedRowIds = defineModel('selectedRowIds', selectionModel.selectedRowIds);
-const props = defineProps({ ...tableProps, ...selectionProps, ...sortProps, ...dragSortProps });
+const props = defineProps({ ...tableProps, ...stateProps, ...selectionProps, ...sortProps, ...dragSortProps });
 const emits = defineEmits([...tableEmits, ...selectionEmits, ...dragSortEmist]);
 
 // 全局状态
@@ -99,6 +89,13 @@ const { rootClasses, rootStyles, headerStyles, colWidthsRef } = useTable({
   tableElRef,
   tbodyElRef: tbodyProps.ref,
   props
+});
+
+// 使用状态
+const { renderState } = useState({
+  type: 'table',
+  props,
+  dataRef: rowItemsRef
 });
 
 // 使用多选

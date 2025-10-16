@@ -131,6 +131,12 @@
       border-color: var(--#{$prefix}-active-color);
     }
 
+    // label
+    &-label {
+      display: flex;
+      align-items: center;
+    }
+
     // 多选框
     @if $prefix == "vui-checkbox" {
       &-icon {

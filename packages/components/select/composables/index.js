@@ -51,14 +51,14 @@ export const useSelect = ({ triggerElRef, modelValue, props, emits }) => {
   ]);
 
   // 箭头图标
-  const expandIconRotate = computed(() => (isDropdownVisible.value ? '180deg' : null));
+  const expandIconRotate = computed(() => (isDropdownVisible.value ? '180deg' : undefined));
 
   // 清除按钮
   const isShowClearIcon = computed(() => props.clearable && modelValue.value && isEnabled.value && (isFocused.value || isHovered.value));
   function onClickClearIcon(e) {
-    modelValue.value = null;
+    modelValue.value = undefined;
     isFocused.value = true;
-    emits('clear', { event: e, value: null });
+    emits('clear', { event: e, value: undefined });
   }
 
   // 打开/关闭下拉菜单

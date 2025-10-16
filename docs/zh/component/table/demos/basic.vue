@@ -19,7 +19,7 @@ const colItems = renderCols();
   max-height: 300px;
 }
 .c-demo-tables .vui-table {
-  height: 300px;
+  height: 200px;
   border: 1px solid var(--demo-border-color-base);
 }
 .c-demo-table-cell {
