@@ -12,11 +12,11 @@ export const dragSortProps = {
   dragSortable: { type: Boolean, default: false },
   // 多组件之间拖拽的分组标识
   // 默认在单个树或列表内部拖拽，设置分组标识并提供一个全局状态(见示例)，就可以在多组件之间拖拽
-  dragSortGroup: { type: String, default: null },
+  dragSortGroup: { type: String, default: undefined },
   // 校验是否可以移入目标
   // 1. 示例 target => Boolean
   // 2. 参数为目标项，返回 `true` 表示可以移入
-  canDropInto: { type: Function, default: null }
+  canDropInto: { type: Function, default: undefined }
 };
 
 // 使用拖拽排序

@@ -1,6 +1,6 @@
 <template>
   <VTable
-    class="demo-table"
+    class="c-demo-table"
     :col-items="colItems"
     :row-items="rowItems"
     :row-height="25"

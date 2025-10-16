@@ -8,7 +8,7 @@ export const selectionEmits = ['selection-change'];
 // v-model
 export const selectionModel = {
   // 选中项的 ids
-  selectedRowIds: { type: Array, default: null }
+  selectedRowIds: { type: Array, default: undefined }
 };
 
 // props

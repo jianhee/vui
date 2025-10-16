@@ -1,11 +1,11 @@
 <template>
   <VTable
     v-slot="{ row, col }"
-    class="demo-table"
+    class="c-demo-table"
     :row-items="rowItems"
     :col-items="colItems"
     col-resizable
-    col-resize-storage-key="demo-table-col-widths"
+    col-resize-storage-key="c-demo-table-col-widths"
   >
     <template v-if="col.key === 'title'">
       <VIcon :icon="row.type" />

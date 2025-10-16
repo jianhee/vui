@@ -1,6 +1,6 @@
 <template>
   <VTable
-    class="demo-table"
+    class="c-demo-table"
     :row-items="rowItems"
     :col-items="colItems"
     sort-key="id"

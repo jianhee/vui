@@ -22,7 +22,7 @@ export const renderItems = (params = {}) => {
 export const renderCols = (params = {}) => {
   const { sortable } = params;
   return [
-    { key: 'id', title: 'ID', width: 80, cellClass: 'demo-table-cell', sortable },
+    { key: 'id', title: 'ID', width: 80, cellClass: 'c-demo-table-cell', sortable },
     { key: 'title', title: '标题', width: 120, sortable },
     { key: 'name', title: '姓名', minWidth: 120, sortable },
     { key: 'age', title: '年纪' },

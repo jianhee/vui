@@ -4,9 +4,9 @@ import { computed } from 'vue';
 // props
 export const sortProps = {
   // 默认排序字段
-  sortKey: { type: String, default: null },
+  sortKey: { type: String, default: undefined },
   // 默认排序方式
-  sortOrder: { type: String, default: null }
+  sortOrder: { type: String, default: undefined }
 };
 
 // 使用排序

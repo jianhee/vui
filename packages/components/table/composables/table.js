@@ -1,7 +1,7 @@
 // 表格
 import { ref, computed, watchEffect } from 'vue';
 import { useStorage, useEventListener, useIntersectionObserver } from '@vueuse/core';
-import { addUnit } from '../../../utils';
+import { completeCSSUnit } from '../../@common';
 
 // emits
 export const tableEmits = ['row-click', 'row-contextmenu'];
@@ -15,7 +15,7 @@ export const tableProps = {
   emptyText: { type: String, default: 'No Data' },
   // 行数据 `Array[Object]`
   //  1. `id` 行唯一标识
-  rowItems: { type: Array, default: null },
+  rowItems: { type: Array, default: undefined },
   // 列数据 `Array[Object]`
   //  1. `key` 列唯一标识，默认使用 `row[col.key]` 的值渲染单元格内容
   //  2. `title` 列标题
@@ -26,7 +26,7 @@ export const tableProps = {
   // ---------- 表格属性 ----------
   // 表格高度：不带单位时默认 `px`
   // 必须使用此属性或 CSS 限制高度，否则会渲染全部数据
-  tableHeight: { type: [String, Number], default: null },
+  tableHeight: { type: [String, Number], default: undefined },
   // 是否使用斑马纹
   stripe: { type: Boolean, default: false },
   // ---------- 行属性 ----------
@@ -35,16 +35,16 @@ export const tableProps = {
   // 行 `id` 键名
   rowIdKey: { type: String, default: 'id' },
   // 当前行 `id`，用于高亮当前行
-  currentRowId: { type: [String, Number], default: null },
+  currentRowId: { type: [String, Number], default: undefined },
   // 自定义行属性的方法
   //  1. 示例 `({ row }) => ({ key: value, ... })`
   //  2. 参数为当前行，返回一个可以使用 `v-bind` 绑定到行元素的对象
-  customRow: { type: Function, default: null },
+  customRow: { type: Function, default: undefined },
   // ---------- 列属性 ----------
   // 是否可以调整列宽
   colResizable: { type: Boolean, default: false },
   // 如果需要记住调整后的列宽，需要设置一个键名
-  colResizeStorageKey: { type: String, default: null }
+  colResizeStorageKey: { type: String, default: undefined }
 };
 
 // 使用表格
@@ -68,7 +68,7 @@ export const useTable = ({ tableElRef, tbodyElRef, props }) => {
   // 根元素样式
   const rootStyles = computed(() => {
     return {
-      'height': addUnit(props.tableHeight, 'px'),
+      'height': completeCSSUnit(props.tableHeight, 'px'),
       '--vui-table-row-height': `${props.rowHeight}px`
     };
   });

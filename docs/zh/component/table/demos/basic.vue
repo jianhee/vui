@@ -1,6 +1,6 @@
 <template>
   <VTable
-    class="demo-table"
+    class="c-demo-table"
     :row-items="rowItems"
     :col-items="colItems"
     table-height="300"
@@ -15,14 +15,14 @@ const colItems = renderCols();
 </script>
 
 <style>
-.demo-table {
+.c-demo-table {
   max-height: 300px;
 }
-.demo-tables .vui-table {
+.c-demo-tables .vui-table {
   height: 300px;
   border: 1px solid var(--demo-border-color-base);
 }
-.demo-table-cell {
+.c-demo-table-cell {
   font-weight: bold;
 }
 </style>

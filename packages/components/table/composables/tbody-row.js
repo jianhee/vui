@@ -6,7 +6,7 @@ export const tbodyRowProps = {
   // 当前行
   rowData: { type: Object, required: true },
   // 当前列
-  colData: { type: Object, default: null }
+  colData: { type: Object, default: undefined }
 };
 
 // 使用行
