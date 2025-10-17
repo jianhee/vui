@@ -1,0 +1,8 @@
+// 文字提示
+// ----------------------------------------
+.vui-tooltip {
+  --vui-popover-text-color: var(--vui-bg-color-base);
+  --vui-popover-bg-color: var(--vui-text-color-primary);
+  --vui-popover-border-color: var(--vui-text-color-primary);
+  --vui-popover-shadow: var(--vui-box-shadow-light);
+}
