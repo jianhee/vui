@@ -39,7 +39,6 @@ defineProps({
   gap: 5px var(--demo-filed-gap);
   width: 100%;
   margin-bottom: var(--demo-filed-gap);
-  overflow: auto;
   &:last-child {
     margin-bottom: 0;
   }

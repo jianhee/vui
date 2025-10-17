@@ -9,7 +9,7 @@ import { vite } from './config/vite.js';
 export default defineConfig({
   // 元数据
   title: 'Vue UI',
-  description: 'Vue 3 组件库 + 工具集',
+  description: 'Vue 3 组件库 + 工具库',
   head: [['link', { rel: 'icon', href: '/logo.svg' }]],
   // 国际化
   locales: locales,

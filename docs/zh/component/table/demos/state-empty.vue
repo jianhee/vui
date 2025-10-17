@@ -36,3 +36,16 @@
 import { renderProps } from '../composables';
 const props = renderProps();
 </script>
+
+<style lang="scss">
+.c-demo-tables {
+  .g-demo-config {
+    width: 33%;
+    margin-bottom: 0;
+  }
+  .vui-table {
+    height: 200px;
+    border: 1px solid var(--demo-border-color-base);
+  }
+}
+</style>

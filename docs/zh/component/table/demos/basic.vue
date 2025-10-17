@@ -18,10 +18,6 @@ const colItems = renderCols();
 .c-demo-table {
   max-height: 300px;
 }
-.c-demo-tables .vui-table {
-  height: 200px;
-  border: 1px solid var(--demo-border-color-base);
-}
 .c-demo-table-cell {
   font-weight: bold;
 }

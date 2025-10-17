@@ -6,7 +6,7 @@
 import vui from 'vui/components';
 import 'vui/styles/index.scss';
 
-app.use(vui);
+vueApp.use(vui);
 ```
 
 ## 使用组件

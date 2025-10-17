@@ -2,7 +2,7 @@
   <div class="c-demo-inputs">
     <DemoConfig
       label="使用属性"
-      label-width="60px"
+      label-position="top"
     >
       <VInput
         v-model:value="inputValue"
@@ -23,7 +23,7 @@
     </DemoConfig>
     <DemoConfig
       label="使用插槽"
-      label-width="60px"
+      label-position="top"
     >
       <VInput
         v-model:value="inputValue"
@@ -47,7 +47,7 @@
     </DemoConfig>
     <DemoConfig
       label="混合使用"
-      label-width="60px"
+      label-position="top"
     >
       <VInput
         v-model:value="inputValue"

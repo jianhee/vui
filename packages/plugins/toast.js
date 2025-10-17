@@ -83,12 +83,10 @@ toastFunction.info = createTypeMethod('info');
 export const toast = toastFunction;
 
 // 插件式调用：在 main.js 中注册
-// 方式1：setupToast(vue)
+// 方式1：setupToast(vueApp)
 export const setupToast = vueApp => {
   vueApp.config.globalProperties.$toast = toast;
 };
 
-// 方式2：vue.use(toast)
-export const toastPlugin = {
-  install: setupToast
-};
+// 方式2：vueApp.use(toastPlugin)
+export const toastPlugin = { install: setupToast };

@@ -1,11 +1,11 @@
-# 使用图标库
+# 使用图标
 
-## 全局注册所有图标组件
+## 全局注册所有图标
 
 ```js [main.js]
 import icons from 'vui/icons';
 
-app.use(icons);
+vueApp.use(icons);
 ```
 
 ## 使用图标

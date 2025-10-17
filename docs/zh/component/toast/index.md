@@ -1,7 +1,7 @@
 # Toast 消息提示
 
 ::: details 示例中的消息数据
-<<< ./composables/index.js
+<<< @/component/toast/composables/index.js
 :::
 
 ## 组件式调用
@@ -15,13 +15,13 @@
 - 使用 `message` 属性定义消息内容
 - 使用 `type` 属性定义消息类型
 
-<preview path="./demos/component.vue"></preview>
+<preview path="@docs/component/toast/demos/component.vue"></preview>
 
 ## 函数式调用
 
 ### 如何使用
 
-按需引入后使用
+按需引入后即可使用
 
 ```js [*.vue]
 import { toast } from 'vui/plugins';
@@ -33,19 +33,19 @@ toast('这是一条消息');
 
 直接调用 `toast` 方法，它的参数可以是字符串或对象
 
-<preview path="./demos/function.vue"></preview>
+<preview path="@docs/component/toast/demos/function.vue"></preview>
 
 ### 使用别名
 
 每种消息类型都有一个对应的方法别名，使用时可以省略 `type` 参数
 
-<preview path="./demos/function-type.vue"></preview>
+<preview path="@docs/component/toast/demos/function-type.vue"></preview>
 
 ### 显示时间
 
 使用 `duration` 参数定义显示时间
 
-<preview path="./demos/duration.vue"></preview>
+<preview path="@docs/component/toast/demos/duration.vue"></preview>
 
 ## 插件式调用
 
@@ -56,11 +56,11 @@ toast('这是一条消息');
 ```js [main.js]
 // 方式一
 import { toastPlugin } from 'vui/plugins';
-app.use(toastPlugin);
+vueApp.use(toastPlugin);
 
 // 方式二
 import { setupToast } from 'vui/plugins';
-setupToast(app);
+setupToast(vueApp);
 ```
 
 2. 在组件中使用 `$toast` 方法
@@ -75,7 +75,7 @@ setupToast(app);
 
 插件式调用 `$toast` 方法和函数式调用 `toast` 方法，两种方式的参数完全一样
 
-<preview path="./demos/plugin.vue"></preview>
+<preview path="@docs/component/toast/demos/plugin.vue"></preview>
 
 ## API
 
