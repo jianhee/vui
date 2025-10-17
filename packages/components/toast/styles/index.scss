@@ -1,0 +1,65 @@
+// 消息提示
+// ----------------------------------------
+.vui-toast-wrapper {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  max-width: 90%;
+  transform: translateX(-50%);
+}
+.vui-toast {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 11px 15px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--vui-toast-text-color);
+  background-color: var(--vui-toast-bg-color);
+  border: 1px solid var(--vui-toast-border-color);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  &-icon {
+    flex: none;
+  }
+  &-message {
+    flex: auto;
+  }
+  &-enter-from,
+  &-leave-to {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+
+  // type
+  &--primary {
+    --vui-toast-bg-color: var(--vui-color-primary-a1);
+    --vui-toast-border-color: var(--vui-color-primary-a2);
+    --vui-toast-text-color: var(--vui-color-primary-base);
+  }
+  &--success {
+    --vui-toast-bg-color: var(--vui-color-success-a1);
+    --vui-toast-border-color: var(--vui-color-success-a2);
+    --vui-toast-text-color: var(--vui-color-success-base);
+  }
+  &--warning {
+    --vui-toast-bg-color: var(--vui-color-warning-a1);
+    --vui-toast-border-color: var(--vui-color-warning-a2);
+    --vui-toast-text-color: var(--vui-color-warning-base);
+  }
+  &--error {
+    --vui-toast-bg-color: var(--vui-color-error-a1);
+    --vui-toast-border-color: var(--vui-color-error-a2);
+    --vui-toast-text-color: var(--vui-color-error-base);
+  }
+  &--info {
+    --vui-toast-bg-color: var(--vui-color-info-a1);
+    --vui-toast-border-color: var(--vui-color-info-a2);
+    --vui-toast-text-color: var(--vui-color-info-base);
+  }
+}

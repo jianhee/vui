@@ -1,10 +1,8 @@
 <template>
-  <DemoSpace>
-    <VSwitch
-      v-model:checked="checkedRef"
-      @change="writeLog('change', $event)"
-    />
-  </DemoSpace>
+  <VSwitch
+    v-model:checked="checkedRef"
+    @change="writeLog('change', $event)"
+  />
 
   <DemoSpace>
     当前值为 <code>{{ checkedRef }}</code>
