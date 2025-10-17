@@ -24,7 +24,7 @@
 按需引入后使用
 
 ```js [*.vue]
-import { toast } from 'vui/plugins/toast';
+import { toast } from 'vui/plugins';
 
 toast('这是一条消息');
 ```
@@ -55,11 +55,11 @@ toast('这是一条消息');
 
 ```js [main.js]
 // 方式一
-import { toastPlugin } from 'vui/plugins/toast';
+import { toastPlugin } from 'vui/plugins';
 app.use(toastPlugin);
 
 // 方式二
-import { setupToast } from 'vui/plugins/toast';
+import { setupToast } from 'vui/plugins';
 setupToast(app);
 ```
 

@@ -70,8 +70,8 @@ export const sidebarNavs = {
       text: '反馈',
       items: [
         { text: 'Toast 消息提示', link: '/component/toast/' },
-        { text: 'Tooltip 文字提示', link: '/component/tooltip/' },
         { text: 'Popover 弹出框', link: '/component/popover/' },
+        { text: 'Tooltip 文字提示', link: '/component/tooltip/' },
         { text: 'Dialog 对话框', link: '/component/dialog/' },
         { text: 'Drawer 抽屉', link: '/component/drawer/' }
       ]
@@ -87,5 +87,10 @@ export const sidebarNavs = {
     { text: '图标库', link: '/icon/library' }
   ],
   // 工具集
-  '/util/': [{ text: '如何使用', link: '/util/usage' }]
+  '/util/': [
+    { text: '如何使用', link: '/util/usage' },
+    { text: '工具函数', link: '/util/util' },
+    { text: '组合式函数', link: '/util/composable' },
+    { text: '插件', link: '/util/plugin' }
+  ]
 };

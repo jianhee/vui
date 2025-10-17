@@ -1,2 +1,1 @@
-export * from './setup-components';
-export * from './use-components-props';
+export * from './use-components';

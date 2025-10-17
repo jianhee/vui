@@ -1,7 +1,7 @@
 /**
- * 获取组件对象
+ * 获取指定目录下的组件
  * @param {Object} modulesMap     - 组件模块对象：{ 组件路径: 组件模块 }
- * @return {Object} componentsMap - 组件对象：{ 组件名: 组件 }
+ * @return {Object} componentsMap - 组件对象：{ 驼峰式组件名: 组件 }
  */
 export const getComponents = modulesMap => {
   // 组件对象
@@ -41,7 +41,7 @@ export const getComponents = modulesMap => {
 };
 
 /**
- * 注册全局组件
+ * 全局注册指定目录下的组件
  * @param {Object} vueApp               - Vue 应用实例
  * @param {Object} modulesMap           - 导入的组件模块：例如 import.meta.glob(['./*.vue'], { eager: true }) 的值
  * @param {Array} [options.includes=[]] - 组件名称白名单：空数组时注册全部组件
