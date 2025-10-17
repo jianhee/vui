@@ -3,6 +3,9 @@
 
 @use "../../../styles/mixins";
 @use "../../table/styles/drag";
+@use "../../table/styles/state";
+@include state.vui-state("vui-tree", "loading");
+@include state.vui-state("vui-tree", "empty");
 @include drag.vui-drag("vui-tree", "node");
 
 // vars

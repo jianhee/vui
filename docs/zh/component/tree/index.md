@@ -23,8 +23,6 @@
 <!-- 数据状态 -->
 <!--@include: ../table/parts/data-state-guild.md-->
 
-<preview path="./demos/data-state.vue"></preview>
-
 ### 懒加载
 
 使用 `isLeaf` 和 `loadData` 属性定义懒加载节点的功能
@@ -56,21 +54,19 @@
 
 ### 属性
 
-| 名称              | 说明                                                                                                                   | 类型（默认单位）                                         | 默认值    |
-| ----------------- | ---------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- | --------- |
-| `loading`         | 是否正在加载数据                                                                                                       | `boolean`                                                | `false`   |
-| `emptyText`       | 空数据时显示的文本内容                                                                                                 | `string`                                                 | `No Data` |
-| `data`            | 树数据                                                                                                                 | `Array[Object]`                                          |           |
-| `treeHeight`      | 树高度 <br> 必须使用此属性或 CSS 限制高度，否则会渲染全部数据                                                          | `string\|number(?px)`                                    |           |
-| `treeIndent`      | 树整体缩进                                                                                                             | `number`                                                 | `0`       |
-| `nodeHeight`      | 节点高度，用于计算虚拟列表的显示内容                                                                                   | `number`                                                 | `30`      |
-| `nodeIndent`      | 节点缩进                                                                                                               | `number`                                                 | `15`      |
-| `currentNodeId`   | 当前节点 `id`，用于高亮当前节点                                                                                        | `string\|number`                                         |           |
-| `customNode`      | 自定义节点属性的方法 <br> 参数为当前节点和当前项，返回一个可以使用 `v-bind` 绑定到节点元素的对象                       | `function`: `({ node, item }) => ({ key: value, ... })`  |           |
-| `expandedNodeIds` | 默认展开的节点 `id`                                                                                                    | `Array[string\|number]`                                  |           |
-| `isLeaf`          | 校验是否是叶子节点 <br> 默认通过 `children` 属性判断，设置后通过方法判断 <br> 参数为当前项，返回 `true` 表示是叶子节点 | `function`: `item => boolean`                            |           |
-| `loadData`        | 加载数据的方法 <br> 参数为当前节点和当前项，返回 `true` 表示加载成功                                                   | `async function`: `({ node, item }) => Promise<boolean>` |           |
-| `filterMethod`    | 筛选数据方法 <br> 参数为当前项，返回 `false` 表示不包含当前项                                                          | `function`: `({ item }) => boolean`                      |           |
+| 名称              | 说明                                                                                                                   | 类型（默认单位）                                         | 默认值 |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- | ------ |
+| `data`            | 树数据                                                                                                                 | `Array[Object]`                                          |        |
+| `treeHeight`      | 树高度 <br> 必须使用此属性或 CSS 限制高度，否则会渲染全部数据                                                          | `string\|number(?px)`                                    |        |
+| `treeIndent`      | 树整体缩进                                                                                                             | `number`                                                 | `0`    |
+| `nodeHeight`      | 节点高度，用于计算虚拟列表的显示内容                                                                                   | `number`                                                 | `30`   |
+| `nodeIndent`      | 节点缩进                                                                                                               | `number`                                                 | `15`   |
+| `currentNodeId`   | 当前节点 `id`，用于高亮当前节点                                                                                        | `string\|number`                                         |        |
+| `customNode`      | 自定义节点属性的方法 <br> 参数为当前节点和当前项，返回一个可以使用 `v-bind` 绑定到节点元素的对象                       | `function`: `({ node, item }) => ({ key: value, ... })`  |        |
+| `expandedNodeIds` | 默认展开的节点 `id`                                                                                                    | `Array[string\|number]`                                  |        |
+| `isLeaf`          | 校验是否是叶子节点 <br> 默认通过 `children` 属性判断，设置后通过方法判断 <br> 参数为当前项，返回 `true` 表示是叶子节点 | `function`: `item => boolean`                            |        |
+| `loadData`        | 加载数据的方法 <br> 参数为当前节点和当前项，返回 `true` 表示加载成功                                                   | `async function`: `({ node, item }) => Promise<boolean>` |        |
+| `filterMethod`    | 筛选数据方法 <br> 参数为当前项，返回 `false` 表示不包含当前项                                                          | `function`: `({ item }) => boolean`                      |        |
 
 ### 属性.data
 
@@ -78,6 +74,12 @@
 | ------- | ------------------------------------------- | ---------------- | ------ |
 | `id`    | 节点唯一标识                                | `string\|number` | 必填   |
 | `title` | 节点标题，默认使用 `title` 的值渲染节点内容 | `string`         |        |
+
+### 插槽
+
+| 名称      | 说明                               | 参数                                   |
+| --------- | ---------------------------------- | -------------------------------------- |
+| `default` | 节点的自定义内容，优先级高于属性值 | `{ node: '当前节点', item: '当前项' }` |
 
 ### 事件
 

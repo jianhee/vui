@@ -5,22 +5,11 @@
     :style="treeRootStyles"
     v-bind="rootProps"
   >
-    <!-- 加载状态 -->
-    <VLoading v-if="loading" />
-    <!-- 空状态 -->
-    <template v-else-if="!treeDataRef?.length">
-      <!-- 优先插槽 -->
-      <slot
-        v-if="$slots.empty"
-        name="empty"
-      />
-      <!-- 其次文案 -->
-      <VEmpty
-        v-else
-        :icon="null"
-        :description="emptyText"
-      />
-    </template>
+    <!-- 加载状态/空状态 -->
+    <component
+      :is="renderState"
+      v-if="renderState"
+    />
     <!-- 虚拟列表 -->
     <div
       v-else
@@ -52,11 +41,12 @@
 import { provide, ref, watch } from 'vue';
 import { useVirtualList } from '@vueuse/core';
 import { useTree, treeProps, treeEmits } from './composables/tree';
+import { useState, stateProps } from '../table/composables/state';
 import { useDragSort, dragSortProps, dragSortEmist } from '../table/composables/drag-sort';
 import VTreeNode from './tree-node.vue';
 
 // 树
-const props = defineProps({ ...treeProps, ...dragSortProps });
+const props = defineProps({ ...treeProps, ...stateProps, ...dragSortProps });
 const emits = defineEmits([...treeEmits, ...dragSortEmist]);
 
 // 全局拖拽状态
@@ -83,6 +73,13 @@ const {
 } = useVirtualList(flattenedNodes, {
   itemHeight: props.nodeHeight,
   overscan: 20
+});
+
+// 使用状态
+const { renderState } = useState({
+  type: 'tree',
+  props,
+  dataRef: treeDataRef
 });
 
 // 使用排序

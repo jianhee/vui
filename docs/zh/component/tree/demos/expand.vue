@@ -1,7 +1,7 @@
 <template>
   <DemoSpace
     flex
-    class="demo-tree-expand"
+    class="c-demo-tree-expand"
   >
     <DemoBasicTree :expanded-node-ids="[treeData[2].id]" />
     <DemoLoadTree :expanded-node-ids="[treeData[2].id]" />
@@ -19,7 +19,7 @@ provide('demoTreeData', treeData);
 </script>
 
 <style>
-.demo-tree-expand .vui-tree {
+.c-demo-tree-expand .vui-tree {
   flex: auto;
   width: 0;
 }

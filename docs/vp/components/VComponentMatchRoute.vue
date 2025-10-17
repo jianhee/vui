@@ -13,6 +13,8 @@ import VLoading from 'vui/components/loading/loading.vue';
 import VPopover from 'vui/components/popover/popover.vue';
 import VTooltip from 'vui/components/tooltip/tooltip.vue';
 import VDropdown from 'vui/components/dropdown/dropdown.vue';
+import VTable from 'vui/components/table/table.vue';
+import VTree from 'vui/components/tree/tree.vue';
 
 const componentMap = {
   checkbox: VCheckbox,
@@ -25,7 +27,9 @@ const componentMap = {
   loading: VLoading,
   popover: VPopover,
   tooltip: VTooltip,
-  dropdown: VDropdown
+  dropdown: VDropdown,
+  table: VTable,
+  tree: VTree
 };
 
 export default {

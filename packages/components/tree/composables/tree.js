@@ -7,18 +7,14 @@ export const treeEmits = ['node-click', 'node-contextmenu'];
 // props
 export const treeProps = {
   // ---------- 数据展示 ----------
-  // 是否正在加载数据
-  loading: { type: Boolean, default: false },
-  // 空数据时显示的文本内容
-  emptyText: { type: String, default: 'No Data' },
   // 树数据 `Array[Object]`
   //  1. `id` 节点唯一标识，必填
   //  2. `title` 节点标题，默认使用 `title` 的值渲染单元格
-  data: { type: Array, default: null },
+  data: { type: Array, default: undefined },
   // ---------- 树属性 ----------
   // 树高度：不带单位时默认 `px`
   // 必须使用此属性或 CSS 限制高度，否则会渲染全部数据
-  treeHeight: { type: [String, Number], default: null },
+  treeHeight: { type: [String, Number], default: undefined },
   // 树整体缩进
   treeIndent: { type: Number, default: 0 },
   // ---------- 节点属性 ----------
@@ -27,22 +23,22 @@ export const treeProps = {
   // 节点缩进
   nodeIndent: { type: Number, default: 15 },
   // 当前节点 `id`，用于高亮当前节点
-  currentNodeId: { type: [String, Number], default: null },
+  currentNodeId: { type: [String, Number], default: undefined },
   // 默认展开的节点 `id`
-  expandedNodeIds: { type: Array, default: null },
+  expandedNodeIds: { type: Array, default: undefined },
   // 自定义节点属性的方法
   //  1. 示例 `({ node, item }) => ({ key: value, ... })`
   //  2. 参数为当前节点和当前项，返回一个可以使用 `v-bind` 绑定到节点元素的对象
-  customNode: { type: Function, default: null },
+  customNode: { type: Function, default: undefined },
   // 校验是否是叶子节点
   // 默认通过 `children` 属性判断，设置后通过方法判断
   // 1. 示例：item => boolean
   // 2. 参数为当前项，返回 `true` 表示是叶子节点
-  isLeaf: { type: Function, default: null },
+  isLeaf: { type: Function, default: undefined },
   // 加载数据的方法
   // 1. 示例：({ node, item }) => Promise<boolean>
   // 2. 参数为当前节点和当前项，返回 `true` 表示加载成功
-  loadData: { type: Function, default: null },
+  loadData: { type: Function, default: undefined },
   // 筛选数据的方法
   //  1. 示例 `({ item }) => boolean`
   //  2. 参数为当前项，返回 `false` 表示不包含当前项

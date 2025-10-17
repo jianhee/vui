@@ -1,7 +1,7 @@
 <template>
   <VTree
     v-slot="{ node, item }"
-    class="demo-tree"
+    class="c-demo-tree"
     :data="treeData"
     :drag-sortable="true"
     :can-drop-into="target => target.type === 'folder'"

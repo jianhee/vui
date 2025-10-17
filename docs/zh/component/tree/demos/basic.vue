@@ -1,6 +1,6 @@
 <template>
   <VTree
-    class="demo-tree"
+    class="c-demo-tree"
     :tree-height="300"
     :data="treeData"
     v-bind="$attrs"
@@ -19,8 +19,7 @@ const treeData = inject('demoTreeData', _treeData);
 </script>
 
 <style>
-.demo-tree,
-.demo-trees .vui-tree {
+.c-demo-tree {
   height: 300px;
   border: 1px solid var(--demo-border-color-base);
 }

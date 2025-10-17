@@ -1,3 +1,5 @@
+import { validateRoutePath } from '@vp/composables';
+
 // 生成数据
 export const renderItems = (params = {}) => {
   const { length = 1000, level = 0, path = '0' } = params;
@@ -18,7 +20,7 @@ export const renderItems = (params = {}) => {
   });
 };
 
-// 列数据
+// 生成列数据
 export const renderCols = (params = {}) => {
   const { sortable } = params;
   return [
@@ -31,7 +33,17 @@ export const renderCols = (params = {}) => {
   ];
 };
 
-// 图标
+// 生成图标
 export const renderIcon = node => {
   return node.data.type === 'note' ? 'note' : node.isExpanded ? 'folder-open' : 'folder';
+};
+
+// 生成v-bind属性
+export const renderProps = () => {
+  const isTable = validateRoutePath('table');
+  if (isTable) {
+    return { colItems: renderCols() };
+  } else {
+    return undefined;
+  }
 };

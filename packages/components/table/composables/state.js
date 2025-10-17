@@ -1,5 +1,5 @@
 // 加载状态/空状态
-import { computed, useSlots, h } from 'vue';
+import { defineComponent, computed, useSlots, h } from 'vue';
 import VEmpty from '../../empty/empty.vue';
 import VLoading from '../../loading/loading.vue';
 
@@ -16,6 +16,15 @@ export const stateProps = {
 export const useState = ({ type, props, dataRef }) => {
   const slots = useSlots();
 
+  // 渲染组件：直接使用 h 渲染会在切换页面时报错
+  const renderComponent = (component, props) => {
+    return defineComponent({
+      render() {
+        return h(component, props);
+      }
+    });
+  };
+
   // 渲染加载状态
   const renderLoading = computed(() => {
     if (!props.loading) return null;
@@ -26,7 +35,7 @@ export const useState = ({ type, props, dataRef }) => {
     }
 
     // 其次使用加载组件
-    return h(VLoading, props.loadingProps);
+    return renderComponent(VLoading, props.loadingProps);
   });
 
   // 渲染空状态
@@ -39,7 +48,7 @@ export const useState = ({ type, props, dataRef }) => {
     }
 
     // 其次使用空状态组件
-    return h(VEmpty, { icon: null, ...props.emptyProps });
+    return renderComponent(VEmpty, { icon: null, ...props.emptyProps });
   });
 
   // 渲染状态内容
