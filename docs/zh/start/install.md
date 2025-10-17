@@ -1,6 +1,6 @@
 # 安装
 
-目前暂未发布线上版本，仅支持本地使用，需要手动将 Vui 代码库克隆到本地。
+目前仅支持本地使用，需要手动将 Vui 代码库克隆到本地。
 
 ## 使用 Vite
 
@@ -22,16 +22,16 @@ export default defineConfig({
 
 ## 使用 Yalc
 
-1. 发布
+1. 在 vui 根目录下发布
 
-```sh [vui 根目录下运行]
+```sh
 yalc publish    # 发布
 yalc push       # 推送更新
 ```
 
-2. 安装
+2. 在项目根目录下安装
 
-```sh [项目根目录运行]
+```sh
 yalc add vui      # 添加
 yalc remove vui   # 删除
 yalc update vui   # 更新
