@@ -20,7 +20,7 @@ customName: Checkbox
 ### 基础用法
 
 - 使用 `v-model:checked` 属性绑定当前值
-- 选项内容优先级顺序为 `default` 插槽 > `label` 属性
+- 有多种方式定义选项内容，优先级顺序为 `default` 插槽 > `label` 属性
 - 切换选中状态时触发 `change` 事件
 
 <preview path="@docs/component/checkbox/demos/option.vue"></preview>
@@ -41,8 +41,8 @@ customName: Checkbox
 
 ### 基础用法
 
-- 使用 `v-model:value` 属性绑定当前值
-- 使用 `options` 属性定义选项数组，选项内容优先级顺序为 `default` 插槽 > `option.label` 属性 > `option.value` 属性 > `option` 属性
+- 使用 `v-model:value` 属性绑定当前值，使用 `options` 属性定义选项数组
+- 有多种方式定义选项内容，优先级顺序为 `default` 插槽 > `option.label` 属性 > `option.value` 属性 > `option` 属性
 - 切换选项时触发 `change` 事件
 
 <preview path="@docs/component/checkbox/demos/group.vue"></preview>

@@ -25,13 +25,13 @@ const isShowContent = useRoute().path.includes('dropdown') === false
 
 ### 属性
 
-| 名称             | 说明                              | 类型                                                                                                                                                                      | 默认值         |
-| ---------------- | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
-| `content`        | 弹出内容                          | `string\|number`                                                                                                                                                          |                |
-| `placement`      | 弹出位置                          | `string` 有以下四类 <br> - `top\|top-start\|top-end` <br> - `bottom\|bottom-start\|bottom-end` <br> - `right\|right-start\|right-end` <br> - `left\|left-start\|left-end` | `top`          |
-| `trigger`        | 触发方式                          | `string` = `hover\|click\|contextmenu`                                                                                                                                    | `hover`        |
-| `triggerElement` | 触发元素，一个 DOM 元素或组件对象 | `HTMLElement\|Object`                                                                                                                                                     | `default 插槽` |
-| `disabled`       | 是否禁用                          | `boolean`                                                                                                                                                                 | `false`        |
+| 名称             | 说明                              | 类型                                                                                                                                                                      | 默认值          |
+| ---------------- | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| `content`        | 弹出内容                          | `string\|number`                                                                                                                                                          |                 |
+| `placement`      | 弹出位置                          | `string` 有以下四类 <br> - `top\|top-start\|top-end` <br> - `bottom\|bottom-start\|bottom-end` <br> - `right\|right-start\|right-end` <br> - `left\|left-start\|left-end` | `top`           |
+| `trigger`        | 触发方式                          | `string` = `hover\|click\|contextmenu`                                                                                                                                    | `hover`         |
+| `triggerElement` | 触发元素，一个 DOM 元素或组件对象 | `HTMLElement\|Object`                                                                                                                                                     | `slots.default` |
+| `disabled`       | 是否禁用                          | `boolean`                                                                                                                                                                 | `false`         |
 
 ### 插槽
 
@@ -51,7 +51,7 @@ const isShowContent = useRoute().path.includes('dropdown') === false
 
 ### 方法
 
-| 名称      | 说明     | 参数         |
-| --------- | -------- | ------------ |
-| `open()`  | 打开弹框 | `MouseEvent` |
-| `close()` | 关闭弹框 |              |
+| 名称        | 说明                     | 参数                                                                                                                                                                       |
+| ----------- | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `open(ref)` | 打开弹框，参数表示参照物 | - `ref.el`: 等同于 `props.triggerElement` <br> - `ref.event`: 值为 `MouseEvent`，参照鼠标位置 <br> - `undefined`: 值为空时参照 `props.triggerElement` 或者 `slots.default` |
+| `close()`   | 关闭弹框                 |                                                                                                                                                                            |

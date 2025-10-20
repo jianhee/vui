@@ -1,10 +1,16 @@
 <template>
   <DemoSpace flex>
     <VComponentMatchRoute v-bind="props">
-      <VButton>hover 使用插槽定义触发元素（默认）</VButton>
+      <VButton>hover 默认插槽（默认）</VButton>
     </VComponentMatchRoute>
 
-    <VButton ref="triggerElement">hover 使用属性定义触发元素</VButton>
+    <VButton ref="triggerComponent">hover 外部组件</VButton>
+    <VComponentMatchRoute
+      v-bind="props"
+      :trigger-element="triggerComponent"
+    />
+
+    <button ref="triggerElement">hover 外部元素</button>
     <VComponentMatchRoute
       v-bind="props"
       :trigger-element="triggerElement"
@@ -17,5 +23,6 @@ import { useTemplateRef } from 'vue';
 import { useDemo } from '../composables';
 
 const { props } = useDemo();
+const triggerComponent = useTemplateRef('triggerComponent');
 const triggerElement = useTemplateRef('triggerElement');
 </script>

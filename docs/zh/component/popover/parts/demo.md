@@ -1,6 +1,6 @@
 ### 触发元素
 
-默认使用 `default` 插槽定义触发元素，也可以使用 `triggerElement` 属性定义组件外的触发元素
+默认使用 `default` 插槽作为触发元素，也可以使用 `triggerElement` 属性定义一个外部组件或元素作为触发元素
 
 <preview path="@docs/component/popover/demos/trigger-element.vue"></preview>
 
@@ -33,8 +33,7 @@
 
 ### 调用方法
 
-- 使用 `open()` 方法手动打开弹框，默认对齐参考元素的位置，也可以传入鼠标事件来对齐鼠标位置
-- 使用 `close()` 方法关闭弹框
+使用 `open()` 和 `close()` 方法手动打开或关闭弹框
 
 <preview path="@docs/component/popover/demos/method.vue"></preview>
 

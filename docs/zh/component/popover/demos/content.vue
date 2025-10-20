@@ -1,12 +1,12 @@
 <template>
   <DemoSpace flex>
-    <VComponentMatchRoute>
-      <VButton>hover 使用插槽定义弹框内容</VButton>
-      <template #content>这里的内容是插槽定义的</template>
+    <VComponentMatchRoute content="这里是属性定义的弹框内容">
+      <VButton>hover 属性定义弹框内容</VButton>
     </VComponentMatchRoute>
 
-    <VComponentMatchRoute content="这里的内容是属性定义的">
-      <VButton>hover 使用属性定义弹框内容</VButton>
+    <VComponentMatchRoute>
+      <VButton>hover 插槽定义弹框内容</VButton>
+      <template #content>这里是插槽定义的弹框内容</template>
     </VComponentMatchRoute>
   </DemoSpace>
 </template>
