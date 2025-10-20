@@ -127,7 +127,6 @@
   }
   &-icon--clear,
   &-icon--password {
-    --vui-icon-size: 12px;
     --vui-icon-cursor: pointer;
     &:hover {
       --vui-icon-color: var(--vui-input-icon-active-color);

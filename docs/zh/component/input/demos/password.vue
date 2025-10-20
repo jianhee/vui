@@ -6,6 +6,8 @@
         placeholder="请输入密码"
         :type="typeRef"
         :show-password-toggle="isShowPassword"
+        :disabled="isDisabled"
+        :readonly="isReadonly"
       />
     </template>
 
@@ -25,6 +27,13 @@
       >
         <VSwitch v-model:checked="isShowPassword" />
       </DemoConfig>
+      <hr />
+      <DemoConfig label="是否禁用状态">
+        <VSwitch v-model:checked="isDisabled" />
+      </DemoConfig>
+      <DemoConfig label="是否只读状态">
+        <VSwitch v-model:checked="isReadonly" />
+      </DemoConfig>
     </template>
   </DemoUsage>
 </template>
@@ -35,4 +44,6 @@ import { ref } from 'vue';
 const inputValue = ref('123456789');
 const typeRef = ref('password');
 const isShowPassword = ref(true);
+const isDisabled = ref(false);
+const isReadonly = ref(false);
 </script>

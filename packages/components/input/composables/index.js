@@ -68,8 +68,8 @@ export const useInput = ({ wraperElRef, inputElRef, modelValue, props, emits }) 
   const isShowPasswordValue = ref(false);
   const inputType = computed(() => (isShowPasswordValue.value ? 'text' : props.type));
 
-  // 是否显示切换密码按钮
-  const isShowPasswordToggle = computed(() => props.type === 'password' && props.showPasswordToggle && modelValue.value && isEnabled.value);
+  // 是否显示切换密码按钮：只读状态需要显示
+  const isShowPasswordToggle = computed(() => props.type === 'password' && props.showPasswordToggle && modelValue.value && !isDisabled.value);
   const onClickPasswordIcon = () => (isShowPasswordValue.value = !isShowPasswordValue.value);
 
   // 是否显示清除按钮
