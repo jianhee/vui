@@ -11,6 +11,8 @@ export const dragboxProps = {
   movable: { type: Boolean, default: false },
   // 可移动手柄：一个 DOM 元素或组件对象，为空时使用整个盒子
   moveHandle: { type: [HTMLElement, Object], default: undefined },
+  // 移动到边界时的参考对象：'mouse' 或 'box'
+  moveBoundary: { type: String, default: 'mouse' },
   // 是否可缩放
   resizable: { type: Boolean, default: false },
   // 可缩放手柄

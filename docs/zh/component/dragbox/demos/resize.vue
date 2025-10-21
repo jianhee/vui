@@ -7,8 +7,18 @@
     :min-width="100"
     :min-height="100"
     class="c-demo-dragbox"
-    :class="{ 'is-fixed': isEnabled }"
+    :class="{ 'is-fixed': boxState === 'fixed' && isEnabled }"
   >
+    <DemoConfig
+      label="盒子状态"
+      label-width="180px"
+    >
+      <VRadioGroup
+        v-model:value="boxState"
+        :options="['fixed', 'normal']"
+        option-type="button"
+      />
+    </DemoConfig>
     <DemoConfig
       label="是否启用"
       code="enabled"
@@ -56,16 +66,17 @@
 <script setup>
 import { ref } from 'vue';
 
+const boxState = ref('fixed');
 const isEnabled = ref(false);
 const isResizable = ref(false);
 const handlesOptions = ['left', 'right', 'top', 'bottom'];
-const handlesRef = ref(['left', 'right', 'top', 'bottom']);
+const handlesRef = ref(handlesOptions);
 const widthRef = ref(null);
 const heightRef = ref(null);
 </script>
 
 <style lang="scss">
-.c-demo-dragbox.is-fixed:not(.is-normal) {
+.c-demo-dragbox.is-fixed {
   position: fixed !important;
   top: 200px;
   left: 400px;

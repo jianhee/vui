@@ -8,7 +8,7 @@ export const useDragMove = ({ boxElRef, dragFlagRef, props, modelLeft, modelTop 
 
   // 初始数据
   const { width: windowWidth, height: windowHeight } = useWindowSize();
-  let mouseStartPos = { x: 0, y: 0 };
+  let mouseStartPos = { x: 0, y: 0, minX: 0, minY: 0, maxX: 0, maxY: 0 };
   let boxStartPos = { x: 0, y: 0 };
   let clearEvent1 = null;
   let clearEvent2 = null;
@@ -21,11 +21,20 @@ export const useDragMove = ({ boxElRef, dragFlagRef, props, modelLeft, modelTop 
 
     dragFlagRef.value = 'move';
 
+    // 处理边界问题
+    const isBoxBoundary = props.moveBoundary === 'box';
+
     // 记录初始数据
     const boxRect = boxElRef.value.getBoundingClientRect();
-    mouseStartPos = { x: e.clientX, y: e.clientY };
+    mouseStartPos = {
+      x: e.clientX,
+      y: e.clientY,
+      minX: isBoxBoundary ? e.clientX - boxRect.left : 0,
+      minY: isBoxBoundary ? e.clientY - boxRect.top : 0,
+      maxX: isBoxBoundary ? windowWidth.value - (boxRect.right - e.clientX) : windowWidth.value,
+      maxY: isBoxBoundary ? windowHeight.value - (boxRect.bottom - e.clientY) : windowHeight.value
+    };
     boxStartPos = { x: boxRect.left, y: boxRect.top };
-
     clearEvent1 = useEventListener('mousemove', onMoving);
     clearEvent2 = useEventListener('mouseup', onMoveStop);
   });
@@ -34,10 +43,10 @@ export const useDragMove = ({ boxElRef, dragFlagRef, props, modelLeft, modelTop 
   function onMoving(e) {
     if (dragFlagRef.value !== 'move') return;
 
-    // 鼠标当前位置：不能超出窗口
+    // 鼠标当前位置
     const mouseCurrentPos = {
-      x: Math.max(0, Math.min(e.clientX, windowWidth.value)),
-      y: Math.max(0, Math.min(e.clientY, windowHeight.value))
+      x: Math.max(mouseStartPos.minX, Math.min(e.clientX, mouseStartPos.maxX)),
+      y: Math.max(mouseStartPos.minY, Math.min(e.clientY, mouseStartPos.maxY))
     };
 
     // 差值
