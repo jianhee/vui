@@ -33,7 +33,7 @@
 </template>
 
 <script setup>
-import { inject } from 'vue';
+import { inject, computed } from 'vue';
 import { useSortItem } from './composables/sort';
 
 // 表格
@@ -47,8 +47,6 @@ const props = defineProps({
 // 使用排序
 const { isSortable, isAsc, isDesc, onSortKeyClick, onSortOrderClick } = useSortItem({
   rowItemsRef: tableRoot.rowItemsRef,
-  colData: props.colData,
-  sortKeyRef: tableRoot.sortKeyRef,
-  sortOrderRef: tableRoot.sortOrderRef
+  colDataRef: computed(() => props.colData)
 });
 </script>

@@ -52,11 +52,10 @@
 <script setup>
 import { ref, provide, useTemplateRef, watchEffect } from 'vue';
 import { useVirtualList } from '@vueuse/core';
-import { getSortResults } from '../../utils';
 import { useTable, tableProps, tableEmits } from './composables/table';
 import { useState, stateProps } from './composables/state';
 import { useSelection, selectionModel, selectionProps, selectionEmits } from './composables/selection';
-import { sortProps } from './composables/sort';
+import { useSort, sortProps } from './composables/sort';
 import { useDragSort, dragSortProps, dragSortEmist } from './composables/drag-sort';
 import TheadRow from './thead-row.vue';
 import TbodyRow from './tbody-row.vue';
@@ -71,8 +70,6 @@ const emits = defineEmits([...tableEmits, ...selectionEmits, ...dragSortEmist]);
 // 全局状态
 const rowItemsRef = ref(null);
 const dragFlagRef = ref(null);
-const sortKeyRef = ref(props.sortKey);
-const sortOrderRef = ref(props.sortOrder);
 
 // 使用虚拟列表
 const {
@@ -106,6 +103,9 @@ const { selectionRootClasses, selectionRootStyles, selectionInnerStyles } = useS
   emits
 });
 
+// 使用排序
+const { sortedRows } = useSort({ props });
+
 // 使用拖拽排序
 const { dragSortRootClasses } = useDragSort({
   dragFlagRef,
@@ -114,11 +114,7 @@ const { dragSortRootClasses } = useDragSort({
 
 // 更新数据
 watchEffect(() => {
-  rowItemsRef.value = getSortResults({
-    items: props.rowItems || [],
-    key: sortKeyRef.value,
-    order: sortOrderRef.value
-  });
+  rowItemsRef.value = sortedRows.value || props.rowItems || [];
 });
 
 // 子组件使用
@@ -129,8 +125,6 @@ provide('vuiTableRoot', {
   emits,
   rowItemsRef,
   dragFlagRef,
-  sortKeyRef,
-  sortOrderRef,
   colWidthsRef
 });
 </script>
